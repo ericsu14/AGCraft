@@ -1,0 +1,49 @@
+package constants;
+
+public enum BookID 
+{
+	GEN ("GEN", "genesis"),
+	EXO ("EXO", "exodus"),
+	LEV ("LEV", "leviticus"),
+	NUM ("NUM", "numbers"),
+	DEU ("DEU", "deuteronomy"),
+	JOS ("JOS", "joshua"),
+	JDG ("JDG", "judges"),
+	RUT ("RUT", "ruth"),
+	SA1 ("1SA", "1 Samuel"),
+	SA2 ("2SA", "2 Samuel"),
+	KI1 ("1KI", "1 King"),
+	KI2 ("2KI", "2 King"),
+	CH1 ("1CH", "1 Chronicles"),
+	CH2 ("2CH", "2 Chronicles"),
+	EZR ("EZR", "Ezra"),
+	NEH ("NEH", "Nehemia"),
+	EST ("EST", "Esther"),
+	JOB ("JOB", "Job"),
+	PSA ("PSA", "Psalms"),
+	PRO ("PRO", "Proverbs"),
+	ECC ("ECC", "Ecclesiastes"),
+	SNG ("SNG", "Song of Solomon"),
+	ISA ("ISA", "Isaish"),
+	JER ("JER", "Jeremiah"),
+	;
+	
+	private String kBookID;
+	private String kBookTitle;
+	
+	BookID (String bookID, String bookTitle)
+	{
+		this.kBookTitle = bookTitle;
+	}
+	
+	public String getTitle ()
+	{
+		return this.kBookTitle;
+	}
+	
+	public String getID ()
+	{
+		return this.kBookID;
+	}
+}
+

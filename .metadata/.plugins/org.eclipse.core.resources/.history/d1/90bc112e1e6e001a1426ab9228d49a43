@@ -1,0 +1,58 @@
+package parser;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+
+import constants.BibleID;
+import constants.BookID;
+
+public class VerseExtractor 
+{
+	
+	public static ArrayList <String> tokenizeChapter (String content) throws UnsupportedEncodingException
+	{
+		ArrayList <String> container = new ArrayList <String> ();
+		String[] tokens = content.split("(\\[.[0-9]*\\])");
+		
+		for (String curr : tokens)
+		{
+			curr = curr.trim();
+			// Ignores empty lines
+			if (!curr.isEmpty())
+			{
+				container.add(curr.trim());
+			}
+		}
+		
+		return container;
+	}
+	
+	public static ArrayList <String> getVerses (BibleID translation, BookID book, int chapter) throws UnsupportedEncodingException
+	{
+		String content = BibleParser.parseChapter(translation, book, chapter);
+		return tokenizeChapter (content);
+
+	}
+	
+	/** Extracts a set of verses from the specified chapter of the bible */
+	public static ArrayList <String> getVerses (BibleID translation, BookID book, int chapter, int verseStart, int verseEnd) throws UnsupportedEncodingException, RuntimeException
+	{	
+		// TODO: Check against database to see if that section of the bible is already cached
+		String content = BibleParser.parseChapter(translation, book, chapter);
+		ArrayList<String> tokens = tokenizeChapter (content);
+
+		int size = tokens.size();
+		
+		if (!inRange (1, size, verseStart) || !inRange (1, size, verseEnd))
+		{
+			throw new RuntimeException ("Specified verses do not exist.");
+		}
+		
+		return (ArrayList<String>) tokens.subList(verseStart - 1, verseEnd - 1);
+	}
+	
+	public static boolean inRange (int x, int y, int target)
+	{
+		return (x <= target && target <= y);
+	}
+}

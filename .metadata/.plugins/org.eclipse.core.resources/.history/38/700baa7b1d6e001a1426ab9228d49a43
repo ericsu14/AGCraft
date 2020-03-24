@@ -1,0 +1,26 @@
+package main;
+
+import java.io.UnsupportedEncodingException;
+
+import constants.BibleID;
+import constants.BookID;
+import parser.BibleParser;
+import parser.VerseExtractor;
+
+public class Test {
+
+	public static void main(String[] args) 
+	{
+		String raw = "";
+		try 
+		{
+			raw = VerseExtractor.tokenizeChapter(BibleParser.parseChapter(BibleID.WEB, BookID.REV, 1)).toString();
+		} 
+		catch (UnsupportedEncodingException e) 
+		{
+			e.printStackTrace();
+		}
+		System.out.println (raw);
+	}
+
+}

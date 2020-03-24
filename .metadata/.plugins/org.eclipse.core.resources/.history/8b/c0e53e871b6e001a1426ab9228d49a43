@@ -1,0 +1,25 @@
+package main;
+
+import java.io.UnsupportedEncodingException;
+
+import constants.BibleID;
+import constants.BookID;
+import parser.BibleParser;
+
+public class Test {
+
+	public static void main(String[] args) 
+	{
+		String raw = "";
+		try 
+		{
+			raw = BibleParser.parseChapter(BibleID.WEB, BookID.ROM, 12);
+		} 
+		catch (UnsupportedEncodingException e) 
+		{
+			e.printStackTrace();
+		}
+		System.out.println (raw);
+	}
+
+}

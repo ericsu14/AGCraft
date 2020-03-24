@@ -1,0 +1,14 @@
+package parser;
+
+import constants.BibieID;
+import constants.BookID;
+
+public class VerseExtractor 
+{
+	public static String getVerses (BibieID translation, BookID book, int chapter) throws UnsupportedEncodingException
+	{
+		StringBuilder content = new StringBuilder (BibleParser.parseChapter(translation, book, chapter));
+		
+		return "";
+	}
+}

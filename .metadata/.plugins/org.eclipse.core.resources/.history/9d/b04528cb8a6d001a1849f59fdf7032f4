@@ -1,0 +1,13 @@
+package constants;
+
+public enum BibieID 
+{
+	
+	private String kBibleID;
+	private String kBibleKey;
+	
+	public BibleID (String bibleID, bibleKey)
+	{
+		
+	}
+}

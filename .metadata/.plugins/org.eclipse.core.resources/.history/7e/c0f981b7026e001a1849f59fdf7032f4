@@ -1,0 +1,15 @@
+package main;
+
+import api.APIFetcher;
+import constants.BibieID;
+import constants.BookID;
+
+public class Test {
+
+	public static void main(String[] args) 
+	{
+		String raw = APIFetcher.getVerses(BibieID.ASV, BookID.LUK, 1);
+		System.out.println (raw);
+	}
+
+}

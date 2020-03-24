@@ -1,0 +1,5 @@
+1585023243746	Rename type 'bookID'
+1585081683558	Rename type 'JSONParser'
+1585087182211	Rename type 'BibieID'
+1585087917881	Rename method 'fetchVerses'
+1585087994001	Rename method 'tokenizeVerses'

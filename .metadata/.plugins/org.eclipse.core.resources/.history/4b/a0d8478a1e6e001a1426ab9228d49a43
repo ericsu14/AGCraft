@@ -1,0 +1,27 @@
+package main;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+
+import constants.BibleID;
+import constants.BookID;
+import parser.BibleParser;
+import parser.VerseExtractor;
+
+public class Test {
+
+	public static void main(String[] args) 
+	{
+		ArrayList <String> container;
+		try 
+		{
+			container = VerseExtractor.getVerses(BibleID.WEB, BookID.LUK, 1, 5, 10);
+		} 
+		catch (UnsupportedEncodingException e) 
+		{
+			e.printStackTrace();
+		}
+		System.out.println (raw);
+	}
+
+}

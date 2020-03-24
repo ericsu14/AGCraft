@@ -1,0 +1,13 @@
+package parser;
+
+import api.APIFetcher;
+import constants.BibieID;
+import constants.BookID;
+
+public class JSONParser 
+{
+	public static String parseVerses (BibieID translation, BookID book, int chapter)
+	{
+		StringBuilder content = new StringBuilder (APIFetcher.fetchVerses(translation, book, chapter));
+	}
+}

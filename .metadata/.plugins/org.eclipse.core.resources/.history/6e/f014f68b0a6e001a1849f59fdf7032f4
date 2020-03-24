@@ -1,0 +1,17 @@
+package parser;
+
+import java.io.UnsupportedEncodingException;
+
+import api.APIFetcher;
+import constants.BibieID;
+import constants.BookID;
+
+public class JSONParser 
+{
+	public static String parseVerses (BibieID translation, BookID book, int chapter) throws UnsupportedEncodingException
+	{
+		StringBuilder content = new StringBuilder (APIFetcher.fetchVerses(translation, book, chapter));
+		
+		return content.toString();
+	}
+}

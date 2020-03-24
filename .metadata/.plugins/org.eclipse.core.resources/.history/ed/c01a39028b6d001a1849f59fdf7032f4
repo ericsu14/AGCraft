@@ -1,0 +1,15 @@
+package constants;
+
+public enum BibieID 
+{
+	DRA ("DRA", "179568874c45066f-01"),
+	FBVNTPsalms ("FBVNTPsalms", "65eec8e0b60e656b-01");
+	private String kBibleID;
+	private String kBibleKey;
+	
+	public BibleID (String bibleID, String bibleKey)
+	{
+		this.kBibleID = bibleID;
+		this.kBibleKey = bibleKey;
+	}
+}
