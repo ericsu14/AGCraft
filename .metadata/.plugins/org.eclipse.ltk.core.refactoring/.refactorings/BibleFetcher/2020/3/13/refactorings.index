@@ -3,3 +3,4 @@
 1585087182211	Rename type 'BibieID'
 1585087917881	Rename method 'fetchVerses'
 1585087994001	Rename method 'tokenizeVerses'
+1585089200771	Rename type 'BibleParser'
