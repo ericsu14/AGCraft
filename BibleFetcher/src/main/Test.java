@@ -24,6 +24,19 @@ public class Test {
 		System.out.println ("----------");
 	}
 	
+	public static void fetchVerses (BibleID translation, BookID book, int chapter, int to) throws MalformedURLException, ProtocolException, RuntimeException, IOException
+	{
+		ArrayList <String> container = BibleFetcher.getVerses(translation, book, chapter, to);
+		
+		System.out.println (book.getFormattedTitle() + " " + chapter + ":" + to + "-" + (container.size() + (to - 1)) + " (" + translation.getBibleID() + ")");
+		int i = to;
+		for (String s : container)
+		{
+			System.out.println (i++ + ". " + s);
+		}
+		System.out.println ("----------");
+	}
+	
 	public static void fetchVerses (BibleID translation, BookID book, int chapter, int to, int from) throws MalformedURLException, ProtocolException, RuntimeException, IOException
 	{
 		ArrayList <String> container = BibleFetcher.getVerses(translation, book, chapter, to, from);
@@ -44,7 +57,10 @@ public class Test {
 			BookID test = interpreter.searchBookTrie("number");
 			System.out.println (test.getTitle());
 			
-			fetchVerses(BibleID.KJV, BookID.REV, 1);
+			fetchVerses(BibleID.KJV, BookID.REV, 8, 1);
+			fetchVerses(BibleID.KJV, BookID.REV, 9);
+			fetchVerses(BibleID.KJV, BookID.REV, 10, 1);
+			fetchVerses(BibleID.KJV, BookID.REV, 11);
 		} 
 		catch (IOException e) 
 		{

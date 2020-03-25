@@ -32,6 +32,7 @@ public class BibleFetcher
 		return container;
 	}
 	
+	/** Extracts an entire chapter from the specified chapter of the bible. */
 	public static ArrayList <String> getVerses (BibleID translation, BookID book, int chapter) throws MalformedURLException, ProtocolException, IOException
 	{
 		// TODO: Check against database to see if that section of the bible is already cached
@@ -44,7 +45,23 @@ public class BibleFetcher
 		}
 		
 		return tokenizeChapter (content);
-
+	}
+	
+	/** Extracts an entire chapter from the specified chapter of the bible starting from a specific verse number 
+	 * @throws IOException 
+	 * @throws ProtocolException 
+	 * @throws MalformedURLException */
+	public static ArrayList <String> getVerses (BibleID translation, BookID book, int chapter, int verseStart) throws MalformedURLException, ProtocolException, IOException
+	{
+		ArrayList <String> tokens = getVerses (translation, book, chapter);
+		
+		int size = tokens.size();
+		
+		if (!inRange (1, size, verseStart))
+		{
+			throw new RuntimeException ("Verse ranges are out of bounds. There are " + size + " verses in the book of " + book.getFormattedTitle() + " " + chapter + "."); 
+		}
+		return parseList (tokens, verseStart, size);
 	}
 	
 	/** Extracts a set of verses from the specified chapter of the bible 
@@ -64,21 +81,28 @@ public class BibleFetcher
 		
 		if (!inRange (1, size, verseStart) || !inRange (1, size, verseEnd))
 		{
-			throw new RuntimeException ("Specified verses do not exist.");
+			throw new RuntimeException ("Verse ranges are out of bounds. There are " + size + " verses in the book of " + book.getFormattedTitle() + " " + chapter + ".");
 		}
 		
-		ArrayList <String> sublist = new ArrayList <String> ();
-		
-		for (int i = verseStart - 1; i <= verseEnd - 1; ++i)
-		{
-			sublist.add(tokens.get(i));
-		}
-		
-		return sublist;
+		return parseList (tokens, verseStart, verseEnd);
 	}
 	
-	public static boolean inRange (int x, int y, int target)
+	private static boolean inRange (int x, int y, int target)
 	{
 		return (x <= target && target <= y);
+	}
+	
+	/** Returns a subset of an ArrayList.
+	 * 		@param list - Original list
+	 * 		@param start - Starting index
+	 * 		@param end - Ending index */
+	private static ArrayList <String> parseList (ArrayList<String> list, int start, int end)
+	{
+		ArrayList <String> sublist = new ArrayList <String> ();
+		for (int i = start - 1; i <= end - 1; ++i)
+		{
+			sublist.add(list.get(i));
+		}
+		return sublist;
 	}
 }
