@@ -1,7 +1,6 @@
 package api;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -46,7 +45,6 @@ public class APIFetcher
 		parameters.put("use-org-id", "false");
 
 		link.append(getParamsString (parameters));
-		
 		
 		URL url;
 		try 

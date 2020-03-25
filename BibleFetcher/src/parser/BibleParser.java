@@ -3,10 +3,11 @@ package parser;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+import api.APIParser;
 import constants.BibleID;
 import constants.BookID;
 
-public class VerseExtractor 
+public class BibleParser 
 {
 	
 	public static ArrayList <String> tokenizeChapter (String content) throws UnsupportedEncodingException

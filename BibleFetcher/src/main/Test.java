@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import constants.BibleID;
 import constants.BookID;
-import parser.VerseExtractor;
+import parser.BibleParser;
 
 public class Test {
 
@@ -14,7 +14,7 @@ public class Test {
 		ArrayList <String> container;
 		try 
 		{
-			container = VerseExtractor.getVerses(BibleID.WEB, BookID.LUK, 1);
+			container = BibleParser.getVerses(BibleID.WEB, BookID.LUK, 1);
 			
 			for (String s : container)
 			{

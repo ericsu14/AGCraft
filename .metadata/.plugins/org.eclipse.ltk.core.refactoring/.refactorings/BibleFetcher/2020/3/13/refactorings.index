@@ -4,3 +4,5 @@
 1585087917881	Rename method 'fetchVerses'
 1585087994001	Rename method 'tokenizeVerses'
 1585089200771	Rename type 'BibleParser'
+1585095621053	Move compilation unit
+1585095651137	Rename type 'VerseExtractor'

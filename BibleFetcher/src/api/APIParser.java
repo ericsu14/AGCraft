@@ -1,8 +1,7 @@
-package parser;
+package api;
 
 import java.io.UnsupportedEncodingException;
 
-import api.APIFetcher;
 import constants.BibleID;
 import constants.BookID;
 
