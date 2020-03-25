@@ -53,9 +53,26 @@ class TestInterpreter
 		}
 	}
 	
+	/** For BookIDs with chapter information, test the command interpreter by seeing if it could search for every possible arrangement
+	 *  of title + chapter. For example, John1 will be tested as 1John and John1. */
+	void testValidBookNameWithChapterSearches ()
+	{
+		for (BookID id : BookID.values())
+		{
+			if (id.getChapter() > 0)
+			{
+				String prefix = id.getChapter() + id.getTitle();
+				String postfix = id.getTitle() + id.getChapter();
+				
+				assertEquals (interpreter.searchBookTrie(prefix), id);
+				assertEquals (interpreter.searchBookTrie(postfix), id);
+			}
+		}
+	}
+	
 	/** Tests the command interpreter by feeding it with commonly misspelled book titles */
 	@Test
-	void testMisSpelledBookNameSearches ()
+	void testMisspelledBookNameSearches ()
 	{
 		// TODO: 
 	}
