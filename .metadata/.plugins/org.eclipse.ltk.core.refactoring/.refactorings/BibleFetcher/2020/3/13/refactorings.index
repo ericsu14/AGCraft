@@ -7,3 +7,4 @@
 1585095621053	Move compilation unit
 1585095651137	Rename type 'VerseExtractor'
 1585098177757	Rename type 'BibleParser'
+1585098698850	Rename package 'parser'

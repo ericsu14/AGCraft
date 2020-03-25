@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import constants.BibleID;
 import constants.BookID;
-import parser.BibleFetcher;
+import fetcher.BibleFetcher;
 
 public class Test {
 
