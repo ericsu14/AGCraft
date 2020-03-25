@@ -57,6 +57,11 @@ public class BibleFetcher
 
 		int size = tokens.size();
 		
+		if (verseStart > verseEnd)
+		{
+			throw new RuntimeException ("Invalid range.");
+		}
+		
 		if (!inRange (1, size, verseStart) || !inRange (1, size, verseEnd))
 		{
 			throw new RuntimeException ("Specified verses do not exist.");
