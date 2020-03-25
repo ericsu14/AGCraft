@@ -44,12 +44,20 @@ class TestInterpreter
 	}
 	
 	/** Tests the command interpreter by feeding it with valid book names */
+	@Test
 	void testValidBookNameSearches ()
 	{
 		for (BookID id : BookID.values())
 		{
 			assertEquals (interpreter.searchBookTrie(removeWhiteSpace(id.getFormattedTitle())), id);
 		}
+	}
+	
+	/** Tests the command interpreter by feeding it with commonly misspelled book titles */
+	@Test
+	void testMisSpelledBookNameSearches ()
+	{
+		// TODO: 
 	}
 	
 	/** Helper function used to filter out whitespaces from string */
