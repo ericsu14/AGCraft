@@ -19,57 +19,6 @@ public class CommandInterpreter
 		this.populateBookIDTrie();
 	}
 	
-	/** Populates the bible search trie by adding every possible way a user could search for their desired bible translation */
-	public void populateBibleIDTrie ()
-	{
-		Arrays.stream(BibleID.values()).forEach(entry -> {
-			this.insertWord(entry.getBibleID().toLowerCase(), entry, this.bibRoot);
-			this.insertWord(entry.name().toLowerCase(), entry, this.bibRoot);
-			this.insertWord(entry.getTranslationName().toLowerCase().replaceAll("([ ])", ""), entry, this.bibRoot);
-		});
-	}
-	
-	/** Populates the book search trie by adding every possible way a used could search for their desired book chapter */
-	public void populateBookIDTrie ()
-	{
-		Arrays.stream(BookID.values()).forEach(entry -> {
-			this.insertWord(entry.getID().toLowerCase(), entry, this.bookRoot);
-			this.insertWord(entry.name().toLowerCase(), entry, this.bookRoot);
-			if (entry.getChapter() == 0)
-			{
-				this.insertWord(entry.getTitle().toLowerCase().replaceAll("([ ])", ""), entry, this.bookRoot);
-			}
-			/* If this book does come in multiple chapters (or parts), allow the user to search for
-			 * this book with the part number appended in front or behind of the title. */
-			else
-			{
-				this.insertWord(entry.getChapter() + entry.getTitle().toLowerCase(), entry, this.bookRoot);
-				this.insertWord(entry.getTitle().toLowerCase() + entry.getChapter(), entry, this.bookRoot);
-			}
-		});
-	}
-	
-	/** Inserts a word into the trie
-	 * 	@param word - The string being inserted into the trie
-	 * 	@param id - The enum this string is tied to
-	 * 	@param root - A reference to the root node */
-	public <T> void insertWord (String word, T id, TrieNode <T> root)
-	{
-		TrieNode <T> curr = root;
-		for (char c : word.toCharArray())
-		{
-			if (curr.next(c) == null)
-			{
-				curr.addChild(c, id);
-			}
-			else
-			{
-				curr.incrementCount();
-			}
-			curr = curr.next(c);
-		}
-	}
-	
 	/** Searches the bible trie for the specified input and
 	 *  returns the BibleID enum that holds the closest approximation
 	 *  to the search term. Returns null if not found.
@@ -90,7 +39,7 @@ public class CommandInterpreter
 				break;
 			}
 		}
-		return (BibleID) curr.getLinkedID();
+		return (BibleID) curr.getLinkedID(input);
 	}
 	
 	/** Searches the book trie for the specified input and
@@ -113,8 +62,59 @@ public class CommandInterpreter
 				break;
 			}
 		}
-		return (BookID) curr.getLinkedID();
+		return (BookID) curr.getLinkedID(input);
 	}
 	
+	/** Populates the bible search trie by adding every possible way a user could search for their desired bible translation */
+	private void populateBibleIDTrie ()
+	{
+		Arrays.stream(BibleID.values()).forEach(entry -> {
+			this.insertWord(entry.getBibleID(), entry, this.bibRoot);
+			this.insertWord(entry.name(), entry, this.bibRoot);
+			this.insertWord(entry.getTranslationName().replaceAll("([ ])", ""), entry, this.bibRoot);
+		});
+	}
+	
+	/** Populates the book search trie by adding every possible way a used could search for their desired book chapter */
+	private void populateBookIDTrie ()
+	{
+		Arrays.stream(BookID.values()).forEach(entry -> {
+			this.insertWord(entry.getID(), entry, this.bookRoot);
+			this.insertWord(entry.name(), entry, this.bookRoot);
+			if (entry.getChapter() == 0)
+			{
+				this.insertWord(entry.getTitle().replaceAll("([ ])", ""), entry, this.bookRoot);
+			}
+			/* If this book does come in multiple chapters (or parts), allow the user to search for
+			 * this book with the part number appended in front or behind of the title. */
+			else
+			{
+				this.insertWord(entry.getChapter() + entry.getTitle(), entry, this.bookRoot);
+				this.insertWord(entry.getTitle() + entry.getChapter(), entry, this.bookRoot);
+			}
+		});
+	}
+	
+	/** Inserts a word into the trie
+	 * 	@param word - The string being inserted into the trie
+	 * 	@param id - The enum this string is tied to
+	 * 	@param root - A reference to the root node */
+	private <T> void insertWord (String word, T id, TrieNode <T> root)
+	{
+		word = word.toLowerCase();
+		TrieNode <T> curr = root;
+		for (char c : word.toCharArray())
+		{
+			if (curr.next(c) == null)
+			{
+				curr.addChild(c, id);
+			}
+			else
+			{
+				curr.next(c).updateFrequency(id);
+			}
+			curr = curr.next(c);
+		}
+	}
 	
 }

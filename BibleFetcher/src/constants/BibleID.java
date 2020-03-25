@@ -22,6 +22,7 @@ public enum BibleID
 		this.kTranslationName = translationName;
 	}
 	
+	/** Returns the Bible's translation abbreviation (such as KJV for King James Version). */
 	public String getBibleID ()
 	{
 		return this.kBibleID;
@@ -33,6 +34,7 @@ public enum BibleID
 		return this.kBibleKey;
 	}
 	
+	/** Returns the Bible's full translation name */
 	public String getTranslationName ()
 	{
 		return this.kTranslationName;

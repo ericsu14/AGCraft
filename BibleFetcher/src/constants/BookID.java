@@ -55,8 +55,8 @@ public enum BookID
 	COL ("COL", "colossians"),
 	TH1 ("1TH", "thessalonians", 1),
 	TH2 ("2TH", "thessalonians", 2),
-	TI1 ("1TH", "timothy", 1),
-	TI2 ("1TH", "timothy", 2),
+	TI1 ("1TI", "timothy", 1),
+	TI2 ("2TI", "timothy", 2),
 	TIT ("TIT", "titus"),
 	PHN ("PHN", "philemon"),
 	HEB ("HEB", "hebrews"),
@@ -88,12 +88,13 @@ public enum BookID
 		this.kChapter = chapter;
 	}
 	
+	/** Returns the title of the book without any added chapter information. */
 	public String getTitle ()
 	{
 		return this.kBookTitle;
 	}
 	
-	/** Returns the name with the first character capitalized */
+	/** Returns a formatted version of the book title with proper capitalization and chapter metadata. */
 	public String getFormattedTitle ()
 	{
 		StringBuilder result = new StringBuilder ();
@@ -108,11 +109,13 @@ public enum BookID
 		return result.toString();
 	}
 	
+	/** Returns the BookID used to communicate with the WEB API */
 	public String getID ()
 	{
 		return this.kBookID;
 	}
 	
+	/** Returns the book's chapter number if it comes in parts, such as John1 or John2. */
 	public int getChapter ()
 	{
 		return this.kChapter;

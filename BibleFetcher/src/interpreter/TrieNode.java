@@ -1,13 +1,13 @@
 package interpreter;
 
+import java.util.Hashtable;
+import java.util.Map.Entry;
+
 public class TrieNode <T> 
 {
 	// Defines the max. amount of children this node could store
 	public final int kChildSize = 255;
-	// Amount of entities linked to this node
-	private int count;
-	// Stores the identification info this entry is linked to
-	private T linkedID;
+	private Hashtable <T, Integer> linkedIDs;
 	// Stores the node's children
 	private TrieNode<T> children[];
 	// Amount of active children this node carries
@@ -19,10 +19,10 @@ public class TrieNode <T>
 	public TrieNode (char letter, T linkedID)
 	{
 		this.letter = letter;
-		this.linkedID = linkedID;
 		this.size = 0;
-		this.count = 0;
 		this.children = (TrieNode<T>[]) new TrieNode [this.kChildSize];
+		this.linkedIDs = new Hashtable <T, Integer> ();
+		this.updateFrequency(linkedID);
 	}
 	
 	public void addChild (char letter, T linkedID)
@@ -41,9 +41,20 @@ public class TrieNode <T>
 		return this.size;
 	}
 	
-	public T getLinkedID ()
+	/** Returns the linked id with the highest frequency */
+	public T getLinkedID (String searchTerm)
 	{
-		return this.linkedID;
+		T result = null;
+		int currentCount = -1;
+		for (Entry<T, Integer> entry : this.linkedIDs.entrySet())
+		{
+			if (entry.getValue() > currentCount)
+			{
+				currentCount = entry.getValue();
+				result = entry.getKey();
+			}
+		}
+		return result;
 	}
 	
 	public char getLetter ()
@@ -51,14 +62,26 @@ public class TrieNode <T>
 		return this.letter;
 	}
 	
-	public int getCount ()
+	/** Each node in this trie could be tied to multiple bible IDs. These bible IDs are tracked
+	 *  with an internal hashtable that keeps track of the frequency of these bible IDs.
+	 *  This function updates that count. */
+	public void updateFrequency (T id)
 	{
-		return this.count;
-	}
-	
-	public void incrementCount ()
-	{
-		++this.count;
+		// Null check
+		if (id == null)
+		{
+			return;
+		}
+
+		if (!this.linkedIDs.containsKey (id))
+		{
+			this.linkedIDs.put(id, 1);
+		}
+		else
+		{
+			int updCount = this.linkedIDs.get(id) + 1;
+			this.linkedIDs.replace(id, updCount);
+		}
 	}
 	
 	
