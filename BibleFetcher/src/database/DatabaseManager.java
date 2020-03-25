@@ -39,6 +39,8 @@ public class DatabaseManager
 		catch (Exception e)
 		{
 			System.err.println ("Error: " + e.getClass().getName() + ": " + e.getMessage());
+			System.err.println ("Attempting to create a new database...");
+			CreateDatabase.createNewDatabase();
 		}
 	}
 	

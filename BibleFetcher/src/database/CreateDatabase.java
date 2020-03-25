@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class CreateDatabase 
 {
 	public final static String kDatabaseName = "bibles";
-	public final static String kDatabaseURL = "jdbc:sqlite:.\\database\\" + kDatabaseName;
+	public final static String kDatabaseURL = "jdbc:sqlite:.\\" + kDatabaseName;
 	
 	/** Creates a new database in ./database/bibles.
 	 * 	WARNING: Running this code will overwrite everything in the old database! */
@@ -23,6 +23,8 @@ public class CreateDatabase
 				System.out.println ("Driver Name: " + meta.getDriverName());
 				System.out.println ("Created a new database");
 			}
+			
+			initializeTables();
 		}
 		
 		catch (SQLException e)
@@ -32,7 +34,7 @@ public class CreateDatabase
 	}
 	
 	/** Creates a singular table allowing this software to quickly look up stored bible chapters. */
-	public static void initializeTables ()
+	private static void initializeTables ()
 	{
 		Connection c = null;
 		Statement stmt = null;
@@ -66,7 +68,6 @@ public class CreateDatabase
 	public static void main (String [] args)
 	{
 		CreateDatabase.createNewDatabase();
-		CreateDatabase.initializeTables();
 	}
 
 }
