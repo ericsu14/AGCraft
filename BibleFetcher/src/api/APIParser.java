@@ -1,6 +1,9 @@
 package api;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 
 import constants.BibleID;
 import constants.BookID;
@@ -11,8 +14,11 @@ import com.google.gson.JsonParser;
 
 public class APIParser 
 {
-	/** Fetches biblical content from the API and extracts the content body from the response */
-	public static String parseChapter (BibleID translation, BookID book, int chapter) throws UnsupportedEncodingException
+	/** Fetches biblical content from the API and extracts the content body from the response 
+	 * @throws IOException 
+	 * @throws ProtocolException 
+	 * @throws MalformedURLException */
+	public static String parseChapter (BibleID translation, BookID book, int chapter) throws MalformedURLException, ProtocolException, IOException
 	{
 		StringBuilder content = new StringBuilder (APIFetcher.fetchChapter(translation, book, chapter));
 		

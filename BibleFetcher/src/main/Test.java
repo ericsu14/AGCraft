@@ -1,6 +1,5 @@
 package main;
-
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import constants.BibleID;
@@ -9,21 +8,26 @@ import parser.BibleParser;
 
 public class Test {
 
-	public static void main(String[] args) 
+	public static void main(String[] args)
 	{
 		ArrayList <String> container;
 		try 
 		{
-			container = BibleParser.getVerses(BibleID.WEB, BookID.LUK, 1);
+			container = BibleParser.getVerses(BibleID.WEB, BookID.ROM, 12);
 			
 			for (String s : container)
 			{
 				System.out.println (s);
 			}
 		} 
-		catch (UnsupportedEncodingException e) 
+		catch (IOException e) 
 		{
-			e.printStackTrace();
+			System.out.println ("That chapter of the bible is not supported in this version of the book.");
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println (e.getMessage());
 		}
 		
 	}

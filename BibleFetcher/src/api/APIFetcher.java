@@ -1,9 +1,12 @@
 package api;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -22,8 +25,9 @@ public class APIFetcher
 	 *  	@param book - The book of the bible we are reading at
 	 *  	@param chapter - The chapter of the book we are reading at
 	 *  	@return The contents of the biblical section in RAW JSON format
-	 * 		@throws UnsupportedEncodingException */
-	public static String fetchChapter (BibleID translation, BookID book, int chapter) throws UnsupportedEncodingException
+	 * 		@throws UnsupportedEncodingException 
+	 * @throws MalformedURLException */
+	public static String fetchChapter (BibleID translation, BookID book, int chapter) throws UnsupportedEncodingException, MalformedURLException, IOException, ProtocolException
 	{
 		// Builds the URL
 		StringBuilder link = new StringBuilder (kAPIURL);
@@ -47,39 +51,27 @@ public class APIFetcher
 		link.append(getParamsString (parameters));
 		
 		URL url;
-		try 
-		{
-			url = new URL (link.toString());
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-			con.setRequestMethod("GET");
+
+		url = new URL (link.toString());
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("GET");
 			
-			// Header
-			con.setRequestProperty("api-key", kAPIKey);
-			con.setDoOutput(true);
-	        con.setConnectTimeout(5000);
-	        con.setReadTimeout(5000);
-	        
-	        int status = con.getResponseCode();
-	        System.out.println ("Status: " + status);
-	        BufferedReader br = new BufferedReader (new InputStreamReader (con.getInputStream()));
-	        StringBuilder output = new StringBuilder ();
-	        
-	        String it;
-	        while ((it = br.readLine()) != null)
-	        {
-	        	output.append((it));
-	        }
-	        con.disconnect();
-	        
-	        return output.toString();
-			
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
+		// Header
+		con.setRequestProperty("api-key", kAPIKey);
+		con.setDoOutput(true);
+		con.setConnectTimeout(5000);
+		con.setReadTimeout(5000);
 		
-		return "";
+		BufferedReader br = new BufferedReader (new InputStreamReader (con.getInputStream()));
+		StringBuilder output = new StringBuilder ();
+		String it;
+		while ((it = br.readLine()) != null)
+		{
+			output.append((it));
+		}
+		con.disconnect();
+	        
+		return output.toString();
 	}
 	
 	public static String generateJSONParams (Map <String, String> params) throws UnsupportedEncodingException

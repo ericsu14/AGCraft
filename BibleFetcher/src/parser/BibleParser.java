@@ -1,6 +1,9 @@
 package parser;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.util.ArrayList;
 
 import api.APIParser;
@@ -28,7 +31,7 @@ public class BibleParser
 		return container;
 	}
 	
-	public static ArrayList <String> getVerses (BibleID translation, BookID book, int chapter) throws UnsupportedEncodingException
+	public static ArrayList <String> getVerses (BibleID translation, BookID book, int chapter) throws MalformedURLException, ProtocolException, IOException
 	{
 		// TODO: Check against database to see if that section of the bible is already cached
 		String content = APIParser.parseChapter(translation, book, chapter);
@@ -37,8 +40,11 @@ public class BibleParser
 
 	}
 	
-	/** Extracts a set of verses from the specified chapter of the bible */
-	public static ArrayList <String> getVerses (BibleID translation, BookID book, int chapter, int verseStart, int verseEnd) throws UnsupportedEncodingException, RuntimeException
+	/** Extracts a set of verses from the specified chapter of the bible 
+	 * @throws IOException 
+	 * @throws ProtocolException 
+	 * @throws MalformedURLException */
+	public static ArrayList <String> getVerses (BibleID translation, BookID book, int chapter, int verseStart, int verseEnd) throws RuntimeException, MalformedURLException, ProtocolException, IOException
 	{	
 		ArrayList<String> tokens = getVerses (translation, book, chapter);
 
@@ -51,7 +57,7 @@ public class BibleParser
 		
 		ArrayList <String> sublist = new ArrayList <String> ();
 		
-		for (int i = verseStart - 1; i < verseEnd - 1; ++i)
+		for (int i = verseStart - 1; i <= verseEnd - 1; ++i)
 		{
 			sublist.add(tokens.get(i));
 		}
