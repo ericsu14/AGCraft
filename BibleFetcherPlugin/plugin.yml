@@ -1,0 +1,8 @@
+name: BibleFetcherPlugin
+main: com.joojet.plugins.biblefetcher.source.BibleFetcherPlugin
+version: 1.0
+api-version: 1.15.2-R0.1-SNAPSHOT
+commands:
+  bible:
+    description: Generates a written book containing specified sections of the Bible. The <start> and <end> parameters are optional.
+    usage: /bible <translation> <book> <chapter> <start> <end>
