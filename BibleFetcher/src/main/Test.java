@@ -38,6 +38,7 @@ public class Test {
 			fetchVerses(BibleID.ASV, BookID.ROM, 12);
 			fetchVerses(BibleID.KJV, BookID.ROM, 12);
 			fetchVerses(BibleID.WEB, BookID.ROM, 12);
+			fetchVerses(BibleID.WEB, BookID.MRK, 12);
 		} 
 		catch (IOException e) 
 		{
