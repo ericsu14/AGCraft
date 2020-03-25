@@ -1,4 +1,4 @@
-package constants;
+package com.joojet.biblefetcher.constants;
 
 public enum BookID 
 {

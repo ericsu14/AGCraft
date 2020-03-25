@@ -1,4 +1,4 @@
-package fetcher;
+package com.joojet.biblefetcher.fetcher;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -6,10 +6,10 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.util.ArrayList;
 
-import api.APIParser;
-import constants.BibleID;
-import constants.BookID;
-import database.DatabaseManager;
+import com.joojet.biblefetcher.api.APIParser;
+import com.joojet.biblefetcher.constants.BibleID;
+import com.joojet.biblefetcher.constants.BookID;
+import com.joojet.biblefetcher.database.DatabaseManager;
 
 public class BibleFetcher 
 {

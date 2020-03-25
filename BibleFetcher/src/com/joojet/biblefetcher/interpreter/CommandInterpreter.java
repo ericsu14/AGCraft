@@ -1,9 +1,9 @@
-package interpreter;
+package com.joojet.biblefetcher.interpreter;
 
 import java.util.Arrays;
 
-import constants.BibleID;
-import constants.BookID;
+import com.joojet.biblefetcher.constants.BibleID;
+import com.joojet.biblefetcher.constants.BookID;
 
 public class CommandInterpreter 
 {

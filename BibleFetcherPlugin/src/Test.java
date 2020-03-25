@@ -2,9 +2,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 
-import constants.BibleID;
-import constants.BookID;
-import fetcher.BibleFetcher;
+import com.joojet.biblefetcher.constants.BibleID;
+import com.joojet.biblefetcher.constants.BookID;
+import com.joojet.biblefetcher.fetcher.BibleFetcher;
 
 public class Test {
 

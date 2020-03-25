@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import constants.*;
-import interpreter.CommandInterpreter;
+import com.joojet.biblefetcher.constants.*;
+import com.joojet.biblefetcher.interpreter.CommandInterpreter;
 
 class TestInterpreter 
 {

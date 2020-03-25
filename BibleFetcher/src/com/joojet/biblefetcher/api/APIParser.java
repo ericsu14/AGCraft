@@ -1,15 +1,14 @@
-package api;
+package com.joojet.biblefetcher.api;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 
-import constants.BibleID;
-import constants.BookID;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.joojet.biblefetcher.constants.BibleID;
+import com.joojet.biblefetcher.constants.BookID;
 
 public class APIParser 
 {

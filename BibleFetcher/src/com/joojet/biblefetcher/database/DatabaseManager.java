@@ -1,12 +1,12 @@
-package database;
+package com.joojet.biblefetcher.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import constants.BibleID;
-import constants.BookID;
+import com.joojet.biblefetcher.constants.BibleID;
+import com.joojet.biblefetcher.constants.BookID;
 
 public class DatabaseManager 
 {

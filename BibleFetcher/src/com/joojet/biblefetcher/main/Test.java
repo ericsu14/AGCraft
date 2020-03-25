@@ -1,13 +1,13 @@
-package main;
+package com.joojet.biblefetcher.main;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.util.ArrayList;
 
-import constants.BibleID;
-import constants.BookID;
-import fetcher.BibleFetcher;
-import interpreter.CommandInterpreter;
+import com.joojet.biblefetcher.constants.BibleID;
+import com.joojet.biblefetcher.constants.BookID;
+import com.joojet.biblefetcher.fetcher.BibleFetcher;
+import com.joojet.biblefetcher.interpreter.CommandInterpreter;
 
 public class Test {
 	

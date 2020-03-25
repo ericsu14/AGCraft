@@ -1,4 +1,4 @@
-package api;
+package com.joojet.biblefetcher.api;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import constants.*;
+import com.joojet.biblefetcher.constants.*;
 
 public class APIFetcher 
 {
