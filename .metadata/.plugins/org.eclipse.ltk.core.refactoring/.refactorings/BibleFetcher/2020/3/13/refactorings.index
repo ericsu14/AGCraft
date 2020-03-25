@@ -8,3 +8,6 @@
 1585095651137	Rename type 'VerseExtractor'
 1585098177757	Rename type 'BibleParser'
 1585098698850	Rename package 'parser'
+1585100767103	Delete element
+1585102003240	Move compilation unit
+1585102871659	Rename type 'DatabaseFetcher'

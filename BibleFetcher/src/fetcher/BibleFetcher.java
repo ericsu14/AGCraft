@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import api.APIParser;
 import constants.BibleID;
 import constants.BookID;
+import database.DatabaseManager;
 
 public class BibleFetcher 
 {
@@ -34,7 +35,13 @@ public class BibleFetcher
 	public static ArrayList <String> getVerses (BibleID translation, BookID book, int chapter) throws MalformedURLException, ProtocolException, IOException
 	{
 		// TODO: Check against database to see if that section of the bible is already cached
-		String content = APIParser.parseChapter(translation, book, chapter);
+		String content = DatabaseManager.fetch(translation, book, chapter);
+		if (content.isEmpty())
+		{
+			content = APIParser.parseChapter(translation, book, chapter);
+			DatabaseManager.insert(translation, book, chapter, content);
+			System.out.println ("Database updated");
+		}
 		
 		return tokenizeChapter (content);
 
