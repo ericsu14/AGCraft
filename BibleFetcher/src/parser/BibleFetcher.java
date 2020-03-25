@@ -10,7 +10,7 @@ import api.APIParser;
 import constants.BibleID;
 import constants.BookID;
 
-public class BibleParser 
+public class BibleFetcher 
 {
 	
 	public static ArrayList <String> tokenizeChapter (String content) throws UnsupportedEncodingException
