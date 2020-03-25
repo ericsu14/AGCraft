@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import constants.BibleID;
 import constants.BookID;
 import fetcher.BibleFetcher;
+import interpreter.CommandInterpreter;
 
 public class Test {
 	
@@ -34,6 +35,10 @@ public class Test {
 	{
 		try 
 		{
+			CommandInterpreter interpreter = new CommandInterpreter ();
+			BookID test = interpreter.searchBookTrie("number");
+			System.out.println (test.getTitle());
+			
 			fetchVerses(BibleID.ASV, BookID.ROM, 12, 2, 4);
 			fetchVerses(BibleID.ASV, BookID.ROM, 12);
 			fetchVerses(BibleID.KJV, BookID.ROM, 12);

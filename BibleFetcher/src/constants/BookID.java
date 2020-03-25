@@ -93,6 +93,21 @@ public enum BookID
 		return this.kBookTitle;
 	}
 	
+	/** Returns the name with the first character capitalized */
+	public String getFormattedTitle ()
+	{
+		StringBuilder result = new StringBuilder ();
+		if (this.kChapter != 0)
+		{
+			result.append(" ").append(this.kChapter);
+		}
+		
+		result.append(Character.toUpperCase(this.kBookTitle.charAt(0)));
+		result.append(this.kBookTitle.substring(1));
+		
+		return result.toString();
+	}
+	
 	public String getID ()
 	{
 		return this.kBookID;

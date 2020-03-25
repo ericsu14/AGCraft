@@ -25,7 +25,7 @@ public class CommandInterpreter
 		Arrays.stream(BibleID.values()).forEach(entry -> {
 			this.insertWord(entry.getBibleID().toLowerCase(), entry, this.bibRoot);
 			this.insertWord(entry.name().toLowerCase(), entry, this.bibRoot);
-			this.insertWord(entry.getTranslationName().toLowerCase(), entry, this.bibRoot);
+			this.insertWord(entry.getTranslationName().toLowerCase().replaceAll("([ ])", ""), entry, this.bibRoot);
 		});
 	}
 	
@@ -37,7 +37,7 @@ public class CommandInterpreter
 			this.insertWord(entry.name().toLowerCase(), entry, this.bookRoot);
 			if (entry.getChapter() == 0)
 			{
-				this.insertWord(entry.getTitle().toLowerCase(), entry, this.bookRoot);
+				this.insertWord(entry.getTitle().toLowerCase().replaceAll("([ ])", ""), entry, this.bookRoot);
 			}
 			/* If this book does come in multiple chapters (or parts), allow the user to search for
 			 * this book with the part number appended in front or behind of the title. */
