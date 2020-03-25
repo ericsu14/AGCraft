@@ -8,7 +8,8 @@ public enum BibleID
 	ASV ("ASV", "06125adad2d5898a-01", "The Holy Bible, American Standard Version"),
 	T4T ("T4T", "0bc8836afa7427fa-01", "Translation for Translators"),
 	WEB ("WEB", "9879dbb7cfe39e4d-04", "World English Bible (Protestant)"),
-	FBVNT ("FBVNTPsalms", "65eec8e0b60e656b-01", "Free Bible Version New Testament with Psalms");
+	FBVNT ("FBVNTPsalms", "65eec8e0b60e656b-01", "Free Bible Version New Testament with Psalms")
+	;
 	
 	private String kBibleID;
 	private String kBibleKey;

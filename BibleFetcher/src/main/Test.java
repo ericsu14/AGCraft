@@ -33,7 +33,7 @@ public class Test {
 	public static void main(String[] args)
 	{
 		try 
-		{			
+		{
 			fetchVerses(BibleID.ASV, BookID.ROM, 12, 2, 4);
 			fetchVerses(BibleID.ASV, BookID.ROM, 12);
 			fetchVerses(BibleID.KJV, BookID.ROM, 12);
