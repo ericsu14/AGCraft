@@ -24,3 +24,6 @@ hs_err_pid*
 
 #eclipse
 .metadata/
+
+#database stuff
+database/
