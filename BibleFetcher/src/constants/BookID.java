@@ -99,7 +99,7 @@ public enum BookID
 		StringBuilder result = new StringBuilder ();
 		if (this.kChapter != 0)
 		{
-			result.append(" ").append(this.kChapter);
+			result.append(this.kChapter).append(" ");
 		}
 		
 		result.append(Character.toUpperCase(this.kBookTitle.charAt(0)));

@@ -62,6 +62,15 @@ public class Test {
 			fetchVerses(BibleID.KJV, BookID.REV, 10, 1);
 			fetchVerses(BibleID.WEB, BookID.JOB, 11);
 			fetchVerses(BibleID.FBVNT, BookID.ROM, 12);
+			fetchVerses(BibleID.KJV, BookID.ROM, 12);
+			fetchVerses(BibleID.KJV, BookID.MRK, 12);
+			fetchVerses(BibleID.KJV, BookID.MRK, 1);
+			fetchVerses(BibleID.KJV, BookID.MRK, 2);
+			fetchVerses(BibleID.FBVNT, BookID.MRK, 2);
+			fetchVerses(BibleID.FBVNT, BookID.MRK, 1);
+			fetchVerses(BibleID.FBVNT, BookID.JN3, 1);
+			fetchVerses(BibleID.KJV, BookID.MRK, 3);
+			fetchVerses(BibleID.KJV, BookID.MRK, 4);
 		} 
 		catch (IOException e) 
 		{
