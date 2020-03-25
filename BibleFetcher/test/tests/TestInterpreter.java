@@ -74,7 +74,23 @@ class TestInterpreter
 	@Test
 	void testMisspelledBookNameSearches ()
 	{
-		// TODO: 
+		testBookInput ("markz", BookID.MRK);
+		testBookInput ("marks", BookID.MRK);
+		testBookInput ("ezkieal", BookID.EZK);
+		testBookInput ("ezraro", BookID.EZR);
+		testBookInput ("genasis", BookID.GEN);
+		testBookInput ("jonaes", BookID.JON);
+		testBookInput ("revalations", BookID.REV);
+		testBookInput ("revelation", BookID.REV);
+		testBookInput ("revaleations", BookID.REV);
+		// TODO: The rest
+	}
+	
+	/** Helper function used to test if a BookID returned from a custom input 
+	 *  matches with its intended target */
+	private void testBookInput (String input, BookID expected)
+	{
+		assertEquals (interpreter.searchBookTrie(removeWhiteSpace (input)), expected);
 	}
 	
 	/** Helper function used to filter out whitespaces from string */
