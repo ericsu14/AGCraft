@@ -40,6 +40,6 @@ public class APIParser
 	/** Fixes common issues that occurs within text extracted from the API */
 	public static String fixContent (String content)
 	{
-		return content.replaceAll("([â][€][™])", "\'").replaceAll("([â][€][˜])", "\'").replaceAll("([Â][¶][\\s])","").replaceAll("([Ã])", "a").replaceAll("([¦])", "e").replaceAll("([â][€][”])", "—").replaceAll("([â][€][\\s\\S])", "\"").replaceAll("([Â][//s//S]+", "");
+		return content.replaceAll("([â][€][™])", "\'").replaceAll("([â][€][˜])", "\'").replaceAll("([Â][¶][\\s])","").replaceAll("([Ã])", "a").replaceAll("([¦])", "e").replaceAll("([â][€][”])", "—").replaceAll("([â][€][\\s\\S])", "\"").replaceAll("([Â][//s//S]+)", "");
 	}
 }
