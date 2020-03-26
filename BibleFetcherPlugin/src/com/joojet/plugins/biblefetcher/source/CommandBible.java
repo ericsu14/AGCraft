@@ -55,13 +55,13 @@ public class CommandBible implements CommandExecutor
 				Player player = (Player) sender;
 				
 				// Merges the pages together
-				String mergedPages = ContentParser.mergeContent(verses);
+				String mergedPages = ContentParser.mergeContent(ContentParser.formatContent(verses, this.start));
 				ItemStack bible = new ItemStack (Material.WRITTEN_BOOK);
 				BookMeta bibleContent = (BookMeta) bible.getItemMeta();
 				
 				bibleContent.setTitle(this.generateHeader());
 				bibleContent.setAuthor(bibleID.getBibleID());
-				bibleContent.setPages(ContentParser.formatContent (mergedPages, this.start));
+				bibleContent.setPages(ContentParser.formatContent (mergedPages, 1));
 				bible.setItemMeta(bibleContent);
 				
 				player.getInventory().addItem(bible);
