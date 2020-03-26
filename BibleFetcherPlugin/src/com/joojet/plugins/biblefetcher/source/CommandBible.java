@@ -138,7 +138,7 @@ public class CommandBible implements CommandExecutor
 		{	
 			result.append(":");
 			result.append(this.start);
-			if (this.start < this.verseSize)
+			if (this.start < this.verseSize || (this.start < (this.verseSize + this.start - 1) && n == 4))
 			{
 				result.append("-");
 				if (n == 4)
