@@ -187,19 +187,19 @@ public class CommandBible implements CommandExecutor
 					substr = curr.substring(startIndex, endIndex);
 					if (firstLine)
 					{
-						result.add("\"" + i + ". " + substr + "-\"");
+						result.add(i + ". " + substr + "-");
 						firstLine = false;
 					}
 					else
 					{
 						if (lastElement)
 						{
-							result.add("\"" + substr + "\"");
+							result.add(substr);
 							break;
 						}
 						else
 						{
-							result.add("\"" + substr + "-\"");
+							result.add(substr + "-");
 						}
 					}
 					startIndex = endIndex;
@@ -217,11 +217,11 @@ public class CommandBible implements CommandExecutor
 			{
 				if (i - this.start == 0)
 				{
-					result.add("\"" + curr + "\"");
+					result.add(curr);
 				}
 				else
 				{
-					result.add("\"" + i + ". " + curr + "\"");
+					result.add(i + ". " + curr);
 				}
 			}
 			++i;
