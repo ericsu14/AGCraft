@@ -19,6 +19,70 @@ public class APIFetcher
 	private static final String kAPIURL = "https://api.scripture.api.bible/v1";
 	private static final String kAPIKey = "c83f0ad75d6f512a24112697f36e8e42";
 	
+	// ESV API
+	private static final String kESVAPIURL = "https://api.esv.org/v3";
+	private static final String kESVAPIKey = "79c54ff3062f66750d18e411295b7671e26c120f";
+	
+	public static String fetchChapter (BibleID translation, BookID book, int chapter) throws IOException
+	{
+		if (translation.equals(BibleID.ESV))
+		{
+			return fetchChapterESV (translation, book, chapter);
+		}
+		return fetchChapterCommon (translation, book, chapter);
+	}
+	
+	/** Uses call /v3/passage/text to retrieve an entire chapter from the bible.
+	 *  	@param translation - The version of the bible we are using
+	 *  	@param book - The book of the bible we are reading at
+	 *  	@param chapter - The chapter of the book we are reading at
+	 *  	@return The contents of the biblical section in RAW JSON format
+	 * 		@throws UnsupportedEncodingException 
+	 * 		@throws MalformedURLException */
+	public static String fetchChapterESV (BibleID translation, BookID book, int chapter) throws IOException
+	{
+		StringBuilder link = new StringBuilder (kESVAPIURL);
+		link.append("/passage/text/?");
+		// Build parameters
+		Map <String, String> parameters = new HashMap <String, String> ();
+		StringBuilder query = new StringBuilder (book.getFormattedTitle());
+		query.append(" ").append (chapter);
+		
+		parameters.put("q", query.toString());
+		parameters.put("include-passage-references", "false");
+		parameters.put("include-first-verse-numbers", "false");
+		parameters.put("include-footnotes", "false");
+		parameters.put("include-headings", "false");
+		parameters.put("include-passage-horizontal-lines", "false");
+		parameters.put("include-heading-horizontal-lines", "false");
+		parameters.put("indent-paragraphs", "0");
+		parameters.put("indent-poetry", "false");
+		
+		link.append(getParamsString(parameters));
+		System.out.println (link.toString());
+		// Opens connection
+		URL url = new URL (link.toString());
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("GET");
+		
+		// Header
+		con.setRequestProperty("Authorization", "Token " + kESVAPIKey);
+		con.setDoOutput(true);
+		con.setConnectTimeout(5000);
+		con.setReadTimeout(5000);
+		
+		// Get output
+		BufferedReader br = new BufferedReader (new InputStreamReader (con.getInputStream()));
+		StringBuilder output = new StringBuilder ();
+		String it;
+		while ((it = br.readLine()) != null)
+		{
+			output.append((it));
+		}
+		con.disconnect();
+		
+		return output.toString();
+	}
 	
 	/** Uses call /v1/bibles/{bibleId}/passages/{passageId} to retrieve an entire chapter from the bible.
 	 *  	@param translation - The version of the bible we are using
@@ -27,7 +91,7 @@ public class APIFetcher
 	 *  	@return The contents of the biblical section in RAW JSON format
 	 * 		@throws UnsupportedEncodingException 
 	 * @throws MalformedURLException */
-	public static String fetchChapter (BibleID translation, BookID book, int chapter) throws UnsupportedEncodingException, MalformedURLException, IOException, ProtocolException
+	public static String fetchChapterCommon (BibleID translation, BookID book, int chapter) throws UnsupportedEncodingException, MalformedURLException, IOException, ProtocolException
 	{
 		// Builds the URL
 		StringBuilder link = new StringBuilder (kAPIURL);
@@ -50,9 +114,7 @@ public class APIFetcher
 
 		link.append(getParamsString (parameters));
 		
-		URL url;
-
-		url = new URL (link.toString());
+		URL url = new URL (link.toString());
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		con.setRequestMethod("GET");
 			

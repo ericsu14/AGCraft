@@ -7,6 +7,7 @@ import java.net.ProtocolException;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonArray;
 import com.joojet.biblefetcher.constants.BibleID;
 import com.joojet.biblefetcher.constants.BookID;
 
@@ -26,6 +27,13 @@ public class APIParser
 		if (tree.isJsonObject())
 		{
 			JsonObject parsed = tree.getAsJsonObject();
+			if (translation.equals(BibleID.ESV))
+			{
+				System.out.println (parsed.get("passages").isJsonArray());
+				JsonArray arr = (JsonArray) parsed.get("passages");
+				return fixContent (trimContent (arr.get(0).getAsString()));
+			}
+			
 			return fixContent (trimContent (((JsonObject) parsed.get("data")).get("content").toString()));
 		}
 		return content.toString();

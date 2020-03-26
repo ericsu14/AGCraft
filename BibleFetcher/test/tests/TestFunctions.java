@@ -38,13 +38,14 @@ class TestFunctions {
 		try 
 		{
 			// Known as the longest passage in the bible
-			ArrayList <String> verses = BibleFetcher.getVerses(BibleID.KJV, BookID.EST, 8, 9, 9);
+			ArrayList <String> verses = BibleFetcher.getVerses(BibleID.ESV, BookID.EST, 8, 9, 9);
 			ArrayList <String> split = formatContent (verses);
-			assertEquals (split.size(), 3);
+			assertEquals (split.size(), 2);
 			vertifyCharacterLimits (split);
 		} 
 		catch (Exception e)
 		{
+			System.err.println (e.getMessage());
 			assertEquals (1, 2);
 		}
 	}
