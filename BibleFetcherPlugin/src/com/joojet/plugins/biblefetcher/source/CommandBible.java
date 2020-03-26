@@ -93,7 +93,7 @@ public class CommandBible implements CommandExecutor
 		ArrayList <String> result = null;
 		if (this.n < 3)
 		{
-			throw new RuntimeException ("Insuffient parameters. Usage: /bible <translation> <book> <chapter> <start> <end>");
+			throw new RuntimeException ("Insuffient parameters.\nUsage: /bible <translation> <book> <chapter> <start> <end>");
 		}
 		
 		this.bibleID = BibleFetcherPlugin.interpreter.searchBibleTrie(args[0]);
