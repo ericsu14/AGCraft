@@ -29,7 +29,6 @@ public class APIParser
 			JsonObject parsed = tree.getAsJsonObject();
 			if (translation.equals(BibleID.ESV))
 			{
-				System.out.println (parsed.get("passages").isJsonArray());
 				JsonArray arr = (JsonArray) parsed.get("passages");
 				return fixContent (trimContent (arr.get(0).getAsString()));
 			}

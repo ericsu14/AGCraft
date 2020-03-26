@@ -35,7 +35,7 @@ public enum BookID
 	HOS ("HOS", "hosea"),
 	JOL ("JOL", "joel"),
 	AMO ("AMO", "amos"),
-	OBA ("OBA", "obadiah"),
+	OBA ("OBA", "obadiah", 0, true),
 	JON ("JON", "jonah"),
 	MIC ("MIC", "micah"),
 	NAM ("NAM", "nahum"),
@@ -58,27 +58,29 @@ public enum BookID
 	TI1 ("1TI", "timothy", 1),
 	TI2 ("2TI", "timothy", 2),
 	TIT ("TIT", "titus"),
-	PHN ("PHN", "philemon"),
+	PHN ("PHN", "philemon", 0, true),
 	HEB ("HEB", "hebrews"),
 	JAS ("JAS", "james"),
 	PE1 ("1PE", "peter", 1),
 	PE2 ("2PE", "peter", 2),
 	JN1 ("1JN", "john", 1),
-	JN2 ("2JN", "john", 2),
-	JN3 ("3JN", "john", 3),
-	JUD ("JUD", "jude"),
+	JN2 ("2JN", "john", 2, true),
+	JN3 ("3JN", "john", 3, true),
+	JUD ("JUD", "jude", 0, true),
 	REV ("REV", "revelation")
  	;
 	
 	private String kBookID;
 	private String kBookTitle;
 	private int kChapter;
+	private boolean kSingleChapter;
 	
 	private BookID (String bookID, String bookTitle)
 	{
 		this.kBookID = bookID;
 		this.kBookTitle = bookTitle;
 		this.kChapter = 0;
+		this.kSingleChapter = false;
 	}
 	
 	private BookID (String bookID, String bookTitle, int chapter)
@@ -86,6 +88,15 @@ public enum BookID
 		this.kBookID = bookID;
 		this.kBookTitle = bookTitle;
 		this.kChapter = chapter;
+		this.kSingleChapter = false;
+	}
+	
+	private BookID (String bookID, String bookTitle, int chapter, boolean singleChapter)
+	{
+		this.kBookID = bookID;
+		this.kBookTitle = bookTitle;
+		this.kChapter = chapter;
+		this.kSingleChapter = singleChapter;
 	}
 	
 	/** Returns the title of the book without any added chapter information. */
@@ -119,6 +130,12 @@ public enum BookID
 	public int getChapter ()
 	{
 		return this.kChapter;
+	}
+	
+	/** Returns true if this book only contains one chapter */
+	public boolean isSingleChapter ()
+	{
+		return this.kSingleChapter;
 	}
 }
 

@@ -46,7 +46,10 @@ public class APIFetcher
 		// Build parameters
 		Map <String, String> parameters = new HashMap <String, String> ();
 		StringBuilder query = new StringBuilder (book.getFormattedTitle());
-		query.append(" ").append (chapter);
+		if (!book.isSingleChapter())
+		{
+			query.append(" ").append (chapter);
+		}
 		
 		parameters.put("q", query.toString());
 		parameters.put("include-passage-references", "false");
@@ -59,7 +62,6 @@ public class APIFetcher
 		parameters.put("indent-poetry", "false");
 		
 		link.append(getParamsString(parameters));
-		System.out.println (link.toString());
 		// Opens connection
 		URL url = new URL (link.toString());
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
