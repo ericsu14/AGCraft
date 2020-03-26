@@ -11,7 +11,7 @@ public class ContentParser
 		
 		for (String s : list)
 		{
-			content.append(s + "\n");
+			content.append(s + " ");
 		}
 		return content.toString();
 	}
