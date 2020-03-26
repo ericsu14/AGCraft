@@ -8,19 +8,9 @@ public class ContentParser
 	public static String mergeContent (ArrayList <String> list)
 	{
 		StringBuilder content = new StringBuilder ();
-		
-		boolean firstPass = false;
 		for (String s : list)
 		{
-			if (!firstPass)
-			{
-				content.append(s + "\n");
-				firstPass = true;
-			}
-			else
-			{
-				content.append(s + " ");
-			}
+			content.append(s + "\n");
 		}
 		return content.toString();
 	}
@@ -36,7 +26,7 @@ public class ContentParser
 	/** Splits a passage into two parts should it exceed character MC book's character limits */
 	public static ArrayList <String> formatContent (ArrayList <String> list, int start)
 	{
-		int maxLength = 246;
+		int maxLength = 240;
 		ArrayList <String> result = new ArrayList <String> ();
 		
 		int i = start - 1;

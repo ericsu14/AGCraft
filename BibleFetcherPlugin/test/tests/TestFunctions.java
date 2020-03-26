@@ -55,7 +55,7 @@ class TestFunctions {
 	{
 		try
 		{
-			ArrayList <String> verses = BibleFetcher.getVerses(BibleID.ESV, BookID.MRK, 8);
+			ArrayList <String> verses = BibleFetcher.getVerses(BibleID.KJV, BookID.MRK, 1);
 			verses.add(0, "Header");
 			String bigPassage = ContentParser.mergeContent(ContentParser.formatContent(verses, 1));
 			ArrayList <String> pages = ContentParser.formatContent(bigPassage, 1);
