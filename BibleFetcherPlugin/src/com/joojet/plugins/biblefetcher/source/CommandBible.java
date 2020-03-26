@@ -169,7 +169,7 @@ public class CommandBible implements CommandExecutor
 		int maxLength = 247;
 		ArrayList <String> result = new ArrayList <String> ();
 		
-		int i = this.start;
+		int i = this.start - 1;
 		boolean firstLine = true;
 		boolean lastElement = false;
 		for (String curr : list)
@@ -215,7 +215,7 @@ public class CommandBible implements CommandExecutor
 			}
 			else
 			{
-				if (i - this.start == 0)
+				if ((i + 1) - this.start == 0)
 				{
 					result.add(curr);
 				}
