@@ -166,7 +166,7 @@ public class CommandBible implements CommandExecutor
 	/** Splits a passage into two parts should it exceed character MC book's character limits */
 	private ArrayList <String> formatContent (ArrayList <String> list)
 	{
-		int maxLength = 250;
+		int maxLength = 247;
 		ArrayList <String> result = new ArrayList <String> ();
 		
 		int i = this.start;
@@ -187,16 +187,20 @@ public class CommandBible implements CommandExecutor
 					substr = curr.substring(startIndex, endIndex);
 					if (firstLine)
 					{
-						result.add(i + ". " + substr);
+						result.add("\"" + i + ". " + substr + "-\"");
 						firstLine = false;
 					}
 					else
 					{
-						result.add(substr);
-					}
-					if (lastElement)
-					{
-						break;
+						if (lastElement)
+						{
+							result.add("\"" + substr + "\"");
+							break;
+						}
+						else
+						{
+							result.add("\"" + substr + "-\"");
+						}
 					}
 					startIndex = endIndex;
 					endIndex += maxLength;
@@ -211,7 +215,14 @@ public class CommandBible implements CommandExecutor
 			}
 			else
 			{
-				result.add(i + ". " + curr);
+				if (i - this.start == 0)
+				{
+					result.add("\"" + curr + "\"");
+				}
+				else
+				{
+					result.add("\"" + i + ". " + curr + "\"");
+				}
 			}
 			++i;
 		}
