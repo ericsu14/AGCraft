@@ -28,6 +28,7 @@ class TestSingleChapter {
 		try 
 		{
 			ArrayList <String> content = BibleFetcher.getVerses(BibleID.ESV, book, 1);
+			System.out.println (content.toString());
 			assertEquals (content.size() > 1, true);
 		} 
 		catch (Exception e) 

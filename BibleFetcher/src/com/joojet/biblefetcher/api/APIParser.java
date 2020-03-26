@@ -41,7 +41,15 @@ public class APIParser
 	/** Trims quotation and new line characters from the content string. */
 	public static String trimContent (String content)
 	{
-		return content.replaceAll("([\\\\][n])", "").replaceAll("([\\\"])", "").replaceAll("([\\s][\\s]+)", " ").trim();
+		StringBuilder str = new StringBuilder();
+		for (char c : content.toCharArray())
+		{
+			if (c != '\n' && c != '\r')
+			{
+				str.append(c);
+			}
+		}
+		return str.toString().replaceAll("([\\\\][n])", "").replaceAll("([\\\"])", "").replaceAll("([\\s][\\s]+)", " ").trim();
 	}
 	
 	/** Fixes common issues that occurs within text extracted from the API */

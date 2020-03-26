@@ -25,7 +25,7 @@ public class BibleFetcher
 			// Ignores empty lines
 			if (!curr.isEmpty())
 			{
-				container.add(curr.trim());
+				container.add(APIParser.trimContent(curr));
 			}
 		}
 		
