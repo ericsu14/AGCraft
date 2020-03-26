@@ -58,7 +58,7 @@ public class CommandBible implements CommandExecutor
 				
 				bibleContent.setTitle(this.generateHeader());
 				bibleContent.setAuthor(bibleID.getBibleID());
-				bibleContent.setPages(verses);
+				bibleContent.setPages(this.formatContent (verses));
 				bible.setItemMeta(bibleContent);
 				
 				player.getInventory().addItem(bible);
@@ -66,7 +66,6 @@ public class CommandBible implements CommandExecutor
 		}
 		catch (Exception e)
 		{
-			System.out.println (e.getMessage());
 			sender.sendMessage("[God] Error: " + e.getMessage());
 		}
 
@@ -98,7 +97,9 @@ public class CommandBible implements CommandExecutor
 		
 		if (this.n == 3)
 		{
+			this.start = 1;
 			result = BibleFetcher.getVerses(bibleID, bookID, chapter);
+			this.end = result.size();
 		}
 		if (this.n >= 4)
 		{
@@ -111,6 +112,7 @@ public class CommandBible implements CommandExecutor
 			else
 			{
 				result = BibleFetcher.getVerses(bibleID, bookID, chapter, start);
+				this.end = result.size();
 			}
 		}
 		
@@ -121,7 +123,7 @@ public class CommandBible implements CommandExecutor
 		return result;
 	}
 	
-	public String generateHeader ()
+	private String generateHeader ()
 	{
 		StringBuilder result = new StringBuilder ();
 		result.append(this.bookID.getFormattedTitle());
@@ -159,5 +161,61 @@ public class CommandBible implements CommandExecutor
 			result.append(" | ");
 		}
 		return result.toString();
+	}
+	
+	/** Splits a passage into two parts should it exceed character MC book's character limits */
+	private ArrayList <String> formatContent (ArrayList <String> list)
+	{
+		int maxLength = 250;
+		ArrayList <String> result = new ArrayList <String> ();
+		
+		int i = this.start;
+		boolean firstLine = true;
+		boolean lastElement = false;
+		for (String curr : list)
+		{
+			firstLine = true;
+			lastElement = false;
+			if (curr.length() > maxLength)
+			{
+				int startIndex = 0;
+				int endIndex = maxLength - 1;
+				
+				String substr;
+				while (endIndex <= curr.length() - 1)
+				{
+					substr = curr.substring(startIndex, endIndex);
+					if (firstLine)
+					{
+						result.add(i + ". " + substr);
+						firstLine = false;
+					}
+					else
+					{
+						result.add(substr);
+					}
+					if (lastElement)
+					{
+						break;
+					}
+					startIndex = endIndex;
+					endIndex += maxLength;
+					
+					if (endIndex > curr.length() - 1)
+					{
+						endIndex = curr.length() - 1;
+						lastElement = true;
+					}
+				}
+				
+			}
+			else
+			{
+				result.add(i + ". " + curr);
+			}
+			++i;
+		}
+		
+		return result;
 	}
 }

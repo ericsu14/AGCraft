@@ -70,7 +70,7 @@ public class Test {
 			fetchVerses(BibleID.FBVNT, BookID.MRK, 1);
 			fetchVerses(BibleID.FBVNT, BookID.JN3, 1);
 			fetchVerses(BibleID.KJV, BookID.MRK, 3);
-			fetchVerses(BibleID.KJV, BookID.MRK, 4);
+			fetchVerses(BibleID.KJV, BookID.MRK, 5);
 		} 
 		catch (IOException e) 
 		{
