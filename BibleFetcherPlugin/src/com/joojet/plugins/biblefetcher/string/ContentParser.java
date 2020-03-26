@@ -9,9 +9,18 @@ public class ContentParser
 	{
 		StringBuilder content = new StringBuilder ();
 		
+		boolean firstPass = false;
 		for (String s : list)
 		{
-			content.append(s + " ");
+			if (!firstPass)
+			{
+				content.append(s + "\n");
+				firstPass = true;
+			}
+			else
+			{
+				content.append(s + " ");
+			}
 		}
 		return content.toString();
 	}
@@ -48,7 +57,7 @@ public class ContentParser
 					substr = curr.substring(startIndex, endIndex);
 					if (firstLine)
 					{						
-						result.add(appendDash (substr));
+						result.add(appendIndex (appendDash (substr), i, start));
 						firstLine = false;
 					}
 					else
@@ -76,7 +85,7 @@ public class ContentParser
 			}
 			else
 			{
-				result.add(((i + 1) - start == 0) ? curr :  i + ". " + curr );
+				result.add(appendIndex (curr, i, start));
 			}
 			++i;
 		}
@@ -84,6 +93,20 @@ public class ContentParser
 		return result;
 	}
 	
+	/** Appends a passage index in front of the string if the index is not the content header */
+	private static String appendIndex (String s, int i, int start)
+	{
+		StringBuilder str = new StringBuilder ();
+		if (!((i + 1) - start == 0))
+		{
+			str.append (i);
+			str.append(". ");
+		}
+		str.append(s);
+		return str.toString();
+	}
+	
+	/** Appends a dash to the end of a string if the last character of that string is an alphanumeric character. */
 	private static String appendDash (String s)
 	{
 		StringBuilder str = new StringBuilder (s);
