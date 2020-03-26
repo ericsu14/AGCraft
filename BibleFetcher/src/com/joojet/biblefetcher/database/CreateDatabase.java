@@ -54,15 +54,15 @@ public class CreateDatabase
 			stmt.executeUpdate(sql);
 			stmt.close();
 			c.close();
+			
+			System.out.println ("Table created successfully!");
 		}
 		
 		catch (Exception e)
 		{
 			System.err.println (e.getClass().getName() + ": " + e.getMessage());
-			System.exit(0);
 		}
 		
-		System.out.println ("Table created successfully!");
 	}
 	
 	public static void main (String [] args)
