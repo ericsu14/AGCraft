@@ -1,10 +1,6 @@
 package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.util.ArrayList;
 
 import com.joojet.biblefetcher.constants.BibleID;
