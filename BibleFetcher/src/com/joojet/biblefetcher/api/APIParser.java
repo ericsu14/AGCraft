@@ -20,7 +20,8 @@ public class APIParser
 	{
 		StringBuilder content = new StringBuilder (APIFetcher.fetchChapter(translation, book, chapter));
 		
-		JsonElement tree = JsonParser.parseString(content.toString());
+		JsonParser parser = new JsonParser ();
+		JsonElement tree = parser.parse(content.toString());
 		
 		if (tree.isJsonObject())
 		{
