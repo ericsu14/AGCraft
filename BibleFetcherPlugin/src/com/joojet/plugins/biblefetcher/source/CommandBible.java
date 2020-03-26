@@ -16,6 +16,7 @@ import org.bukkit.inventory.meta.BookMeta;
 import com.joojet.biblefetcher.constants.BibleID;
 import com.joojet.biblefetcher.constants.BookID;
 import com.joojet.biblefetcher.fetcher.BibleFetcher;
+import com.joojet.plugins.biblefetcher.string.ContentParser;
 
 public class CommandBible implements CommandExecutor 
 {
@@ -53,12 +54,14 @@ public class CommandBible implements CommandExecutor
 			{
 				Player player = (Player) sender;
 				
+				// Merges the pages together
+				String mergedPages = ContentParser.mergeContent(verses);
 				ItemStack bible = new ItemStack (Material.WRITTEN_BOOK);
 				BookMeta bibleContent = (BookMeta) bible.getItemMeta();
 				
 				bibleContent.setTitle(this.generateHeader());
 				bibleContent.setAuthor(bibleID.getBibleID());
-				bibleContent.setPages(this.formatContent (verses));
+				bibleContent.setPages(ContentParser.formatContent (mergedPages, this.start));
 				bible.setItemMeta(bibleContent);
 				
 				player.getInventory().addItem(bible);
@@ -77,6 +80,13 @@ public class CommandBible implements CommandExecutor
 		return false;
 	}
 	
+	/** Connects with the BibleParser API to fetch Bible passages based on what is present in the command's arguments
+	 * 		@param args - Command arguments
+	 * 		@return An ArrayList containing the fetched Bible passages
+	 * 		@throws RuntimeException if there is a problem parsing the commandline arguments
+	 * 		@throws IOException if there is a problem regarding connecting with the web API
+	 * 		@throws MalformedURLException if there is a problem with the web API's URL
+	 * 		@throws NumberFormatException if there is a problem extracting an integer based parameter in the commandline arguments */
 	public ArrayList <String> fetchVerses (String [] args) throws RuntimeException, NumberFormatException, MalformedURLException, ProtocolException, IOException
 	{
 		this.n = args.length;
@@ -128,6 +138,7 @@ public class CommandBible implements CommandExecutor
 		return result;
 	}
 	
+	/** Generates a formatted header containing Book, chapter, and passage metadata. */
 	private String generateHeader ()
 	{
 		StringBuilder result = new StringBuilder ();
@@ -157,6 +168,7 @@ public class CommandBible implements CommandExecutor
 		return result.toString();
 	}
 	
+	/** Generates a String containing all of the supported bibles */
 	private String getSupportedBibles ()
 	{
 		StringBuilder result = new StringBuilder ();
@@ -168,70 +180,4 @@ public class CommandBible implements CommandExecutor
 		return result.toString();
 	}
 	
-	/** Splits a passage into two parts should it exceed character MC book's character limits */
-	private ArrayList <String> formatContent (ArrayList <String> list)
-	{
-		int maxLength = 247;
-		ArrayList <String> result = new ArrayList <String> ();
-		
-		int i = this.start - 1;
-		boolean firstLine = true;
-		boolean lastElement = false;
-		for (String curr : list)
-		{
-			firstLine = true;
-			lastElement = false;
-			if (curr.length() > maxLength)
-			{
-				int startIndex = 0;
-				int endIndex = maxLength - 1;
-				
-				String substr;
-				while (endIndex <= curr.length() - 1)
-				{
-					substr = curr.substring(startIndex, endIndex);
-					if (firstLine)
-					{
-						result.add(i + ". " + substr + "-");
-						firstLine = false;
-					}
-					else
-					{
-						if (lastElement)
-						{
-							result.add(substr);
-							break;
-						}
-						else
-						{
-							result.add(substr + "-");
-						}
-					}
-					startIndex = endIndex;
-					endIndex += maxLength;
-					
-					if (endIndex > curr.length() - 1)
-					{
-						endIndex = curr.length() - 1;
-						lastElement = true;
-					}
-				}
-				
-			}
-			else
-			{
-				if ((i + 1) - this.start == 0)
-				{
-					result.add(curr);
-				}
-				else
-				{
-					result.add(i + ". " + curr);
-				}
-			}
-			++i;
-		}
-		
-		return result;
-	}
 }
