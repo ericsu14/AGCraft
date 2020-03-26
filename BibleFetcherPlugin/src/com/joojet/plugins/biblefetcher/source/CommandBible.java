@@ -64,9 +64,14 @@ public class CommandBible implements CommandExecutor
 				player.getInventory().addItem(bible);
 			}
 		}
+		catch (IOException e) 
+		{
+			sender.sendMessage ("[God] That chapter of the bible does not exist.");
+		}
+		
 		catch (Exception e)
 		{
-			sender.sendMessage("[God] Error: " + e.getMessage());
+			sender.sendMessage("[God] " + e.getMessage());
 		}
 
 		return false;
