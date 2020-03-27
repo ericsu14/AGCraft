@@ -25,21 +25,7 @@ public class CommandInterpreter
 	 *  	@param input - Search term */
 	public BibleID searchBibleTrie (String input)
 	{
-		input = input.toLowerCase().trim();
-		
-		TrieNode<BibleID> curr = bibRoot;
-		for (char c : input.toCharArray())
-		{
-			if (curr.next(c) != null)
-			{
-				curr = curr.next(c);
-			}
-			else
-			{
-				break;
-			}
-		}
-		return (BibleID) curr.getLinkedID(input);
+		return (BibleID) this.searchTrie(input, this.bibRoot);
 	}
 	
 	/** Searches the book trie for the specified input and
@@ -48,21 +34,7 @@ public class CommandInterpreter
 	 *  	@param input - Search term */
 	public BookID searchBookTrie (String input)
 	{
-		input = input.toLowerCase().trim();
-		
-		TrieNode<BookID> curr = bookRoot;
-		for (char c : input.toCharArray())
-		{
-			if (curr.next(c) != null)
-			{
-				curr = curr.next(c);
-			}
-			else
-			{
-				break;
-			}
-		}
-		return (BookID) curr.getLinkedID(input);
+		return (BookID) this.searchTrie(input, this.bookRoot);
 	}
 	
 	/** Populates the bible search trie by adding every possible way a user could search for their desired bible translation */
@@ -93,6 +65,30 @@ public class CommandInterpreter
 				this.insertWord(entry.getTitle() + entry.getChapter(), entry, this.bookRoot);
 			}
 		});
+	}
+	
+	/** Searches the trie using the input String and returns the linkedID 
+	  * associated with that search term.
+	  * @param input - Search term
+	  * @param root - Pointer to root node of the trie being searched
+	  * @return - The linkedID associated with the search term, or null if not found.*/
+	private <T> T searchTrie (String input, TrieNode <T> root)
+	{
+		input = input.toLowerCase();
+		TrieNode <T> curr = root;
+		
+		for (char c : input.toCharArray())
+		{
+			if (curr.next(c) != null)
+			{
+				curr = curr.next(c);
+			}
+			else
+			{
+				break;
+			}
+		}
+		return curr.getLinkedID(input);
 	}
 	
 	/** Inserts a word into the trie
