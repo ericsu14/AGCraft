@@ -55,7 +55,7 @@ public class CommandInterpreter
 			this.insertWord(entry.name(), entry, this.bookRoot);
 			if (entry.getChapter() == 0)
 			{
-				this.insertWord(entry.getTitle().replaceAll("([ ])", ""), entry, this.bookRoot);
+				this.insertWord(entry.getTitle(), entry, this.bookRoot);
 			}
 			/* If this book does come in multiple chapters (or parts), allow the user to search for
 			 * this book with the part number appended in front or behind of the title. */
