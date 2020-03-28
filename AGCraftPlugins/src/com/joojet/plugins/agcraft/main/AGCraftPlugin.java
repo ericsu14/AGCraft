@@ -1,11 +1,11 @@
-package com.joojet.plugins.biblefetcher.main;
+package com.joojet.plugins.agcraft.main;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import com.joojet.biblefetcher.database.CreateDatabase;
 import com.joojet.biblefetcher.interpreter.CommandInterpreter;
 import com.joojet.plugins.biblefetcher.commands.Bible;
 import com.joojet.plugins.biblefetcher.commands.ClearBibles;
-public class BibleFetcherPlugin extends JavaPlugin 
+public class AGCraftPlugin extends JavaPlugin 
 {
 	public static CommandInterpreter interpreter = new CommandInterpreter ();
 	

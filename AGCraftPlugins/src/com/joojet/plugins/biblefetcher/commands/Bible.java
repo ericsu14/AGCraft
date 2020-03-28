@@ -15,7 +15,7 @@ import org.bukkit.inventory.meta.BookMeta;
 
 import com.joojet.biblefetcher.constants.*;
 import com.joojet.biblefetcher.fetcher.BibleFetcher;
-import com.joojet.plugins.biblefetcher.main.BibleFetcherPlugin;
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.biblefetcher.string.ContentParser;
 
 import net.md_5.bungee.api.ChatColor;
@@ -99,8 +99,8 @@ public class Bible implements CommandExecutor
 			throw new RuntimeException ("Insuffient parameters.\nUsage: /bible <translation> <book> <chapter> <start> <end>");
 		}
 		
-		this.bibleID = BibleFetcherPlugin.interpreter.searchBibleTrie(args[0]);
-		this.bookID = BibleFetcherPlugin.interpreter.searchBookTrie(args[1]);
+		this.bibleID = AGCraftPlugin.interpreter.searchBibleTrie(args[0]);
+		this.bookID = AGCraftPlugin.interpreter.searchBookTrie(args[1]);
 		this.chapter = Integer.parseInt(args[2]);
 		
 		if (this.bibleID == null)
