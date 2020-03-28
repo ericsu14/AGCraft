@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class CreateDatabase 
 {
-	public final static String kDatabaseName = "bibles";
+	public final static String kDatabaseName = "bibles.db";
 	public final static String kDatabaseURL = "jdbc:sqlite:.\\" + kDatabaseName;
 	
 	/** Creates a new database in ./database/bibles.

@@ -1,7 +1,11 @@
 name: BibleFetcherPlugin
-main: com.joojet.plugins.biblefetcher.source.BibleFetcherPlugin
-version: 1.3
+main: com.joojet.plugins.biblefetcher.main.BibleFetcherPlugin
+version: 1.4
 api-version: 1.13
 commands:
   bible:
     description: Generates a written book containing specified sections of the Bible. The <start> and <end> parameters are optional.
+    usage: /bible <translation> <book> <chapter> <start> <end>
+  clearBibles:
+    description: Removes all command-generated bibles from your inventory.
+    usage: /clearBibles

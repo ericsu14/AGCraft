@@ -1,4 +1,4 @@
-package com.joojet.plugins.biblefetcher.source;
+package com.joojet.plugins.biblefetcher.commands;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -13,12 +13,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
-import com.joojet.biblefetcher.constants.BibleID;
-import com.joojet.biblefetcher.constants.BookID;
+import com.joojet.biblefetcher.constants.*;
 import com.joojet.biblefetcher.fetcher.BibleFetcher;
+import com.joojet.plugins.biblefetcher.main.BibleFetcherPlugin;
 import com.joojet.plugins.biblefetcher.string.ContentParser;
 
-public class CommandBible implements CommandExecutor 
+import net.md_5.bungee.api.ChatColor;
+
+public class Bible implements CommandExecutor 
 {
 	private BibleID bibleID;
 	private BookID bookID;
@@ -28,7 +30,7 @@ public class CommandBible implements CommandExecutor
 	private int n;
 	private int verseSize;
 	
-	public CommandBible ()
+	public Bible ()
 	{
 		this.bookID = BookID.GEN;
 		this.bibleID = BibleID.KJV;
@@ -65,16 +67,17 @@ public class CommandBible implements CommandExecutor
 				bible.setItemMeta(bibleContent);
 				
 				player.getInventory().addItem(bible);
+				return true;
 			}
 		}
 		catch (IOException e) 
 		{
-			sender.sendMessage ("[God] That chapter of the bible does not exist.");
+			sender.sendMessage (ChatColor.RED + "" + ChatColor.BOLD + "[God] That chapter of the bible does not exist.");
 		}
 		
 		catch (Exception e)
 		{
-			sender.sendMessage("[God] " + e.getMessage());
+			sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "[God] " + e.getMessage());
 		}
 
 		return false;
