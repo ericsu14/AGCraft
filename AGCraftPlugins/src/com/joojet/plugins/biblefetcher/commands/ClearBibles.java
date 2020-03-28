@@ -24,7 +24,7 @@ public class ClearBibles implements CommandExecutor  {
 			ArrayList <ItemStack> removeList = new ArrayList <ItemStack> ();
 			player.getInventory().forEach(item -> {
 				// Verify if this book is a written book
-				if (item.getType().equals(Material.WRITTEN_BOOK))
+				if (item != null && item.getType().equals(Material.WRITTEN_BOOK))
 				{
 					BookMeta meta = (BookMeta) item.getItemMeta();
 					
@@ -41,7 +41,7 @@ public class ClearBibles implements CommandExecutor  {
 				player.getInventory().remove(item);
 			}
 			
-			player.sendMessage(ChatColor.GOLD + "[God] The Lord Gave, and the Lord Hath Taken Away " + count + " Bibles.");
+			player.sendMessage(ChatColor.YELLOW + "[God] The Lord Gave, and the Lord Hath Taken Away " + count + " Bibles.");
 			return true;
 		}
 		return false;

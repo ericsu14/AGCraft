@@ -56,6 +56,12 @@ public class Bible implements CommandExecutor
 			{
 				Player player = (Player) sender;
 				
+				// Check if the player's inventory is full
+				if (player.getInventory().firstEmpty() == -1)
+				{
+					throw new RuntimeException ("Your inventory is full. Please clear at least one spot in your inventory before trying again.");
+				}
+				
 				// Merges the pages together
 				String mergedPages = ContentParser.mergeContent(ContentParser.formatContent(verses, this.start));
 				ItemStack bible = new ItemStack (Material.WRITTEN_BOOK);
@@ -67,17 +73,18 @@ public class Bible implements CommandExecutor
 				bible.setItemMeta(bibleContent);
 				
 				player.getInventory().addItem(bible);
+				sender.sendMessage(ChatColor.GRAY + this.generateHeader() + " has been added into your inventory.");
 				return true;
 			}
 		}
 		catch (IOException e) 
 		{
-			sender.sendMessage (ChatColor.RED + "" + ChatColor.BOLD + "[God] That chapter of the bible does not exist.");
+			sender.sendMessage (ChatColor.RED + "[God] That chapter of the bible does not exist.");
 		}
 		
 		catch (Exception e)
 		{
-			sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "[God] " + e.getMessage());
+			sender.sendMessage(ChatColor.RED + "[God] " + e.getMessage());
 		}
 
 		return false;
@@ -110,7 +117,7 @@ public class Bible implements CommandExecutor
 		
 		if (this.bookID == null)
 		{
-			throw new RuntimeException ("Unrecognized book chapter. Please try again.");
+			throw new RuntimeException ("I do not ever recall writing the book of " + args[1] + ". Please try again.");
 		}
 		
 		if (this.n == 3)
