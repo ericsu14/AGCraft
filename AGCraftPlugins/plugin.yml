@@ -9,3 +9,6 @@ commands:
   clearBibles:
     description: Removes all command-generated bibles from your inventory.
     usage: /clearBibles
+  getCoordinates:
+    description: Returns the coordinates of your current location in {X,Y,Z format}. This also returns the coordinates of another player in this server if another player is specified.
+    usage: /getCoordinates or /getCoordinates <player>
