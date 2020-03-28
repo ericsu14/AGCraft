@@ -25,7 +25,7 @@ public class GetCoordinates implements CommandExecutor
 			Player player = (Player) sender;
 			if (n == 0)
 			{
-				player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + GetCoordinates.getCoordinates(player));
+				player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "Your "+ GetCoordinates.getCoordinates(player));
 			}
 			if (n >= 1)
 			{
@@ -51,7 +51,7 @@ public class GetCoordinates implements CommandExecutor
 	{
 		Location loc = player.getLocation();
 		StringBuilder coordinates = new StringBuilder ();
-		coordinates.append ("Coordinates: { X=");
+		coordinates.append ("coordinates: { X=");
 		coordinates.append (String.format("%.3f", loc.getX()));
 		coordinates.append (", Y=");
 		coordinates.append (String.format("%.3f", loc.getY()));
