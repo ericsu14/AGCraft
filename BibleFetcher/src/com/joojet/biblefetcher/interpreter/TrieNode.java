@@ -3,6 +3,8 @@ package com.joojet.biblefetcher.interpreter;
 import java.util.Hashtable;
 import java.util.Map.Entry;
 
+import com.joojet.biblefetcher.constants.BookID;
+
 public class TrieNode <T> 
 {
 	// Defines the max. amount of children this node could store
@@ -48,6 +50,18 @@ public class TrieNode <T>
 		int currentCount = -1;
 		for (Entry<T, Integer> entry : this.linkedIDs.entrySet())
 		{
+			/* Check if length of searchTerm matches length of formatted title */
+			if (entry.getKey() instanceof BookID)
+			{
+				BookID id = (BookID) entry.getKey();
+				// If a matching term and length is detected, return the id.
+				if (id.getFormattedTitle().length() == searchTerm.length() &&
+						searchTerm.toLowerCase().equalsIgnoreCase(id.getFormattedTitle()))
+				{
+					return entry.getKey();
+				}
+			}
+			
 			if (entry.getValue() > currentCount)
 			{
 				currentCount = entry.getValue();
