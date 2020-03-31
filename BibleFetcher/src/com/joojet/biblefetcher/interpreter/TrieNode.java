@@ -56,7 +56,7 @@ public class TrieNode <T>
 				BookID id = (BookID) entry.getKey();
 				// If a matching term and length is detected, return the id.
 				if (id.getFormattedTitle().length() == searchTerm.length() &&
-						searchTerm.toLowerCase().equalsIgnoreCase(id.getFormattedTitle()))
+						searchTerm.equalsIgnoreCase(id.getFormattedTitle()))
 				{
 					return entry.getKey();
 				}

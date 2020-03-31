@@ -1,5 +1,6 @@
 package com.joojet.biblefetcher.database;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -8,13 +9,15 @@ import java.sql.Statement;
 
 public class CreateDatabase 
 {
+	public final static String kDirectoryPath = "biblefetcher_db";
 	public final static String kDatabaseName = "bibles.db";
-	public final static String kDatabaseURL = "jdbc:sqlite:.\\" + kDatabaseName;
+	public final static String kDatabaseURL = "jdbc:sqlite:.\\" + kDirectoryPath + "\\" + kDatabaseName;
 	
 	/** Creates a new database in ./database/bibles.
 	 * 	WARNING: Running this code will overwrite everything in the old database! */
 	public static void createNewDatabase ()
 	{
+		createDirectory();
 		try (Connection conn = DriverManager.getConnection(kDatabaseURL))
 		{
 			if (conn != null)
@@ -63,6 +66,13 @@ public class CreateDatabase
 			System.err.println (e.getClass().getName() + ": " + e.getMessage());
 		}
 		
+	}
+	
+	/** Attempts to create a new directory under the directory path constant.
+	 *  Returns true if successful. */
+	private static boolean createDirectory ()
+	{
+		return new File (kDirectoryPath).mkdir();
 	}
 	
 	public static void main (String [] args)

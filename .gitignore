@@ -30,3 +30,4 @@ database/
 /.recommenders/
 BibleFetcher/bibles
 *.db
+biblefetcher_db/
