@@ -2,6 +2,7 @@ package com.joojet.plugins.coordinates.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World.Environment;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -34,7 +35,16 @@ public class GetCoordinates implements CommandExecutor
 				
 				if (p2 != null)
 				{
-					player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + otherPlayer + "'s " + getCoordinates (p2));
+					// Only show coordinates to players in the same dimension as the player.
+					Environment otherPlayerEnvironment = p2.getWorld().getEnvironment();
+					if (otherPlayerEnvironment.equals(player.getWorld().getEnvironment()))
+					{
+						player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + otherPlayer + "'s " + getCoordinates (p2));
+					}
+					else
+					{
+						player.sendMessage(ChatColor.RED + "" + ChatColor.ITALIC + otherPlayer + " is currently in the " + getEnvironmentName (otherPlayerEnvironment) + ".");
+					}
 				}
 				else
 				{
@@ -60,5 +70,19 @@ public class GetCoordinates implements CommandExecutor
 		coordinates.append (" }");
 		
 		return coordinates.toString();
+	}
+	
+	/** Returns the actual name of the environment */
+	public static String getEnvironmentName (Environment env)
+	{
+		switch (env)
+		{
+			case NETHER:
+				return "nether";
+			case THE_END:
+				return "the end";
+			default:
+				return "overworld";
+		}
 	}
 }

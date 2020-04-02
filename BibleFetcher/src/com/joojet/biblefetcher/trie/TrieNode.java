@@ -1,4 +1,4 @@
-package com.joojet.biblefetcher.interpreter;
+package com.joojet.biblefetcher.trie;
 
 import java.util.Hashtable;
 import java.util.Map.Entry;

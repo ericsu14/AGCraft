@@ -1,6 +1,6 @@
 name: AGCraftPlugins
 main: com.joojet.plugins.agcraft.main.AGCraftPlugin
-version: 1.4
+version: 1.5
 api-version: 1.13
 commands:
   bible:
@@ -12,3 +12,6 @@ commands:
   getCoordinates:
     description: Returns the coordinates of your current location in {X,Y,Z format}. This also returns the coordinates of another player in this server if another player is specified.
     usage: /getCoordinates or /getCoordinates <player>
+  removeJunk:
+    description: Removes junk items from your inventory based on a list of classifiers. Listed classifiers are common, stone, natural, brewing, and armor.
+    usage: /removeJunk or /removeJunk <list of classifiers>
