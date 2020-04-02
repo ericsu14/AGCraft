@@ -38,6 +38,13 @@ public class AutoSmelt implements CommandExecutor
 			
 			this.updateCounts(p);
 			
+			// Cannot use this command if the player does not have any iron / gold ores in their inventory
+			if (this.getTotalOreCount() == 0)
+			{
+				p.sendMessage(ChatColor.RED + "Operation failed. No ores detected in your inventory.");
+				return false;
+			}
+			
 			// Checks if the player has enough coals to complete this operation
 			// Recall that each piece of coal can smelt 8 items.
 			// Thus if the player has 64 coal, the player can smelt
@@ -129,8 +136,6 @@ public class AutoSmelt implements CommandExecutor
 				++coal;
 			}
 		}
-		
-		System.out.println ("Coal: " + coal + " | Coal Blocks: " + coalBlocks);
 		
 		ArrayList <ItemStack> queuedItems = new ArrayList <ItemStack> ();
 		for (ItemStack item : p.getInventory())
