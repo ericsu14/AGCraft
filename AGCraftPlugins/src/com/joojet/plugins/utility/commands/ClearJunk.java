@@ -16,12 +16,12 @@ import com.joojet.plugins.utility.interpreter.JunkCommandInterpreter;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class RemoveJunk implements CommandExecutor
+public class ClearJunk implements CommandExecutor
 {
 	private JunkCommandInterpreter commandInterpreter;
 	private Hashtable <Material, JunkClassifier> junkItems;
 	
-	public RemoveJunk ()
+	public ClearJunk ()
 	{
 		this.junkItems = new Hashtable <Material, JunkClassifier> ();
 		

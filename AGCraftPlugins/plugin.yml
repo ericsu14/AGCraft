@@ -12,6 +12,9 @@ commands:
   getCoordinates:
     description: Returns the coordinates of your current location in {X,Y,Z format}. This also returns the coordinates of another player in this server if another player is specified.
     usage: /getCoordinates or /getCoordinates <player>
-  removeJunk:
+  clearJunk:
     description: Removes junk items from your inventory based on a list of classifiers. Listed classifiers are common, stone, natural, brewing, and armor.
-    usage: /removeJunk or /removeJunk <list of classifiers>
+    usage: / clearJunk or / clearJunk <list of classifiers>
+  autosmelt:
+    description: Uses the coal / coal blocks / charcoal in your inventory to automatically smelt gold / iron ores to their respective counterparts
+    usage: /autosmelt

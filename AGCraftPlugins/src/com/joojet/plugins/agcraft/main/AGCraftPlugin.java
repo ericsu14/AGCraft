@@ -6,7 +6,8 @@ import com.joojet.biblefetcher.interpreter.CommandInterpreter;
 import com.joojet.plugins.biblefetcher.commands.Bible;
 import com.joojet.plugins.biblefetcher.commands.ClearBibles;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
-import com.joojet.plugins.utility.commands.RemoveJunk;
+import com.joojet.plugins.utility.commands.AutoSmelt;
+import com.joojet.plugins.utility.commands.ClearJunk;
 public class AGCraftPlugin extends JavaPlugin 
 {
 	public static CommandInterpreter interpreter = new CommandInterpreter ();
@@ -20,7 +21,8 @@ public class AGCraftPlugin extends JavaPlugin
 		this.getCommand("bible").setExecutor(new Bible ());
 		this.getCommand("clearBibles").setExecutor(new ClearBibles());
 		this.getCommand("getCoordinates").setExecutor(new GetCoordinates());
-		this.getCommand("removeJunk").setExecutor(new RemoveJunk());
+		this.getCommand("clearJunk").setExecutor(new ClearJunk());
+		this.getCommand("autosmelt").setExecutor(new AutoSmelt());
 	}
 	
 	@Override

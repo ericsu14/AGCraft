@@ -48,7 +48,7 @@ public class GetCoordinates implements CommandExecutor
 				}
 				else
 				{
-					player.sendMessage(ChatColor.RED + "" + ChatColor.ITALIC + "Either " + otherPlayer + " is not logged in or " + otherPlayer + " is not a valid user in this server.");
+					player.sendMessage(ChatColor.RED + "" + ChatColor.ITALIC + "Either " + otherPlayer + " is not logged in or " + otherPlayer + " is not a whitelisted user in this server.");
 				}
 			}
 		}
