@@ -118,7 +118,7 @@ public class RemoveJunk implements CommandExecutor
 			if (item != null)
 			{
 				JunkClassifier classifier = this.junkItems.get(item.getType());
-				if (classifier != null && classifier.equals(filter))
+				if (classifier != null && (classifier.equals(filter) || filter.equals(JunkClassifier.ALL)))
 				{
 					queuedItems.add (item);
 				}
