@@ -52,6 +52,10 @@ public class ClearJunk implements CommandExecutor
 		this.junkItems.put(Material.CHAINMAIL_CHESTPLATE, JunkClassifier.ARMOR);
 		this.junkItems.put(Material.CHAINMAIL_LEGGINGS, JunkClassifier.ARMOR);
 		this.junkItems.put(Material.CHAINMAIL_HELMET, JunkClassifier.ARMOR);
+		this.junkItems.put(Material.LEATHER_BOOTS, JunkClassifier.ARMOR);
+		this.junkItems.put(Material.LEATHER_HELMET, JunkClassifier.ARMOR);
+		this.junkItems.put(Material.LEATHER_CHESTPLATE, JunkClassifier.ARMOR);
+		this.junkItems.put(Material.LEATHER_LEGGINGS, JunkClassifier.ARMOR);
 		
 		// Brewing
 		this.junkItems.put(Material.SPIDER_EYE, JunkClassifier.BREWING);
