@@ -90,7 +90,7 @@ public class RemoveJunk implements CommandExecutor
 				else
 				{
 					p.sendMessage(ChatColor.RED + "" + param + " is an invalid classification.");
-					p.sendMessage("Valid classifiers: " + this.printClassifiersAsList());
+					p.sendMessage(ChatColor.RED + "Valid classifiers: " + this.printClassifiersAsList());
 					return false;
 				}
 			}
@@ -111,6 +111,7 @@ public class RemoveJunk implements CommandExecutor
 	 *  and returns the amount of items removed. */
 	private int removeJunk (Player player, JunkClassifier filter)
 	{
+		int count = 0;
 		// Gathers items based on the passed filter
 		ArrayList <ItemStack> queuedItems = new ArrayList <ItemStack> ();
 		for (ItemStack item : player.getInventory())
@@ -121,18 +122,18 @@ public class RemoveJunk implements CommandExecutor
 				if (classifier != null && (classifier.equals(filter) || filter.equals(JunkClassifier.ALL)))
 				{
 					queuedItems.add (item);
+					count += item.getAmount();
 				}
 			}
 		}
 		
-		int n = queuedItems.size();
 		// Removes the targeted items from the player's inventory
 		for (ItemStack item : queuedItems)
 		{
 			player.getInventory().remove(item);
 		}
 		
-		return n;
+		return count;
 	}
 	
 	/** Returns all classifiers as a list in String format */
@@ -143,7 +144,7 @@ public class RemoveJunk implements CommandExecutor
 		{
 			str.append(ele.name() + " | ");
 		}
-		return str.toString();
+		return str.toString().substring(0, str.length() - 2);
 	}
 	
 }
