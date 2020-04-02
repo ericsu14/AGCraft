@@ -89,7 +89,7 @@ public class RemoveJunk implements CommandExecutor
 				}
 				else
 				{
-					p.sendMessage(ChatColor.RED + "" + param + " is an invalid classification.");
+					p.sendMessage(ChatColor.RED + "" + arg + " is an invalid classification.");
 					p.sendMessage(ChatColor.RED + "Valid classifiers: " + this.printClassifiersAsList());
 					return false;
 				}
