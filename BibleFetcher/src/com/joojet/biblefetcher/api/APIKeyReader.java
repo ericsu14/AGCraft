@@ -63,12 +63,12 @@ public class APIKeyReader
 				String key = tokens[1].trim();
 				if (key.isEmpty())
 				{
-					throw new RuntimeException ("API key for  " + id.name() + " not provided. Please update the key in " + getConfigFilePath());
+					throw new RuntimeException ("API key for " + id.name() + " not provided. Please update the key in " + getConfigFilePath());
 				}
 				return key;
 			}
 		}
-		throw new RuntimeException ("API key for  " + id.name() + " not provided. Please update the key in " + getConfigFilePath());
+		throw new RuntimeException ("API key for " + id.name() + " not provided. Please update the key in " + getConfigFilePath());
 	}
 	
 	/** Returns the URL for the configuration file */
