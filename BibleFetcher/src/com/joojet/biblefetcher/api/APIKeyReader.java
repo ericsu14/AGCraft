@@ -40,7 +40,7 @@ public class APIKeyReader
 	}
 	
 	/** Scans the config file and returns the API key for the passed APIName constant
-	 * 		@APIName - The name of the API we are getting its API key for.
+	 * 		@param id - The name of the API we are getting the API key for.
 	 * 		@returns The API key stored in the text file
 	 * 		@throws IOException if there is an issue parsing the config file
 	 * 		@throws RuntimeException if the config file is missing. This would also create a new, empty file. */
