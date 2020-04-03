@@ -74,9 +74,9 @@ public class APIKeyReader
 	/** Returns the URL for the configuration file */
 	public static String getConfigFilePath ()
 	{
-		StringBuilder path = new StringBuilder (".\\");
+		StringBuilder path = new StringBuilder ("./");
 		path.append(CreateDatabase.kDirectoryPath);
-		path.append("\\");
+		path.append("/");
 		path.append(configFileName);
 		path.append(configFileSuffix);
 		return path.toString();

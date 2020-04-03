@@ -12,9 +12,9 @@ import com.joojet.biblefetcher.api.APIKeyReader;
 
 public class CreateDatabase 
 {
-	public final static String kDirectoryPath = "plugins\\AGCraftFiles";
+	public final static String kDirectoryPath = "plugins/AGCraftFiles";
 	public final static String kDatabaseName = "bibles.db";
-	public final static String kDatabaseURL = "jdbc:sqlite:.\\" + kDirectoryPath + "\\" + kDatabaseName;
+	public final static String kDatabaseURL = "jdbc:sqlite:./" + kDirectoryPath + "/" + kDatabaseName;
 	
 	/** Attempts to create a new database in ./plugins/AGCraft/bibles.*/
 	public static void createNewDatabase ()
