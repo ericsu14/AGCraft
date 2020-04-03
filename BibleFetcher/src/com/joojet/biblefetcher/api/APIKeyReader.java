@@ -22,6 +22,8 @@ public class APIKeyReader
 	 * @throws IOException - thrown if file creation has failed. */
 	public static void createConfigFile () throws IOException
 	{
+		CreateDatabase.createDirectory();
+		
 		Stream <String> content = Arrays.asList (APIName.values()).stream().map(entity -> {
 			return entity.name() + ": ";
 		});

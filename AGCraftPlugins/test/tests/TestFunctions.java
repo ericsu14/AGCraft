@@ -27,6 +27,7 @@ class TestFunctions {
 		} 
 		catch (Exception e)
 		{
+			e.getStackTrace();
 			fail(e.getMessage());
 		}
 	}
@@ -46,6 +47,7 @@ class TestFunctions {
 		} 
 		catch (Exception e)
 		{
+			e.printStackTrace();
 			fail(e.getMessage());
 		}
 	}
@@ -64,6 +66,7 @@ class TestFunctions {
 		
 		catch (Exception e)
 		{
+			e.getStackTrace();
 			fail (e.getMessage());
 		}
 	}

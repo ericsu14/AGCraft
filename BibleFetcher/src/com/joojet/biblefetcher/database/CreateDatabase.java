@@ -12,7 +12,7 @@ import com.joojet.biblefetcher.api.APIKeyReader;
 
 public class CreateDatabase 
 {
-	public final static String kDirectoryPath = "plugins\\AGCraft";
+	public final static String kDirectoryPath = "plugins\\AGCraftFiles";
 	public final static String kDatabaseName = "bibles.db";
 	public final static String kDatabaseURL = "jdbc:sqlite:.\\" + kDirectoryPath + "\\" + kDatabaseName;
 	
@@ -85,7 +85,7 @@ public class CreateDatabase
 	
 	/** Attempts to create a new directory under the directory path constant.
 	 *  Returns true if successful. */
-	private static boolean createDirectory ()
+	public static boolean createDirectory ()
 	{
 		return new File (kDirectoryPath).mkdirs();
 	}
