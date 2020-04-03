@@ -48,6 +48,10 @@ public class APIParser
 			{
 				str.append(c);
 			}
+			else
+			{
+				str.append(' ');
+			}
 		}
 		return str.toString().replaceAll("([\\\\][n])", "").replaceAll("([\\\"])", "").replaceAll("([\\s][\\s]+)", " ").trim();
 	}
