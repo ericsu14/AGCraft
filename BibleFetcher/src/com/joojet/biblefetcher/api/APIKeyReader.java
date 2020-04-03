@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
-import java.util.Collections;
 
 import com.joojet.biblefetcher.constants.APIName;
 import com.joojet.biblefetcher.database.CreateDatabase;
@@ -38,6 +37,11 @@ public class APIKeyReader
 		System.out.println ("Created a config file at " + getConfigFilePath() + ". Please update this file with the needed API keys.");
 	}
 	
+	/** Scans the config file and returns the API key for the passed APIName constant
+	 * 		@APIName - The name of the API we are getting its API key for.
+	 * 		@returns The API key stored in the text file
+	 * 		@throws IOException if there is an issue parsing the config file
+	 * 		@throws RuntimeException if the config file is missing. This would also create a new, empty file. */
 	public static String getAPIKey (APIName id) throws IOException, RuntimeException
 	{
 		if (!checkConfigFile())

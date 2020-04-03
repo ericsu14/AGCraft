@@ -19,7 +19,7 @@ public class CreateDatabase
 	/** Attempts to create a new database in ./plugins/AGCraft/bibles.*/
 	public static void createNewDatabase ()
 	{
-		boolean mkDir = createDirectory();
+		createDirectory();
 		
 		try (Connection conn = DriverManager.getConnection(kDatabaseURL))
 		{
