@@ -90,6 +90,9 @@ public class APIKeyReader
 		return file.exists();
 	}
 	
+	/** Returns all of the content from a text file as a list of Strings.
+	 * 		@param filename - Name of file being read
+	 * 		@throws IOException if there is an issue reading the file. */
 	private static List <String> readFileAsList (String filename) throws IOException
 	{
 		return Files.readAllLines(Paths.get(filename), StandardCharsets.UTF_8); 
