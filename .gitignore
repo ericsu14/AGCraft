@@ -33,3 +33,4 @@ BibleFetcher/bibles
 biblefetcher_db/
 plugins/AGCraft/
 *.txt
+plugins/**
