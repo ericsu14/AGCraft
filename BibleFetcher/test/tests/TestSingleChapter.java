@@ -33,6 +33,7 @@ class TestSingleChapter {
 		} 
 		catch (Exception e) 
 		{
+			System.out.println ("FAIL: " + e.getMessage());
 			fail (e.getMessage());
 		} 
 		

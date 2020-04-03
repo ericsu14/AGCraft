@@ -16,12 +16,11 @@ import com.joojet.biblefetcher.constants.*;
 
 public class APIFetcher 
 {
+	// API Bible
 	private static final String kAPIURL = "https://api.scripture.api.bible/v1";
-	private static final String kAPIKey = "c83f0ad75d6f512a24112697f36e8e42";
 	
 	// ESV API
 	private static final String kESVAPIURL = "https://api.esv.org/v3";
-	private static final String kESVAPIKey = "79c54ff3062f66750d18e411295b7671e26c120f";
 	
 	public static String fetchChapter (BibleID translation, BookID book, int chapter) throws IOException
 	{
@@ -68,7 +67,7 @@ public class APIFetcher
 		con.setRequestMethod("GET");
 		
 		// Header
-		con.setRequestProperty("Authorization", "Token " + kESVAPIKey);
+		con.setRequestProperty("Authorization", "Token " + APIKeyReader.getAPIKey(APIName.ESV));
 		con.setDoOutput(true);
 		con.setConnectTimeout(5000);
 		con.setReadTimeout(5000);
@@ -121,7 +120,7 @@ public class APIFetcher
 		con.setRequestMethod("GET");
 			
 		// Header
-		con.setRequestProperty("api-key", kAPIKey);
+		con.setRequestProperty("api-key", APIKeyReader.getAPIKey(APIName.API_BIBLE));
 		con.setDoOutput(true);
 		con.setConnectTimeout(5000);
 		con.setReadTimeout(5000);

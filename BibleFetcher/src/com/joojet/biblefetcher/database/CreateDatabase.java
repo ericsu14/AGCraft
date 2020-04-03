@@ -1,25 +1,35 @@
 package com.joojet.biblefetcher.database;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.joojet.biblefetcher.api.APIKeyReader;
+
 public class CreateDatabase 
 {
-	public final static String kDirectoryPath = "biblefetcher_db";
+	public final static String kDirectoryPath = "plugins\\AGCraft";
 	public final static String kDatabaseName = "bibles.db";
 	public final static String kDatabaseURL = "jdbc:sqlite:.\\" + kDirectoryPath + "\\" + kDatabaseName;
 	
-	/** Creates a new database in ./database/bibles.
-	 * 	WARNING: Running this code will overwrite everything in the old database! */
+	/** Attempts to create a new database in ./plugins/AGCraft/bibles.*/
 	public static void createNewDatabase ()
 	{
-		createDirectory();
+		boolean mkDir = createDirectory();
+		
 		try (Connection conn = DriverManager.getConnection(kDatabaseURL))
 		{
+			/* Check for the existence of a plugin configuration file. If not, create one and prompt the server
+			 * admin to provide needed API keys. */
+			if (!APIKeyReader.checkConfigFile())
+			{
+				APIKeyReader.createConfigFile();
+			}
+			
 			if (conn != null)
 			{
 				DatabaseMetaData meta = conn.getMetaData();
@@ -31,6 +41,11 @@ public class CreateDatabase
 		}
 		
 		catch (SQLException e)
+		{
+			System.out.println ("Error: " + e.getMessage());
+		}
+		
+		catch (IOException e)
 		{
 			System.out.println ("Error: " + e.getMessage());
 		}
@@ -72,7 +87,7 @@ public class CreateDatabase
 	 *  Returns true if successful. */
 	private static boolean createDirectory ()
 	{
-		return new File (kDirectoryPath).mkdir();
+		return new File (kDirectoryPath).mkdirs();
 	}
 	
 	public static void main (String [] args)
