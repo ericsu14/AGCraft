@@ -61,7 +61,7 @@ For example, typing ``/bible ESV eziekiel 1`` will give you the book of ``ezekie
 Unless otherwise indicated, all Scripture quotations are from the ESV® Bible (The Holy Bible, English Standard Version®), copyright © 2001 by Crossway, a publishing ministry of Good News Publishers. Used by permission. All rights reserved. You may not copy or download more than 500 consecutive verses of the ESV Bible or more than one half of any book of the ESV Bible.
 
 All biblical content graciously provided from:
-[https://scripture.api.bible/](https://scripture.api.bible/)\
+[https://scripture.api.bible/](https://scripture.api.bible/)  
 [https://api.esv.org/](https://api.esv.org/)
 
 
