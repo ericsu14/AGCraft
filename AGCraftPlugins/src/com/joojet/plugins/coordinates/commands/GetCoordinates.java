@@ -39,7 +39,7 @@ public class GetCoordinates implements CommandExecutor
 					Environment otherPlayerEnvironment = p2.getWorld().getEnvironment();
 					if (otherPlayerEnvironment.equals(player.getWorld().getEnvironment()))
 					{
-						player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + otherPlayer + "'s " + getCoordinates (p2));
+						player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + p2.getDisplayName() + "'s " + getCoordinates (p2));
 					}
 					else
 					{
