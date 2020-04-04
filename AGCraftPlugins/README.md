@@ -94,7 +94,7 @@ The items that falls under each category are as follows:
 If you want to remove <b>all of the items</b> listed above in your inventory, you can simply use ``/clearjunk all`` to do so. This list will be continuously updated in the near future.
 
 
-<b>Usage Examples</b>
+<b>Usage Examples:</b>  
 ``/clearjunk stone`` removes all listed stone variants from your inventory.\
 ``/clearjunk stone natural`` removes all listed stone variants and natural blocks from your inventory.\
 ``/clearjunk armor common brewing stone`` removes all listed leather, chainmail, and gold armor, common mob drops, and spider eyes, and listed stone variants from your inventory.\
