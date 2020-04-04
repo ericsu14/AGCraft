@@ -51,7 +51,7 @@ Instead of typing out the entire chapter by its full name, you can use book abbr
 `/bible ESV romans 12` gives you the <i>entire chapter</i> of Romans 12 in ESV format.\
 `/bible KJV mrk 1 7` gives you Mark 1:7-45 (end of chapter) in KJV format.\
 `/bible KJV gal 6 2 3` gives you Galatians 6:2-3 in KJV format.\
-`/bible WEB romans 6 2 3` gives you Galatians 6:2 in WEB format.
+`/bible WEB romans 6 2 2` gives you Romans 6:2 in WEB format.
 
 <b> AutoCorrect:</b>
 With the help of tries, this command utilizes a very aggressive autocorrect. This means that misspelling books such as ``ezekiel`` will, in most cases, give you what you desire.
