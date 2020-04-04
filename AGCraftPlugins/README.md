@@ -46,7 +46,7 @@ Simply add any of these <i>abbreviated translation names</i> in the first parame
 <b>Abbreviations:</b>
 Instead of typing out the entire chapter by its full name, you can use book abbreviations to make your life easier while using this command. For instance, ``ezekiel`` can be abbreviated to ``ezk``, ``colossians`` can be abbreviated to ``col``, ``mark`` can be abbreviated to ``mrk``, ``galatians`` can be abbreviated to ``gal``, and many more.
 
-<b>Usage Examples:</b>
+<b>Usage Examples:</b>  
 `/bible ESV romans 12` gives you the <i>entire chapter</i> of Romans 12 in ESV format.\
 `/bible KJV mrk 1 7` gives you Mark 1:7-45 (end of chapter) in KJV format.\
 `/bible KJV gal 6 2 3` gives you Galatians 6:2-3 in KJV format.\
@@ -109,7 +109,7 @@ Outputs the <x,y,z> coordinates of any currently online player in this server. T
 
 Using this command without a username will print out your own coordinates instead.
 
-<b>Usage Examples:  </b>
+<b>Usage Examples:</b>  
 ``/getcoordinates CompleteEdd`` prints the coordinates of user ``CompleteEdd``, which is me, to your chat.\
 ``/getcoordinates`` prints your own coordinates to your chat.
 
