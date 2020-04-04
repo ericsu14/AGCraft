@@ -21,7 +21,7 @@ A small price to pay for automation.
 <b>Description:</b>
 This command fetches passages or entire chapters of the Bible (that <b> you </b> want to read) from the Internet, and compiles all of it down into a <i>written book</i> for you to read in Minecraft.
 
-<b>Parameters</b>
+<b>Parameters:</b>
 
  - `translation` - The translation of the Bible you want your passages to be in.
  - `book` - The book of the Bible you want to read. 
@@ -29,35 +29,35 @@ This command fetches passages or entire chapters of the Bible (that <b> you </b>
  - `start` - The verse you want to start at (<i>optional</i>). 
  - `end` - The verse you want to end at (<i>optional</i>).
 
-<b> Supported Translations </b>
+<b> Supported Translations:</b>
 Due to many variations of the Bible being protected by copyright, this command only has access to the following versions of the Bible, which are:
 
-> <b>KJV</b> (King James Version)
-> <b>FBVNTPsalms</b> (Free Bible Version New Testament with Psalms)
-> <b>ESV</b> (English Standard Version)
-> <b>WEB</b> (World English Bible [Protestant])
-> <b>T4T</b> (Translation for Translators)
-> <b>ASV</b> (The Holy Bible, American Standard Version)
-> <b>RV</b> (Revised Version)
-> <b>GNV</b> (Geneva Bible)
+> <b>KJV</b> (King James Version) \
+> <b>FBVNTPsalms</b> (Free Bible Version New Testament with Psalms)\
+> <b>ESV</b> (English Standard Version)\
+> <b>WEB</b> (World English Bible [Protestant])\
+> <b>T4T</b> (Translation for Translators)\
+> <b>ASV</b> (The Holy Bible, American Standard Version)\
+> <b>RV</b> (Revised Version)\
+> <b>GNV</b> (Geneva Bible)\
 
 Simply add any of these <i>abbreviated translation names</i> in the first parameter of the command to get verses for that translation.
 
-<b>Abbreviations</b>
+<b>Abbreviations:</b>
 Instead of typing out the entire chapter by its full name, you can use book abbreviations to make your life easier while using this command. For instance, ``ezekiel`` can be abbreviated to ``ezk``, ``colossians`` can be abbreviated to ``col``, ``mark`` can be abbreviated to ``mrk``, ``galatians`` can be abbreviated to ``gal``, and many more.
 
-<b>Usage Examples</b>
-`/bible ESV romans 12` gives you the <i>entire chapter</i> of Romans 12 in ESV format. 
-`/bible KJV mrk 1 7` gives you Mark 1:7-45 (end of chapter) in KJV format. 
-`/bible KJV gal 6 2 3` gives you Galatians 6:2-3 in KJV format
-`/bible WEB romans 6 2 3` gives you Galatians 6:2 in WEB format
+<b>Usage Examples:</b>
+`/bible ESV romans 12` gives you the <i>entire chapter</i> of Romans 12 in ESV format.\
+`/bible KJV mrk 1 7` gives you Mark 1:7-45 (end of chapter) in KJV format.\
+`/bible KJV gal 6 2 3` gives you Galatians 6:2-3 in KJV format.\
+`/bible WEB romans 6 2 3` gives you Galatians 6:2 in WEB format.\
 
-<b> AutoCorrect </b>
+<b> AutoCorrect:</b>
 With the help of tries, this command utilizes a very aggressive autocorrect. This means that misspelling books such as ``ezekiel`` will, in most cases, give you what you desire.
 
 For example, typing ``/bible ESV eziekiel 1`` will give you the book of ``ezekiel`` in ESV format, even though you spelled ``ezekiel`` wrong.
 
-<b> Copyright </b>
+<b> Copyright:</b>
 Unless otherwise indicated, all Scripture quotations are from the ESV® Bible (The Holy Bible, English Standard Version®), copyright © 2001 by Crossway, a publishing ministry of Good News Publishers. Used by permission. All rights reserved. You may not copy or download more than 500 consecutive verses of the ESV Bible or more than one half of any book of the ESV Bible.
 
 All biblical content graciously provided from:
@@ -95,10 +95,10 @@ If you want to remove <b>all of the items</b> listed above in your inventory, yo
 
 
 <b>Usage Examples</b>
-``/clearjunk stone`` removes all listed stone variants from your inventory.
-``/clearjunk stone natural`` removes all listed stone variants and natural blocks from your inventory.
-``/clearjunk armor common brewing stone`` removes all listed leather, chainmail, and gold armor, common mob drops, and spider eyes, and listed stone variants from your inventory.
-``/clearjunk`` without any parameters automatically defaults to ``/clearjunk common``, which removes all common mob drops from your inventory.
+``/clearjunk stone`` removes all listed stone variants from your inventory.\
+``/clearjunk stone natural`` removes all listed stone variants and natural blocks from your inventory.\
+``/clearjunk armor common brewing stone`` removes all listed leather, chainmail, and gold armor, common mob drops, and spider eyes, and listed stone variants from your inventory.\
+``/clearjunk`` without any parameters automatically defaults to ``/clearjunk common``, which removes all common mob drops from your inventory.\
 
 ## Get Coordinates
 <b> Usage: </b>
@@ -110,7 +110,7 @@ Outputs the <x,y,z> coordinates of any currently online player in this server. T
 Using this command without a username will print out your own coordinates instead.
 
 <b>Usage Examples: </b>
-``/getcoordinates CompleteEdd`` prints the coordinates of user ``CompleteEdd``, which is me, to your chat.
-``/getcoordinates`` prints your own coordinates to your chat.
+``/getcoordinates CompleteEdd`` prints the coordinates of user ``CompleteEdd``, which is me, to your chat.\
+``/getcoordinates`` prints your own coordinates to your chat.\
 
 
