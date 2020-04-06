@@ -55,6 +55,7 @@ class TestInterpreter
 	
 	/** For BookIDs with chapter information, test the command interpreter by seeing if it could search for every possible arrangement
 	 *  of title + chapter. For example, John1 will be tested as 1John and John1. */
+	@Test
 	void testValidBookNameWithChapterSearches ()
 	{
 		for (BookID id : BookID.values())

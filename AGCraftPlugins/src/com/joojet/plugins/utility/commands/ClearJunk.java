@@ -10,6 +10,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.joojet.plugins.utility.enums.JunkClassifier;
 import com.joojet.plugins.utility.interpreter.JunkCommandInterpreter;
@@ -59,6 +61,9 @@ public class ClearJunk implements CommandExecutor
 		
 		// Brewing
 		this.junkItems.put(Material.SPIDER_EYE, JunkClassifier.BREWING);
+		
+		// Damaged, unenchanted bows
+		this.junkItems.put(Material.BOW, JunkClassifier.BOWS);
 		
 		// Initializes command interpreter
 		this.commandInterpreter = new JunkCommandInterpreter ();
@@ -123,7 +128,8 @@ public class ClearJunk implements CommandExecutor
 			if (item != null)
 			{
 				JunkClassifier classifier = this.junkItems.get(item.getType());
-				if (classifier != null && (classifier.equals(filter) || filter.equals(JunkClassifier.ALL)))
+				if (classifier != null && checkMobArmorLoot (item, classifier) 
+						&& (classifier.equals(filter) || filter.equals(JunkClassifier.ALL)))
 				{
 					queuedItems.add (item);
 					count += item.getAmount();
@@ -149,6 +155,26 @@ public class ClearJunk implements CommandExecutor
 			str.append(ele.name() + " | ");
 		}
 		return str.toString().substring(0, str.length() - 2);
+	}
+	
+	/** Checks if an item is of type ARMOR or WEAPON and returns true if:
+	 * 		- the item is unenchanted
+	 * 		- The item has durability loss.
+	 *  If the classifier is marked as anything else, it will always return true.
+	 *  These are typically mob loot that nobody uses. */
+	private boolean checkMobArmorLoot (ItemStack item, JunkClassifier classifier)
+	{
+		if (classifier.equals(JunkClassifier.BOWS) || classifier.equals (JunkClassifier.ARMOR))
+		{
+			ItemMeta itemMeta = item.getItemMeta();
+			if (itemMeta instanceof Damageable)
+			{
+				Damageable dmg = (Damageable) itemMeta;
+				return (dmg.hasDamage() && !itemMeta.hasEnchants());
+			}
+			return false;
+		}
+		return true;
 	}
 	
 }
