@@ -87,13 +87,13 @@ The items that falls under each category are as follows:
 
 |Common|Stone|Natural|Armor|Brewing|Weapons|
 |--|--|--|--|--|--|
-| Rotten Flesh | Cobblestone |Dirt|All Leather Armor*|Spider Eyes| Golden Sword* |
+| Rotten Flesh | Cobblestone |Dirt|All Leather Armor*|Spider Eyes| Golden Swords* |
 | Bones | Stone | Sand | All Chainmail Armor* | | Bows* |
 | String | Granite | Gravel | All Gold Armor* |
 | Seeds (wheat) | Diorite
 | | Andesite |
 
-* Armor and weapons must be <b>unenchanted</b> and <b>damaged</b> in order for this command to remove them. This is to prevent your own gear from being removed accidentally.
+*Armor and weapons must be <b>damaged</b> and <b>unenchanted</b> in order for this command to remove them. This is to prevent your own gear from being removed accidentally.
 
 If you want to remove <b>all of the items</b> listed above in your inventory, you can simply use ``/clearjunk all`` to do so. This list will be continuously updated in the near future.
 
