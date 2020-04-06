@@ -14,14 +14,14 @@ public class CreateDatabase
 {
 	public final static String kDirectoryPath = "plugins/AGCraftFiles";
 	public final static String kDatabaseName = "bibles.db";
-	public final static String kDatabaseURL = "jdbc:sqlite:./" + kDirectoryPath + "/" + kDatabaseName;
+	public final static String kDatabasePath = getDBPath (kDatabaseName);
 	
 	/** Attempts to create a new database in ./plugins/AGCraft/bibles.*/
 	public static void createNewDatabase ()
 	{
 		createDirectory();
 		
-		try (Connection conn = DriverManager.getConnection(kDatabaseURL))
+		try (Connection conn = DriverManager.getConnection(kDatabasePath))
 		{
 			/* Check for the existence of a plugin configuration file. If not, create one and prompt the server
 			 * admin to provide needed API keys. */
@@ -34,10 +34,9 @@ public class CreateDatabase
 			{
 				DatabaseMetaData meta = conn.getMetaData();
 				System.out.println ("Driver Name: " + meta.getDriverName());
-				System.out.println ("Created a new database");
+				System.out.println ("Created a new database at " + kDatabasePath);
+				initializeTables();
 			}
-			
-			initializeTables();
 		}
 		
 		catch (SQLException e)
@@ -59,9 +58,7 @@ public class CreateDatabase
 		
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection(kDatabaseURL);
-			
-			System.out.println ("Opened database!");
+			c = DriverManager.getConnection(kDatabasePath);
 			
 			stmt = c.createStatement();
 			String sql = "CREATE TABLE BIBLES (" +
@@ -88,6 +85,12 @@ public class CreateDatabase
 	public static boolean createDirectory ()
 	{
 		return new File (kDirectoryPath).mkdirs();
+	}
+	
+	/** Returns the location path of a database file */
+	public static String getDBPath (String databaseName)
+	{
+		return "jdbc:sqlite:./" + kDirectoryPath + "/" + databaseName;
 	}
 	
 	public static void main (String [] args)

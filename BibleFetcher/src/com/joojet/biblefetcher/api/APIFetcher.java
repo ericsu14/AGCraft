@@ -100,8 +100,13 @@ public class APIFetcher
 		link.append(translation.getBibleKey());
 		link.append("/passages/");
 		link.append(book.getID());
-		link.append('.');
-		link.append(chapter);
+		
+		if (!book.isSingleChapter())
+		{
+			link.append('.');
+			link.append(chapter);
+		}
+		
 		link.append("?");
 		
 		Map <String, String> parameters = new HashMap <String, String> ();

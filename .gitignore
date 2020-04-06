@@ -26,7 +26,6 @@ hs_err_pid*
 .metadata/
 
 #database stuff
-database/
 /.recommenders/
 BibleFetcher/bibles
 *.db

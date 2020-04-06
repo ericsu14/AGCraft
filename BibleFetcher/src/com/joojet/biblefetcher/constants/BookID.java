@@ -58,7 +58,7 @@ public enum BookID
 	TI1 ("1TI", "timothy", 1),
 	TI2 ("2TI", "timothy", 2),
 	TIT ("TIT", "titus"),
-	PHN ("PHN", "philemon", 0, true),
+	PHM ("PHM", "philemon", 0, true),
 	HEB ("HEB", "hebrews"),
 	JAS ("JAS", "james"),
 	PE1 ("1PE", "peter", 1),

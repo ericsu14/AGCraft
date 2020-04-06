@@ -17,7 +17,7 @@ public class DatabaseManager
 		Connection c = null;
 		
 		try {
-			c = DriverManager.getConnection(CreateDatabase.kDatabaseURL);
+			c = DriverManager.getConnection(CreateDatabase.kDatabasePath);
 			c.setAutoCommit(false);
 
 			StringBuilder query = new StringBuilder();
@@ -53,7 +53,7 @@ public class DatabaseManager
 		
 		try 
 		{
-			c = DriverManager.getConnection(CreateDatabase.kDatabaseURL);
+			c = DriverManager.getConnection(CreateDatabase.kDatabasePath);
 			
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT * FROM BIBLES WHERE BIBLE_ID=? AND BOOK_ID=? AND CHAPTER=?");
@@ -76,4 +76,5 @@ public class DatabaseManager
 		
 		return result.toString();
 	}
+	
 }

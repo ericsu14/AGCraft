@@ -20,7 +20,7 @@ class TestSingleChapter {
 		testPassage (BookID.JN3);
 		testPassage (BookID.JUD);
 		testPassage (BookID.OBA);
-		testPassage (BookID.PHN);
+		testPassage (BookID.PHM);
 	}
 	
 	private void testPassage (BookID book)
