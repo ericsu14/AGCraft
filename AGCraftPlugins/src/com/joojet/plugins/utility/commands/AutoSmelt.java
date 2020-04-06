@@ -66,25 +66,28 @@ public class AutoSmelt implements CommandExecutor
 	}
 	
 	/** Makes a calculation to get the exact amount of coal the player needs to smelt all of his items */
-	public int getRemainingCoal ()
+	private int getRemainingCoal ()
 	{
 		double remaining = ((double) this.getTotalOreCount() - (double) (this.getTotalCoalCount() * 8)) / 8;
 		remaining = Math.ceil(remaining);
 		return (int) remaining;
 	}
 	
-	public int getTotalCoalCount ()
+	/** Returns the total amount of coal units the player currently has. Coal blocks are automatically converted to individual pieces
+	 *  of coal. */
+	private int getTotalCoalCount ()
 	{
 		return this.numCoals + (this.numCoalBlocks * 10);
 	}
 	
-	public int getTotalOreCount ()
+	/** Returns the total number of gold and iron ores the player currently has */
+	private int getTotalOreCount ()
 	{
 		return this.numGoldOres + this.numIronOres;
 	}
 	
 	/** Updates the number of coal, coal blocks, iron ores, and gold ores through scanning the player's inventory */
-	public void updateCounts (Player p)
+	private void updateCounts (Player p)
 	{
 		for (ItemStack item : p.getInventory())
 		{
@@ -115,7 +118,7 @@ public class AutoSmelt implements CommandExecutor
 	}
 	
 	/** Removes coal / coal blocks / charcoal items from the player's inventory that are going to be smelted */
-	public void removeCoal (Player p)
+	private void removeCoal (Player p)
 	{
 		// Gets the number of coal / coal blocks to be removed from the player's inventory
 		int totalCoalBlocks = this.numCoalBlocks;
@@ -189,7 +192,7 @@ public class AutoSmelt implements CommandExecutor
 	}
 	
 	/** Converts all gold and iron ores in the player's inventory to ignots */
-	public void convertOres (Player p)
+	private void convertOres (Player p)
 	{
 		ArrayList <ItemStack> queuedItems = new ArrayList <ItemStack> ();
 		for (ItemStack item : p.getInventory())
