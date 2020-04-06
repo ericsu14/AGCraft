@@ -62,8 +62,9 @@ public class ClearJunk implements CommandExecutor
 		// Brewing
 		this.junkItems.put(Material.SPIDER_EYE, JunkClassifier.BREWING);
 		
-		// Damaged, unenchanted bows
-		this.junkItems.put(Material.BOW, JunkClassifier.BOWS);
+		// Damaged, unenchanted weapon drops
+		this.junkItems.put(Material.BOW, JunkClassifier.WEAPONS);
+		this.junkItems.put(Material.GOLDEN_SWORD, JunkClassifier.WEAPONS);
 		
 		// Initializes command interpreter
 		this.commandInterpreter = new JunkCommandInterpreter ();
@@ -164,7 +165,7 @@ public class ClearJunk implements CommandExecutor
 	 *  These are typically mob loot that nobody uses. */
 	private boolean checkMobArmorLoot (ItemStack item, JunkClassifier classifier)
 	{
-		if (classifier.equals(JunkClassifier.BOWS) || classifier.equals (JunkClassifier.ARMOR))
+		if (classifier.equals(JunkClassifier.ARMOR) || classifier.equals (JunkClassifier.WEAPONS))
 		{
 			ItemMeta itemMeta = item.getItemMeta();
 			if (itemMeta instanceof Damageable)
