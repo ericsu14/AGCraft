@@ -88,7 +88,7 @@ The items that falls under each category are as follows:
 |Common|Stone|Natural|Armor|Brewing|Weapons|
 |--|--|--|--|--|--|
 | Rotten Flesh | Cobblestone |Dirt|All Leather Armor*|Spider Eyes| Golden Sword* |
-| Bones | Stone | Sand | All Chainmail Armor* | Bows* |
+| Bones | Stone | Sand | All Chainmail Armor* | | Bows* |
 | String | Granite | Gravel | All Gold Armor* |
 | Seeds (wheat) | Diorite
 | | Andesite |
