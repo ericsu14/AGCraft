@@ -36,7 +36,7 @@ public class LocationDatabaseManager
 	
 	/** Inserts a new location into the database 
 	 * @throws SQLException */
-	public static void insert (String uuid, String locationName, double x, double y, double z, Environment env, WarpAccessLevel level) throws SQLException
+	public static void insert (String uuid, String locationName, double x, double y, double z, Environment env, WarpAccessLevel level) throws SQLException, RuntimeException
 	{
 		locationName = locationName.toLowerCase();
 		
