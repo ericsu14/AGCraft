@@ -1,6 +1,6 @@
 name: AGCraftPlugins
 main: com.joojet.plugins.agcraft.main.AGCraftPlugin
-version: 1.6.0
+version: 1.6.1
 api-version: 1.13
 commands:
   bible:
@@ -20,14 +20,14 @@ commands:
     usage: /autosmelt
   warp:
     description: Warps you to either a designated location or their bed spawn.
-    usage: /warp <tag> <location name>
+    usage: /warp <location | home> <location name>
   getLocations:
     description: Prints all known location name to your chat as a list
     usage: /getlocations
   removeLocation:
     description: Removes a location from the player's list of implemented locations.
-    usage: /removelocation <location name> <access level>
+    usage: /removelocation <location name> <PUBLIC | PRIVATE>
   setLocation:
     description: Registers the player's current location as a new location in the database as a specified name
-    usage: /setlocation <name of location> <access level>
+    usage: /setlocation <name of location> <PUBLIC | PRIVATE>
   

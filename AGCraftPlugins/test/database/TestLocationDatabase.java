@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.bukkit.World.Environment;
 import org.junit.jupiter.api.Test;
@@ -405,10 +406,11 @@ class TestLocationDatabase
 	{
 		try
 		{
-			int numLocationsOverworld = 100, numLocationsNether = 50, numLocationsEnd = 110;
+			int numLocationsOverworld = 100, numLocationsNether = 50, numLocationsEnd = 110, numLocationsOverworldP2 = 10;
 			LocationEntry entryOverworld = createRandomPrivateLocations (numLocationsOverworld, 1, Environment.NORMAL);
 			LocationEntry entryNether = createRandomPrivateLocations (numLocationsNether, 1, Environment.NETHER);
 			LocationEntry entryEnd = createRandomPrivateLocations (numLocationsEnd, 1, Environment.THE_END);
+			LocationEntry entryOverworldP2 = createRandomPrivateLocations (numLocationsOverworldP2, 2, Environment.NORMAL);
 			
 			ArrayList <LocationEntry> entriesOverworld = this.getListofLocations(entryOverworld);
 			assertEquals (entriesOverworld.size(), numLocationsOverworld);
@@ -418,6 +420,9 @@ class TestLocationDatabase
 			
 			ArrayList <LocationEntry> entriesEnd = this.getListofLocations(entryEnd);
 			assertEquals (entriesEnd.size(), numLocationsEnd);
+			
+			ArrayList <LocationEntry> entriesOverworldP2 = this.getListofLocations(entryOverworldP2);
+			assertEquals (entriesOverworldP2.size(), numLocationsOverworldP2);
 		}
 		
 		catch (Exception e)
@@ -453,6 +458,32 @@ class TestLocationDatabase
 		}
 	}
 	
+	/** Tests this following edge case:
+	 * 		p1 sets a private entry
+	 * 		p2 registers a public entry under the same name as p1's private entry
+	 * 	... check to see if p1 still gets his private location after calling fetch. */
+	@Test
+	void sameNameTest9 ()
+	{
+		String locName = "spawn";
+		LocationEntry p1PrivateEntry = new LocationEntry (player(1), locName, 1, 1, 1, OVERWORLD, PRIVATE);
+		LocationEntry p2PublicEntry = new LocationEntry (player(21), locName, 1, 1, 1, OVERWORLD, PUBLIC);
+		
+		try
+		{
+			insert (p1PrivateEntry);
+			insert (p2PublicEntry);
+			
+			LocationEntry entry = fetch (p1PrivateEntry);
+			assertEquals (entry, p1PrivateEntry);
+		}
+		
+		catch (Exception e)
+		{
+			fail ("FAIL: " + e.getMessage());
+		}
+	}
+	
 	/** Populates the database with a set number of private locations 
 	 * @throws SQLException, RuntimeException */
 	private LocationEntry createRandomPrivateLocations (int number, int player, Environment env) throws SQLException, RuntimeException
@@ -460,7 +491,7 @@ class TestLocationDatabase
 		LocationEntry entry = null;
 		for (int i = 0; i < number; ++i)
 		{
-			entry = new LocationEntry (player(player), "adsf" + i , 1, 1, 1, PRIVATE, env.name());
+			entry = new LocationEntry (player(player), generateRandomString() , 1, 1, 1, PRIVATE, env.name());
 			insert (entry);
 		}
 		
@@ -473,12 +504,11 @@ class TestLocationDatabase
 		LocationEntry entry = null;
 		for (int i = 0; i < number; ++i)
 		{
-			entry = new LocationEntry (player(1000+i), "adsf" + i , 1, 1, 1, PUBLIC, env.name());
+			entry = new LocationEntry (player(1000+i), generateRandomString() , 1, 1, 1, PUBLIC, env.name());
 			insert (entry);
 		}
 		return entry;
 	}
-	
 	
 	/** Resets the test database */
 	private void resetDatabase ()
@@ -534,5 +564,21 @@ class TestLocationDatabase
 	private String player (int index)
 	{
 		return "player " + index;
+	}
+	
+	private String generateRandomString ()
+	{
+	    int leftLimit = 48; // numeral '0'
+	    int rightLimit = 122; // letter 'z'
+	    int targetStringLength = 10;
+	    Random random = new Random();
+	 
+	    String generatedString = random.ints(leftLimit, rightLimit + 1)
+	      .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+	      .limit(targetStringLength)
+	      .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+	      .toString();
+	    
+	    return generatedString;
 	}
 }

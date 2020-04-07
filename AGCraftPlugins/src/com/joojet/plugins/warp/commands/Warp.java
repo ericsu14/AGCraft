@@ -53,11 +53,13 @@ public class Warp implements CommandExecutor
 			
 			// Idiot proofing in-case nobody reads the docs.
 			String locName = "";
+			boolean isIdiot = false;
 			if (type == null)
 			{
 				System.out.println (p.getDisplayName() + "is a village idiot");
 				type = WarpType.LOCATION;
 				locName = args[0];
+				isIdiot = true;
 			}
 				
 			Location loc = null;
@@ -80,6 +82,12 @@ public class Warp implements CommandExecutor
 						return false;
 					}
 					locName = (locName.equals("") ? args[1] : locName);
+					
+					if (isIdiot)
+					{
+						p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.ITALIC + "I will let it slide for now, but please use /warp location " + locName + " in the future.");
+					}
+						
 					try 
 					{
 						loc = LocationDatabaseManager.getlocation(p, locName);

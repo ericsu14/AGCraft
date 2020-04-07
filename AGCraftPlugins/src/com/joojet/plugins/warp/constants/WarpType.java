@@ -2,7 +2,7 @@ package com.joojet.plugins.warp.constants;
 
 public enum WarpType 
 {
-	HOME, LOCATION, PLAYER;
+	HOME, LOCATION;
 	
 	
 	/** Returns the enum's name as a string */

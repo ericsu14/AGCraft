@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.bukkit.Location;
 import org.bukkit.World.Environment;
@@ -88,7 +89,7 @@ public class LocationDatabaseManager
 	{
 		locationName = locationName.toLowerCase();
 		
-		if (!checkIfLocationExists (uuid, locationName, env))
+		if (!checkIfLocationUnderClassifierExists (uuid, locationName, env, level))
 		{
 			throw new RuntimeException (locationName + " is not a registered location in " + GetCoordinates.getEnvironmentName(env));
 		}
@@ -125,13 +126,14 @@ public class LocationDatabaseManager
 		ResultSet result = null;
 		LocationEntry entry = null;
 		
+		ArrayList <LocationEntry> entries = new ArrayList <LocationEntry> ();
+		
 		c = DriverManager.getConnection(CreateLocationDatabase.kDatabasePath);
 		
 		StringBuilder query = new StringBuilder ("SELECT * FROM LOCATIONS WHERE ");
 		query.append("(UUID = ? AND NAME = ? AND WORLD = ? AND ACCESS = ?)");
 		query.append("OR");
 		query.append("(NAME = ? AND WORLD = ? AND ACCESS = ?)");
-		
 		
 		PreparedStatement pstmt = c.prepareStatement(query.toString());
 		pstmt.setString(1, uuid);
@@ -146,8 +148,53 @@ public class LocationDatabaseManager
 		
 		if (result.next())
 		{
-			entry = new LocationEntry (result.getString("UUID"), result.getString("NAME"), result.getDouble("X"), result.getDouble("Y"), result.getDouble("Z"),
+			do
+			{
+				entry = new LocationEntry (result.getString("UUID"), result.getString("NAME"), result.getDouble("X"), result.getDouble("Y"), result.getDouble("Z"),
 										result.getString("ACCESS"), result.getString("WORLD"));
+				entries.add(entry);
+			} while (result.next());
+			
+			// Checks if the list of entries has more than one element.
+			// If so, prioritize the one classified under private.
+			if (entries.size() > 1)
+			{
+				entries = (ArrayList<LocationEntry>) Arrays.asList ((LocationEntry []) entries.stream().filter(e -> {
+					return e.getAccessLevel().equals(WarpAccessLevel.PRIVATE);
+				}).toArray());
+				entry = entries.get(0);
+			}
+		}
+		
+		pstmt.close();
+		c.close();
+		return entry;
+	}
+	
+	/** Fetches a location registered under a specific private or public access classifier */
+	public static LocationEntry fetchLocationUnderClassifier (String uuid, String locationName, Environment env, WarpAccessLevel access) throws SQLException
+	{
+		locationName = locationName.toLowerCase();
+		
+		Connection c = DriverManager.getConnection(CreateLocationDatabase.kDatabasePath);
+		ResultSet result = null;
+		LocationEntry entry = null;
+		
+		StringBuilder query = new StringBuilder ("SELECT * FROM LOCATIONS WHERE ");
+		query.append ("UUID = ? AND NAME = ? AND WORLD = ? AND ACCESS = ?");
+		
+		PreparedStatement pstmt = c.prepareStatement(query.toString());
+		pstmt.setString(1, uuid);
+		pstmt.setString(2, locationName);
+		pstmt.setString(3, env.name());
+		pstmt.setString(4, access.name());
+		
+		result = pstmt.executeQuery();
+		
+		if (result.next())
+		{
+			entry = new LocationEntry (result.getString("UUID"), result.getString("NAME"), result.getDouble("X"), result.getDouble("Y"), result.getDouble("Z"),
+					result.getString("ACCESS"), result.getString("WORLD"));
 		}
 		
 		pstmt.close();
@@ -221,6 +268,21 @@ public class LocationDatabaseManager
 			return fetchLocation(uuid, locationName, env) != null;
 		} 
 		catch (SQLException e) 
+		{
+			System.out.println (e.getMessage());
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/** Checks if a player specified location under a certain access level and name already exists in the database */
+	public static boolean checkIfLocationUnderClassifierExists (String uuid, String locationName, Environment env, WarpAccessLevel access)
+	{
+		try
+		{
+			return fetchLocationUnderClassifier (uuid, locationName, env, access) != null;
+		}
+		catch (SQLException e)
 		{
 			System.out.println (e.getMessage());
 			e.printStackTrace();
