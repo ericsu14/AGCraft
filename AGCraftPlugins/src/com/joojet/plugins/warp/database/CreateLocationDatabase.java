@@ -46,6 +46,7 @@ public class CreateLocationDatabase
 							"X         DOUBLE   NOT NULL," +
 							"Y         DOUBLE  NOT NULL,"  +
 							"Z       DOUBLE   NOT NULL,"   +
+							"WORLD   TEXT     NOT NULL,"   +
 							"ACCESS  TEXT  NOT NULL"       +  ")";
 			
 			stmt.executeUpdate(sql);
