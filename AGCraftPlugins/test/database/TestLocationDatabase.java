@@ -461,7 +461,7 @@ class TestLocationDatabase
 	/** Tests this following edge case:
 	 * 		p1 sets a private entry
 	 * 		p2 registers a public entry under the same name as p1's private entry
-	 * 	... check to see if p1 still gets his private location after calling fetch. */
+	 * 	p2 should be prevented from entering that location with the same name. */
 	@Test
 	void sameNameTest9 ()
 	{
@@ -474,11 +474,10 @@ class TestLocationDatabase
 			insert (p1PrivateEntry);
 			insert (p2PublicEntry);
 			
-			LocationEntry entry = fetch (p1PrivateEntry);
-			assertEquals (entry, p1PrivateEntry);
+			fail ("FAIL: An exception should have been thrown");
 		}
 		
-		catch (Exception e)
+		catch (SQLException e)
 		{
 			fail ("FAIL: " + e.getMessage());
 		}
