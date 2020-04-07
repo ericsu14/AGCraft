@@ -477,6 +477,10 @@ class TestLocationDatabase
 			fail ("FAIL: An exception should have been thrown");
 		}
 		
+		catch (RuntimeException e)
+		{
+			System.out.println (e.getMessage());
+		}
 		catch (SQLException e)
 		{
 			fail ("FAIL: " + e.getMessage());
