@@ -86,7 +86,7 @@ public class Bible implements CommandExecutor
 		catch (RuntimeException e)
 		{
 			System.err.println ("[BibleFetcher]" + e.getMessage());
-			sender.sendMessage (ChatColor.RED + e.getMessage());
+			sender.sendMessage (ChatColor.RED + "[God]" + e.getMessage());
 		}
 		
 		catch (Exception e)
