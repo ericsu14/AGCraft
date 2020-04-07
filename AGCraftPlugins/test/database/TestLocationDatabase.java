@@ -2,7 +2,6 @@ package database;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.bukkit.World.Environment;
@@ -15,13 +14,12 @@ import com.joojet.plugins.warp.database.LocationEntry;
 
 class TestLocationDatabase 
 {
-	// Test UUID for main player
-	public final String testPlayerID = "player1";
+	
 	public TestLocationDatabase ()
 	{
+		// Ensures a new database is created every time this test case is ran
 		CreateLocationDatabase.createDataBase();
-		CreateLocationDatabase.dropTables();
-		CreateLocationDatabase.initializeTables();
+		resetDatabase();
 	}
 	
 	/** Tests to see if the database could handle a basic insertion and search operation */
@@ -29,23 +27,40 @@ class TestLocationDatabase
 	void basicInsertionTest () 
 	{
 		
-		// Inserts a 
-		double x = 1, y = 1, z = 1;
-		Environment env = Environment.NORMAL;
-		String locName = "test1";
-		WarpAccessLevel level = WarpAccessLevel.PRIVATE;
+		// Inserts single entry in the database
+		LocationEntry entry = new LocationEntry ("player1", "test1", 1, 1, 1, WarpAccessLevel.PRIVATE.name(), Environment.NORMAL.name());
 		
 		try 
 		{
-			LocationDatabaseManager.insert(this.testPlayerID, locName, x, y, z, env, level);
-			assertEquals (LocationDatabaseManager.checkIfLocationExists(this.testPlayerID, locName, env), true);
-			LocationEntry entry = LocationDatabaseManager.fetchLocation(this.testPlayerID, locName, env);
-			assertEquals (entry.getLocationName(), locName);
-			
-		} catch (SQLException e) 
+			insert (entry);
+			LocationEntry ret = fetch (entry);
+			assertEquals (ret.equals(entry), true); 
+			resetDatabase();
+		} 
+		catch (SQLException e) 
 		{
 			fail ("FAIL: " + e.getMessage());
 		}
 	}
-
+	
+	/** Resets the test database */
+	private void resetDatabase ()
+	{
+		CreateLocationDatabase.dropTables();
+		CreateLocationDatabase.initializeTables();
+	}
+	
+	/** Adds an entry into the database 
+	 * @throws SQLException */
+	private void insert (LocationEntry entry) throws SQLException
+	{
+		LocationDatabaseManager.insert (entry.getUUID(), entry.getLocationName(), entry.getX(), entry.getY(), entry.getZ(), entry.getEnvironment(), entry.getAccessLevel());
+		assertEquals (LocationDatabaseManager.checkIfLocationExists(entry.getUUID(), entry.getLocationName(), entry.getEnvironment()), true);
+	}
+	
+	/** Fetches an entry from the database */
+	private LocationEntry fetch (LocationEntry entry) throws SQLException
+	{
+		return LocationDatabaseManager.fetchLocation(entry.getUUID(), entry.getLocationName(), entry.getEnvironment());
+	}
 }
