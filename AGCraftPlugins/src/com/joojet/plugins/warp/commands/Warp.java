@@ -51,11 +51,13 @@ public class Warp implements CommandExecutor
 			WarpType type = this.interpreter.searchWarpTypeTrie(args[0]);
 			
 			
-			// Idiot proofing incase nobody reads the docs.
+			// Idiot proofing in-case nobody reads the docs.
+			String locName = "";
 			if (type == null)
 			{
+				System.out.println (p.getDisplayName() + "is a village idiot");
 				type = WarpType.LOCATION;
-				args[1] = args[0];
+				locName = args[0];
 			}
 				
 			Location loc = null;
@@ -77,7 +79,7 @@ public class Warp implements CommandExecutor
 						p.sendMessage(ChatColor.RED + "No location name specified.");
 						return false;
 					}
-					String locName = args[1];
+					locName = (locName.equals("") ? args[1] : locName);
 					try 
 					{
 						loc = LocationDatabaseManager.getlocation(p, locName);
@@ -98,7 +100,7 @@ public class Warp implements CommandExecutor
 				default:
 					return false;
 			}
-			
+
 			p.teleport(loc);
 			p.playSound(loc, Sound.ENTITY_ENDERMAN_TELEPORT, 0.4f, 1f);
 			p.sendMessage(ChatColor.GOLD + "Teleported you to location " + name + " at " + GetCoordinates.getCoordinates(p));

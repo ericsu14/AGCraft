@@ -83,6 +83,12 @@ public class Bible implements CommandExecutor
 			sender.sendMessage (ChatColor.RED + "[God] That chapter of the bible does not exist.");
 		}
 		
+		catch (RuntimeException e)
+		{
+			System.err.println ("[BibleFetcher]" + e.getMessage());
+			sender.sendMessage (ChatColor.RED + e.getMessage());
+		}
+		
 		catch (Exception e)
 		{
 			System.err.println ("[BibleFetcher]" + e.getMessage());
