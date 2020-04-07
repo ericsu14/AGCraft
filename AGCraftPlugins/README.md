@@ -2,7 +2,7 @@
 
 # AGCraft Commands Documentation
 
-## AutoSmelt
+## AutoSmelt <a name = "autosmelt"></a>
 <b>Usage:</b> \
 ``/autosmelt``
 
@@ -16,7 +16,7 @@ it will consume that coal block to do so, and you will not get your 8 coal piece
 
 A small price to pay for automation.
 
-## Bible
+## Bible <a name = "bible"></a>
 <b>Usage:</b> \
 ``` /bible <translation> <book> <chapter> <start> <end> ```
 
@@ -122,23 +122,24 @@ Using this command without a username will print out your own coordinates instea
 ``/getlocations <visibility level>``
 
 <b> Description </b> \
-Outputs all registered warp locations under the specified `<visibility level>` to your chat.
+Outputs all registered warp locations (under the specified `<visibility level>`) to your chat.
 
 <b>Usage Examples</b> \
-``/getlocations`` lists all of your privately warp locations. \
-``/getlocations public`` lists all warp locations publicly set by the server.
+``/getlocations private`` lists all of your privately set warp locations. \
+``/getlocations public`` lists all warp locations publicly set by yourself and all members of the server.
 
 ## Remove Location
 <b> Usage: </b> \
 ``/removelocation <location name> <visibility level>``
 
 <b> Description: </b> \
-Removes a named warp location under the specified ``<visibility level>`` from the server registries. Doing this will no longer allow `/warp <location name>` to work anymore.
+Removes a named warp location under the specified ``<visibility level>`` from the database. Doing this will no longer allow you to warp to that removed location.
 
 Note that this only works on private or public locations specified by you. It will not remove public locations specified by other players in this server.
 
 <b> Usage examples </b>: \
-``/removelocation village private`` removes a privately set warp location named `village` from your personal list of warp locations. 
+``/removelocation village private`` removes a private warp location, `village` from the database, if it was originally set by you. \
+``/removelocation spawn public`` removes a public warp location, `spawn` from the database, if it was originally set by you.
 
 ## SetLocation
 <b> Usage: </b> \
@@ -148,11 +149,14 @@ Note that this only works on private or public locations specified by you. It wi
 Registers your current position as a new warp location under the name, ``<location name>``. Doing this will allow ``/warp location <location name>`` to teleport you back to ``<location name>``. Fails if a location with the same name is already registered in the server.
 
 <b> Parameters: </b> \
-``location name`` - Name of the location you are setting your warp location to.
-``visibility level`` - Can either be ``private`` or ``public``. ``public`` warp locations can be seen and accessed by anyone in the server while ``private`` warp locations can only be seen and accessed by yourself.
+``location name`` - Name of the location you are setting your warp location to. \
+``visibility level`` - Can be either ``private`` or ``public``. 
+- ``public`` warp locations can be seen and accessed by anyone in the server.
+- ``private`` warp locations can only be seen and accessed by yourself.
 
 <b> Usage Examples: </b> \
 ``/setlocation village private`` Sets your current location as a new warp location called ``village``. Thus, ``/warp location village`` will warp you (and only you) to that location.
+
 ``/setlocation spawn public`` Sets your current location to a new warp location called ``spawn``. Because this location is made ``public``, anyone in the server can access and warp to that location.
 
 
@@ -161,11 +165,13 @@ Registers your current position as a new warp location under the name, ``<locati
 ``/warp <tag> <location name>``
 
 <b>Description</b>:\
-Warps you to a named location either registered by `/setlocation`, or the location of your last slept bed if the tag parameter is set to <b>home</b>. Fails if your bed is missing or obstructed when attempting to warp back to home. This command also fails when ``<location name>`` is not a registered location in the registries.
+If the `tag` parameter is set to `location`, using this command will warp you to a named location that is registered by `/setlocation`. 
+
+If the `tag` parameter is set to `home`, using this command will warp you back to your home bed. \
 
 <b>Parameters:</b> \
-``tag`` - Specifies the type of location you want to warp to.
-``location`` - the name of the location specified by `/setlocation` if the tag parameter is set to `location`.
+``tag`` - Specifies the type of location you want to warp to. \
+``location name`` - the name of the location specified by `/setlocation` if the tag parameter is set to `location`.
 
 <b> Tags: </b> \
 The tags currently specified by this command are:
@@ -175,15 +181,15 @@ The tags currently specified by this command are:
 |`location`| Teleports you to a named location registered by `/setlocation`.
 
 ### Instructions on using warp:
-Lets say that you built an awesome house in the middle of the village. Before using this command, you want to first <b>physically stand</b> (in Minecraft) to the spot you want to warp to in the future.
+Let's say that you built an awesome house in the middle of the village. Before using this command, you want to first <b>physically stand</b> in the spot you want to warp to in the future.
 
-Once you are standing on that spot, simply type ``/setlocation <name> private`` to register your new warp location to the registry. Note that ``<name>`` could be anything; <b>it is entirely up to you on what you want to name your warp locations. </b> 
+Once you are standing on that spot, simply type ``/setlocation <name> private`` to register your new warp location to the database. ``/setlocation <name> private`` will take in your current coordinates and register it as a newly named warp location for you to use in the future. 
 
-In addition, the ``private`` specifier after ``<name>`` ensures that the locations you set <i>can only be seen and accessed by you.</i>
+Note that ``<name>`` could be anything; <b>it is entirely up to you on what you want to name your warp locations. </b> In addition, the ``private`` specifier after ``<name>`` ensures that the locations you set <i>can only be seen and accessed by you.</i>
 
-Once you set your own location using `/setlocation <name>`, you now free to use ``/warp location <name>`` to warp back to your awesome house in the middle of the village any time!
+Once you set your own location using `/setlocation <name> private`, you now free to use ``/warp location <name>`` to warp back to your awesome house in the middle of the village any time!
 
-- Lost track of your locations? Don't worry! Simply use `/getlocations private` to list all registered locations that are privately set by you!
+- Lost track of your locations? Don't worry! Simply use `/getlocations private or /getlocations` to list all registered locations that are privately set by you!
 - Want to remove a location from the registry? Simply use ``/removelocations <name> private`` to remove that location from your list.
 - Want to warp back to your home bed? Simply use ``/warp home`` to do so!
 
