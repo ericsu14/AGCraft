@@ -41,7 +41,7 @@ public class GetLocations implements CommandExecutor
 			{
 				ArrayList <LocationEntry> entries = LocationDatabaseManager.getLocationsAsList(p, access);
 				
-				p.sendMessage(p.getDisplayName() + "'s " + access.name().toLowerCase() + " locations: ");
+				p.sendMessage(ChatColor.GRAY + p.getDisplayName() + "'s " + access.name().toLowerCase() + " locations: ");
 				StringBuilder locationList = new StringBuilder ();
 				for (LocationEntry entry : entries)
 				{
@@ -51,11 +51,11 @@ public class GetLocations implements CommandExecutor
 				int ln = locationList.length();
 				if (entries.isEmpty())
 				{
-					p.sendMessage("No locations found.");
+					p.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "No locations found.");
 				}
 				else
 				{
-					p.sendMessage(locationList.substring(0, ln - 3).toString());
+					p.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC +locationList.substring(0, ln - 3).toString());
 				}
 				return true;
 			}
