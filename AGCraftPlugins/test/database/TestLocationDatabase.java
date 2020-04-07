@@ -176,6 +176,134 @@ class TestLocationDatabase
 		}
 	}
 	
+	/** Tests if the player is able to add a private location with the same name as another location, but that location is public and in a different environment */
+	@Test
+	void sameNameTest6 ()
+	{
+		String player1 = "player1";
+		String locName = "test1";
+		
+		LocationEntry oEntry = new LocationEntry (player1, locName, 1, 1, 1, PUBLIC, OVERWORLD);
+		LocationEntry nEntry = new LocationEntry (player1, locName, 2, 2, 2, PRIVATE, NETHER);
+		LocationEntry eEntry = new LocationEntry (player1, locName, 3, 3, 3, PUBLIC, THE_END);
+		
+		try
+		{
+			insert (oEntry);
+			insert (eEntry);
+			fetch (oEntry);
+			fetch (eEntry);
+			insert (nEntry);
+			fetch (nEntry);
+		}
+		
+		catch (Exception e)
+		{
+			fail ("FAIL: " + e.getMessage());
+		}
+	}
+	
+	/** Tests if another player is unable to add a location with the same name as a public location */
+	@Test
+	void sameNameTest7 ()
+	{
+		String locName = "test1";
+		
+		LocationEntry p1Entry = new LocationEntry (player (1), locName, 1, 1, 1, PUBLIC, OVERWORLD);
+		LocationEntry p2Entry = new LocationEntry (player (2), locName, 1, 1, 1, PRIVATE, OVERWORLD);
+		
+		try
+		{
+			insert (p1Entry);
+			fetch (p1Entry);
+			insert (p2Entry);
+			fail ("FAIL: an exception should be thrown");
+		}
+		
+		catch (SQLException e)
+		{
+			fail ("FAIL: " + e.getMessage());
+		}
+		
+		catch (RuntimeException e)
+		{
+			System.out.println (e.getMessage());
+		}
+	}
+	
+	/** Similar to test 7, but this time all of their locations are private, which should be able to happen */
+	@Test
+	void sameNameTest8 ()
+	{
+		String locName = "test1";
+		
+		LocationEntry p1Entry = new LocationEntry (player (1), locName, 1, 1, 1, PRIVATE, OVERWORLD);
+		LocationEntry p2Entry = new LocationEntry (player (2), locName, 1, 1, 1, PRIVATE, OVERWORLD);
+		
+		try
+		{
+			insert (p1Entry);
+			fetch (p1Entry);
+			insert (p2Entry);
+			fetch (p2Entry);
+		}
+		
+		catch (Exception e)
+		{
+			fail ("FAIL: " + e.getMessage());
+		}
+	}
+	
+	/** Tests if the public location can be accessed by multiple members */
+	@Test
+	void testPublicLocations ()
+	{
+		String locName = "test1";
+		LocationEntry p1Entry = new LocationEntry (player(1), locName, 1, 1, 1, PUBLIC, OVERWORLD);
+		
+		try
+		{
+			insert (p1Entry);
+			fetch (p1Entry);
+			for (int i = 2; i < 100; ++i)
+			{
+				spoofedFetch (player(i), p1Entry);
+			}
+		}
+		
+		catch (Exception e)
+		{
+			fail ("FAIL: " + e.getMessage());
+		}
+	}
+	
+	/** Tests if a private location can only be accessed by the user itself */
+	@Test
+	void testPrivateLocations ()
+	{
+		String locName = "secret";
+		LocationEntry p1Entry = new LocationEntry (player(1), locName, 1, 1, 1, PRIVATE, OVERWORLD);
+		
+		try
+		{
+			insert (p1Entry);
+			fetch (p1Entry);
+			
+			spoofedFetch (player (99), p1Entry);
+			fail ("FAIL: an exception should be thrown");
+		}
+		
+		catch (SQLException e)
+		{
+			fail ("FAIL: " + e.getMessage());
+		}
+		
+		catch (RuntimeException e)
+		{
+			System.out.println ("PASS: " + e.getMessage());
+		}
+	}
+	
 	/** Resets the test database */
 	private void resetDatabase ()
 	{
@@ -197,5 +325,19 @@ class TestLocationDatabase
 		LocationEntry ret = LocationDatabaseManager.fetchLocation(entry.getUUID(), entry.getLocationName(), entry.getEnvironment());
 		assertEquals (ret.equals(entry), true);
 		return ret;
+	}
+	
+	/** Fetches an entry from the database spoofed as another user */
+	private LocationEntry spoofedFetch (String uuid, LocationEntry entry) throws SQLException, RuntimeException
+	{
+		LocationEntry ret = LocationDatabaseManager.fetchLocation(uuid, entry.getLocationName(), entry.getEnvironment());
+		assertEquals (ret.equals(entry), true);
+		return ret;
+	}
+	
+	/** Returns a formatted test UUID */
+	private String player (int index)
+	{
+		return "player " + index;
 	}
 }
