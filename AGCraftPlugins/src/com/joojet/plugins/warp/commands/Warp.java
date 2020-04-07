@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
+import com.joojet.plugins.warp.constants.WarpAccessLevel;
 import com.joojet.plugins.warp.constants.WarpType;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 import com.joojet.plugins.warp.interpreter.WarpCommandInterpreter;
@@ -49,6 +50,14 @@ public class Warp implements CommandExecutor
 			}
 			
 			WarpType type = this.interpreter.searchWarpTypeTrie(args[0]);
+			
+			
+			// Idiot proofing incase nobody reads the docs.
+			if (type == null)
+			{
+				type = WarpType.LOCATION;
+				args[1] = args[0];
+			}
 				
 			Location loc = null;
 			String name = "";
