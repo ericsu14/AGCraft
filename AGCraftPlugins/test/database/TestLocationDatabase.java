@@ -304,6 +304,87 @@ class TestLocationDatabase
 		}
 	}
 	
+	/** Tests the remove function on a single private location */
+	@Test
+	void testPrivateRemove ()
+	{
+		String locName = "temp";
+		LocationEntry p1Entry = new LocationEntry (player(1), locName, 1, 1, 1, PRIVATE, OVERWORLD);
+		
+		try
+		{
+			insert (p1Entry);
+			fetch (p1Entry);
+			remove (p1Entry);
+		}
+		
+		catch (Exception e)
+		{
+			fail ("FAIL: " + e.getMessage());
+		}
+	}
+	
+	/** Tests the remove function on a single public location and checks to see if that location
+	 *  can no longer be accessed by other players. */
+	@Test
+	void testPublicRemove ()
+	{
+		String locName = "temp";
+		LocationEntry p1Entry = new LocationEntry (player(1), locName, 1, 1, 1, PUBLIC, OVERWORLD);
+		
+		try
+		{
+			insert (p1Entry);
+			fetch (p1Entry);
+			
+			for (int i = 2; i < 100; ++i)
+			{
+				assertEquals (checkIfLocationExists (player (i), p1Entry), true);
+			}
+			
+			remove (p1Entry);
+			
+			for (int i = 2; i < 100; ++i)
+			{
+				assertEquals (checkIfLocationExists (player (i), p1Entry), false);
+			}
+		}
+		catch (Exception e)
+		{
+			fail ("FAIL: " + e.getMessage());
+		}
+	}
+	
+	/** Tests if the remove function does not remove locations with the same name, but different environments */
+	@Test
+	void testRemoveMultiEnv ()
+	{
+		String locName = "temp";
+		String player1 = player(1);
+		
+		LocationEntry oEntry = new LocationEntry (player1, locName, 1, 1, 1, PRIVATE, OVERWORLD);
+		LocationEntry nEntry = new LocationEntry (player1, locName, 1, 1, 1, PRIVATE, NETHER);
+		LocationEntry eEntry = new LocationEntry (player1, locName, 1, 1, 1, PRIVATE, THE_END);
+		
+		try
+		{
+			insert (oEntry);
+			insert (nEntry);
+			insert (eEntry);
+			
+			remove (nEntry);
+			
+			assertEquals (checkIfLocationExists (player1, oEntry), true);
+			assertEquals (checkIfLocationExists (player1, nEntry), false);
+			assertEquals (checkIfLocationExists (player1, eEntry), true);
+		}
+		catch (Exception e)
+		{
+			fail ("FAIL: " + e.getMessage());
+		}
+	}
+	
+	
 	/** Resets the test database */
 	private void resetDatabase ()
 	{
@@ -327,12 +408,25 @@ class TestLocationDatabase
 		return ret;
 	}
 	
+	/** Removes an entry from the database and tests if that entry no longer exists */
+	private void remove (LocationEntry entry) throws SQLException
+	{
+		LocationDatabaseManager.removeLocation(entry.getUUID(), entry.getLocationName(), entry.getEnvironment(), entry.getAccessLevel());
+		assertEquals (LocationDatabaseManager.fetchLocation(entry.getUUID(), entry.getLocationName(), entry.getEnvironment()), null);
+	}
+	
 	/** Fetches an entry from the database spoofed as another user */
 	private LocationEntry spoofedFetch (String uuid, LocationEntry entry) throws SQLException, RuntimeException
 	{
 		LocationEntry ret = LocationDatabaseManager.fetchLocation(uuid, entry.getLocationName(), entry.getEnvironment());
 		assertEquals (ret.equals(entry), true);
 		return ret;
+	}
+	
+	/** Checks if a location exists in the database. */
+	private boolean checkIfLocationExists (String uuid, LocationEntry entry) throws SQLException, RuntimeException
+	{
+		return LocationDatabaseManager.checkIfLocationExists(uuid, entry.getLocationName(), entry.getEnvironment());
 	}
 	
 	/** Returns a formatted test UUID */

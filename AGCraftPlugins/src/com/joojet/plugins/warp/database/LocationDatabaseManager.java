@@ -16,7 +16,10 @@ import com.joojet.plugins.warp.database.CreateLocationDatabase;
 
 public class LocationDatabaseManager 
 {
-	/** Inserts the player's current location into the database */
+	/** Inserts the player's current location into the database
+	 * 	@param p - The player object
+	 * 	@param locationName - Name of the location the player is setting their location as
+	 * 	@param level - The access priv. level the player is setting their location as */
 	public static void insert (Player p, String locationName, WarpAccessLevel level)
 	{
 		Location loc = p.getLocation();
@@ -34,13 +37,19 @@ public class LocationDatabaseManager
 		}
 	}
 	
-	/** Inserts a new location into the database 
+	/** Inserts a new location into the database
+	 * 	@param uuid - Player's unique UUID
+	 * 	@param locationName - Name of the location the player is setting their location as
+	 * 	@param x - X coord of location
+	 * 	@param y - Y coord of location
+	 * 	@param z - Z coord of location
+	 * 	@param env - The dimension the player is in
+	 * 	@param level - The access priv. level the player is setting their location as
 	 * @throws SQLException */
 	public static void insert (String uuid, String locationName, double x, double y, double z, Environment env, WarpAccessLevel level) throws SQLException, RuntimeException
 	{
 		locationName = locationName.toLowerCase();
 		
-		// TODO: Check if the locationName already exists in the database. 
 		if (checkIfLocationExists (uuid, locationName, env))
 		{
 			throw new RuntimeException (locationName + " is already a registered location in " + GetCoordinates.getEnvironmentName(env));
@@ -69,10 +78,43 @@ public class LocationDatabaseManager
 		c.close();
 	}
 	
+	/** Removes a location entry from the database
+	 * 	@param uuid - Player's unique UUID
+	 * 	@param locationName - Name of the location the player is setting their location as
+	 * 	@param env - The dimension the player is in
+	 * 	@param level - The access priv. level the player is setting their location as  */
+	public static void removeLocation (String uuid, String locationName, Environment env, WarpAccessLevel level) throws SQLException, RuntimeException
+	{
+		locationName = locationName.toLowerCase();
+		
+		if (!checkIfLocationExists (uuid, locationName, env))
+		{
+			throw new RuntimeException (locationName + " is not a registered location in " + GetCoordinates.getEnvironmentName(env));
+		}
+		
+		Connection c = DriverManager.getConnection(CreateLocationDatabase.kDatabasePath);
+		
+		StringBuilder query = new StringBuilder ("DELETE FROM LOCATIONS WHERE ");
+		query.append("UUID = ? AND NAME = ? AND WORLD = ? AND ACCESS = ?");
+		
+		PreparedStatement pstmt = c.prepareStatement(query.toString());
+		pstmt.setString(1, uuid);
+		pstmt.setString(2, locationName);
+		pstmt.setString(3, env.name());
+		pstmt.setString(4, level.name());
+		
+		pstmt.executeUpdate();
+		pstmt.close();
+		c.close();
+	}
+	
 	/** Searches the database to see if:
 	 * 		- Either the private locationName registered under the user exists
 	 * 		- or a public locationName registered under any player exists.
-	 * This will return the resultSet formed from this query 
+	 * This will return the location data as a LocationEntry. null if not found.
+	 * 	@param uuid - UUID of the player
+	 * 	@param locationName - Name of the location the player is setting their location as
+	 * 	@param env - The dimension the player is in
 	 * @throws SQLException */
 	public static LocationEntry fetchLocation (String uuid, String locationName, Environment env) throws SQLException
 	{
@@ -112,7 +154,10 @@ public class LocationDatabaseManager
 		return entry;
 	}
 	
-	/** Checks if a player specified location under a name already exists in the database */
+	/** Checks if a player specified location under a name already exists in the database 
+	 * 	 @param uuid - UUID of the player
+	 * 	@param locationName - Name of the location the player is setting their location as
+	 * 	@param env - The dimension the player is in*/
 	public static boolean checkIfLocationExists (String uuid, String locationName, Environment env)
 	{
 		try 
@@ -127,7 +172,9 @@ public class LocationDatabaseManager
 		return false;
 	}
 	
-	/** Attempts to fetch and return the location data that is tied under locationName from the database. */
+	/** Attempts to fetch and return the location data that is tied under locationName from the database. 
+	 * 	@param p - Player object
+	 * 	@param locationName - Name of the location the player is setting their location as */
 	public static Location getlocation (Player p, String locationName) throws SQLException, RuntimeException
 	{
 		Environment env = p.getWorld().getEnvironment();
