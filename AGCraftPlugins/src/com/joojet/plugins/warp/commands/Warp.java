@@ -74,7 +74,7 @@ public class Warp implements CommandExecutor
 					name = "home";
 					break;
 				case LOCATION:
-					if (n <= 1)
+					if (n <= 1 && locName.equals(""))
 					{
 						p.sendMessage(ChatColor.RED + "No location name specified.");
 						return false;
