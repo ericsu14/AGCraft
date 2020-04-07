@@ -3,6 +3,7 @@ package database;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.bukkit.World.Environment;
 import org.junit.jupiter.api.Test;
@@ -373,15 +374,109 @@ class TestLocationDatabase
 			insert (eEntry);
 			
 			remove (nEntry);
-			
 			assertEquals (checkIfLocationExists (player1, oEntry), true);
 			assertEquals (checkIfLocationExists (player1, nEntry), false);
 			assertEquals (checkIfLocationExists (player1, eEntry), true);
+			
+			remove (oEntry);
+			assertEquals (checkIfLocationExists (player1, oEntry), false);
+			assertEquals (checkIfLocationExists (player1, nEntry), false);
+			assertEquals (checkIfLocationExists (player1, eEntry), true);
+			
+			remove (eEntry);
+			assertEquals (checkIfLocationExists (player1, oEntry), false);
+			assertEquals (checkIfLocationExists (player1, nEntry), false);
+			assertEquals (checkIfLocationExists (player1, eEntry), false);
+			
+			insert (oEntry);
+			assertEquals (checkIfLocationExists (player1, oEntry), true);
+			assertEquals (checkIfLocationExists (player1, nEntry), false);
+			assertEquals (checkIfLocationExists (player1, eEntry), false);
 		}
 		catch (Exception e)
 		{
 			fail ("FAIL: " + e.getMessage());
 		}
+	}
+	
+	/** Tests if the getLocationsAsList function is working properly on private entries */
+	@Test
+	void testListofLocationsPrivate ()
+	{
+		try
+		{
+			int numLocationsOverworld = 100, numLocationsNether = 50, numLocationsEnd = 110;
+			LocationEntry entryOverworld = createRandomPrivateLocations (numLocationsOverworld, 1, Environment.NORMAL);
+			LocationEntry entryNether = createRandomPrivateLocations (numLocationsNether, 1, Environment.NETHER);
+			LocationEntry entryEnd = createRandomPrivateLocations (numLocationsEnd, 1, Environment.THE_END);
+			
+			ArrayList <LocationEntry> entriesOverworld = this.getListofLocations(entryOverworld);
+			assertEquals (entriesOverworld.size(), numLocationsOverworld);
+			
+			ArrayList <LocationEntry> entriesNether= this.getListofLocations(entryNether);
+			assertEquals (entriesNether.size(), numLocationsNether);
+			
+			ArrayList <LocationEntry> entriesEnd = this.getListofLocations(entryEnd);
+			assertEquals (entriesEnd.size(), numLocationsEnd);
+		}
+		
+		catch (Exception e)
+		{
+			fail ("FAIL: " + e.getMessage());
+		}
+	}
+	
+	/** Tests if the getLocationsAsList function is working properly on public entries */
+	@Test
+	void testListofLocationsPublic ()
+	{
+		try
+		{
+			int numLocationsOverworld = 100, numLocationsNether = 50, numLocationsEnd = 110;
+			LocationEntry entryOverworld = createRandomPublicLocations (numLocationsOverworld, Environment.NORMAL);
+			LocationEntry entryNether = createRandomPublicLocations (numLocationsNether, Environment.NETHER);
+			LocationEntry entryEnd = createRandomPublicLocations (numLocationsEnd, Environment.THE_END);
+			
+			ArrayList <LocationEntry> entriesOverworld = this.getListofLocations(entryOverworld);
+			assertEquals (entriesOverworld.size(), numLocationsOverworld);
+			
+			ArrayList <LocationEntry> entriesNether= this.getListofLocations(entryNether);
+			assertEquals (entriesNether.size(), numLocationsNether);
+			
+			ArrayList <LocationEntry> entriesEnd = this.getListofLocations(entryEnd);
+			assertEquals (entriesEnd.size(), numLocationsEnd);
+		}
+		
+		catch (Exception e)
+		{
+			fail ("FAIL: " + e.getMessage());
+		}
+	}
+	
+	/** Populates the database with a set number of private locations 
+	 * @throws SQLException, RuntimeException */
+	private LocationEntry createRandomPrivateLocations (int number, int player, Environment env) throws SQLException, RuntimeException
+	{
+		LocationEntry entry = null;
+		for (int i = 0; i < number; ++i)
+		{
+			entry = new LocationEntry (player(player), "adsf" + i , 1, 1, 1, PRIVATE, env.name());
+			insert (entry);
+		}
+		
+		return entry;
+	}
+	
+	/** Populates the database with a number of public locations  */
+	private LocationEntry createRandomPublicLocations (int number, Environment env) throws SQLException, RuntimeException
+	{
+		LocationEntry entry = null;
+		for (int i = 0; i < number; ++i)
+		{
+			entry = new LocationEntry (player(1000+i), "adsf" + i , 1, 1, 1, PUBLIC, env.name());
+			insert (entry);
+		}
+		return entry;
 	}
 	
 	
@@ -427,6 +522,12 @@ class TestLocationDatabase
 	private boolean checkIfLocationExists (String uuid, LocationEntry entry) throws SQLException, RuntimeException
 	{
 		return LocationDatabaseManager.checkIfLocationExists(uuid, entry.getLocationName(), entry.getEnvironment());
+	}
+	
+	/** Returns a list of locations available to the player */
+	private ArrayList <LocationEntry> getListofLocations (LocationEntry entry) throws SQLException, RuntimeException
+	{
+		return LocationDatabaseManager.getLocationsAsList(entry.getUUID(), entry.getEnvironment(), entry.getAccessLevel());
 	}
 	
 	/** Returns a formatted test UUID */

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.bukkit.Location;
 import org.bukkit.World.Environment;
@@ -152,6 +153,53 @@ public class LocationDatabaseManager
 		pstmt.close();
 		c.close();
 		return entry;
+	}
+	
+	/** Returns a list of locations either private or public to the player as an ArrayList of LocationEntries in the player's current dimension.
+	 * 		@param uuid - The uuid of the player
+	 * 		@param env - The dimension that the player is currently in
+	 * 		@param level - Access specifier the player is getting their list as */
+	public static ArrayList <LocationEntry> getLocationsAsList (String uuid, Environment env, WarpAccessLevel level) throws SQLException, RuntimeException
+	{
+		ResultSet result = null;
+		PreparedStatement pstmt = null;
+		ArrayList <LocationEntry> entries = new ArrayList <LocationEntry> ();
+		Connection c = DriverManager.getConnection(CreateLocationDatabase.kDatabasePath);
+		
+		StringBuilder query = new StringBuilder ("SELECT * FROM LOCATIONS WHERE ");
+		
+		if (level.equals(WarpAccessLevel.PRIVATE))
+		{
+			query.append("UUID = ? AND WORLD = ? AND ACCESS = ?");
+			pstmt = c.prepareStatement(query.toString());
+			pstmt.setString(1, uuid);
+			pstmt.setString(2, env.name());
+			pstmt.setString(3, level.name());
+		}
+		else
+		{
+			query.append("WORLD = ? AND ACCESS = ?");
+			pstmt = c.prepareStatement(query.toString());
+			pstmt.setString(1, env.name());
+			pstmt.setString(2, level.name());
+		}
+		
+		result = pstmt.executeQuery();
+		
+		// Adds everything into an arraylist
+		if (result.next())
+		{
+			do {
+				LocationEntry entry = new LocationEntry (result.getString("UUID"), result.getString("NAME"), result.getDouble("X"), result.getDouble("Y"), result.getDouble("Z"),
+						result.getString("ACCESS"), result.getString("WORLD"));
+				entries.add(entry);
+			} while (result.next());
+		}
+		
+		pstmt.close();
+		c.close();
+		
+		return entries;
 	}
 	
 	/** Checks if a player specified location under a name already exists in the database 
