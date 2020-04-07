@@ -40,4 +40,11 @@ public enum BibleID
 	{
 		return this.kTranslationName;
 	}
+	
+	/** Returns the Bible ID as a string */
+	@Override
+	public String toString ()
+	{
+		return this.kBibleID;
+	}
 }

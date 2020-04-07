@@ -156,6 +156,14 @@ public class LocationDatabaseManager
 	}
 	
 	/** Returns a list of locations either private or public to the player as an ArrayList of LocationEntries in the player's current dimension.
+	 * 		@param p - The player object
+	 * 		@param level - Access specifier the player is getting their list as */
+	public static ArrayList <LocationEntry> getLocationsAsList (Player p, WarpAccessLevel level) throws SQLException, RuntimeException
+	{
+		return getLocationsAsList (p.getUniqueId().toString(), p.getWorld().getEnvironment(), level);
+	}
+	
+	/** Returns a list of locations either private or public to the player as an ArrayList of LocationEntries in the player's current dimension.
 	 * 		@param uuid - The uuid of the player
 	 * 		@param env - The dimension that the player is currently in
 	 * 		@param level - Access specifier the player is getting their list as */

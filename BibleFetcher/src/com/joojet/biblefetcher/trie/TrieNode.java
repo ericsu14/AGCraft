@@ -51,12 +51,15 @@ public class TrieNode <T>
 		for (Entry<T, Integer> entry : this.linkedIDs.entrySet())
 		{
 			/* Check if length of searchTerm matches length of formatted title */
-			if (entry.getKey() instanceof BookID)
+			if (entry.getKey() instanceof Enum)
 			{
-				BookID id = (BookID) entry.getKey();
+				@SuppressWarnings("rawtypes")
+				Enum id = (Enum) entry.getKey();
 				// If a matching term and length is detected, return the id.
-				if (id.getFormattedTitle().length() == searchTerm.length() &&
-						searchTerm.equalsIgnoreCase(id.getFormattedTitle()))
+				if (((id.toString().length() == searchTerm.length() &&
+						searchTerm.equalsIgnoreCase(id.toString()))) ||(
+						id.name().length() == searchTerm.length() &&
+						searchTerm.equalsIgnoreCase(id.name())))
 				{
 					return entry.getKey();
 				}

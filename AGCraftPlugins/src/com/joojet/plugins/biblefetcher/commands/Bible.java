@@ -105,7 +105,7 @@ public class Bible implements CommandExecutor
 		ArrayList <String> result = null;
 		if (this.n < 3)
 		{
-			throw new RuntimeException ("Insuffient parameters.\nUsage: /bible <translation> <book> <chapter> <start> <end>");
+			throw new RuntimeException ("Insufficient parameters.\nUsage: /bible <translation> <book> <chapter> <start> <end>");
 		}
 		
 		this.bibleID = AGCraftPlugin.interpreter.searchBibleTrie(args[0]);

@@ -43,7 +43,7 @@ public class GetCoordinates implements CommandExecutor
 					}
 					else
 					{
-						player.sendMessage(ChatColor.RED + "" + ChatColor.ITALIC + otherPlayer + " is currently in the " + getEnvironmentName (otherPlayerEnvironment) + ".");
+						player.sendMessage(ChatColor.RED + "" + ChatColor.ITALIC + otherPlayer + " is currently in " + getEnvironmentName (otherPlayerEnvironment) + ".");
 					}
 				}
 				else
@@ -78,11 +78,11 @@ public class GetCoordinates implements CommandExecutor
 		switch (env)
 		{
 			case NETHER:
-				return "nether";
+				return "the nether";
 			case THE_END:
 				return "the end";
 			default:
-				return "overworld";
+				return "the overworld";
 		}
 	}
 }

@@ -137,5 +137,12 @@ public enum BookID
 	{
 		return this.kSingleChapter;
 	}
+	
+	/** Returns the book's formatted title as a string */
+	@Override
+	public String toString ()
+	{
+		return this.getFormattedTitle();
+	}
 }
 
