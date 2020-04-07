@@ -3,8 +3,6 @@ package com.joojet.biblefetcher.trie;
 import java.util.Hashtable;
 import java.util.Map.Entry;
 
-import com.joojet.biblefetcher.constants.BookID;
-
 public class TrieNode <T> 
 {
 	// Defines the max. amount of children this node could store
