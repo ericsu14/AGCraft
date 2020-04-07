@@ -189,4 +189,4 @@ Once you set your own location using `/setlocation <name>`, you now free to use 
 
 <b> Usage Examples: </b>\
 ``/warp home`` warps you back to your home bed spawn. \
-``/warp location village`` If ``village`` is a registered location in the server registries, entering this command will warp you to where the location `village` is at.
+``/warp location village`` If ``village`` is a registered location in the server registry. Entering this command will warp you to where the location `village` is at.
