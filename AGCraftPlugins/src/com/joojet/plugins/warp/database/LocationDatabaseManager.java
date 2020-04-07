@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
 
+import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.warp.constants.WarpAccessLevel;
 import com.joojet.plugins.warp.database.CreateLocationDatabase;
 
@@ -40,9 +41,9 @@ public class LocationDatabaseManager
 		locationName = locationName.toLowerCase();
 		
 		// TODO: Check if the locationName already exists in the database. 
-		if (!checkIfLocationExists (uuid, locationName, env))
+		if (checkIfLocationExists (uuid, locationName, env))
 		{
-			throw new RuntimeException (locationName + " is already a registered location.");
+			throw new RuntimeException (locationName + " is already a registered location in " + GetCoordinates.getEnvironmentName(env));
 		}
 		
 		Connection c = null;
@@ -73,16 +74,17 @@ public class LocationDatabaseManager
 	 * 		- or a public locationName registered under any player exists.
 	 * This will return the resultSet formed from this query 
 	 * @throws SQLException */
-	public static ResultSet fetchLocation (String uuid, String locationName, Environment env) throws SQLException
+	public static LocationEntry fetchLocation (String uuid, String locationName, Environment env) throws SQLException
 	{
 		locationName = locationName.toLowerCase();
 		
 		Connection c = null;
 		ResultSet result = null;
+		LocationEntry entry = null;
 		
 		c = DriverManager.getConnection(CreateLocationDatabase.kDatabasePath);
 		
-		StringBuilder query = new StringBuilder ("SELECT 1 FROM LOCATIONS WHERE ");
+		StringBuilder query = new StringBuilder ("SELECT * FROM LOCATIONS WHERE ");
 		query.append("(UUID = ? AND NAME = ? AND WORLD = ? AND ACCESS = ?)");
 		query.append("OR");
 		query.append("(NAME = ? AND WORLD = ? AND ACCESS = ?)");
@@ -99,10 +101,15 @@ public class LocationDatabaseManager
 		pstmt.execute();
 		result = pstmt.executeQuery();
 		
+		if (result.next())
+		{
+			entry = new LocationEntry (result.getString("UUID"), result.getString("NAME"), result.getDouble("X"), result.getDouble("Y"), result.getDouble("Z"),
+										result.getString("ACCESS"), result.getString("WORLD"));
+		}
+		
 		pstmt.close();
 		c.close();
-		
-		return result;
+		return entry;
 	}
 	
 	/** Checks if a player specified location under a name already exists in the database */
@@ -110,11 +117,12 @@ public class LocationDatabaseManager
 	{
 		try 
 		{
-			return fetchLocation(uuid, locationName, env).next();
+			return fetchLocation(uuid, locationName, env) != null;
 		} 
 		catch (SQLException e) 
 		{
 			System.out.println (e.getMessage());
+			e.printStackTrace();
 		}
 		return false;
 	}
@@ -122,15 +130,16 @@ public class LocationDatabaseManager
 	/** Attempts to fetch and return the location data that is tied under locationName from the database. */
 	public static Location getlocation (Player p, String locationName) throws SQLException, RuntimeException
 	{
-		ResultSet data = fetchLocation (p.getUniqueId().toString(), locationName, p.getWorld().getEnvironment());
-		if (!data.next())
+		Environment env = p.getWorld().getEnvironment();
+		LocationEntry data = fetchLocation (p.getUniqueId().toString(), locationName, env);
+		if (data == null)
 		{
-			throw new RuntimeException (locationName + " is not a registered location.");
+			throw new RuntimeException (locationName + " is not a registered location in " + GetCoordinates.getEnvironmentName(env));
 		}
 		
-		double x = data.getDouble("X");
-		double y = data.getDouble("Y");
-		double z = data.getDouble("Z");
+		double x = data.getX();
+		double y = data.getY();
+		double z = data.getZ();
 		
 		Location loc = new Location (p.getWorld(), x, y, z);
 		
