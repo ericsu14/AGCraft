@@ -4,6 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.joojet.biblefetcher.database.CreateDatabase;
 import com.joojet.biblefetcher.interpreter.CommandInterpreter;
 import com.joojet.plugins.biblefetcher.commands.Bible;
+import com.joojet.plugins.biblefetcher.commands.BibleTabCompleter;
 import com.joojet.plugins.biblefetcher.commands.ClearBibles;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.utility.commands.AutoSmelt;
@@ -21,14 +22,31 @@ public class AGCraftPlugin extends JavaPlugin
 		CreateDatabase.createNewDatabase();
 		CreateLocationDatabase.createDataBase();
 		
+		//Bible
 		this.getCommand("bible").setExecutor(new Bible ());
+		this.getCommand("bible").setTabCompleter(new BibleTabCompleter());
+		// Clear Bible
 		this.getCommand("clearBibles").setExecutor(new ClearBibles());
+		
+		// Get Coordinates
 		this.getCommand("getCoordinates").setExecutor(new GetCoordinates());
+		
+		// Clear Junk
 		this.getCommand("clearJunk").setExecutor(new ClearJunk());
+		
+		// AutoSmelt
 		this.getCommand("autosmelt").setExecutor(new AutoSmelt());
+		
+		// Warp
 		this.getCommand("warp").setExecutor(new Warp());
+		
+		// Set Location
 		this.getCommand("setlocation").setExecutor(new SetLocation());
+		
+		// Remove Location
 		this.getCommand("removelocation").setExecutor(new RemoveLocation());
+		
+		// Get Locations
 		this.getCommand("getlocations").setExecutor(new GetLocations());
 	}
 	

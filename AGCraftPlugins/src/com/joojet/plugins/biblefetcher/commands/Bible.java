@@ -77,21 +77,16 @@ public class Bible implements CommandExecutor
 				return true;
 			}
 		}
-		catch (IOException e) 
-		{
-			System.err.println ("[BibleFetcher]" + e.getMessage());
-			sender.sendMessage (ChatColor.RED + "[God] That chapter of the bible does not exist.");
-		}
 		
 		catch (RuntimeException e)
 		{
-			System.err.println ("[BibleFetcher]" + e.getMessage());
+			System.err.println ("[BibleFetcher] " + e.getMessage());
 			sender.sendMessage (ChatColor.RED + "[God] " + e.getMessage());
 		}
 		
 		catch (Exception e)
 		{
-			System.err.println ("[BibleFetcher]" + e.getMessage());
+			System.err.println ("[BibleFetcher] " + e.getMessage());
 			sender.sendMessage(ChatColor.RED + "[God] An internal error occured while fetching this passage.");
 		}
 

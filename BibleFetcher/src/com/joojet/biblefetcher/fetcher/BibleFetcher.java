@@ -33,9 +33,13 @@ public class BibleFetcher
 	}
 	
 	/** Extracts an entire chapter from the specified chapter of the bible. */
-	public static ArrayList <String> getVerses (BibleID translation, BookID book, int chapter) throws MalformedURLException, ProtocolException, IOException
+	public static ArrayList <String> getVerses (BibleID translation, BookID book, int chapter) throws RuntimeException, MalformedURLException, ProtocolException, IOException
 	{
-		// TODO: Check against database to see if that section of the bible is already cached
+		if (!inRange (1, book.getNumChapters(), chapter))
+		{
+			throw new RuntimeException ("Chapter " + chapter + " does not exist in the book of " + book.getFormattedTitle() + ".");
+		}
+		
 		String content = DatabaseManager.fetch(translation, book, chapter);
 		if (content.isEmpty())
 		{

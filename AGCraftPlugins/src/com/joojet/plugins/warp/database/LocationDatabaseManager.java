@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.warp.constants.WarpAccessLevel;
-import com.joojet.plugins.warp.database.CreateLocationDatabase;
 
 public class LocationDatabaseManager 
 {

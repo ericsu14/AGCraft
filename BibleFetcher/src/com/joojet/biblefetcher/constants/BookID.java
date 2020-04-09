@@ -2,101 +2,101 @@ package com.joojet.biblefetcher.constants;
 
 public enum BookID 
 {
-	GEN ("GEN", "genesis"),
-	EXO ("EXO", "exodus"),
-	LEV ("LEV", "leviticus"),
-	NUM ("NUM", "numbers"),
-	DEU ("DEU", "deuteronomy"),
-	JOS ("JOS", "joshua"),
-	JDG ("JDG", "judges"),
-	RUT ("RUT", "ruth"),
-	SA1 ("1SA", "samuel", 1),
-	SA2 ("2SA", "samuel", 2),
-	KI1 ("1KI", "king", 1),
-	KI2 ("2KI", "king", 2),
-	CH1 ("1CH", "chronicles", 1),
-	CH2 ("2CH", "chronicles", 2),
-	EZR ("EZR", "ezra"),
-	NEH ("NEH", "nehemia"),
-	EST ("EST", "esther"),
-	JOB ("JOB", "job"),
-	PSA ("PSA", "psalms"),
-	PRO ("PRO", "proverbs"),
-	ECC ("ECC", "ecclesiastes"),
-	SNG ("SNG", "song of solomon"),
-	ISA ("ISA", "isaish"),
-	JER ("JER", "jeremiah"),
-	LAM ("LAM", "lamentations"),
-	EZK ("EZK", "ezekiel"),
-	DAN ("DAN", "daniel"),
-	HAB ("HAB", "habakkuk"),
-	ZEP ("ZEP", "zephaniah"),
-	MAL ("MAL", "malachi"),
-	HOS ("HOS", "hosea"),
-	JOL ("JOL", "joel"),
-	AMO ("AMO", "amos"),
-	OBA ("OBA", "obadiah", 0, true),
-	JON ("JON", "jonah"),
-	MIC ("MIC", "micah"),
-	NAM ("NAM", "nahum"),
-	HAG ("HAG", "haggai"),
-	ZEC ("ZEC", "zechariah"),
-	MAT ("MAT", "matthew"),
-	MRK ("MRK", "mark"),
-	LUK ("LUK", "luke"),
-	JHN ("JHN", "john"),
-	ACT ("ACT", "act"),
-	ROM ("ROM", "romans"),
-	CO1 ("1CO", "corinthians", 1),
-	CO2 ("2CO", "corinthians", 2),
-	GAL ("GAL", "galatians"),
-	EPH ("EPH", "ephesians"),
-	PHP ("PHP", "philippians"),
-	COL ("COL", "colossians"),
-	TH1 ("1TH", "thessalonians", 1),
-	TH2 ("2TH", "thessalonians", 2),
-	TI1 ("1TI", "timothy", 1),
-	TI2 ("2TI", "timothy", 2),
-	TIT ("TIT", "titus"),
-	PHM ("PHM", "philemon", 0, true),
-	HEB ("HEB", "hebrews"),
-	JAS ("JAS", "james"),
-	PE1 ("1PE", "peter", 1),
-	PE2 ("2PE", "peter", 2),
-	JN1 ("1JN", "john", 1),
-	JN2 ("2JN", "john", 2, true),
-	JN3 ("3JN", "john", 3, true),
-	JUD ("JUD", "jude", 0, true),
-	REV ("REV", "revelation")
+	GEN (50, "GEN", "genesis"),
+	EXO (40, "EXO", "exodus"),
+	LEV (27, "LEV", "leviticus"),
+	NUM (36, "NUM", "numbers"),
+	DEU (34, "DEU", "deuteronomy"),
+	JOS (24, "JOS", "joshua"),
+	JDG (21, "JDG", "judges"),
+	RUT (4, "RUT", "ruth"),
+	SA1 (31, "1SA", "samuel", 1),
+	SA2 (24, "2SA", "samuel", 2),
+	KI1 (22, "1KI", "king", 1),
+	KI2 (25, "2KI", "king", 2),
+	CH1 (29, "1CH", "chronicles", 1),
+	CH2 (36, "2CH", "chronicles", 2),
+	EZR (10, "EZR", "ezra"),
+	NEH (13, "NEH", "nehemia"),
+	EST (10, "EST", "esther"),
+	JOB (42, "JOB", "job"),
+	PSA (150, "PSA", "psalms"),
+	PRO (31, "PRO", "proverbs"),
+	ECC (12, "ECC", "ecclesiastes"),
+	SNG (8, "SNG", "song of solomon"),
+	ISA (66, "ISA", "isaish"),
+	JER (52, "JER", "jeremiah"),
+	LAM (5, "LAM", "lamentations"),
+	EZK (48, "EZK", "ezekiel"),
+	DAN (12, "DAN", "daniel"),
+	HAB (3, "HAB", "habakkuk"),
+	ZEP (3, "ZEP", "zephaniah"),
+	MAL (4, "MAL", "malachi"),
+	HOS (14, "HOS", "hosea"),
+	JOL (3, "JOL", "joel"),
+	AMO (9, "AMO", "amos"),
+	OBA (1, "OBA", "obadiah", 0),
+	JON (4, "JON", "jonah"),
+	MIC (7, "MIC", "micah"),
+	NAM (3, "NAM", "nahum"),
+	HAG (2, "HAG", "haggai"),
+	ZEC (14, "ZEC", "zechariah"),
+	MAT (28, "MAT", "matthew"),
+	MRK (16, "MRK", "mark"),
+	LUK (24, "LUK", "luke"),
+	JHN (21, "JHN", "john"),
+	ACT (28, "ACT", "act"),
+	ROM (16, "ROM", "romans"),
+	CO1 (16, "1CO", "corinthians", 1),
+	CO2 (13, "2CO", "corinthians", 2),
+	GAL (6, "GAL", "galatians"),
+	EPH (6, "EPH", "ephesians"),
+	PHP (4, "PHP", "philippians"),
+	COL (4, "COL", "colossians"),
+	TH1 (5, "1TH", "thessalonians", 1),
+	TH2 (3, "2TH", "thessalonians", 2),
+	TI1 (6, "1TI", "timothy", 1),
+	TI2 (4, "2TI", "timothy", 2),
+	TIT (3, "TIT", "titus"),
+	PHM (1, "PHM", "philemon", 0),
+	HEB (13, "HEB", "hebrews"),
+	JAS (5, "JAS", "james"),
+	PE1 (5, "1PE", "peter", 1),
+	PE2 (3, "2PE", "peter", 2),
+	JN1 (5, "1JN", "john", 1),
+	JN2 (1, "2JN", "john", 2),
+	JN3 (1, "3JN", "john", 3),
+	JUD (1, "JUD", "jude", 0),
+	REV (22, "REV", "revelation")
  	;
 	
 	private String kBookID;
 	private String kBookTitle;
+	private int kNumChapters;
 	private int kChapter;
-	private boolean kSingleChapter;
 	
-	private BookID (String bookID, String bookTitle)
+	private BookID (int numChapters, String bookID, String bookTitle)
 	{
+		this.kNumChapters = numChapters;
 		this.kBookID = bookID;
 		this.kBookTitle = bookTitle;
 		this.kChapter = 0;
-		this.kSingleChapter = false;
 	}
 	
-	private BookID (String bookID, String bookTitle, int chapter)
+	private BookID (int numChapters, String bookID, String bookTitle, int chapter)
 	{
+		this.kNumChapters = numChapters;
 		this.kBookID = bookID;
 		this.kBookTitle = bookTitle;
 		this.kChapter = chapter;
-		this.kSingleChapter = false;
 	}
 	
-	private BookID (String bookID, String bookTitle, int chapter, boolean singleChapter)
+	private BookID (int numChapters, String bookID, String bookTitle, int chapter, boolean singleChapter)
 	{
+		this.kNumChapters = numChapters;
 		this.kBookID = bookID;
 		this.kBookTitle = bookTitle;
 		this.kChapter = chapter;
-		this.kSingleChapter = singleChapter;
 	}
 	
 	/** Returns the title of the book without any added chapter information. */
@@ -120,6 +120,12 @@ public enum BookID
 		return result.toString();
 	}
 	
+	/** Returns the book title without any spaces */
+	public String getFormattedTitleWithoutSpace ()
+	{
+		return this.getFormattedTitle().replaceAll("([\\s])", "");
+	}
+	
 	/** Returns the BookID used to communicate with the WEB API */
 	public String getID ()
 	{
@@ -135,7 +141,13 @@ public enum BookID
 	/** Returns true if this book only contains one chapter */
 	public boolean isSingleChapter ()
 	{
-		return this.kSingleChapter;
+		return this.kNumChapters == 1;
+	}
+	
+	/** Returns the total number of chapters in this book */
+	public int getNumChapters ()
+	{
+		return this.kNumChapters;
 	}
 	
 	/** Returns the book's formatted title as a string */
