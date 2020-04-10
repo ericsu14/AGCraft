@@ -127,7 +127,7 @@ public class ClearJunk implements CommandExecutor
 				JunkClassifier classifier = this.junkItems.get(item.getType());
 				if (classifier != null 
 						&& checkMobArmorLoot (item, classifier) 
-						&& (filter.contains(classifier) || classifier.equals(JunkClassifier.ALL)))
+						&& (filter.contains(classifier) || filter.contains(JunkClassifier.ALL)))
 				{
 					queuedItems.add (item);
 					count += item.getAmount();

@@ -82,13 +82,13 @@ public class LocationDatabaseManager
 	/** Removes a location entry from the database
 	 * 	@param uuid - Player's unique UUID
 	 * 	@param locationName - Name of the location the player is setting their location as
-	 * 	@param env - The dimension the player is in
-	 * 	@param level - The access priv. level the player is setting their location as  */
-	public static void removeLocation (String uuid, String locationName, Environment env, WarpAccessLevel level) throws SQLException, RuntimeException
+	 * 	@param env - The dimension the player is in */
+	public static void removeLocation (String uuid, String locationName, Environment env) throws SQLException, RuntimeException
 	{
 		locationName = locationName.toLowerCase();
 		
-		if (!checkIfLocationUnderClassifierExists (uuid, locationName, env, level))
+		if (!(checkIfLocationUnderClassifierExists (uuid, locationName, env, WarpAccessLevel.PRIVATE) 
+				&& checkIfLocationUnderClassifierExists (uuid, locationName, env, WarpAccessLevel.PUBLIC)))
 		{
 			throw new RuntimeException (locationName + " is not a registered location in " + GetCoordinates.getEnvironmentName(env));
 		}
@@ -96,13 +96,12 @@ public class LocationDatabaseManager
 		Connection c = DriverManager.getConnection(CreateLocationDatabase.kDatabasePath);
 		
 		StringBuilder query = new StringBuilder ("DELETE FROM LOCATIONS WHERE ");
-		query.append("UUID = ? AND NAME = ? AND WORLD = ? AND ACCESS = ?");
+		query.append("UUID = ? AND NAME = ? AND WORLD = ?");
 		
 		PreparedStatement pstmt = c.prepareStatement(query.toString());
 		pstmt.setString(1, uuid);
 		pstmt.setString(2, locationName);
 		pstmt.setString(3, env.name());
-		pstmt.setString(4, level.name());
 		
 		pstmt.executeUpdate();
 		pstmt.close();

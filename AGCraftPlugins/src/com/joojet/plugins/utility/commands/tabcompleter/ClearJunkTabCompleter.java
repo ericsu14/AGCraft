@@ -1,4 +1,4 @@
-package com.joojet.plugins.utility.commands;
+package com.joojet.plugins.utility.commands.tabcompleter;
 
 import java.util.Arrays;
 import java.util.List;

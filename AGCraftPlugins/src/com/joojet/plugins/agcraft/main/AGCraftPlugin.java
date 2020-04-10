@@ -4,14 +4,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.joojet.biblefetcher.database.CreateDatabase;
 import com.joojet.biblefetcher.interpreter.CommandInterpreter;
 import com.joojet.plugins.biblefetcher.commands.Bible;
-import com.joojet.plugins.biblefetcher.commands.BibleTabCompleter;
 import com.joojet.plugins.biblefetcher.commands.ClearBibles;
+import com.joojet.plugins.biblefetcher.commands.tabcompleter.*;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.utility.commands.AutoSmelt;
 import com.joojet.plugins.utility.commands.ClearJunk;
-import com.joojet.plugins.utility.commands.ClearJunkTabCompleter;
+import com.joojet.plugins.utility.commands.tabcompleter.*;
 import com.joojet.plugins.warp.commands.*;
+import com.joojet.plugins.warp.commands.tabcompleter.*;
 import com.joojet.plugins.warp.database.CreateLocationDatabase;
+
 public class AGCraftPlugin extends JavaPlugin 
 {
 	public static CommandInterpreter interpreter = new CommandInterpreter ();
@@ -45,9 +47,11 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Set Location
 		this.getCommand("setlocation").setExecutor(new SetLocation());
+		this.getCommand("setlocation").setTabCompleter(new SetLocationTabCompleter());
 		
 		// Remove Location
 		this.getCommand("removelocation").setExecutor(new RemoveLocation());
+		this.getCommand("removelocation").setTabCompleter(new RemoveLocationTabCompleter());
 		
 		// Get Locations
 		this.getCommand("getlocations").setExecutor(new GetLocations());

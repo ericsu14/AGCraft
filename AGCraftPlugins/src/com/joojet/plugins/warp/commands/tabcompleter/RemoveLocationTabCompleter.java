@@ -1,4 +1,4 @@
-package com.joojet.plugins.warp.commands;
+package com.joojet.plugins.warp.commands.tabcompleter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,10 +10,9 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import com.joojet.plugins.warp.constants.WarpAccessLevel;
-import com.joojet.plugins.warp.constants.WarpType;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 
-public class WarpTabCompleter implements TabCompleter 
+public class RemoveLocationTabCompleter implements TabCompleter 
 {
 	@Override
 	public List <String> onTabComplete (CommandSender sender, Command command, String alias, String[] args)
@@ -26,20 +25,7 @@ public class WarpTabCompleter implements TabCompleter
 			Object [] values = null;
 			switch (n)
 			{
-				// List all warp types
 				case 1:
-					values = Arrays.asList(WarpType.values()).stream().
-					map(entry -> (String) entry.toString()).
-					filter(entry -> entry.toLowerCase().contains(input)).
-					toArray();
-					break;
-				// List all locations if the tag is location
-				case 2:
-					if (!Warp.interpreter.searchWarpTypeTrie(args[0]).equals(WarpType.LOCATION))
-					{
-						return new ArrayList <String> ();
-					}
-					
 					ArrayList <String> allLocations = new ArrayList <String> ();
 					// Gets all private and public locations from the database and outputs them to the autocompleter
 					try
@@ -62,7 +48,7 @@ public class WarpTabCompleter implements TabCompleter
 					return new ArrayList <String> ();
 			}
 			
-			return (List<String>) Arrays.asList(Arrays.copyOf(values, values.length, String[].class));
+			return (List<String>) Arrays.asList(Arrays.copyOf(values, values.length, String[].class)); 
 		}
 		return null;
 	}

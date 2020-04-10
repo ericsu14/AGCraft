@@ -1,6 +1,6 @@
 name: AGCraftPlugins
 main: com.joojet.plugins.agcraft.main.AGCraftPlugin
-version: 1.6.1
+version: 1.6.2
 api-version: 1.13
 commands:
   bible:
@@ -26,7 +26,7 @@ commands:
     usage: /getlocations
   removeLocation:
     description: Removes a location from the player's list of implemented locations.
-    usage: /removelocation <location name> <PUBLIC | PRIVATE>
+    usage: /removelocation <location name>
   setLocation:
     description: Registers the player's current location as a new location in the database as a specified name
     usage: /setlocation <name of location> <PUBLIC | PRIVATE>

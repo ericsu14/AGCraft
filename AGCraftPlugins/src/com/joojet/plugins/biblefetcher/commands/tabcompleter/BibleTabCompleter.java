@@ -1,4 +1,4 @@
-package com.joojet.plugins.biblefetcher.commands;
+package com.joojet.plugins.biblefetcher.commands.tabcompleter;
 
 import java.util.ArrayList;
 import java.util.Arrays;

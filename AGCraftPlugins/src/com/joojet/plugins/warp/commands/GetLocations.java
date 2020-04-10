@@ -14,8 +14,6 @@ import com.joojet.plugins.warp.interpreter.AccessLevelInterpreter;
 
 import net.md_5.bungee.api.ChatColor;
 
-import com.joojet.plugins.warp.database.LocationEntry;
-
 public class GetLocations implements CommandExecutor 
 {
 	private AccessLevelInterpreter interpreter;
@@ -39,24 +37,17 @@ public class GetLocations implements CommandExecutor
 			
 			try
 			{
-				ArrayList <LocationEntry> entries = LocationDatabaseManager.getLocationsAsList(p, access);
+				// Prints all public locations
+				ArrayList <String> publicLocations = new ArrayList <String> ();
+				LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PUBLIC).
+					forEach(entry -> publicLocations.add(entry.getLocationName()));
+				printLocationstoPlayer (p, publicLocations, WarpAccessLevel.PUBLIC);
 				
-				p.sendMessage(ChatColor.GRAY + p.getDisplayName() + "'s " + access.name().toLowerCase() + " locations: ");
-				StringBuilder locationList = new StringBuilder ();
-				for (LocationEntry entry : entries)
-				{
-					locationList.append(entry.getLocationName());
-					locationList.append(" | ");
-				}
-				int ln = locationList.length();
-				if (entries.isEmpty())
-				{
-					p.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "No locations found.");
-				}
-				else
-				{
-					p.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC +locationList.substring(0, ln - 3).toString());
-				}
+				// Prints all private locations
+				ArrayList <String> privateLocations = new ArrayList <String> ();
+				LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PRIVATE).
+					forEach(entry -> privateLocations.add(entry.getLocationName()));
+				printLocationstoPlayer (p, privateLocations, WarpAccessLevel.PRIVATE);
 				return true;
 			}
 			catch (SQLException e)
@@ -73,5 +64,36 @@ public class GetLocations implements CommandExecutor
 		}
 		
 		return false;
+	}
+	
+	private void printLocationstoPlayer (Player p, ArrayList <String> locations, WarpAccessLevel access)
+	{
+		if (access.equals(WarpAccessLevel.PUBLIC))
+		{
+			p.sendMessage(ChatColor.GOLD  + "All" + ChatColor.AQUA + access.name().toLowerCase() + ChatColor.GOLD + "warp locations: ");
+		}
+		else
+		{
+			p.sendMessage(ChatColor.GOLD + p.getDisplayName() + "'s " + ChatColor.AQUA + access.name().toLowerCase() + ChatColor.GOLD + " warp locations: ");
+		}
+		
+		StringBuilder locationList = new StringBuilder ();
+		for (String entry : locations)
+		{
+			locationList.append(ChatColor.AQUA + "");
+			locationList.append(entry);
+			locationList.append(ChatColor.WHITE + "");
+			locationList.append(" | ");
+		}
+		int ln = locationList.length();
+		
+		if (locations.isEmpty())
+		{
+			p.sendMessage(ChatColor.RED + "" + ChatColor.ITALIC + "No locations found.");
+		}
+		else
+		{
+			p.sendMessage(ChatColor.AQUA + locationList.substring(0, ln - 3).toString());
+		}
 	}
 }

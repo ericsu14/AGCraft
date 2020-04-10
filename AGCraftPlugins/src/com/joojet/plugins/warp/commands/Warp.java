@@ -43,7 +43,7 @@ public class Warp implements CommandExecutor
 				return false;
 			}
 			
-			WarpType type = this.interpreter.searchWarpTypeTrie(args[0]);
+			WarpType type = interpreter.searchWarpTypeTrie(args[0]);
 			
 			
 			// Idiot proofing in-case nobody reads the docs.
