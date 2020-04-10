@@ -32,6 +32,7 @@ public class BibleTabCompleter implements TabCompleter
 						filter(param -> param.toLowerCase().contains(input)).
 						toArray();
 					break;
+					
 				// Get bible book names
 				case 2:
 					values = Arrays.asList((BookID[])BookID.values()).
@@ -39,6 +40,7 @@ public class BibleTabCompleter implements TabCompleter
 						filter(param -> param.toLowerCase().contains (input)).
 						toArray();
 					break;
+					
 				// List all the chapters in the book.
 				case 3:
 					BookID book = AGCraftPlugin.interpreter.searchBookTrie(args[1]);
@@ -51,6 +53,7 @@ public class BibleTabCompleter implements TabCompleter
 					values = chapters.stream().
 							filter(param -> param.toLowerCase().
 							contains (input)).toArray();
+					
 				// Otherwise, return an empty array
 				default:
 					return new ArrayList <String> ();

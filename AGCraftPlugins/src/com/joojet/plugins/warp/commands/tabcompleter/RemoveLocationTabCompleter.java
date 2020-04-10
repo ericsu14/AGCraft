@@ -31,9 +31,9 @@ public class RemoveLocationTabCompleter implements TabCompleter
 					try
 					{
 						LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PRIVATE).
-						forEach(entry -> allLocations.add(entry.getLocationName()));
+							forEach(entry -> allLocations.add(entry.getLocationName()));
 						LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PUBLIC).
-						forEach(entry -> allLocations.add(entry.getLocationName()));	
+							forEach(entry -> allLocations.add(entry.getLocationName()));	
 						
 						values = allLocations.stream().
 								filter(entry -> entry.toLowerCase().

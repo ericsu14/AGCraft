@@ -28,8 +28,8 @@ public class SetLocationTabCompleter implements TabCompleter
 				case 2:
 					values = Arrays.asList(WarpAccessLevel.values()).stream().
 						map (entry -> entry.toString().toLowerCase()).
-						filter (entry -> entry.contains(input))
-						.toArray();
+						filter (entry -> entry.contains(input)).
+						toArray();
 					break;
 				default:
 					return new ArrayList <String> ();
