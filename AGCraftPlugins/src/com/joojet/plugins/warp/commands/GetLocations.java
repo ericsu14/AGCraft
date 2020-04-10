@@ -37,6 +37,10 @@ public class GetLocations implements CommandExecutor
 			
 			try
 			{
+				p.sendMessage(ChatColor.AQUA + "==========================");
+				p.sendMessage(ChatColor.GOLD + "ALL WARP LOCATIONS");
+				p.sendMessage(ChatColor.AQUA + "==========================");
+				
 				// Prints all public locations
 				ArrayList <String> publicLocations = new ArrayList <String> ();
 				LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PUBLIC).
