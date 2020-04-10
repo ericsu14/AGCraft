@@ -119,21 +119,17 @@ Using this command without a username will print out your own coordinates instea
 ``/getcoordinates`` prints your own coordinates to your chat.
 ## Get Locations
 <b> Usage: </b> \
-``/getlocations <visibility level>``
+``/getlocations``
 
 <b> Description </b> \
-Outputs all registered warp locations (under the specified `<visibility level>`) to your chat.
-
-<b>Usage Examples</b> \
-``/getlocations private`` lists all of your privately set warp locations. \
-``/getlocations public`` lists all warp locations publicly set by yourself and all members of the server.
+Outputs all registered warp locations to your chat.
 
 ## Remove Location
 <b> Usage: </b> \
-``/removelocation <location name> <visibility level>``
+``/removelocation <location name>``
 
 <b> Description: </b> \
-Removes a named warp location under the specified ``<visibility level>`` from the database. Doing this will no longer allow you to warp to that removed location.
+Removes a named warp location from the database. Doing this will no longer allow you to warp to that removed location.
 
 Note that this only works on private or public locations specified by you. It will not remove public locations specified by other players in this server.
 
