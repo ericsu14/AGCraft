@@ -53,7 +53,7 @@ public class BibleTabCompleter implements TabCompleter
 					values = chapters.stream().
 							filter(param -> param.contains(input)).
 							toArray();
-					
+					break;
 				// Otherwise, return an empty array
 				default:
 					return new ArrayList <String> ();
