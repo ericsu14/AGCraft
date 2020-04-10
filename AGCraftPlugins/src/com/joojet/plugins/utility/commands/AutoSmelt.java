@@ -59,7 +59,7 @@ public class AutoSmelt implements CommandExecutor
 			
 			removeCoal (p);
 			convertOres (p);
-			p.sendMessage(ChatColor.GRAY + "Successfully converted " + this.getTotalOreCount() + " ores to their respective ignots.");
+			p.sendMessage(ChatColor.AQUA + "Successfully converted " + ChatColor.BLUE + this.getTotalOreCount() + ChatColor.AQUA + " ores to their respective ignots.");
 			return true;
 		}
 		return false;

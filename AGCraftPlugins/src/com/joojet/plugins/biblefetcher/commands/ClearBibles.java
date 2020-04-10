@@ -41,7 +41,7 @@ public class ClearBibles implements CommandExecutor  {
 				player.getInventory().remove(item);
 			}
 			
-			player.sendMessage(ChatColor.YELLOW + "[God] The Lord Gave, and the Lord Hath Taken Away " + count + " Bibles.");
+			player.sendMessage(ChatColor.GOLD + "[God] The Lord Gave, and the Lord Hath Taken Away " + ChatColor.AQUA + count + ChatColor.GOLD + " Bibles.");
 			return true;
 		}
 		return false;
