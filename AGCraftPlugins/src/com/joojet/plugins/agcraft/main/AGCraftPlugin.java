@@ -9,6 +9,7 @@ import com.joojet.plugins.biblefetcher.commands.ClearBibles;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.utility.commands.AutoSmelt;
 import com.joojet.plugins.utility.commands.ClearJunk;
+import com.joojet.plugins.utility.commands.ClearJunkTabCompleter;
 import com.joojet.plugins.warp.commands.*;
 import com.joojet.plugins.warp.database.CreateLocationDatabase;
 public class AGCraftPlugin extends JavaPlugin 
@@ -33,12 +34,14 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Clear Junk
 		this.getCommand("clearJunk").setExecutor(new ClearJunk());
+		this.getCommand("clearJunk").setTabCompleter(new ClearJunkTabCompleter());
 		
 		// AutoSmelt
 		this.getCommand("autosmelt").setExecutor(new AutoSmelt());
 		
 		// Warp
 		this.getCommand("warp").setExecutor(new Warp());
+		this.getCommand("warp").setTabCompleter(new WarpTabCompleter());
 		
 		// Set Location
 		this.getCommand("setlocation").setExecutor(new SetLocation());

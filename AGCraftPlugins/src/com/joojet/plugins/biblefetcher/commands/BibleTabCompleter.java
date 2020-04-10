@@ -14,23 +14,30 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 
 public class BibleTabCompleter implements TabCompleter 
 {
+	@Override
 	public List <String> onTabComplete (CommandSender sender, Command command, String alias, String[] args)
 	{
 		int n = args.length;
-		if (command.getName().equalsIgnoreCase("bible"))
+		if (command.getName().equalsIgnoreCase("bible") && n >= 1)
 		{
+			// Captures the current input
+			String input = args [n - 1].toLowerCase();
 			Object values[] = null;
 			switch (n)
 			{
 				// Get bible translations
 				case 1:
-					values = Arrays.asList((BibleID[])BibleID.values())
-						.stream().map(entry -> (String) entry.getBibleID()).toArray();
+					values = Arrays.asList((BibleID[])BibleID.values()).
+						stream().map(entry -> (String) entry.getBibleID()).
+						filter(param -> param.toLowerCase().contains(input)).
+						toArray();
 					break;
 				// Get bible book names
 				case 2:
-					values = Arrays.asList((BookID[])BookID.values())
-						.stream().map(entry -> (String) entry.getFormattedTitleWithoutSpace()).toArray();
+					values = Arrays.asList((BookID[])BookID.values()).
+						stream().map(entry -> (String) entry.getFormattedTitleWithoutSpace()).
+						filter(param -> param.toLowerCase().contains (input)).
+						toArray();
 					break;
 				// List all the chapters in the book.
 				case 3:
@@ -41,7 +48,9 @@ public class BibleTabCompleter implements TabCompleter
 					{
 						chapters.add(i + "");
 					}
-					return chapters;
+					values = chapters.stream().
+							filter(param -> param.toLowerCase().
+							contains (input)).toArray();
 				// Otherwise, return an empty array
 				default:
 					return new ArrayList <String> ();

@@ -19,12 +19,7 @@ import net.md_5.bungee.api.ChatColor;
 public class Warp implements CommandExecutor
 {
 	
-	private WarpCommandInterpreter interpreter;
-	
-	public Warp ()
-	{
-		this.interpreter = new WarpCommandInterpreter();
-	}
+	public static WarpCommandInterpreter interpreter = new WarpCommandInterpreter ();
 	
 	/** Warps a player to either a designated location or their bed spawn.
 	 * 	Usage:

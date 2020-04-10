@@ -105,11 +105,7 @@ public class ClearJunk implements CommandExecutor
 				}
 			}
 			
-			int removedItems = 0;
-			for (JunkClassifier param : classifiers)
-			{
-				removedItems += this.removeJunk(p, param);
-			}
+			int removedItems = this.removeJunk(p, classifiers);
 			
 			p.sendMessage(ChatColor.GRAY + "Removed " + removedItems + " item(s) from your inventory.");
 		}
@@ -119,7 +115,7 @@ public class ClearJunk implements CommandExecutor
 	
 	/** Removes junk content from the player's inventory based on the filter passed into this function
 	 *  and returns the amount of items removed. */
-	private int removeJunk (Player player, JunkClassifier filter)
+	private int removeJunk (Player player, HashSet <JunkClassifier> filter)
 	{
 		int count = 0;
 		// Gathers items based on the passed filter
@@ -129,8 +125,9 @@ public class ClearJunk implements CommandExecutor
 			if (item != null)
 			{
 				JunkClassifier classifier = this.junkItems.get(item.getType());
-				if (classifier != null && checkMobArmorLoot (item, classifier) 
-						&& (classifier.equals(filter) || filter.equals(JunkClassifier.ALL)))
+				if (classifier != null 
+						&& checkMobArmorLoot (item, classifier) 
+						&& (filter.contains(classifier) || classifier.equals(JunkClassifier.ALL)))
 				{
 					queuedItems.add (item);
 					count += item.getAmount();
