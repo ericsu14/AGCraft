@@ -539,7 +539,7 @@ class TestLocationDatabase
 	/** Removes an entry from the database and tests if that entry no longer exists */
 	private void remove (LocationEntry entry) throws SQLException
 	{
-		LocationDatabaseManager.removeLocation(entry.getUUID(), entry.getLocationName(), entry.getEnvironment(), entry.getAccessLevel());
+		LocationDatabaseManager.removeLocation(entry.getUUID(), entry.getLocationName(), entry.getEnvironment());
 		assertEquals (LocationDatabaseManager.fetchLocation(entry.getUUID(), entry.getLocationName(), entry.getEnvironment()), null);
 	}
 	

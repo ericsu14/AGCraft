@@ -87,8 +87,8 @@ public class LocationDatabaseManager
 	{
 		locationName = locationName.toLowerCase();
 		
-		if (!(checkIfLocationUnderClassifierExists (uuid, locationName, env, WarpAccessLevel.PRIVATE) 
-				&& checkIfLocationUnderClassifierExists (uuid, locationName, env, WarpAccessLevel.PUBLIC)))
+		if (!checkIfLocationUnderClassifierExists (uuid, locationName, env, WarpAccessLevel.PRIVATE) 
+				&& !checkIfLocationUnderClassifierExists (uuid, locationName, env, WarpAccessLevel.PUBLIC))
 		{
 			throw new RuntimeException (locationName + " is not a registered location in " + GetCoordinates.getEnvironmentName(env));
 		}
