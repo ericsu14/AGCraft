@@ -51,8 +51,8 @@ public class BibleTabCompleter implements TabCompleter
 						chapters.add(i + "");
 					}
 					values = chapters.stream().
-							filter(param -> param.toLowerCase().
-							contains (input)).toArray();
+							filter(param -> param.contains(input)).
+							toArray();
 					
 				// Otherwise, return an empty array
 				default:
