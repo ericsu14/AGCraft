@@ -39,7 +39,7 @@ public class GetCoordinates implements CommandExecutor
 					Environment otherPlayerEnvironment = p2.getWorld().getEnvironment();
 					if (otherPlayerEnvironment.equals(player.getWorld().getEnvironment()))
 					{
-						player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + p2.getDisplayName() + "'s " + getCoordinates (p2));
+						player.sendMessage(ChatColor.AQUA + "" + p2.getDisplayName() + "'s " + ChatColor.GOLD + getCoordinates (p2));
 					}
 					else
 					{
@@ -61,7 +61,9 @@ public class GetCoordinates implements CommandExecutor
 	{
 		Location loc = player.getLocation();
 		StringBuilder coordinates = new StringBuilder ();
-		coordinates.append ("coordinates: { X=");
+		coordinates.append ("coordinates: ");
+		coordinates.append (ChatColor.AQUA + "");
+		coordinates.append ("{ X=");
 		coordinates.append (String.format("%.3f", loc.getX()));
 		coordinates.append (", Y=");
 		coordinates.append (String.format("%.3f", loc.getY()));

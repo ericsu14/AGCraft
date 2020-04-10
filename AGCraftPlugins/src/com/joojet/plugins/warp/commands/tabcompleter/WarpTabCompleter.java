@@ -25,18 +25,22 @@ public class WarpTabCompleter implements TabCompleter
 			Player p = (Player) sender;
 			String input = args[n-1].toLowerCase();
 			Object [] values = null;
+			
 			switch (n)
 			{
 				// List all warp types
 				case 1:
 					values = Arrays.asList(WarpType.values()).stream().
-					map(entry -> (String) entry.toString().toLowerCase()).
-					filter(entry -> entry.toLowerCase().contains(input)).
-					toArray();
+						map(entry -> (String) entry.toString().toLowerCase()).
+						filter(entry -> entry.toLowerCase().contains(input)).
+						toArray();
 					break;
 				// List all locations if the tag is location
 				case 2:
-					if (!Warp.interpreter.searchWarpTypeTrie(args[0]).equals(WarpType.LOCATION))
+					WarpType type = Warp.interpreter.searchWarpTypeTrie(args[0]);
+					
+					// NULL / check for non-location enums
+					if (type == null || !type.equals(WarpType.LOCATION))
 					{
 						return new ArrayList <String> ();
 					}

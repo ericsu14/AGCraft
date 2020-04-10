@@ -45,6 +45,12 @@ public class BibleTabCompleter implements TabCompleter
 				case 3:
 					BookID book = AGCraftPlugin.interpreter.searchBookTrie(args[1]);
 					
+					// If the book is not found, return an empty array
+					if (book == null)
+					{
+						return new ArrayList <String> ();
+					}
+					
 					ArrayList <String> chapters = new ArrayList <String> ();
 					for (int i = 1; i <= book.getNumChapters(); ++i)
 					{
