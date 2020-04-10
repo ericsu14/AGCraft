@@ -35,7 +35,7 @@ public class RemoveLocation implements CommandExecutor
 			try
 			{
 				LocationDatabaseManager.removeLocation(p.getUniqueId().toString(), locationName, p.getWorld().getEnvironment());
-				p.sendMessage(ChatColor.GOLD + "Successfully removed " + ChatColor.AQUA + locationName + ChatColor.GOLD + " from the database!");
+				p.sendMessage(ChatColor.GOLD + "Successfully removed location " + ChatColor.AQUA + locationName + ChatColor.GOLD + " from the database!");
 				return true;
 			}
 			catch (SQLException e)

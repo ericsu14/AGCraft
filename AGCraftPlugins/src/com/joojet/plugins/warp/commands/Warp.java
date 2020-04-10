@@ -106,7 +106,7 @@ public class Warp implements CommandExecutor
 
 			p.teleport(loc);
 			p.playSound(loc, Sound.ENTITY_ENDERMAN_TELEPORT, 0.4f, 1f);
-			p.sendMessage(ChatColor.GOLD + "Teleported you to location " + name + " at " + GetCoordinates.getCoordinates(p));
+			p.sendMessage(ChatColor.GOLD + "Teleported you to location " + ChatColor.AQUA + name + ChatColor.GOLD + " at " + GetCoordinates.getCoordinates(p));
 			return true;
 		}
 		return false;
