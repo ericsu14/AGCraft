@@ -107,7 +107,7 @@ public class ClearJunk implements CommandExecutor
 			
 			int removedItems = this.removeJunk(p, classifiers);
 			
-			p.sendMessage(ChatColor.GRAY + "Removed " + removedItems + " item(s) from your inventory.");
+			p.sendMessage(ChatColor.GOLD + "Removed " + ChatColor.AQUA +  removedItems + ChatColor.GOLD + " item(s) from your inventory.");
 		}
 		return true;
 	}
