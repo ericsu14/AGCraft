@@ -44,8 +44,8 @@ public class SetLocation implements CommandExecutor
 			try
 			{
 				LocationDatabaseManager.insert(p, locationName, access);
-				p.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "Location " + locationName + " has been successfully registered as a " + access.name().toLowerCase() + " location to "
-						+ (access.equals(WarpAccessLevel.PRIVATE) ? "yourself." : "everyone in the server!"));
+				p.sendMessage(ChatColor.GOLD + "" + "Location " + ChatColor.AQUA + locationName + ChatColor.GOLD + " has been successfully registered as a " + ChatColor.AQUA + access.name().toLowerCase() +
+						ChatColor.GOLD +" location to " + (access.equals(WarpAccessLevel.PRIVATE) ? "yourself." : "everyone in the server!"));
 				return true;
 			}
 			catch (RuntimeException e)

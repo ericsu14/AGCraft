@@ -90,7 +90,8 @@ public class LocationDatabaseManager
 		if (!checkIfLocationUnderClassifierExists (uuid, locationName, env, WarpAccessLevel.PRIVATE) 
 				&& !checkIfLocationUnderClassifierExists (uuid, locationName, env, WarpAccessLevel.PUBLIC))
 		{
-			throw new RuntimeException (locationName + " is not a registered location in " + GetCoordinates.getEnvironmentName(env));
+			throw new RuntimeException ("Either " + locationName + " is a public location not set by you or " +
+					 locationName +" is not a registered location in " + GetCoordinates.getEnvironmentName(env));
 		}
 		
 		Connection c = DriverManager.getConnection(CreateLocationDatabase.kDatabasePath);

@@ -73,7 +73,7 @@ public class Bible implements CommandExecutor
 				bible.setItemMeta(bibleContent);
 				
 				player.getInventory().addItem(bible);
-				sender.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + this.generateHeader() + " has been added into your inventory.");
+				sender.sendMessage(ChatColor.AQUA + "" + this.generateHeader() + ChatColor.GOLD + " has been added into your inventory.");
 				return true;
 			}
 		}

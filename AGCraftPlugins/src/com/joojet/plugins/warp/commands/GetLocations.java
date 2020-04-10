@@ -42,6 +42,7 @@ public class GetLocations implements CommandExecutor
 				LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PUBLIC).
 					forEach(entry -> publicLocations.add(entry.getLocationName()));
 				printLocationstoPlayer (p, publicLocations, WarpAccessLevel.PUBLIC);
+				p.sendMessage("");
 				
 				// Prints all private locations
 				ArrayList <String> privateLocations = new ArrayList <String> ();
@@ -70,7 +71,7 @@ public class GetLocations implements CommandExecutor
 	{
 		if (access.equals(WarpAccessLevel.PUBLIC))
 		{
-			p.sendMessage(ChatColor.GOLD  + "All" + ChatColor.AQUA + access.name().toLowerCase() + ChatColor.GOLD + "warp locations: ");
+			p.sendMessage(ChatColor.GOLD  + "All " + ChatColor.AQUA + access.name().toLowerCase() + ChatColor.GOLD + " warp locations: ");
 		}
 		else
 		{
@@ -80,7 +81,7 @@ public class GetLocations implements CommandExecutor
 		StringBuilder locationList = new StringBuilder ();
 		for (String entry : locations)
 		{
-			locationList.append(ChatColor.AQUA + "");
+			locationList.append(ChatColor.YELLOW + "");
 			locationList.append(entry);
 			locationList.append(ChatColor.WHITE + "");
 			locationList.append(" | ");
