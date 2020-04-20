@@ -28,6 +28,7 @@ public class WarpTabCompleter implements TabCompleter
 			
 			switch (n)
 			{
+			
 				// List all warp types
 				case 1:
 					values = Arrays.asList(WarpType.values()).stream().

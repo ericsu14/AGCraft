@@ -17,7 +17,7 @@ public class TestAudioPercussionSound
 	
 	public static void main (String [] args) throws UnsupportedAudioFileException, IOException
 	{
-		String file = "./music/New York.wav";
+		String file = "./music/SummerWind.wav";
 		AudioFormat format = AudioSystem.getAudioInputStream(new File (file)).getFormat();
 		AudioDispatcher dispatcher = AudioDispatcherFactory.fromFile(new File (file), 2048, 0);
 		
@@ -28,7 +28,7 @@ public class TestAudioPercussionSound
 			{
 				System.out.println (i++ + "\t" + timestamp + "\t" + o);
 			}
-		}, 44, 4));
+		},50, 4));
 		System.out.println (dispatcher.toString());
 		dispatcher.run();
 	}
