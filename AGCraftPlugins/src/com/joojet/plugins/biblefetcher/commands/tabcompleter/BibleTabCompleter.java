@@ -30,6 +30,7 @@ public class BibleTabCompleter implements TabCompleter
 					values = Arrays.asList((BibleID[])BibleID.values()).
 						stream().map(entry -> (String) entry.getBibleID()).
 						filter(param -> param.toLowerCase().contains(input)).
+						sorted().
 						toArray();
 					break;
 					
@@ -38,6 +39,7 @@ public class BibleTabCompleter implements TabCompleter
 					values = Arrays.asList((BookID[])BookID.values()).
 						stream().map(entry -> (String) entry.getFormattedTitleWithoutSpace()).
 						filter(param -> param.toLowerCase().contains (input)).
+						sorted().
 						toArray();
 					break;
 					
@@ -58,6 +60,7 @@ public class BibleTabCompleter implements TabCompleter
 					}
 					values = chapters.stream().
 							filter(param -> param.contains(input)).
+							sorted ().
 							toArray();
 					break;
 				// Otherwise, return an empty array

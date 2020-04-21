@@ -51,7 +51,7 @@ public class Warp implements CommandExecutor
 			boolean isIdiot = false;
 			if (type == null)
 			{
-				System.out.println (p.getDisplayName() + "is a village idiot");
+				System.out.println (p.getDisplayName() + " is a village idiot");
 				type = WarpType.LOCATION;
 				locName = args[0];
 				isIdiot = true;

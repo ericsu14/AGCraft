@@ -66,6 +66,12 @@ public class ClearJunk implements CommandExecutor
 		this.junkItems.put(Material.BOW, JunkClassifier.WEAPONS);
 		this.junkItems.put(Material.GOLDEN_SWORD, JunkClassifier.WEAPONS);
 		
+		// Cactus
+		this.junkItems.put(Material.CACTUS, JunkClassifier.CACTUS);
+		
+		// Nether
+		this.junkItems.put(Material.NETHERRACK, JunkClassifier.NETHER);
+		
 		// Initializes command interpreter
 		this.commandInterpreter = new JunkCommandInterpreter ();
 	}

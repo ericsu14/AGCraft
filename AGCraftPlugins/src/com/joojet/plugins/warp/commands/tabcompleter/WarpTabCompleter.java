@@ -56,7 +56,9 @@ public class WarpTabCompleter implements TabCompleter
 						
 						values = allLocations.stream().
 								filter(entry -> entry.toLowerCase().
-								contains(input)).toArray();
+								contains(input)).
+								sorted().
+								toArray();
 					}
 					catch (Exception e)
 					{

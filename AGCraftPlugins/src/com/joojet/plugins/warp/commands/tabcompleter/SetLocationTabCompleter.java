@@ -29,6 +29,7 @@ public class SetLocationTabCompleter implements TabCompleter
 					values = Arrays.asList(WarpAccessLevel.values()).stream().
 						map (entry -> entry.toString().toLowerCase()).
 						filter (entry -> entry.contains(input)).
+						sorted().
 						toArray();
 					break;
 				default:

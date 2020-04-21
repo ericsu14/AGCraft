@@ -22,6 +22,7 @@ public class ClearJunkTabCompleter implements TabCompleter
 			Object[] values = Arrays.stream(JunkClassifier.values()).
 					map(entry -> (String) entry.toString().toLowerCase()).
 					filter(val -> val.contains(input)).
+					sorted().
 					toArray();
 			return (List<String>) Arrays.asList(Arrays.copyOf(values, values.length, String[].class));
 		}
