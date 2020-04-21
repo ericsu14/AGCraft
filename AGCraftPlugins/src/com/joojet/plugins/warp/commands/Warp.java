@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
-import com.joojet.plugins.warp.interpreter.WarpCommandInterpreter;
 
 import net.md_5.bungee.api.ChatColor;
 
