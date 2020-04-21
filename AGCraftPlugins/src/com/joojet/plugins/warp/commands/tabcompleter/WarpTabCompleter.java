@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 
 import com.joojet.plugins.warp.commands.Warp;
 import com.joojet.plugins.warp.constants.WarpAccessLevel;
-import com.joojet.plugins.warp.constants.WarpType;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 
 public class WarpTabCompleter implements TabCompleter 
@@ -28,23 +27,8 @@ public class WarpTabCompleter implements TabCompleter
 			
 			switch (n)
 			{
-				// List all warp types
+				// List all locations
 				case 1:
-					values = Arrays.asList(WarpType.values()).stream().
-						map(entry -> (String) entry.toString().toLowerCase()).
-						filter(entry -> entry.toLowerCase().contains(input)).
-						toArray();
-					break;
-				// List all locations if the tag is location
-				case 2:
-					WarpType type = Warp.interpreter.searchWarpTypeTrie(args[0]);
-					
-					// NULL / check for non-location enums
-					if (type == null || !type.equals(WarpType.LOCATION))
-					{
-						return new ArrayList <String> ();
-					}
-					
 					ArrayList <String> allLocations = new ArrayList <String> ();
 					// Gets all private and public locations from the database and outputs them to the autocompleter
 					try
@@ -53,6 +37,7 @@ public class WarpTabCompleter implements TabCompleter
 							forEach(entry -> allLocations.add(entry.getLocationName()));
 						LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PUBLIC).
 							forEach(entry -> allLocations.add(entry.getLocationName()));	
+						allLocations.add(Warp.home);
 						
 						values = allLocations.stream().
 								filter(entry -> entry.toLowerCase().

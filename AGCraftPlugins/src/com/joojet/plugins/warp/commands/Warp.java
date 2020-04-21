@@ -10,7 +10,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
-import com.joojet.plugins.warp.constants.WarpType;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 import com.joojet.plugins.warp.interpreter.WarpCommandInterpreter;
 
@@ -19,15 +18,11 @@ import net.md_5.bungee.api.ChatColor;
 public class Warp implements CommandExecutor
 {
 	
-	public static WarpCommandInterpreter interpreter = new WarpCommandInterpreter ();
+	public static final String home = "home";
 	
 	/** Warps a player to either a designated location or their bed spawn.
 	 * 	Usage:
-	 * 		/warp <tag> <location name>
-	 * 
-	 *  Examples:
-	 *  	/warp home
-	 *  	/warp location <name>*/
+	 * 		/warp <location name> */
 	@Override
 	public boolean onCommand (CommandSender sender, Command command, String label, String [] args)
 	{
@@ -43,46 +38,20 @@ public class Warp implements CommandExecutor
 				return false;
 			}
 			
-			WarpType type = interpreter.searchWarpTypeTrie(args[0]);
-			
-			
-			// Idiot proofing in-case nobody reads the docs.
-			String locName = "";
-			boolean isIdiot = false;
-			if (type == null)
-			{
-				System.out.println (p.getDisplayName() + " is a village idiot");
-				type = WarpType.LOCATION;
-				locName = args[0];
-				isIdiot = true;
-			}
-				
+			String locName = args[0].toLowerCase();
 			Location loc = null;
-			String name = "";
-			switch (type)
+			
+			switch (locName)
 			{
-				case HOME:
+				case home:
 					loc = p.getBedSpawnLocation();
 					if (loc == null)
 					{
 						p.sendMessage(ChatColor.RED + "Error: Your home bed is either missing or obstructed.");
 						return false;
 					}
-					name = "home";
 					break;
-				case LOCATION:
-					if (n <= 1 && locName.equals(""))
-					{
-						p.sendMessage(ChatColor.RED + "No location name specified.");
-						return false;
-					}
-					locName = (locName.equals("") ? args[1] : locName);
-					
-					if (isIdiot)
-					{
-						p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.ITALIC + "I will let it slide for now, but please use /warp location " + locName + " in the future.");
-					}
-						
+				default:
 					try 
 					{
 						loc = LocationDatabaseManager.getlocation(p, locName);
@@ -98,15 +67,12 @@ public class Warp implements CommandExecutor
 						p.sendMessage(ChatColor.RED + e.getMessage());
 						return false;
 					}
-					name = locName;
 					break;
-				default:
-					return false;
 			}
 
 			p.teleport(loc);
 			p.playSound(loc, Sound.ENTITY_ENDERMAN_TELEPORT, 0.4f, 1f);
-			p.sendMessage(ChatColor.GOLD + "Teleported you to location " + ChatColor.AQUA + name + ChatColor.GOLD + " at " + GetCoordinates.getCoordinates(p));
+			p.sendMessage(ChatColor.GOLD + "Teleported you to location " + ChatColor.AQUA + locName + ChatColor.GOLD + " at " + GetCoordinates.getCoordinates(p));
 			return true;
 		}
 		return false;

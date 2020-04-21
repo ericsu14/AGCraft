@@ -41,6 +41,13 @@ public class SetLocation implements CommandExecutor
 			String locationName = args[0];
 			WarpAccessLevel access = (n >= 2) ? interpreter.searchTrie(args[1]) : WarpAccessLevel.PRIVATE;
 			access = (access == null) ? WarpAccessLevel.PRIVATE : access;
+			
+			// The player cannot set their location to a hardcoded location, home.
+			if (locationName.equalsIgnoreCase(Warp.home))
+			{
+				p.sendMessage(ChatColor.RED + "home is a hardcoded location that cannot be overridden by the player.");
+				return false;
+			}
 			try
 			{
 				LocationDatabaseManager.insert(p, locationName, access);
