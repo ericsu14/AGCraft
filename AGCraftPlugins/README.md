@@ -23,7 +23,7 @@ A small price to pay for automation.
 <b>Description:</b> \
 This command fetches passages or entire chapters of the Bible (that <b> you </b> want to read) from the Internet, and compiles all of it down into a <i>written book</i> for you to read in Minecraft.
 
-<b>Parameters:</b> \
+<b>Parameters:</b>
 
  - `translation` - The translation of the Bible you want your passages to be in.
  - `book` - The book of the Bible you want to read. 
@@ -134,8 +134,8 @@ Removes a named warp location from the database. Doing this will no longer allow
 Note that this only works on private or public locations specified by you. It will not remove public locations specified by other players in this server.
 
 <b> Usage examples </b>: \
-``/removelocation village private`` removes a private warp location, `village` from the database, if it was originally set by you. \
-``/removelocation spawn public`` removes a public warp location, `spawn` from the database, if it was originally set by you.
+``/removelocation village`` removes a warp location, `village` from the database, if it was originally set by you. \
+``/removelocation spawn`` removes a warp location, `spawn` from the database, if it was originally set by you.
 
 ## SetLocation
 <b> Usage: </b> \
