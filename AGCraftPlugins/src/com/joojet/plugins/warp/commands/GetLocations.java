@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import com.joojet.plugins.warp.constants.WarpAccessLevel;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
+import com.joojet.plugins.warp.database.LocationEntry;
 import com.joojet.plugins.warp.interpreter.AccessLevelInterpreter;
 
 import net.md_5.bungee.api.ChatColor;
@@ -42,16 +43,12 @@ public class GetLocations implements CommandExecutor
 				p.sendMessage(ChatColor.AQUA + "==========================");
 				
 				// Prints all public locations
-				ArrayList <String> publicLocations = new ArrayList <String> ();
-				LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PUBLIC).
-					forEach(entry -> publicLocations.add(entry.getLocationName()));
+				ArrayList <LocationEntry> publicLocations = LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PUBLIC);
 				printLocationstoPlayer (p, publicLocations, WarpAccessLevel.PUBLIC);
 				p.sendMessage("");
 				
 				// Prints all private locations
-				ArrayList <String> privateLocations = new ArrayList <String> ();
-				LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PRIVATE).
-					forEach(entry -> privateLocations.add(entry.getLocationName()));
+				ArrayList <LocationEntry> privateLocations = LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PRIVATE);
 				printLocationstoPlayer (p, privateLocations, WarpAccessLevel.PRIVATE);
 				return true;
 			}
@@ -71,7 +68,7 @@ public class GetLocations implements CommandExecutor
 		return false;
 	}
 	
-	private void printLocationstoPlayer (Player p, ArrayList <String> locations, WarpAccessLevel access)
+	private void printLocationstoPlayer (Player p, ArrayList <LocationEntry> locations, WarpAccessLevel access)
 	{
 		if (access.equals(WarpAccessLevel.PUBLIC))
 		{
@@ -83,10 +80,10 @@ public class GetLocations implements CommandExecutor
 		}
 		
 		StringBuilder locationList = new StringBuilder ();
-		for (String entry : locations)
+		for (LocationEntry entry : locations)
 		{
 			locationList.append(ChatColor.YELLOW + "");
-			locationList.append(entry);
+			locationList.append(entry.getLocationName());
 			locationList.append(ChatColor.WHITE + "");
 			locationList.append(" | ");
 		}
