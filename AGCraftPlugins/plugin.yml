@@ -1,6 +1,6 @@
 name: AGCraftPlugins
 main: com.joojet.plugins.agcraft.main.AGCraftPlugin
-version: 1.6.2
+version: 1.6.3
 api-version: 1.13
 commands:
   bible:
@@ -19,8 +19,8 @@ commands:
     description: Uses the coal / coal blocks / charcoal in your inventory to automatically smelt gold / iron ores to their respective counterparts
     usage: /autosmelt
   warp:
-    description: Warps you to either a designated location or their bed spawn.
-    usage: /warp <location | home> <location name>
+    description: Warps you to either a designated location or their bed spawn. Use /warp home to teleport to your bed spawn.
+    usage: /warp <location name>
   getLocations:
     description: Prints all known location name to your chat as a list
     usage: /getlocations

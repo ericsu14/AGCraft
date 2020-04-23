@@ -32,6 +32,7 @@ public class ClearJunk implements CommandExecutor
 		this.junkItems.put(Material.BONE, JunkClassifier.COMMON);
 		this.junkItems.put(Material.STRING, JunkClassifier.COMMON);
 		this.junkItems.put(Material.WHEAT_SEEDS, JunkClassifier.COMMON);
+		this.junkItems.put(Material.GREEN_DYE, JunkClassifier.COMMON);
 		
 		// Natural blocks
 		this.junkItems.put(Material.DIRT, JunkClassifier.NATURAL);
@@ -65,9 +66,6 @@ public class ClearJunk implements CommandExecutor
 		// Damaged, unenchanted weapon drops
 		this.junkItems.put(Material.BOW, JunkClassifier.WEAPONS);
 		this.junkItems.put(Material.GOLDEN_SWORD, JunkClassifier.WEAPONS);
-		
-		// Cactus
-		this.junkItems.put(Material.CACTUS, JunkClassifier.CACTUS);
 		
 		// Nether
 		this.junkItems.put(Material.NETHERRACK, JunkClassifier.NETHER);

@@ -86,13 +86,13 @@ You might notice that you can append a list of ``filters`` into this command. Th
 
 The items that falls under each category are as follows:
 
-|Common|Stone|Natural|Armor|Brewing|Weapons|
+|Common|Stone|Natural|Armor|Brewing|Weapons|Nether|
 |--|--|--|--|--|--|
-| Rotten Flesh | Cobblestone |Dirt|All Leather Armor*|Spider Eyes| Golden Swords* |
+| Rotten Flesh | Cobblestone |Dirt|All Leather Armor*|Spider Eyes| Golden Swords* | Netherbrick |
 | Bones | Stone | Sand | All Chainmail Armor* | | Bows* |
 | String | Granite | Gravel | All Gold Armor* |
 | Seeds (wheat) | Diorite
-| | Andesite |
+| Green Dye | Andesite |
 
 *Armor and weapons must be <b>damaged</b> and <b>unenchanted</b> in order for this command to remove them. This is to prevent your own gear from being removed accidentally.
 
@@ -161,20 +161,12 @@ Registers your current position as a new warp location under the name, ``<locati
 ``/warp <tag> <location name>``
 
 <b>Description</b>:\
-If the `tag` parameter is set to `location`, using this command will warp you to a named location that is registered by `/setlocation`. 
-
-If the `tag` parameter is set to `home`, using this command will warp you back to your home bed. \
+Instantlly teleports you to a named location. Use /warp home to teleport yourself back to your bed spawn. \
 
 <b>Parameters:</b> \
 ``tag`` - Specifies the type of location you want to warp to. \
 ``location name`` - the name of the location specified by `/setlocation` if the tag parameter is set to `location`.
 
-<b> Tags: </b> \
-The tags currently specified by this command are:
-|Name| Description|
-|--|--|
-|`home`| Teleports you to your bed spawn.|
-|`location`| Teleports you to a named location registered by `/setlocation`.
 
 ### Instructions on using warp:
 Let's say that you built an awesome house in the middle of the village. Before using this command, you want to first <b>physically stand</b> in the spot you want to warp to in the future.
@@ -183,7 +175,7 @@ Once you are standing on that spot, simply type ``/setlocation <name> private`` 
 
 Note that ``<name>`` could be anything; <b>it is entirely up to you on what you want to name your warp locations. </b> In addition, the ``private`` specifier after ``<name>`` ensures that the locations you set <i>can only be seen and accessed by you.</i>
 
-Once you set your own location using `/setlocation <name> private`, you now free to use ``/warp location <name>`` to warp back to your awesome house in the middle of the village any time!
+Once you set your own location using `/setlocation <name> private`, you now free to use ``/warp <name>`` to warp back to your awesome house in the middle of the village any time!
 
 - Lost track of your locations? Don't worry! Simply use `/getlocations private or /getlocations` to list all registered locations that are privately set by you!
 - Want to remove a location from the registry? Simply use ``/removelocations <name> private`` to remove that location from your list.
@@ -191,4 +183,4 @@ Once you set your own location using `/setlocation <name> private`, you now free
 
 <b> Usage Examples: </b>\
 ``/warp home`` warps you back to your home bed spawn. \
-``/warp location village`` If ``village`` is a registered location in the server registry. Entering this command will warp you to where the location `village` is at.
+``/warp village`` If ``village`` is a registered location in the server registry. Entering this command will warp you to where the location `village` is at.
