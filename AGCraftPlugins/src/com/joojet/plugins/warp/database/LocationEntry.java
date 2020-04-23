@@ -55,75 +55,47 @@ public class LocationEntry
 			return Environment.NORMAL;
 		}
 	}
-
+	
+	/** Returns the UUID associated with this warp location */
 	public String getUUID () 
 	{
 		return uuid;
 	}
-
-	public void setUUID (String uuid) 
-	{
-		this.uuid = uuid;
-	}
-
+	
+	/** Returns the location's custom name */
 	public String getLocationName() 
 	{
 		return locationName;
 	}
-
-	public void setLocationName(String locationName) 
-	{
-		this.locationName = locationName;
-	}
-
+	
+	/** Returns the location's X coordinate */
 	public double getX() 
 	{
 		return x;
 	}
 
-	public void setX(double x) 
-	{
-		this.x = x;
-	}
-
+	/** Returns the location's Y coordinate */
 	public double getY() 
 	{
 		return y;
 	}
 
-	public void setY(double y) 
-	{
-		this.y = y;
-	}
-
+	/** Returns the location's Z coordinate */
 	public double getZ() 
 	{
 		return z;
 	}
 
-	public void setZ(double z) 
-	{
-		this.z = z;
-	}
-
+	/** Returns the location's access level */
 	public WarpAccessLevel getAccessLevel() 
 	{
 		return level;
 	}
 
-	public void setAccesssLevel(WarpAccessLevel level) 
-	{
-		this.level = level;
-	}
-
+	/** Returns the location's Y environment */
 	public Environment getEnvironment() 
 	{
 		return env;
-	}
-
-	public void setEnvironment(Environment env) 
-	{
-		this.env = env;
 	}
 	
 	@Override
