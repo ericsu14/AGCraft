@@ -53,11 +53,9 @@ public class TrieNode <T>
 			{
 				@SuppressWarnings("rawtypes")
 				Enum id = (Enum) entry.getKey();
-				// If a matching term and length is detected, return the id.
-				if (((id.toString().length() == searchTerm.length() &&
-						searchTerm.equalsIgnoreCase(id.toString()))) ||(
-						id.name().length() == searchTerm.length() &&
-						searchTerm.equalsIgnoreCase(id.name())))
+				// Returns the current ID if term matches either its name or toString property
+				if (id.toString().equalsIgnoreCase(searchTerm) ||
+						id.name().equalsIgnoreCase(searchTerm))
 				{
 					return entry.getKey();
 				}
