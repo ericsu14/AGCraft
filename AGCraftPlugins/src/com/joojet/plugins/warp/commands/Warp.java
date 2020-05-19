@@ -74,7 +74,7 @@ public class Warp implements CommandExecutor
 						if (count > 0)
 						{
 							p.sendMessage(ChatColor.RED + "You have used up one emergency warp. Please be more careful in the future.");
-							p.sendMessage(ChatColor.RED + "You have " + ChatColor.GOLD + count + " emergency warps left.");
+							p.sendMessage(ChatColor.RED + "You have " + ChatColor.YELLOW + count + ChatColor.RED + " emergency warps left.");
 						}
 						else
 						{
