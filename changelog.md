@@ -139,3 +139,10 @@ Added a death counter, which will be displayed below the player's name. This wil
 **Future Additions**
 - Minecraft will be more difficult in the future. I am planning of adding custom monsters and boss mobs into the server, as it has gotten a little too easy with the amount of OP armor we have.
 - The addition of a broomball minigame, which allows you to create working broomball arenas in this server!
+
+## Version 1.6.4.1 - May 18, 2020
+**Changes**
+- All players are now given **six** *emergency warp tickets*, allowing them to use `/warp` when:
+    -  The player is on fire
+    -  The player's health drops below 80%.
+- They will not work however when the player is within seven blocks of any hostile monster  (radius has been changed). This is to prevent you from accidentally wasting them.
