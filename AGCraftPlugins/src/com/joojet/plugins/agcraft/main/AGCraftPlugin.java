@@ -64,6 +64,9 @@ public class AGCraftPlugin extends JavaPlugin
 		// Get Locations
 		this.getCommand("getlocations").setExecutor(new GetLocations());
 		
+		// Respawn ticket
+		this.getCommand("giverespawnticket").setExecutor(new GiveRespawnTicket());
+		
 		// Death counter
 		deathCounter = new DeathCounter();
 	}
