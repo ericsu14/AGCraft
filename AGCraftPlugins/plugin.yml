@@ -1,6 +1,6 @@
 name: AGCraftPlugins
 main: com.joojet.plugins.agcraft.main.AGCraftPlugin
-version: 1.6.3
+version: 1.6.4
 api-version: 1.13
 commands:
   bible:

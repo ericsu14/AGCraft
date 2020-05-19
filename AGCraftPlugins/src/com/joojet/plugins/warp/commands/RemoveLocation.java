@@ -6,10 +6,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.ChatColor;
 
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
-
-import net.md_5.bungee.api.ChatColor;
 
 public class RemoveLocation implements CommandExecutor
 {

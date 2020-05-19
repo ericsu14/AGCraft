@@ -7,6 +7,7 @@ import com.joojet.plugins.biblefetcher.commands.Bible;
 import com.joojet.plugins.biblefetcher.commands.ClearBibles;
 import com.joojet.plugins.biblefetcher.commands.tabcompleter.*;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
+import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.utility.commands.AutoSmelt;
 import com.joojet.plugins.utility.commands.ClearJunk;
 import com.joojet.plugins.utility.commands.tabcompleter.*;
@@ -16,11 +17,17 @@ import com.joojet.plugins.warp.database.CreateLocationDatabase;
 
 public class AGCraftPlugin extends JavaPlugin 
 {
+	// Stores the command interpreter used for the bible plugin
 	public static CommandInterpreter interpreter = new CommandInterpreter ();
+	// Stores an instance of the plugin itself
+	public static AGCraftPlugin plugin;
+	// Stores a reference to the death counter object
+	public static DeathCounter deathCounter;
 	
 	@Override
 	public void onEnable ()
 	{
+		plugin = this;
 		// Attempts to create a database
 		CreateDatabase.createNewDatabase();
 		CreateLocationDatabase.createDataBase();
@@ -55,6 +62,9 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Get Locations
 		this.getCommand("getlocations").setExecutor(new GetLocations());
+		
+		// Death counter
+		deathCounter = new DeathCounter();
 	}
 	
 	@Override
