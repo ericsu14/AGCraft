@@ -30,4 +30,8 @@ commands:
   setLocation:
     description: Registers the player's current location as a new location in the database as a specified name
     usage: /setlocation <name of location> <PUBLIC | PRIVATE>
+  giverespawnticket:
+    description: Admin use only
+    usage: /giverespawnticket <username>
+
   
