@@ -1,3 +1,4 @@
+
 # AGCraft Changelog
 
 ## Versions 1.0 to 1.3 - March 23, 2020
@@ -124,3 +125,17 @@ What is planned in the future:
 - Simplified the `/warp` command by removing the `tag` parameter. You can now use `/warp <name of location>` to warp to your named locations. In addition, `/warp home` still teleports you to your bed spawn, like always.
 - -   Added green dye to the  `COMMON`  category of the  `/clearjunk`  command. Use  `/clearjunk`  to remove all rotten flesh, bones, string, green dye, and seeds from your inventory, which should be useful while using a cactus EXP farm!
 -   Added a new category to the  `/clearjunk`  command,  `NETHER`. Use  `/clearjunk nether`  to remove all netherrack from your inventory.
+
+## Version 1.6.4 - May 18, 2020
+**Additions**
+Added a death counter, which will be displayed below the player's name. This will publically list the amount of deaths took dating back from the moment you stepped foot into this server.
+
+**Changes**
+- The `/warp` command is **nerfed.** **This command will no longer work when:**
+    - There are hostile mobs within a *ten* block radius from the player.
+    -  The player is on fire
+    -  The player's health drops below 80%.
+
+**Future Additions**
+- Minecraft will be more difficult in the future. I am planning of adding custom monsters and boss mobs into the server, as it has gotten a little too easy with the amount of OP armor we have.
+- The addition of a broomball minigame, which allows you to create working broomball arenas in this server!
