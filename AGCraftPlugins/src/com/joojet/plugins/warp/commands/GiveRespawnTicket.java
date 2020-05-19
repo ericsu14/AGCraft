@@ -46,7 +46,7 @@ public class GiveRespawnTicket implements CommandExecutor
 						EWarpDatabaseManager.incrementTicketCount(uuid);
 						System.out.println ("Gave one respawn ticket to " + username + "!");
 						System.out.println (username + " now has " + EWarpDatabaseManager.getTicketCount(uuid) + " tickets.");
-						p.sendMessage(ChatColor.AQUA + "You have been granted " + ChatColor.YELLOW + "" + ChatColor.AQUA + " one emergency warp ticket!");
+						p.sendMessage(ChatColor.AQUA + "You have been granted " + ChatColor.YELLOW + "one" + ChatColor.AQUA + " emergency warp ticket!");
 					} 
 					catch (SQLException e) {
 						// TODO Auto-generated catch block
