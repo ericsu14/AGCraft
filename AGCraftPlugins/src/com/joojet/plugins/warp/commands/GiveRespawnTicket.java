@@ -15,6 +15,7 @@ import org.bukkit.ChatColor;
 
 public class GiveRespawnTicket implements CommandExecutor
 {
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand (CommandSender sender, Command command, String label, String [] args)
 	{
@@ -30,15 +31,14 @@ public class GiveRespawnTicket implements CommandExecutor
 			if (n >= 1)
 			{
 				String username = args[0];
-				@SuppressWarnings("deprecation")
-				Player p = Bukkit.getOfflinePlayer(username) == null ? Bukkit.getOfflinePlayer(username).getPlayer() : Bukkit.getPlayer(username);
-				if (p == null)
+				if (Bukkit.getOfflinePlayer(username) == null && Bukkit.getPlayer(username) == null)
 				{
 					System.out.println ("Cannot find the player.");
 					return false;
 				}
 				
-				String uuid = p.getUniqueId().toString();
+				String uuid = Bukkit.getOfflinePlayer(username) == null ? Bukkit.getPlayer(username).getUniqueId().toString() : 
+																		  Bukkit.getOfflinePlayer(username).getUniqueId().toString();
 				if (EWarpDatabaseManager.checkIfUserExists(uuid))
 				{
 					try 
@@ -46,7 +46,6 @@ public class GiveRespawnTicket implements CommandExecutor
 						EWarpDatabaseManager.incrementTicketCount(uuid);
 						System.out.println ("Gave one respawn ticket to " + username + "!");
 						System.out.println (username + " now has " + EWarpDatabaseManager.getTicketCount(uuid) + " tickets.");
-						p.sendMessage(ChatColor.AQUA + "You have been granted " + ChatColor.YELLOW + "one" + ChatColor.AQUA + " emergency warp ticket!");
 					} 
 					catch (SQLException e) {
 						// TODO Auto-generated catch block
