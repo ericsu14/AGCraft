@@ -34,7 +34,7 @@ public class LocationDatabaseManager
 			p.sendMessage ("An internal error occured while attempting to register this new location.");
 			System.out.println ("Error: " + e.getMessage());
 			
-			CreateLocationDatabase.createDataBase();
+			CreateLocationDatabase.createDatabase();
 		}
 	}
 	

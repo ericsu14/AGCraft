@@ -517,7 +517,7 @@ class TestLocationDatabase
 	private void resetDatabase ()
 	{
 		CreateLocationDatabase.dropTables();
-		CreateLocationDatabase.initializeTables();
+		CreateLocationDatabase.initializeLocationTable();
 	}
 	
 	/** Adds an entry into the database 

@@ -30,11 +30,12 @@ public class AGCraftPlugin extends JavaPlugin
 		plugin = this;
 		// Attempts to create a database
 		CreateDatabase.createNewDatabase();
-		CreateLocationDatabase.createDataBase();
+		CreateLocationDatabase.createDatabase();
 		
 		//Bible
 		this.getCommand("bible").setExecutor(new Bible ());
 		this.getCommand("bible").setTabCompleter(new BibleTabCompleter());
+		
 		// Clear Bible
 		this.getCommand("clearBibles").setExecutor(new ClearBibles());
 		
