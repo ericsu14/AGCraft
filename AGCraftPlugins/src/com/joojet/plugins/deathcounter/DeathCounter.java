@@ -12,7 +12,7 @@ public class DeathCounter
 {
 	private String scoreboardName = "deathcounter";
 	private String deathCriteriaName = "deathCount";
-	private String scoreboardDisplayName = "Death Counter";
+	private String scoreboardDisplayName = "Deaths";
 	private Scoreboard scoreboard;
 	private Objective deathCounterObj;
 	
@@ -40,8 +40,10 @@ public class DeathCounter
 		{
 			if (p != null)
 			{
+				System.out.println ("Found offline player with UUID " + p.getUniqueId());
 				// Gets the player's current deaths
 				int deaths = p.getStatistic(Statistic.DEATHS);
+				System.out.println ("Deaths: " + deaths);
 				deathCounterObj.getScore(p).setScore(deaths);
 			}
 		}
