@@ -37,18 +37,25 @@ public class GetLocations implements CommandExecutor
 			
 			try
 			{
+				String str = (n >= 1) ? access.toString().toUpperCase() : "WARP";
 				p.sendMessage(ChatColor.AQUA + "==========================");
-				p.sendMessage(ChatColor.GOLD + "ALL WARP LOCATIONS");
+				p.sendMessage(ChatColor.GOLD + "ALL " + str + " LOCATIONS");
 				p.sendMessage(ChatColor.AQUA + "==========================");
 				
 				// Prints all public locations
-				ArrayList <LocationEntry> publicLocations = LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PUBLIC);
-				printLocationstoPlayer (p, publicLocations, WarpAccessLevel.PUBLIC);
-				p.sendMessage("");
+				if (n == 0 || access == WarpAccessLevel.PUBLIC)
+				{
+					ArrayList <LocationEntry> publicLocations = LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PUBLIC);
+					printLocationstoPlayer (p, publicLocations, WarpAccessLevel.PUBLIC);
+					p.sendMessage("");
+				}
 				
-				// Prints all private locations
-				ArrayList <LocationEntry> privateLocations = LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PRIVATE);
-				printLocationstoPlayer (p, privateLocations, WarpAccessLevel.PRIVATE);
+				if (n == 0 || access == WarpAccessLevel.PRIVATE)
+				{
+					// Prints all private locations
+					ArrayList <LocationEntry> privateLocations = LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PRIVATE);
+					printLocationstoPlayer (p, privateLocations, WarpAccessLevel.PRIVATE);
+				}
 				return true;
 			}
 			catch (SQLException e)

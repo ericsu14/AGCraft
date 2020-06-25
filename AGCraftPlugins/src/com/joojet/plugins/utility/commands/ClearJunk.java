@@ -38,6 +38,7 @@ public class ClearJunk implements CommandExecutor
 		this.junkItems.put(Material.DIRT, JunkClassifier.NATURAL);
 		this.junkItems.put(Material.SAND, JunkClassifier.NATURAL);
 		this.junkItems.put(Material.GRAVEL, JunkClassifier.NATURAL);
+		this.junkItems.put(Material.CACTUS, JunkClassifier.NATURAL);
 		
 		// Stones
 		this.junkItems.put(Material.COBBLESTONE, JunkClassifier.STONE);

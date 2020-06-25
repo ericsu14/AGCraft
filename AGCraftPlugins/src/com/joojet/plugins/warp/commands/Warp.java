@@ -20,7 +20,7 @@ public class Warp implements CommandExecutor
 	
 	public final static String home = "home";
 	// Max. search radius of nearby enemies check
-	private int maxMobRadius = 7;
+	private int maxMobRadius = 10;
 	// Min. player health needs to exceed before warping
 	private double healthThreshold = 20 * 0.79;
 	
