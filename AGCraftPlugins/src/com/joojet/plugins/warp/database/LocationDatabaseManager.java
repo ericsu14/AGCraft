@@ -109,6 +109,23 @@ public class LocationDatabaseManager
 		c.close();
 	}
 	
+	/** Removes all locations under a specific environment (world) from the database
+	 *  This is mostly used to remove all old nether locations from the DB safely. */
+	public static void removeAllLocationsUnderEnviroment (Environment env) throws SQLException, RuntimeException
+	{
+		Connection c = DriverManager.getConnection(CreateLocationDatabase.kDatabasePath);
+		
+		StringBuilder query = new StringBuilder ("DELETE FROM LOCATIONS WHERE ");
+		query.append ("WORLD = ?");
+		
+		PreparedStatement pstmt = c.prepareStatement(query.toString());
+		pstmt.setString(1, env.name());
+		
+		pstmt.executeUpdate();
+		pstmt.close();
+		c.close();
+	}
+	
 	/** Searches the database to see if:
 	 * 		- Either the private locationName registered under the user exists
 	 * 		- or a public locationName registered under any player exists.
@@ -237,6 +254,39 @@ public class LocationDatabaseManager
 			pstmt.setString(1, env.name());
 			pstmt.setString(2, level.name());
 		}
+		
+		result = pstmt.executeQuery();
+		
+		// Adds everything into an arraylist
+		if (result.next())
+		{
+			do {
+				LocationEntry entry = new LocationEntry (result.getString("UUID"), result.getString("NAME"), result.getDouble("X"), result.getDouble("Y"), result.getDouble("Z"),
+						result.getString("ACCESS"), result.getString("WORLD"));
+				entries.add(entry);
+			} while (result.next());
+		}
+		
+		pstmt.close();
+		c.close();
+		
+		return entries;
+	}
+	
+	/** Returns all locations under a specific environment
+	 * 		@param env - The dimension we want to search in */
+	public static ArrayList <LocationEntry> getLocationsAsList (Environment env) throws SQLException, RuntimeException
+	{
+		ResultSet result = null;
+		PreparedStatement pstmt = null;
+		ArrayList <LocationEntry> entries = new ArrayList <LocationEntry> ();
+		Connection c = DriverManager.getConnection(CreateLocationDatabase.kDatabasePath);
+		
+		StringBuilder query = new StringBuilder ("SELECT * FROM LOCATIONS WHERE ");
+
+		query.append("WORLD = ?");
+		pstmt = c.prepareStatement(query.toString());
+		pstmt.setString(1, env.name());
 		
 		result = pstmt.executeQuery();
 		

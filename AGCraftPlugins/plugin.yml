@@ -1,6 +1,6 @@
 name: AGCraftPlugins
 main: com.joojet.plugins.agcraft.main.AGCraftPlugin
-version: 1.6.4.2
+version: 1.6.4.3
 api-version: 1.13
 commands:
   bible:
@@ -33,5 +33,8 @@ commands:
   giverespawnticket:
     description: Admin use only
     usage: /giverespawnticket <username>
+  removeoldnetherlocations:
+    description: Admin use only. Removes all old nether warps from the database.
+    usage: /removeoldnetherlocations
 
   

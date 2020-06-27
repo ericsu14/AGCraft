@@ -147,4 +147,28 @@ public class LocationEntry
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString ()
+	{
+		StringBuilder ss = new StringBuilder ();
+		ss.append("Location Name: ");
+		ss.append(this.locationName);
+		ss.append(" | ");
+		ss.append("Coords: {");
+		ss.append(x);
+		ss.append(",");
+		ss.append(y);
+		ss.append(",");
+		ss.append(z);
+		ss.append("}");
+		ss.append(" | UUID: ");
+		ss.append(this.uuid);
+		ss.append(" | ENV: ");
+		ss.append(this.env.name());
+		ss.append(" | ACCESS: ");
+		ss.append(this.level.name());
+		
+		return ss.toString();
+	}
 }

@@ -25,7 +25,7 @@ class TestEWarpDatabase {
 			// Inserts the player into the database
 			EWarpDatabaseManager.registerNewUser(p1);
 			// Checks if the player's starting ticket count is accurate
-			assertEquals (EWarpDatabaseManager.getTicketCount(p1),EWarpDatabaseManager.startingTickets);
+			assertEquals (EWarpDatabaseManager.startingTickets, EWarpDatabaseManager.getTicketCount(p1));
 		} catch (SQLException e) 
 		{
 			fail (e.getMessage());
@@ -41,10 +41,10 @@ class TestEWarpDatabase {
 		try
 		{
 			// At the moment, the user should not exist
-			assertEquals (EWarpDatabaseManager.checkIfUserExists(p1), false);
+			assertEquals (false, EWarpDatabaseManager.checkIfUserExists(p1));
 			// Insert the user into the DB
 			EWarpDatabaseManager.registerNewUser(p1);
-			assertEquals (EWarpDatabaseManager.checkIfUserExists(p1), true);
+			assertEquals (true, EWarpDatabaseManager.checkIfUserExists(p1));
 		}
 		catch (SQLException e) 
 		{
@@ -60,9 +60,9 @@ class TestEWarpDatabase {
 		try
 		{
 			EWarpDatabaseManager.registerNewUser(p1);
-			assertEquals (EWarpDatabaseManager.getTicketCount(p1),EWarpDatabaseManager.startingTickets);
+			assertEquals (EWarpDatabaseManager.startingTickets, EWarpDatabaseManager.getTicketCount(p1));
 			EWarpDatabaseManager.incrementTicketCount(p1);
-			assertEquals (EWarpDatabaseManager.getTicketCount(p1),EWarpDatabaseManager.startingTickets + 1);
+			assertEquals (EWarpDatabaseManager.startingTickets + 1, EWarpDatabaseManager.getTicketCount(p1));
 		}
 		catch (SQLException e) 
 		{
@@ -78,9 +78,9 @@ class TestEWarpDatabase {
 		try
 		{
 			EWarpDatabaseManager.registerNewUser(p1);
-			assertEquals (EWarpDatabaseManager.getTicketCount(p1),EWarpDatabaseManager.startingTickets);
+			assertEquals (EWarpDatabaseManager.startingTickets, EWarpDatabaseManager.getTicketCount(p1));
 			EWarpDatabaseManager.decrementTicketCount(p1);
-			assertEquals (EWarpDatabaseManager.getTicketCount(p1),EWarpDatabaseManager.startingTickets - 1);
+			assertEquals (EWarpDatabaseManager.startingTickets - 1, EWarpDatabaseManager.getTicketCount(p1));
 		}
 		catch (SQLException e) 
 		{

@@ -68,6 +68,9 @@ public class AGCraftPlugin extends JavaPlugin
 		// Respawn ticket
 		this.getCommand("giverespawnticket").setExecutor(new GiveRespawnTicket());
 		
+		// Remove all old nether locations
+		this.getCommand("removeoldnetherlocations").setExecutor(new RemoveOldNetherLocations());
+		
 		// Death counter
 		deathCounter = new DeathCounter();
 	}

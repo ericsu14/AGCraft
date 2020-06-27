@@ -375,24 +375,24 @@ class TestLocationDatabase
 			insert (eEntry);
 			
 			remove (nEntry);
-			assertEquals (checkIfLocationExists (player1, oEntry), true);
-			assertEquals (checkIfLocationExists (player1, nEntry), false);
-			assertEquals (checkIfLocationExists (player1, eEntry), true);
+			assertEquals (true, checkIfLocationExists (player1, oEntry));
+			assertEquals (false, checkIfLocationExists (player1, nEntry));
+			assertEquals (true, checkIfLocationExists (player1, eEntry));
 			
 			remove (oEntry);
-			assertEquals (checkIfLocationExists (player1, oEntry), false);
-			assertEquals (checkIfLocationExists (player1, nEntry), false);
-			assertEquals (checkIfLocationExists (player1, eEntry), true);
+			assertEquals (false, checkIfLocationExists (player1, oEntry));
+			assertEquals (false, checkIfLocationExists (player1, nEntry));
+			assertEquals (true, checkIfLocationExists (player1, eEntry));
 			
 			remove (eEntry);
-			assertEquals (checkIfLocationExists (player1, oEntry), false);
-			assertEquals (checkIfLocationExists (player1, nEntry), false);
-			assertEquals (checkIfLocationExists (player1, eEntry), false);
+			assertEquals (false, checkIfLocationExists (player1, oEntry));
+			assertEquals (false, checkIfLocationExists (player1, nEntry));
+			assertEquals (false, checkIfLocationExists (player1, eEntry));
 			
 			insert (oEntry);
-			assertEquals (checkIfLocationExists (player1, oEntry), true);
-			assertEquals (checkIfLocationExists (player1, nEntry), false);
-			assertEquals (checkIfLocationExists (player1, eEntry), false);
+			assertEquals (true, checkIfLocationExists (player1, oEntry));
+			assertEquals (false, checkIfLocationExists (player1, nEntry));
+			assertEquals (false, checkIfLocationExists (player1, eEntry));
 		}
 		catch (Exception e)
 		{
@@ -413,16 +413,16 @@ class TestLocationDatabase
 			LocationEntry entryOverworldP2 = createRandomPrivateLocations (numLocationsOverworldP2, 2, Environment.NORMAL);
 			
 			ArrayList <LocationEntry> entriesOverworld = this.getListofLocations(entryOverworld);
-			assertEquals (entriesOverworld.size(), numLocationsOverworld);
+			assertEquals (numLocationsOverworld, entriesOverworld.size());
 			
 			ArrayList <LocationEntry> entriesNether= this.getListofLocations(entryNether);
-			assertEquals (entriesNether.size(), numLocationsNether);
+			assertEquals (numLocationsNether, entriesNether.size());
 			
 			ArrayList <LocationEntry> entriesEnd = this.getListofLocations(entryEnd);
-			assertEquals (entriesEnd.size(), numLocationsEnd);
+			assertEquals (numLocationsEnd, entriesEnd.size());
 			
 			ArrayList <LocationEntry> entriesOverworldP2 = this.getListofLocations(entryOverworldP2);
-			assertEquals (entriesOverworldP2.size(), numLocationsOverworldP2);
+			assertEquals (numLocationsOverworldP2, entriesOverworldP2.size());
 		}
 		
 		catch (Exception e)
@@ -443,13 +443,13 @@ class TestLocationDatabase
 			LocationEntry entryEnd = createRandomPublicLocations (numLocationsEnd, Environment.THE_END);
 			
 			ArrayList <LocationEntry> entriesOverworld = this.getListofLocations(entryOverworld);
-			assertEquals (entriesOverworld.size(), numLocationsOverworld);
+			assertEquals (numLocationsOverworld, entriesOverworld.size());
 			
 			ArrayList <LocationEntry> entriesNether= this.getListofLocations(entryNether);
-			assertEquals (entriesNether.size(), numLocationsNether);
+			assertEquals (numLocationsNether, entriesNether.size());
 			
 			ArrayList <LocationEntry> entriesEnd = this.getListofLocations(entryEnd);
-			assertEquals (entriesEnd.size(), numLocationsEnd);
+			assertEquals (numLocationsEnd, entriesEnd.size());
 		}
 		
 		catch (Exception e)
@@ -480,6 +480,68 @@ class TestLocationDatabase
 		catch (RuntimeException e)
 		{
 			System.out.println (e.getMessage());
+		}
+		catch (SQLException e)
+		{
+			fail ("FAIL: " + e.getMessage());
+		}
+	}
+	
+	/** Tests to see if removing all nether locations works properly */
+	@Test
+	void removeAllNetherLocationsTest ()
+	{
+		int numNether = 100;
+		int numOverworld = 100;
+		int numEnd = 100;
+		try
+		{
+			// Create 100 nether, overworld, and end locations
+			LocationEntry p1_o = createRandomPrivateLocations (numOverworld, 1, Environment.NORMAL);
+			LocationEntry p1_n = createRandomPrivateLocations (numNether, 1, Environment.NETHER);
+			LocationEntry p1_e = createRandomPrivateLocations (numEnd, 1, Environment.THE_END);
+			LocationEntry p1_p = this.createRandomPublicLocations(numEnd, Environment.THE_END);
+			
+			// Removes all nether locations from the database
+			LocationDatabaseManager.removeAllLocationsUnderEnviroment(Environment.NETHER);
+			
+			// Grabs all locations visible under player 1
+			ArrayList <LocationEntry> overworldList = this.getListofLocations(p1_o);
+			ArrayList <LocationEntry> netherList = this.getListofLocations(p1_n);
+			ArrayList <LocationEntry> endList = this.getListofLocations(p1_e);
+			ArrayList <LocationEntry> endListPublic = this.getListofLocations(p1_p);
+			
+			// Overworld list should not be empty
+			assertEquals (false, overworldList.isEmpty());
+			assertEquals (overworldList.size(), numOverworld);
+			
+			// Manually check if all locations are under the overworld
+			for (LocationEntry e : overworldList)
+			{
+				if (e.getEnvironment() != Environment.NORMAL)
+				{
+					fail ("FAIL: Found an entry with env " + e.getEnvironment().name());
+				}
+			}
+			
+			// But the nether list should be empty
+			assertEquals (netherList.isEmpty(), true);
+			
+			// The end list should be unchanged as well
+			assertEquals (false, endList.isEmpty());
+			assertEquals (numEnd, endList.size());
+			
+			assertEquals (false, endListPublic.isEmpty());
+			assertEquals (numEnd, endListPublic.size());
+			
+			// Manually check if all end locations are under the end
+			for (LocationEntry e : endList)
+			{
+				if (e.getEnvironment() != Environment.THE_END)
+				{
+					fail ("FAIL: Found an entry with env " + e.getEnvironment().name());
+				}
+			}
 		}
 		catch (SQLException e)
 		{
