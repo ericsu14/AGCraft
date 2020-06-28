@@ -1,5 +1,6 @@
 package com.joojet.plugins.agcraft.main;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.joojet.biblefetcher.database.CreateDatabase;
 import com.joojet.biblefetcher.interpreter.CommandInterpreter;
@@ -8,6 +9,7 @@ import com.joojet.plugins.biblefetcher.commands.ClearBibles;
 import com.joojet.plugins.biblefetcher.commands.tabcompleter.*;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
+import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.utility.commands.AutoSmelt;
 import com.joojet.plugins.utility.commands.ClearJunk;
 import com.joojet.plugins.utility.commands.tabcompleter.*;
@@ -73,11 +75,14 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Death counter
 		deathCounter = new DeathCounter();
+		
+		// Amplified mob spawner
+		Bukkit.getPluginManager().registerEvents(new AmplifiedMobSpawner(), this);
 	}
 	
 	@Override
 	public void onDisable ()
 	{
-		
+
 	}
 }
