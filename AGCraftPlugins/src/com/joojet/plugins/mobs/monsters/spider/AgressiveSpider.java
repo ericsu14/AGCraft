@@ -1,6 +1,5 @@
 package com.joojet.plugins.mobs.monsters.spider;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
@@ -24,7 +23,6 @@ public class AgressiveSpider extends MobEquipment
 		this.name = "Agressive Spider";
 		this.color = ChatColor.GREEN;
 		
-		this.effects.add(CustomPotionEffect.STRENGTH.getPotionEffect());
 		this.effects.add(CustomPotionEffect.RESISTANCE.getPotionEffect());
 		
 		// Weapon
