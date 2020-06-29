@@ -18,6 +18,7 @@ import org.bukkit.potion.PotionEffect;
 
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 import com.joojet.plugins.mobs.monsters.skeleton.SkeletonTypes;
+import com.joojet.plugins.mobs.monsters.spider.SpiderTypes;
 import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
 
 public class AmplifiedMobSpawner implements Listener 
@@ -28,6 +29,7 @@ public class AmplifiedMobSpawner implements Listener
 	private Random rand = new Random ();
 	private ZombieTypes zombieTypes = new ZombieTypes ();
 	private SkeletonTypes skeletonTypes = new SkeletonTypes();
+	private SpiderTypes spiderTypes = new SpiderTypes();
 	
 	public void onEnable ()
 	{
@@ -61,6 +63,9 @@ public class AmplifiedMobSpawner implements Listener
 			case SKELETON:
 				mobEquipment = skeletonTypes.getRandomEquipment();
 				break;
+			case SPIDER:
+				mobEquipment = spiderTypes.getRandomEquipment();
+				break;
 			default:
 				return;
 		}
@@ -79,35 +84,35 @@ public class AmplifiedMobSpawner implements Listener
 		if (items[1] != null)
 		{
 			equipment.setChestplate(items[1]);
-			equipment.setChestplateDropChance(0.03f);
+			equipment.setChestplateDropChance(0.3f);
 		}
 		
 		// Leggings
 		if (items[2] != null)
 		{
 			equipment.setLeggings(items[2]);
-			equipment.setLeggingsDropChance(0.03f);
+			equipment.setLeggingsDropChance(0.3f);
 		}
 		
 		// Boots
 		if (items[3] != null)
 		{
 			equipment.setBoots(items[3]);
-			equipment.setBootsDropChance(0.05f);
+			equipment.setBootsDropChance(0.5f);
 		}
 
 		// Weapon
 		if (items[4] != null)
 		{
 			equipment.setItemInMainHand(items[4]);
-			equipment.setItemInMainHandDropChance(0.03f);
+			equipment.setItemInMainHandDropChance(0.3f);
 		}
 		
 		// Offhand
 		if (items[5] != null)
 		{
 			equipment.setItemInOffHand(items[5]);
-			equipment.setItemInOffHandDropChance(0.03f);
+			equipment.setItemInOffHandDropChance(0.3f);
 		}
 		
 		// Name

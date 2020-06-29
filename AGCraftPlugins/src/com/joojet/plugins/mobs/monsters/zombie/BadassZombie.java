@@ -61,7 +61,7 @@ public class BadassZombie extends MobEquipment
 		ItemMeta legMeta = this.chestplate.getItemMeta();
 		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
 		legMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
-		legMeta.setDisplayName(this.color + "Reinforced Netherite Leggings");
+		legMeta.setDisplayName(this.color + "Reinforced Iron Leggings");
 		this.leggings.setItemMeta(legMeta);
 		this.addRandomDamage(this.leggings);
 		

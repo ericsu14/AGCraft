@@ -33,7 +33,7 @@ public class UltimateBadassZombie extends MobEquipment
 		
 		AttributeModifier weaponMod = new AttributeModifier ("generic.attack_damage", 12.0, Operation.ADD_NUMBER);
 		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, weaponMod);
-		weaponMeta.setDisplayName(this.color + "Sharpened Netherite Axe");
+		weaponMeta.setDisplayName(this.color + "Japanese Grade Nippon Steel Sharpened over 9000 times");
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
 		
