@@ -1,21 +1,15 @@
-package com.joojet.plugins.mobs.enums;
+package com.joojet.plugins.mobs.interfaces;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
-import com.joojet.plugins.mobs.monsters.zombie.*;
-
-public class ZombieTypes 
+public abstract class MonsterTypes 
 {
 	private ArrayList <MobEquipment> equipmentList;
 	
-	public ZombieTypes ()
+	public MonsterTypes ()
 	{
-		equipmentList = new ArrayList <MobEquipment> ();
-		this.addEquipment(new UncommonZombie(), 4);
-		this.addEquipment(new BadassZombie(), 2);
-		this.addEquipment(new UltimateBadassZombie(), 1);
+		this.equipmentList = new ArrayList <MobEquipment> ();
 	}
 	
 	public void addEquipment (MobEquipment equipment, int weight)

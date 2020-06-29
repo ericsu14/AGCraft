@@ -18,18 +18,15 @@ public class UltimateBadassZombie extends MobEquipment
 	{
 		this.name = "Ultimate Badass Zombie";
 		this.color = ChatColor.GOLD;
-		this.health = 40;
 		
 		// Custom potion effects
-		this.effects.add(CustomPotionEffect.STRENGTH.getPotionEffect());
 		this.effects.add(CustomPotionEffect.FIRE_RESISTANCE.getPotionEffect());
-		this.effects.add(CustomPotionEffect.RESISTANCE.getPotionEffect());
-		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
+		this.effects.add(CustomPotionEffect.STRENGTH.getPotionEffect());
 		
 		// Weapon
 		this.weapon = new ItemStack(Material.NETHERITE_AXE, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
-		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
+		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		weaponMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
@@ -77,7 +74,7 @@ public class UltimateBadassZombie extends MobEquipment
 		bootMeta.setDisplayName(this.color + "Lightweight Netherite Boots");
 		
 		// One speedy boi
-		AttributeModifier bootsMod = new AttributeModifier ("generic.movement_speed", 20.0, Operation.ADD_NUMBER);
+		AttributeModifier bootsMod = new AttributeModifier ("generic.movement_speed", 0.10, Operation.ADD_NUMBER);
 		bootMeta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, bootsMod);
 		
 		this.boots.setItemMeta(bootMeta);

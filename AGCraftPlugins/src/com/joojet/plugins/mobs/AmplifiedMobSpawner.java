@@ -3,10 +3,10 @@ package com.joojet.plugins.mobs;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -16,8 +16,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 
-import com.joojet.plugins.mobs.enums.ZombieTypes;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.skeleton.SkeletonTypes;
+import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
 
 public class AmplifiedMobSpawner implements Listener 
 {
@@ -26,6 +27,7 @@ public class AmplifiedMobSpawner implements Listener
 	
 	private Random rand = new Random ();
 	private ZombieTypes zombieTypes = new ZombieTypes ();
+	private SkeletonTypes skeletonTypes = new SkeletonTypes();
 	
 	public void onEnable ()
 	{
@@ -52,6 +54,12 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			case ZOMBIE:
 				mobEquipment = zombieTypes.getRandomEquipment();
+				// Prevents zombies from being babies
+				Zombie zomble = (Zombie) entity;
+				zomble.setBaby(false);
+				break;
+			case SKELETON:
+				mobEquipment = skeletonTypes.getRandomEquipment();
 				break;
 			default:
 				return;
@@ -64,49 +72,53 @@ public class AmplifiedMobSpawner implements Listener
 		if (items[0] != null)
 		{
 			equipment.setHelmet(items[0]);
+			equipment.setHelmetDropChance(0.05f);
 		}
 		
 		// Chestplate
 		if (items[1] != null)
 		{
 			equipment.setChestplate(items[1]);
+			equipment.setChestplateDropChance(0.03f);
 		}
 		
 		// Leggings
 		if (items[2] != null)
 		{
 			equipment.setLeggings(items[2]);
+			equipment.setLeggingsDropChance(0.03f);
 		}
 		
 		// Boots
 		if (items[3] != null)
 		{
 			equipment.setBoots(items[3]);
+			equipment.setBootsDropChance(0.05f);
 		}
 
 		// Weapon
 		if (items[4] != null)
 		{
 			equipment.setItemInMainHand(items[4]);
+			equipment.setItemInMainHandDropChance(0.03f);
 		}
 		
 		// Offhand
 		if (items[5] != null)
 		{
 			equipment.setItemInOffHand(items[5]);
+			equipment.setItemInOffHandDropChance(0.03f);
 		}
 		
 		// Name
 		if (!mobEquipment.getName().equals(""))
 		{
 			entity.setCustomName(mobEquipment.getChatColor() + "" + mobEquipment.getName());
-			entity.setCustomNameVisible(true);
 		}
 		
 		// Custom health
 		if (mobEquipment.getHealth() > 0)
 		{
-			entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(mobEquipment.getHealth());
 			Damageable dmg = (Damageable) entity;
 			dmg.setHealth(mobEquipment.getHealth());
 		}

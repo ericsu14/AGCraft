@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.monsters.zombie;
+package com.joojet.plugins.mobs.monsters.skeleton;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -8,29 +8,39 @@ import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 
-public class UncommonZombie extends MobEquipment 
+public class UncommonSkeleton extends MobEquipment
 {
-	public UncommonZombie ()
+	public UncommonSkeleton ()
 	{
-		this.name = "Uncommon Zombie";
+		this.name = "Uncommon Skeleton";
 		this.color = ChatColor.GREEN;
 		
 		// Weapon
-		this.weapon = new ItemStack(Material.IRON_SWORD, 1);
+		this.weapon = new ItemStack(Material.BOW, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
-		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
-		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
-		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+		weaponMeta.addEnchant(Enchantment.ARROW_DAMAGE, 3, true);
+		weaponMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
+		weaponMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, true);
 		weaponMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		
-		AttributeModifier weaponMod = new AttributeModifier ("generic.attack_damage", 7.0, Operation.ADD_NUMBER);
-		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, weaponMod);
-		weaponMeta.setDisplayName(this.color + "Reinforced Iron Sword");
+		weaponMeta.setDisplayName(this.color + "Uncommon Bow");
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
+		
+		// Offhand
+		this.offhand = new ItemStack (Material.TIPPED_ARROW, 1);
+		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
+		tippedArrow.setBasePotionData(new PotionData (PotionType.WEAKNESS));
+		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WEAKNESS, 140, 1), true);
+		this.offhand.setItemMeta(tippedArrow);
 		
 		// Helmet
 		this.helmet = new ItemStack (Material.CHAINMAIL_HELMET, 1);
@@ -44,9 +54,9 @@ public class UncommonZombie extends MobEquipment
 		// Chestplate
 		this.chestplate = new ItemStack (Material.CHAINMAIL_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
-		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+		chestMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 3, true);
 		chestMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
-		chestMeta.setDisplayName(this.color + "Reinforced Chainmail Chestplate");
+		chestMeta.setDisplayName(this.color + "Bulletproof Chainmail Chestplate");
 		this.chestplate.setItemMeta(chestMeta);
 		this.addRandomDamage(this.chestplate);
 		
@@ -62,13 +72,13 @@ public class UncommonZombie extends MobEquipment
 		// Boots
 		this.boots = new ItemStack (Material.CHAINMAIL_BOOTS);
 		ItemMeta bootMeta = this.boots.getItemMeta();
-		bootMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+		bootMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 3, true);
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
 		bootMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		bootMeta.setDisplayName(this.color + "Lightweight Chainmail Boots");
 		
 		// One speedy boi
-		AttributeModifier bootsMod = new AttributeModifier ("generic.movement_speed", 0.10, Operation.ADD_NUMBER);
+		AttributeModifier bootsMod = new AttributeModifier ("generic.movement_speed", 0.15, Operation.ADD_NUMBER);
 		bootMeta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, bootsMod);
 		
 		this.boots.setItemMeta(bootMeta);
