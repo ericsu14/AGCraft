@@ -1,13 +1,9 @@
 package com.joojet.plugins.mobs.monsters.spider;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -36,11 +32,7 @@ public class EnragedSpider extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 3, true);
 		
-		AttributeModifier weaponMod = new AttributeModifier (UUID.randomUUID(), "generic.attack_damage", 6.66, Operation.ADD_NUMBER, EquipmentSlot.HAND);
-		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, weaponMod);
-		
-		AttributeModifier weaponMod2 = new AttributeModifier (UUID.randomUUID(), "generic.attack_speed", 1.6, Operation.ADD_NUMBER, EquipmentSlot.HAND);
-		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, weaponMod2);
+		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 6.66, 1.6);
 		
 		weaponMeta.setDisplayName(this.color + "Fire Venom Fang");
 		ArrayList <String> weaponLore = new ArrayList <String> ();

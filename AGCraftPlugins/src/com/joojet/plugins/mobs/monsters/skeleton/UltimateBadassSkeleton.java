@@ -1,13 +1,9 @@
 package com.joojet.plugins.mobs.monsters.skeleton;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -90,9 +86,10 @@ public class UltimateBadassSkeleton extends MobEquipment
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
 		bootMeta.setDisplayName(this.color + "Lightweight Netherite Boots");
 		
-		// One speedy boi
-		AttributeModifier bootsMod = new AttributeModifier (UUID.randomUUID(), "generic.movement_speed", 0.30, Operation.MULTIPLY_SCALAR_1, EquipmentSlot.FEET);
-		bootMeta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, bootsMod);
+		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.30);
+		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 3.0, 3.0, 0.1);
+		
+		// Add back defences for boots
 		
 		this.boots.setItemMeta(bootMeta);
 		this.addRandomDamage(this.boots);

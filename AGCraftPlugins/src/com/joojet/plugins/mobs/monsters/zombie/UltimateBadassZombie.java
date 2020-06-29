@@ -1,13 +1,9 @@
 package com.joojet.plugins.mobs.monsters.zombie;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -37,10 +33,7 @@ public class UltimateBadassZombie extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		
 		// Weapon modifier
-		AttributeModifier weaponMod = new AttributeModifier (UUID.randomUUID(), "generic.attack_damage", 12.0, Operation.ADD_NUMBER, EquipmentSlot.HAND);
-		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, weaponMod);
-		AttributeModifier weaponMod2 = new AttributeModifier (UUID.randomUUID(), "generic.attack_speed", 1.0, Operation.ADD_NUMBER, EquipmentSlot.HAND);
-		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, weaponMod2);
+		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 12.0, 1.0);
 		
 		// Weapon name and lore
 		weaponMeta.setDisplayName(this.color + "A Spiritual Travesty");
@@ -89,8 +82,8 @@ public class UltimateBadassZombie extends MobEquipment
 		bootMeta.setDisplayName(this.color + "Lightweight Netherite Boots");
 		
 		// One speedy boi
-		AttributeModifier bootsMod = new AttributeModifier (UUID.randomUUID(), "generic.movement_speed", 0.15, Operation.MULTIPLY_SCALAR_1, EquipmentSlot.FEET);
-		bootMeta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, bootsMod);
+		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.25);
+		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 3.0, 3.0, 0.1);
 	
 		this.boots.setItemMeta(bootMeta);
 		this.addRandomDamage(this.boots);

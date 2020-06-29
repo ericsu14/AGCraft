@@ -34,11 +34,7 @@ public class BadassZombie extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 2, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		
-		AttributeModifier weaponMod = new AttributeModifier (UUID.randomUUID(), "generic.attack_damage", 10.5, Operation.ADD_NUMBER, EquipmentSlot.HAND);
-		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, weaponMod);
-		
-		AttributeModifier weaponMod2 = new AttributeModifier (UUID.randomUUID(), "generic.attack_speed", 1.6, Operation.ADD_NUMBER, EquipmentSlot.HAND);
-		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, weaponMod2);
+		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 10.0, 1.6);
 		
 		ArrayList <String> weaponLore = new ArrayList <String> ();
 		weaponLore.add(this.color + "These zombies were formally");
@@ -87,6 +83,8 @@ public class BadassZombie extends MobEquipment
 		// One speedy boi
 		AttributeModifier bootsMod = new AttributeModifier (UUID.randomUUID(), "generic.movement_speed", 0.10, Operation.MULTIPLY_SCALAR_1, EquipmentSlot.FEET);
 		bootMeta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, bootsMod);
+		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.20);
+		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 2.0, 0.0, 0.0);
 		
 		this.boots.setItemMeta(bootMeta);
 		this.addRandomDamage(this.boots);

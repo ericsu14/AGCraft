@@ -1,13 +1,9 @@
 package com.joojet.plugins.mobs.monsters.zombie;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -28,12 +24,7 @@ public class UncommonZombie extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		
-		AttributeModifier weaponMod = new AttributeModifier (UUID.randomUUID(), "generic.attack_damage", 8.0, Operation.ADD_NUMBER, EquipmentSlot.HAND);
-		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, weaponMod);
-		weaponMeta.setDisplayName(this.color + "Sharpened Iron Sword");
-		
-		AttributeModifier weaponMod2 = new AttributeModifier (UUID.randomUUID(), "generic.attack_speed", 1.6, Operation.ADD_NUMBER, EquipmentSlot.HAND);
-		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, weaponMod2);
+		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 8.0, 1.6);
 		
 		ArrayList <String> weaponLore = new ArrayList <String> ();
 		weaponLore.add(this.color + "These zombies were formally");
@@ -78,8 +69,8 @@ public class UncommonZombie extends MobEquipment
 		bootMeta.setDisplayName(this.color + "Lightweight Chainmail Boots");
 		
 		// One speedy boi
-		AttributeModifier bootsMod = new AttributeModifier (UUID.randomUUID(), "generic.movement_speed", 0.10, Operation.MULTIPLY_SCALAR_1, EquipmentSlot.FEET);
-		bootMeta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, bootsMod);
+		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.10);
+		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 1.0, 0.0, 0.0);
 		
 		this.boots.setItemMeta(bootMeta);
 		this.addRandomDamage(this.boots);
