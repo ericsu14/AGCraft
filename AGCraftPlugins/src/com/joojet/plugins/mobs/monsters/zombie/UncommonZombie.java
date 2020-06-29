@@ -19,7 +19,7 @@ public class UncommonZombie extends MobEquipment
 {
 	public UncommonZombie ()
 	{
-		this.name = "Uncommon Zombie";
+		this.name = "Bulky Zombie";
 		this.color = ChatColor.GREEN;
 		
 		// Weapon
