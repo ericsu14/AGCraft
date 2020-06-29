@@ -1,11 +1,15 @@
 package com.joojet.plugins.mobs.monsters.skeleton;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -21,7 +25,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 {
 	public UltimateBadassSkeleton ()
 	{
-		this.name = "Ultimate Badass Skeleton";
+		this.name = "#agspotted";
 		this.color = ChatColor.GOLD;
 		
 		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
@@ -32,9 +36,13 @@ public class UltimateBadassSkeleton extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.ARROW_DAMAGE, 5, true);
 		weaponMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
 		weaponMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 2, true);
-		weaponMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		
 		weaponMeta.setDisplayName(this.color + "A Spiritual Fantasy");
+		
+		ArrayList <String> weaponLore = new ArrayList <String> ();
+		weaponLore.add(this.color + "Don't even think about it");
+		weaponMeta.setLore(weaponLore);
+		
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
 		
@@ -42,7 +50,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.offhand = new ItemStack (Material.TIPPED_ARROW, 1);
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
 		tippedArrow.setBasePotionData(new PotionData (PotionType.INSTANT_DAMAGE));
-		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WITHER, 240, 2), true);
+		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WITHER, 140, 2), true);
 		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 1), true);
 		tippedArrow.setDisplayName(this.color + "Thanos Arrow");
 		this.offhand.setItemMeta(tippedArrow);
@@ -51,7 +59,6 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.helmet = new ItemStack (Material.NETHERITE_HELMET, 1);
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
 		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
-		helmetMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		helmetMeta.setDisplayName(this.color + "Dark Netherite Helmet");
 		this.helmet.setItemMeta(helmetMeta);
 		this.addRandomDamage(this.helmet);
@@ -60,7 +67,6 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.chestplate = new ItemStack (Material.NETHERITE_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
 		chestMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 4, true);
-		chestMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		chestMeta.setDisplayName(this.color + "Dark Netherite Chestplate");
 		this.chestplate.setItemMeta(chestMeta);
 		this.addRandomDamage(this.chestplate);
@@ -69,7 +75,6 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.leggings = new ItemStack (Material.NETHERITE_LEGGINGS, 1);
 		ItemMeta legMeta = this.chestplate.getItemMeta();
 		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
-		legMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		legMeta.setDisplayName(this.color + "Dark Netherite Leggings");
 		this.leggings.setItemMeta(legMeta);
 		this.addRandomDamage(this.leggings);
@@ -79,11 +84,10 @@ public class UltimateBadassSkeleton extends MobEquipment
 		ItemMeta bootMeta = this.boots.getItemMeta();
 		bootMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 4, true);
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
-		bootMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		bootMeta.setDisplayName(this.color + "Lightweight Netherite Boots");
 		
 		// One speedy boi
-		AttributeModifier bootsMod = new AttributeModifier ("generic.movement_speed", 0.15, Operation.ADD_NUMBER);
+		AttributeModifier bootsMod = new AttributeModifier (UUID.randomUUID(), "generic.movement_speed", 0.30, Operation.MULTIPLY_SCALAR_1, EquipmentSlot.FEET);
 		bootMeta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, bootsMod);
 		
 		this.boots.setItemMeta(bootMeta);

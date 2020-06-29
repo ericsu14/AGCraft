@@ -5,11 +5,11 @@ import org.bukkit.potion.PotionEffectType;
 
 public enum CustomPotionEffect 
 {
-	STRENGTH (PotionEffectType.INCREASE_DAMAGE, 1), 
-	SPEED (PotionEffectType.SPEED, 1),
-	JUMP_BOOST (PotionEffectType.JUMP, 1),
-	RESISTANCE (PotionEffectType.DAMAGE_RESISTANCE, 1),
-	FIRE_RESISTANCE (PotionEffectType.FIRE_RESISTANCE, 1);
+	STRENGTH (PotionEffectType.INCREASE_DAMAGE, 0), 
+	SPEED (PotionEffectType.SPEED, 0),
+	JUMP_BOOST (PotionEffectType.JUMP, 0),
+	RESISTANCE (PotionEffectType.DAMAGE_RESISTANCE, 0),
+	FIRE_RESISTANCE (PotionEffectType.FIRE_RESISTANCE, 0);
 	
 	private PotionEffect effect;
 	private CustomPotionEffect (PotionEffectType effect, int amplifier)

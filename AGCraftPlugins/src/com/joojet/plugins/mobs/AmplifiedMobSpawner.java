@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -77,42 +78,42 @@ public class AmplifiedMobSpawner implements Listener
 		if (items[0] != null)
 		{
 			equipment.setHelmet(items[0]);
-			equipment.setHelmetDropChance(0.5f);
+			equipment.setHelmetDropChance(0.125f);
 		}
 		
 		// Chestplate
 		if (items[1] != null)
 		{
 			equipment.setChestplate(items[1]);
-			equipment.setChestplateDropChance(0.3f);
+			equipment.setChestplateDropChance(0.125f);
 		}
 		
 		// Leggings
 		if (items[2] != null)
 		{
 			equipment.setLeggings(items[2]);
-			equipment.setLeggingsDropChance(0.3f);
+			equipment.setLeggingsDropChance(0.125f);
 		}
 		
 		// Boots
 		if (items[3] != null)
 		{
 			equipment.setBoots(items[3]);
-			equipment.setBootsDropChance(0.5f);
+			equipment.setBootsDropChance(0.125f);
 		}
 
 		// Weapon
 		if (items[4] != null)
 		{
 			equipment.setItemInMainHand(items[4]);
-			equipment.setItemInMainHandDropChance(0.3f);
+			equipment.setItemInMainHandDropChance(0.075f);
 		}
 		
 		// Offhand
 		if (items[5] != null)
 		{
 			equipment.setItemInOffHand(items[5]);
-			equipment.setItemInOffHandDropChance(0.1f);
+			equipment.setItemInOffHandDropChance(0.125f);
 		}
 		
 		// Name
@@ -125,6 +126,7 @@ public class AmplifiedMobSpawner implements Listener
 		if (mobEquipment.getHealth() > 0)
 		{
 			Damageable dmg = (Damageable) entity;
+			entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(mobEquipment.getHealth());
 			dmg.setHealth(mobEquipment.getHealth());
 		}
 		

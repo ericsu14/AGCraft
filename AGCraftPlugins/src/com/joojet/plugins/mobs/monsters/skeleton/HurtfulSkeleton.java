@@ -1,11 +1,14 @@
 package com.joojet.plugins.mobs.monsters.skeleton;
 
+import java.util.UUID;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -14,6 +17,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
+import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 
 public class HurtfulSkeleton extends MobEquipment  
@@ -23,15 +27,16 @@ public class HurtfulSkeleton extends MobEquipment
 		this.name = "Hurtful Skeleton";
 		this.color = ChatColor.LIGHT_PURPLE;
 		
+		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
+		
 		// Weapon
 		this.weapon = new ItemStack(Material.BOW, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
 		weaponMeta.addEnchant(Enchantment.ARROW_DAMAGE, 4, true);
 		weaponMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
 		weaponMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, true);
-		weaponMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		
-		weaponMeta.setDisplayName(this.color + "Chaos Bow");
+		weaponMeta.setDisplayName(this.color + "Hurtful Bow");
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
 		
@@ -46,7 +51,6 @@ public class HurtfulSkeleton extends MobEquipment
 		this.helmet = new ItemStack (Material.IRON_HELMET, 1);
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
 		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
-		helmetMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		helmetMeta.setDisplayName(this.color + "Reinforced Iron Helmet");
 		this.helmet.setItemMeta(helmetMeta);
 		this.addRandomDamage(this.helmet);
@@ -55,7 +59,6 @@ public class HurtfulSkeleton extends MobEquipment
 		this.chestplate = new ItemStack (Material.IRON_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
 		chestMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 4, true);
-		chestMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		chestMeta.setDisplayName(this.color + "Bulletproof Iron Chestplate");
 		this.chestplate.setItemMeta(chestMeta);
 		this.addRandomDamage(this.chestplate);
@@ -64,7 +67,6 @@ public class HurtfulSkeleton extends MobEquipment
 		this.leggings = new ItemStack (Material.IRON_LEGGINGS, 1);
 		ItemMeta legMeta = this.chestplate.getItemMeta();
 		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
-		legMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		legMeta.setDisplayName(this.color + "Reinforced Iron Leggings");
 		this.leggings.setItemMeta(legMeta);
 		this.addRandomDamage(this.leggings);
@@ -74,11 +76,10 @@ public class HurtfulSkeleton extends MobEquipment
 		ItemMeta bootMeta = this.boots.getItemMeta();
 		bootMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 4, true);
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
-		bootMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		bootMeta.setDisplayName(this.color + "Lightweight Chainmail Boots");
 		
 		// One speedy boi
-		AttributeModifier bootsMod = new AttributeModifier ("generic.movement_speed", 0.10, Operation.ADD_NUMBER);
+		AttributeModifier bootsMod = new AttributeModifier (UUID.randomUUID(), "generic.movement_speed", 0.20, Operation.MULTIPLY_SCALAR_1, EquipmentSlot.FEET);
 		bootMeta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, bootsMod);
 		
 		this.boots.setItemMeta(bootMeta);

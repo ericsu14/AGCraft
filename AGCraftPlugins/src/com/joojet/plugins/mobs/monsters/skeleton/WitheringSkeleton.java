@@ -20,6 +20,7 @@ public class WitheringSkeleton extends MobEquipment
 	{
 		this.name = "Rare Withering Skeleton";
 		this.color = ChatColor.BLUE;
+		this.health = 30;
 		
 		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
 		
@@ -37,7 +38,8 @@ public class WitheringSkeleton extends MobEquipment
 		this.offhand = new ItemStack (Material.TIPPED_ARROW, 1);
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
 		tippedArrow.setBasePotionData(new PotionData (PotionType.INSTANT_DAMAGE));
-		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WITHER, 140, 2), true);
+		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WITHER, 140, 1), true);
+		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 0), true);
 		this.offhand.setItemMeta(tippedArrow);
 		
 		// Helmet
