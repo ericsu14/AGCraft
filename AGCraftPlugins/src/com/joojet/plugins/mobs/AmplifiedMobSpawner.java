@@ -17,6 +17,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 
+import com.joojet.plugins.mobs.allies.golem.GolemTypes;
+import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 import com.joojet.plugins.mobs.monsters.skeleton.SkeletonTypes;
 import com.joojet.plugins.mobs.monsters.spider.SpiderTypes;
@@ -28,13 +30,26 @@ public class AmplifiedMobSpawner implements Listener
 	private final double chance = 0.2;
 	
 	private Random rand = new Random ();
+	
 	private ZombieTypes zombieTypes = new ZombieTypes ();
 	private SkeletonTypes skeletonTypes = new SkeletonTypes();
 	private SpiderTypes spiderTypes = new SpiderTypes();
+	private GolemTypes golemTypes = new GolemTypes();
+	private SnowmanTypes snowmanTypes = new SnowmanTypes();
 	
 	public void onEnable ()
 	{
 		Bukkit.getPluginManager().registerEvents(this, (Plugin) this);
+	}
+	
+	/** Returns true if the passed spawn reason agrees with the set filters */
+	public boolean reasonFilter (SpawnReason reason)
+	{
+		return (reason.equals (SpawnReason.NATURAL) ||
+				reason.equals (SpawnReason.BUILD_SNOWMAN) ||
+				reason.equals (SpawnReason.BUILD_IRONGOLEM) ||
+				reason.equals (SpawnReason.VILLAGE_DEFENSE));
+				
 	}
 	
 	@EventHandler
@@ -45,7 +60,7 @@ public class AmplifiedMobSpawner implements Listener
 		LivingEntity entity = event.getEntity();
 		
 		// Do not alter any mob that isn't spawned into the world naturally or dice roll fails
-		if (!reason.equals(SpawnReason.NATURAL) || rand.nextDouble() > chance)
+		if ((!reasonFilter(reason) || rand.nextDouble() > chance))
 		{
 			return;
 		}
@@ -67,6 +82,12 @@ public class AmplifiedMobSpawner implements Listener
 			case SPIDER:
 				mobEquipment = spiderTypes.getRandomEquipment();
 				break;
+			case IRON_GOLEM:
+				mobEquipment = golemTypes.getRandomEquipment();
+				break;
+			case SNOWMAN:
+				mobEquipment = snowmanTypes.getRandomEquipment();
+				break;
 			default:
 				return;
 		}
@@ -78,48 +99,49 @@ public class AmplifiedMobSpawner implements Listener
 		if (items[0] != null)
 		{
 			equipment.setHelmet(items[0]);
-			equipment.setHelmetDropChance(0.125f);
+			equipment.setHelmetDropChance(0.075f);
 		}
 		
 		// Chestplate
 		if (items[1] != null)
 		{
 			equipment.setChestplate(items[1]);
-			equipment.setChestplateDropChance(0.125f);
+			equipment.setChestplateDropChance(0.075f);
 		}
 		
 		// Leggings
 		if (items[2] != null)
 		{
 			equipment.setLeggings(items[2]);
-			equipment.setLeggingsDropChance(0.125f);
+			equipment.setLeggingsDropChance(0.075f);
 		}
 		
 		// Boots
 		if (items[3] != null)
 		{
 			equipment.setBoots(items[3]);
-			equipment.setBootsDropChance(0.125f);
+			equipment.setBootsDropChance(0.075f);
 		}
 
 		// Weapon
 		if (items[4] != null)
 		{
 			equipment.setItemInMainHand(items[4]);
-			equipment.setItemInMainHandDropChance(0.075f);
+			equipment.setItemInMainHandDropChance(0.025f);
 		}
 		
 		// Offhand
 		if (items[5] != null)
 		{
 			equipment.setItemInOffHand(items[5]);
-			equipment.setItemInOffHandDropChance(0.125f);
+			equipment.setItemInOffHandDropChance(0.05f);
 		}
 		
 		// Name
 		if (!mobEquipment.getName().equals(""))
 		{
 			entity.setCustomName(mobEquipment.getChatColor() + "" + mobEquipment.getName());
+			entity.setCustomNameVisible(true);
 		}
 		
 		// Custom health
@@ -137,6 +159,12 @@ public class AmplifiedMobSpawner implements Listener
 			{
 				entity.addPotionEffect(effect);
 			}
+		}
+		
+		// Forever ablaze
+		if (mobEquipment.onFire())
+		{
+			entity.setFireTicks(9999999);
 		}
 		
 		System.out.println ("Changed " + entity.getName() + " propetries to " + mobEquipment.getName());

@@ -22,6 +22,7 @@ public class EnragedSpider extends MobEquipment
 	{
 		this.name = "Enraged Spider";
 		this.color = ChatColor.LIGHT_PURPLE;
+		this.onFire = true;
 		this.health = 20.0;
 		
 		// Custom potion effects

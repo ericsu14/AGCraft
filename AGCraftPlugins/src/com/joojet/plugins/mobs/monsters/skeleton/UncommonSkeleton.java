@@ -40,6 +40,7 @@ public class UncommonSkeleton extends MobEquipment
 		this.offhand = new ItemStack (Material.TIPPED_ARROW, 1);
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
 		tippedArrow.setBasePotionData(new PotionData (PotionType.WEAKNESS));
+		tippedArrow.removeCustomEffect(PotionEffectType.WEAKNESS);
 		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WEAKNESS, 140, 1), true);
 		tippedArrow.setDisplayName(this.color + "Nerf the Player");
 		this.offhand.setItemMeta(tippedArrow);

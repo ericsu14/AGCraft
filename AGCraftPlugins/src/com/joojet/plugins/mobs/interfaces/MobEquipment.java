@@ -19,6 +19,7 @@ public abstract class MobEquipment
 	protected ItemStack boots;
 	protected ItemStack weapon;
 	protected ItemStack offhand;
+	protected boolean onFire;
 	protected ArrayList <PotionEffect> effects;
 	
 	public MobEquipment ()
@@ -27,6 +28,7 @@ public abstract class MobEquipment
 		this.color = ChatColor.WHITE;
 		// -1 represents default health
 		this.health = -1.0;
+		this.onFire = false;
 		this.effects = new ArrayList <PotionEffect> ();
 	}
 	
@@ -93,6 +95,11 @@ public abstract class MobEquipment
 	public ArrayList <PotionEffect> getEffects ()
 	{
 		return this.effects;
+	}
+	
+	public boolean onFire ()
+	{
+		return this.onFire;
 	}
 	
 	public void addRandomDamage (ItemStack item)
