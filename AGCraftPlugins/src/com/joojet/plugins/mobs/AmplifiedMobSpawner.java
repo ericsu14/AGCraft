@@ -27,7 +27,7 @@ import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
 public class AmplifiedMobSpawner implements Listener 
 {
 	// Chance of spawning a super monster
-	private final double chance = 0.2;
+	private final double chance = 0.15;
 	
 	private Random rand = new Random ();
 	
@@ -65,7 +65,7 @@ public class AmplifiedMobSpawner implements Listener
 			return;
 		}
 		
-		System.out.println ("Captured custom mob spawn event");
+		// System.out.println ("Captured custom mob spawn event");
 		
 		MobEquipment mobEquipment;
 		switch (type)
@@ -99,35 +99,35 @@ public class AmplifiedMobSpawner implements Listener
 		if (items[0] != null)
 		{
 			equipment.setHelmet(items[0]);
-			equipment.setHelmetDropChance(0.075f);
+			equipment.setHelmetDropChance(0.03f);
 		}
 		
 		// Chestplate
 		if (items[1] != null)
 		{
 			equipment.setChestplate(items[1]);
-			equipment.setChestplateDropChance(0.075f);
+			equipment.setChestplateDropChance(0.03f);
 		}
 		
 		// Leggings
 		if (items[2] != null)
 		{
 			equipment.setLeggings(items[2]);
-			equipment.setLeggingsDropChance(0.075f);
+			equipment.setLeggingsDropChance(0.03f);
 		}
 		
 		// Boots
 		if (items[3] != null)
 		{
 			equipment.setBoots(items[3]);
-			equipment.setBootsDropChance(0.075f);
+			equipment.setBootsDropChance(0.03f);
 		}
 
 		// Weapon
 		if (items[4] != null)
 		{
 			equipment.setItemInMainHand(items[4]);
-			equipment.setItemInMainHandDropChance(0.025f);
+			equipment.setItemInMainHandDropChance(0.01f);
 		}
 		
 		// Offhand
@@ -141,7 +141,6 @@ public class AmplifiedMobSpawner implements Listener
 		if (!mobEquipment.getName().equals(""))
 		{
 			entity.setCustomName(mobEquipment.getChatColor() + "" + mobEquipment.getName());
-			entity.setCustomNameVisible(true);
 		}
 		
 		// Custom health
@@ -167,6 +166,6 @@ public class AmplifiedMobSpawner implements Listener
 			entity.setFireTicks(9999999);
 		}
 		
-		System.out.println ("Changed " + entity.getName() + " propetries to " + mobEquipment.getName());
+		// System.out.println ("Changed " + entity.getName() + " propetries to " + mobEquipment.getName());
 	}
 }

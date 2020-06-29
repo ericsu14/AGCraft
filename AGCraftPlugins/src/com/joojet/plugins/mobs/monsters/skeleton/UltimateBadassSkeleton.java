@@ -59,6 +59,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.helmet = new ItemStack (Material.NETHERITE_HELMET, 1);
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
 		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+		helmetMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		helmetMeta.setDisplayName(this.color + "Dark Netherite Helmet");
 		this.helmet.setItemMeta(helmetMeta);
 		this.addRandomDamage(this.helmet);
@@ -75,6 +76,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.leggings = new ItemStack (Material.NETHERITE_LEGGINGS, 1);
 		ItemMeta legMeta = this.chestplate.getItemMeta();
 		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+		legMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		legMeta.setDisplayName(this.color + "Dark Netherite Leggings");
 		this.leggings.setItemMeta(legMeta);
 		this.addRandomDamage(this.leggings);
@@ -82,6 +84,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		// Boots
 		this.boots = new ItemStack (Material.NETHERITE_BOOTS);
 		ItemMeta bootMeta = this.boots.getItemMeta();
+		bootMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		bootMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 4, true);
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
 		bootMeta.setDisplayName(this.color + "Lightweight Netherite Boots");

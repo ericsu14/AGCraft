@@ -33,6 +33,10 @@ public class UltimateBadassZombie extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+		weaponMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
+		
+		// Offhand (loot)
+		this.offhand = new ItemStack (Material.ANCIENT_DEBRIS, 2);
 		
 		// Weapon modifier
 		AttributeModifier weaponMod = new AttributeModifier (UUID.randomUUID(), "generic.attack_damage", 12.0, Operation.ADD_NUMBER, EquipmentSlot.HAND);
@@ -52,6 +56,7 @@ public class UltimateBadassZombie extends MobEquipment
 		this.helmet = new ItemStack (Material.NETHERITE_HELMET, 1);
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
 		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+		helmetMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		helmetMeta.setDisplayName(this.color + "Reinforced Netherite Helmet");
 		this.helmet.setItemMeta(helmetMeta);
 		this.addRandomDamage(this.helmet);
@@ -60,6 +65,7 @@ public class UltimateBadassZombie extends MobEquipment
 		this.chestplate = new ItemStack (Material.NETHERITE_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
 		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+		chestMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		chestMeta.addEnchant(Enchantment.THORNS, 3, true);
 		chestMeta.setDisplayName(this.color + "Reinforced Netherite Chestplate");
 		this.chestplate.setItemMeta(chestMeta);
@@ -77,6 +83,7 @@ public class UltimateBadassZombie extends MobEquipment
 		this.boots = new ItemStack (Material.NETHERITE_BOOTS);
 		ItemMeta bootMeta = this.boots.getItemMeta();
 		bootMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+		bootMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
 		bootMeta.setDisplayName(this.color + "Lightweight Netherite Boots");
 		

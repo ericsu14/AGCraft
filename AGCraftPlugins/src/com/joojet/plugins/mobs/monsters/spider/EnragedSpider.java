@@ -28,6 +28,7 @@ public class EnragedSpider extends MobEquipment
 		// Custom potion effects
 		this.effects.add(CustomPotionEffect.STRENGTH.getPotionEffect());
 		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
+		this.effects.add(CustomPotionEffect.FIRE_RESISTANCE.getPotionEffect());
 		
 		// Weapon
 		this.weapon = new ItemStack(Material.STONE_SWORD, 1);
