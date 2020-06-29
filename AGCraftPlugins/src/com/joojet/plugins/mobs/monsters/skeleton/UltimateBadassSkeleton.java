@@ -29,7 +29,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		// Weapon
 		this.weapon = new ItemStack(Material.BOW, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
-		weaponMeta.addEnchant(Enchantment.ARROW_DAMAGE, 6, true);
+		weaponMeta.addEnchant(Enchantment.ARROW_DAMAGE, 5, true);
 		weaponMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
 		weaponMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 2, true);
 		weaponMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
@@ -42,7 +42,9 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.offhand = new ItemStack (Material.TIPPED_ARROW, 1);
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
 		tippedArrow.setBasePotionData(new PotionData (PotionType.INSTANT_DAMAGE));
-		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WITHER, 420, 2), true);
+		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WITHER, 240, 2), true);
+		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 1), true);
+		tippedArrow.setDisplayName(this.color + "Thanos Arrow");
 		this.offhand.setItemMeta(tippedArrow);
 		
 		// Helmet

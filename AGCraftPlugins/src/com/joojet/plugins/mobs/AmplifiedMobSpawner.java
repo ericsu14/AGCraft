@@ -77,7 +77,7 @@ public class AmplifiedMobSpawner implements Listener
 		if (items[0] != null)
 		{
 			equipment.setHelmet(items[0]);
-			equipment.setHelmetDropChance(0.05f);
+			equipment.setHelmetDropChance(0.5f);
 		}
 		
 		// Chestplate
@@ -112,7 +112,7 @@ public class AmplifiedMobSpawner implements Listener
 		if (items[5] != null)
 		{
 			equipment.setItemInOffHand(items[5]);
-			equipment.setItemInOffHandDropChance(0.3f);
+			equipment.setItemInOffHandDropChance(0.1f);
 		}
 		
 		// Name

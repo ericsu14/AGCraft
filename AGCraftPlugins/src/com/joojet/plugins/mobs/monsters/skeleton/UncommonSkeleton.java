@@ -26,8 +26,7 @@ public class UncommonSkeleton extends MobEquipment
 		// Weapon
 		this.weapon = new ItemStack(Material.BOW, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
-		weaponMeta.addEnchant(Enchantment.ARROW_DAMAGE, 3, true);
-		weaponMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
+		weaponMeta.addEnchant(Enchantment.ARROW_DAMAGE, 4, true);
 		weaponMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, true);
 		weaponMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		
