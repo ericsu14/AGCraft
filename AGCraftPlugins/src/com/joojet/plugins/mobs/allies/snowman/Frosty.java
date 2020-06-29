@@ -16,6 +16,7 @@ public class Frosty extends MobEquipment
 		this.name = "Frosty the Snowman";
 		this.color = ChatColor.AQUA;
 		this.health = 30;
+		this.showName = true;
 		
 		this.effects.add(CustomPotionEffect.RESISTANCE.getPotionEffect());
 		this.effects.add(CustomPotionEffect.WATER_BREATHING.getPotionEffect());

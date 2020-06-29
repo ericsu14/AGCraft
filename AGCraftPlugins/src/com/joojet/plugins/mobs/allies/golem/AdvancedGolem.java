@@ -12,6 +12,7 @@ public class AdvancedGolem extends MobEquipment
 		this.name = "Advanced Golem";
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.health = 200;
+		this.showName = true;
 		
 		this.effects.add(CustomPotionEffect.RESISTANCE.getPotionEffect());
 		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());

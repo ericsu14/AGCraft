@@ -15,6 +15,7 @@ public class JohnJae extends MobEquipment
 	{
 		this.name = "John Jae";
 		this.color = ChatColor.GOLD;
+		this.showName = true;
 		
 		this.effects.add(CustomPotionEffect.RESISTANCE_II.getPotionEffect());
 		this.effects.add(CustomPotionEffect.REGEN.getPotionEffect());
@@ -26,7 +27,7 @@ public class JohnJae extends MobEquipment
 		this.health = 250;
 		
 		// Chestplate
-		this.chestplate = new ItemStack (Material.IRON_CHESTPLATE, 1);
+		this.chestplate = new ItemStack (Material.NETHERITE_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
 		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
 		chestMeta.addEnchant(Enchantment.THORNS, 3, true);

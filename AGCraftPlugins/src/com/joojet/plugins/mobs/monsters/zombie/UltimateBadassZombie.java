@@ -20,8 +20,9 @@ public class UltimateBadassZombie extends MobEquipment
 {
 	public UltimateBadassZombie ()
 	{
-		this.name = "Shadow Clone Jootsu";
+		this.name = "Shadow Clone joojetsu";
 		this.color = ChatColor.GOLD;
+		this.health = 30;
 		
 		// Custom potion effects
 		this.effects.add(CustomPotionEffect.FIRE_RESISTANCE.getPotionEffect());
@@ -44,7 +45,8 @@ public class UltimateBadassZombie extends MobEquipment
 		// Weapon name and lore
 		weaponMeta.setDisplayName(this.color + "A Spiritual Travesty");
 		ArrayList <String> weaponLore = new ArrayList <String> ();
-		weaponLore.add(this.color + "100% Authentic Japanese Grade Nippon Steel");
+		weaponLore.add(this.color + "Forged from 100%");
+		weaponLore.add(this.color + "Japanese Grade Nippon Steel");
 		weaponLore.add(this.color + "folded over 9000 times.");
 		weaponMeta.setLore(weaponLore);
 		
@@ -74,6 +76,7 @@ public class UltimateBadassZombie extends MobEquipment
 		this.leggings = new ItemStack (Material.NETHERITE_LEGGINGS, 1);
 		ItemMeta legMeta = this.chestplate.getItemMeta();
 		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+		legMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		legMeta.setDisplayName(this.color + "Reinforced Netherite Leggings");
 		this.leggings.setItemMeta(legMeta);
 		this.addRandomDamage(this.leggings);
@@ -82,7 +85,6 @@ public class UltimateBadassZombie extends MobEquipment
 		this.boots = new ItemStack (Material.NETHERITE_BOOTS);
 		ItemMeta bootMeta = this.boots.getItemMeta();
 		bootMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
-		bootMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
 		bootMeta.setDisplayName(this.color + "Lightweight Netherite Boots");
 		

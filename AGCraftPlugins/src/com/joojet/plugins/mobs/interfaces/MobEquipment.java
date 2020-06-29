@@ -20,6 +20,7 @@ public abstract class MobEquipment
 	protected ItemStack weapon;
 	protected ItemStack offhand;
 	protected boolean onFire;
+	protected boolean showName;
 	protected ArrayList <PotionEffect> effects;
 	
 	public MobEquipment ()
@@ -29,6 +30,7 @@ public abstract class MobEquipment
 		// -1 represents default health
 		this.health = -1.0;
 		this.onFire = false;
+		this.showName = false;
 		this.effects = new ArrayList <PotionEffect> ();
 	}
 	
@@ -100,6 +102,11 @@ public abstract class MobEquipment
 	public boolean onFire ()
 	{
 		return this.onFire;
+	}
+	
+	public boolean showName ()
+	{
+		return this.showName;
 	}
 	
 	public void addRandomDamage (ItemStack item)

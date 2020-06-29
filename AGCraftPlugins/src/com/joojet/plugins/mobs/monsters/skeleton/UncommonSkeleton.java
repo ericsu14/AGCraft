@@ -23,14 +23,13 @@ public class UncommonSkeleton extends MobEquipment
 {
 	public UncommonSkeleton ()
 	{
-		this.name = "Uncommon Skeleton";
+		this.name = "Bulky Skeleton";
 		this.color = ChatColor.GREEN;
 		
 		// Weapon
 		this.weapon = new ItemStack(Material.BOW, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
 		weaponMeta.addEnchant(Enchantment.ARROW_DAMAGE, 4, true);
-		weaponMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, true);
 		
 		weaponMeta.setDisplayName(this.color + "Potent Bow");
 		this.weapon.setItemMeta(weaponMeta);

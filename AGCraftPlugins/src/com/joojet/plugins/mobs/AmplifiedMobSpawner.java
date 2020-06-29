@@ -141,6 +141,7 @@ public class AmplifiedMobSpawner implements Listener
 		if (!mobEquipment.getName().equals(""))
 		{
 			entity.setCustomName(mobEquipment.getChatColor() + "" + mobEquipment.getName());
+			entity.setCustomNameVisible(mobEquipment.showName());
 		}
 		
 		// Custom health
@@ -165,6 +166,7 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			entity.setFireTicks(9999999);
 		}
+		
 		
 		// System.out.println ("Changed " + entity.getName() + " propetries to " + mobEquipment.getName());
 	}

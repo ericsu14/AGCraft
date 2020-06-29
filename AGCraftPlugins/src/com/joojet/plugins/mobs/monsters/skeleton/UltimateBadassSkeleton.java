@@ -27,6 +27,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 	{
 		this.name = "#agspotted";
 		this.color = ChatColor.GOLD;
+		this.health = 30;
 		
 		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
 		

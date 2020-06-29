@@ -16,6 +16,7 @@ public class Scruffy extends MobEquipment
 		this.name = "Scruffy";
 		this.color = ChatColor.GOLD;
 		this.health = 40;
+		this.showName = true;
 		
 		this.effects.add(CustomPotionEffect.RESISTANCE.getPotionEffect());
 		this.effects.add(CustomPotionEffect.WATER_BREATHING.getPotionEffect());
