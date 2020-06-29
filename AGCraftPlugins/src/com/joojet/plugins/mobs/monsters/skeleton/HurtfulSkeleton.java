@@ -25,7 +25,7 @@ public class HurtfulSkeleton extends MobEquipment
 	public HurtfulSkeleton ()
 	{
 		this.name = "Hurtful Skeleton";
-		this.color = ChatColor.LIGHT_PURPLE;
+		this.color = ChatColor.BLUE;
 		
 		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
 		
@@ -45,6 +45,7 @@ public class HurtfulSkeleton extends MobEquipment
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
 		tippedArrow.setBasePotionData(new PotionData (PotionType.INSTANT_DAMAGE));
 		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 1), true);
+		tippedArrow.setDisplayName(this.color + "Hurtful Arrow");
 		this.offhand.setItemMeta(tippedArrow);
 		
 		// Helmet

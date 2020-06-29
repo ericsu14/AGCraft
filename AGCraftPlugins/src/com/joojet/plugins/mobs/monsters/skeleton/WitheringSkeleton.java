@@ -19,7 +19,7 @@ public class WitheringSkeleton extends MobEquipment
 	public WitheringSkeleton ()
 	{
 		this.name = "Rare Withering Skeleton";
-		this.color = ChatColor.BLUE;
+		this.color = ChatColor.LIGHT_PURPLE;
 		this.health = 30;
 		
 		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
@@ -27,10 +27,10 @@ public class WitheringSkeleton extends MobEquipment
 		// Weapon
 		this.weapon = new ItemStack(Material.BOW, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
-		weaponMeta.addEnchant(Enchantment.ARROW_DAMAGE, 3, true);
-		weaponMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
+		weaponMeta.addEnchant(Enchantment.ARROW_DAMAGE, 5, true);
+		weaponMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
 		
-		weaponMeta.setDisplayName(this.color + "Chaos Bow");
+		weaponMeta.setDisplayName(this.color + "Angel of Death");
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
 		
@@ -40,6 +40,7 @@ public class WitheringSkeleton extends MobEquipment
 		tippedArrow.setBasePotionData(new PotionData (PotionType.INSTANT_DAMAGE));
 		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WITHER, 140, 1), true);
 		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 0), true);
+		tippedArrow.setDisplayName(this.color + "Withering Arrow");
 		this.offhand.setItemMeta(tippedArrow);
 		
 		// Helmet
