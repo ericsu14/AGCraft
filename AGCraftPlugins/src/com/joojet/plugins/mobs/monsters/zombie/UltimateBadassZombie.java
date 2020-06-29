@@ -39,6 +39,8 @@ public class UltimateBadassZombie extends MobEquipment
 		// Weapon modifier
 		AttributeModifier weaponMod = new AttributeModifier (UUID.randomUUID(), "generic.attack_damage", 12.0, Operation.ADD_NUMBER, EquipmentSlot.HAND);
 		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, weaponMod);
+		AttributeModifier weaponMod2 = new AttributeModifier (UUID.randomUUID(), "generic.attack_speed", 1.0, Operation.ADD_NUMBER, EquipmentSlot.HAND);
+		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, weaponMod2);
 		
 		// Weapon name and lore
 		weaponMeta.setDisplayName(this.color + "A Spiritual Travesty");
