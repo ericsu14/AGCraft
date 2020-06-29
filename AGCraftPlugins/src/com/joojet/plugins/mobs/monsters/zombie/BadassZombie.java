@@ -40,9 +40,9 @@ public class BadassZombie extends MobEquipment
 		ArrayList <String> weaponLore = new ArrayList <String> ();
 		weaponLore.add(this.color + "These zombies were formally");
 		weaponLore.add(this.color + "avengers level weebs and used");
-		weaponLore.add(this.color + " 7000 grit waterstone to");
+		weaponLore.add(this.color + " 10000 grit waterstone to");
 		weaponLore.add(this.color + "sharpen this sword.");
-		weaponLore.add(this.color + "It is now as sharp as diamond.");
+		weaponLore.add(this.color + "It is now sharper than diamond.");
 		weaponMeta.setLore(weaponLore);
 		
 		weaponMeta.setDisplayName(this.color + "Enhanced Iron Sword");
