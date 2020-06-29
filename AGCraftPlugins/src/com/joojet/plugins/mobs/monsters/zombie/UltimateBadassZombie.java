@@ -27,6 +27,7 @@ public class UltimateBadassZombie extends MobEquipment
 		// Custom potion effects
 		this.effects.add(CustomPotionEffect.FIRE_RESISTANCE.getPotionEffect());
 		this.effects.add(CustomPotionEffect.STRENGTH.getPotionEffect());
+		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
 		
 		// Weapon
 		this.weapon = new ItemStack(Material.NETHERITE_AXE, 1);
@@ -34,9 +35,6 @@ public class UltimateBadassZombie extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-		
-		// Offhand (loot)
-		this.offhand = new ItemStack (Material.ANCIENT_DEBRIS, 2);
 		
 		// Weapon modifier
 		AttributeModifier weaponMod = new AttributeModifier (UUID.randomUUID(), "generic.attack_damage", 12.0, Operation.ADD_NUMBER, EquipmentSlot.HAND);
