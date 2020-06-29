@@ -1,27 +1,35 @@
 package com.joojet.plugins.mobs.enums;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 import com.joojet.plugins.mobs.monsters.zombie.*;
 
-public enum ZombieTypes {
-	UNCOMMON_ZOMBIE (new UncommonZombie());
+public class ZombieTypes 
+{
+	private ArrayList <MobEquipment> equipmentList;
 	
-	private MobEquipment equipment;
-	private ZombieTypes (MobEquipment equip)
+	public ZombieTypes ()
 	{
-		this.equipment = equip;
+		equipmentList = new ArrayList <MobEquipment> ();
+		this.addEquipment(new UncommonZombie(), 4);
+		this.addEquipment(new BadassZombie(), 2);
+		this.addEquipment(new UltimateBadassZombie(), 1);
 	}
 	
-	public MobEquipment getEquipment ()
+	public void addEquipment (MobEquipment equipment, int weight)
 	{
-		return this.equipment;
+		for (int i = 0; i < weight; ++i)
+		{
+			equipmentList.add(equipment);
+		}
 	}
 	
-	public static MobEquipment getRandomEquipment ()
+	public MobEquipment getRandomEquipment ()
 	{
-		Random rand = new Random();
-		return values() [rand.nextInt(values().length)].getEquipment();
+		int n = equipmentList.size();
+		Random rand = new Random ();
+		return equipmentList.get(rand.nextInt(n));
 	}
 }

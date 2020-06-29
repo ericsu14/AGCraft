@@ -14,6 +14,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.potion.PotionEffect;
 
 import com.joojet.plugins.mobs.enums.ZombieTypes;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
@@ -24,6 +25,7 @@ public class AmplifiedMobSpawner implements Listener
 	private final double chance = 0.2;
 	
 	private Random rand = new Random ();
+	private ZombieTypes zombieTypes = new ZombieTypes ();
 	
 	public void onEnable ()
 	{
@@ -49,7 +51,7 @@ public class AmplifiedMobSpawner implements Listener
 		switch (type)
 		{
 			case ZOMBIE:
-				mobEquipment = ZombieTypes.getRandomEquipment();
+				mobEquipment = zombieTypes.getRandomEquipment();
 				break;
 			default:
 				return;
@@ -107,6 +109,15 @@ public class AmplifiedMobSpawner implements Listener
 			entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(mobEquipment.getHealth());
 			Damageable dmg = (Damageable) entity;
 			dmg.setHealth(mobEquipment.getHealth());
+		}
+		
+		// Potion effects
+		if (!mobEquipment.getEffects().isEmpty())
+		{
+			for (PotionEffect effect : mobEquipment.getEffects())
+			{
+				entity.addPotionEffect(effect);
+			}
 		}
 		
 		System.out.println ("Changed " + entity.getName() + " propetries to " + mobEquipment.getName());

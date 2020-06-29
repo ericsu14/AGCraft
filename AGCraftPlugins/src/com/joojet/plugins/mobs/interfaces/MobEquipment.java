@@ -90,6 +90,11 @@ public abstract class MobEquipment
 		return this.health;
 	}
 	
+	public ArrayList <PotionEffect> getEffects ()
+	{
+		return this.effects;
+	}
+	
 	public void addRandomDamage (ItemStack item)
 	{
 		Damageable dmg = (Damageable) item.getItemMeta();
