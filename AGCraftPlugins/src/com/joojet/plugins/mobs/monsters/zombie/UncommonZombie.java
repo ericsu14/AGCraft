@@ -32,6 +32,9 @@ public class UncommonZombie extends MobEquipment
 		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, weaponMod);
 		weaponMeta.setDisplayName(this.color + "Sharpened Iron Sword");
 		
+		AttributeModifier weaponMod2 = new AttributeModifier (UUID.randomUUID(), "generic.attack_speed", 1.6, Operation.ADD_NUMBER, EquipmentSlot.HAND);
+		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, weaponMod2);
+		
 		ArrayList <String> weaponLore = new ArrayList <String> ();
 		weaponLore.add(this.color + "These zombies were formally");
 		weaponLore.add(this.color + "avengers level weebs and used");

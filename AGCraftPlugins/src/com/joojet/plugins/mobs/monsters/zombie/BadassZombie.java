@@ -37,6 +37,9 @@ public class BadassZombie extends MobEquipment
 		AttributeModifier weaponMod = new AttributeModifier (UUID.randomUUID(), "generic.attack_damage", 10.5, Operation.ADD_NUMBER, EquipmentSlot.HAND);
 		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, weaponMod);
 		
+		AttributeModifier weaponMod2 = new AttributeModifier (UUID.randomUUID(), "generic.attack_speed", 1.6, Operation.ADD_NUMBER, EquipmentSlot.HAND);
+		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, weaponMod2);
+		
 		ArrayList <String> weaponLore = new ArrayList <String> ();
 		weaponLore.add(this.color + "These zombies were formally");
 		weaponLore.add(this.color + "avengers level weebs and used");

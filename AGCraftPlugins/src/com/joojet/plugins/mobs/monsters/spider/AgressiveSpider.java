@@ -33,6 +33,9 @@ public class AgressiveSpider extends MobEquipment
 		AttributeModifier weaponMod = new AttributeModifier (UUID.randomUUID(), "generic.attack_damage", 8, Operation.ADD_NUMBER, EquipmentSlot.HAND);
 		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, weaponMod);
 		
+		AttributeModifier weaponMod2 = new AttributeModifier (UUID.randomUUID(), "generic.attack_speed", 1.6, Operation.ADD_NUMBER, EquipmentSlot.HAND);
+		weaponMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, weaponMod2);
+		
 		weaponMeta.setDisplayName(this.color + "Hardened Spider Fang");
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
