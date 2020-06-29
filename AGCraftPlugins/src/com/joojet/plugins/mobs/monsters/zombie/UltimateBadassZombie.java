@@ -33,7 +33,6 @@ public class UltimateBadassZombie extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-		weaponMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		
 		// Offhand (loot)
 		this.offhand = new ItemStack (Material.ANCIENT_DEBRIS, 2);
