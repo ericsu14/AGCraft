@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -29,7 +28,6 @@ public class EnragedSpider extends MobEquipment
 		// Weapon
 		this.weapon = new ItemStack(Material.STONE_SWORD, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
-		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 6.0, 2.0);
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 3, true);
 		

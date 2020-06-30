@@ -17,14 +17,12 @@ public class UncommonZombie extends MobEquipment
 		this.color = ChatColor.GREEN;
 		
 		// Weapon
-		this.weapon = new ItemStack(Material.IRON_SWORD, 1);
+		this.weapon = new ItemStack(Material.STONE_SWORD, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
-		
-		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 7.0, 2.2);
 		
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-		weaponMeta.setDisplayName(this.color + "Enhanced Iron Sword");
+		weaponMeta.setDisplayName(this.color + "Enhanced Stone Sword");
 		
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);

@@ -25,7 +25,6 @@ public class BadassZombie extends MobEquipment
 		
 		// Custom potion effects
 		this.effects.add(CustomPotionEffect.FIRE_RESISTANCE.getPotionEffect());
-		this.effects.add(CustomPotionEffect.STRENGTH.getPotionEffect());
 		
 		// Weapon
 		this.weapon = new ItemStack(Material.IRON_SWORD, 1);
@@ -61,7 +60,7 @@ public class BadassZombie extends MobEquipment
 		this.chestplate = new ItemStack (Material.DIAMOND_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
 		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
-		chestMeta.addEnchant(Enchantment.THORNS, 3, true);
+		chestMeta.addEnchant(Enchantment.THORNS, 2, true);
 		chestMeta.setDisplayName(this.color + "Reinforced Diamond Chestplate");
 		this.chestplate.setItemMeta(chestMeta);
 		this.addRandomDamage(this.chestplate);

@@ -85,7 +85,7 @@ public class AmplifiedMobSpawner implements Listener
 	public void makeRaiderNameVisible (LivingEntity entity, EntityType type)
 	{
 		StringBuilder name = new StringBuilder (type.name().toLowerCase());
-		name.replace(0, 0, type.name().toUpperCase().substring(0,0));
+		name.replace(0, 1, type.name().toUpperCase().substring(0,1));
 		name.append(" Raider");
 		entity.setCustomName(ChatColor.RED + name.toString());
 		entity.setCustomNameVisible(true);
