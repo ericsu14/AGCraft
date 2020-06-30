@@ -25,9 +25,9 @@ public class AgressiveSpider extends MobEquipment
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
 		
-		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 8.0, 1.6);
+		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 3.0, 1.6);
 		
-		weaponMeta.setDisplayName(this.color + "Hardened Spider Fang");
+		weaponMeta.setDisplayName(this.color + "Reinforced Spider Fang");
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
 		

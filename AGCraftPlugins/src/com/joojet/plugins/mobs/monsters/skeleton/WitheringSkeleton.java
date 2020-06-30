@@ -18,7 +18,7 @@ public class WitheringSkeleton extends MobEquipment
 {
 	public WitheringSkeleton ()
 	{
-		this.name = "Rare Withering Skeleton";
+		this.name = "Withering Skeleton";
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.health = 30;
 		

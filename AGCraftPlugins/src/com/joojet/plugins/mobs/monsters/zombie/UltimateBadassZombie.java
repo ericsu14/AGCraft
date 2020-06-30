@@ -19,6 +19,7 @@ public class UltimateBadassZombie extends MobEquipment
 		this.name = "Shadow Clone joojetsu";
 		this.color = ChatColor.GOLD;
 		this.health = 30;
+		this.showName = true;
 		
 		// Custom potion effects
 		this.effects.add(CustomPotionEffect.FIRE_RESISTANCE.getPotionEffect());
@@ -33,7 +34,7 @@ public class UltimateBadassZombie extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		
 		// Weapon modifier
-		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 12.0, 1.0);
+		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 4.0, 1.0);
 		
 		// Weapon name and lore
 		weaponMeta.setDisplayName(this.color + "A Spiritual Travesty");

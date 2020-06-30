@@ -24,7 +24,7 @@ public class UncommonZombie extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		
-		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 8.0, 1.6);
+		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 2.0, 1.6);
 		
 		ArrayList <String> weaponLore = new ArrayList <String> ();
 		weaponLore.add(this.color + "These zombies were formally");

@@ -167,7 +167,6 @@ public class AmplifiedMobSpawner implements Listener
 			entity.setFireTicks(9999999);
 		}
 		
-		
 		// System.out.println ("Changed " + entity.getName() + " propetries to " + mobEquipment.getName());
 	}
 }

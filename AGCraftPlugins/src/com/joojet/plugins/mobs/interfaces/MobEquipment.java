@@ -136,7 +136,7 @@ public abstract class MobEquipment
 		
 		if (attackSpeed > 0.0)
 		{
-			AttributeModifier attackSpeedMod = new AttributeModifier (UUID.randomUUID(), "generic.attack_speed", attackSpeed, Operation.ADD_NUMBER, slot);
+			AttributeModifier attackSpeedMod = new AttributeModifier (UUID.randomUUID(), "generic.attack_speed", -attackSpeed, Operation.ADD_NUMBER, slot);
 			meta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, attackSpeedMod);
 		}
 	}
