@@ -7,11 +7,13 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
@@ -28,6 +30,9 @@ public class AmplifiedMobSpawner implements Listener
 {
 	// Chance of spawning a super monster
 	private final double chance = 0.15;
+	
+	// Show debug info if set to true
+	private final boolean debug = false;
 	
 	private Random rand = new Random ();
 	
@@ -50,6 +55,28 @@ public class AmplifiedMobSpawner implements Listener
 				reason.equals (SpawnReason.BUILD_IRONGOLEM) ||
 				reason.equals (SpawnReason.VILLAGE_DEFENSE));
 				
+	}
+	
+	/** For debugging purposes */
+	@EventHandler
+	public void onPlayerAttack (EntityDamageByEntityEvent event)
+	{
+		if (!debug)
+		{
+			return;
+		}
+		
+		if (event.getDamager() instanceof Player)
+		{
+			Player p = (Player) event.getDamager();
+			p.sendMessage("Dealt " + event.getDamage() + " damage.");
+		}
+		
+		else if (event.getEntity() instanceof Player)
+		{
+			Player p = (Player) event.getEntity();
+			p.sendMessage("Taken " + event.getDamage() + " damage.");
+		}
 	}
 	
 	@EventHandler

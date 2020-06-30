@@ -39,7 +39,7 @@ public class HurtfulSkeleton extends MobEquipment
 		this.offhand = new ItemStack (Material.TIPPED_ARROW, 1);
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
 		tippedArrow.setBasePotionData(new PotionData (PotionType.INSTANT_DAMAGE));
-		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 1), true);
+		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 0), true);
 		tippedArrow.setDisplayName(this.color + "Hurtful Arrow");
 		this.offhand.setItemMeta(tippedArrow);
 		
@@ -75,7 +75,7 @@ public class HurtfulSkeleton extends MobEquipment
 		bootMeta.setDisplayName(this.color + "Lightweight Chainmail Boots");
 		
 		// One speedy boi
-		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.20);
+		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.15);
 		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 2.0, 0.0, 0.0);
 		
 		this.boots.setItemMeta(bootMeta);

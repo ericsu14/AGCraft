@@ -25,7 +25,7 @@ public class UncommonSkeleton extends MobEquipment
 		// Weapon
 		this.weapon = new ItemStack(Material.BOW, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
-		weaponMeta.addEnchant(Enchantment.ARROW_DAMAGE, 4, true);
+		weaponMeta.addEnchant(Enchantment.ARROW_DAMAGE, 3, true);
 		
 		weaponMeta.setDisplayName(this.color + "Potent Bow");
 		this.weapon.setItemMeta(weaponMeta);
@@ -36,7 +36,7 @@ public class UncommonSkeleton extends MobEquipment
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
 		tippedArrow.setBasePotionData(new PotionData (PotionType.WEAKNESS));
 		tippedArrow.removeCustomEffect(PotionEffectType.WEAKNESS);
-		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WEAKNESS, 140, 1), true);
+		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WEAKNESS, 120, 0), true);
 		tippedArrow.setDisplayName(this.color + "Nerf the Player");
 		this.offhand.setItemMeta(tippedArrow);
 		
@@ -72,7 +72,7 @@ public class UncommonSkeleton extends MobEquipment
 		bootMeta.setDisplayName(this.color + "Lightweight Chainmail Boots");
 		
 		// One speedy boi
-		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.20);
+		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.10);
 		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 1.0, 0.0, 0.0);
 		
 		this.boots.setItemMeta(bootMeta);

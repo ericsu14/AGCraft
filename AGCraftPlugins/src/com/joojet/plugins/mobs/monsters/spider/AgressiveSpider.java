@@ -3,7 +3,6 @@ package com.joojet.plugins.mobs.monsters.spider;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -24,8 +23,6 @@ public class AgressiveSpider extends MobEquipment
 		this.weapon = new ItemStack(Material.STONE_SWORD, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
-		
-		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 3.0, 1.6);
 		
 		weaponMeta.setDisplayName(this.color + "Reinforced Spider Fang");
 		this.weapon.setItemMeta(weaponMeta);

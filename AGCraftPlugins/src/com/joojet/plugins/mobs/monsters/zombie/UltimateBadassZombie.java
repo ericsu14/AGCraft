@@ -29,12 +29,12 @@ public class UltimateBadassZombie extends MobEquipment
 		// Weapon
 		this.weapon = new ItemStack(Material.NETHERITE_AXE, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
+		// Weapon modifier
+		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 12.0, 3.0);
+		
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-		
-		// Weapon modifier
-		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 4.0, 1.0);
 		
 		// Weapon name and lore
 		weaponMeta.setDisplayName(this.color + "A Spiritual Travesty");

@@ -24,17 +24,18 @@ public class BadassZombie extends MobEquipment
 		this.color = ChatColor.LIGHT_PURPLE;
 		
 		// Custom potion effects
-		this.effects.add(CustomPotionEffect.STRENGTH.getPotionEffect());
 		this.effects.add(CustomPotionEffect.FIRE_RESISTANCE.getPotionEffect());
+		this.effects.add(CustomPotionEffect.STRENGTH.getPotionEffect());
 		
 		// Weapon
 		this.weapon = new ItemStack(Material.IRON_SWORD, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
+		
+		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 8.0, 2.4);
+		
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 2, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-		
-		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 3.0, 1.6);
 		
 		ArrayList <String> weaponLore = new ArrayList <String> ();
 		weaponLore.add(this.color + "These zombies were formally");
@@ -44,7 +45,7 @@ public class BadassZombie extends MobEquipment
 		weaponLore.add(this.color + "It is now sharper than diamond.");
 		weaponMeta.setLore(weaponLore);
 		
-		weaponMeta.setDisplayName(this.color + "Enhanced Iron Sword");
+		weaponMeta.setDisplayName(this.color + "Sharpened Iron Sword");
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
 		

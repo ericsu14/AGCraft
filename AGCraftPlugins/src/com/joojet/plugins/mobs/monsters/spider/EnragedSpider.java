@@ -29,10 +29,9 @@ public class EnragedSpider extends MobEquipment
 		// Weapon
 		this.weapon = new ItemStack(Material.STONE_SWORD, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
+		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 6.0, 2.0);
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 3, true);
-		
-		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 4.00, 1.6);
 		
 		weaponMeta.setDisplayName(this.color + "Fire Venom Fang");
 		ArrayList <String> weaponLore = new ArrayList <String> ();
