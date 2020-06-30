@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.allies.golem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -34,6 +35,7 @@ public class JohnJae extends MobEquipment
 		chestMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		chestMeta.setDisplayName(this.color + "The Pecks");
 		this.chestplate.setItemMeta(chestMeta);
+		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 10.0, 5.0, 0.50);
 		this.addRandomDamage(this.chestplate);
 	}
 }
