@@ -32,7 +32,7 @@ public class Scruffy extends MobEquipment
 		helmetMeta.addEnchant(Enchantment.THORNS, 5, true);
 		helmetMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		helmetMeta.setDisplayName(this.color + "Scruffy's Face");
-		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 10.0, 8.0, 0.4);
+		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 10.0, 8.0, 0.5);
 		this.helmet.setItemMeta(helmetMeta);
 	}
 		

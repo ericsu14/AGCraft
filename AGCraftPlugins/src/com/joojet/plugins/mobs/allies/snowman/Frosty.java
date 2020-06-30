@@ -31,7 +31,7 @@ public class Frosty extends MobEquipment
 		helmetMeta.addEnchant(Enchantment.THORNS, 4, true);
 		helmetMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		helmetMeta.setDisplayName(this.color + "Frosty's Face");
-		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 5.0, 4.0, 0.2);
+		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 8.0, 4.0, 0.2);
 		this.helmet.setItemMeta(helmetMeta);
 	}
 }

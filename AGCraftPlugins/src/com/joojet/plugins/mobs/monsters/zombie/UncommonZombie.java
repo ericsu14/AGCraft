@@ -22,7 +22,7 @@ public class UncommonZombie extends MobEquipment
 		
 		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 7.0, 2.2);
 		
-		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
+		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		weaponMeta.setDisplayName(this.color + "Enhanced Iron Sword");
 		

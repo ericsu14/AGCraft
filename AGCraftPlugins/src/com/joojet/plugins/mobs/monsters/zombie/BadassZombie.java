@@ -31,9 +31,9 @@ public class BadassZombie extends MobEquipment
 		this.weapon = new ItemStack(Material.IRON_SWORD, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
 		
-		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 8.0, 2.4);
+		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 7.0, 2.4);
 		
-		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
+		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 2, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		

@@ -26,6 +26,8 @@ import com.joojet.plugins.mobs.monsters.skeleton.SkeletonTypes;
 import com.joojet.plugins.mobs.monsters.spider.SpiderTypes;
 import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class AmplifiedMobSpawner implements Listener 
 {
 	// Chance of spawning a super monster
@@ -79,12 +81,31 @@ public class AmplifiedMobSpawner implements Listener
 		}
 	}
 	
+	/** Makes the names of raider mobs visible */
+	public void makeRaiderNameVisible (LivingEntity entity, EntityType type)
+	{
+		StringBuilder name = new StringBuilder (type.name().toLowerCase());
+		name.replace(0, 0, type.name().toUpperCase().substring(0,0));
+		name.append(" Raider");
+		entity.setCustomName(ChatColor.RED + name.toString());
+		entity.setCustomNameVisible(true);
+	}
+	
+	/** Amplifies mob spawns */
 	@EventHandler
 	public void onEntitySpawn (CreatureSpawnEvent event)
 	{
+		
 		EntityType type = event.getEntityType();
 		SpawnReason reason = event.getSpawnReason();
 		LivingEntity entity = event.getEntity();
+		
+		// Switch to raider handler if the spawn reason is RAID
+		if (reason.equals(SpawnReason.RAID))
+		{
+			this.makeRaiderNameVisible(entity, type);
+			return;
+		}
 		
 		// Do not alter any mob that isn't spawned into the world naturally or dice roll fails
 		if ((!reasonFilter(reason) || rand.nextDouble() > chance))
@@ -194,6 +215,6 @@ public class AmplifiedMobSpawner implements Listener
 			entity.setFireTicks(9999999);
 		}
 		
-		// System.out.println ("Changed " + entity.getName() + " propetries to " + mobEquipment.getName());
+		// System.out.println ("Changed " + entity.getName() + " properties to " + mobEquipment.getName());
 	}
 }
