@@ -39,6 +39,7 @@ public class HurtfulSkeleton extends MobEquipment
 		this.offhand = new ItemStack (Material.TIPPED_ARROW, 1);
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
 		tippedArrow.setBasePotionData(new PotionData (PotionType.INSTANT_DAMAGE));
+		tippedArrow.removeCustomEffect(PotionEffectType.HARM);
 		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 0), true);
 		tippedArrow.setDisplayName(this.color + "Hurtful Arrow");
 		this.offhand.setItemMeta(tippedArrow);
