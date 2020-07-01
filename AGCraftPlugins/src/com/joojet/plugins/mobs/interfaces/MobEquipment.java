@@ -193,25 +193,25 @@ public abstract class MobEquipment
 	 *  @param paramString - URL of the custom player head */
 	public ItemMeta addHeadData (ItemMeta meta, String url)
 	{
-        SkullMeta localSkullMeta = (SkullMeta)meta;
+		SkullMeta localSkullMeta = (SkullMeta)meta;
 
-        GameProfile localGameProfile = new GameProfile(UUID.randomUUID(), null);
-        StringBuilder fullURL = new StringBuilder (this.urlBase);
-        fullURL.append(url);
-        byte[] arrayOfByte = Base64.getEncoder().encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", new Object[] { fullURL.toString() }).getBytes());
-        localGameProfile.getProperties().put("textures", new Property("textures", new String(arrayOfByte)));
-        Field localField = null;
-        try
-        {
-            localField = localSkullMeta.getClass().getDeclaredField("profile");
-            localField.setAccessible(true);
-            localField.set(localSkullMeta, localGameProfile);
-        }
-        catch (NoSuchFieldException|IllegalArgumentException|IllegalAccessException localNoSuchFieldException)
-        {
-            System.out.println("error: " + localNoSuchFieldException.getMessage());
-        }
-        
-        return (ItemMeta) localSkullMeta;
+		GameProfile localGameProfile = new GameProfile(UUID.randomUUID(), null);
+		StringBuilder fullURL = new StringBuilder (this.urlBase);
+		fullURL.append(url);
+		byte[] arrayOfByte = Base64.getEncoder().encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", new Object[] { fullURL.toString() }).getBytes());
+		localGameProfile.getProperties().put("textures", new Property("textures", new String(arrayOfByte)));
+		Field localField = null;
+		try
+		{
+				localField = localSkullMeta.getClass().getDeclaredField("profile");
+				localField.setAccessible(true);
+				localField.set(localSkullMeta, localGameProfile);
+		}
+		catch (NoSuchFieldException|IllegalArgumentException|IllegalAccessException localNoSuchFieldException)
+		{
+				System.out.println("error: " + localNoSuchFieldException.getMessage());
+		}
+
+		return (ItemMeta) localSkullMeta;
 	}
 }
