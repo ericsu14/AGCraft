@@ -23,14 +23,13 @@ public class UltimateBadassZombie extends MobEquipment
 		
 		// Custom potion effects
 		this.effects.add(CustomPotionEffect.FIRE_RESISTANCE.getPotionEffect());
-		this.effects.add(CustomPotionEffect.STRENGTH.getPotionEffect());
 		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
 		
 		// Weapon
 		this.weapon = new ItemStack(Material.NETHERITE_AXE, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
 		// Weapon modifier
-		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 12.0, 3.0);
+		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 11.0, 3.0);
 		
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
@@ -83,7 +82,7 @@ public class UltimateBadassZombie extends MobEquipment
 		bootMeta.setDisplayName(this.color + "Lightweight Netherite Boots");
 		
 		// One speedy boi
-		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.25);
+		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.20);
 		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 3.0, 3.0, 0.1);
 	
 		this.boots.setItemMeta(bootMeta);

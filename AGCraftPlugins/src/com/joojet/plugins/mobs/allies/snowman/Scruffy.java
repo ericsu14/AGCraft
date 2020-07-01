@@ -29,10 +29,10 @@ public class Scruffy extends MobEquipment
 		this.helmet = new ItemStack (Material.CARVED_PUMPKIN, 1);
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
 		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
-		helmetMeta.addEnchant(Enchantment.THORNS, 5, true);
+		helmetMeta.addEnchant(Enchantment.THORNS, 7, true);
 		helmetMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		helmetMeta.setDisplayName(this.color + "Scruffy's Face");
-		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 10.0, 8.0, 0.5);
+		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 12.0, 8.0, 0.5);
 		this.helmet.setItemMeta(helmetMeta);
 	}
 		

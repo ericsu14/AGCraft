@@ -7,6 +7,6 @@ public class GolemTypes extends MonsterTypes
 	public GolemTypes ()
 	{
 		this.addEquipment(new JohnJae(), 1);
-		this.addEquipment(new AdvancedGolem(), 4);
+		this.addEquipment(new AdvancedGolem(), 2);
 	}
 }
