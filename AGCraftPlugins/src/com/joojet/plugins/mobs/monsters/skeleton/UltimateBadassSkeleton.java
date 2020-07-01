@@ -54,13 +54,15 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.offhand.setItemMeta(tippedArrow);
 		
 		// Helmet
-		this.helmet = new ItemStack (Material.NETHERITE_HELMET, 1);
-		ItemMeta helmetMeta = this.helmet.getItemMeta();
-		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
-		helmetMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
-		helmetMeta.setDisplayName(this.color + "Dark Netherite Helmet");
+		this.helmet = new ItemStack (Material.PLAYER_HEAD, 1);
+		ItemMeta helmetMeta = this.addHeadData(this.helmet.getItemMeta(), this.cameraHead);
+		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+		ArrayList <String> helmetLore = new ArrayList <String> ();
+		helmetLore.add(this.color + "Used for stalker pics and spottings.");
+		helmetMeta.setLore(helmetLore);
+		helmetMeta.setDisplayName(this.color + "#agspotted Camera");
+		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 3.0, 3.0, 0.15);
 		this.helmet.setItemMeta(helmetMeta);
-		this.addRandomDamage(this.helmet);
 		
 		// Chestplate
 		this.chestplate = new ItemStack (Material.NETHERITE_CHESTPLATE, 1);
@@ -87,7 +89,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
 		bootMeta.setDisplayName(this.color + "Lightweight Netherite Boots");
 		
-		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.30);
+		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.20);
 		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 3.0, 3.0, 0.1);
 		
 		// Add back defences for boots

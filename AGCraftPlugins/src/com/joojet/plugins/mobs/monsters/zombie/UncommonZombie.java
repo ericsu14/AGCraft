@@ -38,7 +38,7 @@ public class UncommonZombie extends MobEquipment
 		// Chestplate
 		this.chestplate = new ItemStack (Material.CHAINMAIL_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
-		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		chestMeta.setDisplayName(this.color + "Reinforced Chainmail Chestplate");
 		this.chestplate.setItemMeta(chestMeta);
 		this.addRandomDamage(this.chestplate);

@@ -1,6 +1,8 @@
 package com.joojet.plugins.mobs.interfaces;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Random;
 import java.util.UUID;
 
@@ -12,7 +14,11 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
+
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 
 public abstract class MobEquipment 
 {
@@ -28,6 +34,9 @@ public abstract class MobEquipment
 	protected boolean onFire;
 	protected boolean showName;
 	protected ArrayList <PotionEffect> effects;
+	
+	protected final String urlBase = "http://textures.minecraft.net/texture/";
+	protected final String cameraHead = "3db83586542934f8c3231a5284f2489b87678478454fca69359447569f157d14";
 	
 	public MobEquipment ()
 	{
@@ -174,5 +183,35 @@ public abstract class MobEquipment
 			AttributeModifier knockbackResistanceMod = new AttributeModifier (UUID.randomUUID(), "generic.knockback_resistance", knockbackResistance, Operation.MULTIPLY_SCALAR_1, slot);
 			meta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, knockbackResistanceMod);
 		}
+	}
+	
+	
+	/** Creates a custom playerhead using a custom texture.
+	 *  Code stolen from:
+	 *  	https://www.spigotmc.org/threads/custom-textured-non-player-skulls.244561/#post-2448313
+	 *  @param meta - ItemMeta of the head
+	 *  @param paramString - URL of the custom player head */
+	public ItemMeta addHeadData (ItemMeta meta, String url)
+	{
+        SkullMeta localSkullMeta = (SkullMeta)meta;
+
+        GameProfile localGameProfile = new GameProfile(UUID.randomUUID(), null);
+        StringBuilder fullURL = new StringBuilder (this.urlBase);
+        fullURL.append(url);
+        byte[] arrayOfByte = Base64.getEncoder().encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", new Object[] { fullURL.toString() }).getBytes());
+        localGameProfile.getProperties().put("textures", new Property("textures", new String(arrayOfByte)));
+        Field localField = null;
+        try
+        {
+            localField = localSkullMeta.getClass().getDeclaredField("profile");
+            localField.setAccessible(true);
+            localField.set(localSkullMeta, localGameProfile);
+        }
+        catch (NoSuchFieldException|IllegalArgumentException|IllegalAccessException localNoSuchFieldException)
+        {
+            System.out.println("error: " + localNoSuchFieldException.getMessage());
+        }
+        
+        return (ItemMeta) localSkullMeta;
 	}
 }

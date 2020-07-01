@@ -30,7 +30,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class AmplifiedMobSpawner implements Listener 
 {
-	// Chance of spawning a super monster
+	// Chance of spawning a elite monster
 	private final double chance = 0.15;
 	
 	// Show debug info if set to true
