@@ -17,6 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 
+import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 
@@ -36,7 +37,6 @@ public abstract class MobEquipment
 	protected ArrayList <PotionEffect> effects;
 	
 	protected final String urlBase = "http://textures.minecraft.net/texture/";
-	protected final String cameraHead = "3db83586542934f8c3231a5284f2489b87678478454fca69359447569f157d14";
 	
 	public MobEquipment ()
 	{
@@ -191,13 +191,13 @@ public abstract class MobEquipment
 	 *  	https://www.spigotmc.org/threads/custom-textured-non-player-skulls.244561/#post-2448313
 	 *  @param meta - ItemMeta of the head
 	 *  @param paramString - URL of the custom player head */
-	public ItemMeta addHeadData (ItemMeta meta, String url)
+	public ItemMeta addHeadData (ItemMeta meta, PlayerHead head)
 	{
 		SkullMeta localSkullMeta = (SkullMeta)meta;
 
 		GameProfile localGameProfile = new GameProfile(UUID.randomUUID(), null);
 		StringBuilder fullURL = new StringBuilder (this.urlBase);
-		fullURL.append(url);
+		fullURL.append(head.getURL());
 		byte[] arrayOfByte = Base64.getEncoder().encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", new Object[] { fullURL.toString() }).getBytes());
 		localGameProfile.getProperties().put("textures", new Property("textures", new String(arrayOfByte)));
 		Field localField = null;

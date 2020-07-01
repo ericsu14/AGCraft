@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 
 public class UltimateBadassSkeleton extends MobEquipment
@@ -56,7 +57,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		
 		// Helmet
 		this.helmet = new ItemStack (Material.PLAYER_HEAD, 1);
-		ItemMeta helmetMeta = this.addHeadData(this.helmet.getItemMeta(), this.cameraHead);
+		ItemMeta helmetMeta = this.addHeadData(this.helmet.getItemMeta(), PlayerHead.CAMERA_HEAD);
 		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
 		ArrayList <String> helmetLore = new ArrayList <String> ();
 		helmetLore.add(this.color + "Used for stalker pics and spottings.");
