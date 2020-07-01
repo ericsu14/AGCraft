@@ -22,7 +22,6 @@ public class UltimateBadassZombie extends MobEquipment
 		this.showName = true;
 		
 		// Custom potion effects
-		this.effects.add(CustomPotionEffect.FIRE_RESISTANCE.getPotionEffect());
 		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
 		
 		// Weapon
@@ -49,7 +48,7 @@ public class UltimateBadassZombie extends MobEquipment
 		// Helmet
 		this.helmet = new ItemStack (Material.NETHERITE_HELMET, 1);
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
-		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+		helmetMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 3, true);
 		helmetMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		helmetMeta.setDisplayName(this.color + "Reinforced Netherite Helmet");
 		this.helmet.setItemMeta(helmetMeta);
@@ -68,7 +67,7 @@ public class UltimateBadassZombie extends MobEquipment
 		// Leggings
 		this.leggings = new ItemStack (Material.NETHERITE_LEGGINGS, 1);
 		ItemMeta legMeta = this.chestplate.getItemMeta();
-		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+		legMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 3, true);
 		legMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		legMeta.setDisplayName(this.color + "Reinforced Netherite Leggings");
 		this.leggings.setItemMeta(legMeta);
