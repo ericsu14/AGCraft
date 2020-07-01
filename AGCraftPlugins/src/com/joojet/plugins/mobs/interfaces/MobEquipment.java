@@ -189,11 +189,11 @@ public abstract class MobEquipment
 	/** Creates a custom playerhead using a custom texture.
 	 *  Code stolen from:
 	 *  	https://www.spigotmc.org/threads/custom-textured-non-player-skulls.244561/#post-2448313
-	 *  @param meta - ItemMeta of the head
+	 *  @param meta - the item we are adding head data to.
 	 *  @param paramString - URL of the custom player head */
-	public ItemMeta addHeadData (ItemMeta meta, PlayerHead head)
+	public ItemMeta createHeadData (ItemStack item, PlayerHead head)
 	{
-		SkullMeta localSkullMeta = (SkullMeta)meta;
+		SkullMeta localSkullMeta = (SkullMeta)item.getItemMeta();
 
 		GameProfile localGameProfile = new GameProfile(UUID.randomUUID(), null);
 		StringBuilder fullURL = new StringBuilder (this.urlBase);
@@ -203,13 +203,13 @@ public abstract class MobEquipment
 		Field localField = null;
 		try
 		{
-				localField = localSkullMeta.getClass().getDeclaredField("profile");
-				localField.setAccessible(true);
-				localField.set(localSkullMeta, localGameProfile);
+			localField = localSkullMeta.getClass().getDeclaredField("profile");
+			localField.setAccessible(true);
+			localField.set(localSkullMeta, localGameProfile);
 		}
 		catch (NoSuchFieldException|IllegalArgumentException|IllegalAccessException localNoSuchFieldException)
 		{
-				System.out.println("error: " + localNoSuchFieldException.getMessage());
+			System.out.println("error: " + localNoSuchFieldException.getMessage());
 		}
 
 		return (ItemMeta) localSkullMeta;
