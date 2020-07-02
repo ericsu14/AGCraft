@@ -6,7 +6,7 @@ public class HuskTypes extends MonsterTypes
 {
 	public HuskTypes ()
 	{
-		this.addEquipment(new EnragedHusk(), 3);
+		this.addEquipment(new WanderingHusk(), 3);
 		this.addEquipment(new FallenPharaoh (), 1);
 	}
 }

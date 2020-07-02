@@ -12,11 +12,11 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 
-public class EnragedHusk extends MobEquipment
+public class WanderingHusk extends MobEquipment
 {
-	public EnragedHusk ()
+	public WanderingHusk ()
 	{
-		this.name = "Enraged Husk";
+		this.name = "Wandering Husk";
 		this.color = ChatColor.GREEN;
 		this.health = 30;
 		

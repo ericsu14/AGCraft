@@ -59,10 +59,14 @@ public class FallenPharaoh extends MobEquipment
 		this.weapon = new ItemStack (Material.GOLDEN_HOE, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
 		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 6.0, 1.4);
-		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
+		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 4, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		weaponMeta.setDisplayName(this.color + "Pharaoh's Royal Staff");
+		ArrayList <String> weaponLore = new ArrayList <String> ();
+		weaponLore.add(this.color + "They say you don't");
+		weaponLore.add(this.color + "waste gold on a hoe.");
+		weaponMeta.setLore(weaponLore);
 		this.weapon.setItemMeta(weaponMeta);
 	}
 }
