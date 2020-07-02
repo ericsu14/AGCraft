@@ -17,13 +17,13 @@ public class JohnJae extends MobEquipment
 		this.name = "John Jae";
 		this.color = ChatColor.GOLD;
 		this.showName = true;
-		
-		this.effects.add(CustomPotionEffect.RESISTANCE_II.getPotionEffect());
-		this.effects.add(CustomPotionEffect.REGEN.getPotionEffect());
-		this.effects.add(CustomPotionEffect.STRENGTH_II.getPotionEffect());
-		this.effects.add(CustomPotionEffect.FIRE_RESISTANCE.getPotionEffect());
-		this.effects.add(CustomPotionEffect.JUMP_BOOST.getPotionEffect());
-		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
+
+		this.addPotionEffect(CustomPotionEffect.RESISTANCE_II);
+		this.addPotionEffect(CustomPotionEffect.REGEN);
+		this.addPotionEffect(CustomPotionEffect.STRENGTH_II);
+		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
+		this.addPotionEffect(CustomPotionEffect.JUMP_BOOST);
+		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
 		this.health = 250;
 		

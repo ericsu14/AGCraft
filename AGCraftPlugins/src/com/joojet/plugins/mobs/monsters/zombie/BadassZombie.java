@@ -20,7 +20,7 @@ public class BadassZombie extends MobEquipment
 		this.color = ChatColor.LIGHT_PURPLE;
 		
 		// Custom potion effects
-		this.effects.add(CustomPotionEffect.FIRE_RESISTANCE.getPotionEffect());
+		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
 		
 		// Weapon
 		this.weapon = new ItemStack(Material.IRON_SWORD, 1);

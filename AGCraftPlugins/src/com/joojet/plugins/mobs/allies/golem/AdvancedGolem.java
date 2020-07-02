@@ -14,8 +14,8 @@ public class AdvancedGolem extends MobEquipment
 		this.health = 200;
 		this.showName = true;
 		
-		this.effects.add(CustomPotionEffect.RESISTANCE.getPotionEffect());
-		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
-		this.effects.add(CustomPotionEffect.STRENGTH.getPotionEffect());
+		this.addPotionEffect(CustomPotionEffect.RESISTANCE);
+		this.addPotionEffect(CustomPotionEffect.SPEED);
+		this.addPotionEffect(CustomPotionEffect.STRENGTH);
 	}
 }

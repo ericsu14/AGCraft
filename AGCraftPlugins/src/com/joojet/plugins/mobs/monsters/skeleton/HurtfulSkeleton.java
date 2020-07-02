@@ -22,7 +22,7 @@ public class HurtfulSkeleton extends MobEquipment
 		this.name = "Hurtful Skeleton";
 		this.color = ChatColor.BLUE;
 		
-		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
+		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
 		// Weapon
 		this.weapon = new ItemStack(Material.BOW, 1);

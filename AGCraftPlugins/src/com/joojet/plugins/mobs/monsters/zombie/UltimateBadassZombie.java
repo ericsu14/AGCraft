@@ -22,7 +22,7 @@ public class UltimateBadassZombie extends MobEquipment
 		this.showName = true;
 		
 		// Custom potion effects
-		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
+		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
 		// Weapon
 		this.weapon = new ItemStack(Material.NETHERITE_AXE, 1);

@@ -17,6 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 
+import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
@@ -213,5 +214,11 @@ public abstract class MobEquipment
 		}
 
 		return (ItemMeta) localSkullMeta;
+	}
+	
+	/** Adds a custom potion effect to the monster */
+	public void addPotionEffect (CustomPotionEffect effect)
+	{
+		this.effects.add(effect.getPotionEffect());
 	}
 }

@@ -22,7 +22,7 @@ public class WitheringSkeleton extends MobEquipment
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.health = 30;
 		
-		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
+		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
 		// Weapon
 		this.weapon = new ItemStack(Material.BOW, 1);

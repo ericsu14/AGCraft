@@ -9,6 +9,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Husk;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.WanderingTrader;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,10 +24,12 @@ import org.bukkit.potion.PotionEffect;
 import com.joojet.plugins.mobs.allies.golem.GolemTypes;
 import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.interfaces.VillagerEquipment;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
 import com.joojet.plugins.mobs.monsters.skeleton.SkeletonTypes;
 import com.joojet.plugins.mobs.monsters.spider.SpiderTypes;
 import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
+import com.joojet.plugins.mobs.villager.wandering.WanderingVillagerTypes;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -40,16 +43,24 @@ public class AmplifiedMobSpawner implements Listener
 	
 	private Random rand = new Random ();
 	
-	private ZombieTypes zombieTypes = new ZombieTypes ();
-	private SkeletonTypes skeletonTypes = new SkeletonTypes();
-	private SpiderTypes spiderTypes = new SpiderTypes();
-	private GolemTypes golemTypes = new GolemTypes();
-	private SnowmanTypes snowmanTypes = new SnowmanTypes();
-	private HuskTypes huskTypes = new HuskTypes ();
+	private ZombieTypes zombieTypes;
+	private SkeletonTypes skeletonTypes;
+	private SpiderTypes spiderTypes;
+	private GolemTypes golemTypes;
+	private SnowmanTypes snowmanTypes;
+	private HuskTypes huskTypes;
+	private WanderingVillagerTypes wanderingTypes;
 	
 	public void onEnable ()
 	{
 		Bukkit.getPluginManager().registerEvents(this, (Plugin) this);
+		this.zombieTypes = new ZombieTypes();
+		this.skeletonTypes = new SkeletonTypes();
+		this.spiderTypes = new SpiderTypes();
+		this.golemTypes = new GolemTypes();
+		this.snowmanTypes = new SnowmanTypes();
+		this.huskTypes = new HuskTypes();
+		this.wanderingTypes = new WanderingVillagerTypes();
 	}
 	
 	/** Returns true if the passed spawn reason agrees with the set filters */
@@ -84,16 +95,6 @@ public class AmplifiedMobSpawner implements Listener
 		}
 	}
 	
-	/** Makes the names of raider mobs visible */
-	public void makeRaiderNameVisible (LivingEntity entity, EntityType type)
-	{
-		StringBuilder name = new StringBuilder (type.name().toLowerCase());
-		name.replace(0, 1, type.name().toUpperCase().substring(0,1));
-		name.append(" Raider");
-		entity.setCustomName(ChatColor.RED + name.toString());
-		entity.setCustomNameVisible(true);
-	}
-	
 	/** Amplifies mob spawns */
 	@EventHandler
 	public void onEntitySpawn (CreatureSpawnEvent event)
@@ -102,6 +103,13 @@ public class AmplifiedMobSpawner implements Listener
 		EntityType type = event.getEntityType();
 		SpawnReason reason = event.getSpawnReason();
 		LivingEntity entity = event.getEntity();
+		
+		// If the entity is a wandering trader, transform him
+		if (type.equals(EntityType.WANDERING_TRADER))
+		{
+			this.transformWanderingTrader(entity);
+			return;
+		}
 		
 		// Switch to raider handler if the spawn reason is RAID
 		if (reason.equals(SpawnReason.RAID))
@@ -149,6 +157,33 @@ public class AmplifiedMobSpawner implements Listener
 				return;
 		}
 		
+		this.equipEntity(entity, mobEquipment);
+	}
+	
+	/** Makes the names of raider mobs visible */
+	public void makeRaiderNameVisible (LivingEntity entity, EntityType type)
+	{
+		StringBuilder name = new StringBuilder (type.name().toLowerCase());
+		name.replace(0, 1, type.name().toUpperCase().substring(0,1));
+		name.append(" Raider");
+		entity.setCustomName(ChatColor.RED + name.toString());
+		entity.setCustomNameVisible(true);
+	}
+	
+	/** Transforms a wandering trader into Frolf */
+	public void transformWanderingTrader (LivingEntity entity)
+	{
+		WanderingTrader trader = (WanderingTrader) entity;
+		VillagerEquipment equipment = (VillagerEquipment) wanderingTypes.getRandomEquipment();
+		trader.setRecipes(equipment.getRecipes());
+		this.equipEntity(trader, (MobEquipment) equipment);
+	}
+	
+	/** Equips a living entity with the items stored in a MobEquipment object
+	 * 	@param entity - Entity we are equipping custom armor to
+	 *  @param mobEquipment - Object containing custom mob equipment */
+	public void equipEntity (LivingEntity entity, MobEquipment mobEquipment)
+	{
 		EntityEquipment equipment = entity.getEquipment();
 		ItemStack[] items = mobEquipment.getEquipment();
 		
@@ -223,7 +258,5 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			entity.setFireTicks(9999999);
 		}
-		
-		// System.out.println ("Changed " + entity.getName() + " properties to " + mobEquipment.getName());
 	}
 }

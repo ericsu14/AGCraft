@@ -27,7 +27,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.health = 30;
 		this.showName = true;
 		
-		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
+		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
 		// Weapon
 		this.weapon = new ItemStack(Material.BOW, 1);

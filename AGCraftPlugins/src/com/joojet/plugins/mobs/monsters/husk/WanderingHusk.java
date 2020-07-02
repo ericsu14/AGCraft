@@ -20,8 +20,8 @@ public class WanderingHusk extends MobEquipment
 		this.color = ChatColor.GREEN;
 		this.health = 30;
 		
-		this.effects.add(CustomPotionEffect.STRENGTH.getPotionEffect());
-		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
+		this.addPotionEffect(CustomPotionEffect.STRENGTH);
+		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
 		this.boots = new ItemStack (Material.LEATHER_BOOTS, 1);
 		LeatherArmorMeta  bootMeta = (LeatherArmorMeta ) this.boots.getItemMeta();
