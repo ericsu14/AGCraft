@@ -8,7 +8,9 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.joojet.plugins.mobs.interfaces.SummoningScroll;
 import com.joojet.plugins.mobs.interfaces.VillagerEquipment;
+import com.joojet.plugins.mobs.scrolls.SummonJohnJae;
 
 public class Frolf extends VillagerEquipment
 {
@@ -73,5 +75,11 @@ public class Frolf extends VillagerEquipment
 		hastePotMeta.setDisplayName(this.color + "Potion of Haste");
 		hastePotion.setItemMeta(hastePotMeta);
 		this.addRecipe(hastePotion, Material.DIAMOND, 2, 2);
+		
+		/** Trade 8: Summon John Jae
+		 * 		- Price: 48 Diamonds
+		 * 		- Max stock: 1 */
+		SummoningScroll johnJaeScroll = new SummonJohnJae ();
+		this.addRecipe(johnJaeScroll, Material.DIAMOND, 48, 1);
 	}
 }

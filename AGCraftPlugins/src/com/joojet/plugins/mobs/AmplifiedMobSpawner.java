@@ -3,6 +3,8 @@ package com.joojet.plugins.mobs;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
@@ -13,18 +15,24 @@ import org.bukkit.entity.WanderingTrader;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 
 import com.joojet.plugins.mobs.allies.golem.GolemTypes;
 import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
+import com.joojet.plugins.mobs.enums.SummonTypes;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.interfaces.SummoningScroll;
 import com.joojet.plugins.mobs.interfaces.VillagerEquipment;
+import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
 import com.joojet.plugins.mobs.monsters.skeleton.SkeletonTypes;
 import com.joojet.plugins.mobs.monsters.spider.SpiderTypes;
@@ -43,6 +51,7 @@ public class AmplifiedMobSpawner implements Listener
 	
 	private Random rand = new Random ();
 	
+	// Mob equipment factories
 	private ZombieTypes zombieTypes;
 	private SkeletonTypes skeletonTypes;
 	private SpiderTypes spiderTypes;
@@ -50,6 +59,9 @@ public class AmplifiedMobSpawner implements Listener
 	private SnowmanTypes snowmanTypes;
 	private HuskTypes huskTypes;
 	private WanderingVillagerTypes wanderingTypes;
+	
+	// Interpreter to search for used summoning scrolls
+	private SummoningScrollInterpreter summonInterpreter;
 	
 	public AmplifiedMobSpawner ()
 	{
@@ -60,6 +72,7 @@ public class AmplifiedMobSpawner implements Listener
 		this.snowmanTypes = new SnowmanTypes();
 		this.huskTypes = new HuskTypes();
 		this.wanderingTypes = new WanderingVillagerTypes();
+		this.summonInterpreter = new SummoningScrollInterpreter();
 	}
 	
 	public void onEnable ()
@@ -96,6 +109,45 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			Player p = (Player) event.getEntity();
 			p.sendMessage("Taken " + event.getDamage() + " damage.");
+		}
+	}
+	
+	/** Checks for use of a summoning scroll */
+	@EventHandler
+	public void useSummoningScroll (PlayerInteractEvent event)
+	{
+		Player p = event.getPlayer();
+		if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK
+				&& event.getItem() != null)
+		{
+			ItemStack item = event.getItem();
+			ItemMeta itemMeta = item.getItemMeta();
+			/* An item is a summoning scroll if:
+			 * 	- It is of type paper
+			 *  - It has an enchant (not possible in vanilla MC)
+			 *  - It has a localized name, storing the name of the custom mob to be spawned */
+			if (item.getType().equals(Material.PAPER)
+					&& itemMeta.hasLocalizedName()
+					&& itemMeta.hasEnchants())
+			{
+				SummonTypes scrollType = this.summonInterpreter.searchTrie(itemMeta.getLocalizedName());
+				if (scrollType != null)
+				{
+					SummoningScroll scroll = this.summonInterpreter.searchTrie(itemMeta.getLocalizedName()).getSummon();
+					
+					// Gets player's current location
+					Location spawnLocation = p.getLocation();
+					spawnLocation.add(spawnLocation.getDirection());
+					
+					// Spawns the entity into the world in front of the player
+					LivingEntity entity = (LivingEntity) p.getWorld().spawnEntity(spawnLocation, scroll.getMobType());
+					this.equipEntity(entity, scroll.getMob());
+					p.sendMessage(ChatColor.AQUA + "Sucessfully summoned " + scroll.getMob().getChatColor() + scroll.getName() + ChatColor.AQUA + "!");
+					
+					// Marks the scroll as used (since removing it has a chance of crashing the world)
+					item.setItemMeta(SummoningScroll.markUsed(itemMeta));
+				}
+			}
 		}
 	}
 	
