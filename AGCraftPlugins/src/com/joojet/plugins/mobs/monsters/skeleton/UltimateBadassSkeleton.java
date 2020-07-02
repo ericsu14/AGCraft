@@ -3,16 +3,15 @@ package com.joojet.plugins.mobs.monsters.skeleton;
 import java.util.ArrayList;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionType;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.PlayerHead;
@@ -48,8 +47,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		// Offhand
 		this.offhand = new ItemStack (Material.TIPPED_ARROW, 1);
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
-		tippedArrow.setBasePotionData(new PotionData (PotionType.INSTANT_DAMAGE));
-		tippedArrow.removeCustomEffect(PotionEffectType.HARM);
+		tippedArrow.setColor(Color.PURPLE);
 		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WITHER, 70, 2), true);
 		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 1), true);
 		tippedArrow.setDisplayName(this.color + "Thanos Arrow");

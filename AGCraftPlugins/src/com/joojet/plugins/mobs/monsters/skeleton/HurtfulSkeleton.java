@@ -1,16 +1,15 @@
 package com.joojet.plugins.mobs.monsters.skeleton;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionType;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
@@ -38,9 +37,8 @@ public class HurtfulSkeleton extends MobEquipment
 		// Offhand
 		this.offhand = new ItemStack (Material.TIPPED_ARROW, 1);
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
-		tippedArrow.setBasePotionData(new PotionData (PotionType.INSTANT_DAMAGE));
-		tippedArrow.removeCustomEffect(PotionEffectType.HARM);
-		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 0), true);
+		tippedArrow.setColor(Color.MAROON);
+		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 1), true);
 		tippedArrow.setDisplayName(this.color + "Hurtful Arrow");
 		this.offhand.setItemMeta(tippedArrow);
 		

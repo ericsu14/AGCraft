@@ -51,9 +51,8 @@ public class AmplifiedMobSpawner implements Listener
 	private HuskTypes huskTypes;
 	private WanderingVillagerTypes wanderingTypes;
 	
-	public void onEnable ()
+	public AmplifiedMobSpawner ()
 	{
-		Bukkit.getPluginManager().registerEvents(this, (Plugin) this);
 		this.zombieTypes = new ZombieTypes();
 		this.skeletonTypes = new SkeletonTypes();
 		this.spiderTypes = new SpiderTypes();
@@ -61,6 +60,11 @@ public class AmplifiedMobSpawner implements Listener
 		this.snowmanTypes = new SnowmanTypes();
 		this.huskTypes = new HuskTypes();
 		this.wanderingTypes = new WanderingVillagerTypes();
+	}
+	
+	public void onEnable ()
+	{
+		Bukkit.getPluginManager().registerEvents(this, (Plugin) this);
 	}
 	
 	/** Returns true if the passed spawn reason agrees with the set filters */

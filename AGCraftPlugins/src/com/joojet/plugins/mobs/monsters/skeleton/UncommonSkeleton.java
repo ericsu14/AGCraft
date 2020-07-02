@@ -2,16 +2,15 @@ package com.joojet.plugins.mobs.monsters.skeleton;
 
 
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionType;
 
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 
@@ -34,8 +33,7 @@ public class UncommonSkeleton extends MobEquipment
 		// Offhand
 		this.offhand = new ItemStack (Material.TIPPED_ARROW, 1);
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
-		tippedArrow.setBasePotionData(new PotionData (PotionType.WEAKNESS));
-		tippedArrow.removeCustomEffect(PotionEffectType.WEAKNESS);
+		tippedArrow.setColor(Color.GRAY);
 		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WEAKNESS, 70, 0), true);
 		tippedArrow.setDisplayName(this.color + "Weakening Arrow");
 		this.offhand.setItemMeta(tippedArrow);
