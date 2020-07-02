@@ -36,8 +36,8 @@ public class UncommonSkeleton extends MobEquipment
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
 		tippedArrow.setBasePotionData(new PotionData (PotionType.WEAKNESS));
 		tippedArrow.removeCustomEffect(PotionEffectType.WEAKNESS);
-		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WEAKNESS, 120, 0), true);
-		tippedArrow.setDisplayName(this.color + "Nerf the Player");
+		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WEAKNESS, 70, 0), true);
+		tippedArrow.setDisplayName(this.color + "Weakening Arrow");
 		this.offhand.setItemMeta(tippedArrow);
 		
 		// Helmet
@@ -58,7 +58,7 @@ public class UncommonSkeleton extends MobEquipment
 		
 		// Leggings
 		this.leggings = new ItemStack (Material.CHAINMAIL_LEGGINGS, 1);
-		ItemMeta legMeta = this.chestplate.getItemMeta();
+		ItemMeta legMeta = this.leggings.getItemMeta();
 		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
 		legMeta.setDisplayName(this.color + "Reinforced Chainmail Leggings");
 		this.leggings.setItemMeta(legMeta);

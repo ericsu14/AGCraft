@@ -63,7 +63,7 @@ public class BadassZombie extends MobEquipment
 		
 		// Leggings
 		this.leggings = new ItemStack (Material.IRON_LEGGINGS, 1);
-		ItemMeta legMeta = this.chestplate.getItemMeta();
+		ItemMeta legMeta = this.leggings.getItemMeta();
 		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
 		legMeta.setDisplayName(this.color + "Reinforced Iron Leggings");
 		this.leggings.setItemMeta(legMeta);

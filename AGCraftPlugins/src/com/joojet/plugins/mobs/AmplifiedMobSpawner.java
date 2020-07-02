@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Husk;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
@@ -22,6 +23,7 @@ import org.bukkit.potion.PotionEffect;
 import com.joojet.plugins.mobs.allies.golem.GolemTypes;
 import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
 import com.joojet.plugins.mobs.monsters.skeleton.SkeletonTypes;
 import com.joojet.plugins.mobs.monsters.spider.SpiderTypes;
 import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
@@ -43,6 +45,7 @@ public class AmplifiedMobSpawner implements Listener
 	private SpiderTypes spiderTypes = new SpiderTypes();
 	private GolemTypes golemTypes = new GolemTypes();
 	private SnowmanTypes snowmanTypes = new SnowmanTypes();
+	private HuskTypes huskTypes = new HuskTypes ();
 	
 	public void onEnable ()
 	{
@@ -135,6 +138,12 @@ public class AmplifiedMobSpawner implements Listener
 				break;
 			case SNOWMAN:
 				mobEquipment = snowmanTypes.getRandomEquipment();
+				break;
+			case HUSK:
+				mobEquipment = huskTypes.getRandomEquipment();
+				// Prevents baby elite husks from spawning
+				Husk husk = (Husk) entity;
+				husk.setBaby(false);
 				break;
 			default:
 				return;

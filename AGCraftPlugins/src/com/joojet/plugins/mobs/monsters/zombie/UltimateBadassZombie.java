@@ -66,7 +66,7 @@ public class UltimateBadassZombie extends MobEquipment
 		
 		// Leggings
 		this.leggings = new ItemStack (Material.NETHERITE_LEGGINGS, 1);
-		ItemMeta legMeta = this.chestplate.getItemMeta();
+		ItemMeta legMeta = this.leggings.getItemMeta();
 		legMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 3, true);
 		legMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		legMeta.setDisplayName(this.color + "Reinforced Netherite Leggings");

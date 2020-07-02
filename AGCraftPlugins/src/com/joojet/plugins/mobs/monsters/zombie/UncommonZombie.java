@@ -45,7 +45,7 @@ public class UncommonZombie extends MobEquipment
 		
 		// Leggings
 		this.leggings = new ItemStack (Material.CHAINMAIL_LEGGINGS, 1);
-		ItemMeta legMeta = this.chestplate.getItemMeta();
+		ItemMeta legMeta = this.leggings.getItemMeta();
 		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		legMeta.setDisplayName(this.color + "Reinforced Chainmail Leggings");
 		this.leggings.setItemMeta(legMeta);
