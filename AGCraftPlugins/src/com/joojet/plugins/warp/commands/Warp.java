@@ -22,7 +22,7 @@ public class Warp implements CommandExecutor
 	// Max. search radius of nearby enemies check
 	private int maxMobRadius = 10;
 	// Min. player health needs to exceed before warping
-	private double healthThreshold = 20 * 0.79;
+	private double healthThreshold = 20 * 0.29;
 	
 	/** Warps a player to either a designated location or their bed spawn.
 	 * 	Usage:
