@@ -5,10 +5,12 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Husk;
+import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WanderingTrader;
@@ -136,15 +138,20 @@ public class AmplifiedMobSpawner implements Listener
 					SummoningScroll scroll = this.summonInterpreter.searchTrie(itemMeta.getLocalizedName()).getSummon();
 					
 					// Gets player's current location
-					Location spawnLocation = p.getLocation();
-					spawnLocation.add(spawnLocation.getDirection());
-					spawnLocation.setZ(p.getLocation().getZ() + 4.0);
-					
+					Location spawnLocation = p.getEyeLocation();
+		
 					// Spawns the entity into the world in front of the player
 					LivingEntity entity = (LivingEntity) p.getWorld().spawnEntity(spawnLocation, scroll.getMobType());
+					// If the spawned entity is a golem, make him player built
+					if (entity instanceof IronGolem)
+					{
+						IronGolem golem = (IronGolem) entity;
+						golem.setPlayerCreated(true);
+					}
 					this.equipEntity(entity, scroll.getMob());
 					p.sendMessage(ChatColor.AQUA + "Sucessfully summoned " + scroll.getMob().getChatColor() + scroll.getName() + ChatColor.AQUA + "!");
-					
+					p.playSound(spawnLocation, Sound.ENTITY_EVOKER_PREPARE_WOLOLO, 1.0f, 1.0f);
+					p.playSound(spawnLocation, Sound.ENTITY_EVOKER_CAST_SPELL, 1.0f, 1.0f);
 					int numScrolls = item.getAmount();
 					if (numScrolls > 1)
 					{
