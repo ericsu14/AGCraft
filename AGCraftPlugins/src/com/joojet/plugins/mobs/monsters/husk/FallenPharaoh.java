@@ -53,7 +53,7 @@ public class FallenPharaoh extends MobEquipment
 		bootMeta.addEnchant(Enchantment.DURABILITY, 2, true);
 		bootMeta.setDisplayName(this.color + "Royal Gold Boots");
 		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 2.0, 1.0, 0.05);
-		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.15);
+		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.20);
 		this.boots.setItemMeta(bootMeta);
 		
 		this.weapon = new ItemStack (Material.GOLDEN_HOE, 1);
