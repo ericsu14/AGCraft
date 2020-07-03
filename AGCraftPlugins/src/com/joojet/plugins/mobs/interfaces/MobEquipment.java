@@ -24,20 +24,34 @@ import com.mojang.authlib.properties.Property;
 
 public abstract class MobEquipment 
 {
+	/** Name of the entity */
 	protected String name;
+	/** Color used to recolor the entity's display names */
 	protected ChatColor color;
+	/** Entity's health. A value of -1 uses the entity's default health */
 	protected double health;
+	/** The entity's helmet */
 	protected ItemStack helmet;
+	/** The entity's chestplate */
 	protected ItemStack chestplate;
+	/** The entity's leggings */
 	protected ItemStack leggings;
+	/** The entity's boots */
 	protected ItemStack boots;
+	/** The entity's weapon */
 	protected ItemStack weapon;
+	/** The entity's offhand item */
 	protected ItemStack offhand;
+	/** If set to true, the entity will spawn with a permanent burning effect */
 	protected boolean onFire;
+	/** If set to true, the entity will have its nametag visible to everyone */
 	protected boolean showName;
+	/** A list of potion effects applied on the entity upon spawning */
 	protected ArrayList <PotionEffect> effects;
-	
+	/** URL base for custom player head skins */
 	protected final String urlBase = "http://textures.minecraft.net/texture/";
+	/** An array storing the drop chances for each item the entity has. */
+	protected float dropRates[];
 	
 	public MobEquipment ()
 	{
@@ -48,6 +62,28 @@ public abstract class MobEquipment
 		this.onFire = false;
 		this.showName = false;
 		this.effects = new ArrayList <PotionEffect> ();
+		// Set up default drop rates
+		this.dropRates = new float[6];
+		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.01f, 0.05f);
+	}
+	
+	/** Sets up drop rates for this entity.
+	 *  Rates are stored as doubles from ranges 0.0f-1.0f, where
+	 *  1.0f indicates a 100% chance of dropping
+	 * 		@param helmet - Drop rate for helmet
+	 * 		@param chestplate - Drop rate for chestplate
+	 * 		@param leggings - Drop rate for leggings
+	 * 		@param boots - Drop rate for boots
+	 * 		@param weapon - Drop rate for weapons
+	 * 		@param offhand - Drop rate for offhand */
+	public void setDropRates (float helmet, float chestplate, float leggings, float boots, float weapon, float offhand)
+	{
+		this.dropRates[0] = helmet;
+		this.dropRates[1] = chestplate;
+		this.dropRates[2] = leggings;
+		this.dropRates[3] = boots;
+		this.dropRates[4] = weapon;
+		this.dropRates[5] = offhand;
 	}
 	
 	/** Returns all of the mob's equipment in the form of an array */
@@ -63,6 +99,12 @@ public abstract class MobEquipment
 		itemList[5] = this.offhand;
 		
 		return itemList;
+	}
+	
+	/** Return the drop rates for each item in the mob's inventory */
+	public float[] getDropRates ()
+	{
+		return this.dropRates;
 	}
 	
 	public ItemStack getHelmet ()
@@ -220,5 +262,38 @@ public abstract class MobEquipment
 	public void addPotionEffect (CustomPotionEffect effect)
 	{
 		this.effects.add(effect.getPotionEffect());
+	}
+	
+	/** Americanizes a name by applying the USA colors to every character in a string
+	 *  in an alternating pattern */
+	public String americanizeText (String str)
+	{
+		StringBuilder result = new StringBuilder ();
+		
+		int pattern = 0;
+		for (char c : str.toCharArray())
+		{
+			switch (pattern)
+			{
+				case 0:
+					result.append(ChatColor.RED);
+					break;
+				case 1:
+					result.append(ChatColor.WHITE);
+					break;
+				default:
+					result.append(ChatColor.BLUE);
+					break;
+			}
+			result.append(c);
+			++pattern;
+			
+			if (pattern > 2)
+			{
+				pattern = 0;
+			}
+				
+		}
+		return result.toString();
 	}
 }

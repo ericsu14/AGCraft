@@ -38,6 +38,7 @@ import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
 import com.joojet.plugins.mobs.monsters.skeleton.SkeletonTypes;
 import com.joojet.plugins.mobs.monsters.spider.SpiderTypes;
+import com.joojet.plugins.mobs.monsters.zombie.PatrioticZombie;
 import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
 import com.joojet.plugins.mobs.villager.wandering.WanderingVillagerTypes;
 
@@ -174,6 +175,34 @@ public class AmplifiedMobSpawner implements Listener
 		SpawnReason reason = event.getSpawnReason();
 		LivingEntity entity = event.getEntity();
 		
+		double roll = rand.nextDouble();
+		
+		// Summon a new patriotic zombie when roll is between a certain range
+		if (roll >= 0.30 && roll <= 0.50)
+		{
+			System.out.println ("USA");
+			MobEquipment mobEquipment;
+			switch (type)
+			{
+				case ZOMBIE:
+					mobEquipment = new PatrioticZombie();
+					// Prevents zombies from being babies
+					Zombie zomble = (Zombie) entity;
+					zomble.setBaby(false);
+					break;
+				case HUSK:
+					mobEquipment = new PatrioticZombie();
+					// Prevents baby elite husks from spawning
+					Husk husk = (Husk) entity;
+					husk.setBaby(false);
+					break;
+				default:
+					return;
+ 			}
+			this.equipEntity(entity, mobEquipment);
+			return;
+		}
+		
 		// If the entity is a wandering trader, transform him
 		if (type.equals(EntityType.WANDERING_TRADER))
 		{
@@ -189,7 +218,7 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		// Do not alter any mob that isn't spawned into the world naturally or dice roll fails
-		if ((!reasonFilter(reason) || rand.nextDouble() > chance))
+		if ((!reasonFilter(reason) || roll > chance))
 		{
 			return;
 		}
@@ -256,47 +285,48 @@ public class AmplifiedMobSpawner implements Listener
 	{
 		EntityEquipment equipment = entity.getEquipment();
 		ItemStack[] items = mobEquipment.getEquipment();
+		float[] dropRates = mobEquipment.getDropRates();
 		
 		// Helmet
 		if (items[0] != null)
 		{
 			equipment.setHelmet(items[0]);
-			equipment.setHelmetDropChance(0.03f);
+			equipment.setHelmetDropChance(dropRates[0]);
 		}
 		
 		// Chestplate
 		if (items[1] != null)
 		{
 			equipment.setChestplate(items[1]);
-			equipment.setChestplateDropChance(0.03f);
+			equipment.setChestplateDropChance(dropRates[1]);
 		}
 		
 		// Leggings
 		if (items[2] != null)
 		{
 			equipment.setLeggings(items[2]);
-			equipment.setLeggingsDropChance(0.03f);
+			equipment.setLeggingsDropChance(dropRates[2]);
 		}
 		
 		// Boots
 		if (items[3] != null)
 		{
 			equipment.setBoots(items[3]);
-			equipment.setBootsDropChance(0.03f);
+			equipment.setBootsDropChance(dropRates[3]);
 		}
 
 		// Weapon
 		if (items[4] != null)
 		{
 			equipment.setItemInMainHand(items[4]);
-			equipment.setItemInMainHandDropChance(0.01f);
+			equipment.setItemInMainHandDropChance(dropRates[4]);
 		}
 		
 		// Offhand
 		if (items[5] != null)
 		{
 			equipment.setItemInOffHand(items[5]);
-			equipment.setItemInOffHandDropChance(0.05f);
+			equipment.setItemInOffHandDropChance(dropRates[5]);
 		}
 		
 		// Name
