@@ -44,7 +44,7 @@ public class Frolf extends VillagerEquipment
 		this.addRecipe(netheriteIgnot, Material.DIAMOND, 12, 1);
 		
 		/** Trade 5: Enhanced Potion of Strength
-		 * 		- Price: 2 Diamonds
+		 * 		- Price: 3 Diamonds
 		 * 		- Max stock: 3 */
 		ItemStack enhancedStrengthPotion = new ItemStack (Material.POTION, 1);
 		PotionMeta strPotMeta = (PotionMeta) enhancedStrengthPotion.getItemMeta();
@@ -55,8 +55,8 @@ public class Frolf extends VillagerEquipment
 		this.addRecipe(enhancedStrengthPotion, Material.DIAMOND, 3, 1);
 		
 		/** Trade 6: Enhanced Potion of Speed 
-		 * 		- Price: 2 Diamonds
-		 * 		- Max stock: 3 */
+		 * 		- Price: 3 Diamonds
+		 * 		- Max stock: 1 */
 		ItemStack enhancedSpeedPotion = new ItemStack (Material.POTION, 1);
 		PotionMeta speedPotMeta = (PotionMeta) enhancedSpeedPotion.getItemMeta();
 		speedPotMeta.setColor(Color.fromRGB(137, 207, 240));
@@ -75,6 +75,17 @@ public class Frolf extends VillagerEquipment
 		hastePotMeta.setDisplayName(this.color + "Potion of Haste");
 		hastePotion.setItemMeta(hastePotMeta);
 		this.addRecipe(hastePotion, Material.DIAMOND, 2, 2);
+		
+		/** Trade 8: Potion of Luck
+		 * 		- Price: 2 Diamonds
+		 * 		- Max Stock: 2 */
+		ItemStack luckPotion = new ItemStack (Material.POTION, 1);
+		PotionMeta luckPotMeta = (PotionMeta) luckPotion.getItemMeta();
+		luckPotMeta.setColor(Color.LIME);
+		luckPotMeta.addCustomEffect(new PotionEffect (PotionEffectType.LUCK, 9600, 0), false);
+		luckPotMeta.setDisplayName(this.color + "Potion of Luck");
+		luckPotion.setItemMeta(luckPotMeta);
+		this.addRecipe(luckPotion, Material.DIAMOND, 2, 2);
 		
 		/** Trade 8: Summon Frosty
 		 * 		- Price: 16 Emeralds

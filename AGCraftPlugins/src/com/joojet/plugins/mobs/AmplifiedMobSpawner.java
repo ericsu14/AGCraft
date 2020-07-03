@@ -129,7 +129,7 @@ public class AmplifiedMobSpawner implements Listener
 				SummonTypes scrollType = this.summonInterpreter.searchTrie(itemMeta.getLocalizedName());
 				if (scrollType != null)
 				{
-					SummoningScroll scroll = this.summonInterpreter.searchTrie(itemMeta.getLocalizedName()).getSummon();
+					SummoningScroll scroll = scrollType.getSummon();
 					
 					// Gets player's current location
 					Location spawnLocation = p.getEyeLocation();
