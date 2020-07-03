@@ -3,8 +3,8 @@ package com.joojet.plugins.mobs;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
-import org.bukkit.EntityEffect;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Damageable;
@@ -146,7 +146,8 @@ public class AmplifiedMobSpawner implements Listener
 					p.sendMessage(ChatColor.AQUA + "Sucessfully summoned " + scroll.getMob().getChatColor() + scroll.getName() + ChatColor.AQUA + "!");
 					p.playSound(spawnLocation, Sound.ENTITY_EVOKER_PREPARE_WOLOLO, 1.0f, 1.0f);
 					p.playSound(spawnLocation, Sound.ENTITY_EVOKER_CAST_SPELL, 1.0f, 1.0f);
-					p.playEffect(EntityEffect.WITCH_MAGIC);
+					p.spawnParticle(Particle.SPELL_INSTANT, spawnLocation, 10, 1.0, 1.0, 0.0, 0.1, null);
+					p.spawnParticle(Particle.SPELL_INSTANT, spawnLocation, 15, 1.0, 1.0, 0.0, 0.1, null);
 					int numScrolls = item.getAmount();
 					
 					// Dec. or wither away summoning scroll

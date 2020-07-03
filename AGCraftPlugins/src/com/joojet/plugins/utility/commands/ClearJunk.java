@@ -69,6 +69,7 @@ public class ClearJunk implements CommandExecutor
 		// Damaged, unenchanted weapon drops
 		this.junkItems.put(Material.BOW, JunkClassifier.WEAPONS);
 		this.junkItems.put(Material.GOLDEN_SWORD, JunkClassifier.WEAPONS);
+		this.junkItems.put(Material.CROSSBOW, JunkClassifier.WEAPONS);
 		
 		// Nether
 		this.junkItems.put(Material.NETHERRACK, JunkClassifier.NETHER);

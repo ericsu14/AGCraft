@@ -33,9 +33,9 @@ public class Frolf extends VillagerEquipment
 		this.addRecipe(sponges, Material.EMERALD, 12, 2);
 		
 		/** Trade 3: Enchanted Golden Apple 
-		 *		- Price: 3 diamonds, max stock: 3 */
+		 *		- Price: 5 diamonds, max stock: 3 */
 		ItemStack goldApple = new ItemStack (Material.ENCHANTED_GOLDEN_APPLE, 1);
-		this.addRecipe(goldApple, Material.DIAMOND, 3, 3);
+		this.addRecipe(goldApple, Material.DIAMOND, 5, 3);
 		
 		/** Trade 4: Netherite Ingot
 		 * 		- Price: 12 Diamonds
@@ -44,68 +44,68 @@ public class Frolf extends VillagerEquipment
 		this.addRecipe(netheriteIgnot, Material.DIAMOND, 12, 1);
 		
 		/** Trade 5: Enhanced Potion of Strength
-		 * 		- Price: 3 Diamonds
+		 * 		- Price: 4 Diamonds
 		 * 		- Max stock: 3 */
 		ItemStack enhancedStrengthPotion = new ItemStack (Material.POTION, 1);
 		PotionMeta strPotMeta = (PotionMeta) enhancedStrengthPotion.getItemMeta();
 		strPotMeta.setColor(Color.MAROON);
-		strPotMeta.addCustomEffect(new PotionEffect (PotionEffectType.INCREASE_DAMAGE, 9600, 1), false);
+		strPotMeta.addCustomEffect(new PotionEffect (PotionEffectType.INCREASE_DAMAGE, 4800, 1), false);
 		strPotMeta.setDisplayName(this.color + "Enhanced Potion of Strength");
 		enhancedStrengthPotion.setItemMeta(strPotMeta);
-		this.addRecipe(enhancedStrengthPotion, Material.DIAMOND, 3, 1);
+		this.addRecipe(enhancedStrengthPotion, Material.DIAMOND, 4, 1);
 		
 		/** Trade 6: Enhanced Potion of Speed 
-		 * 		- Price: 3 Diamonds
+		 * 		- Price: 4 Diamonds
 		 * 		- Max stock: 1 */
 		ItemStack enhancedSpeedPotion = new ItemStack (Material.POTION, 1);
 		PotionMeta speedPotMeta = (PotionMeta) enhancedSpeedPotion.getItemMeta();
 		speedPotMeta.setColor(Color.fromRGB(137, 207, 240));
-		speedPotMeta.addCustomEffect(new PotionEffect (PotionEffectType.SPEED, 9600, 1), false);
+		speedPotMeta.addCustomEffect(new PotionEffect (PotionEffectType.SPEED, 4800, 1), false);
 		speedPotMeta.setDisplayName(this.color + "Enhanced Potion of Speed");
 		enhancedSpeedPotion.setItemMeta(speedPotMeta);
-		this.addRecipe(enhancedSpeedPotion, Material.DIAMOND, 3, 1);
+		this.addRecipe(enhancedSpeedPotion, Material.DIAMOND, 4, 1);
 		
 		/** Trade 7: Potion of Haste
-		 * 		- Price: 2 Diamonds
-		 * 		- Max stock: 2 */
+		 * 		- Price: 3 Diamonds
+		 * 		- Max stock: 1 */
 		ItemStack hastePotion = new ItemStack (Material.POTION, 1);
 		PotionMeta hastePotMeta = (PotionMeta) hastePotion.getItemMeta();
 		hastePotMeta.setColor (Color.YELLOW);
 		hastePotMeta.addCustomEffect(new PotionEffect (PotionEffectType.FAST_DIGGING, 9600, 0), false);
 		hastePotMeta.setDisplayName(this.color + "Potion of Haste");
 		hastePotion.setItemMeta(hastePotMeta);
-		this.addRecipe(hastePotion, Material.DIAMOND, 2, 2);
+		this.addRecipe(hastePotion, Material.DIAMOND, 3, 1);
 		
 		/** Trade 8: Potion of Luck
-		 * 		- Price: 2 Diamonds
-		 * 		- Max Stock: 2 */
+		 * 		- Price: 3 Diamonds
+		 * 		- Max Stock: 1 */
 		ItemStack luckPotion = new ItemStack (Material.POTION, 1);
 		PotionMeta luckPotMeta = (PotionMeta) luckPotion.getItemMeta();
 		luckPotMeta.setColor(Color.LIME);
 		luckPotMeta.addCustomEffect(new PotionEffect (PotionEffectType.LUCK, 9600, 0), false);
 		luckPotMeta.setDisplayName(this.color + "Potion of Luck");
 		luckPotion.setItemMeta(luckPotMeta);
-		this.addRecipe(luckPotion, Material.DIAMOND, 2, 2);
+		this.addRecipe(luckPotion, Material.DIAMOND, 3, 1);
 		
-		/** Trade 8: Summon Frosty
+		/** Trade 9: Summon Frosty
 		 * 		- Price: 16 Emeralds
 		 * 		- Max stock: 1 */
 		SummoningScroll frostyScroll = new SummonFrosty();
 		this.addRecipe(frostyScroll, Material.EMERALD, 16, 1);
 		
-		/** Trade 9: Summon Scruffy
+		/** Trade 10: Summon Scruffy
 		 * 		- Price: 32 Emeralds
 		 * 		- Max stock: 1 */
 		SummoningScroll scruffyScroll = new SummonScruffy ();
 		this.addRecipe(scruffyScroll, Material.EMERALD, 32, 1);
 		
-		/** Trade 10: Summon Advanced Golem
+		/** Trade 11: Summon Advanced Golem
 		 * 		- Price: 12 Diamonds
 		 * 		- Max stock: 1 */
 		SummoningScroll advGolemScroll = new SummonAdvancedGolem ();
 		this.addRecipe(advGolemScroll, Material.DIAMOND, 12, 1);
 		
-		/** Trade 11: Summon John Jae
+		/** Trade 12: Summon John Jae
 		 * 		- Price: 24 Diamonds
 		 * 		- Max stock: 1 */
 		SummoningScroll johnJaeScroll = new SummonJohnJae ();
