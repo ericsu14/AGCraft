@@ -10,7 +10,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.joojet.plugins.mobs.interfaces.SummoningScroll;
 import com.joojet.plugins.mobs.interfaces.VillagerEquipment;
-import com.joojet.plugins.mobs.scrolls.SummonJohnJae;
+import com.joojet.plugins.mobs.scrolls.*;
 
 public class Frolf extends VillagerEquipment
 {
@@ -76,10 +76,31 @@ public class Frolf extends VillagerEquipment
 		hastePotion.setItemMeta(hastePotMeta);
 		this.addRecipe(hastePotion, Material.DIAMOND, 2, 2);
 		
-		/** Trade 8: Summon John Jae
-		 * 		- Price: 48 Diamonds
+		/** Trade 8: Summon Frosty
+		 * 		- Price: 16 Emeralds
+		 * 		- Max stock: 1 */
+		SummoningScroll frostyScroll = new SummonFrosty();
+		this.addRecipe(frostyScroll, Material.EMERALD, 16, 1);
+		
+		/** Trade 9: Summon Scruffy
+		 * 		- Price: 32 Emeralds
+		 * 		- Max stock: 1 */
+		SummoningScroll scruffyScroll = new SummonScruffy ();
+		this.addRecipe(scruffyScroll, Material.EMERALD, 32, 1);
+		
+		/** Trade 10: Summon Advanced Golem
+		 * 		- Price: 12 Diamonds
+		 * 		- Max stock: 1 */
+		SummoningScroll advGolemScroll = new SummonAdvancedGolem ();
+		this.addRecipe(advGolemScroll, Material.DIAMOND, 12, 1);
+		
+		/** Trade 11: Summon John Jae
+		 * 		- Price: 24 Diamonds
 		 * 		- Max stock: 1 */
 		SummoningScroll johnJaeScroll = new SummonJohnJae ();
-		this.addRecipe(johnJaeScroll, Material.DIAMOND, 48, 1);
+		this.addRecipe(johnJaeScroll, Material.DIAMOND, 24, 1);
+		
 	}
+	
+	
 }

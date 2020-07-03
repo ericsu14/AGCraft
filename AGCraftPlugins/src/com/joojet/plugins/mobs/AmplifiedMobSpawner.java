@@ -138,14 +138,23 @@ public class AmplifiedMobSpawner implements Listener
 					// Gets player's current location
 					Location spawnLocation = p.getLocation();
 					spawnLocation.add(spawnLocation.getDirection());
+					spawnLocation.setZ(p.getLocation().getZ() + 4.0);
 					
 					// Spawns the entity into the world in front of the player
 					LivingEntity entity = (LivingEntity) p.getWorld().spawnEntity(spawnLocation, scroll.getMobType());
 					this.equipEntity(entity, scroll.getMob());
 					p.sendMessage(ChatColor.AQUA + "Sucessfully summoned " + scroll.getMob().getChatColor() + scroll.getName() + ChatColor.AQUA + "!");
 					
-					// Marks the scroll as used (since removing it has a chance of crashing the world)
-					item.setItemMeta(SummoningScroll.markUsed(itemMeta));
+					int numScrolls = item.getAmount();
+					if (numScrolls > 1)
+					{
+						item.setAmount(numScrolls - 1); 
+					}
+					else
+					{
+						// Marks the scroll as used (since removing it has a chance of crashing the world)
+						item.setItemMeta(SummoningScroll.markUsed(itemMeta));
+					}
 				}
 			}
 		}

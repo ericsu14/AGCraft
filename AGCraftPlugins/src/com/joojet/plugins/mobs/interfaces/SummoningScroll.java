@@ -1,7 +1,6 @@
 package com.joojet.plugins.mobs.interfaces;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -30,7 +29,6 @@ public abstract class SummoningScroll extends ItemStack
 		scrollMeta.setDisplayName(ChatColor.GOLD + "Summon " + mob.getChatColor() + mob.getName());
 		ArrayList <String> scrollLore = new ArrayList <String> ();
 		scrollLore.add(ChatColor.DARK_PURPLE + "Right click to summon " + mob.getChatColor() + mob.getName());
-		scrollLore.add(ChatColor.GOLD + "Ticket No. " + UUID.randomUUID());
 		scrollMeta.setLore(scrollLore);
 		scrollMeta.setLocalizedName(mob.getName());
 		this.setItemMeta(scrollMeta);
@@ -63,7 +61,7 @@ public abstract class SummoningScroll extends ItemStack
 	{
 		// Marks the summoning scroll as used
 		itemMeta.removeEnchant(Enchantment.DURABILITY);
-		itemMeta.setDisplayName(ChatColor.GRAY + "Withered Summing Scroll");
+		itemMeta.setDisplayName(ChatColor.GRAY + "Withered Summoning Scroll");
 		ArrayList <String> lore = new ArrayList <String> ();
 		lore.add(ChatColor.GRAY + "You cannot use this scroll anymore.");
 		lore.add(ChatColor.GRAY + "Best to throw it away or use it as paper.");
