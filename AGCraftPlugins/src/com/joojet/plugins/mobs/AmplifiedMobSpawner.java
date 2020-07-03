@@ -3,8 +3,8 @@ package com.joojet.plugins.mobs;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.EntityEffect;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Damageable;
@@ -124,13 +124,7 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			ItemStack item = event.getItem();
 			ItemMeta itemMeta = item.getItemMeta();
-			/* An item is a summoning scroll if:
-			 * 	- It is of type paper
-			 *  - It has an enchant (not possible in vanilla MC)
-			 *  - It has a localized name, storing the name of the custom mob to be spawned */
-			if (item.getType().equals(Material.PAPER)
-					&& itemMeta.hasLocalizedName()
-					&& itemMeta.hasEnchants())
+			if (SummoningScroll.isSummoningScroll(item))
 			{
 				SummonTypes scrollType = this.summonInterpreter.searchTrie(itemMeta.getLocalizedName());
 				if (scrollType != null)
@@ -152,7 +146,10 @@ public class AmplifiedMobSpawner implements Listener
 					p.sendMessage(ChatColor.AQUA + "Sucessfully summoned " + scroll.getMob().getChatColor() + scroll.getName() + ChatColor.AQUA + "!");
 					p.playSound(spawnLocation, Sound.ENTITY_EVOKER_PREPARE_WOLOLO, 1.0f, 1.0f);
 					p.playSound(spawnLocation, Sound.ENTITY_EVOKER_CAST_SPELL, 1.0f, 1.0f);
+					p.playEffect(EntityEffect.WITCH_MAGIC);
 					int numScrolls = item.getAmount();
+					
+					// Dec. or wither away summoning scroll
 					if (numScrolls > 1)
 					{
 						item.setAmount(numScrolls - 1); 

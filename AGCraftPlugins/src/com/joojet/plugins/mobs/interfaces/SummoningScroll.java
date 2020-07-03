@@ -19,6 +19,8 @@ public abstract class SummoningScroll extends ItemStack
 	protected EntityType type;
 	/** The mob's name */
 	protected String name;
+	/** String that marks a scroll as used */
+	protected final static String witheredString = "withered";
 	
 	public SummoningScroll (MobEquipment mob, EntityType type)
 	{
@@ -65,9 +67,29 @@ public abstract class SummoningScroll extends ItemStack
 		ArrayList <String> lore = new ArrayList <String> ();
 		lore.add(ChatColor.GRAY + "You cannot use this scroll anymore.");
 		lore.add(ChatColor.GRAY + "Best to throw it away or use it as paper.");
+		lore.add(ChatColor.GRAY + "Use /clearjunk to remove from inventory.");
 		itemMeta.setLore(lore);
-		itemMeta.setLocalizedName("");
+		itemMeta.setLocalizedName(witheredString);
 		
 		return itemMeta;
+	}
+	
+	/** Returns true if the item is a scroll */
+	public static boolean isSummoningScroll (ItemStack item)
+	{
+		ItemMeta itemMeta = item.getItemMeta();
+		return (item.getType().equals(Material.PAPER)
+			&& itemMeta.hasLocalizedName()
+			&& itemMeta.hasEnchants());
+	}
+	
+	/** Returns true if the item is a withered scroll */
+	public static boolean isWitheredScroll (ItemStack item)
+	{
+		ItemMeta itemMeta = item.getItemMeta();
+		return (item.getType().equals(Material.PAPER)
+				&& itemMeta.hasLocalizedName()
+				&& itemMeta.getLocalizedName().equals(witheredString)
+				&& !itemMeta.hasEnchants());
 	}
 }

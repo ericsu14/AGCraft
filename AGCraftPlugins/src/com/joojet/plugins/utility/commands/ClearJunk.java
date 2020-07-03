@@ -14,6 +14,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.ChatColor;
 
+import com.joojet.plugins.mobs.interfaces.SummoningScroll;
 import com.joojet.plugins.utility.enums.JunkClassifier;
 import com.joojet.plugins.utility.interpreter.JunkCommandInterpreter;
 
@@ -33,6 +34,7 @@ public class ClearJunk implements CommandExecutor
 		this.junkItems.put(Material.STRING, JunkClassifier.COMMON);
 		this.junkItems.put(Material.WHEAT_SEEDS, JunkClassifier.COMMON);
 		this.junkItems.put(Material.GREEN_DYE, JunkClassifier.COMMON);
+		this.junkItems.put(Material.PAPER, JunkClassifier.COMMON);
 		
 		// Natural blocks
 		this.junkItems.put(Material.DIRT, JunkClassifier.NATURAL);
@@ -134,8 +136,17 @@ public class ClearJunk implements CommandExecutor
 						&& checkMobArmorLoot (item, classifier) 
 						&& (filter.contains(classifier) || filter.contains(JunkClassifier.ALL)))
 				{
-					queuedItems.add (item);
-					count += item.getAmount();
+					boolean addToQueue = true;
+					// Special case for used scrolls
+					if (classifier.equals(JunkClassifier.COMMON) && item.getType().equals(Material.PAPER))
+					{
+						addToQueue = SummoningScroll.isWitheredScroll(item);
+					}
+					if (addToQueue)
+					{
+						queuedItems.add (item);
+						count += item.getAmount();
+					}
 				}
 			}
 		}

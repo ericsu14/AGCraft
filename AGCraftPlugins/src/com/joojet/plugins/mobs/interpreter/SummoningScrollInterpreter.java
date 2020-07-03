@@ -14,7 +14,7 @@ public class SummoningScrollInterpreter
 		this.populateTrie();
 	}
 	
-	/** Populates the trie with all enums in JunkClassifier */
+	/** Populates the trie with all enums in SummonTypes */
 	private void populateTrie ()
 	{
 		for (SummonTypes ele : SummonTypes.values())
@@ -23,7 +23,7 @@ public class SummoningScrollInterpreter
 		}
 	}
 	
-	/** Searches the trie for the search term and returns the JunkClassifier related to
+	/** Searches the trie for the search term and returns the SummonType related to
 	 *  that search term. */
 	public SummonTypes searchTrie (String input)
 	{
