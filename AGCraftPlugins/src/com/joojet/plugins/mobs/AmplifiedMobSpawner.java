@@ -9,6 +9,7 @@ import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Husk;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.LivingEntity;
@@ -24,6 +25,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
@@ -31,11 +33,13 @@ import org.bukkit.potion.PotionEffect;
 import com.joojet.plugins.mobs.allies.golem.GolemTypes;
 import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
 import com.joojet.plugins.mobs.enums.SummonTypes;
+import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 import com.joojet.plugins.mobs.interfaces.SummoningScroll;
 import com.joojet.plugins.mobs.interfaces.VillagerEquipment;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
+import com.joojet.plugins.mobs.monsters.phantom.FireworkPhantom;
 import com.joojet.plugins.mobs.monsters.pillager.PatrioticPillager;
 import com.joojet.plugins.mobs.monsters.skeleton.PatrioticSkeleton;
 import com.joojet.plugins.mobs.monsters.skeleton.SkeletonTypes;
@@ -68,6 +72,9 @@ public class AmplifiedMobSpawner implements Listener
 	// Interpreter to search for used summoning scrolls
 	private SummoningScrollInterpreter summonInterpreter;
 	
+	// Used to generate random fireworks
+	private FireworkTypes fwTypes;
+	
 	public AmplifiedMobSpawner ()
 	{
 		this.zombieTypes = new ZombieTypes();
@@ -78,6 +85,7 @@ public class AmplifiedMobSpawner implements Listener
 		this.huskTypes = new HuskTypes();
 		this.wanderingTypes = new WanderingVillagerTypes();
 		this.summonInterpreter = new SummoningScrollInterpreter();
+		this.fwTypes = new FireworkTypes();
 	}
 	
 	public void onEnable ()
@@ -179,6 +187,13 @@ public class AmplifiedMobSpawner implements Listener
 		
 		double roll = rand.nextDouble();
 		
+		// Insta kill phantoms and let them explode
+		if (type.equals(EntityType.PHANTOM))
+		{
+			this.transformFireworkPhantom(entity);
+			return;
+		}
+		
 		// Summon a new patriotic zombie when roll is between a certain range
 		if (roll >= 0.30 && roll <= 0.50)
 		{
@@ -264,6 +279,16 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		this.equipEntity(entity, mobEquipment);
+	}
+	
+	/** Transforms the phantom into a firework phantom */
+	public void transformFireworkPhantom (LivingEntity entity)
+	{
+		this.equipEntity(entity, new FireworkPhantom());
+		Firework firework = (Firework) entity.getWorld().spawnEntity(entity.getLocation(), EntityType.FIREWORK);
+		ItemStack fwItem = fwTypes.getRandomFirework(1, 0);
+		firework.setFireworkMeta((FireworkMeta)fwItem.getItemMeta());
+		firework.detonate();
 	}
 	
 	/** Makes the names of raider mobs visible */
