@@ -24,6 +24,8 @@ public class FireworkTypes
 		this.addFirework(new ChandelierFalling());
 		this.addFirework(new PinkMist());
 		this.addFirework(new CreeperRocket());
+		this.addFirework(new MagicalFirework());
+		this.addFirework(new DragonsBreath());
 	}
 	
 	public void addFirework (Firework firework)
