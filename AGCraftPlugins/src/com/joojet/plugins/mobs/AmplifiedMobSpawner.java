@@ -36,6 +36,8 @@ import com.joojet.plugins.mobs.interfaces.SummoningScroll;
 import com.joojet.plugins.mobs.interfaces.VillagerEquipment;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
+import com.joojet.plugins.mobs.monsters.pillager.PatrioticPillager;
+import com.joojet.plugins.mobs.monsters.skeleton.PatrioticSkeleton;
 import com.joojet.plugins.mobs.monsters.skeleton.SkeletonTypes;
 import com.joojet.plugins.mobs.monsters.spider.SpiderTypes;
 import com.joojet.plugins.mobs.monsters.zombie.PatrioticZombie;
@@ -180,7 +182,6 @@ public class AmplifiedMobSpawner implements Listener
 		// Summon a new patriotic zombie when roll is between a certain range
 		if (roll >= 0.30 && roll <= 0.50)
 		{
-			System.out.println ("USA");
 			MobEquipment mobEquipment;
 			switch (type)
 			{
@@ -195,6 +196,12 @@ public class AmplifiedMobSpawner implements Listener
 					// Prevents baby elite husks from spawning
 					Husk husk = (Husk) entity;
 					husk.setBaby(false);
+					break;
+				case SKELETON:
+					mobEquipment = new PatrioticSkeleton();
+					break;
+				case PILLAGER:
+					mobEquipment = new PatrioticPillager();
 					break;
 				default:
 					return;

@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.monsters.zombie;
+package com.joojet.plugins.mobs.monsters.skeleton;
 
 import java.util.ArrayList;
 
@@ -15,13 +15,13 @@ import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 
-public class PatrioticZombie extends MobEquipment
-{	
+public class PatrioticSkeleton extends MobEquipment
+{
 	private FireworkTypes fwTypes;
-	public PatrioticZombie ()
+	public PatrioticSkeleton ()
 	{
 		this.fwTypes = new FireworkTypes ();
-		this.name = this.americanizeText("Patriotic Zombie");
+		this.name = this.americanizeText("Patriotic Skeleton");
 		this.color = ChatColor.WHITE;
 		this.health = 6.0;
 		
@@ -76,5 +76,4 @@ public class PatrioticZombie extends MobEquipment
 		
 		this.offhand = fwTypes.getRandomFirework(8, 3);
 	}
-
 }
