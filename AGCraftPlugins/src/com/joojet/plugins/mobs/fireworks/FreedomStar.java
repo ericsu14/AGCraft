@@ -34,7 +34,7 @@ public class FreedomStar extends Firework
 				.withTrail()
 				.with(Type.STAR)
 				.build());
-		firework.setDisplayName(ChatColor.YELLOW + "Freedom Star");
+		firework.setDisplayName(ChatColor.WHITE + "The" + ChatColor.RED + " Stars" + ChatColor.WHITE + " and" + ChatColor.BLUE + " Stripes");
 		firework.setPower(power);
 		fw.setItemMeta(firework);
 		return fw;

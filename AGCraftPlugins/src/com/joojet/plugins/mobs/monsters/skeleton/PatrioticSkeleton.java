@@ -74,6 +74,6 @@ public class PatrioticSkeleton extends MobEquipment
 		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 3.0, 1.5, 0.05);
 		this.boots.setItemMeta(bootMeta);
 		
-		this.offhand = fwTypes.getRandomFirework(8, 2);
+		this.offhand = fwTypes.getRandomFirework(16, 2);
 	}
 }
