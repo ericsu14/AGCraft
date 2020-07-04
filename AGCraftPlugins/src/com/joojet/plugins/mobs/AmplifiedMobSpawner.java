@@ -195,7 +195,7 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		// Summon a new patriotic zombie when roll is between a certain range
-		if (roll >= 0.30 && roll <= 0.50)
+		if (!reason.equals(SpawnReason.RAID) && roll >= 0.30 && roll <= 0.50)
 		{
 			MobEquipment mobEquipment;
 			switch (type)

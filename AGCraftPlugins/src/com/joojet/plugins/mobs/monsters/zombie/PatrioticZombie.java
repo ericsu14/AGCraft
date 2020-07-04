@@ -74,7 +74,7 @@ public class PatrioticZombie extends MobEquipment
 		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 3.0, 1.5, 0.05);
 		this.boots.setItemMeta(bootMeta);
 		
-		this.offhand = fwTypes.getRandomFirework(8, 3);
+		this.offhand = fwTypes.getRandomFirework(8, 2);
 	}
 
 }
