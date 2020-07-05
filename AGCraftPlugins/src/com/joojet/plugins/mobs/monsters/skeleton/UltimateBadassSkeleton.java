@@ -23,7 +23,6 @@ public class UltimateBadassSkeleton extends MobEquipment
 	{
 		this.name = "#agspotted";
 		this.color = ChatColor.GOLD;
-		this.health = 30;
 		this.showName = true;
 		
 		this.addPotionEffect(CustomPotionEffect.SPEED);
@@ -47,7 +46,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		// Offhand
 		this.offhand = new ItemStack (Material.TIPPED_ARROW, 1);
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
-		tippedArrow.setColor(Color.PURPLE);
+		tippedArrow.setColor(Color.fromRGB(75, 0, 130));
 		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WITHER, 70, 2), true);
 		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 1), true);
 		tippedArrow.setDisplayName(this.color + "Thanos Arrow");
@@ -75,7 +74,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		// Leggings
 		this.leggings = new ItemStack (Material.NETHERITE_LEGGINGS, 1);
 		ItemMeta legMeta = this.leggings.getItemMeta();
-		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
 		legMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		legMeta.setDisplayName(this.color + "Dark Netherite Leggings");
 		this.leggings.setItemMeta(legMeta);

@@ -23,7 +23,7 @@ public class PatrioticSkeleton extends MobEquipment
 		this.fwTypes = new FireworkTypes ();
 		this.name = this.americanizeText("Patriotic Skeleton");
 		this.color = ChatColor.WHITE;
-		this.health = 6.0;
+		this.health = 5.0;
 		
 		this.addPotionEffect(CustomPotionEffect.STRENGTH);
 		this.addPotionEffect(CustomPotionEffect.SPEED);

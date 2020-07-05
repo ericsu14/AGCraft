@@ -38,14 +38,14 @@ public class WitheringSkeleton extends MobEquipment
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
 		tippedArrow.setColor(Color.BLACK);
 		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.WITHER, 140, 1), true);
-		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 0), true);
+		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 1), true);
 		tippedArrow.setDisplayName(this.color + "Withering Arrow");
 		this.offhand.setItemMeta(tippedArrow);
 		
 		// Helmet
 		this.helmet = new ItemStack (Material.NETHERITE_HELMET, 1);
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
-		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
 		helmetMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		helmetMeta.setDisplayName(this.color + "Dark Netherite Helmet");
 		this.helmet.setItemMeta(helmetMeta);

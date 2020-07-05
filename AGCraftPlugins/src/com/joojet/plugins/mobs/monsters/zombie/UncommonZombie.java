@@ -46,7 +46,7 @@ public class UncommonZombie extends MobEquipment
 		// Leggings
 		this.leggings = new ItemStack (Material.CHAINMAIL_LEGGINGS, 1);
 		ItemMeta legMeta = this.leggings.getItemMeta();
-		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
+		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 		legMeta.setDisplayName(this.color + "Reinforced Chainmail Leggings");
 		this.leggings.setItemMeta(legMeta);
 		this.addRandomDamage(this.leggings);
@@ -54,7 +54,7 @@ public class UncommonZombie extends MobEquipment
 		// Boots
 		this.boots = new ItemStack (Material.CHAINMAIL_BOOTS);
 		ItemMeta bootMeta = this.boots.getItemMeta();
-		bootMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
+		bootMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
 		bootMeta.setDisplayName(this.color + "Lightweight Chainmail Boots");
 		

@@ -29,7 +29,7 @@ public class BadassZombie extends MobEquipment
 		this.addAttackAttributes(weaponMeta, EquipmentSlot.HAND, 7.0, 2.4);
 		
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
-		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 2, true);
+		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		
 		ArrayList <String> weaponLore = new ArrayList <String> ();
@@ -47,7 +47,7 @@ public class BadassZombie extends MobEquipment
 		// Helmet
 		this.helmet = new ItemStack (Material.IRON_HELMET, 1);
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
-		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		helmetMeta.setDisplayName(this.color + "Reinforced Iron Helmet");
 		this.helmet.setItemMeta(helmetMeta);
 		this.addRandomDamage(this.helmet);
@@ -55,7 +55,7 @@ public class BadassZombie extends MobEquipment
 		// Chestplate
 		this.chestplate = new ItemStack (Material.DIAMOND_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
-		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
 		chestMeta.addEnchant(Enchantment.THORNS, 2, true);
 		chestMeta.setDisplayName(this.color + "Reinforced Diamond Chestplate");
 		this.chestplate.setItemMeta(chestMeta);
@@ -64,7 +64,7 @@ public class BadassZombie extends MobEquipment
 		// Leggings
 		this.leggings = new ItemStack (Material.IRON_LEGGINGS, 1);
 		ItemMeta legMeta = this.leggings.getItemMeta();
-		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		legMeta.setDisplayName(this.color + "Reinforced Iron Leggings");
 		this.leggings.setItemMeta(legMeta);
 		this.addRandomDamage(this.leggings);

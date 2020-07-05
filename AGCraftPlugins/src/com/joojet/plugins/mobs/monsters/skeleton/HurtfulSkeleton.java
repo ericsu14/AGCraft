@@ -38,14 +38,14 @@ public class HurtfulSkeleton extends MobEquipment
 		this.offhand = new ItemStack (Material.TIPPED_ARROW, 1);
 		PotionMeta tippedArrow = (PotionMeta) this.offhand.getItemMeta();
 		tippedArrow.setColor(Color.MAROON);
-		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 1), true);
+		tippedArrow.addCustomEffect(new PotionEffect (PotionEffectType.HARM, 1, 0), true);
 		tippedArrow.setDisplayName(this.color + "Hurtful Arrow");
 		this.offhand.setItemMeta(tippedArrow);
 		
 		// Helmet
 		this.helmet = new ItemStack (Material.IRON_HELMET, 1);
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
-		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		helmetMeta.setDisplayName(this.color + "Reinforced Iron Helmet");
 		this.helmet.setItemMeta(helmetMeta);
 		this.addRandomDamage(this.helmet);
@@ -53,7 +53,7 @@ public class HurtfulSkeleton extends MobEquipment
 		// Chestplate
 		this.chestplate = new ItemStack (Material.IRON_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
-		chestMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 4, true);
+		chestMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 3, true);
 		chestMeta.setDisplayName(this.color + "Bulletproof Iron Chestplate");
 		this.chestplate.setItemMeta(chestMeta);
 		this.addRandomDamage(this.chestplate);
@@ -61,7 +61,7 @@ public class HurtfulSkeleton extends MobEquipment
 		// Leggings
 		this.leggings = new ItemStack (Material.IRON_LEGGINGS, 1);
 		ItemMeta legMeta = this.leggings.getItemMeta();
-		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
+		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
 		legMeta.setDisplayName(this.color + "Reinforced Iron Leggings");
 		this.leggings.setItemMeta(legMeta);
 		this.addRandomDamage(this.leggings);
@@ -69,7 +69,7 @@ public class HurtfulSkeleton extends MobEquipment
 		// Boots
 		this.boots = new ItemStack (Material.IRON_BOOTS);
 		ItemMeta bootMeta = this.boots.getItemMeta();
-		bootMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 4, true);
+		bootMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 2, true);
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
 		bootMeta.setDisplayName(this.color + "Lightweight Chainmail Boots");
 		

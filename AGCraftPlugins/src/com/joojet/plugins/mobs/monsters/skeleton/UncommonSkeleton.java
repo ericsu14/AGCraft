@@ -20,6 +20,7 @@ public class UncommonSkeleton extends MobEquipment
 	{
 		this.name = "Bulky Skeleton";
 		this.color = ChatColor.GREEN;
+		this.health = 16;
 		
 		// Weapon
 		this.weapon = new ItemStack(Material.BOW, 1);
@@ -41,7 +42,7 @@ public class UncommonSkeleton extends MobEquipment
 		// Helmet
 		this.helmet = new ItemStack (Material.CHAINMAIL_HELMET, 1);
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
-		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		helmetMeta.setDisplayName(this.color + "Reinforced Chainmail Helmet");
 		this.helmet.setItemMeta(helmetMeta);
 		this.addRandomDamage(this.helmet);
@@ -57,7 +58,7 @@ public class UncommonSkeleton extends MobEquipment
 		// Leggings
 		this.leggings = new ItemStack (Material.CHAINMAIL_LEGGINGS, 1);
 		ItemMeta legMeta = this.leggings.getItemMeta();
-		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		legMeta.setDisplayName(this.color + "Reinforced Chainmail Leggings");
 		this.leggings.setItemMeta(legMeta);
 		this.addRandomDamage(this.leggings);

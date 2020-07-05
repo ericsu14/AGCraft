@@ -18,7 +18,6 @@ public class UltimateBadassZombie extends MobEquipment
 	{
 		this.name = "Shadow Clone joojetsu";
 		this.color = ChatColor.GOLD;
-		this.health = 30;
 		this.showName = true;
 		
 		// Custom potion effects
@@ -59,7 +58,7 @@ public class UltimateBadassZombie extends MobEquipment
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
 		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
 		chestMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
-		chestMeta.addEnchant(Enchantment.THORNS, 3, true);
+		chestMeta.addEnchant(Enchantment.THORNS, 2, true);
 		chestMeta.setDisplayName(this.color + "Reinforced Netherite Chestplate");
 		this.chestplate.setItemMeta(chestMeta);
 		this.addRandomDamage(this.chestplate);
