@@ -59,7 +59,7 @@ public class WorldofColors extends Firework
 				.withFade(Color.fromRGB(84, 64, 177))
 				.with(Type.BALL_LARGE)
 				.build());
-		firework.setDisplayName(ChatColor.LIGHT_PURPLE + "Paint the Skies");
+		firework.setDisplayName(ChatColor.LIGHT_PURPLE + "A World of Colors");
 		firework.setPower(power);
 		fw.setItemMeta(firework);
 		return fw;
