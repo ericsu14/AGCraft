@@ -49,7 +49,7 @@ public class HurtfulSkeleton extends MobEquipment
 		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		helmetMeta.setDisplayName(this.color + "Reinforced Iron Helmet");
 		this.addLoreToItemMeta(helmetMeta, genericLore);
-		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 0.0, 0.5, 0.0);
+		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 2.0, 0.5, 0.0);
 		this.helmet.setItemMeta(helmetMeta);
 		
 		// Chestplate
@@ -58,7 +58,7 @@ public class HurtfulSkeleton extends MobEquipment
 		chestMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 3, true);
 		chestMeta.setDisplayName(this.color + "Bulletproof Iron Chestplate");
 		this.addLoreToItemMeta(chestMeta, genericLore);
-		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 0.0, 1.0, 0.0);
+		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 6.0, 1.0, 0.0);
 		this.chestplate.setItemMeta(chestMeta);
 
 		// Leggings
@@ -67,7 +67,7 @@ public class HurtfulSkeleton extends MobEquipment
 		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
 		legMeta.setDisplayName(this.color + "Reinforced Iron Leggings");
 		this.addLoreToItemMeta(legMeta, genericLore);
-		this.addDefenseAttributes(legMeta, EquipmentSlot.LEGS, 0.0, 0.5, 0.0);
+		this.addDefenseAttributes(legMeta, EquipmentSlot.LEGS, 5.0, 0.5, 0.0);
 		this.leggings.setItemMeta(legMeta);
 		
 		// Boots
@@ -80,7 +80,7 @@ public class HurtfulSkeleton extends MobEquipment
 		
 		// One speedy boi
 		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.15);
-		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 2.0, 0.0, 0.0);
+		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 2.0, 0.5, 0.0);
 		
 		this.boots.setItemMeta(bootMeta);
 		this.addRandomDamage(this.boots);

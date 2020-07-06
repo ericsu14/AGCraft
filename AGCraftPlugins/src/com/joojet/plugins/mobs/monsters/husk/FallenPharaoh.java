@@ -31,6 +31,7 @@ public class FallenPharaoh extends MobEquipment
 		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
 		chestMeta.addEnchant(Enchantment.DURABILITY, 2, true);
 		chestMeta.setDisplayName(this.color + "Royal Gold Chestplate");
+		this.addLoreToItemMeta(chestMeta, "Passed down by generations.");
 		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 6.0, 2.0, 0.10);
 		this.chestplate.setItemMeta(chestMeta);
 		
@@ -39,6 +40,7 @@ public class FallenPharaoh extends MobEquipment
 		legMeta.addEnchant(Enchantment.PROTECTION_FIRE, 3, true);
 		legMeta.addEnchant(Enchantment.DURABILITY, 2, true);
 		legMeta.setDisplayName(this.color + "Royal Gold Leggings");
+		this.addLoreToItemMeta(legMeta, "Passed down by generations.");
 		this.addDefenseAttributes(legMeta, EquipmentSlot.LEGS, 5.0, 2.0, 0.05);
 		this.leggings.setItemMeta(legMeta);
 		
@@ -48,6 +50,7 @@ public class FallenPharaoh extends MobEquipment
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
 		bootMeta.addEnchant(Enchantment.DURABILITY, 2, true);
 		bootMeta.setDisplayName(this.color + "Royal Gold Boots");
+		this.addLoreToItemMeta(bootMeta, "This isn't actually made from 24k gold which offers vastly improved mobility.");
 		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 2.0, 1.0, 0.05);
 		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.20);
 		this.boots.setItemMeta(bootMeta);

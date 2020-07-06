@@ -6,7 +6,7 @@ public class SpiderTypes extends MonsterTypes
 {
 	public SpiderTypes ()
 	{
-		this.addEquipment(new AgressiveSpider(), 5);
+		this.addEquipment(new AgressiveSpider(), 9);
 		this.addEquipment(new EnragedSpider(), 1);
 	}
 }

@@ -34,7 +34,7 @@ public class UncommonZombie extends MobEquipment
 		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 		helmetMeta.setDisplayName(this.color + "Reinforced Chainmail Helmet");
 		this.addLoreToItemMeta(helmetMeta, genericLore);
-		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 0.0, 0.5, 0.0);
+		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 2.0, 0.5, 0.0);
 		this.helmet.setItemMeta(helmetMeta);
 		
 		// Chestplate
@@ -42,7 +42,7 @@ public class UncommonZombie extends MobEquipment
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
 		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		chestMeta.setDisplayName(this.color + "Reinforced Chainmail Chestplate");
-		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 0.0, 1.0, 0.0);
+		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 5.0, 1.0, 0.0);
 		this.addLoreToItemMeta(chestMeta, genericLore);
 		this.chestplate.setItemMeta(chestMeta);
 		
@@ -51,7 +51,7 @@ public class UncommonZombie extends MobEquipment
 		ItemMeta legMeta = this.leggings.getItemMeta();
 		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 		legMeta.setDisplayName(this.color + "Reinforced Chainmail Leggings");
-		this.addDefenseAttributes(legMeta, EquipmentSlot.LEGS, 0.0, 0.5, 0.0);
+		this.addDefenseAttributes(legMeta, EquipmentSlot.LEGS, 4.0, 0.5, 0.0);
 		this.addLoreToItemMeta(legMeta, genericLore);
 		this.leggings.setItemMeta(legMeta);
 		
@@ -59,7 +59,7 @@ public class UncommonZombie extends MobEquipment
 		this.boots = new ItemStack (Material.CHAINMAIL_BOOTS);
 		ItemMeta bootMeta = this.boots.getItemMeta();
 		bootMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
+		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 2, true);
 		bootMeta.setDisplayName(this.color + "Lightweight Chainmail Boots");
 		this.addLoreToItemMeta(bootMeta, "Lightweight chains allows for improved mobility.");
 		// One speedy boi

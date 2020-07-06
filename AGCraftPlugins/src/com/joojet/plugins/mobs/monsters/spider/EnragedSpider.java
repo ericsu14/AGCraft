@@ -13,10 +13,9 @@ public class EnragedSpider extends MobEquipment
 {
 	public EnragedSpider ()
 	{
-		this.name = "Enraged Firey Boi";
+		this.name = "One Enraged Firey Boi";
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.onFire = true;
-		this.health = 20.0;
 		
 		// Custom potion effects
 		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
@@ -25,7 +24,7 @@ public class EnragedSpider extends MobEquipment
 		// Weapon
 		this.weapon = new ItemStack(Material.STONE_SWORD, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
-		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
+		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 3, true);
 		
 		weaponMeta.setDisplayName(this.color + "Fire Venom Fang");
@@ -36,8 +35,8 @@ public class EnragedSpider extends MobEquipment
 		// Chestplate
 		this.chestplate = new ItemStack (Material.NETHERITE_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
-		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
-		chestMeta.addEnchant(Enchantment.THORNS, 3, true);
+		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+		chestMeta.addEnchant(Enchantment.THORNS, 2, true);
 		chestMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		chestMeta.setDisplayName(this.color + "Reinforced Keratin Chestplate");
 		this.chestplate.setItemMeta(chestMeta);

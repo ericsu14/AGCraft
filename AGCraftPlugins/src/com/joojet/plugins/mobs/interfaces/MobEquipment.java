@@ -68,7 +68,7 @@ public abstract class MobEquipment
 		this.dropRates = new float[6];
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.01f, 0.05f);
 		// Words per line defaults to 6
-		this.wordsPerLine = 6;
+		this.wordsPerLine = 5;
 	}
 	
 	/** Sets up drop rates for this entity.

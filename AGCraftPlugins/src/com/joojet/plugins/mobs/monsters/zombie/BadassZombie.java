@@ -40,28 +40,30 @@ public class BadassZombie extends MobEquipment
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
 		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 		helmetMeta.addEnchant(Enchantment.DURABILITY, 2, true);
-		helmetMeta.setDisplayName(this.color + "Reinforced Iron Helmet");
+		helmetMeta.setDisplayName(this.color + "Enhanced Iron Helmet");
 		this.addLoreToItemMeta(helmetMeta, genericLore);
-		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 0.0, 0.5, 0.0);
+		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 2.0, 1.0, 0.0);
 		this.helmet.setItemMeta(helmetMeta);
 		
 		// Chestplate
 		this.chestplate = new ItemStack (Material.DIAMOND_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
-		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		chestMeta.addEnchant(Enchantment.THORNS, 2, true);
-		chestMeta.setDisplayName(this.color + "Reinforced Diamond Chestplate");
+		chestMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+		chestMeta.setDisplayName(this.color + "Enhanced Diamond Chestplate");
 		this.addLoreToItemMeta(chestMeta, "Forged from a higher-grade cut of Diamond, this chestplate offers improved resistance towards high damaging attacks.");
-		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 0.0, 1.0, 0.0);
+		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 8.0, 2.0, 0.0);
 		this.chestplate.setItemMeta(chestMeta);
 		
 		// Leggings
 		this.leggings = new ItemStack (Material.IRON_LEGGINGS, 1);
 		ItemMeta legMeta = this.leggings.getItemMeta();
-		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
-		legMeta.setDisplayName(this.color + "Reinforced Iron Leggings");
+		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+		legMeta.addEnchant(Enchantment.DURABILITY, 2, true);
+		legMeta.setDisplayName(this.color + "Enhanced Iron Leggings");
 		this.addLoreToItemMeta(legMeta, genericLore);
-		this.addDefenseAttributes(legMeta, EquipmentSlot.LEGS, 0.0, 0.5, 0.0);
+		this.addDefenseAttributes(legMeta, EquipmentSlot.LEGS, 5.0, 1.0, 0.0);
 		this.leggings.setItemMeta(legMeta);
 		
 		// Boots
@@ -74,7 +76,7 @@ public class BadassZombie extends MobEquipment
 		
 		// One speedy boi
 		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.15);
-		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 2.0, 1.0, 0.0);
+		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 2.0, 0.5, 0.0);
 		
 		this.boots.setItemMeta(bootMeta);;
 	}

@@ -45,9 +45,9 @@ public class UncommonSkeleton extends MobEquipment
 		this.helmet = new ItemStack (Material.CHAINMAIL_HELMET, 1);
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
 		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-		helmetMeta.addEnchant(Enchantment.DURABILITY, 2, true);
+		helmetMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		helmetMeta.setDisplayName(this.color + "Reinforced Chainmail Helmet");
-		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 0.0, 0.5, 0.0);
+		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 2.0, 0.5, 0.0);
 		this.addLoreToItemMeta(helmetMeta, genericLore);
 		this.helmet.setItemMeta(helmetMeta);
 		
@@ -57,7 +57,7 @@ public class UncommonSkeleton extends MobEquipment
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
 		chestMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 2, true);
 		chestMeta.setDisplayName(this.color + "Bulletproof Chainmail Chestplate");
-		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 0.0, 1.0, 0.0);
+		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 5.0, 1.0, 0.0);
 		this.addLoreToItemMeta(chestMeta, genericLore);
 		this.chestplate.setItemMeta(chestMeta);
 		
@@ -66,7 +66,7 @@ public class UncommonSkeleton extends MobEquipment
 		ItemMeta legMeta = this.leggings.getItemMeta();
 		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		legMeta.setDisplayName(this.color + "Reinforced Chainmail Leggings");
-		this.addDefenseAttributes(legMeta, EquipmentSlot.LEGS, 0.0, 0.5, 0.0);
+		this.addDefenseAttributes(legMeta, EquipmentSlot.LEGS, 4.0, 0.5, 0.0);
 		this.addLoreToItemMeta(legMeta, genericLore);
 		this.leggings.setItemMeta(legMeta);
 		
