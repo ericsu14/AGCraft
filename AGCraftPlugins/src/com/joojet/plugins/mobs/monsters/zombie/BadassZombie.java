@@ -69,7 +69,7 @@ public class BadassZombie extends MobEquipment
 		// Boots
 		this.boots = new ItemStack (Material.IRON_BOOTS);
 		ItemMeta bootMeta = this.boots.getItemMeta();
-		bootMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 4, true);
+		bootMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 2, true);
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
 		bootMeta.setDisplayName(this.color + "Lightweight Iron Boots");
 		this.addLoreToItemMeta(bootMeta, "Lightweight iron allows for improved mobility.");

@@ -21,6 +21,7 @@ public class HurtfulSkeleton extends MobEquipment
 		this.name = "Skeleguard";
 		this.color = ChatColor.BLUE;
 		String genericLore = "Reinforced with titanium to have better resistance towards high damaging attacks.";
+		this.health = 16;
 		
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
@@ -55,7 +56,7 @@ public class HurtfulSkeleton extends MobEquipment
 		// Chestplate
 		this.chestplate = new ItemStack (Material.IRON_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
-		chestMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 3, true);
+		chestMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 2, true);
 		chestMeta.setDisplayName(this.color + "Bulletproof Iron Chestplate");
 		this.addLoreToItemMeta(chestMeta, genericLore);
 		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 6.0, 2.0, 0.0);
@@ -64,7 +65,7 @@ public class HurtfulSkeleton extends MobEquipment
 		// Leggings
 		this.leggings = new ItemStack (Material.IRON_LEGGINGS, 1);
 		ItemMeta legMeta = this.leggings.getItemMeta();
-		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		legMeta.setDisplayName(this.color + "Reinforced Iron Leggings");
 		this.addLoreToItemMeta(legMeta, genericLore);
 		this.addDefenseAttributes(legMeta, EquipmentSlot.LEGS, 5.0, 2.0, 0.0);

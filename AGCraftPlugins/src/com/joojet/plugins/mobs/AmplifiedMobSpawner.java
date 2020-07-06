@@ -115,7 +115,9 @@ public class AmplifiedMobSpawner implements Listener
 		if (event.getDamager() instanceof Player)
 		{
 			Player p = (Player) event.getDamager();
+			LivingEntity e = (LivingEntity) event.getEntity();
 			p.sendMessage("Dealt " + event.getDamage() + " damage.");
+			p.sendMessage("The enemy has " + e.getHealth() + "");
 		}
 		
 		else if (event.getEntity() instanceof Player)

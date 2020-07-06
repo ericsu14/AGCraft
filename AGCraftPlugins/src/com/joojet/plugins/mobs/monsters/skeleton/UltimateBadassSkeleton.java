@@ -50,7 +50,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		// Helmet
 		this.helmet = new ItemStack (Material.PLAYER_HEAD, 1);
 		ItemMeta helmetMeta = this.createHeadData(this.helmet, PlayerHead.CAMERA_HEAD);
-		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
 		this.addLoreToItemMeta(helmetMeta, "Used for stalker pics and spottings.");
 		helmetMeta.setDisplayName(this.color + "#agspotted Camera");
 		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 3.0, 3.0, 0.15);
@@ -67,7 +67,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		// Leggings
 		this.leggings = new ItemStack (Material.NETHERITE_LEGGINGS, 1);
 		ItemMeta legMeta = this.leggings.getItemMeta();
-		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
 		legMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		legMeta.setDisplayName(this.color + "Dark Netherite Leggings");
 		this.leggings.setItemMeta(legMeta);
