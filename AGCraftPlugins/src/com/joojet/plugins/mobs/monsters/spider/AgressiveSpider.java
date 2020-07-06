@@ -23,9 +23,10 @@ public class AgressiveSpider extends MobEquipment
 		this.weapon = new ItemStack(Material.STONE_SWORD, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
+		weaponMeta.addEnchant(Enchantment.KNOCKBACK, 1, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-		
 		weaponMeta.setDisplayName(this.color + "Spider Tooth");
+		this.addLoreToItemMeta(weaponMeta, "You are lucky this spider ain't poisonous...");
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
 		

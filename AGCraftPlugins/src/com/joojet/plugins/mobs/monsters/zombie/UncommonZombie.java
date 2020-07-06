@@ -15,6 +15,7 @@ public class UncommonZombie extends MobEquipment
 	{
 		this.name = "Bulky Zombie";
 		this.color = ChatColor.GREEN;
+		this.health = 16;
 		String genericLore = "Reinforced with steel to have better resistance towards high damaging attacks.";
 		
 		// Weapon
@@ -24,7 +25,7 @@ public class UncommonZombie extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		weaponMeta.setDisplayName(this.color + "Enhanced Stone Sword");
-		
+		this.addLoreToItemMeta(weaponMeta, "Okay, maybe not that enhanced.");
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
 		
@@ -49,7 +50,7 @@ public class UncommonZombie extends MobEquipment
 		// Leggings
 		this.leggings = new ItemStack (Material.CHAINMAIL_LEGGINGS, 1);
 		ItemMeta legMeta = this.leggings.getItemMeta();
-		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		legMeta.setDisplayName(this.color + "Reinforced Chainmail Leggings");
 		this.addDefenseAttributes(legMeta, EquipmentSlot.LEGS, 4.0, 0.5, 0.0);
 		this.addLoreToItemMeta(legMeta, genericLore);
@@ -64,7 +65,7 @@ public class UncommonZombie extends MobEquipment
 		this.addLoreToItemMeta(bootMeta, "Lightweight chains allows for improved mobility.");
 		// One speedy boi
 		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.10);
-		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 1.0, 0.0, 0.0);
+		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 1.0, 0.5, 0.0);
 		
 		this.boots.setItemMeta(bootMeta);
 		this.addRandomDamage(this.boots);

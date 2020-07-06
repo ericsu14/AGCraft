@@ -26,6 +26,7 @@ public class EnragedSpider extends MobEquipment
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 3, true);
+		weaponMeta.addEnchant(Enchantment.KNOCKBACK, 2, true);
 		
 		weaponMeta.setDisplayName(this.color + "Fire Venom Fang");
 		this.addLoreToItemMeta(weaponMeta, "A fang stolen from one firey boi.");

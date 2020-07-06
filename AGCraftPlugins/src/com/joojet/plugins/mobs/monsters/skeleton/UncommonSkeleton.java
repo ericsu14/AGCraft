@@ -18,7 +18,7 @@ public class UncommonSkeleton extends MobEquipment
 {
 	public UncommonSkeleton ()
 	{
-		this.name = "Bulky Skeleton";
+		this.name = "Annoying Skeleton";
 		this.color = ChatColor.GREEN;
 		this.health = 16;
 		String genericLore = "Reinforced with steel to have better resistance towards high damaging attacks.";
@@ -27,10 +27,9 @@ public class UncommonSkeleton extends MobEquipment
 		this.weapon = new ItemStack(Material.BOW, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
 		weaponMeta.addEnchant(Enchantment.ARROW_DAMAGE, 3, true);
-		
 		weaponMeta.setDisplayName(this.color + "Potent Bow");
+		this.addLoreToItemMeta(weaponMeta, "Guaranteed to ruin your day.");
 		this.weapon.setItemMeta(weaponMeta);
-		this.addRandomDamage(this.weapon);
 		
 		// Offhand
 		this.offhand = new ItemStack (Material.TIPPED_ARROW, 1);

@@ -30,7 +30,7 @@ public class BadassZombie extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-		this.addLoreToItemMeta(weaponMeta, "Sharpened with a 10000 grit waterstone, these swords dea just as much damage as a Diamond Sword.");
+		this.addLoreToItemMeta(weaponMeta, "Sharpened with a 10000 grit waterstone, these swords deal just as much damage as a Diamond Sword.");
 		weaponMeta.setDisplayName(this.color + "Sharpened Iron Sword");
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
@@ -53,7 +53,7 @@ public class BadassZombie extends MobEquipment
 		chestMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		chestMeta.setDisplayName(this.color + "Enhanced Diamond Chestplate");
 		this.addLoreToItemMeta(chestMeta, "Forged from a higher-grade cut of Diamond, this chestplate offers improved resistance towards high damaging attacks.");
-		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 8.0, 2.0, 0.0);
+		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 8.0, 4.0, 0.0);
 		this.chestplate.setItemMeta(chestMeta);
 		
 		// Leggings

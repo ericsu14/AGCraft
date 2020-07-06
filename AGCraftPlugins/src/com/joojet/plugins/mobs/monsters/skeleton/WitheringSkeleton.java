@@ -17,7 +17,7 @@ public class WitheringSkeleton extends MobEquipment
 {
 	public WitheringSkeleton ()
 	{
-		this.name = "Withering Skeleton";
+		this.name = "Soul Eater";
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.health = 30;
 		
@@ -28,8 +28,9 @@ public class WitheringSkeleton extends MobEquipment
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
 		weaponMeta.addEnchant(Enchantment.ARROW_DAMAGE, 5, true);
 		weaponMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
-		
+		weaponMeta.addEnchant(Enchantment.DURABILITY, 2, true);
 		weaponMeta.setDisplayName(this.color + "Angel of Death");
+		this.addLoreToItemMeta(weaponMeta, "You can have it when you pry it from my cold, dead hands.");
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
 		

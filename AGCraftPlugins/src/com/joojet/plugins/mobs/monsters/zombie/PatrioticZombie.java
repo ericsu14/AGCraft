@@ -23,7 +23,7 @@ public class PatrioticZombie extends MobEquipment
 		this.fwTypes = new FireworkTypes ();
 		this.name = this.americanizeText("Patriotic Zombie");
 		this.color = ChatColor.WHITE;
-		this.health = 5.0;
+		this.health = 4.0;
 		
 		this.addPotionEffect(CustomPotionEffect.STRENGTH);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
