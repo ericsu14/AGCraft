@@ -34,6 +34,14 @@ public class Scruffy extends MobEquipment
 		helmetMeta.setDisplayName(this.color + "Scruffy's Face");
 		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 16.0, 8.0, 0.5);
 		this.helmet.setItemMeta(helmetMeta);
+		
+		// Boots
+		this.boots = new ItemStack (Material.GOLDEN_BOOTS, 1);
+		ItemMeta bootMeta = this.boots.getItemMeta();
+		bootMeta.addEnchant(Enchantment.FROST_WALKER, 1, true);
+		bootMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
+		bootMeta.setDisplayName(this.color + "Let it go!");
+		this.boots.setItemMeta(bootMeta);
 	}
 		
 }

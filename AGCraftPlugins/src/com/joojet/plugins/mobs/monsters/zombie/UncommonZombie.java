@@ -15,6 +15,7 @@ public class UncommonZombie extends MobEquipment
 	{
 		this.name = "Bulky Zombie";
 		this.color = ChatColor.GREEN;
+		String genericLore = "Reinforced with steel to have better resistance towards high damaging attacks.";
 		
 		// Weapon
 		this.weapon = new ItemStack(Material.STONE_SWORD, 1);
@@ -30,26 +31,29 @@ public class UncommonZombie extends MobEquipment
 		// Helmet
 		this.helmet = new ItemStack (Material.CHAINMAIL_HELMET, 1);
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
-		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
+		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 		helmetMeta.setDisplayName(this.color + "Reinforced Chainmail Helmet");
+		this.addLoreToItemMeta(helmetMeta, genericLore);
+		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 0.0, 0.5, 0.0);
 		this.helmet.setItemMeta(helmetMeta);
-		this.addRandomDamage(this.helmet);
 		
 		// Chestplate
 		this.chestplate = new ItemStack (Material.CHAINMAIL_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
 		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		chestMeta.setDisplayName(this.color + "Reinforced Chainmail Chestplate");
+		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 0.0, 1.0, 0.0);
+		this.addLoreToItemMeta(chestMeta, genericLore);
 		this.chestplate.setItemMeta(chestMeta);
-		this.addRandomDamage(this.chestplate);
 		
 		// Leggings
 		this.leggings = new ItemStack (Material.CHAINMAIL_LEGGINGS, 1);
 		ItemMeta legMeta = this.leggings.getItemMeta();
 		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 		legMeta.setDisplayName(this.color + "Reinforced Chainmail Leggings");
+		this.addDefenseAttributes(legMeta, EquipmentSlot.LEGS, 0.0, 0.5, 0.0);
+		this.addLoreToItemMeta(legMeta, genericLore);
 		this.leggings.setItemMeta(legMeta);
-		this.addRandomDamage(this.leggings);
 		
 		// Boots
 		this.boots = new ItemStack (Material.CHAINMAIL_BOOTS);
@@ -57,7 +61,7 @@ public class UncommonZombie extends MobEquipment
 		bootMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
 		bootMeta.setDisplayName(this.color + "Lightweight Chainmail Boots");
-		
+		this.addLoreToItemMeta(bootMeta, "Lightweight chains allows for improved mobility.");
 		// One speedy boi
 		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.10);
 		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 1.0, 0.0, 0.0);

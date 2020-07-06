@@ -1,7 +1,5 @@
 package com.joojet.plugins.mobs.monsters.husk;
 
-import java.util.ArrayList;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -28,12 +26,8 @@ public class WanderingHusk extends MobEquipment
 		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.10);
 		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 4.0, 1.0, 0.1);
 		bootMeta.setDisplayName(this.color + "Desert Sandals");
-		ArrayList <String> bootLore = new ArrayList <String> ();
-		bootLore.add (this.color + "Passed down by generations,");
-		bootLore.add (this.color + "these sandals are used");
-		bootLore.add (this.color + "to walk across this");
-		bootLore.add (this.color + "scorched earth safely.");
-		bootMeta.setLore(bootLore);
+		this.addLoreToItemMeta(bootMeta, "Passed down by generations,"
+				+ "these sandals were used to walk across this scorched earth safely.");
 		bootMeta.setColor(Color.fromRGB(237, 201, 175));
 		this.boots.setItemMeta(bootMeta);
 	}

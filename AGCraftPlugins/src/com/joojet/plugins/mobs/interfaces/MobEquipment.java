@@ -52,6 +52,8 @@ public abstract class MobEquipment
 	protected final String urlBase = "http://textures.minecraft.net/texture/";
 	/** An array storing the drop chances for each item the entity has. */
 	protected float dropRates[];
+	/** Number of words that can fit in a single line for an item's lore */
+	protected int wordsPerLine;
 	
 	public MobEquipment ()
 	{
@@ -65,6 +67,8 @@ public abstract class MobEquipment
 		// Set up default drop rates
 		this.dropRates = new float[6];
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.01f, 0.05f);
+		// Words per line defaults to 6
+		this.wordsPerLine = 6;
 	}
 	
 	/** Sets up drop rates for this entity.
@@ -295,5 +299,40 @@ public abstract class MobEquipment
 				
 		}
 		return result.toString();
+	}
+	
+	/** Adds a new lore string into the passed ItemMeta. The String will be split into multiple tokens depending on how many
+	 *  words can fit in a single line.
+	 * 		@param meta - ItemMeta we are adding the lore info into
+	 * 		@param lore - The lore text */
+	public void addLoreToItemMeta (ItemMeta meta, String lore)
+	{
+		ArrayList <String> itemLore = new ArrayList <String> ();
+		StringBuilder str = new StringBuilder();
+		str.append(this.color);
+		
+		String[] tokens = lore.split(" ");
+		
+		int count = 0;
+		for (String token : tokens)
+		{
+			str.append(token);
+			str.append(" ");
+			++count;
+			
+			if (count >= this.wordsPerLine)
+			{
+				itemLore.add(str.toString().trim());
+				str = new StringBuilder();
+				count = 0;
+				str.append(this.color);
+			}
+		}
+		
+		if (!str.toString().substring(2).isEmpty())
+		{
+			itemLore.add(str.toString().trim());
+		}
+		meta.setLore(itemLore);
 	}
 }

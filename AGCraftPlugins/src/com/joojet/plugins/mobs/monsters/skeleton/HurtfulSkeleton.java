@@ -20,6 +20,7 @@ public class HurtfulSkeleton extends MobEquipment
 	{
 		this.name = "Hurtful Skeleton";
 		this.color = ChatColor.BLUE;
+		String genericLore = "Reinforced with titanium to have better resistance towards high damaging attacks.";
 		
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
@@ -47,30 +48,34 @@ public class HurtfulSkeleton extends MobEquipment
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
 		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		helmetMeta.setDisplayName(this.color + "Reinforced Iron Helmet");
+		this.addLoreToItemMeta(helmetMeta, genericLore);
+		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 0.0, 0.5, 0.0);
 		this.helmet.setItemMeta(helmetMeta);
-		this.addRandomDamage(this.helmet);
 		
 		// Chestplate
 		this.chestplate = new ItemStack (Material.IRON_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
 		chestMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 3, true);
 		chestMeta.setDisplayName(this.color + "Bulletproof Iron Chestplate");
+		this.addLoreToItemMeta(chestMeta, genericLore);
+		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 0.0, 1.0, 0.0);
 		this.chestplate.setItemMeta(chestMeta);
-		this.addRandomDamage(this.chestplate);
-		
+
 		// Leggings
 		this.leggings = new ItemStack (Material.IRON_LEGGINGS, 1);
 		ItemMeta legMeta = this.leggings.getItemMeta();
 		legMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
 		legMeta.setDisplayName(this.color + "Reinforced Iron Leggings");
+		this.addLoreToItemMeta(legMeta, genericLore);
+		this.addDefenseAttributes(legMeta, EquipmentSlot.LEGS, 0.0, 0.5, 0.0);
 		this.leggings.setItemMeta(legMeta);
-		this.addRandomDamage(this.leggings);
 		
 		// Boots
 		this.boots = new ItemStack (Material.IRON_BOOTS);
 		ItemMeta bootMeta = this.boots.getItemMeta();
 		bootMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 2, true);
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
+		this.addLoreToItemMeta(bootMeta, "Lightweight iron allows for improved mobility.");
 		bootMeta.setDisplayName(this.color + "Lightweight Chainmail Boots");
 		
 		// One speedy boi

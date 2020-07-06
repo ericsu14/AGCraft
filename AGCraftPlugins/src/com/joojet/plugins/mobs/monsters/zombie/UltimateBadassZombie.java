@@ -1,7 +1,5 @@
 package com.joojet.plugins.mobs.monsters.zombie;
 
-import java.util.ArrayList;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -35,11 +33,7 @@ public class UltimateBadassZombie extends MobEquipment
 		
 		// Weapon name and lore
 		weaponMeta.setDisplayName(this.color + "A Spiritual Travesty");
-		ArrayList <String> weaponLore = new ArrayList <String> ();
-		weaponLore.add(this.color + "Forged from 100%");
-		weaponLore.add(this.color + "Japanese Grade Nippon Steel");
-		weaponLore.add(this.color + "folded over 9000 times.");
-		weaponMeta.setLore(weaponLore);
+		this.addLoreToItemMeta(weaponMeta, "Forged from Glorious Nippon Steel, folded over 9000 times");
 		
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
@@ -49,7 +43,7 @@ public class UltimateBadassZombie extends MobEquipment
 		ItemMeta helmetMeta = this.helmet.getItemMeta();
 		helmetMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 3, true);
 		helmetMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
-		helmetMeta.setDisplayName(this.color + "Reinforced Netherite Helmet");
+		helmetMeta.setDisplayName(this.color + "Dark Netherite Helmet");
 		this.helmet.setItemMeta(helmetMeta);
 		this.addRandomDamage(this.helmet);
 		
@@ -59,7 +53,7 @@ public class UltimateBadassZombie extends MobEquipment
 		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
 		chestMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		chestMeta.addEnchant(Enchantment.THORNS, 2, true);
-		chestMeta.setDisplayName(this.color + "Reinforced Netherite Chestplate");
+		chestMeta.setDisplayName(this.color + "Dark Netherite Chestplate");
 		this.chestplate.setItemMeta(chestMeta);
 		this.addRandomDamage(this.chestplate);
 		
@@ -68,7 +62,7 @@ public class UltimateBadassZombie extends MobEquipment
 		ItemMeta legMeta = this.leggings.getItemMeta();
 		legMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 3, true);
 		legMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
-		legMeta.setDisplayName(this.color + "Reinforced Netherite Leggings");
+		legMeta.setDisplayName(this.color + "Dark Netherite Leggings");
 		this.leggings.setItemMeta(legMeta);
 		this.addRandomDamage(this.leggings);
 		
@@ -78,6 +72,7 @@ public class UltimateBadassZombie extends MobEquipment
 		bootMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
 		bootMeta.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
 		bootMeta.setDisplayName(this.color + "Lightweight Netherite Boots");
+		this.addLoreToItemMeta(bootMeta, "Forged from a mixture of carbon-fiber and netherite, these boots offers vastly improved mobility.");
 		
 		// One speedy boi
 		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.20);

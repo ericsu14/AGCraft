@@ -1,7 +1,5 @@
 package com.joojet.plugins.mobs.monsters.skeleton;
 
-import java.util.ArrayList;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -35,10 +33,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 2, true);
 		
 		weaponMeta.setDisplayName(this.color + "A Spiritual Fantasy");
-		
-		ArrayList <String> weaponLore = new ArrayList <String> ();
-		weaponLore.add(this.color + "Don't even think about it");
-		weaponMeta.setLore(weaponLore);
+		this.addLoreToItemMeta(weaponMeta, "Don't even think about it.");
 		
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
@@ -56,9 +51,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.helmet = new ItemStack (Material.PLAYER_HEAD, 1);
 		ItemMeta helmetMeta = this.createHeadData(this.helmet, PlayerHead.CAMERA_HEAD);
 		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
-		ArrayList <String> helmetLore = new ArrayList <String> ();
-		helmetLore.add(this.color + "Used for stalker pics and spottings.");
-		helmetMeta.setLore(helmetLore);
+		this.addLoreToItemMeta(helmetMeta, "Used for stalker pics and spottings.");
 		helmetMeta.setDisplayName(this.color + "#agspotted Camera");
 		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 3.0, 3.0, 0.15);
 		this.helmet.setItemMeta(helmetMeta);

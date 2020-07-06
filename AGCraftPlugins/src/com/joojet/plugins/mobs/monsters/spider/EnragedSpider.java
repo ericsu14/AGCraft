@@ -1,7 +1,5 @@
 package com.joojet.plugins.mobs.monsters.spider;
 
-import java.util.ArrayList;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -15,13 +13,12 @@ public class EnragedSpider extends MobEquipment
 {
 	public EnragedSpider ()
 	{
-		this.name = "Enraged Spider";
+		this.name = "Enraged Firey Boi";
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.onFire = true;
 		this.health = 20.0;
 		
 		// Custom potion effects
-		this.effects.add(CustomPotionEffect.STRENGTH.getPotionEffect());
 		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
 		this.effects.add(CustomPotionEffect.FIRE_RESISTANCE.getPotionEffect());
 		
@@ -32,9 +29,7 @@ public class EnragedSpider extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 3, true);
 		
 		weaponMeta.setDisplayName(this.color + "Fire Venom Fang");
-		ArrayList <String> weaponLore = new ArrayList <String> ();
-		weaponLore.add(this.color + "A fang stolen from one firey boi.");
-		weaponMeta.setLore(weaponLore);
+		this.addLoreToItemMeta(weaponMeta, "A fang stolen from one firey boi.");
 		this.weapon.setItemMeta(weaponMeta);
 		this.addRandomDamage(this.weapon);
 		
@@ -42,7 +37,7 @@ public class EnragedSpider extends MobEquipment
 		this.chestplate = new ItemStack (Material.NETHERITE_CHESTPLATE, 1);
 		ItemMeta chestMeta = this.chestplate.getItemMeta();
 		chestMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
-		chestMeta.addEnchant(Enchantment.THORNS, 4, true);
+		chestMeta.addEnchant(Enchantment.THORNS, 3, true);
 		chestMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 		chestMeta.setDisplayName(this.color + "Reinforced Keratin Chestplate");
 		this.chestplate.setItemMeta(chestMeta);

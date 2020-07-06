@@ -1,7 +1,5 @@
 package com.joojet.plugins.mobs.monsters.husk;
 
-import java.util.ArrayList;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -18,16 +16,14 @@ public class FallenPharaoh extends MobEquipment
 	{
 		this.name = "Fallen Pharaoh";
 		this.color = ChatColor.LIGHT_PURPLE;
+		this.wordsPerLine = 3;
 		
 		this.helmet = new ItemStack (Material.PLAYER_HEAD, 1);
 		ItemMeta helmetMeta = this.createHeadData(this.helmet, PlayerHead.PHARAOH);
 		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
 		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 2.0, 1.0, 0.05);
 		helmetMeta.setDisplayName(this.color + "Head of the Fallen Pharaoh");
-		ArrayList <String> helmetLore = new ArrayList <String> ();
-		helmetLore.add(this.color + "Once a ruler,");
-		helmetLore.add(this.color + "fallen from grace.");
-		helmetMeta.setLore(helmetLore);
+		this.addLoreToItemMeta(helmetMeta, "Once a ruler, fallen from grace.");
 		this.helmet.setItemMeta(helmetMeta);
 		
 		this.chestplate = new ItemStack (Material.GOLDEN_CHESTPLATE, 1);
@@ -63,10 +59,7 @@ public class FallenPharaoh extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
 		weaponMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		weaponMeta.setDisplayName(this.color + "Pharaoh's Royal Staff");
-		ArrayList <String> weaponLore = new ArrayList <String> ();
-		weaponLore.add(this.color + "They say you don't");
-		weaponLore.add(this.color + "waste gold on a hoe.");
-		weaponMeta.setLore(weaponLore);
+		this.addLoreToItemMeta(weaponMeta, "They say you don't waste gold on a hoe.");
 		this.weapon.setItemMeta(weaponMeta);
 	}
 }
