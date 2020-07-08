@@ -587,14 +587,14 @@ class TestLocationDatabase
 	private void insert (LocationEntry entry) throws SQLException
 	{
 		LocationDatabaseManager.insert (entry.getUUID(), entry.getLocationName(), entry.getX(), entry.getY(), entry.getZ(), entry.getEnvironment(), entry.getAccessLevel());
-		assertEquals (LocationDatabaseManager.checkIfLocationExists(entry.getUUID(), entry.getLocationName(), entry.getEnvironment()), true);
+		assertEquals (true, LocationDatabaseManager.checkIfLocationExists(entry.getUUID(), entry.getLocationName(), entry.getEnvironment()));
 	}
 	
 	/** Fetches an entry from the database and tests if the fetched entry is equal to the one logged here */
 	private LocationEntry fetch (LocationEntry entry) throws SQLException
 	{
 		LocationEntry ret = LocationDatabaseManager.fetchLocation(entry.getUUID(), entry.getLocationName(), entry.getEnvironment());
-		assertEquals (ret.equals(entry), true);
+		assertEquals (true, ret.equals(entry));
 		return ret;
 	}
 	
@@ -602,14 +602,14 @@ class TestLocationDatabase
 	private void remove (LocationEntry entry) throws SQLException
 	{
 		LocationDatabaseManager.removeLocation(entry.getUUID(), entry.getLocationName(), entry.getEnvironment());
-		assertEquals (LocationDatabaseManager.fetchLocation(entry.getUUID(), entry.getLocationName(), entry.getEnvironment()), null);
+		assertEquals (null, LocationDatabaseManager.fetchLocation(entry.getUUID(), entry.getLocationName(), entry.getEnvironment()));
 	}
 	
 	/** Fetches an entry from the database spoofed as another user */
 	private LocationEntry spoofedFetch (String uuid, LocationEntry entry) throws SQLException, RuntimeException
 	{
 		LocationEntry ret = LocationDatabaseManager.fetchLocation(uuid, entry.getLocationName(), entry.getEnvironment());
-		assertEquals (ret.equals(entry), true);
+		assertEquals (true, ret.equals(entry));
 		return ret;
 	}
 	

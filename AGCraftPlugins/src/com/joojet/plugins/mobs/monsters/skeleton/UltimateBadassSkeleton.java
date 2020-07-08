@@ -84,8 +84,6 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.addSpeedAttribute(bootMeta, EquipmentSlot.FEET, 0.20);
 		this.addDefenseAttributes(bootMeta, EquipmentSlot.FEET, 3.0, 3.0, 0.1);
 		
-		// Add back defences for boots
-		
 		this.boots.setItemMeta(bootMeta);
 		this.addRandomDamage(this.boots);
 	}

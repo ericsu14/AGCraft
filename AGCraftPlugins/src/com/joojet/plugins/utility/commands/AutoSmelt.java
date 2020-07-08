@@ -34,7 +34,7 @@ public class AutoSmelt implements CommandExecutor
 		if (sender instanceof Player)
 		{
 			Player p = (Player) sender;
-			
+
 			this.updateCounts(p);
 			
 			// Cannot use this command if the player does not have any iron / gold ores in their inventory

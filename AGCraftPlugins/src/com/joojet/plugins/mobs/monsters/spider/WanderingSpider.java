@@ -1,7 +1,5 @@
 package com.joojet.plugins.mobs.monsters.spider;
 
-import java.util.ArrayList;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -32,10 +30,7 @@ public class WanderingSpider extends MobEquipment
 		weaponMeta.addEnchant(Enchantment.KNOCKBACK, 2, true);
 		
 		weaponMeta.setDisplayName(this.color + "Blade of the Wandering Spider");
-		ArrayList<String> weaponLore = new ArrayList <String> ();
-		weaponLore.add(this.color + "Very potent stuff.");
-		weaponMeta.setLore(weaponLore);
-		this.addRandomDamage(this.weapon);
+		this.addLoreToItemMeta(weaponMeta, "Very potent stuff.");
 		
 		this.weapon.setItemMeta(weaponMeta);
 		

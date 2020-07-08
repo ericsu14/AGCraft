@@ -237,7 +237,7 @@ public abstract class MobEquipment
 	 *  Code stolen from:
 	 *  	https://www.spigotmc.org/threads/custom-textured-non-player-skulls.244561/#post-2448313
 	 *  @param meta - the item we are adding head data to.
-	 *  @param paramString - URL of the custom player head */
+	 *  @param head - Type of skin the player head is using */
 	public ItemMeta createHeadData (ItemStack item, PlayerHead head)
 	{
 		SkullMeta localSkullMeta = (SkullMeta)item.getItemMeta();
