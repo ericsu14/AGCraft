@@ -10,6 +10,7 @@ import com.joojet.plugins.biblefetcher.commands.tabcompleter.*;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
+import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.commands.OpenRewards;
 import com.joojet.plugins.rewards.commands.RewardPlayer;
 import com.joojet.plugins.rewards.database.CreateRewardsDatabase;
@@ -94,6 +95,9 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Amplified mob spawner
 		Bukkit.getPluginManager().registerEvents(new AmplifiedMobSpawner(), this);
+		
+		// Player login handler
+		Bukkit.getPluginManager().registerEvents(new RewardManager(), this);
 	}
 	
 	@Override
