@@ -11,7 +11,7 @@ public class PatrioticWhiteLeggings extends LeatherEquipment
 {
 	public PatrioticWhiteLeggings ()
 	{
-		super (Material.LEATHER_BOOTS, EquipmentSlot.LEGS, ChatColor.WHITE);
+		super (Material.LEATHER_LEGGINGS, EquipmentSlot.LEGS, ChatColor.WHITE);
 		this.setColor(Color.WHITE);
 		this.setDisplayName("Patriotic White Pants");
 		this.addLoreToItemMeta("Whiter than Collin!");
