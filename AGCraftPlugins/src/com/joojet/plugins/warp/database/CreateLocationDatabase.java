@@ -1,7 +1,6 @@
 package com.joojet.plugins.warp.database;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,15 +15,11 @@ public class CreateLocationDatabase
 	public static final String kEWarpDatabaseName = "EWARP";
 	
 	public static void createDatabase ()
-	{
+	{		
 		try (Connection conn = (Connection) DriverManager.getConnection(kDatabasePath))
 		{
 			if (conn != null)
 			{
-				DatabaseMetaData meta = conn.getMetaData();
-				System.out.println ("Driver Name: " + meta.getDriverName());
-				System.out.println ("Created a new database at " + kDatabasePath);
-				
 				initializeLocationTable();
 				initializeEmergencyWarpTable();
 			}
@@ -48,7 +43,7 @@ public class CreateLocationDatabase
 			stmt = c.createStatement();
 			StringBuilder sql = new StringBuilder ();
 			
-			sql.append("CREATE TABLE ");
+			sql.append("CREATE TABLE IF NOT EXISTS ");
 			sql.append(kEWarpDatabaseName);
 			sql.append(" (");
 			sql.append("UUID TEXT NOT NULL,");
@@ -80,7 +75,7 @@ public class CreateLocationDatabase
 			stmt = c.createStatement();
 			
 			StringBuilder sql = new StringBuilder ();
-			sql.append("CREATE TABLE ");
+			sql.append("CREATE TABLE IF NOT EXISTS ");
 			sql.append(kLocationDatabaseName);
 			sql.append(" (");
 			sql.append("UUID TEXT NOT NULL,");
@@ -95,8 +90,6 @@ public class CreateLocationDatabase
 			stmt.executeUpdate(sql.toString());
 			stmt.close();
 			c.close();
-			
-			System.out.println ("Table created successfully!");
 		}
 		
 		catch (Exception e)

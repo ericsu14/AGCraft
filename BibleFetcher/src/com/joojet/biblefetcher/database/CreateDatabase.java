@@ -3,7 +3,6 @@ package com.joojet.biblefetcher.database;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -32,9 +31,6 @@ public class CreateDatabase
 			
 			if (conn != null)
 			{
-				DatabaseMetaData meta = conn.getMetaData();
-				System.out.println ("Driver Name: " + meta.getDriverName());
-				System.out.println ("Created a new database at " + kDatabasePath);
 				initializeTables();
 			}
 		}
@@ -61,7 +57,7 @@ public class CreateDatabase
 			c = DriverManager.getConnection(kDatabasePath);
 			
 			stmt = c.createStatement();
-			String sql = "CREATE TABLE BIBLES (" +
+			String sql = "CREATE TABLE IF NOT EXISTS BIBLES (" +
 							"BIBLE_ID        TEXT  NOT NULL," +
 							"BOOK_ID         TEXT  NOT NULL," +
 							"CHAPTER         INT   NOT NULL," +
@@ -69,8 +65,6 @@ public class CreateDatabase
 			stmt.executeUpdate(sql);
 			stmt.close();
 			c.close();
-			
-			System.out.println ("Table created successfully!");
 		}
 		
 		catch (Exception e)
