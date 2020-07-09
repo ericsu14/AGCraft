@@ -37,6 +37,6 @@ public enum EventType
 	@Override
 	public String toString ()
 	{
-		return this.fullName;
+		return this.name();
 	}
 }

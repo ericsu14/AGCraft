@@ -2,7 +2,6 @@ package com.joojet.plugins.rewards.gui;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -13,7 +12,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import com.joojet.plugins.rewards.database.RewardDatabaseManager;
 import com.joojet.plugins.rewards.interfaces.RewardEntry;
@@ -38,24 +36,17 @@ public class RewardGUI implements Listener
     	try 
     	{
 			this.entries = RewardDatabaseManager.fetchUnclaimedRewards(player.getUniqueId());
-	        this.inv = Bukkit.createInventory(null, entries.size() + 1, "Rewards");
+	        this.inv = Bukkit.createInventory(null, 36, "Rewards");
 	        for (RewardEntry entry : entries)
 	        {
-	        	// Adds event information to the item's lore
-	        	ItemStack reward = entry.getReward().getReward();
-	        	ItemMeta meta = reward.getItemMeta();
-	        	List <String> lore = meta.getLore();
-	        	lore.add(ChatColor.GOLD + entry.getEvent().getFormattedLore());
-	        	meta.setLore(lore);
-	        	reward.setItemMeta(meta);
-	        	this.inv.addItem(reward);
+	        	this.inv.addItem(entry.getReward().getReward());
 	        }
 	        player.openInventory(inv);
 		} 
     	catch (SQLException e) 
     	{
     		player.sendMessage(ChatColor.RED + "An internal error occured while trying to fetch rewards.");
-			System.out.println (e.getMessage());
+    		e.printStackTrace();
 		}
     }
 

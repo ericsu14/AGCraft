@@ -45,7 +45,19 @@ public class RewardPlayer implements CommandExecutor
 			}
 			
 			RewardType rewardType = AGCraftPlugin.rewardInterpreter.searchTrie(args[0]);
-			EventType eventType = AGCraftPlugin.eventInterpreter.searchTrie(args[0]);
+			EventType eventType = AGCraftPlugin.eventInterpreter.searchTrie(args[1]);
+			
+			if (rewardType == null)
+			{
+				System.out.println ("Invalid reward");
+				return false;
+			}
+			
+			if (eventType == null)
+			{
+				System.out.println ("Invalid event");
+				return false;
+			}
 			
 			// Grabs all offline / online players
 			String username;

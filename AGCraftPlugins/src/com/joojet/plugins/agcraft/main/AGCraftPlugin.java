@@ -12,6 +12,7 @@ import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.rewards.commands.OpenRewards;
 import com.joojet.plugins.rewards.commands.RewardPlayer;
+import com.joojet.plugins.rewards.database.CreateRewardsDatabase;
 import com.joojet.plugins.rewards.interpreter.EventTypeInterpreter;
 import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
 import com.joojet.plugins.utility.commands.AutoSmelt;
@@ -41,6 +42,7 @@ public class AGCraftPlugin extends JavaPlugin
 		// Attempts to create a database
 		CreateDatabase.createNewDatabase();
 		CreateLocationDatabase.createDatabase();
+		CreateRewardsDatabase.createDatabase();
 		
 		//Bible
 		this.getCommand("bible").setExecutor(new Bible ());

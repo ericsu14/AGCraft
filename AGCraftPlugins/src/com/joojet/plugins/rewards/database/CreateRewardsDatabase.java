@@ -20,6 +20,10 @@ public class CreateRewardsDatabase
 			{
 				createRewardsDatabase();
 			}
+			else
+			{
+				System.err.println ("Connection invalid");
+			}
 		}
 		
 		catch (Exception e)
@@ -48,7 +52,7 @@ public class CreateRewardsDatabase
 			sql.append("REWARD TEXT NOT NULL,");
 			sql.append("EVENT TEXT NOT NULL,");
 			sql.append("CLAIMED BOOLEAN NOT NULL");
-			sql.append(")");
+			sql.append(");");
 			
 			stmt.executeUpdate(sql.toString());
 			stmt.close();

@@ -28,7 +28,7 @@ public class RewardDatabaseManager
 		c.setAutoCommit(false);
 		
 		StringBuilder query = new StringBuilder ("INSERT INTO ");
-		query.append(CreateRewardsDatabase.kDatabaseName);
+		query.append(CreateRewardsDatabase.kRewardsDatabaseName);
 		query.append(" (UUID, REWARD, EVENT, CLAIMED) VALUES (?,?,?,?)");
 		
 		PreparedStatement pstmt = c.prepareStatement(query.toString());
@@ -39,6 +39,7 @@ public class RewardDatabaseManager
 		
 		pstmt.executeUpdate();
 		pstmt.close();
+		c.commit();
 		c.close();
 	}
 	
@@ -53,7 +54,7 @@ public class RewardDatabaseManager
 		c.setAutoCommit(false);
 		
 		StringBuilder query = new StringBuilder ("UPDATE ");
-		query.append(CreateRewardsDatabase.kDatabaseName);
+		query.append(CreateRewardsDatabase.kRewardsDatabaseName);
 		query.append(" SET CLAIMED = ?");
 		query.append(" WHERE REWARD_ID = ?");
 		
@@ -63,6 +64,7 @@ public class RewardDatabaseManager
 		
 		pstmt.executeUpdate();
 		pstmt.close();
+		c.commit();
 		c.close();
 	}
 	
@@ -82,7 +84,7 @@ public class RewardDatabaseManager
 		
 		StringBuilder query = new StringBuilder ();
 		query.append("SELECT * FROM ");
-		query.append(CreateRewardsDatabase.kDatabaseName);
+		query.append(CreateRewardsDatabase.kRewardsDatabaseName);
 		query.append(" WHERE UUID = ? AND CLAIMED = ?");
 		
 		PreparedStatement pstmt = c.prepareStatement(query.toString());
@@ -123,7 +125,7 @@ public class RewardDatabaseManager
 		
 		StringBuilder query = new StringBuilder ();
 		query.append("SELECT * FROM ");
-		query.append(CreateRewardsDatabase.kDatabaseName);
+		query.append(CreateRewardsDatabase.kRewardsDatabaseName);
 		query.append(" WHERE UUID = ?");
 		
 		PreparedStatement pstmt = c.prepareStatement(query.toString());

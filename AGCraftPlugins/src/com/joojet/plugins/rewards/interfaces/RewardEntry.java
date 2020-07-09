@@ -26,6 +26,18 @@ public class RewardEntry
 		this.reward = AGCraftPlugin.rewardInterpreter.searchTrie(reward);
 		this.event = AGCraftPlugin.eventInterpreter.searchTrie(event);
 		this.claimed = claimed;
+		
+		if (this.reward == null)
+		{
+			this.reward = RewardType.TEST_STICK;
+			System.out.println ("Warning: Reward is null | " + event);
+		}
+		
+		if (this.event == null)
+		{
+			this.event = EventType.UHC_I;
+			System.out.println ("Warning: Event is null | " + event);
+		}
 	}
 	
 	public RewardEntry (int rewardID, UUID uuid, RewardType reward, EventType event, boolean claimed)
