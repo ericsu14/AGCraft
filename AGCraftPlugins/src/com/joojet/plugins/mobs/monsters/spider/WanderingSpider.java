@@ -1,12 +1,6 @@
 package com.joojet.plugins.mobs.monsters.spider;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 
@@ -23,7 +17,7 @@ public class WanderingSpider extends MobEquipment
 		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
 		this.effects.add(CustomPotionEffect.STRENGTH.getPotionEffect());
 
-		this.weapon = new ItemStack (Material.NETHERITE_SWORD, 1);
+		/* this.weapon = new ItemStack (Material.NETHERITE_SWORD, 1);
 		ItemMeta weaponMeta = this.weapon.getItemMeta();
 		weaponMeta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
 		weaponMeta.addEnchant(Enchantment.FIRE_ASPECT, 3, true);
@@ -43,6 +37,6 @@ public class WanderingSpider extends MobEquipment
 		chestMeta.setDisplayName(this.color + "Thanos Plate");
 		this.addDefenseAttributes(chestMeta, EquipmentSlot.CHEST, 15.0, 8.0, 0.2);
 		this.chestplate.setItemMeta(chestMeta);
-		this.addRandomDamage(this.chestplate);
+		this.addRandomDamage(this.chestplate); */
 	}
 }

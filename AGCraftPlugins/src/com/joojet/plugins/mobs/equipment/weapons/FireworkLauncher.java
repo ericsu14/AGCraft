@@ -16,7 +16,7 @@ public class FireworkLauncher extends Equipment
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
 		this.addUnsafeEnchantment(Enchantment.QUICK_CHARGE, 3);
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
-		this.setDisplayName(ChatColor.GOLD + "Firework Launcher");
+		this.setDisplayName("Firework Launcher");
 		this.addLoreToItemMeta(this.americanizeText("Light up the sky!"));
 	}
 }

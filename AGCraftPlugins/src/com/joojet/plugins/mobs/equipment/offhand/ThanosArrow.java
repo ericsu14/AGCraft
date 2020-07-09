@@ -16,6 +16,7 @@ public class ThanosArrow extends TippedArrow
 		this.addCustomEffect(PotionEffectType.WITHER, 70, 2);
 		this.addCustomEffect(PotionEffectType.HARM, 1, 1);
 		this.setDisplayName("Thanos Arrow");
+		this.addLoreToItemMeta("Will break the enemy's health in half...");
 	}
 
 }

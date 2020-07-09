@@ -1,13 +1,9 @@
 package com.joojet.plugins.mobs.allies.snowman;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.equipment.head.FrostyFace;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 
 public class Frosty extends MobEquipment
@@ -25,13 +21,6 @@ public class Frosty extends MobEquipment
 		this.addPotionEffect(CustomPotionEffect.REGEN);
 		
 		// Chestplate
-		this.helmet = new ItemStack (Material.CARVED_PUMPKIN, 1);
-		ItemMeta helmetMeta = this.helmet.getItemMeta();
-		helmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
-		helmetMeta.addEnchant(Enchantment.THORNS, 5, true);
-		helmetMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
-		helmetMeta.setDisplayName(this.color + "Frosty's Face");
-		this.addDefenseAttributes(helmetMeta, EquipmentSlot.HEAD, 10.0, 4.0, 0.2);
-		this.helmet.setItemMeta(helmetMeta);
+		this.helmet = new FrostyFace (this.color);
 	}
 }
