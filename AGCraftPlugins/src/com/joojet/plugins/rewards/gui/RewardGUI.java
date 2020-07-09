@@ -50,7 +50,7 @@ public class RewardGUI implements Listener
     	try 
     	{
 			this.entries = RewardDatabaseManager.fetchUnclaimedRewards(player.getUniqueId());
-	        this.inv = Bukkit.createInventory(null, maxInvSize, "Rewards");
+	        this.inv = Bukkit.createInventory(null, maxInvSize, "Claim Rewards");
 	        int index = 0;
 	        for (RewardEntry entry : entries)
 	        {
