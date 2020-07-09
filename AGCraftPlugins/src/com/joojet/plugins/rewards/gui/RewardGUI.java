@@ -91,10 +91,6 @@ public class RewardGUI implements Listener
 
         final Player p = (Player) e.getWhoClicked();
 
-        // Using slots click is a best option for your inventory click's
-        p.sendMessage("You clicked at slot " + e.getRawSlot());
-        p.sendMessage("Slot type: " + e.getSlotType());
-        p.sendMessage("Inv Type: " + e.getInventory().getType());
         int slot = e.getRawSlot();
         
         // Check if the player's inventory is full
