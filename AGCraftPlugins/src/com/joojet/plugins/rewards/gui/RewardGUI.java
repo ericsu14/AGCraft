@@ -1,8 +1,11 @@
 package com.joojet.plugins.rewards.gui;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,33 +13,50 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import com.joojet.plugins.rewards.database.RewardDatabaseManager;
+import com.joojet.plugins.rewards.interfaces.RewardEntry;
+
+import net.md_5.bungee.api.ChatColor;
 
 public class RewardGUI implements Listener 
 {
     private Inventory inv;
+    private ArrayList <RewardEntry> entries;
+    private Player player;
 
-    public RewardGUI() 
+    public RewardGUI(Player player) 
     {
-        // Create a new inventory, with no owner (as this isn't a real inventory), a size of nine, called example
-        this.inv = Bukkit.createInventory(null, 18, "Rewards");
-
-        // Put the items into the inventory
-        initializeItems();
+        this.player = player;
+        this.entries = new ArrayList <RewardEntry> ();
     }
-
-    /** Loads in inventory items */
-    public void initializeItems() 
-    {
-
-    }
-
 
     /** Opens the inventory */
-    public void openInventory(final HumanEntity ent) 
+    public void openInventory() 
     {
-        this.inv = Bukkit.createInventory(null, 18, "Rewards");
-        this.initializeItems();
-    	ent.openInventory(inv);
+    	try 
+    	{
+			this.entries = RewardDatabaseManager.fetchUnclaimedRewards(player.getUniqueId());
+	        this.inv = Bukkit.createInventory(null, entries.size() + 1, "Rewards");
+	        for (RewardEntry entry : entries)
+	        {
+	        	// Adds event information to the item's lore
+	        	ItemStack reward = entry.getReward().getReward();
+	        	ItemMeta meta = reward.getItemMeta();
+	        	List <String> lore = meta.getLore();
+	        	lore.add(ChatColor.GOLD + entry.getEvent().getFormattedLore());
+	        	meta.setLore(lore);
+	        	reward.setItemMeta(meta);
+	        	this.inv.addItem(reward);
+	        }
+	        player.openInventory(inv);
+		} 
+    	catch (SQLException e) 
+    	{
+    		player.sendMessage(ChatColor.RED + "An internal error occured while trying to fetch rewards.");
+			System.out.println (e.getMessage());
+		}
     }
 
     /** Handles inventory click events */

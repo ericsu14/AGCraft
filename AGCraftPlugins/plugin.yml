@@ -1,6 +1,6 @@
 name: AGCraftPlugins
 main: com.joojet.plugins.agcraft.main.AGCraftPlugin
-version: 1.7.4
+version: 1.7.5
 api-version: 1.13
 commands:
   bible:
@@ -36,5 +36,11 @@ commands:
   removeoldnetherlocations:
     description: Admin use only. Removes all old nether warps from the database.
     usage: /removeoldnetherlocations
+  rewards:
+    description: Use this command to open the rewards GUI. Rewards can be earned by partaking in events!
+    usage: /rewards
+  rewardplayer:
+    description: Admin use only.
+    usage: /rewardplayer <type of reward> <type of event> [list of players]
 
   

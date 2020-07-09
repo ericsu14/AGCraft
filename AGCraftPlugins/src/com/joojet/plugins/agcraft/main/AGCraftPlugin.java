@@ -10,6 +10,8 @@ import com.joojet.plugins.biblefetcher.commands.tabcompleter.*;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
+import com.joojet.plugins.rewards.commands.OpenRewards;
+import com.joojet.plugins.rewards.commands.RewardPlayer;
 import com.joojet.plugins.rewards.interpreter.EventTypeInterpreter;
 import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
 import com.joojet.plugins.utility.commands.AutoSmelt;
@@ -78,6 +80,12 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Remove all old nether locations
 		this.getCommand("removeoldnetherlocations").setExecutor(new RemoveOldNetherLocations());
+		
+		// Reward player
+		this.getCommand("rewardplayer").setExecutor(new RewardPlayer ());
+		
+		// Open reward gui
+		this.getCommand("rewards").setExecutor(new OpenRewards());
 		
 		// Death counter
 		deathCounter = new DeathCounter();
