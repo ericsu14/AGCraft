@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.joojet.plugins.rewards.database.RewardDatabaseManager;
 
@@ -16,7 +16,7 @@ public class RewardManager implements Listener
 	
 	/** Alerts the player of any unclaimed items if he has some */
 	@EventHandler
-	public void handlePlayerLogin (PlayerLoginEvent event)
+	public void handlePlayerLogin (PlayerJoinEvent event)
 	{
 		Player p = event.getPlayer();
 		int size = 0;
