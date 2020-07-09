@@ -94,12 +94,12 @@ public class RewardDatabaseManager
 		{
 			do {
 				entry = new RewardEntry (
-										result.getInt("REWARD_ID"), 
-										result.getString("UUID"), 
-										result.getString ("REWARD"), 
-										result.getString("EVENT"), 
-										result.getBoolean("CLAIMED")
-										);
+					result.getInt("REWARD_ID"), 
+					result.getString("UUID"), 
+					result.getString ("REWARD"), 
+					result.getString("EVENT"), 
+					result.getBoolean("CLAIMED")
+				);
 				entries.add(entry);
 			} while (result.next());
 		}
@@ -134,12 +134,12 @@ public class RewardDatabaseManager
 		{
 			do {
 				entry = new RewardEntry (
-										result.getInt("REWARD_ID"), 
-										result.getString("UUID"), 
-										result.getString ("REWARD"), 
-										result.getString("EVENT"), 
-										result.getBoolean("CLAIMED")
-										);
+					result.getInt("REWARD_ID"), 
+					result.getString("UUID"), 
+					result.getString ("REWARD"), 
+					result.getString("EVENT"), 
+					result.getBoolean("CLAIMED")
+				);
 				entries.add(entry);
 			} while (result.next());
 		}

@@ -2,6 +2,7 @@ package com.joojet.plugins.rewards.interfaces;
 
 import java.util.UUID;
 
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.rewards.enums.RewardType;
 
 public class RewardEntry 
@@ -19,7 +20,11 @@ public class RewardEntry
 	
 	public RewardEntry (int rewardID, String uuid, String reward, String event, boolean claimed)
 	{
-		
+		this.rewardID = rewardID;
+		this.uuid = UUID.fromString(uuid);
+		this.reward = AGCraftPlugin.rewardInterpreter.searchTrie(reward);
+		this.event = event;
+		this.claimed = claimed;
 	}
 	
 	public RewardEntry (int rewardID, UUID uuid, RewardType reward, String event, boolean claimed)
