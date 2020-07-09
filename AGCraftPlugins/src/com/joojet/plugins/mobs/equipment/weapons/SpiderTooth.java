@@ -1,0 +1,21 @@
+package com.joojet.plugins.mobs.equipment.weapons;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.EquipmentSlot;
+
+import com.joojet.plugins.mobs.interfaces.Equipment;
+
+public class SpiderTooth extends Equipment 
+{
+	public SpiderTooth (ChatColor color)
+	{
+		super (Material.STONE_SWORD, EquipmentSlot.HAND, color);
+		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 2);
+		this.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
+		this.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
+		this.setDisplayName("Spider Tooth");
+		this.addLoreToItemMeta("You are lucky this spider ain't poisonous...");
+	}
+}
