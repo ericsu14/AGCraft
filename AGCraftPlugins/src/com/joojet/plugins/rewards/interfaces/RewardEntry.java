@@ -3,6 +3,7 @@ package com.joojet.plugins.rewards.interfaces;
 import java.util.UUID;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.rewards.enums.EventType;
 import com.joojet.plugins.rewards.enums.RewardType;
 
 public class RewardEntry 
@@ -14,7 +15,7 @@ public class RewardEntry
 	/** The type of prize being distributed */
 	private RewardType reward;
 	/** The name of the event in which this reward is distributed from */
-	private String event;
+	private EventType event;
 	/** True if the prize is already claimed by the user */
 	private boolean claimed;
 	
@@ -23,11 +24,11 @@ public class RewardEntry
 		this.rewardID = rewardID;
 		this.uuid = UUID.fromString(uuid);
 		this.reward = AGCraftPlugin.rewardInterpreter.searchTrie(reward);
-		this.event = event;
+		this.event = AGCraftPlugin.eventInterpreter.searchTrie(event);
 		this.claimed = claimed;
 	}
 	
-	public RewardEntry (int rewardID, UUID uuid, RewardType reward, String event, boolean claimed)
+	public RewardEntry (int rewardID, UUID uuid, RewardType reward, EventType event, boolean claimed)
 	{
 		this.rewardID = rewardID;
 		this.uuid = uuid;
@@ -66,12 +67,12 @@ public class RewardEntry
 		this.reward = reward;
 	}
 
-	public String getEvent() 
+	public EventType getEvent() 
 	{
 		return event;
 	}
 
-	public void setEvent(String event) 
+	public void setEvent(EventType event) 
 	{
 		this.event = event;
 	}

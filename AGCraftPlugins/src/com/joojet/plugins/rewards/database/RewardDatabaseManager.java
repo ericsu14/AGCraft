@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import com.joojet.plugins.rewards.enums.EventType;
 import com.joojet.plugins.rewards.enums.RewardType;
 import com.joojet.plugins.rewards.interfaces.RewardEntry;
 
@@ -19,7 +20,7 @@ public class RewardDatabaseManager
 	 * 		@param reward - The type of reward that is being granted to the player
 	 * 		@param event - The name of the event from where the reward is distributed 
 	 * 		@throws SQLException - Internal connection error */
-	public static void grantReward (UUID uuid, RewardType reward, String event) throws SQLException
+	public static void grantReward (UUID uuid, RewardType reward, EventType event) throws SQLException
 	{
 		Connection c = null;
 		
@@ -33,7 +34,7 @@ public class RewardDatabaseManager
 		PreparedStatement pstmt = c.prepareStatement(query.toString());
 		pstmt.setString(1, uuid.toString());
 		pstmt.setString(2, reward.toString());
-		pstmt.setString(3, event);
+		pstmt.setString(3, event.toString());
 		pstmt.setBoolean(4, false);
 		
 		pstmt.executeUpdate();
@@ -169,7 +170,7 @@ public class RewardDatabaseManager
 		String eventLower = event.toLowerCase();
 		for (RewardEntry entry : rewards)
 		{
-			if (entry.getEvent().toLowerCase().equals(eventLower))
+			if (entry.getEvent().toString().toLowerCase().equals(eventLower))
 			{
 				return true;
 			}

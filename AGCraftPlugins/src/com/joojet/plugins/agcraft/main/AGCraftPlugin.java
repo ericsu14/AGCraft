@@ -10,6 +10,7 @@ import com.joojet.plugins.biblefetcher.commands.tabcompleter.*;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
+import com.joojet.plugins.rewards.interpreter.EventTypeInterpreter;
 import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
 import com.joojet.plugins.utility.commands.AutoSmelt;
 import com.joojet.plugins.utility.commands.ClearJunk;
@@ -28,6 +29,8 @@ public class AGCraftPlugin extends JavaPlugin
 	public static DeathCounter deathCounter;
 	// Stores the command interpreter used for reward types
 	public static RewardTypeInterpreter rewardInterpreter = new RewardTypeInterpreter();
+	// Stores the command interpreter used for event types
+	public static EventTypeInterpreter eventInterpreter = new EventTypeInterpreter();
 	
 	@Override
 	public void onEnable ()
