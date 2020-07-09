@@ -1,12 +1,9 @@
 package com.joojet.plugins.mobs.allies.snowman;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.equipment.boots.LetItGo;
 import com.joojet.plugins.mobs.equipment.head.ScruffyFace;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 
