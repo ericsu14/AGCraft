@@ -94,7 +94,6 @@ public class EWarpDatabaseManager
 		}
 		
 		pstmt.close ();
-		// c.commit();
 		c.close();
 		
 		return count;

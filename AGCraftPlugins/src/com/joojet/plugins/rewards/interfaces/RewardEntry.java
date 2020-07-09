@@ -17,6 +17,11 @@ public class RewardEntry
 	/** True if the prize is already claimed by the user */
 	private boolean claimed;
 	
+	public RewardEntry (int rewardID, String uuid, String reward, String event, boolean claimed)
+	{
+		
+	}
+	
 	public RewardEntry (int rewardID, UUID uuid, RewardType reward, String event, boolean claimed)
 	{
 		this.rewardID = rewardID;
