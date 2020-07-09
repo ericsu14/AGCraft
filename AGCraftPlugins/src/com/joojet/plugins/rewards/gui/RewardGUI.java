@@ -105,7 +105,7 @@ public class RewardGUI implements Listener
         		RewardDatabaseManager.claimReward(rewardID);
         		this.removeIDField(clickedItem);
         		this.player.getInventory().addItem(clickedItem);
-        		this.player.sendMessage (ChatColor.GOLD + "Acquired " + clickedItem.getItemMeta().getDisplayName() + ChatColor.GOLD +"!");
+        		this.player.sendMessage (ChatColor.AQUA + "Acquired " + clickedItem.getItemMeta().getDisplayName() + ChatColor.AQUA +"!");
         		this.player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
         		this.inv.remove(clickedItem);
         	}
