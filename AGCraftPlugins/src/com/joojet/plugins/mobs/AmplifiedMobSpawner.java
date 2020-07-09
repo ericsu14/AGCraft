@@ -155,6 +155,7 @@ public class AmplifiedMobSpawner implements Listener
 						IronGolem golem = (IronGolem) entity;
 						golem.setPlayerCreated(true);
 					}
+					
 					this.equipEntity(entity, scroll.getMob());
 					p.sendMessage(ChatColor.AQUA + "Sucessfully summoned " + scroll.getMob().getChatColor() + scroll.getName() + ChatColor.AQUA + "!");
 					p.playSound(spawnLocation, Sound.ENTITY_EVOKER_PREPARE_WOLOLO, 1.0f, 1.0f);

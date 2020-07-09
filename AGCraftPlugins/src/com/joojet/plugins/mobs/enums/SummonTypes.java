@@ -8,7 +8,8 @@ public enum SummonTypes
 	JOHN_JAE,
 	SCRUFFY,
 	ADVANCED_GOLEM,
-	FROSTY;
+	FROSTY,
+	FROLF;
 	
 	/** Summoning scroll object */
 	private SummoningScroll summon;
@@ -28,6 +29,9 @@ public enum SummonTypes
 				break;
 			case "FROSTY":
 				this.summon = new SummonFrosty();
+				break;
+			case "FROLF":
+				this.summon = new SummonFrolf ();
 				break;
 			default:
 				break;
