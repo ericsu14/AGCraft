@@ -89,8 +89,6 @@ public class RewardGUI implements Listener
         // verify current item is not null
         if (clickedItem == null || clickedItem.getType() == Material.AIR) return;
 
-        final Player p = (Player) e.getWhoClicked();
-
         int slot = e.getRawSlot();
         
         // Check if the player's inventory is full
