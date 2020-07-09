@@ -15,6 +15,11 @@ public enum RewardType
 	
 	private RewardType ()
 	{
+
+	}
+	
+	public ItemStack getReward ()
+	{
 		switch (this.name())
 		{
 			case "TEST_STICK":
@@ -29,10 +34,6 @@ public enum RewardType
 			default:
 				break;
 		}
-	}
-	
-	public ItemStack getReward ()
-	{
 		return this.reward;
 	}
 	

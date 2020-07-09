@@ -17,6 +17,7 @@ public class OpenRewards implements CommandExecutor
 		{
 			Player player = (Player) sender;
 			RewardGUI gui = new RewardGUI (player);
+			gui.onEnable();
 			gui.openInventory();
 			return true;
 		}
