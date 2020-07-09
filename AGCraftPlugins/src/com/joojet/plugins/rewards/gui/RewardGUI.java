@@ -57,7 +57,7 @@ public class RewardGUI implements Listener
 	        	// Prevents overflow
 	        	if (index > maxInvSize)
 	        	{
-	        		return;
+	        		break;
 	        	}
 	        	
 	        	// Appends lore and reward ID to the item. Reward ID is always in the last slot of the item's lore
