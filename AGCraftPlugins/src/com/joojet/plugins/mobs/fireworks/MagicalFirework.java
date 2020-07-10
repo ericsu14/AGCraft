@@ -1,5 +1,6 @@
 package com.joojet.plugins.mobs.fireworks;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
@@ -10,14 +11,13 @@ import org.bukkit.inventory.meta.FireworkMeta;
 
 import com.joojet.plugins.mobs.interfaces.Firework;
 
-import net.md_5.bungee.api.ChatColor;
-
 public class MagicalFirework extends Firework
 {
 	@Override
 	public ItemStack generateFirework (int amount, int power)
 	{
 		ItemStack fw = new ItemStack (Material.FIREWORK_ROCKET, amount);
+		this.addLoreToItemMeta(fw, "For the blue and gold!", ChatColor.GOLD);
 		FireworkMeta firework = (FireworkMeta) fw.getItemMeta();
 		firework.addEffect(FireworkEffect.builder()
 				.withColor(Color.YELLOW)

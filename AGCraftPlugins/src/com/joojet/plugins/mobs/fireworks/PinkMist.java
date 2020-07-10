@@ -1,5 +1,6 @@
 package com.joojet.plugins.mobs.fireworks;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
@@ -10,14 +11,13 @@ import org.bukkit.inventory.meta.FireworkMeta;
 
 import com.joojet.plugins.mobs.interfaces.Firework;
 
-import net.md_5.bungee.api.ChatColor;
-
 public class PinkMist extends Firework
 {
 	@Override
 	public ItemStack generateFirework(int amount, int power) 
 	{
 		ItemStack fw = new ItemStack (Material.FIREWORK_ROCKET, amount);
+		this.addLoreToItemMeta(fw, "Very pink, indeed.", ChatColor.DARK_PURPLE);
 		FireworkMeta firework = (FireworkMeta) fw.getItemMeta();
 		firework.addEffect(FireworkEffect.builder()
 				.withColor(Color.WHITE)
