@@ -39,8 +39,8 @@ commands:
   rewards:
     description: Use this command to open the rewards GUI. Rewards can be earned by partaking in events!
     usage: /rewards
-  rewardplayer:
+  grantrewards:
     description: Admin use only.
-    usage: /rewardplayer <type of reward> <type of event> [list of players]
+    usage: /grantrewards <type of reward> <type of event> [list of players]
 
   

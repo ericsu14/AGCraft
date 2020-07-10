@@ -85,7 +85,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.getCommand("removeoldnetherlocations").setExecutor(new RemoveOldNetherLocations());
 		
 		// Reward player
-		this.getCommand("rewardplayer").setExecutor(new RewardPlayer ());
+		this.getCommand("grantrewards").setExecutor(new RewardPlayer ());
 		
 		// Open reward gui
 		this.getCommand("rewards").setExecutor(new OpenRewards());
