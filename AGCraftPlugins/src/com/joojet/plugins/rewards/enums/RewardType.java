@@ -52,7 +52,7 @@ public enum RewardType
 				this.reward = new SummonJohnJae ();
 				break;
 			case ENCHANTED_GOLDEN_APPLE:
-				this.reward = new ItemStack (Material.GOLDEN_APPLE, 2);
+				this.reward = new ItemStack (Material.ENCHANTED_GOLDEN_APPLE, 2);
 				break;
 			case CAPTAIN_AMERICA:
 				this.reward = new CaptainAmericaShield (ChatColor.GOLD);
