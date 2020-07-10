@@ -62,7 +62,7 @@ public class RewardGUI implements Listener
 	        	
 	        	// Appends lore and reward ID to the item. Reward ID is always in the last slot of the item's lore
 	        	ItemStack reward = entry.getReward().getReward();
-	        	this.addLoreToItemMeta(reward, entry.getEvent().getFormattedLore(), ChatColor.GOLD);
+	        	this.addLoreToItemMeta(reward, entry.getEvent().getFormattedLore(), ChatColor.YELLOW);
 	        	this.addLoreToItemMeta(reward, entry.getRewardID() + "", ChatColor.MAGIC);
 	        	this.inv.addItem(reward);
 	        	++index;
@@ -202,9 +202,15 @@ public class RewardGUI implements Listener
 		// If display name does not exist, create one automatically for the item
 		if (!meta.hasDisplayName())
 		{
-			StringBuilder name = new StringBuilder (item.getType().toString().toLowerCase());
-			name.replace(0, 1, item.getType().toString().toUpperCase().substring(0,1));
-			meta.setDisplayName(ChatColor.AQUA + name.toString());
+			String rawItemName = item.getType().toString();
+			String[] tokens = rawItemName.split("_");
+			StringBuilder name = new StringBuilder ();
+			for (String token : tokens)
+			{
+				name.append(this.captializeString(token));
+				name.append(" ");
+			}
+			meta.setDisplayName(ChatColor.AQUA + name.toString().trim());
 		}
 		
 		String[] tokens = lore.split(" ");
@@ -232,4 +238,12 @@ public class RewardGUI implements Listener
 		meta.setLore(itemLore);
 		item.setItemMeta(meta);
 	}
+    
+    /** Captializes the first letter of the string */
+    public String captializeString (String str)
+    {
+    	StringBuilder string = new StringBuilder (str.toLowerCase());
+    	string.replace(0, 1, str.toUpperCase().substring(0, 1));
+    	return string.toString();
+    }
 }
