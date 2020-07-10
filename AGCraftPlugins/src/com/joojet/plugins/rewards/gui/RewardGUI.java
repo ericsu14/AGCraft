@@ -94,7 +94,8 @@ public class RewardGUI implements Listener
         // Check if the player's inventory is full
 		if (player.getInventory().firstEmpty() == -1)
 		{
-			player.sendMessage (ChatColor.RED + "Your inventory is full. Please clear at least one spot in your inventory before trying again.");
+			this.player.sendMessage (ChatColor.RED + "Your inventory is full. Please clear at least one spot in your inventory before trying again.");
+			this.player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f);
 			return;
 		}
         
