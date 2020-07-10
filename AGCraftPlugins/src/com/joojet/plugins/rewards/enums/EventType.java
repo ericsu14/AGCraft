@@ -8,7 +8,7 @@ import java.util.Date;
 public enum EventType 
 {
 	/** A list of minigame events that has happened in this server */
-	UHC_I ("UHC I", "7-9-2020"),
+	UHC_I ("UHC I", "07-09-2020"),
 	GIFT ("Gift", "now", "A small gift from the administrator!");
 	
 	/** Full name of the event */
@@ -55,7 +55,7 @@ public enum EventType
 			lore.append("Rewarded from partaking in ");
 			lore.append(fullName);
 			lore.append(" on ");
-			lore.append(date.get(Calendar.MONTH));
+			lore.append((date.get(Calendar.MONTH) + 1));
 			lore.append("/");
 			lore.append(date.get(Calendar.DAY_OF_MONTH));
 			lore.append("/");
