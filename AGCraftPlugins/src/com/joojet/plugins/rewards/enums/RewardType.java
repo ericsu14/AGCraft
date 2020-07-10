@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.equipment.offhand.CaptainAmericaShield;
+import com.joojet.plugins.mobs.fireworks.PaintTheSky;
 import com.joojet.plugins.mobs.scrolls.SummonAdvancedGolem;
 import com.joojet.plugins.mobs.scrolls.SummonFrolf;
 import com.joojet.plugins.mobs.scrolls.SummonJohnJae;
@@ -18,7 +19,8 @@ public enum RewardType
 	ADVANCED_GOLEM,
 	JOHN_JAE,
 	ENCHANTED_GOLDEN_APPLE,
-	CAPTAIN_AMERICA;
+	CAPTAIN_AMERICA,
+	PAINT_THE_SKIES;
 	
 	private ItemStack reward;
 	
@@ -54,6 +56,9 @@ public enum RewardType
 				break;
 			case CAPTAIN_AMERICA:
 				this.reward = new CaptainAmericaShield (ChatColor.GOLD);
+				break;
+			case PAINT_THE_SKIES:
+				this.reward = new PaintTheSky().generateFirework(64, 3);
 				break;
 			default:
 				break;
