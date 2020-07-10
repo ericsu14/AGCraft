@@ -32,6 +32,7 @@ import org.bukkit.potion.PotionEffect;
 
 import com.joojet.plugins.mobs.allies.golem.GolemTypes;
 import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
+import com.joojet.plugins.mobs.enums.ServerEvent;
 import com.joojet.plugins.mobs.enums.SummonTypes;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
@@ -68,6 +69,9 @@ public class AmplifiedMobSpawner implements Listener
 	private SnowmanTypes snowmanTypes;
 	private HuskTypes huskTypes;
 	private WanderingVillagerTypes wanderingTypes;
+	
+	// Type of server event that is happening right now
+	private ServerEvent serverEvent = ServerEvent.JULY_FORTH;
 	
 	// Interpreter to search for used summoning scrolls
 	private SummoningScrollInterpreter summonInterpreter;
@@ -190,6 +194,73 @@ public class AmplifiedMobSpawner implements Listener
 		
 		double roll = rand.nextDouble();
 		
+		// Handles server wide event mob spawns
+		switch (this.serverEvent)
+		{
+			case JULY_FORTH:
+				this.handleJulyForthSpawns(type, reason, entity, roll);
+				break;
+			default:
+				break;
+		}
+		
+		// If the entity is a wandering trader, transform him
+		if (type.equals(EntityType.WANDERING_TRADER))
+		{
+			this.transformWanderingTrader(entity);
+			return;
+		}
+		
+		// Switch to raider handler if the spawn reason is RAID
+		if (reason.equals(SpawnReason.RAID))
+		{
+			this.makeRaiderNameVisible(entity, type);
+			return;
+		}
+		
+		// Do not alter any mob that isn't spawned into the world naturally or dice roll fails
+		if ((!reasonFilter(reason) || roll > chance))
+		{
+			return;
+		}
+		
+		MobEquipment mobEquipment;
+		switch (type)
+		{
+			case ZOMBIE:
+				mobEquipment = zombieTypes.getRandomEquipment();
+				// Prevents zombies from being babies
+				Zombie zomble = (Zombie) entity;
+				zomble.setBaby(false);
+				break;
+			case SKELETON:
+				mobEquipment = skeletonTypes.getRandomEquipment();
+				break;
+			case SPIDER:
+				mobEquipment = spiderTypes.getRandomEquipment();
+				break;
+			case IRON_GOLEM:
+				mobEquipment = golemTypes.getRandomEquipment();
+				break;
+			case SNOWMAN:
+				mobEquipment = snowmanTypes.getRandomEquipment();
+				break;
+			case HUSK:
+				mobEquipment = huskTypes.getRandomEquipment();
+				// Prevents baby elite husks from spawning
+				Husk husk = (Husk) entity;
+				husk.setBaby(false);
+				break;
+			default:
+				return;
+		}
+		
+		this.equipEntity(entity, mobEquipment);
+	}
+	
+	/** Handles 4th of july mob spawns */
+	public void handleJulyForthSpawns (EntityType type, SpawnReason reason, LivingEntity entity, double roll)
+	{
 		// Insta kill phantoms and let them explode
 		if (type.equals(EntityType.PHANTOM))
 		{
@@ -227,61 +298,6 @@ public class AmplifiedMobSpawner implements Listener
 			this.equipEntity(entity, mobEquipment);
 			return;
 		}
-		
-		// If the entity is a wandering trader, transform him
-		if (type.equals(EntityType.WANDERING_TRADER))
-		{
-			this.transformWanderingTrader(entity);
-			return;
-		}
-		
-		// Switch to raider handler if the spawn reason is RAID
-		if (reason.equals(SpawnReason.RAID))
-		{
-			this.makeRaiderNameVisible(entity, type);
-			return;
-		}
-		
-		// Do not alter any mob that isn't spawned into the world naturally or dice roll fails
-		if ((!reasonFilter(reason) || roll > chance))
-		{
-			return;
-		}
-		
-		// System.out.println ("Captured custom mob spawn event");
-		
-		MobEquipment mobEquipment;
-		switch (type)
-		{
-			case ZOMBIE:
-				mobEquipment = zombieTypes.getRandomEquipment();
-				// Prevents zombies from being babies
-				Zombie zomble = (Zombie) entity;
-				zomble.setBaby(false);
-				break;
-			case SKELETON:
-				mobEquipment = skeletonTypes.getRandomEquipment();
-				break;
-			case SPIDER:
-				mobEquipment = spiderTypes.getRandomEquipment();
-				break;
-			case IRON_GOLEM:
-				mobEquipment = golemTypes.getRandomEquipment();
-				break;
-			case SNOWMAN:
-				mobEquipment = snowmanTypes.getRandomEquipment();
-				break;
-			case HUSK:
-				mobEquipment = huskTypes.getRandomEquipment();
-				// Prevents baby elite husks from spawning
-				Husk husk = (Husk) entity;
-				husk.setBaby(false);
-				break;
-			default:
-				return;
-		}
-		
-		this.equipEntity(entity, mobEquipment);
 	}
 	
 	/** Transforms the phantom into a firework phantom */
