@@ -49,7 +49,7 @@ public class RewardGUI implements Listener
     {
     	try 
     	{
-			this.entries = RewardDatabaseManager.fetchUnclaimedRewards(player.getUniqueId());
+    		this.entries = RewardDatabaseManager.fetchUnclaimedRewards(player.getUniqueId());
 	        this.inv = Bukkit.createInventory(null, maxInvSize, "Claim Rewards");
 	        int index = 0;
 	        for (RewardEntry entry : entries)
@@ -73,14 +73,14 @@ public class RewardGUI implements Listener
     	{
     		player.sendMessage(ChatColor.RED + "An internal error occured while trying to fetch rewards.");
     		e.printStackTrace();
-		}
+    	}
     }
 
     /** Handles inventory click events */
     @EventHandler
     public void onInventoryClick(final InventoryClickEvent e) 
     {
-        if (e.getInventory() != inv) return;
+    	if (e.getInventory() != inv) return;
 
         e.setCancelled(true);
 
@@ -91,16 +91,16 @@ public class RewardGUI implements Listener
 
         int slot = e.getRawSlot();
         
-        // Check if the player's inventory is full
-		if (player.getInventory().firstEmpty() == -1)
-		{
-			this.player.sendMessage (ChatColor.RED + "Your inventory is full. Please clear at least one spot in your inventory before trying again.");
-			this.player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f);
-			return;
-		}
-        
         if (slot >= 0 && slot <= maxInvSize - 1)
         {
+            // Check if the player's inventory is full
+    		if (player.getInventory().firstEmpty() == -1)
+    		{
+    			this.player.sendMessage (ChatColor.RED + "Your inventory is full. Please clear at least one spot in your inventory before trying again.");
+    			this.player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f);
+    			return;
+    		}
+    		
         	int rewardID = this.getRewardID(clickedItem);
         	try
         	{
@@ -126,7 +126,7 @@ public class RewardGUI implements Listener
     {
         if (e.getInventory() == inv) 
         {
-          e.setCancelled(true);
+        	e.setCancelled(true);
         }
     }
     
@@ -187,9 +187,9 @@ public class RewardGUI implements Listener
 	 * 		@param item - Item we are adding lore info into
 	 * 		@param lore - The lore we are adding into the item meta
 	 * 		@param color - Color of the lore text */
-	public void addLoreToItemMeta (ItemStack item, String lore, ChatColor color)
-	{
-		StringBuilder str = new StringBuilder();
+    public void addLoreToItemMeta (ItemStack item, String lore, ChatColor color)
+    {
+    	StringBuilder str = new StringBuilder();
 		str.append(color);
 		ItemMeta meta = item.getItemMeta();
 		List <String> itemLore = meta.getLore();

@@ -72,8 +72,7 @@ public class RewardPlayer implements CommandExecutor
 					return false;
 				}
 				
-				UUID uuid = Bukkit.getOfflinePlayer(username) == null ? Bukkit.getPlayer(username).getUniqueId() : 
-																		  Bukkit.getOfflinePlayer(username).getUniqueId();
+				UUID uuid = Bukkit.getOfflinePlayer(username) == null ? Bukkit.getPlayer(username).getUniqueId() : Bukkit.getOfflinePlayer(username).getUniqueId();
 				players.add(uuid);
 			}
 			

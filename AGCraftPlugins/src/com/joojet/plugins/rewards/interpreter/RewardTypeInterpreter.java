@@ -14,7 +14,7 @@ public class RewardTypeInterpreter
 		this.populateTrie();
 	}
 	
-	/** Populates the trie with all enums in SummonTypes */
+	/** Populates the trie with all enums in RewardTypes */
 	private void populateTrie ()
 	{
 		for (RewardType ele : RewardType.values())
@@ -23,7 +23,7 @@ public class RewardTypeInterpreter
 		}
 	}
 	
-	/** Searches the trie for the search term and returns the SummonType related to
+	/** Searches the trie for the search term and returns the RewardType related to
 	 *  that search term. */
 	public RewardType searchTrie (String input)
 	{

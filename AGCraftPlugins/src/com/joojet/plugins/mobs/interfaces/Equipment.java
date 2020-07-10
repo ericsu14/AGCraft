@@ -111,6 +111,19 @@ public abstract class Equipment extends ItemStack
 		this.setItemMeta(meta);
 	}
 	
+	/** Adds max health attributes to a piece of armor or weapon
+	 * 		@param health - The amount of max health bonuses this equipment carries */
+	public void addHealthAttributes (double health)
+	{
+		ItemMeta meta = this.getItemMeta();
+		if (health > 0.0)
+		{
+			AttributeModifier healthMod = new AttributeModifier (UUID.randomUUID(), "generic.max_health", health, Operation.ADD_NUMBER, this.equipmentSlot);
+			meta.addAttributeModifier(Attribute.GENERIC_MAX_HEALTH, healthMod);
+		}
+		this.setItemMeta(meta);
+	}
+	
 	/** Creates a custom playerhead using a custom texture.
 	 *  Code stolen from:
 	 *  	https://www.spigotmc.org/threads/custom-textured-non-player-skulls.244561/#post-2448313
