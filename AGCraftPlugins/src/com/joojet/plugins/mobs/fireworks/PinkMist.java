@@ -4,6 +4,7 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.FireworkEffect.Type;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
@@ -33,6 +34,7 @@ public class PinkMist extends Firework
 				.build());
 		firework.setDisplayName(ChatColor.LIGHT_PURPLE + "Pink Mist");
 		firework.setPower(power);
+		firework.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
 		fw.setItemMeta(firework);
 		return fw;
 	}

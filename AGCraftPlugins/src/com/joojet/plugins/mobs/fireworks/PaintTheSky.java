@@ -4,6 +4,7 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.FireworkEffect.Type;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
@@ -58,6 +59,7 @@ public class PaintTheSky extends Firework
 				.withFade(Color.fromRGB(84, 64, 177))
 				.with(Type.BURST)
 				.build());
+		firework.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
 		firework.setDisplayName(ChatColor.LIGHT_PURPLE + "Paint the Skies");
 		firework.setPower(power);
 		fw.setItemMeta(firework);

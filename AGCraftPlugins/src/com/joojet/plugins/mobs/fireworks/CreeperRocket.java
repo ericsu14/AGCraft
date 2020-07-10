@@ -6,6 +6,7 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.FireworkEffect.Type;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
@@ -39,6 +40,7 @@ public class CreeperRocket extends Firework
 		ArrayList <String> fireworkLore = new ArrayList <String>();
 		fireworkLore.add(ChatColor.DARK_PURPLE + "Aww man...");
 		firework.setLore(fireworkLore);
+		firework.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
 		firework.setPower(power);
 		fw.setItemMeta(firework);
 		

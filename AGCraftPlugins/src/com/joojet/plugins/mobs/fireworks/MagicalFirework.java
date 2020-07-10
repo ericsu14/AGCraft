@@ -4,6 +4,7 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.FireworkEffect.Type;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
@@ -40,6 +41,7 @@ public class MagicalFirework extends Firework
 				.with(Type.BALL_LARGE)
 				.build());
 		firework.setDisplayName(ChatColor.LIGHT_PURPLE + "Magical Firework");
+		firework.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
 		firework.setPower(power);
 		fw.setItemMeta(firework);
 		return fw;

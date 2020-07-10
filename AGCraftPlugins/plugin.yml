@@ -41,6 +41,6 @@ commands:
     usage: /rewards
   grantreward:
     description: Admin use only.
-    usage: /grantrewards <type of reward> <type of event> [list of players]
+    usage: /grantreward <type of reward> <type of event> [list of players]
 
   
