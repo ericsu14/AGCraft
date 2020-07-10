@@ -17,7 +17,7 @@ public class PaintTheSky extends Firework
 	public ItemStack generateFirework(int amount, int power) 
 	{
 		ItemStack fw = new ItemStack (Material.FIREWORK_ROCKET, amount);
-		this.addLoreToItemMeta(fw, "Add color to the night sky!", ChatColor.AQUA);
+		this.addLoreToItemMeta(fw, "Add some color to the night sky!", ChatColor.AQUA);
 		FireworkMeta firework = (FireworkMeta) fw.getItemMeta();
 		// Red to Green
 		firework.addEffect(FireworkEffect.builder()
