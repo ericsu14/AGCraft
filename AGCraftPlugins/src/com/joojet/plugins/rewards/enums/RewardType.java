@@ -37,7 +37,7 @@ public enum RewardType
 				this.reward = new ItemStack (Material.STICK, 1);
 				break;
 			case DIAMONDS:
-				this.reward = new ItemStack (Material.DIAMOND, 16);
+				this.reward = new ItemStack (Material.DIAMOND, 18);
 				break;
 			case FROLF:
 				this.reward = new SummonFrolf ();

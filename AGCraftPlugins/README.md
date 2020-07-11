@@ -1,5 +1,6 @@
 
 
+
 # AGCraft Commands Documentation
 
 ## AutoSmelt <a name = "autosmelt"></a>
@@ -87,12 +88,13 @@ You might notice that you can append a list of ``filters`` into this command. Th
 The items that falls under each category are as follows:
 
 |Common|Stone|Natural|Armor|Brewing|Weapons|Nether|
-|--|--|--|--|--|--|--|
+|--|--|--|--|--|--|--|--|
 | Rotten Flesh | Cobblestone |Dirt|All Leather Armor*|Spider Eyes| Golden Swords* | Netherbrick |
 | Bones | Stone | Sand | All Chainmail Armor* | | Bows* |
 | String | Granite | Gravel | All Gold Armor* |
-| Seeds (wheat) | Diorite
+| Seeds (wheat) | Diorite | Cactus
 | Green Dye | Andesite |
+| Poisonous Potato |
 
 *Armor and weapons must be <b>damaged</b> and <b>unenchanted</b> in order for this command to remove them. This is to prevent your own gear from being removed accidentally.
 
@@ -137,6 +139,13 @@ Note that this only works on private or public locations specified by you. It wi
 ``/removelocation village`` removes a warp location, `village` from the database, if it was originally set by you. \
 ``/removelocation spawn`` removes a warp location, `spawn` from the database, if it was originally set by you.
 
+## Rewards
+<b>Usage: </b> \
+``/rewards``
+
+<b>Description: </b> \
+Opens the rewards inventory, which can be used to claim rewards distributed from server-wide events or gifts from the administrator. If you have items in your rewards inventory, simply click on that item for it to be added in your inventory.
+
 ## SetLocation
 <b> Usage: </b> \
 ``/setlocation <location name> <visibility level>``
@@ -146,7 +155,7 @@ Registers your current position as a new warp location under the name, ``<locati
 
 <b> Parameters: </b> \
 ``location name`` - Name of the location you are setting your warp location to. \
-``visibility level`` - Can be either ``private`` or ``public``. 
+``visibility level`` - An optional parameter that can be either ``private`` or ``public``.  Commands without this parameter will automatically be set to ``private``by default.
 - ``public`` warp locations can be seen and accessed by anyone in the server.
 - ``private`` warp locations can only be seen and accessed by yourself.
 
@@ -158,20 +167,19 @@ Registers your current position as a new warp location under the name, ``<locati
 
 ## Warp
 <b>Usage:</b>
-``/warp <tag> <location name>``
+``/warp <location name>``
 
 <b>Description</b>:\
-Instantlly teleports you to a named location. Use /warp home to teleport yourself back to your bed spawn. \
+Instantly teleports you to a named location. Use /warp home to teleport yourself back to your bed spawn. \
 
 <b>Parameters:</b> \
-``tag`` - Specifies the type of location you want to warp to. \
 ``location name`` - the name of the location specified by `/setlocation` if the tag parameter is set to `location`.
 
 
 ### Instructions on using warp:
 Let's say that you built an awesome house in the middle of the village. Before using this command, you want to first <b>physically stand</b> in the spot you want to warp to in the future.
 
-Once you are standing on that spot, simply type ``/setlocation <name> private`` to register your new warp location to the database. ``/setlocation <name> private`` will take in your current coordinates and register it as a newly named warp location for you to use in the future. 
+Once you are standing on that spot, simply type ``/setlocation <name>`` to register your new warp location to the database. ``/setlocation <name>`` will take in your current coordinates and register it as a newly named warp location for you to use in the future. 
 
 Note that ``<name>`` could be anything; <b>it is entirely up to you on what you want to name your warp locations. </b> In addition, the ``private`` specifier after ``<name>`` ensures that the locations you set <i>can only be seen and accessed by you.</i>
 

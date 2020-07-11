@@ -35,6 +35,7 @@ public class ClearJunk implements CommandExecutor
 		this.junkItems.put(Material.WHEAT_SEEDS, JunkClassifier.COMMON);
 		this.junkItems.put(Material.GREEN_DYE, JunkClassifier.COMMON);
 		this.junkItems.put(Material.PAPER, JunkClassifier.COMMON);
+		this.junkItems.put(Material.POISONOUS_POTATO, JunkClassifier.COMMON);
 		
 		// Natural blocks
 		this.junkItems.put(Material.DIRT, JunkClassifier.NATURAL);
