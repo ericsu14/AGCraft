@@ -65,25 +65,6 @@ public abstract class MobEquipment
 		this.spawnWeight = 1;
 	}
 	
-	public MobEquipment (int spawnWeight)
-	{
-		this.name = "";
-		this.color = ChatColor.WHITE;
-		// -1 represents default health
-		this.health = -1.0;
-		this.onFire = false;
-		this.showName = false;
-		this.effects = new ArrayList <PotionEffect> ();
-		// Set up default drop rates
-		this.dropRates = new float[6];
-		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.01f, 0.05f);
-		// Words per line defaults to 6
-		this.wordsPerLine = 5;
-		this.biomes = new ArrayList <Biome> ();
-		// Spawn weight set to default
-		this.spawnWeight = spawnWeight;
-	}
-	
 	/** Sets up drop rates for this entity.
 	 *  Rates are stored as doubles from ranges 0.0f-1.0f, where
 	 *  1.0f indicates a 100% chance of dropping

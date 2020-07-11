@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.block.Biome;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -191,6 +192,7 @@ public class AmplifiedMobSpawner implements Listener
 		EntityType type = event.getEntityType();
 		SpawnReason reason = event.getSpawnReason();
 		LivingEntity entity = event.getEntity();
+		Biome biome = entity.getLocation().getBlock().getBiome();
 		
 		double roll = rand.nextDouble();
 		
@@ -228,25 +230,25 @@ public class AmplifiedMobSpawner implements Listener
 		switch (type)
 		{
 			case ZOMBIE:
-				mobEquipment = zombieTypes.getRandomEquipment();
+				mobEquipment = zombieTypes.getRandomEquipment(biome);
 				// Prevents zombies from being babies
 				Zombie zomble = (Zombie) entity;
 				zomble.setBaby(false);
 				break;
 			case SKELETON:
-				mobEquipment = skeletonTypes.getRandomEquipment();
+				mobEquipment = skeletonTypes.getRandomEquipment(biome);
 				break;
 			case SPIDER:
-				mobEquipment = spiderTypes.getRandomEquipment();
+				mobEquipment = spiderTypes.getRandomEquipment(biome);
 				break;
 			case IRON_GOLEM:
-				mobEquipment = golemTypes.getRandomEquipment();
+				mobEquipment = golemTypes.getRandomEquipment(biome);
 				break;
 			case SNOWMAN:
-				mobEquipment = snowmanTypes.getRandomEquipment();
+				mobEquipment = snowmanTypes.getRandomEquipment(biome);
 				break;
 			case HUSK:
-				mobEquipment = huskTypes.getRandomEquipment();
+				mobEquipment = huskTypes.getRandomEquipment(biome);
 				// Prevents baby elite husks from spawning
 				Husk husk = (Husk) entity;
 				husk.setBaby(false);
@@ -334,6 +336,12 @@ public class AmplifiedMobSpawner implements Listener
 	 *  @param mobEquipment - Object containing custom mob equipment */
 	public void equipEntity (LivingEntity entity, MobEquipment mobEquipment)
 	{
+		// NULL check
+		if (entity == null || mobEquipment == null)
+		{
+			return;
+		}
+		
 		EntityEquipment equipment = entity.getEquipment();
 		ItemStack[] items = mobEquipment.getEquipment();
 		float[] dropRates = mobEquipment.getDropRates();
