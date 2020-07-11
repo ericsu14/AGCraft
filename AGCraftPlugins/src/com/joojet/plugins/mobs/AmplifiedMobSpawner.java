@@ -71,7 +71,7 @@ public class AmplifiedMobSpawner implements Listener
 	private WanderingVillagerTypes wanderingTypes;
 	
 	// Type of server event that is happening right now
-	private ServerEvent serverEvent = ServerEvent.JULY_FORTH;
+	private ServerEvent serverEvent = ServerEvent.JULY_FOURTH;
 	
 	// Interpreter to search for used summoning scrolls
 	private SummoningScrollInterpreter summonInterpreter;
@@ -197,8 +197,8 @@ public class AmplifiedMobSpawner implements Listener
 		// Handles server wide event mob spawns
 		switch (this.serverEvent)
 		{
-			case JULY_FORTH:
-				this.handleJulyForthSpawns(type, reason, entity, roll);
+			case JULY_FOURTH:
+				this.handleJulyFourthSpawns(type, reason, entity, roll);
 				break;
 			default:
 				break;
@@ -259,7 +259,7 @@ public class AmplifiedMobSpawner implements Listener
 	}
 	
 	/** Handles 4th of july mob spawns */
-	public void handleJulyForthSpawns (EntityType type, SpawnReason reason, LivingEntity entity, double roll)
+	public void handleJulyFourthSpawns (EntityType type, SpawnReason reason, LivingEntity entity, double roll)
 	{
 		// Insta kill phantoms and let them explode
 		if (type.equals(EntityType.PHANTOM))

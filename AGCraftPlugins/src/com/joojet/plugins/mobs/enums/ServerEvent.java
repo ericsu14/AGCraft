@@ -4,5 +4,5 @@ package com.joojet.plugins.mobs.enums;
  *  themed mob spawns. */
 public enum ServerEvent 
 {
-	DEFAULT, JULY_FORTH;
+	DEFAULT, JULY_FOURTH;
 }

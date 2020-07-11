@@ -146,3 +146,115 @@ Added a death counter, which will be displayed below the player's name. This wil
     -  The player is on fire
     -  The player's health drops below 80%.
 - They will not work however when the player is within seven blocks of any hostile monster  (radius has been changed). This is to prevent you from accidentally wasting them.
+
+## Version 1.6.4.2 - June 24, 2020
+**Changes**
+- Added cactus to the `natural` category for the `/clearjunk` command.
+- Increased scanning radius of the "check nearby monsters" component of the `/warp` command to 10.
+- Added back the access level parameter in `/getlocations` to filter between private and public warps.
+- Added auto completion capabilities for the `/getlocations` command for the new access specifier parameter.
+
+
+## Version 1.6.4.3 - June 27, 2020
+**Changes**
+- Began preparation for the upcoming nether update.
+- Implemented a new console-only command, ``/removeoldnetherlocations``, which removes all current nether warp locations from the database. This command can only be ran by the administrator.
+
+## Version 1.6.5 - June 29, 2020
+
+**Changes**
+
+- Amplified the game difficulty by implementing a custom mob system.
+- Added the following monsters into the game:
+
+|Zombie|Skeleton|Spider|Snowman|Iron Golem|
+|--|--|--|--|--|
+| Uncommon Zombie | Uncommon Skeleton| Aggressive Spider|Frosty the Snowman|Advanced Golem 
+| Badass Zombie| Hurtful Skeleton| Enraged Spider| Scruffy | John Jae |
+| Ultimate Badass Zombie| Withering Skeleton|
+|  | Ultimate Badass Skeleton|
+- Each custom monster has their own tier, stats, and equipment. All monsters are designed to provide a much greater challenge in Minecraft's PVE combat.
+- Modified the spawning algorithm to have a 15% chance of replacing a naturally spawned mob with one of the aforementioned custom monsters.
+- Added custom mob types for golems and snowman to help the player defend their homes from these new threats.
+
+## Version 1.7.1 - 1.7.2 - July 2, 2020
+
+**Changes **
+Added two new husk mobs, which are:  
+
+-   Wandering Husk (Uncommon)
+-   Fallen Pharaoh (Epic)
+
+All wandering traders are now replaced by frolf. frolf is a custom wandering trader who trades emeralds and diamonds for very good loot, many of whom are unobtainable in the game.I figured it would be a good idea to have this since the custom mobs I have added has augmented the game's difficulty to extremes. Not only is this a way to have a greater use for your hard earned diamonds, this also gives you more power to deal with several of the OP mobs I have added. However, stock is limited and some things frolf offers are quite costly.Here are his trades:  
+
+> Golden Carrots (bundles of 16)
+
+-   3 Emeralds / bundle | Max Stock: 4
+
+> Sponges (bundles of 4)
+
+-   12 Emeralds / bundle | Max Stock: 2
+
+> Enchanted Golden Apple
+
+-   5 Diamonds / item | Max Stock: 3
+
+> Netherite Ingot
+
+-   12 Diamonds / Ingot | Max Stock: 1
+
+> Enhanced Potion of Strength
+
+-   Gives Strength II for 4 minutes
+-   4 Diamonds / Potion | Max Stock: 1
+
+> Enhanced Potion of Speed
+
+-   Gives Speed II for 4 minutes
+-   4 Diamonds / Potion | Max Stock: 1
+
+> Potion of Haste
+
+-   Gives Haste I for 8 minutes
+-   3 Diamonds / Potion | Max Stock: 1
+
+> Potion of Luck
+
+-   Gives Luck I for 8 minutes
+-   3 Diamonds / Potion | Max Stock: 1
+
+> Summoning Scroll for Frosty the Snowman
+
+-   Right click to summon Frosty the Snowman
+-   16 Emeralds / Scroll | Max Stock: 1
+
+> Summoning Scroll for Scruffy
+
+-   Right click to summon Scruffy
+-   32 Emeralds / Scroll | Max Stock: 1
+
+> Summoning Scroll for Advanced Golem
+
+-   Right click to summon the Advanced Golem
+-   12 Diamonds / Scroll | Max Stock: 1
+
+> Summoning Scroll for John Jae
+
+-   Right click to summon John Jae
+-   24 Diamonds / Scroll | Max Stock: 1
+
+
+- Added functionality for custom summoning scrolls, which can be used to summon elite allied monsters instantaneously in the game. Frolf is the only NPC that sells those scrolls.
+
+## Version 1.7.3 - July 3, 2020
+
+**Fourth of July Update**
+
+**Changelog (Will be in effect until 7/12/2020):**
+
+- Added the following custom monsters to the game:   
+   - Patriotic Zombie  
+   - Patriotic Skeleton  
+   - Patriotic Pillagers  
+They will be sporting classic Red, White, and Blue armor pieces and a unique Helmet; all which has similar strength compared to a full set of Netherite Armor, despite being all Leather.They also have a high chance of dropping one of nine custom firework rockets (in bundles of 16), which can be used to light up the night sky!They have a 20% chance of spawning and are a bit bulky, so be prepared.Patriotic Pillagers are added into the game and will shoot custom firework rockets at you. Their crossbows are enchanted with multishot for comedic effect.  
+- Phantoms will now explode into a firework upon spawning (and die instantly).  

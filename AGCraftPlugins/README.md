@@ -121,7 +121,10 @@ Using this command without a username will print out your own coordinates instea
 ``/getcoordinates`` prints your own coordinates to your chat.
 ## Get Locations
 <b> Usage: </b> \
-``/getlocations``
+``/getlocations <access level>``
+
+<b>Parameters:</b>
+- ``access level`` - An optional parameter that can be used to display either private or public warp locations to your chat.
 
 <b> Description </b> \
 Outputs all registered warp locations to your chat.
