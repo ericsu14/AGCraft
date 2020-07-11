@@ -17,7 +17,7 @@ public class MagicalFirework extends Firework
 	public ItemStack generateFirework (int amount, int power)
 	{
 		ItemStack fw = new ItemStack (Material.FIREWORK_ROCKET, amount);
-		this.addLoreToItemMeta(fw, "For the blue and gold!", ChatColor.GOLD);
+		this.addLoreToItemMeta(fw, "Light up the skies!", ChatColor.GOLD);
 		FireworkMeta firework = (FireworkMeta) fw.getItemMeta();
 		firework.addEffect(FireworkEffect.builder()
 				.withColor(Color.YELLOW)
