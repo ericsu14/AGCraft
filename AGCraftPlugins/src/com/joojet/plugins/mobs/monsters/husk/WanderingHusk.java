@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.monsters.husk;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.boots.DesertSandals;
@@ -10,6 +11,8 @@ public class WanderingHusk extends MobEquipment
 {
 	public WanderingHusk ()
 	{
+		this.addBiomes(Biome.THE_VOID);
+		
 		this.name = "Wandering Husk";
 		this.color = ChatColor.GREEN;
 		

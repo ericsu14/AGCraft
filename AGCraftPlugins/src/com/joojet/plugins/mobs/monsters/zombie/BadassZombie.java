@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.monsters.zombie;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.boots.LightweightIronBoots;
@@ -16,6 +17,8 @@ public class BadassZombie extends MobEquipment
 	{
 		this.name = "Badass Zombie";
 		this.color = ChatColor.LIGHT_PURPLE;
+		
+		this.addBiomes(Biome.THE_VOID);
 		
 		// Custom potion effects
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);

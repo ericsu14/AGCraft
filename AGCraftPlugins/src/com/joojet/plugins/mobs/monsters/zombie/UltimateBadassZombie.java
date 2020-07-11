@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.monsters.zombie;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.boots.LightweightNetheriteBoots;
@@ -17,6 +18,8 @@ public class UltimateBadassZombie extends MobEquipment
 		this.name = "Shadow Clone joojetsu";
 		this.color = ChatColor.GOLD;
 		this.showName = true;
+		
+		this.addBiomes(Biome.THE_VOID);
 		
 		// Custom potion effects
 		this.addPotionEffect(CustomPotionEffect.SPEED);

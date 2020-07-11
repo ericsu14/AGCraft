@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.monsters.skeleton;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
@@ -16,6 +17,8 @@ public class WitheringSkeleton extends MobEquipment
 		this.name = "Soul Eater";
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.health = 30;
+		
+		this.addBiomes(Biome.THE_VOID);
 		
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		

@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.monsters.zombie;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.equipment.boots.LightweightChainmailBoots;
 import com.joojet.plugins.mobs.equipment.chest.ReinforcedChainmailChestplate;
@@ -16,6 +17,8 @@ public class UncommonZombie extends MobEquipment
 		this.name = "Bulky Zombie";
 		this.color = ChatColor.GREEN;
 		this.health = 16;
+		
+		this.addBiomes(Biome.THE_VOID);
 		
 		// Weapon
 		this.weapon = new EnhancedStoneSword (this.color);

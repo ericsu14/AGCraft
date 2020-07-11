@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.interfaces;
 import java.util.ArrayList;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
@@ -40,6 +41,8 @@ public abstract class MobEquipment
 	protected float dropRates[];
 	/** Number of words that can fit in a single line for an item's lore */
 	protected int wordsPerLine;
+	/** Biomes this monster can spawn in. Putting the constant, THE_VOID allows the mob to be spawned in all biomes. */
+	protected ArrayList <Biome> biomes;
 	
 	public MobEquipment ()
 	{
@@ -55,6 +58,7 @@ public abstract class MobEquipment
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.01f, 0.05f);
 		// Words per line defaults to 6
 		this.wordsPerLine = 5;
+		this.biomes = new ArrayList <Biome> ();
 	}
 	
 	/** Sets up drop rates for this entity.
@@ -155,6 +159,21 @@ public abstract class MobEquipment
 	public boolean showName ()
 	{
 		return this.showName;
+	}
+	
+	/** Adds biomes to the list of biomes the monster can spawn in */
+	public void addBiomes (Biome... biomes)
+	{
+		for (Biome biome : biomes)
+		{
+			this.biomes.add(biome);
+		}
+	}
+	
+	/** Returns the biomes this monster can spawn in as an arraylist */
+	public ArrayList <Biome> getSpawnBiomes ()
+	{
+		return this.biomes;
 	}
 	
 	/** Adds a custom potion effect to the monster */

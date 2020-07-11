@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.monsters.skeleton;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.boots.PatrioticBlueBoots;
@@ -19,6 +20,8 @@ public class PatrioticSkeleton extends MobEquipment
 		this.name = this.americanizeText("Patriotic Skeleton");
 		this.color = ChatColor.WHITE;
 		this.health = 4.0;
+		
+		this.addBiomes(Biome.THE_VOID);
 		
 		this.addPotionEffect(CustomPotionEffect.STRENGTH);
 		this.addPotionEffect(CustomPotionEffect.SPEED);

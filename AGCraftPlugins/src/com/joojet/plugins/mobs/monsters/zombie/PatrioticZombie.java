@@ -1,6 +1,8 @@
 package com.joojet.plugins.mobs.monsters.zombie;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
+
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.boots.PatrioticBlueBoots;
 import com.joojet.plugins.mobs.equipment.chest.PatrioticRedJacket;
@@ -18,6 +20,8 @@ public class PatrioticZombie extends MobEquipment
 		this.name = this.americanizeText("Patriotic Zombie");
 		this.color = ChatColor.WHITE;
 		this.health = 4.0;
+		
+		this.addBiomes(Biome.THE_VOID);
 		
 		this.addPotionEffect(CustomPotionEffect.STRENGTH);
 		this.addPotionEffect(CustomPotionEffect.SPEED);

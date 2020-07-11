@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.monsters.skeleton;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.boots.LightweightNetheriteBoots;
@@ -18,6 +19,8 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.name = "#agspotted";
 		this.color = ChatColor.GOLD;
 		this.showName = true;
+		
+		this.addBiomes(Biome.THE_VOID);
 		
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		

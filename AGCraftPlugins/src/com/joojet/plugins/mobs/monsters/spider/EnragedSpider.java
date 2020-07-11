@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.monsters.spider;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
@@ -14,6 +15,8 @@ public class EnragedSpider extends MobEquipment
 		this.name = "One Enraged Firey Boi";
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.onFire = true;
+		
+		this.addBiomes(Biome.THE_VOID);
 		
 		// Custom potion effects
 		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());

@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.monsters.pillager;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
@@ -11,6 +12,8 @@ public class PatrioticPillager extends MobEquipment
 	private FireworkTypes fwTypes;
 	public PatrioticPillager ()
 	{
+		this.addBiomes(Biome.THE_VOID);
+		
 		fwTypes = new FireworkTypes();
 		this.name = this.americanizeText("Patriotic Pillager");
 		this.health = 16;
