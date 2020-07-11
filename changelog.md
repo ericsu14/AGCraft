@@ -185,7 +185,7 @@ Added two new husk mobs, which are:
 -   Wandering Husk (Uncommon)
 -   Fallen Pharaoh (Epic)
 
-All wandering traders are now replaced by frolf. frolf is a custom wandering trader who trades emeralds and diamonds for very good loot, many of whom are unobtainable in the game.I figured it would be a good idea to have this since the custom mobs I have added has augmented the game's difficulty to extremes. Not only is this a way to have a greater use for your hard earned diamonds, this also gives you more power to deal with several of the OP mobs I have added. However, stock is limited and some things frolf offers are quite costly.Here are his trades:  
+All wandering traders are now replaced by frolf. frolf is a custom wandering trader who trades emeralds and diamonds for very good loot, many of whom are unobtainable in the game. I figured it would be a good idea to have this since the custom mobs I have added has augmented the game's difficulty to extremes. Not only is this a way to have a greater use for your hard earned diamonds, this also gives you more power to deal with several of the OP mobs I have added. However, stock is limited and some things frolf offers are quite costly.Here are his trades:  
 
 > Golden Carrots (bundles of 16)
 
@@ -256,5 +256,5 @@ All wandering traders are now replaced by frolf. frolf is a custom wandering tra
    - Patriotic Zombie  
    - Patriotic Skeleton  
    - Patriotic Pillagers  
-They will be sporting classic Red, White, and Blue armor pieces and a unique Helmet; all which has similar strength compared to a full set of Netherite Armor, despite being all Leather.They also have a high chance of dropping one of nine custom firework rockets (in bundles of 16), which can be used to light up the night sky!They have a 20% chance of spawning and are a bit bulky, so be prepared.Patriotic Pillagers are added into the game and will shoot custom firework rockets at you. Their crossbows are enchanted with multishot for comedic effect.  
+They will be sporting classic Red, White, and Blue armor pieces and a unique Helmet; all which has similar strength compared to a full set of Netherite Armor, despite being all Leather. They also have a high chance of dropping one of nine custom firework rockets (in bundles of 16), which can be used to light up the night sky! They have a 20% chance of spawning and are a bit bulky, so be prepared. Patriotic Pillagers are added into the game and will shoot custom firework rockets at you. Their crossbows are enchanted with multishot for comedic effect.  
 - Phantoms will now explode into a firework upon spawning (and die instantly).  
