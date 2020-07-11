@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.allies.snowman;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.head.FrostyFace;
@@ -10,6 +11,7 @@ public class Frosty extends MobEquipment
 {
 	public Frosty ()
 	{
+		this.addBiomes(Biome.THE_VOID);
 		this.name = "Frosty the Snowman";
 		this.color = ChatColor.AQUA;
 		this.health = 30;

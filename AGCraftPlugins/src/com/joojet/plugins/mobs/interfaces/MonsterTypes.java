@@ -14,6 +14,7 @@ public abstract class MonsterTypes
 	
 	public void addEquipment (MobEquipment equipment, int weight)
 	{
+		equipment.setSpawnWeight(weight);
 		for (int i = 0; i < weight; ++i)
 		{
 			equipmentList.add(equipment);

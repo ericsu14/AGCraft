@@ -43,6 +43,8 @@ public abstract class MobEquipment
 	protected int wordsPerLine;
 	/** Biomes this monster can spawn in. Putting the constant, THE_VOID allows the mob to be spawned in all biomes. */
 	protected ArrayList <Biome> biomes;
+	/** The spawn weight for this monster. Higher weights equates to higher chances of the mob spawning */
+	protected int spawnWeight;
 	
 	public MobEquipment ()
 	{
@@ -59,6 +61,27 @@ public abstract class MobEquipment
 		// Words per line defaults to 6
 		this.wordsPerLine = 5;
 		this.biomes = new ArrayList <Biome> ();
+		// Spawn weight set to default
+		this.spawnWeight = 1;
+	}
+	
+	public MobEquipment (int spawnWeight)
+	{
+		this.name = "";
+		this.color = ChatColor.WHITE;
+		// -1 represents default health
+		this.health = -1.0;
+		this.onFire = false;
+		this.showName = false;
+		this.effects = new ArrayList <PotionEffect> ();
+		// Set up default drop rates
+		this.dropRates = new float[6];
+		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.01f, 0.05f);
+		// Words per line defaults to 6
+		this.wordsPerLine = 5;
+		this.biomes = new ArrayList <Biome> ();
+		// Spawn weight set to default
+		this.spawnWeight = spawnWeight;
 	}
 	
 	/** Sets up drop rates for this entity.
@@ -159,6 +182,18 @@ public abstract class MobEquipment
 	public boolean showName ()
 	{
 		return this.showName;
+	}
+	
+	/** Returns this monster's spawnweight */
+	public int getSpawnWeight ()
+	{
+		return this.spawnWeight;
+	}
+	
+	/** Sets this monster's spawn weight to a new value */
+	public void setSpawnWeight (int spawnWeight)
+	{
+		this.spawnWeight = spawnWeight;
 	}
 	
 	/** Adds biomes to the list of biomes the monster can spawn in */

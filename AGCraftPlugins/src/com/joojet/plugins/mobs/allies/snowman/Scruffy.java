@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.allies.snowman;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.boots.LetItGo;
@@ -11,6 +12,7 @@ public class Scruffy extends MobEquipment
 {
 	public Scruffy ()
 	{
+		this.addBiomes(Biome.THE_VOID);
 		this.name = "Scruffy";
 		this.color = ChatColor.GOLD;
 		this.health = 40;
