@@ -103,7 +103,7 @@ public class Frolf extends VillagerEquipment
 		 * 		- Max Stock: 2 */
 		ItemStack luckIIPotion = new ItemStack (Material.POTION, 1);
 		PotionMeta luckIIPotMeta = (PotionMeta) luckIIPotion.getItemMeta();
-		luckIIPotMeta.setColor (Color.fromRGB(235, 171, 52));
+		luckIIPotMeta.setColor (Color.fromRGB(130, 255, 211));
 		luckIIPotMeta.addCustomEffect(new PotionEffect (PotionEffectType.LUCK, 6000, 1), false);
 		luckIIPotMeta.setDisplayName(this.color + "Enhanced Potion of Luck");
 		luckIIPotion.setItemMeta(luckIIPotMeta);
