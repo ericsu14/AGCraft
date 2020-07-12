@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.interfaces;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 import org.bukkit.block.Biome;
@@ -32,18 +33,14 @@ public abstract class MonsterTypes
 		int maxWeight = 0;
 		for (MobEquipment mob : equipmentList)
 		{
-			// Iterate through each mob's spawn biomes
-			ArrayList <Biome> spawnBiomes = mob.getSpawnBiomes();
-			for (Biome b : spawnBiomes)
+			HashSet <Biome> spawnBiomes = mob.getSpawnBiomes();
+			/* Add this mob to the monster spawn list if their spawn biomes either contain THE_VOID
+			 * or the passed biome. */
+			if (spawnBiomes.contains(Biome.THE_VOID) || spawnBiomes.contains(biome))
 			{
-				/* Found biome, add to the list and break out of the loop */
-				if (b == Biome.THE_VOID || biome == b)
-				{
-					maxWeight = (minWeight + mob.getSpawnWeight()) - 1;
-					mobList.add(new WeightedMob (mob, minWeight, maxWeight));
-					minWeight = maxWeight + 1;
-					break;
-				}
+				maxWeight = (minWeight + mob.getSpawnWeight()) - 1;
+				mobList.add(new WeightedMob (mob, minWeight, maxWeight));
+				minWeight = maxWeight + 1;
 			}
 		}
 		

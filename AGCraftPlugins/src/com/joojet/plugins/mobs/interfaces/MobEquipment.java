@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.interfaces;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
@@ -42,7 +43,7 @@ public abstract class MobEquipment
 	/** Number of words that can fit in a single line for an item's lore */
 	protected int wordsPerLine;
 	/** Biomes this monster can spawn in. Putting the constant, THE_VOID allows the mob to be spawned in all biomes. */
-	protected ArrayList <Biome> biomes;
+	protected HashSet <Biome> biomes;
 	/** The spawn weight for this monster. Higher weights equates to higher chances of the mob spawning */
 	protected int spawnWeight;
 	
@@ -60,7 +61,7 @@ public abstract class MobEquipment
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.01f, 0.05f);
 		// Words per line defaults to 6
 		this.wordsPerLine = 5;
-		this.biomes = new ArrayList <Biome> ();
+		this.biomes = new HashSet <Biome> ();
 		// Spawn weight set to default
 		this.spawnWeight = 1;
 	}
@@ -187,7 +188,7 @@ public abstract class MobEquipment
 	}
 	
 	/** Returns the biomes this monster can spawn in as an arraylist */
-	public ArrayList <Biome> getSpawnBiomes ()
+	public HashSet <Biome> getSpawnBiomes ()
 	{
 		return this.biomes;
 	}
