@@ -9,5 +9,6 @@ public class SkeletonTypes extends MonsterTypes {
 		this.addEquipment(new WitheringSkeleton(), 2);
 		this.addEquipment(new HurtfulSkeleton(), 3);
 		this.addEquipment(new UltimateBadassSkeleton(), 1);
+		this.addEquipment(new SkullKid (), 2);
 	}
 }
