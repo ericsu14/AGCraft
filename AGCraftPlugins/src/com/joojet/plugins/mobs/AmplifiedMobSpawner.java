@@ -209,7 +209,7 @@ public class AmplifiedMobSpawner implements Listener
 		// If the entity is a wandering trader, transform him
 		if (type.equals(EntityType.WANDERING_TRADER))
 		{
-			this.transformWanderingTrader(entity);
+			this.transformWanderingTrader(entity, biome);
 			return;
 		}
 		
@@ -323,10 +323,10 @@ public class AmplifiedMobSpawner implements Listener
 	}
 	
 	/** Transforms a wandering trader into Frolf */
-	public void transformWanderingTrader (LivingEntity entity)
+	public void transformWanderingTrader (LivingEntity entity, Biome biome)
 	{
 		WanderingTrader trader = (WanderingTrader) entity;
-		VillagerEquipment equipment = (VillagerEquipment) wanderingTypes.getRandomEquipment();
+		VillagerEquipment equipment = (VillagerEquipment) wanderingTypes.getRandomEquipment(biome);
 		trader.setRecipes(equipment.getRecipes());
 		this.equipEntity(trader, (MobEquipment) equipment);
 	}

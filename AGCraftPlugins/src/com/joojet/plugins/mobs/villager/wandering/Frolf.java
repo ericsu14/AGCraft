@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.villager.wandering;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
@@ -19,6 +20,7 @@ public class Frolf extends VillagerEquipment
 		this.name = "frolf";
 		this.color = ChatColor.GOLD;
 		this.showName = true;
+		this.addBiomes(Biome.THE_VOID);
 		
 		/** Trade 1: Golden Carrots (bundles of 16)
 		 * 		- Price: 3 Emeralds

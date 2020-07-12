@@ -19,18 +19,7 @@ public abstract class MonsterTypes
 	public void addEquipment (MobEquipment equipment, int weight)
 	{
 		equipment.setSpawnWeight(weight);
-		for (int i = 0; i < weight; ++i)
-		{
-			equipmentList.add(equipment);
-		}
-	}
-	
-	/** Returns any random mob contained within this equipment list */
-	public MobEquipment getRandomEquipment ()
-	{
-		int n = equipmentList.size();
-		Random rand = new Random ();
-		return equipmentList.get(rand.nextInt(n));
+		equipmentList.add(equipment);
 	}
 	
 	/** Returns a random mob that spawns within a specific biome
