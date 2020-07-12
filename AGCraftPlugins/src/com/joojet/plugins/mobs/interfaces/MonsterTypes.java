@@ -27,13 +27,14 @@ public abstract class MonsterTypes
 	 * 		@param biome - The biome the monster spawns in */
 	public MobEquipment getRandomEquipment (Biome biome)
 	{
-		ArrayList <WeightedMob> mobList = new ArrayList <WeightedMob> ();
-		
 		int minWeight = 0;
 		int maxWeight = 0;
+		HashSet <Biome> spawnBiomes;
+		ArrayList <WeightedMob> mobList = new ArrayList <WeightedMob> ();
+		
 		for (MobEquipment mob : equipmentList)
 		{
-			HashSet <Biome> spawnBiomes = mob.getSpawnBiomes();
+			spawnBiomes = mob.getSpawnBiomes();
 			/* Add this mob to the monster spawn list if their spawn biomes either contain THE_VOID
 			 * or the passed biome. */
 			if (spawnBiomes.contains(Biome.THE_VOID) || spawnBiomes.contains(biome))
