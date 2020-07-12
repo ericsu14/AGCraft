@@ -5,7 +5,6 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.FireworkEffect.Type;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
@@ -41,7 +40,6 @@ public class DragonsBreath extends Firework
 				.with(Type.BURST)
 				.build());
 		firework.setDisplayName(ChatColor.GOLD + "Dragon's Breath");
-		firework.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
 		firework.setPower(power);
 		fw.setItemMeta(firework);
 		return fw;

@@ -186,7 +186,7 @@ public abstract class Equipment extends ItemStack
 		return result.toString();
 	}
 	
-	/** Adds a new lore string into the passed ItemMeta. The String will be split into multiple tokens depending on how many
+	/** Adds a new lore string into the equipment. The String will be split into multiple tokens depending on how many
 	 *  words can fit in a single line.
 	 * 		@param meta - ItemMeta we are adding the lore info into */
 	public void addLoreToItemMeta (String lore)

@@ -5,7 +5,6 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.FireworkEffect.Type;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
@@ -37,7 +36,6 @@ public class FreedomStar extends Firework
 				.with(Type.STAR)
 				.build());
 		firework.setDisplayName(ChatColor.WHITE + "The" + ChatColor.RED + " Stars" + ChatColor.WHITE + " and" + ChatColor.BLUE + " Stripes");
-		firework.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
 		firework.setPower(power);
 		fw.setItemMeta(firework);
 		return fw;

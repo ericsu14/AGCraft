@@ -5,7 +5,6 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
@@ -38,7 +37,6 @@ public class FreedomRocket extends Firework
 				.with(Type.BALL_LARGE)
 				.build());
 		firework.setDisplayName(ChatColor.WHITE + "The" + ChatColor.RED + " Red" + ChatColor.WHITE + " White and " + ChatColor.BLUE + "Blue");
-		firework.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
 		firework.setPower(power);
 		fw.setItemMeta(firework);
 		
