@@ -16,6 +16,8 @@ public class SkullKidHelmet extends Equipment
 		super (PlayerHead.MAJORAS_MASK, color);
 		
 		this.addDefenseAttributes(3.0, 4.0, 0.25);
+		this.addAttackAttributes(0.0, 0.15);
+		this.addHealthAttributes(4.0);
 		
 		Map <Enchantment, Integer> enchants = new HashMap <Enchantment, Integer> ();
 		enchants.put(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
@@ -23,7 +25,7 @@ public class SkullKidHelmet extends Equipment
 		enchants.put(Enchantment.BINDING_CURSE, 1);
 		this.addUnsafeEnchantments(enchants);
 		
-		this.setDisplayName("?????");
+		this.setDisplayName("Majora's Mask");
 		this.addLoreToItemMeta("You’ve met with a terrible fate, haven’t you?");
  	}
 }

@@ -12,10 +12,11 @@ public class ATerribleFate extends Equipment
 	public ATerribleFate (ChatColor color)
 	{
 		super (Material.BOW, EquipmentSlot.HAND, color);
-		this.setDisplayName("?????");
+		this.setDisplayName("A Terrible Fate");
 		
 		this.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 7);
 		this.addUnsafeEnchantment(Enchantment.KNOCKBACK, 3);
+		this.addUnsafeEnchantment(Enchantment.ARROW_FIRE, 1);
 		
 		this.addLoreToItemMeta("You’ve met with a terrible fate, haven’t you?");
 	}
