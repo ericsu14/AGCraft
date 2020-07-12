@@ -9,8 +9,9 @@ public class ZombieTypes extends MonsterTypes
 	{
 		super();
 		this.addEquipment(new UncommonZombie(), 90);
-		this.addEquipment(new BadassZombie(), 8);
-		this.addEquipment(new UltimateBadassZombie(), 2);
+		this.addEquipment(new BadassZombie(), 7);
+		this.addEquipment(new UltimateBadassZombie(), 3);
+		this.addEquipment(new Shrek(), 30);
 	}
 
 }
