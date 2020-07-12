@@ -18,6 +18,8 @@ public class EnragedSpider extends MobEquipment
 		
 		this.addBiomes(Biome.THE_VOID);
 		
+		this.setDropRates(0.0f, 0.0f, 0.0f, 0.0f, 0.05f, 0.0f);
+		
 		// Custom potion effects
 		this.effects.add(CustomPotionEffect.SPEED.getPotionEffect());
 		this.effects.add(CustomPotionEffect.FIRE_RESISTANCE.getPotionEffect());

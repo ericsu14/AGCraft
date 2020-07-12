@@ -13,6 +13,6 @@ public class ShrekHat extends Equipment
 		super (PlayerHead.SHREK, color);
 		this.setDisplayName("Shrek");
 		this.addDefenseAttributes(2.0, 2.0, 0.10);
-		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
 	}
 }

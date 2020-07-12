@@ -16,7 +16,8 @@ public class SpiritualTravesty extends Equipment
 		
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);
 		this.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 1);
-		this.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
+		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
+		this.addUnsafeEnchantment(Enchantment.KNOCKBACK, 2);
 		
 		// Weapon name and lore
 		this.setDisplayName("A Spiritual Travesty");

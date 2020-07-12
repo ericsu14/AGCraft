@@ -3,7 +3,6 @@ package com.joojet.plugins.mobs.monsters.zombie;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
-import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.boots.OgreBoots;
 import com.joojet.plugins.mobs.equipment.chest.OgreTunic;
 import com.joojet.plugins.mobs.equipment.head.ShrekHat;
@@ -19,7 +18,6 @@ public class Shrek extends MobEquipment
 		this.name = "Shrek";
 		this.health = 30;
 		this.addBiomes(Biome.SWAMP, Biome.SWAMP_HILLS);
-		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
 		this.helmet = new ShrekHat (this.color);
 		this.chestplate = new OgreTunic (this.color);
