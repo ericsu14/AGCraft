@@ -11,7 +11,7 @@ public class LightweightIronBoots extends Equipment
 {
 	public LightweightIronBoots (ChatColor color)
 	{
-		super (Material.IRON_LEGGINGS, EquipmentSlot.LEGS, color);
+		super (Material.IRON_BOOTS, EquipmentSlot.FEET, color);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 4);
 		this.addLoreToItemMeta("Lightweight iron allows for improved mobility.");
