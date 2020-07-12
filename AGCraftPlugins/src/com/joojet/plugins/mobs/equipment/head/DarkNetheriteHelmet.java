@@ -13,7 +13,5 @@ public class DarkNetheriteHelmet extends Equipment
 	{
 		super (Material.NETHERITE_HELMET, EquipmentSlot.HEAD, color);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
-		this.addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1);
-		this.setDisplayName("Dark Netherite Helmet");
 	}
 }

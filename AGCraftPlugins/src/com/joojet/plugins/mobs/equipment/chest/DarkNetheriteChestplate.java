@@ -14,6 +14,5 @@ public class DarkNetheriteChestplate extends Equipment
 		super (Material.NETHERITE_CHESTPLATE, EquipmentSlot.CHEST, color);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
 		this.addUnsafeEnchantment(Enchantment.THORNS, 2);
-		this.setDisplayName("Dark Netherite Chestplate");
 	}
 }

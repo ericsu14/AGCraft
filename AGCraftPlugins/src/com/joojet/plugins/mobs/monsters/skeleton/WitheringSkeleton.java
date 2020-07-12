@@ -22,6 +22,8 @@ public class WitheringSkeleton extends MobEquipment
 		
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
+		this.setDropRates(0.00f, 0.00f, 0.00f, 0.00f, 0.075f, 0.075f);
+		
 		// Weapon
 		this.weapon = new AngelOfDeath (this.color);
 		// Offhand
