@@ -13,7 +13,6 @@ public class DarkNetheriteLeggings extends Equipment
 	{
 		super (Material.NETHERITE_LEGGINGS, EquipmentSlot.LEGS, color);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
-		this.addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1);
 		this.setDisplayName("Dark Netherite Leggings");
 	}
 }
