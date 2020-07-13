@@ -15,6 +15,7 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Husk;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WanderingTrader;
 import org.bukkit.entity.Zombie;
@@ -426,11 +427,26 @@ public class AmplifiedMobSpawner implements Listener
 			Location loc = entity.getLocation();
 			entity.getWorld().strikeLightningEffect(loc);
 			// Also alerts the player of the monster's presence
-			ArrayList <Player> nearbyPlayers = ScanEnemies.ScanNearbyPlayers(entity, 150);
+			ArrayList <Player> nearbyPlayers = ScanEnemies.ScanNearbyPlayers(entity, mobEquipment.getHuntOnSpawnRaduis());
 			
 			for (Player p : nearbyPlayers)
 			{
 				p.sendMessage(ChatColor.GOLD + "You feel a great disturbance in the force...");
+			}
+		}
+		
+		// Automatically sets the mob's target to a random nearby player if huntOnSpawn is set to true
+		if (mobEquipment.huntOnSpawn())
+		{
+			if (entity instanceof Monster)
+			{
+				ArrayList <Player> nearbyPlayers = ScanEnemies.ScanNearbyPlayers(entity, mobEquipment.getHuntOnSpawnRaduis());
+				Monster mob = (Monster) entity;
+				int n = nearbyPlayers.size();
+				Player p = nearbyPlayers.get(rand.nextInt(n));
+				mob.setTarget(p);
+				p.sendMessage(ChatColor.DARK_RED + "You are being hunted...");
+				
 			}
 		}
 	}

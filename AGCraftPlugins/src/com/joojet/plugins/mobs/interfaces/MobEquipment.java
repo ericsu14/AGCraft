@@ -48,6 +48,10 @@ public abstract class MobEquipment
 	protected HashSet <Biome> biomes;
 	/** The spawn weight for this monster. Higher weights equates to higher chances of the mob spawning */
 	protected int spawnWeight;
+	/** Determines if the monster should automatically hunt a random nearby player upon spawning */
+	protected boolean huntOnSpawn;
+	/** Max radius in which the enemy will hunt their pray of huntOnSpawn is true */
+	protected int huntRadius;
 	
 	public MobEquipment ()
 	{
@@ -67,6 +71,8 @@ public abstract class MobEquipment
 		this.biomes = new HashSet <Biome> ();
 		// Spawn weight set to default
 		this.spawnWeight = 1;
+		this.huntOnSpawn = false;
+		this.huntRadius = 25;
 	}
 	
 	/** Sets up drop rates for this entity.
@@ -172,6 +178,18 @@ public abstract class MobEquipment
 	public boolean spawnLightning ()
 	{
 		return this.spawnLightning;
+	}
+	
+	/** True if the mob is set to hunt upon spawning */
+	public boolean huntOnSpawn()
+	{
+		return this.huntOnSpawn;
+	}
+	
+	/** Returns the monster's hunt on spawn radius */
+	public int getHuntOnSpawnRaduis ()
+	{
+		return this.huntRadius;
 	}
 	
 	/** Returns this monster's spawnweight */
