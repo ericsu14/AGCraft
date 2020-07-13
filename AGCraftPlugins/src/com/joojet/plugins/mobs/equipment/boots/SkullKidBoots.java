@@ -18,6 +18,7 @@ public class SkullKidBoots extends LeatherEquipment
 		this.addLoreToItemMeta("You’ve met with a terrible fate, haven’t you?");
 		this.addDefenseAttributes(3.0, 4.0, 0.10);
 		this.addSpeedAttribute(0.25);
-		this.addUnsafeEnchantment(Enchantment.FROST_WALKER, 1);
+		this.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, 3);
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 4);
 	}
 }

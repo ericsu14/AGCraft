@@ -21,6 +21,7 @@ public class SkullKidHelmet extends Equipment
 		
 		Map <Enchantment, Integer> enchants = new HashMap <Enchantment, Integer> ();
 		enchants.put(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+		enchants.put(Enchantment.PROTECTION_PROJECTILE, 4);
 		enchants.put(Enchantment.THORNS, 4);
 		enchants.put(Enchantment.BINDING_CURSE, 1);
 		this.addUnsafeEnchantments(enchants);
