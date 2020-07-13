@@ -12,8 +12,8 @@ public class OgreAxe extends Equipment
 	public OgreAxe (ChatColor color)
 	{
 		super (Material.WOODEN_AXE, EquipmentSlot.HAND, color);
-		this.setDisplayName("Shrek's Trusty Axe");
-		this.addLoreToItemMeta("Get off my swamp");
+		this.setDisplayName("Its All Ogre Now");
+		this.addLoreToItemMeta("Shrek is love, shrek is life.");
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 2);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);

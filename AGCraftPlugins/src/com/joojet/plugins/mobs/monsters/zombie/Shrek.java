@@ -16,7 +16,6 @@ public class Shrek extends MobEquipment
 	{
 		this.color = ChatColor.DARK_GREEN;
 		this.name = "Shrek";
-		this.health = 30;
 		this.addBiomes(Biome.SWAMP, Biome.SWAMP_HILLS);
 		
 		this.helmet = new ShrekHat (this.color);
