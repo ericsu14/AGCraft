@@ -34,6 +34,8 @@ public abstract class MobEquipment
 	protected boolean onFire;
 	/** If set to true, the entity will have its nametag visible to everyone */
 	protected boolean showName;
+	/** If true, a lightning bolt is summoned upon spawning the monster */
+	protected boolean spawnLightning;
 	/** A list of potion effects applied on the entity upon spawning */
 	protected ArrayList <PotionEffect> effects;
 	/** URL base for custom player head skins */
@@ -55,6 +57,7 @@ public abstract class MobEquipment
 		this.health = -1.0;
 		this.onFire = false;
 		this.showName = false;
+		this.spawnLightning = false;
 		this.effects = new ArrayList <PotionEffect> ();
 		// Set up default drop rates
 		this.dropRates = new float[6];
@@ -164,6 +167,11 @@ public abstract class MobEquipment
 	public boolean showName ()
 	{
 		return this.showName;
+	}
+	
+	public boolean spawnLightning ()
+	{
+		return this.spawnLightning;
 	}
 	
 	/** Returns this monster's spawnweight */

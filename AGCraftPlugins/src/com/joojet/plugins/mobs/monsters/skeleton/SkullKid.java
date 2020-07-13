@@ -26,9 +26,10 @@ public class SkullKid extends MobEquipment
 				Biome.MOUNTAIN_EDGE,
 				Biome.MODIFIED_GRAVELLY_MOUNTAINS);
 		
-		this.health = 40;
+		this.health = 45;
 		this.color = ChatColor.DARK_RED;
 		this.showName = true;
+		this.spawnLightning = true;
 		
 		this.setDropRates(0.25f, 0.10f, 0.10f, 0.10f, 0.05f, 0.10f);
 		

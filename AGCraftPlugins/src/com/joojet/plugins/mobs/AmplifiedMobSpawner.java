@@ -1,5 +1,6 @@
 package com.joojet.plugins.mobs;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
@@ -49,6 +50,7 @@ import com.joojet.plugins.mobs.monsters.spider.SpiderTypes;
 import com.joojet.plugins.mobs.monsters.zombie.PatrioticZombie;
 import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
 import com.joojet.plugins.mobs.villager.wandering.WanderingVillagerTypes;
+import com.joojet.plugins.warp.scantools.ScanEnemies;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -416,6 +418,20 @@ public class AmplifiedMobSpawner implements Listener
 		if (mobEquipment.onFire())
 		{
 			entity.setFireTicks(9999999);
+		}
+		
+		// Spawns a lightning bolt on the mob's current location if enabled. This should scare the **** out of unsuspecting players
+		if (mobEquipment.spawnLightning())
+		{
+			Location loc = entity.getLocation();
+			entity.getWorld().strikeLightningEffect(loc);
+			// Also alerts the player of the monster's presence
+			ArrayList <Player> nearbyPlayers = ScanEnemies.ScanNearbyPlayers(entity, 150);
+			
+			for (Player p : nearbyPlayers)
+			{
+				p.sendMessage(ChatColor.GOLD + "You feel a great disturbance in the force...");
+			}
 		}
 	}
 }
