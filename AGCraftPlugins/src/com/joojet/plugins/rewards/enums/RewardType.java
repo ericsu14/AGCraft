@@ -60,7 +60,7 @@ public enum RewardType
 				this.reward = new CaptainAmericaShield (ChatColor.GOLD);
 				break;
 			case PAINT_THE_SKIES:
-				this.reward = new PaintTheSky().generateFirework(64, 3);
+				this.reward = new PaintTheSky().generateFirework(64, 2);
 				break;
 			case FIREWORK_LAUNCHER:
 				this.reward = new FireworkLauncher(ChatColor.GOLD);
