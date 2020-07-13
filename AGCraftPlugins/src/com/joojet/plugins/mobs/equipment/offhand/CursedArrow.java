@@ -16,7 +16,6 @@ public class CursedArrow extends TippedArrow
 		this.addCustomEffect(PotionEffectType.BLINDNESS, 70, 0);
 		this.addCustomEffect(PotionEffectType.POISON, 140, 3);
 		this.addCustomEffect(PotionEffectType.CONFUSION, 150, 1);
-		this.addCustomEffect(PotionEffectType.INCREASE_DAMAGE, 1, 0);
 		this.setColor(Color.fromRGB(173, 61, 24));
 	}
 }
