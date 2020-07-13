@@ -21,7 +21,10 @@ public class SkullKid extends MobEquipment
 				Biome.SHATTERED_SAVANNA_PLATEAU,
 				Biome.SHATTERED_SAVANNA,
 				Biome.GRAVELLY_MOUNTAINS,
-				Biome.SNOWY_TAIGA_MOUNTAINS);
+				Biome.SNOWY_TAIGA_MOUNTAINS,
+				Biome.MOUNTAINS,
+				Biome.MOUNTAIN_EDGE,
+				Biome.MODIFIED_GRAVELLY_MOUNTAINS);
 		
 		this.health = 40;
 		this.color = ChatColor.DARK_RED;
