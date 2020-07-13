@@ -8,7 +8,7 @@ import java.util.Date;
 public enum EventType 
 {
 	/** A list of minigame events that has happened in this server */
-	UHC_I ("UHC I", "07-09-2020"),
+	UHC_I ("UHC I", "07-18-2020"),
 	GIFT ("Gift", "now", "A small gift from the administrator!");
 	
 	/** Full name of the event */

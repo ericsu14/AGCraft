@@ -74,7 +74,7 @@ public class AmplifiedMobSpawner implements Listener
 	private WanderingVillagerTypes wanderingTypes;
 	
 	// Type of server event that is happening right now
-	private ServerEvent serverEvent = ServerEvent.JULY_FOURTH;
+	private ServerEvent serverEvent = ServerEvent.DEFAULT;
 	
 	// Interpreter to search for used summoning scrolls
 	private SummoningScrollInterpreter summonInterpreter;
