@@ -427,7 +427,7 @@ public class AmplifiedMobSpawner implements Listener
 			Location loc = entity.getLocation();
 			entity.getWorld().strikeLightningEffect(loc);
 			// Also alerts the player of the monster's presence
-			ArrayList <Player> nearbyPlayers = ScanEnemies.ScanNearbyPlayers(entity, mobEquipment.getHuntOnSpawnRaduis());
+			ArrayList <Player> nearbyPlayers = ScanEnemies.ScanNearbyPlayers(entity, mobEquipment.getHuntOnSpawnRaduis() * 2);
 			
 			for (Player p : nearbyPlayers)
 			{
@@ -443,10 +443,12 @@ public class AmplifiedMobSpawner implements Listener
 				ArrayList <Player> nearbyPlayers = ScanEnemies.ScanNearbyPlayers(entity, mobEquipment.getHuntOnSpawnRaduis());
 				Monster mob = (Monster) entity;
 				int n = nearbyPlayers.size();
-				Player p = nearbyPlayers.get(rand.nextInt(n));
-				mob.setTarget(p);
-				p.sendMessage(ChatColor.DARK_RED + "You are being hunted...");
-				
+				if (!nearbyPlayers.isEmpty())
+				{
+					Player p = nearbyPlayers.get(rand.nextInt(n));
+					mob.setTarget(p);
+					p.sendMessage(ChatColor.DARK_RED + "You are being hunted...");
+				}
 			}
 		}
 	}
