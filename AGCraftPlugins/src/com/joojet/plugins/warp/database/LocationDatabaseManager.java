@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.bukkit.Location;
 import org.bukkit.World.Environment;
@@ -175,10 +174,14 @@ public class LocationDatabaseManager
 			// If so, prioritize the one classified under private.
 			if (entries.size() > 1)
 			{
-				entries = (ArrayList<LocationEntry>) Arrays.asList ((LocationEntry []) entries.stream().filter(e -> {
-					return e.getAccessLevel().equals(WarpAccessLevel.PRIVATE);
-				}).toArray());
-				entry = entries.get(0);
+				for (LocationEntry e : entries)
+				{
+					if (e.getAccessLevel() == WarpAccessLevel.PRIVATE)
+					{
+						entry = e;
+						break;
+					}
+				}
 			}
 		}
 		
