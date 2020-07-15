@@ -31,7 +31,7 @@ public class SkullKid extends MobEquipment
 		this.showName = true;
 		this.spawnLightning = true;
 		this.huntOnSpawn = true;
-		this.huntRadius = 125;
+		this.huntRadius = 50;
 		
 		this.setDropRates(0.25f, 0.10f, 0.10f, 0.10f, 0.05f, 0.10f);
 		
