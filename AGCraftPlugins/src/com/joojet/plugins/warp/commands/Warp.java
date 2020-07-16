@@ -122,7 +122,7 @@ public class Warp implements CommandExecutor
 					catch (RuntimeException e)
 					{
 						e.printStackTrace();
-						p.sendMessage(ChatColor.RED + "An internal error happened while retrieving your location.");
+						p.sendMessage(ChatColor.RED + e.getMessage());
 						return false;
 					}
 					break;
