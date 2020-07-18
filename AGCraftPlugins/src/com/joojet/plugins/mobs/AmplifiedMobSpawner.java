@@ -427,7 +427,7 @@ public class AmplifiedMobSpawner implements Listener
 			Location loc = entity.getLocation();
 			entity.getWorld().strikeLightningEffect(loc);
 			// Also alerts the player of the monster's presence
-			ArrayList <Player> nearbyPlayers = ScanEnemies.ScanNearbyPlayers(entity, mobEquipment.getHuntOnSpawnRaduis() * 2);
+			ArrayList <Player> nearbyPlayers = ScanEnemies.ScanNearbyPlayers(entity, (int) (mobEquipment.getHuntOnSpawnRaduis() * 1.25));
 			
 			for (Player p : nearbyPlayers)
 			{

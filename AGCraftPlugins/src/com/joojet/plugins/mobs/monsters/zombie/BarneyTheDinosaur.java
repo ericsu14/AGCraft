@@ -19,11 +19,12 @@ public class BarneyTheDinosaur extends MobEquipment
 	{
 		this.huntOnSpawn = true;
 		this.spawnLightning = true;
+		this.huntRadius = 50;
 		this.addBiomes(Biome.FLOWER_FOREST, Biome.DARK_FOREST, Biome.DARK_FOREST_HILLS,
 				Biome.SWAMP, Biome.SWAMP_HILLS, Biome.JUNGLE, Biome.JUNGLE_HILLS, Biome.JUNGLE_EDGE,
 				Biome.GRAVELLY_MOUNTAINS, Biome.BADLANDS);
 		this.name = "Barney the Dinosaur";
-		this.color = ChatColor.LIGHT_PURPLE;
+		this.color = ChatColor.DARK_PURPLE;
 		this.setDropRates(0.01f, 0.01f, 0.01f, 0.01f, 0.01f, 1.00f);
 		this.helmet = new BarneyHead (this.color);
 		this.chestplate = new BarneyChest (this.color);

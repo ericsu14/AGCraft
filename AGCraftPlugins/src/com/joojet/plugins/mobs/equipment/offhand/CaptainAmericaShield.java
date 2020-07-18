@@ -48,7 +48,7 @@ public class CaptainAmericaShield extends Equipment
 		this.addAttackAttributes(4.0, 0.0);
 		this.addDefenseAttributes(0.0, 4.0, 0.15);
 		this.addHealthAttributes(14.0);
-		this.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
+		this.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
 		this.addLoreToItemMeta("Crafted from Adamantium, this shield makes you feel like a complete superhero!");
 	}
