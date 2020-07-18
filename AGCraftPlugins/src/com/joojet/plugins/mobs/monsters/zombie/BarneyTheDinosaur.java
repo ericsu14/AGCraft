@@ -10,6 +10,7 @@ import com.joojet.plugins.mobs.equipment.boots.BarneyFeet;
 import com.joojet.plugins.mobs.equipment.chest.BarneyChest;
 import com.joojet.plugins.mobs.equipment.head.BarneyHead;
 import com.joojet.plugins.mobs.equipment.leggings.BarneyLegs;
+import com.joojet.plugins.mobs.equipment.offhand.BarneyTotem;
 import com.joojet.plugins.mobs.equipment.weapons.BarneyDagger;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 
@@ -32,7 +33,7 @@ public class BarneyTheDinosaur extends MobEquipment
 		this.leggings = new BarneyLegs (this.color);
 		this.boots = new BarneyFeet (this.color);
 		this.weapon = new BarneyDagger (this.color);
-		this.offhand = new ItemStack (Material.TOTEM_OF_UNDYING, 1);
+		this.offhand = new BarneyTotem (this.color);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
 	}
