@@ -121,7 +121,6 @@ public class Warp implements CommandExecutor
 					}
 					catch (RuntimeException e)
 					{
-						e.printStackTrace();
 						p.sendMessage(ChatColor.RED + e.getMessage());
 						return false;
 					}

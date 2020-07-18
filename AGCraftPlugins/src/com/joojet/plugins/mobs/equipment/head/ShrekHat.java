@@ -12,7 +12,7 @@ public class ShrekHat extends Equipment
 	{
 		super (PlayerHead.SHREK, color);
 		this.setDisplayName("Shrek's Face");
-		this.addLoreToItemMeta("This is my swamp. There are many like it, but this one is mine.");
+		this.addLoreToItemMeta("Somebody once told me the world is gonna roll me. I ain't the sharpest tool in the shed.");
 		this.addDefenseAttributes(2.0, 2.0, 0.10);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
 	}

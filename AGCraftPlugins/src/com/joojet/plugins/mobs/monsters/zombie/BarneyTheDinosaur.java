@@ -1,0 +1,36 @@
+package com.joojet.plugins.mobs.monsters.zombie;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.block.Biome;
+import org.bukkit.inventory.ItemStack;
+
+import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.equipment.boots.BarneyFeet;
+import com.joojet.plugins.mobs.equipment.chest.BarneyChest;
+import com.joojet.plugins.mobs.equipment.head.BarneyHead;
+import com.joojet.plugins.mobs.equipment.leggings.BarneyLegs;
+import com.joojet.plugins.mobs.equipment.weapons.BarneyDagger;
+import com.joojet.plugins.mobs.interfaces.MobEquipment;
+
+public class BarneyTheDinosaur extends MobEquipment
+{
+	public BarneyTheDinosaur ()
+	{
+		this.huntOnSpawn = true;
+		this.spawnLightning = true;
+		this.addBiomes(Biome.FLOWER_FOREST, Biome.DARK_FOREST, Biome.DARK_FOREST_HILLS,
+				Biome.SWAMP, Biome.SWAMP_HILLS, Biome.JUNGLE, Biome.JUNGLE_HILLS, Biome.JUNGLE_EDGE);
+		this.name = "Barney the Dinosaur";
+		this.color = ChatColor.LIGHT_PURPLE;
+		this.setDropRates(0.01f, 0.01f, 0.01f, 0.01f, 0.01f, 1.00f);
+		this.helmet = new BarneyHead (this.color);
+		this.chestplate = new BarneyChest (this.color);
+		this.leggings = new BarneyLegs (this.color);
+		this.boots = new BarneyFeet (this.color);
+		this.weapon = new BarneyDagger (this.color);
+		this.offhand = new ItemStack (Material.TOTEM_OF_UNDYING, 1);
+		this.addPotionEffect(CustomPotionEffect.SPEED);
+		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
+	}
+}
