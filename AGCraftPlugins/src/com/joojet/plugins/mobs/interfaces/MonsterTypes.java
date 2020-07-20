@@ -10,17 +10,23 @@ public abstract class MonsterTypes
 {
 	private ArrayList <MobEquipment> equipmentList;
 	private Random random;
+	private int size;
 	
 	public MonsterTypes ()
 	{
 		this.equipmentList = new ArrayList <MobEquipment> ();
 		this.random = new Random ();
+		this.size = 0;
 	}
 	
+	/** Adds in a new monster into the moblist.
+	 * 		@param equipment - Monster's equipment class
+	 * 		@param weight - Weight used to amplify the monster's spawn chances (higher = more frequently)s */
 	public void addEquipment (MobEquipment equipment, int weight)
 	{
 		equipment.setSpawnWeight(weight);
 		equipmentList.add(equipment);
+		++this.size;
 	}
 	
 	/** Returns a random mob that spawns within a specific biome
@@ -53,6 +59,12 @@ public abstract class MonsterTypes
 			return this.searchMobList(roll, mobList);
 		}
 		return null;
+	}
+	
+	/** Returns the total number of custom monsters appended to this list */
+	public int getSize ()
+	{
+		return this.size;
 	}
 	
 	/** Conducts binary search upon the weighted mob list searching for the monster whose weight range

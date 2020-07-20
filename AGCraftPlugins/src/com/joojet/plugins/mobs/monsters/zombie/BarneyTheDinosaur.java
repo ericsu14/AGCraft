@@ -20,6 +20,7 @@ public class BarneyTheDinosaur extends MobEquipment
 		this.spawnLightning = true;
 		this.showName = true;
 		this.huntRadius = 50;
+		this.health = 8;
 		this.addBiomes(Biome.FLOWER_FOREST, Biome.DARK_FOREST, Biome.DARK_FOREST_HILLS,
 				Biome.SWAMP, Biome.SWAMP_HILLS, Biome.JUNGLE, Biome.JUNGLE_HILLS, Biome.JUNGLE_EDGE,
 				Biome.GRAVELLY_MOUNTAINS, Biome.SUNFLOWER_PLAINS);
