@@ -15,7 +15,7 @@ public class LightweightIronBoots extends Equipment
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 4);
 		this.addLoreToItemMeta("Lightweight iron allows for improved mobility.");
-		this.setDisplayName("Lightweight Chainmail Boots");
+		this.setDisplayName("Lightweight Iron Boots");
 		this.addSpeedAttribute(0.15);
 		this.addDefenseAttributes(2.0, 1.0, 0.0);
 	}

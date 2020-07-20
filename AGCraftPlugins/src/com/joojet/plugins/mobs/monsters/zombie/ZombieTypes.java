@@ -12,7 +12,7 @@ public class ZombieTypes extends MonsterTypes
 		this.addEquipment(new BadassZombie(), 12);
 		this.addEquipment(new UltimateBadassZombie(), 3);
 		this.addEquipment(new Shrek(), 30);
-		this.addEquipment(new BarneyTheDinosaur (), 1);
+		this.addEquipment(new BarneyTheDinosaur (), 2);
 	}
 
 }
