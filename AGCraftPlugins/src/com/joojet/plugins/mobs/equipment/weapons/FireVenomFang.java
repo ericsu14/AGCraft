@@ -13,7 +13,7 @@ public class FireVenomFang extends Equipment
 	{
 		super (Material.STONE_SWORD, EquipmentSlot.HAND, color);
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
-		this.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 3);
+		this.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 1);
 		this.addUnsafeEnchantment(Enchantment.KNOCKBACK, 2);
 		
 		this.setDisplayName("Fire Venom Fang");

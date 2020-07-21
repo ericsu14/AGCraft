@@ -13,8 +13,9 @@ public class BarneyFeet extends LeatherEquipment
 	public BarneyFeet (ChatColor color)
 	{
 		super (Material.LEATHER_BOOTS, EquipmentSlot.FEET, color);
-		this.addSpeedAttribute(0.40);
+		this.addSpeedAttribute(0.20);
 		this.addDefenseAttributes(4.0, 1.0, 0.05);
+		this.addAttackAttributes(1.0, 0.0);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 4);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 4);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 4);

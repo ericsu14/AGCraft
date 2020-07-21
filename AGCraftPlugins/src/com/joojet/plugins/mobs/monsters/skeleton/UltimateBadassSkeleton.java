@@ -19,6 +19,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.name = "#agspotted";
 		this.color = ChatColor.GOLD;
 		this.showName = true;
+		this.health = 16;
 		
 		this.addBiomes(Biome.THE_VOID);
 		

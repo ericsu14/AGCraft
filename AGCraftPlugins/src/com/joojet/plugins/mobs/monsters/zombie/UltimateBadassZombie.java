@@ -18,6 +18,7 @@ public class UltimateBadassZombie extends MobEquipment
 		this.name = "Shadow Clone joojetsu";
 		this.color = ChatColor.GOLD;
 		this.showName = true;
+		this.health = 14;
 		
 		this.addBiomes(Biome.THE_VOID);
 		

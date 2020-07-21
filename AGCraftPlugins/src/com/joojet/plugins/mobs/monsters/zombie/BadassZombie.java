@@ -17,6 +17,7 @@ public class BadassZombie extends MobEquipment
 	{
 		this.name = "Badass Zombie";
 		this.color = ChatColor.LIGHT_PURPLE;
+		this.health = 16;
 		
 		this.addBiomes(Biome.THE_VOID);
 		

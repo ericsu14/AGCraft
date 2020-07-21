@@ -11,7 +11,8 @@ public class BarneyTotem extends Equipment
 	public BarneyTotem (ChatColor color)
 	{
 		super (Material.TOTEM_OF_UNDYING, EquipmentSlot.OFF_HAND, color);
-		this.addAttackAttributes(5.0, 0.0);
+		this.addAttackAttributes(7.0, 0.0);
+		this.addSpeedAttribute(0.15);
 		this.setDisplayName("Barney's Pal");
 		this.addLoreToItemMeta("Barney weeps in joy for your tortured soul.");
 	}

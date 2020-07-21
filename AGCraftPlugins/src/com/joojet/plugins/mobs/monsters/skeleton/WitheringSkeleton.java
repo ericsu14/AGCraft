@@ -16,6 +16,7 @@ public class WitheringSkeleton extends MobEquipment
 	{
 		this.name = "Soul Eater";
 		this.color = ChatColor.LIGHT_PURPLE;
+		this.health = 16;
 		
 		this.addBiomes(Biome.THE_VOID);
 		

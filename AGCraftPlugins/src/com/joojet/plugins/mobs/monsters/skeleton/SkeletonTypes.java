@@ -7,8 +7,8 @@ public class SkeletonTypes extends MonsterTypes {
 	{
 		this.addEquipment(new UncommonSkeleton(), 75);
 		this.addEquipment(new WitheringSkeleton(), 6);
-		this.addEquipment(new HurtfulSkeleton(), 16);
-		this.addEquipment(new UltimateBadassSkeleton(), 3);
-		this.addEquipment(new SkullKid (), 3);
+		this.addEquipment(new HurtfulSkeleton(), 17);
+		this.addEquipment(new UltimateBadassSkeleton(), 2);
+		this.addEquipment(new SkullKid (), 2);
 	}
 }
