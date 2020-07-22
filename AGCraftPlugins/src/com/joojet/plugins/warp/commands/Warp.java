@@ -129,16 +129,43 @@ public class Warp implements CommandExecutor
 					break;
 			}
 
-			// Teleports all player-owned entities
 			ArrayList <Entity> ownedEntities = ScanEntities.ScanNearbyPlayerOwnedEntities(p, 40);
-			for (Entity entity : ownedEntities)
-			{
-				entity.teleport(loc);
-			}
 			
 			// Teleports the player
 			p.teleport(loc);
 			p.playSound(loc, Sound.ENTITY_ENDERMAN_TELEPORT, 0.4f, 1f);
+			
+			// Teleports any player-owned entities to the player's current location as well
+			StringBuilder teleportedEntities = new StringBuilder ();
+			int index = 0;
+			for (Entity entity : ownedEntities)
+			{
+				entity.teleport(p.getLocation());
+				
+				// Appends an "and" to the last element of the string if there is more than one owned entity to teleport
+				if (index == ownedEntities.size() - 1 && ownedEntities.size() > 1)
+				{
+					teleportedEntities = new StringBuilder (teleportedEntities.substring(0, teleportedEntities.length() - 2));
+					teleportedEntities.append(ChatColor.GOLD);
+					teleportedEntities.append(" and ");
+				}
+				
+				teleportedEntities.append(ChatColor.AQUA);
+				teleportedEntities.append(entity.getName());
+				
+				// Appends a comma on the end of the string if there is more than one entity to teleport
+				if (index < ownedEntities.size() - 1)
+				{
+					teleportedEntities.append(", ");
+				}
+				
+				++index;
+			}
+			// Notifies the player that their owned entities are teleported with them.
+			if (!ownedEntities.isEmpty())
+			{
+				p.sendMessage(ChatColor.GOLD + "Teleported " + teleportedEntities.toString() + ChatColor.GOLD + " to your location. Please rejoin the server if they are invisible.");
+			}
 			p.sendMessage(ChatColor.GOLD + "Teleported you to location " + ChatColor.AQUA + locName + ChatColor.GOLD + " at " + GetCoordinates.getCoordinates(p));
 			return true;
 		}
