@@ -18,6 +18,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WanderingTrader;
+import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -128,6 +129,15 @@ public class AmplifiedMobSpawner implements Listener
 			p.sendMessage("The enemy has " + e.getHealth() + "");
 		}
 		
+		if (event.getDamager() instanceof Wolf)
+		{
+			ArrayList <Player> players = ScanEnemies.ScanNearbyPlayers((LivingEntity) event.getDamager(), 50);
+			for (Player p : players)
+			{
+				p.sendMessage("The wolf dealt " + event.getDamage() + " damage");
+			}
+		}
+		
 		else if (event.getEntity() instanceof Player)
 		{
 			Player p = (Player) event.getEntity();
@@ -157,11 +167,22 @@ public class AmplifiedMobSpawner implements Listener
 		
 					// Spawns the entity into the world in front of the player
 					LivingEntity entity = (LivingEntity) p.getWorld().spawnEntity(spawnLocation, scroll.getMobType());
+					
 					// If the spawned entity is a golem, make him player built
 					if (entity instanceof IronGolem)
 					{
 						IronGolem golem = (IronGolem) entity;
 						golem.setPlayerCreated(true);
+					}
+					
+					// If the spawned entity is a wolf, autotame him
+					if (entity instanceof Wolf)
+					{
+						Wolf wolf = (Wolf) entity;
+						wolf.setAdult();
+						wolf.setTamed(true);
+						wolf.setOwner(p);
+						wolf.setCollarColor(scroll.getMob().getDyeColor());
 					}
 					
 					this.equipEntity(entity, scroll.getMob());
@@ -404,6 +425,12 @@ public class AmplifiedMobSpawner implements Listener
 			Damageable dmg = (Damageable) entity;
 			entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(mobEquipment.getHealth());
 			dmg.setHealth(mobEquipment.getHealth());
+		}
+		
+		// Custom attack damage
+		if (mobEquipment.getBaseAttackDamage() > 0)
+		{
+			entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(mobEquipment.getBaseAttackDamage());
 		}
 		
 		// Potion effects

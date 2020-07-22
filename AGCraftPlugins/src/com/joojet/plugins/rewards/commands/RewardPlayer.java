@@ -82,7 +82,7 @@ public class RewardPlayer implements CommandExecutor
 				for (UUID p : players)
 				{
 					RewardDatabaseManager.grantReward(p, rewardType, eventType);
-					System.out.println ("Sucessfully rewarded player with uuid " + p.toString());
+					System.out.println ("Sucessfully rewarded player with uuid " + p.toString() + " | " + rewardType.toString());
 				}
 			}
 			catch (SQLException e)

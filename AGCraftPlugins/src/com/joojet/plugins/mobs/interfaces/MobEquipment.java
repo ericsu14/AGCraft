@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
+import org.bukkit.DyeColor;
 import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.util.ConvertColors;
 
 public abstract class MobEquipment 
 {
@@ -52,6 +55,8 @@ public abstract class MobEquipment
 	protected boolean huntOnSpawn;
 	/** Max radius in which the enemy will hunt their pray of huntOnSpawn is true */
 	protected int huntRadius;
+	/** Base attack damage of this mob */
+	protected double attackDamage;
 	
 	public MobEquipment ()
 	{
@@ -73,6 +78,8 @@ public abstract class MobEquipment
 		this.spawnWeight = 1;
 		this.huntOnSpawn = false;
 		this.huntRadius = 25;
+		// Use default (unmodified) attack damage if set to -1.0
+		this.attackDamage = -1.0;
 	}
 	
 	/** Sets up drop rates for this entity.
@@ -180,6 +187,11 @@ public abstract class MobEquipment
 		return this.spawnLightning;
 	}
 	
+	public double getBaseAttackDamage ()
+	{
+		return this.attackDamage;
+	}
+	
 	/** True if the mob is set to hunt upon spawning */
 	public boolean huntOnSpawn()
 	{
@@ -256,5 +268,17 @@ public abstract class MobEquipment
 				
 		}
 		return result.toString();
+	}
+	
+	/** Returns the monster's chat color as a color enum type */
+	public Color getColor ()
+	{
+		return ConvertColors.convertChatColorToColor(this.color);
+	}
+	
+	/** Returns the monster's chat color as a dye color enum type */
+	public DyeColor getDyeColor ()
+	{
+		return ConvertColors.convertDyeColorToColor(this.color);
 	}
 }

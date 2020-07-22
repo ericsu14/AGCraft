@@ -8,6 +8,7 @@ import com.joojet.plugins.mobs.equipment.offhand.CaptainAmericaShield;
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.fireworks.PaintTheSky;
 import com.joojet.plugins.mobs.scrolls.SummonAdvancedGolem;
+import com.joojet.plugins.mobs.scrolls.SummonCookie;
 import com.joojet.plugins.mobs.scrolls.SummonFrolf;
 import com.joojet.plugins.mobs.scrolls.SummonJohnJae;
 
@@ -22,14 +23,10 @@ public enum RewardType
 	ENCHANTED_GOLDEN_APPLE,
 	CAPTAIN_AMERICA,
 	PAINT_THE_SKIES,
-	FIREWORK_LAUNCHER;
+	FIREWORK_LAUNCHER,
+	COOKIE;
 	
 	private ItemStack reward;
-	
-	private RewardType ()
-	{
-
-	}
 	
 	public ItemStack getReward ()
 	{
@@ -64,6 +61,9 @@ public enum RewardType
 				break;
 			case FIREWORK_LAUNCHER:
 				this.reward = new FireworkLauncher(ChatColor.GOLD);
+				break;
+			case COOKIE:
+				this.reward = new SummonCookie();
 				break;
 			default:
 				break;
