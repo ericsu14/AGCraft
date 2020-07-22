@@ -36,6 +36,7 @@ import org.bukkit.potion.PotionEffect;
 
 import com.joojet.plugins.mobs.allies.golem.GolemTypes;
 import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
+import com.joojet.plugins.mobs.allies.wolf.WolfTypes;
 import com.joojet.plugins.mobs.enums.ServerEvent;
 import com.joojet.plugins.mobs.enums.SummonTypes;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
@@ -73,6 +74,7 @@ public class AmplifiedMobSpawner implements Listener
 	private GolemTypes golemTypes;
 	private SnowmanTypes snowmanTypes;
 	private HuskTypes huskTypes;
+	private WolfTypes wolfTypes;
 	private WanderingVillagerTypes wanderingTypes;
 	
 	// Type of server event that is happening right now
@@ -94,6 +96,7 @@ public class AmplifiedMobSpawner implements Listener
 		this.huskTypes = new HuskTypes();
 		this.wanderingTypes = new WanderingVillagerTypes();
 		this.summonInterpreter = new SummoningScrollInterpreter();
+		this.wolfTypes = new WolfTypes ();
 		this.fwTypes = new FireworkTypes();
 	}
 	
@@ -276,6 +279,13 @@ public class AmplifiedMobSpawner implements Listener
 				// Prevents baby elite husks from spawning
 				Husk husk = (Husk) entity;
 				husk.setBaby(false);
+				break;
+			case WOLF:
+				mobEquipment = wolfTypes.getRandomEquipment(biome);
+				// Prevents baby superwolves from spawning
+				Wolf wolf = (Wolf) entity;
+				wolf.setAdult();
+				wolf.setCollarColor(mobEquipment.getDyeColor());
 				break;
 			default:
 				return;
