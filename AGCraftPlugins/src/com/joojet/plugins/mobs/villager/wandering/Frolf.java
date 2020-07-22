@@ -1,20 +1,11 @@
 package com.joojet.plugins.mobs.villager.wandering;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
-import com.joojet.plugins.mobs.equipment.potions.EnhancedHastePotion;
-import com.joojet.plugins.mobs.equipment.potions.EnhancedLuckPotion;
-import com.joojet.plugins.mobs.equipment.potions.EnhancedSpeedPotion;
-import com.joojet.plugins.mobs.equipment.potions.EnhancedStrengthPotion;
-import com.joojet.plugins.mobs.equipment.potions.HastePotion;
-import com.joojet.plugins.mobs.equipment.potions.LuckPotion;
+import com.joojet.plugins.mobs.equipment.potions.*;
 import com.joojet.plugins.mobs.interfaces.SummoningScroll;
 import com.joojet.plugins.mobs.interfaces.VillagerEquipment;
 import com.joojet.plugins.mobs.scrolls.*;
