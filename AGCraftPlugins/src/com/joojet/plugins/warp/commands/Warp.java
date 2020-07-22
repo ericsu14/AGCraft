@@ -135,6 +135,7 @@ public class Warp implements CommandExecutor
 			{
 				entity.teleport(loc);
 			}
+			
 			// Teleports the player
 			p.teleport(loc);
 			p.playSound(loc, Sound.ENTITY_ENDERMAN_TELEPORT, 0.4f, 1f);

@@ -51,6 +51,8 @@ public class ScanEntities
 	{
 		int halfRadius = (int) (radius / 2.0);
 		ArrayList <Entity> entities = (ArrayList<Entity>) p.getNearbyEntities(radius, radius, halfRadius);
+		ArrayList <Entity> ownedEntities = new ArrayList <Entity> ();
+		
 		for (Entity ent : entities)
 		{
 			// Searches for any nearby player-tamed wolves that are not sitting
@@ -59,7 +61,7 @@ public class ScanEntities
 				Wolf wolf = (Wolf) ent;
 				if (wolf.isTamed() && !wolf.isSitting() && wolf.getOwner().equals(p))
 				{
-					entities.add(ent);
+					ownedEntities.add(ent);
 				}
 			}
 			
@@ -70,12 +72,12 @@ public class ScanEntities
 				{
 					if (rider.equals(p))
 					{
-						entities.add(ent);
+						ownedEntities.add(ent);
 					}
 				}
 			}
 		}
 		
-		return entities;
+		return ownedEntities;
 	}
 }
