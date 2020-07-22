@@ -1,19 +1,21 @@
 package com.joojet.plugins.warp.commands;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
 
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.warp.database.EWarpDatabaseManager;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
-import com.joojet.plugins.warp.scantools.ScanEnemies;
+import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public class Warp implements CommandExecutor
 {
@@ -44,7 +46,7 @@ public class Warp implements CommandExecutor
 			}
 			
 			// Check for player conditions
-			if (ScanEnemies.ScanNearbyEnemies(p, maxMobRadius))
+			if (ScanEntities.ScanNearbyEnemies(p, maxMobRadius))
 			{
 				p.sendMessage(ChatColor.RED + "You cannot warp now! There are enemies nearby.");
 				return false;
@@ -127,6 +129,13 @@ public class Warp implements CommandExecutor
 					break;
 			}
 
+			// Teleports all player-owned entities
+			ArrayList <Entity> ownedEntities = ScanEntities.ScanNearbyPlayerOwnedEntities(p, 40);
+			for (Entity entity : ownedEntities)
+			{
+				entity.teleport(loc);
+			}
+			// Teleports the player
 			p.teleport(loc);
 			p.playSound(loc, Sound.ENTITY_ENDERMAN_TELEPORT, 0.4f, 1f);
 			p.sendMessage(ChatColor.GOLD + "Teleported you to location " + ChatColor.AQUA + locName + ChatColor.GOLD + " at " + GetCoordinates.getCoordinates(p));

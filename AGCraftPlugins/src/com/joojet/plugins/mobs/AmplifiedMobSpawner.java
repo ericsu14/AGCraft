@@ -52,7 +52,7 @@ import com.joojet.plugins.mobs.monsters.spider.SpiderTypes;
 import com.joojet.plugins.mobs.monsters.zombie.PatrioticZombie;
 import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
 import com.joojet.plugins.mobs.villager.wandering.WanderingVillagerTypes;
-import com.joojet.plugins.warp.scantools.ScanEnemies;
+import com.joojet.plugins.warp.scantools.ScanEntities;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -131,7 +131,7 @@ public class AmplifiedMobSpawner implements Listener
 		
 		if (event.getDamager() instanceof Wolf)
 		{
-			ArrayList <Player> players = ScanEnemies.ScanNearbyPlayers((LivingEntity) event.getDamager(), 50);
+			ArrayList <Player> players = ScanEntities.ScanNearbyPlayers((LivingEntity) event.getDamager(), 50);
 			for (Player p : players)
 			{
 				p.sendMessage("The wolf dealt " + event.getDamage() + " damage");
@@ -454,7 +454,7 @@ public class AmplifiedMobSpawner implements Listener
 			Location loc = entity.getLocation();
 			entity.getWorld().strikeLightningEffect(loc);
 			// Also alerts the player of the monster's presence
-			ArrayList <Player> nearbyPlayers = ScanEnemies.ScanNearbyPlayers(entity, (int) (mobEquipment.getHuntOnSpawnRaduis() * 1.25));
+			ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(entity, (int) (mobEquipment.getHuntOnSpawnRaduis() * 1.25));
 			
 			for (Player p : nearbyPlayers)
 			{
@@ -467,7 +467,7 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			if (entity instanceof Monster)
 			{
-				ArrayList <Player> nearbyPlayers = ScanEnemies.ScanNearbyPlayers(entity, mobEquipment.getHuntOnSpawnRaduis());
+				ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(entity, mobEquipment.getHuntOnSpawnRaduis());
 				Monster mob = (Monster) entity;
 				int n = nearbyPlayers.size();
 				if (!nearbyPlayers.isEmpty())
