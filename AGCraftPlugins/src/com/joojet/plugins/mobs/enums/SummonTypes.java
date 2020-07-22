@@ -10,7 +10,8 @@ public enum SummonTypes
 	ADVANCED_GOLEM,
 	FROSTY,
 	FROLF,
-	COOKIE;
+	COOKIE,
+	SNOWBALL;
 	
 	public SummoningScroll getSummon ()
 	{
@@ -28,6 +29,10 @@ public enum SummonTypes
 				return new SummonFrolf ();
 			case COOKIE:
 				return new SummonCookie();
+			case SNOWBALL:
+				return new SummonSnowball ();
+			default:
+				break;
 		}
 		
 		return null;

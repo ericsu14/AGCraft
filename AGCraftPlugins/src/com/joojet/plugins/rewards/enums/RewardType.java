@@ -11,6 +11,7 @@ import com.joojet.plugins.mobs.scrolls.SummonAdvancedGolem;
 import com.joojet.plugins.mobs.scrolls.SummonCookie;
 import com.joojet.plugins.mobs.scrolls.SummonFrolf;
 import com.joojet.plugins.mobs.scrolls.SummonJohnJae;
+import com.joojet.plugins.mobs.scrolls.SummonSnowball;
 
 public enum RewardType 
 {
@@ -24,51 +25,41 @@ public enum RewardType
 	CAPTAIN_AMERICA,
 	PAINT_THE_SKIES,
 	FIREWORK_LAUNCHER,
-	COOKIE;
-	
-	private ItemStack reward;
+	COOKIE,
+	SNOWBALL;
 	
 	public ItemStack getReward ()
 	{
 		switch (this)
 		{
 			case TEST_STICK:
-				this.reward = new ItemStack (Material.STICK, 1);
-				break;
+				return new ItemStack (Material.STICK, 1);
 			case DIAMONDS:
-				this.reward = new ItemStack (Material.DIAMOND_BLOCK, 2);
-				break;
+				return new ItemStack (Material.DIAMOND_BLOCK, 2);
 			case FROLF:
-				this.reward = new SummonFrolf ();
-				break;
+				return new SummonFrolf ();
 			case GOLDEN_CARROTS:
-				this.reward = new ItemStack (Material.GOLDEN_CARROT, 64);
-				break;
+				return new ItemStack (Material.GOLDEN_CARROT, 64);
 			case ADVANCED_GOLEM:
-				this.reward = new SummonAdvancedGolem ();
-				break;
+				return new SummonAdvancedGolem ();
 			case JOHN_JAE:
-				this.reward = new SummonJohnJae ();
-				break;
+				return new SummonJohnJae ();
 			case ENCHANTED_GOLDEN_APPLE:
-				this.reward = new ItemStack (Material.ENCHANTED_GOLDEN_APPLE, 2);
-				break;
+				return new ItemStack (Material.ENCHANTED_GOLDEN_APPLE, 2);
 			case CAPTAIN_AMERICA:
-				this.reward = new CaptainAmericaShield (ChatColor.GOLD);
-				break;
+				return new CaptainAmericaShield (ChatColor.GOLD);
 			case PAINT_THE_SKIES:
-				this.reward = new PaintTheSky().generateFirework(64, 2);
-				break;
+				return new PaintTheSky().generateFirework(64, 2);
 			case FIREWORK_LAUNCHER:
-				this.reward = new FireworkLauncher(ChatColor.GOLD);
-				break;
+				return new FireworkLauncher(ChatColor.GOLD);
 			case COOKIE:
-				this.reward = new SummonCookie();
-				break;
+				return new SummonCookie ();
+			case SNOWBALL:
+				return new SummonSnowball ();
 			default:
 				break;
 		}
-		return this.reward;
+		return null;
 	}
 	
 	@Override

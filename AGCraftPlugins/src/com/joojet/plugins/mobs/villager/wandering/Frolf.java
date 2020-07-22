@@ -9,6 +9,12 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.joojet.plugins.mobs.equipment.potions.EnhancedHastePotion;
+import com.joojet.plugins.mobs.equipment.potions.EnhancedLuckPotion;
+import com.joojet.plugins.mobs.equipment.potions.EnhancedSpeedPotion;
+import com.joojet.plugins.mobs.equipment.potions.EnhancedStrengthPotion;
+import com.joojet.plugins.mobs.equipment.potions.HastePotion;
+import com.joojet.plugins.mobs.equipment.potions.LuckPotion;
 import com.joojet.plugins.mobs.interfaces.SummoningScroll;
 import com.joojet.plugins.mobs.interfaces.VillagerEquipment;
 import com.joojet.plugins.mobs.scrolls.*;
@@ -48,68 +54,38 @@ public class Frolf extends VillagerEquipment
 		/** Trade 5: Enhanced Potion of Strength
 		 * 		- Price: 4 Diamonds
 		 * 		- Max stock: 2 */
-		ItemStack enhancedStrengthPotion = new ItemStack (Material.POTION, 1);
-		PotionMeta strPotMeta = (PotionMeta) enhancedStrengthPotion.getItemMeta();
-		strPotMeta.setColor(Color.MAROON);
-		strPotMeta.addCustomEffect(new PotionEffect (PotionEffectType.INCREASE_DAMAGE, 4800, 1), false);
-		strPotMeta.setDisplayName(this.color + "Enhanced Potion of Strength");
-		enhancedStrengthPotion.setItemMeta(strPotMeta);
+		EnhancedStrengthPotion enhancedStrengthPotion = new EnhancedStrengthPotion (this.color);
 		this.addRecipe(enhancedStrengthPotion, Material.DIAMOND, 4, 2);
 		
 		/** Trade 6: Enhanced Potion of Speed 
 		 * 		- Price: 4 Diamonds
 		 * 		- Max stock: 2 */
-		ItemStack enhancedSpeedPotion = new ItemStack (Material.POTION, 1);
-		PotionMeta speedPotMeta = (PotionMeta) enhancedSpeedPotion.getItemMeta();
-		speedPotMeta.setColor(Color.fromRGB(137, 207, 240));
-		speedPotMeta.addCustomEffect(new PotionEffect (PotionEffectType.SPEED, 4800, 1), false);
-		speedPotMeta.setDisplayName(this.color + "Enhanced Potion of Speed");
-		enhancedSpeedPotion.setItemMeta(speedPotMeta);
+		EnhancedSpeedPotion enhancedSpeedPotion = new EnhancedSpeedPotion (this.color);
 		this.addRecipe(enhancedSpeedPotion, Material.DIAMOND, 4, 2);
 		
 		/** Trade 7: Potion of Haste
 		 * 		- Price: 3 Diamonds
 		 * 		- Max stock: 3 */
-		ItemStack hastePotion = new ItemStack (Material.POTION, 1);
-		PotionMeta hastePotMeta = (PotionMeta) hastePotion.getItemMeta();
-		hastePotMeta.setColor (Color.YELLOW);
-		hastePotMeta.addCustomEffect(new PotionEffect (PotionEffectType.FAST_DIGGING, 9600, 0), false);
-		hastePotMeta.setDisplayName(this.color + "Potion of Haste");
-		hastePotion.setItemMeta(hastePotMeta);
+		HastePotion hastePotion = new HastePotion (this.color);
 		this.addRecipe(hastePotion, Material.DIAMOND, 3, 3);
 		
 		/** Trade 8: Potion of Luck
 		 * 		- Price: 3 Diamonds
 		 * 		- Max Stock: 3 */
-		ItemStack luckPotion = new ItemStack (Material.POTION, 1);
-		PotionMeta luckPotMeta = (PotionMeta) luckPotion.getItemMeta();
-		luckPotMeta.setColor(Color.LIME);
-		luckPotMeta.addCustomEffect(new PotionEffect (PotionEffectType.LUCK, 9600, 0), false);
-		luckPotMeta.setDisplayName(this.color + "Potion of Luck");
-		luckPotion.setItemMeta(luckPotMeta);
+		LuckPotion luckPotion = new LuckPotion (this.color);
 		this.addRecipe(luckPotion, Material.DIAMOND, 3, 3);
 		
 		/** Trade 9: Enhanced Potion of Haste
 		 *  	- Price: 5 Diamonds
 		 *  	- Max Stock: 2 */
-		ItemStack hasteIIPotion = new ItemStack (Material.POTION, 1);
-		PotionMeta hasteIIPotMeta = (PotionMeta) hasteIIPotion.getItemMeta();
-		hasteIIPotMeta.setColor (Color.fromRGB(235, 171, 52));
-		hasteIIPotMeta.addCustomEffect(new PotionEffect (PotionEffectType.FAST_DIGGING, 6000, 1), false);
-		hasteIIPotMeta.setDisplayName(this.color + "Enhanced Potion of Haste");
-		hasteIIPotion.setItemMeta(hasteIIPotMeta);
-		this.addRecipe(hasteIIPotion, Material.DIAMOND, 5, 2);
+		EnhancedHastePotion enhancedHastePotion = new EnhancedHastePotion (this.color);
+		this.addRecipe(enhancedHastePotion, Material.DIAMOND, 5, 2);
 		
 		/** Trade 10: Enhanced Potion of Luck
 		 * 		- Price: 5 Diamonds
 		 * 		- Max Stock: 2 */
-		ItemStack luckIIPotion = new ItemStack (Material.POTION, 1);
-		PotionMeta luckIIPotMeta = (PotionMeta) luckIIPotion.getItemMeta();
-		luckIIPotMeta.setColor (Color.fromRGB(130, 255, 211));
-		luckIIPotMeta.addCustomEffect(new PotionEffect (PotionEffectType.LUCK, 6000, 1), false);
-		luckIIPotMeta.setDisplayName(this.color + "Enhanced Potion of Luck");
-		luckIIPotion.setItemMeta(luckIIPotMeta);
-		this.addRecipe(luckIIPotion, Material.DIAMOND, 5, 2);
+		EnhancedLuckPotion enhancedLuckPotion = new EnhancedLuckPotion (this.color);
+		this.addRecipe(enhancedLuckPotion, Material.DIAMOND, 5, 2);
 		
 		/** Trade 11: Summon Frosty
 		 * 		- Price: 16 Emeralds
@@ -135,7 +111,7 @@ public class Frolf extends VillagerEquipment
 		SummoningScroll johnJaeScroll = new SummonJohnJae ();
 		this.addRecipe(johnJaeScroll, Material.DIAMOND, 24, 1);
 		
-		/** Trade 15: Summon Cookie
+		/** Trade 16: Summon Cookie
 		 * 		- Price: 64 Emeralds
 		 * 		- Max Stock: 1 */
 		SummoningScroll cookieScroll = new SummonCookie ();
