@@ -18,7 +18,7 @@ public class DoomChest extends LeatherEquipment
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 7);
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
-		this.setDisplayName("Doom Guy's Chestplate");
+		this.setDisplayName("Chestplate of the Doom Slayer");
 		this.addLoreToItemMeta("For he alone was the Hell Walker, the Unchained Predator, who sought retribution...");
 		this.setColor(Color.fromRGB(134, 143, 50));
 	}

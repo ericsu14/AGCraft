@@ -64,7 +64,7 @@ public class AmplifiedMobSpawner implements Listener
 	private final double chance = 0.15;
 	
 	// Show debug info if set to true
-	private final boolean debug = false;
+	private final boolean debug = true;
 	
 	private Random rand = new Random ();
 	
