@@ -40,7 +40,7 @@ public abstract class Equipment extends ItemStack
 		this.equipmentSlot = equipmentSlot;
 		this.chatColor = chatColor;
 		this.playerHead = null;
-		this.wordsPerLine = 5;
+		this.wordsPerLine = 4;
 	}
 	
 	/** Constructs a basic playerhead item */

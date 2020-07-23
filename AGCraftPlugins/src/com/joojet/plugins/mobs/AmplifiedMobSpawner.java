@@ -12,7 +12,6 @@ import org.bukkit.block.Biome;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
-import org.bukkit.entity.Husk;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
@@ -53,6 +52,7 @@ import com.joojet.plugins.mobs.monsters.spider.SpiderTypes;
 import com.joojet.plugins.mobs.monsters.wither_skeleton.WitherSkeletonTypes;
 import com.joojet.plugins.mobs.monsters.zombie.PatrioticZombie;
 import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
+import com.joojet.plugins.mobs.monsters.zombie_pigmen.ZombiePigmenTypes;
 import com.joojet.plugins.mobs.villager.wandering.WanderingVillagerTypes;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
@@ -78,6 +78,7 @@ public class AmplifiedMobSpawner implements Listener
 	private WolfTypes wolfTypes;
 	private WanderingVillagerTypes wanderingTypes;
 	private WitherSkeletonTypes witherSkeletonTypes;
+	private ZombiePigmenTypes zombiePigmenTypes;
 	
 	// Type of server event that is happening right now
 	private ServerEvent serverEvent = ServerEvent.DEFAULT;
@@ -101,6 +102,7 @@ public class AmplifiedMobSpawner implements Listener
 		this.wolfTypes = new WolfTypes ();
 		this.fwTypes = new FireworkTypes();
 		this.witherSkeletonTypes = new WitherSkeletonTypes();
+		this.zombiePigmenTypes = new ZombiePigmenTypes();
 	}
 	
 	public void onEnable ()
@@ -261,9 +263,6 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			case ZOMBIE:
 				mobEquipment = zombieTypes.getRandomEquipment(biome);
-				// Prevents zombies from being babies
-				Zombie zomble = (Zombie) entity;
-				zomble.setBaby(false);
 				break;
 			case SKELETON:
 				mobEquipment = skeletonTypes.getRandomEquipment(biome);
@@ -279,9 +278,6 @@ public class AmplifiedMobSpawner implements Listener
 				break;
 			case HUSK:
 				mobEquipment = huskTypes.getRandomEquipment(biome);
-				// Prevents baby elite husks from spawning
-				Husk husk = (Husk) entity;
-				husk.setBaby(false);
 				break;
 			case WOLF:
 				mobEquipment = wolfTypes.getRandomEquipment(biome);
@@ -292,6 +288,9 @@ public class AmplifiedMobSpawner implements Listener
 				break;
 			case WITHER_SKELETON:
 				mobEquipment = this.witherSkeletonTypes.getRandomEquipment(biome);
+				break;
+			case ZOMBIFIED_PIGLIN:
+				mobEquipment = this.zombiePigmenTypes.getRandomEquipment(biome);
 				break;
 			default:
 				return;
@@ -318,15 +317,9 @@ public class AmplifiedMobSpawner implements Listener
 			{
 				case ZOMBIE:
 					mobEquipment = new PatrioticZombie();
-					// Prevents zombies from being babies
-					Zombie zomble = (Zombie) entity;
-					zomble.setBaby(false);
 					break;
 				case HUSK:
 					mobEquipment = new PatrioticZombie();
-					// Prevents baby elite husks from spawning
-					Husk husk = (Husk) entity;
-					husk.setBaby(false);
 					break;
 				case SKELETON:
 					mobEquipment = new PatrioticSkeleton();
@@ -380,6 +373,13 @@ public class AmplifiedMobSpawner implements Listener
 		if (entity == null || mobEquipment == null)
 		{
 			return;
+		}
+		
+		// Prevents baby entities from spawning
+		if (entity instanceof Zombie)
+		{
+			Zombie zombie = (Zombie) entity;
+			zombie.setBaby(false);
 		}
 		
 		EntityEquipment equipment = entity.getEquipment();

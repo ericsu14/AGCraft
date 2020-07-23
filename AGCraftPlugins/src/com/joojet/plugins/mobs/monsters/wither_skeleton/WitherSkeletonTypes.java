@@ -6,7 +6,7 @@ public class WitherSkeletonTypes extends MonsterTypes
 {
 	public WitherSkeletonTypes ()
 	{
-		this.addEquipment(new SoulDestroyer(), 99);
-		this.addEquipment(new DoomGuy(), 1);
+		this.addEquipment(new SoulDestroyer(), 70);
+		this.addEquipment(new SoulObliterator(), 30);
 	}
 }

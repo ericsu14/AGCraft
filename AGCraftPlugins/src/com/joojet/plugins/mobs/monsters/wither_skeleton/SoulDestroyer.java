@@ -1,7 +1,9 @@
 package com.joojet.plugins.mobs.monsters.wither_skeleton;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
+import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.boots.LightweightNetheriteBoots;
@@ -15,16 +17,14 @@ public class SoulDestroyer extends MobEquipment
 	{
 		this.name = "Soul Destroyer";
 		this.color = ChatColor.LIGHT_PURPLE;
-		this.health = 30;
 		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
 		
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
-		
+		this.helmet = new ItemStack (Material.WITHER_SKELETON_SKULL, 1);
 		this.chestplate = new DarkNetheriteChestplate (this.color);
 		this.boots = new LightweightNetheriteBoots (this.color);
-		
 		this.weapon = new PerpetualTorment (this.color);
 	}
 }

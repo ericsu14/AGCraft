@@ -11,7 +11,7 @@ public class PerpetualTorment extends Equipment
 {
 	public PerpetualTorment (ChatColor color)
 	{
-		super (Material.NETHERITE_SWORD, EquipmentSlot.OFF_HAND, color);
+		super (Material.DIAMOND_SWORD, EquipmentSlot.OFF_HAND, color);
 		this.setDisplayName("Perpetual Torment");
 		this.addLoreToItemMeta("With boiling blood, he scoured the Umbral Plains seeking vengeance against the dark lords who had wronged him. ");
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);

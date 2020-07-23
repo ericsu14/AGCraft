@@ -21,7 +21,7 @@ public class DoomGuyFeet extends LeatherEquipment
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 5);
 		this.addUnsafeEnchantment(Enchantment.SOUL_SPEED, 3);
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
-		this.addDefenseAttributes(3.0, 5.0, 0.20);
+		this.addDefenseAttributes(3.0, 5.0, 0.0);
 		this.addSpeedAttribute(0.30);
 		this.setColor(Color.fromRGB(91, 70, 63));
 	}

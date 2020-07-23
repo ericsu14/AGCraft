@@ -17,6 +17,5 @@ public class LightweightChainmailBoots extends Equipment
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 2);
 		this.addLoreToItemMeta("Lightweight chains allows for improved mobility.");
 		this.addSpeedAttribute(0.10);
-		this.addDefenseAttributes(1.0, 0.5, 0.0);
 	}
 }

@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.monsters.wither_skeleton;
+package com.joojet.plugins.mobs.monsters.zombie_pigmen;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -27,7 +27,6 @@ public class DoomGuy extends MobEquipment
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
 		
 		this.spawnLightning = true;
-		this.huntOnSpawn = true;
 		this.showName = true;
 		this.huntRadius = 125;
 		

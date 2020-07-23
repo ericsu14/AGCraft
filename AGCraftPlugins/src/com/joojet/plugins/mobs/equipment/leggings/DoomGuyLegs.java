@@ -14,7 +14,7 @@ public class DoomGuyLegs extends LeatherEquipment
 	{
 		super (Material.LEATHER_LEGGINGS, EquipmentSlot.LEGS, color);
 		this.setDisplayName("Doom Guy's Leggings");
-		this.addDefenseAttributes(6.0, 5.0, 0.20);
+		this.addDefenseAttributes(6.0, 5.0, 0.0);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 7);
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
