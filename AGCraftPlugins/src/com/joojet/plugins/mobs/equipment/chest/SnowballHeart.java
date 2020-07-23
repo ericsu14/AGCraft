@@ -21,6 +21,6 @@ public class SnowballHeart extends Equipment
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 3);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
 		this.addUnsafeEnchantment(Enchantment.THORNS, 2);
-		this.addUnsafeEnchantment(Enchantment.FROST_WALKER, 5);
+		this.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, 2);
 	}
 }
