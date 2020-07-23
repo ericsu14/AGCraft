@@ -55,7 +55,7 @@ public class ScanEntities
 		for (Entity ent : entities)
 		{
 			// Searches for any nearby player-tamed wolves that are not sitting
-			if (ent instanceof Sittable)
+			if (ent instanceof Sittable && ent instanceof Tameable)
 			{
 				Sittable sitAnimal = (Sittable) ent;
 				Tameable tameAnimal = (Tameable) ent;
