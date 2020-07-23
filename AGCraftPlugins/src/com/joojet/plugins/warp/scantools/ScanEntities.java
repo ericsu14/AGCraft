@@ -3,13 +3,12 @@ package com.joojet.plugins.warp.scantools;
 import java.util.ArrayList;
 
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Horse;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
-import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Strider;
-import org.bukkit.entity.Wolf;
+import org.bukkit.entity.Sittable;
+import org.bukkit.entity.Tameable;
+import org.bukkit.entity.Vehicle;
 
 public class ScanEntities 
 {
@@ -56,17 +55,18 @@ public class ScanEntities
 		for (Entity ent : entities)
 		{
 			// Searches for any nearby player-tamed wolves that are not sitting
-			if (ent instanceof Wolf)
+			if (ent instanceof Sittable)
 			{
-				Wolf wolf = (Wolf) ent;
-				if (wolf.isTamed() && !wolf.isSitting() && wolf.getOwner().equals(p))
+				Sittable sitAnimal = (Sittable) ent;
+				Tameable tameAnimal = (Tameable) ent;
+				if (tameAnimal.isTamed() && !sitAnimal.isSitting() && tameAnimal.getOwner().equals(p))
 				{
 					ownedEntities.add(ent);
 				}
 			}
 			
-			// Searches for any pigs, striders, or horses the player is currently riding in
-			else if (ent instanceof Pig || ent instanceof Strider || ent instanceof Horse)
+			// Searches for any living entity the player is currently riding in
+			else if (ent instanceof Vehicle && ent instanceof LivingEntity)
 			{
 				for (Entity rider : ent.getPassengers())
 				{
