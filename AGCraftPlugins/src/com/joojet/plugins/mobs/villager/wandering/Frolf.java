@@ -101,12 +101,6 @@ public class Frolf extends VillagerEquipment
 		 * 		- Max stock: 1 */
 		SummoningScroll johnJaeScroll = new SummonJohnJae ();
 		this.addRecipe(johnJaeScroll, Material.DIAMOND, 24, 1);
-		
-		/** Trade 16: Summon Cookie
-		 * 		- Price: 64 Emeralds
-		 * 		- Max Stock: 1 */
-		SummoningScroll cookieScroll = new SummonCookie ();
-		this.addRecipe(cookieScroll, Material.EMERALD, 64, 1);
 	}
 	
 	
