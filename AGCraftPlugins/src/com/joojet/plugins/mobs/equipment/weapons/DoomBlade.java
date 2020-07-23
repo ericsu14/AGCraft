@@ -11,7 +11,7 @@ public class DoomBlade extends Equipment
 {
 	public DoomBlade (ChatColor color)
 	{
-		super (Material.NETHERITE_SWORD, EquipmentSlot.OFF_HAND, color);
+		super (Material.NETHERITE_SWORD, EquipmentSlot.HAND, color);
 		this.addAttackAttributes(13.0, 3.0);
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
