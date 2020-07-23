@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.monsters.zombie_pigmen;
+package com.joojet.plugins.mobs.monsters.wither_skeleton;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -28,6 +28,7 @@ public class DoomGuy extends MobEquipment
 		
 		this.spawnLightning = true;
 		this.showName = true;
+		this.huntOnSpawn = true;
 		this.huntRadius = 125;
 		
 		this.helmet = new DoomSlayerHead (this.color);

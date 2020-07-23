@@ -21,7 +21,7 @@ public class VeteranZombiePigmen extends MobEquipment
 		
 		this.helmet = new ZombiePigmenHead (this.color);
 		this.leggings = new RoyalGoldLeggings (this.color);
-		this.offhand = new PigmanSword (this.color);
+		this.weapon = new PigmanSword (this.color);
 		
 	}
 }
