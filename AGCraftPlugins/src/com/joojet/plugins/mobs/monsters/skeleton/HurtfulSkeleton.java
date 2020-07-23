@@ -18,7 +18,6 @@ public class HurtfulSkeleton extends MobEquipment
 	{
 		this.name = "Skeleguard";
 		this.color = ChatColor.BLUE;
-		this.health = 16;
 		
 		this.addBiomes(Biome.THE_VOID);
 		

@@ -8,7 +8,8 @@ public enum PlayerHead {
 	MAJORAS_MASK("25bb52db233dbe7fc0bf3afb9be46fa25269d60c1da7a40821e674945c"),
 	SHREK ("4868dd50bcb73c47c4aaee75c7eb3c7097885d4a9dd34a57c8ca48de3b76598a"),
 	BARNEY ("3f9c909e74855e6085ba367952b191a0f53caace1bcb1413b16e666586d08e0"),
-	WOLF ("dc3dd984bb659849bd52994046964c22725f717e986b12d548fd169367d494");
+	WOLF ("dc3dd984bb659849bd52994046964c22725f717e986b12d548fd169367d494"),
+	DOOM_SLAYER ("a43ea31a6839d058c674f4a3bdba3fa856f20be5b1fea92988ba8de632957219");
 	
 	// URL code of playerhead stored in minecraft's skin server
 	private String url;

@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.monsters.skeleton;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.boots.SkullKidBoots;
 import com.joojet.plugins.mobs.equipment.chest.SkullKidChest;
 import com.joojet.plugins.mobs.equipment.head.SkullKidHelmet;
@@ -15,25 +16,21 @@ public class SkullKid extends MobEquipment
 {
 	public SkullKid ()
 	{
-		this.name = "??????????";
-		this.addBiomes(
-				Biome.WOODED_MOUNTAINS, 
-				Biome.SHATTERED_SAVANNA_PLATEAU,
-				Biome.SHATTERED_SAVANNA,
-				Biome.GRAVELLY_MOUNTAINS,
-				Biome.SNOWY_TAIGA_MOUNTAINS,
-				Biome.MOUNTAINS,
-				Biome.MOUNTAIN_EDGE,
-				Biome.MODIFIED_GRAVELLY_MOUNTAINS);
+		this.name = "Skull Kid";
+		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
+				Biome.BASALT_DELTAS);
 		
 		this.health = 50;
 		this.color = ChatColor.DARK_RED;
 		this.showName = true;
 		this.spawnLightning = true;
 		this.huntOnSpawn = true;
-		this.huntRadius = 50;
+		this.huntRadius = 100;
 		
 		this.setDropRates(0.25f, 0.10f, 0.10f, 0.10f, 0.05f, 0.10f);
+		
+		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
+		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
 		this.helmet = new SkullKidHelmet (this.color);
 		this.chestplate = new SkullKidChest (this.color);

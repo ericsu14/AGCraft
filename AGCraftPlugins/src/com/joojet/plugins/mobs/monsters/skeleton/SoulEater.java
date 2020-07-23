@@ -10,19 +10,18 @@ import com.joojet.plugins.mobs.equipment.offhand.WitheringArrow;
 import com.joojet.plugins.mobs.equipment.weapons.AngelOfDeath;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 
-public class WitheringSkeleton extends MobEquipment 
+public class SoulEater extends MobEquipment 
 {
-	public WitheringSkeleton ()
+	public SoulEater ()
 	{
 		this.name = "Soul Eater";
 		this.color = ChatColor.LIGHT_PURPLE;
-		this.health = 16;
 		
-		this.addBiomes(Biome.THE_VOID);
+		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
+				Biome.BASALT_DELTAS);
 		
 		this.addPotionEffect(CustomPotionEffect.SPEED);
-		
-		this.setDropRates(0.00f, 0.00f, 0.00f, 0.00f, 0.075f, 0.075f);
+		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
 		
 		// Weapon
 		this.weapon = new AngelOfDeath (this.color);

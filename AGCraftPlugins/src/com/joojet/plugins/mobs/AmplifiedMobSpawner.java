@@ -50,6 +50,7 @@ import com.joojet.plugins.mobs.monsters.pillager.PatrioticPillager;
 import com.joojet.plugins.mobs.monsters.skeleton.PatrioticSkeleton;
 import com.joojet.plugins.mobs.monsters.skeleton.SkeletonTypes;
 import com.joojet.plugins.mobs.monsters.spider.SpiderTypes;
+import com.joojet.plugins.mobs.monsters.wither_skeleton.WitherSkeletonTypes;
 import com.joojet.plugins.mobs.monsters.zombie.PatrioticZombie;
 import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
 import com.joojet.plugins.mobs.villager.wandering.WanderingVillagerTypes;
@@ -76,6 +77,7 @@ public class AmplifiedMobSpawner implements Listener
 	private HuskTypes huskTypes;
 	private WolfTypes wolfTypes;
 	private WanderingVillagerTypes wanderingTypes;
+	private WitherSkeletonTypes witherSkeletonTypes;
 	
 	// Type of server event that is happening right now
 	private ServerEvent serverEvent = ServerEvent.DEFAULT;
@@ -98,6 +100,7 @@ public class AmplifiedMobSpawner implements Listener
 		this.summonInterpreter = new SummoningScrollInterpreter();
 		this.wolfTypes = new WolfTypes ();
 		this.fwTypes = new FireworkTypes();
+		this.witherSkeletonTypes = new WitherSkeletonTypes();
 	}
 	
 	public void onEnable ()
@@ -286,6 +289,9 @@ public class AmplifiedMobSpawner implements Listener
 				Wolf wolf = (Wolf) entity;
 				wolf.setAdult();
 				wolf.setCollarColor(mobEquipment.getDyeColor());
+				break;
+			case WITHER_SKELETON:
+				mobEquipment = this.witherSkeletonTypes.getRandomEquipment(biome);
 				break;
 			default:
 				return;
