@@ -15,6 +15,7 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
+import org.bukkit.entity.Piglin;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WanderingTrader;
 import org.bukkit.entity.Wolf;
@@ -45,6 +46,7 @@ import com.joojet.plugins.mobs.interfaces.VillagerEquipment;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
 import com.joojet.plugins.mobs.monsters.phantom.FireworkPhantom;
+import com.joojet.plugins.mobs.monsters.piglin.PiglinTypes;
 import com.joojet.plugins.mobs.monsters.pillager.PatrioticPillager;
 import com.joojet.plugins.mobs.monsters.skeleton.PatrioticSkeleton;
 import com.joojet.plugins.mobs.monsters.skeleton.SkeletonTypes;
@@ -79,6 +81,7 @@ public class AmplifiedMobSpawner implements Listener
 	private WanderingVillagerTypes wanderingTypes;
 	private WitherSkeletonTypes witherSkeletonTypes;
 	private ZombiePigmenTypes zombiePigmenTypes;
+	private PiglinTypes piglinTypes;
 	
 	// Type of server event that is happening right now
 	private ServerEvent serverEvent = ServerEvent.DEFAULT;
@@ -103,6 +106,7 @@ public class AmplifiedMobSpawner implements Listener
 		this.fwTypes = new FireworkTypes();
 		this.witherSkeletonTypes = new WitherSkeletonTypes();
 		this.zombiePigmenTypes = new ZombiePigmenTypes();
+		this.piglinTypes = new PiglinTypes();
 	}
 	
 	public void onEnable ()
@@ -292,6 +296,9 @@ public class AmplifiedMobSpawner implements Listener
 			case ZOMBIFIED_PIGLIN:
 				mobEquipment = this.zombiePigmenTypes.getRandomEquipment(biome);
 				break;
+			case PIGLIN:
+				mobEquipment = this.piglinTypes.getRandomEquipment(biome);
+				break;
 			default:
 				return;
 		}
@@ -380,6 +387,13 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			Zombie zombie = (Zombie) entity;
 			zombie.setBaby(false);
+		}
+		
+		// Prevents baby piglins from spawning
+		if (entity instanceof Piglin)
+		{
+			Piglin piglin = (Piglin) entity;
+			piglin.setBaby(false);
 		}
 		
 		EntityEquipment equipment = entity.getEquipment();

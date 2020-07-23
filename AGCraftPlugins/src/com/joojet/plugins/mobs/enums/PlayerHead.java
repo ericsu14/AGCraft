@@ -11,7 +11,9 @@ public enum PlayerHead {
 	WOLF ("dc3dd984bb659849bd52994046964c22725f717e986b12d548fd169367d494"),
 	DOOM_SLAYER ("a43ea31a6839d058c674f4a3bdba3fa856f20be5b1fea92988ba8de632957219"),
 	ZOMBIE_PIGMEN ("74e9c6e98582ffd8ff8feb3322cd1849c43fb16b158abb11ca7b42eda7743eb"),
-	CYBORG_PIGMEN ("74959bdb3c61cdcf4cdae505fb7ad560b23bc95b5167ff1cb3cee43ae444f1cd");
+	CYBORG_PIGMEN ("74959bdb3c61cdcf4cdae505fb7ad560b23bc95b5167ff1cb3cee43ae444f1cd"),
+	PIGLIN_SOILDER ("5ac6d9598cf98f83af89c75b14aff90ffc6b7e22ae8e6fdb85e1bc5df7c5fd0f"),
+	PIGLIN_HUNTER ("44d6152f9151bac7806f2c709391e65c3fa02518aa40c2d5431bcbb2a453a66e");
 	
 	// URL code of playerhead stored in minecraft's skin server
 	private String url;
