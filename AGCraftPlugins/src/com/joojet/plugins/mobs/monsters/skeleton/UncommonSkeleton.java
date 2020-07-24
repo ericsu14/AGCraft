@@ -22,22 +22,11 @@ public class UncommonSkeleton extends MobEquipment
 		
 		this.addBiomes(Biome.THE_VOID);
 		
-		// Weapon
 		this.weapon = new PotentBow (this.color);
-		
-		// Offhand
 		this.offhand = new WeakeningArrow (this.color);
-		
-		// Helmet
 		this.helmet = new ReinforcedChainmailHelmet (this.color);
-		
-		// Chestplate
 		this.chestplate = new BulletproofChainmailChestplate (this.color);
-		
-		// Leggings
 		this.leggings = new ReinforcedChainmailLeggings (this.color);
-		
-		// Boots
 		this.boots = new LightweightChainmailBoots (this.color);
 	}
 }
