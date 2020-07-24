@@ -140,7 +140,7 @@ public class AmplifiedMobSpawner implements Listener
 			Player p = (Player) event.getDamager();
 			LivingEntity e = (LivingEntity) event.getEntity();
 			p.sendMessage("Dealt " + event.getDamage() + " damage.");
-			p.sendMessage("The enemy has " + (e.getHealth() - event.getDamage()) + " health remaining");
+			p.sendMessage("The enemy has " + (e.getHealth() - event.getFinalDamage()) + " health remaining");
 		}
 		
 		if (event.getDamager() instanceof Arrow)
@@ -151,7 +151,7 @@ public class AmplifiedMobSpawner implements Listener
 				Player p = (Player) arr.getShooter();
 				LivingEntity e = (LivingEntity) event.getEntity();
 				p.sendMessage("Dealt " + event.getDamage() + " damage.");
-				p.sendMessage("The enemy has " + (e.getHealth() - event.getDamage()) + " health remaining");
+				p.sendMessage("The enemy has " + (e.getHealth() - event.getFinalDamage()) + " health remaining");
 			}
 		}
 		
