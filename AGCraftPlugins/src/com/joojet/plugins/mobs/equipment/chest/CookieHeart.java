@@ -13,7 +13,7 @@ public class CookieHeart extends Equipment
 	{
 		super (Material.COOKIE, EquipmentSlot.CHEST, color);
 		this.addDefenseAttributes(14.0, 8.0, 0.5);
-		this.addAttackAttributes(6.0, 0.0);
+		this.addAttackAttributes(8.0, 0.0);
 		this.addSpeedAttribute(0.25);
 		this.addHealthAttributes(10.0);
 		this.setDisplayName("Cookie's Heart");

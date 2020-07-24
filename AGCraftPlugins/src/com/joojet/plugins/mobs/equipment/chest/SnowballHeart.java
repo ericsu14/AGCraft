@@ -13,9 +13,9 @@ public class SnowballHeart extends Equipment
 	{
 		super (Material.SNOWBALL, EquipmentSlot.CHEST, color);
 		this.setDisplayName("Snowball's Heart");
-		this.addLoreToItemMeta("His fur is white as snow.");
+		this.addLoreToItemMeta("His fur is as white as snow.");
 		this.addDefenseAttributes(8.0, 6.0, 0.75);
-		this.addAttackAttributes(4.0, 0.0);
+		this.addAttackAttributes(6.0, 0.0);
 		this.addSpeedAttribute(0.20);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 3);
