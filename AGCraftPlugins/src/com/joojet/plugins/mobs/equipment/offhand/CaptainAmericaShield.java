@@ -45,7 +45,7 @@ public class CaptainAmericaShield extends Equipment
 		itemMeta.setBlockState(bannerState);
 		itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
 		this.setItemMeta(itemMeta);
-		this.addAttackAttributes(4.0, 0.0);
+		this.addAttackAttributes(6.0, 0.0);
 		this.addDefenseAttributes(0.0, 4.0, 0.15);
 		this.addHealthAttributes(14.0);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
