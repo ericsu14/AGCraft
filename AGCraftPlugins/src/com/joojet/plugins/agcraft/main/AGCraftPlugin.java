@@ -18,6 +18,7 @@ import com.joojet.plugins.rewards.interpreter.EventTypeInterpreter;
 import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
 import com.joojet.plugins.utility.commands.AutoSmelt;
 import com.joojet.plugins.utility.commands.ClearJunk;
+import com.joojet.plugins.utility.commands.ToggleDebugMode;
 import com.joojet.plugins.utility.commands.tabcompleter.*;
 import com.joojet.plugins.warp.commands.*;
 import com.joojet.plugins.warp.commands.tabcompleter.*;
@@ -89,6 +90,9 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Open reward gui
 		this.getCommand("rewards").setExecutor(new OpenRewards());
+		
+		// Toggles debug mode
+		this.getCommand("toggleDebug").setExecutor(new ToggleDebugMode ());
 		
 		// Death counter
 		deathCounter = new DeathCounter();

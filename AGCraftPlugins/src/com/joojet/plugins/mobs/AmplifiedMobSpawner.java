@@ -67,7 +67,7 @@ public class AmplifiedMobSpawner implements Listener
 	private final double chance = 0.15;
 	
 	// Show debug info if set to true
-	private final boolean debug = false;
+	public static boolean debug = false;
 	
 	private Random rand = new Random ();
 	
@@ -522,5 +522,12 @@ public class AmplifiedMobSpawner implements Listener
 				}
 			}
 		}
+	}
+	
+	/** Toggles debug mode on or off */
+	public static void toggleDebug ()
+	{
+		debug = !(debug);
+		System.out.println ("Debug mode " + ((debug) ? "activated" : "disabled") + ".");
 	}
 }

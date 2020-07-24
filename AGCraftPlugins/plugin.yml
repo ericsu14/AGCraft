@@ -42,5 +42,9 @@ commands:
   grantreward:
     description: Admin use only.
     usage: /grantreward <type of reward> <type of event> [list of players]
+  toggledebugmode:
+    description: Toggles debug mode used to display damage outputs of player or mob attacks. To be used only by the administrator.
+    usage: /toggledebugmode
+    
 
   
