@@ -17,5 +17,6 @@ public class LightweightNetheriteBoots extends Equipment
 		this.setDisplayName("Lightweight Netherite Boots");
 		this.addLoreToItemMeta("Forged from a mixture of carbon-fiber and netherite, these boots offers vastly improved mobility.");
 		this.addSpeedAttribute(0.20);
+		this.addDefenseAttributes(3.0, 3.0, 0.10);
 	}
 }

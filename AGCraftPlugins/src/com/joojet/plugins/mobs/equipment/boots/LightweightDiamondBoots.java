@@ -18,5 +18,6 @@ public class LightweightDiamondBoots extends Equipment
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 4);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
 		this.addSpeedAttribute(0.20);
+		this.addDefenseAttributes(3.0, 2.0, 0.10);
 	}
 }

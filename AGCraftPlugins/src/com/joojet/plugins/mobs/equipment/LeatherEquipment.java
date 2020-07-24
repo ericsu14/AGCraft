@@ -12,7 +12,6 @@ public abstract class LeatherEquipment extends Equipment
 	public LeatherEquipment(Material material, EquipmentSlot equipmentSlot, ChatColor chatColor) 
 	{
 		super(material, equipmentSlot, chatColor);
-		
 	}
 	
 	protected void setColor (Color color)

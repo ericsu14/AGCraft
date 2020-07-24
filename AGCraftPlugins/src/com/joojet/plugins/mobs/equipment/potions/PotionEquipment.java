@@ -12,5 +12,4 @@ public abstract class PotionEquipment extends AbstractPotionEquipment
 	{
 		super (Material.POTION, EquipmentSlot.HAND, color);
 	}
-	
 }

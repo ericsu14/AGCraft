@@ -12,5 +12,4 @@ public abstract class TippedArrow extends AbstractPotionEquipment
 	{
 		super (Material.TIPPED_ARROW, EquipmentSlot.OFF_HAND, color);
 	}
-	
 }
