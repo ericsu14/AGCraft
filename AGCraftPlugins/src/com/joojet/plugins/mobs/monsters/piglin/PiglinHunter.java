@@ -1,9 +1,7 @@
 package com.joojet.plugins.mobs.monsters.piglin;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.block.Biome;
-import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.equipment.boots.RoyalGoldBoots;
 import com.joojet.plugins.mobs.equipment.head.PiglinHunterHelmet;
@@ -23,6 +21,5 @@ public class PiglinHunter extends MobEquipment
 		this.helmet = new PiglinHunterHelmet (this.color);
 		this.boots = new RoyalGoldBoots (this.color);
 		this.weapon = new ShotBow (this.color);
-		this.offhand = new ItemStack (Material.TOTEM_OF_UNDYING, 1);
 	}
 }

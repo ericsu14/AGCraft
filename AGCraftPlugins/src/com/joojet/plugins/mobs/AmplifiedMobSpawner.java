@@ -270,7 +270,7 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		// Do not alter any mob that isn't spawned into the world naturally or dice roll fails
-		if ((!reasonFilter(reason) || roll > chance))
+		if ((!reasonFilter(reason) || roll > chance) && !debug)
 		{
 			return;
 		}
