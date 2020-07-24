@@ -22,4 +22,10 @@ public enum CalendarField
 		}
 		return Calendar.SECOND;
 	}
+	
+	@Override
+	public String toString ()
+	{
+		return this.name();
+	}
 }

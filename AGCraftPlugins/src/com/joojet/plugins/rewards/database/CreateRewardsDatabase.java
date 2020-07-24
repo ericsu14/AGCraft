@@ -84,7 +84,7 @@ public class CreateRewardsDatabase
 			sql.append(" (");
 			sql.append("CONSEQUENCE_ID INTEGER PRIMARY KEY,");
 			sql.append("UUID TEXT NOT NULL,");
-			sql.append("EXPIRE DATE NOT NULL,");
+			sql.append("EXPIRE DATE NOT NULL");
 			sql.append(");");
 			
 			stmt.executeUpdate(sql.toString());

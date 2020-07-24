@@ -58,7 +58,6 @@ public class PunishPlayer implements CommandExecutor
 			UUID uuid = Bukkit.getOfflinePlayer(username) == null ? Bukkit.getPlayer(username).getUniqueId() : Bukkit.getOfflinePlayer(username).getUniqueId();
 			
 			int timeModifiers [] = new int [CalendarField.values().length];
-			
 			int modifier;
 			CalendarField field;
 			try
@@ -66,7 +65,7 @@ public class PunishPlayer implements CommandExecutor
 				for (int i = 1; i < n; i += 2)
 				{
 					// Prevents out of bounds exception
-					if ((i + 1) < n)
+					if ((i + 1) >= n)
 					{
 						break;
 					}
@@ -82,6 +81,7 @@ public class PunishPlayer implements CommandExecutor
 					}
 					
 					timeModifiers[field.ordinal()] += modifier;
+					System.out.println ("Modifier: " + modifier + " |  " + "Field: " + field.toString());
 				}
 			}
 			
@@ -99,6 +99,7 @@ public class PunishPlayer implements CommandExecutor
 			}
 			
 			System.out.println ("Consequence expires in: " + cal.toString());
+			
 			try 
 			{
 				ConsequenceDatabaseManager.punishPlayer(uuid, cal);
