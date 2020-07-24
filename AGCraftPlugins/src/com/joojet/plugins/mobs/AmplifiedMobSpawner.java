@@ -9,6 +9,7 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -66,7 +67,7 @@ public class AmplifiedMobSpawner implements Listener
 	private final double chance = 0.15;
 	
 	// Show debug info if set to true
-	private final boolean debug = true;
+	private final boolean debug = false;
 	
 	private Random rand = new Random ();
 	
@@ -138,7 +139,19 @@ public class AmplifiedMobSpawner implements Listener
 			Player p = (Player) event.getDamager();
 			LivingEntity e = (LivingEntity) event.getEntity();
 			p.sendMessage("Dealt " + event.getDamage() + " damage.");
-			p.sendMessage("The enemy has " + e.getHealth() + "");
+			p.sendMessage("The enemy has " + (e.getHealth() - event.getDamage()) + " health remaining");
+		}
+		
+		if (event.getDamager() instanceof Arrow)
+		{
+			Arrow arr = (Arrow) event.getDamager();
+			if (arr.getShooter() instanceof Player)
+			{
+				Player p = (Player) arr.getShooter();
+				LivingEntity e = (LivingEntity) event.getEntity();
+				p.sendMessage("Dealt " + event.getDamage() + " damage.");
+				p.sendMessage("The enemy has " + (e.getHealth() - event.getDamage()) + " health remaining");
+			}
 		}
 		
 		if (event.getDamager() instanceof Wolf)
@@ -146,11 +159,11 @@ public class AmplifiedMobSpawner implements Listener
 			ArrayList <Player> players = ScanEntities.ScanNearbyPlayers((LivingEntity) event.getDamager(), 50);
 			for (Player p : players)
 			{
-				p.sendMessage("The wolf dealt " + event.getDamage() + " damage");
+				p.sendMessage(event.getDamager().getName() + " dealt " + event.getDamage() + " damage");
 			}
 		}
 		
-		else if (event.getEntity() instanceof Player)
+		if (event.getEntity() instanceof Player)
 		{
 			Player p = (Player) event.getEntity();
 			p.sendMessage("Taken " + event.getDamage() + " damage.");
@@ -394,6 +407,7 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			Piglin piglin = (Piglin) entity;
 			piglin.setBaby(false);
+			piglin.setIsAbleToHunt(true);
 		}
 		
 		EntityEquipment equipment = entity.getEquipment();
