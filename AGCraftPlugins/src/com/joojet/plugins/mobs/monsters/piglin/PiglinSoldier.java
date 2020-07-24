@@ -6,7 +6,7 @@ import org.bukkit.block.Biome;
 import com.joojet.plugins.mobs.equipment.chest.RoyalGoldChestplate;
 import com.joojet.plugins.mobs.equipment.head.PiglinSoldierHat;
 import com.joojet.plugins.mobs.equipment.leggings.RoyalGoldLeggings;
-import com.joojet.plugins.mobs.equipment.weapons.PigmanSword;
+import com.joojet.plugins.mobs.equipment.weapons.PiglinSword;
 import com.joojet.plugins.mobs.interfaces.MobEquipment;
 
 public class PiglinSoldier extends MobEquipment {
@@ -21,6 +21,6 @@ public class PiglinSoldier extends MobEquipment {
 		this.helmet = new PiglinSoldierHat (this.color);
 		this.chestplate = new RoyalGoldChestplate (this.color);
 		this.leggings = new RoyalGoldLeggings (this.color);
-		this.weapon = new PigmanSword (this.color);
+		this.weapon = new PiglinSword (this.color);
 	}
 }
