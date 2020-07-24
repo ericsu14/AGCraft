@@ -3,7 +3,7 @@ package com.joojet.plugins.mobs.equipment.head;
 import org.bukkit.ChatColor;
 
 import com.joojet.plugins.mobs.enums.PlayerHead;
-import com.joojet.plugins.mobs.interfaces.Equipment;
+import com.joojet.plugins.mobs.equipment.Equipment;
 
 
 public class USAHat extends Equipment

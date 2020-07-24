@@ -9,7 +9,7 @@ import com.joojet.plugins.mobs.equipment.chest.OgreTunic;
 import com.joojet.plugins.mobs.equipment.head.ShrekHat;
 import com.joojet.plugins.mobs.equipment.leggings.OgreLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.OgreAxe;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class Shrek extends MobEquipment
 {

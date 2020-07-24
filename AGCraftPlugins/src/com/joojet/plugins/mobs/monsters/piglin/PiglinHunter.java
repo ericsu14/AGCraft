@@ -6,7 +6,7 @@ import org.bukkit.block.Biome;
 import com.joojet.plugins.mobs.equipment.boots.RoyalGoldBoots;
 import com.joojet.plugins.mobs.equipment.head.PiglinHunterHelmet;
 import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class PiglinHunter extends MobEquipment 
 {

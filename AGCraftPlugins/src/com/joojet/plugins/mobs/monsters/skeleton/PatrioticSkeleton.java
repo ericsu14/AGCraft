@@ -9,7 +9,7 @@ import com.joojet.plugins.mobs.equipment.chest.PatrioticRedJacket;
 import com.joojet.plugins.mobs.equipment.head.USAHat;
 import com.joojet.plugins.mobs.equipment.leggings.PatrioticWhiteLeggings;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class PatrioticSkeleton extends MobEquipment
 {

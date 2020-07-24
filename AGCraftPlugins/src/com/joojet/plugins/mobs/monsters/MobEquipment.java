@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.interfaces;
+package com.joojet.plugins.mobs.monsters;
 
 import java.util.ArrayList;
 import java.util.HashSet;

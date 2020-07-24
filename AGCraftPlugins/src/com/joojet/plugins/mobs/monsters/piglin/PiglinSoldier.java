@@ -7,7 +7,7 @@ import com.joojet.plugins.mobs.equipment.chest.RoyalGoldChestplate;
 import com.joojet.plugins.mobs.equipment.head.PiglinSoldierHat;
 import com.joojet.plugins.mobs.equipment.leggings.RoyalGoldLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.PiglinSword;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class PiglinSoldier extends MobEquipment {
 	public PiglinSoldier ()

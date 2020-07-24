@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.interfaces;
+package com.joojet.plugins.mobs.equipment;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

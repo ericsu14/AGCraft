@@ -7,7 +7,7 @@ import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.head.DarkNetheriteHelmet;
 import com.joojet.plugins.mobs.equipment.offhand.PigmanDagger;
 import com.joojet.plugins.mobs.equipment.weapons.PigmanSword;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 
 public class AkimboPigman extends MobEquipment 

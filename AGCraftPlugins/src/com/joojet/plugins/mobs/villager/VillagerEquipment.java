@@ -1,10 +1,12 @@
-package com.joojet.plugins.mobs.interfaces;
+package com.joojet.plugins.mobs.villager;
 
 import java.util.ArrayList;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
+
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public abstract class VillagerEquipment extends MobEquipment
 {

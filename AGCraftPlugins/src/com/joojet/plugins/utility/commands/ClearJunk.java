@@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.ChatColor;
 
-import com.joojet.plugins.mobs.interfaces.SummoningScroll;
+import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 import com.joojet.plugins.utility.enums.JunkClassifier;
 import com.joojet.plugins.utility.interpreter.JunkCommandInterpreter;
 

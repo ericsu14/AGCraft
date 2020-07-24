@@ -6,9 +6,8 @@ import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.equipment.potions.*;
-import com.joojet.plugins.mobs.interfaces.SummoningScroll;
-import com.joojet.plugins.mobs.interfaces.VillagerEquipment;
 import com.joojet.plugins.mobs.scrolls.*;
+import com.joojet.plugins.mobs.villager.VillagerEquipment;
 
 public class Frolf extends VillagerEquipment
 {

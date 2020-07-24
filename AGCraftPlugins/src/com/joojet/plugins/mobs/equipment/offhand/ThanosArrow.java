@@ -4,8 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
 
-import com.joojet.plugins.mobs.interfaces.TippedArrow;
-
 public class ThanosArrow extends TippedArrow 
 {
 
@@ -13,8 +11,8 @@ public class ThanosArrow extends TippedArrow
 	{
 		super(color);
 		this.setColor(Color.fromRGB(75, 0, 130));
-		this.addCustomEffect(PotionEffectType.WITHER, 70, 2);
-		this.addCustomEffect(PotionEffectType.HARM, 1, 1);
+		this.addPotionEffect(PotionEffectType.WITHER, 70, 2);
+		this.addPotionEffect(PotionEffectType.HARM, 1, 1);
 		this.setDisplayName("Thanos Arrow");
 		this.addLoreToItemMeta("Will snap the enemy's health in half...");
 	}

@@ -11,7 +11,7 @@ import com.joojet.plugins.mobs.equipment.chest.DoomChest;
 import com.joojet.plugins.mobs.equipment.head.DoomSlayerHead;
 import com.joojet.plugins.mobs.equipment.leggings.DoomGuyLegs;
 import com.joojet.plugins.mobs.equipment.weapons.DoomBlade;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class DoomGuy extends MobEquipment
 {

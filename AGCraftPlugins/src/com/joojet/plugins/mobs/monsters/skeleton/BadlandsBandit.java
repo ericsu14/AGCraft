@@ -6,7 +6,7 @@ import org.bukkit.block.Biome;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.boots.DesertSandals;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualFantasy;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class BadlandsBandit extends MobEquipment
 {

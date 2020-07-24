@@ -5,7 +5,7 @@ import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class PatrioticPillager extends MobEquipment
 {

@@ -6,6 +6,8 @@ import java.util.Random;
 
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.monsters.MobEquipment;
+
 public abstract class MonsterTypes 
 {
 	private ArrayList <MobEquipment> equipmentList;

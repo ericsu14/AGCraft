@@ -10,7 +10,7 @@ import com.joojet.plugins.mobs.equipment.head.BarneyHead;
 import com.joojet.plugins.mobs.equipment.leggings.BarneyLegs;
 import com.joojet.plugins.mobs.equipment.offhand.BarneyTotem;
 import com.joojet.plugins.mobs.equipment.weapons.BarneyDagger;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class BarneyTheDinosaur extends MobEquipment
 {

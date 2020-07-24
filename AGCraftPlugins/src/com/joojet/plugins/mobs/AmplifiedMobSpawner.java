@@ -41,10 +41,8 @@ import com.joojet.plugins.mobs.allies.wolf.WolfTypes;
 import com.joojet.plugins.mobs.enums.ServerEvent;
 import com.joojet.plugins.mobs.enums.SummonTypes;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
-import com.joojet.plugins.mobs.interfaces.SummoningScroll;
-import com.joojet.plugins.mobs.interfaces.VillagerEquipment;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
 import com.joojet.plugins.mobs.monsters.phantom.FireworkPhantom;
 import com.joojet.plugins.mobs.monsters.piglin.PiglinTypes;
@@ -56,6 +54,8 @@ import com.joojet.plugins.mobs.monsters.wither_skeleton.WitherSkeletonTypes;
 import com.joojet.plugins.mobs.monsters.zombie.PatrioticZombie;
 import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
 import com.joojet.plugins.mobs.monsters.zombie_pigmen.ZombiePigmenTypes;
+import com.joojet.plugins.mobs.scrolls.SummoningScroll;
+import com.joojet.plugins.mobs.villager.VillagerEquipment;
 import com.joojet.plugins.mobs.villager.wandering.WanderingVillagerTypes;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
@@ -118,10 +118,11 @@ public class AmplifiedMobSpawner implements Listener
 	/** Returns true if the passed spawn reason agrees with the set filters */
 	public boolean reasonFilter (SpawnReason reason)
 	{
-		return (reason.equals (SpawnReason.NATURAL) ||
-				reason.equals (SpawnReason.BUILD_SNOWMAN) ||
-				reason.equals (SpawnReason.BUILD_IRONGOLEM) ||
-				reason.equals (SpawnReason.VILLAGE_DEFENSE));
+		return (reason == SpawnReason.NATURAL ||
+				reason == SpawnReason.BUILD_SNOWMAN ||
+				reason == SpawnReason.BUILD_IRONGOLEM ||
+				reason == SpawnReason.VILLAGE_DEFENSE ||
+				reason == SpawnReason.BREEDING);
 				
 	}
 	
@@ -298,10 +299,6 @@ public class AmplifiedMobSpawner implements Listener
 				break;
 			case WOLF:
 				mobEquipment = wolfTypes.getRandomEquipment(biome);
-				// Prevents baby superwolves from spawning
-				Wolf wolf = (Wolf) entity;
-				wolf.setAdult();
-				wolf.setCollarColor(mobEquipment.getDyeColor());
 				break;
 			case WITHER_SKELETON:
 				mobEquipment = this.witherSkeletonTypes.getRandomEquipment(biome);
@@ -408,6 +405,13 @@ public class AmplifiedMobSpawner implements Listener
 			Piglin piglin = (Piglin) entity;
 			piglin.setBaby(false);
 			piglin.setIsAbleToHunt(true);
+		}
+		
+		// Changes color of wolf's collar if this entity is a wolf
+		if (entity instanceof Wolf)
+		{
+			Wolf wolf = (Wolf) entity;
+			wolf.setCollarColor(mobEquipment.getDyeColor());
 		}
 		
 		EntityEquipment equipment = entity.getEquipment();

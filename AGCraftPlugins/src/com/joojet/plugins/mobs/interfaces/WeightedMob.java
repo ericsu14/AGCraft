@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.interfaces;
 
+import com.joojet.plugins.mobs.monsters.MobEquipment;
+
 public class WeightedMob 
 {
 	/** Mob equipment this entity holds */

@@ -6,7 +6,7 @@ import org.bukkit.block.Biome;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.boots.LetItGo;
 import com.joojet.plugins.mobs.equipment.chest.SnowballHeart;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class Snowball extends MobEquipment
 {

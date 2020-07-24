@@ -15,7 +15,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.BlockStateMeta;
 
-import com.joojet.plugins.mobs.interfaces.Equipment;
+import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class CaptainAmericaShield extends Equipment
 {

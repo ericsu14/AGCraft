@@ -10,7 +10,7 @@ import com.joojet.plugins.mobs.equipment.head.AGSpotted;
 import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.ThanosArrow;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualFantasy;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class UltimateBadassSkeleton extends MobEquipment
 {

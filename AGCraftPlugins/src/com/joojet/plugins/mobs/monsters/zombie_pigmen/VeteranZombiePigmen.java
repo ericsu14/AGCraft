@@ -6,7 +6,7 @@ import org.bukkit.block.Biome;
 import com.joojet.plugins.mobs.equipment.head.ZombiePigmenHead;
 import com.joojet.plugins.mobs.equipment.leggings.RoyalGoldLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.PigmanSword;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 
 public class VeteranZombiePigmen extends MobEquipment

@@ -2,7 +2,7 @@ package com.joojet.plugins.mobs.monsters.phantom;
 
 import org.bukkit.block.Biome;
 
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class FireworkPhantom extends MobEquipment
 {

@@ -5,7 +5,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.interfaces.LeatherEquipment;
+import com.joojet.plugins.mobs.equipment.LeatherEquipment;
 
 public class SkullKidChest extends LeatherEquipment
 {

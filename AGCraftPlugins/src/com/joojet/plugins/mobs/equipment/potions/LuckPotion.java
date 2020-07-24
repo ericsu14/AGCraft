@@ -4,8 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
 
-import com.joojet.plugins.mobs.interfaces.PotionEquipment;
-
 public class LuckPotion extends PotionEquipment 
 {
 	public LuckPotion (ChatColor color)

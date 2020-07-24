@@ -9,7 +9,7 @@ import com.joojet.plugins.mobs.equipment.chest.ReinforcedDiamondChestplate;
 import com.joojet.plugins.mobs.equipment.head.ReinforcedIronHelmet;
 import com.joojet.plugins.mobs.equipment.leggings.ReinforcedIronLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.SharpenedIronSword;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class BadassZombie extends MobEquipment
 {

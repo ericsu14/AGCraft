@@ -8,7 +8,7 @@ import com.joojet.plugins.mobs.equipment.chest.RoyalGoldChestplate;
 import com.joojet.plugins.mobs.equipment.head.PharaohHead;
 import com.joojet.plugins.mobs.equipment.leggings.RoyalGoldLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.PharaohStaff;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class FallenPharaoh extends MobEquipment
 {

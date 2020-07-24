@@ -8,11 +8,13 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public abstract class PotionEquipment extends Equipment 
+import com.joojet.plugins.mobs.equipment.Equipment;
+
+public abstract class AbstractPotionEquipment extends Equipment 
 {
-	public PotionEquipment (ChatColor color)
+	public AbstractPotionEquipment (Material material, EquipmentSlot equipment, ChatColor color)
 	{
-		super (Material.POTION, EquipmentSlot.HAND, color);
+		super (material, equipment, color);
 	}
 	
 	/** Changes the base color of this custom potion to a new color */

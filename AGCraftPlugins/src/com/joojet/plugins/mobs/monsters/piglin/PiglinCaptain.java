@@ -6,7 +6,7 @@ import org.bukkit.block.Biome;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.PiglinCaptainHead;
 import com.joojet.plugins.mobs.equipment.weapons.PiglinAxe;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class PiglinCaptain extends MobEquipment 
 {

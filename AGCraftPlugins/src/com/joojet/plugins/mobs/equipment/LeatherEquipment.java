@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.interfaces;
+package com.joojet.plugins.mobs.equipment;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Color;

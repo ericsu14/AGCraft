@@ -1,6 +1,5 @@
 package com.joojet.plugins.mobs.enums;
 
-import com.joojet.plugins.mobs.interfaces.SummoningScroll;
 import com.joojet.plugins.mobs.scrolls.*;
 
 public enum SummonTypes 

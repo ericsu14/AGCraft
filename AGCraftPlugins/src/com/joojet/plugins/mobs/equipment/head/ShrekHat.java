@@ -4,7 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 
 import com.joojet.plugins.mobs.enums.PlayerHead;
-import com.joojet.plugins.mobs.interfaces.Equipment;
+import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class ShrekHat extends Equipment
 {

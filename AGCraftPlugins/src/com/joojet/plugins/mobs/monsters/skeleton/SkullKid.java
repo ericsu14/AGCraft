@@ -10,7 +10,7 @@ import com.joojet.plugins.mobs.equipment.head.SkullKidHelmet;
 import com.joojet.plugins.mobs.equipment.leggings.SkullKidPants;
 import com.joojet.plugins.mobs.equipment.offhand.CursedArrow;
 import com.joojet.plugins.mobs.equipment.weapons.ATerribleFate;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class SkullKid extends MobEquipment 
 {

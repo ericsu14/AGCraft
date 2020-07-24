@@ -10,7 +10,7 @@ import com.joojet.plugins.mobs.equipment.head.ReinforcedIronHelmet;
 import com.joojet.plugins.mobs.equipment.leggings.ReinforcedIronLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.HurtfulArrow;
 import com.joojet.plugins.mobs.equipment.weapons.VeryPotentBow;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class HurtfulSkeleton extends MobEquipment  
 {

@@ -5,7 +5,7 @@ import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.equipment.chest.ThePecks;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class JohnJae extends MobEquipment
 {

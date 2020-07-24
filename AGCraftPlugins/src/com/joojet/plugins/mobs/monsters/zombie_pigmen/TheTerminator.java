@@ -10,7 +10,7 @@ import com.joojet.plugins.mobs.equipment.head.CyborgPigmanHead;
 import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.PigmanDagger;
 import com.joojet.plugins.mobs.equipment.weapons.PigmanSword;
-import com.joojet.plugins.mobs.interfaces.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class TheTerminator extends MobEquipment
 {

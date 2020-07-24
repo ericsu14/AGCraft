@@ -5,7 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.interfaces.Equipment;
+import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class ReinforcedIronHelmet extends Equipment
 {

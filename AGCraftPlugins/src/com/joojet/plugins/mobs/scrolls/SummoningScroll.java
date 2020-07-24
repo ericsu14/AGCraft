@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.interfaces;
+package com.joojet.plugins.mobs.scrolls;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 import org.bukkit.ChatColor;
 
