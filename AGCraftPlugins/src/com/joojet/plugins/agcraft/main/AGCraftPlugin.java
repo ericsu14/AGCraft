@@ -92,7 +92,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.getCommand("rewards").setExecutor(new OpenRewards());
 		
 		// Toggles debug mode
-		this.getCommand("toggleDebug").setExecutor(new ToggleDebugMode ());
+		this.getCommand("toggledebugmode").setExecutor(new ToggleDebugMode ());
 		
 		// Death counter
 		deathCounter = new DeathCounter();
