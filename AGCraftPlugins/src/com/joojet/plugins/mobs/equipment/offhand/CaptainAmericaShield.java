@@ -43,13 +43,13 @@ public class CaptainAmericaShield extends Equipment
 		bannerState.setPatterns(pattern);
 		bannerState.update();
 		itemMeta.setBlockState(bannerState);
-		itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+		itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ENCHANTS);
+		itemMeta.setUnbreakable(true);
 		this.setItemMeta(itemMeta);
 		this.addAttackAttributes(6.0, 0.0);
 		this.addDefenseAttributes(0.0, 4.0, 0.15);
 		this.addHealthAttributes(14.0);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
-		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
 		this.addLoreToItemMeta("Crafted from Adamantium, this shield makes you feel like a complete superhero!");
 	}
 }
