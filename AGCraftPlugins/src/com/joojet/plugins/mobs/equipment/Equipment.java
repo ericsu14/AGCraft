@@ -229,4 +229,12 @@ public abstract class Equipment extends ItemStack
 		meta.setDisplayName(this.chatColor + name);
 		this.setItemMeta(meta);
 	}
+	
+	/** Modifies the localized name field of this item */
+	public void setLocalizedName (String text)
+	{
+		ItemMeta meta = this.getItemMeta();
+		meta.setLocalizedName(text);
+		this.setItemMeta(meta);
+	}
 }
