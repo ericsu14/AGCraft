@@ -6,6 +6,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.equipment.offhand.CaptainAmericaShield;
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
+import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
 import com.joojet.plugins.mobs.fireworks.PaintTheSky;
 import com.joojet.plugins.mobs.scrolls.SummonAdvancedGolem;
 import com.joojet.plugins.mobs.scrolls.SummonCookie;
@@ -26,7 +27,8 @@ public enum RewardType
 	PAINT_THE_SKIES,
 	FIREWORK_LAUNCHER,
 	COOKIE,
-	SNOWBALL;
+	SNOWBALL,
+	SHOTBOW;
 	
 	public ItemStack getReward ()
 	{
@@ -56,6 +58,8 @@ public enum RewardType
 				return new SummonCookie ();
 			case SNOWBALL:
 				return new SummonSnowball ();
+			case SHOTBOW:
+				return new ShotBow (ChatColor.GOLD);
 			default:
 				break;
 		}
