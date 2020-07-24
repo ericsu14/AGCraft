@@ -45,6 +45,9 @@ commands:
   toggledebugmode:
     description: Toggles debug mode used to display damage outputs of player or mob attacks. To be used only by the administrator.
     usage: /toggledebugmode
+  punishplayer:
+    description: Punishes a player by forcing him/her to wear a clown mask for a certain amount of time. Can only be ran by server admins.
+    usage: /punishplayer <player> {<duration> <calendar_field> }
     
 
   

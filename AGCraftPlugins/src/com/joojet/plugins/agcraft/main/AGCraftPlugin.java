@@ -7,6 +7,7 @@ import com.joojet.biblefetcher.interpreter.CommandInterpreter;
 import com.joojet.plugins.biblefetcher.commands.Bible;
 import com.joojet.plugins.biblefetcher.commands.ClearBibles;
 import com.joojet.plugins.biblefetcher.commands.tabcompleter.*;
+import com.joojet.plugins.consequences.commands.PunishPlayer;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
@@ -93,6 +94,9 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Toggles debug mode
 		this.getCommand("toggledebugmode").setExecutor(new ToggleDebugMode ());
+		
+		// Punish player command
+		this.getCommand("punishPlayer").setExecutor(new PunishPlayer ());
 		
 		// Death counter
 		deathCounter = new DeathCounter();

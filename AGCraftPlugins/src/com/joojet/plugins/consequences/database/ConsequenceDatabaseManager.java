@@ -16,7 +16,7 @@ public class ConsequenceDatabaseManager
 	/** Grants a new consequence to a player until a certain timestamp
 	 * 		@param uuid - Player being punished
 	 * 		@param timestamp - Time when the punishment expires 
-	 * 		@throws SQLException - Internal SQL error */
+	 * 		@throws SQLException - Internal SQL connection error */
 	public static void punishPlayer (UUID uuid, Calendar timestamp) throws SQLException
 	{
 		Connection c = DriverManager.getConnection(CreateRewardsDatabase.kDatabasePath);
@@ -37,7 +37,9 @@ public class ConsequenceDatabaseManager
 		c.close();
 	}
 	
-	/** Retrieves all of a player's expiration dates for all of their consequences as a list */
+	/** Retrieves all of a player's expiration dates for all of their consequences as a list
+	 * 		@param uuid - UUID of the player we are looking up 
+	 * 		@throws SQLException - Internal SQL connection error*/
 	public static ArrayList <Calendar> getPlayerTimestamps (UUID uuid) throws SQLException
 	{
 		ArrayList <Calendar> timestamps = new ArrayList <Calendar> ();
@@ -64,5 +66,36 @@ public class ConsequenceDatabaseManager
 			} while (result.next());
 		}
 		return timestamps;
+	}
+	
+	/** Returns true if the player has active consequences
+	 * 		@param uuid - The player we are looking up */
+	public static boolean hasConsequences (UUID uuid)
+	{
+		try
+		{
+			ArrayList <Calendar> timestamps = getPlayerTimestamps (uuid);
+			if (timestamps.isEmpty())
+			{
+				return false;
+			}
+			
+			// Gets current time and compares it to all found timestamps
+			Calendar curr = Calendar.getInstance();
+			for (Calendar cal : timestamps)
+			{
+				// If any calendar timestamp does not pass current time, then we found a consequence 
+				if (curr.compareTo(cal) < 0)
+				{
+					return true;
+				}
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 }
