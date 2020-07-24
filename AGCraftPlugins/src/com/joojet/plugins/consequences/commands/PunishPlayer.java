@@ -62,6 +62,7 @@ public class PunishPlayer implements CommandExecutor
 			CalendarField field;
 			try
 			{
+				// Extracts punish time parameters from the command
 				for (int i = 1; i < n; i += 2)
 				{
 					// Prevents out of bounds exception
@@ -98,7 +99,7 @@ public class PunishPlayer implements CommandExecutor
 				cal.add(calField.getField(), timeModifiers[calField.ordinal()]);
 			}
 			
-			System.out.println ("Consequence expires in: " + cal.toString());
+			System.out.println ("Consequence expires in: " + cal.getTime().toString());
 			
 			try 
 			{

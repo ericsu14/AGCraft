@@ -39,7 +39,7 @@ public class ConsequenceDatabaseManager
 	
 	/** Retrieves all of a player's expiration dates for all of their consequences as a list
 	 * 		@param uuid - UUID of the player we are looking up 
-	 * 		@throws SQLException - Internal SQL connection error*/
+	 * 		@throws SQLException - Internal SQL connection error */
 	public static ArrayList <Calendar> getPlayerTimestamps (UUID uuid) throws SQLException
 	{
 		ArrayList <Calendar> timestamps = new ArrayList <Calendar> ();
@@ -66,6 +66,27 @@ public class ConsequenceDatabaseManager
 			} while (result.next());
 		}
 		return timestamps;
+	}
+	
+	/** Removes all consequences from a player
+	 * 		@param uuid - The UUID of the player being forgiven
+	 * 		@throws SQLException - Internal SQL connection error */
+	public static void forgivePlayer (UUID uuid) throws SQLException
+	{
+		Connection c = DriverManager.getConnection(CreateRewardsDatabase.kDatabasePath);
+		
+		StringBuilder query = new StringBuilder ();
+		query.append("DELETE FROM ");
+		query.append(CreateRewardsDatabase.kConsequenceDatabaseName);
+		query.append(" WHERE UUID = ?");
+		
+		c.setAutoCommit(false);
+		PreparedStatement pstmt = c.prepareStatement(query.toString());
+		pstmt.setString(1, uuid.toString());
+		
+		pstmt.executeUpdate();
+		pstmt.close();
+		c.close();
 	}
 	
 	/** Returns true if the player has active consequences
@@ -97,5 +118,42 @@ public class ConsequenceDatabaseManager
 		}
 		
 		return false;
+	}
+	
+	/** Returns the longest active consequence the player currently has
+	 *  based on the current time
+	 *  	@param uuid - UUID of the player we are looking for */
+	public static Calendar getLongestRunningConsequence (UUID uuid)
+	{
+		try
+		{
+			ArrayList <Calendar> timestamps = getPlayerTimestamps (uuid);
+			if (timestamps.isEmpty())
+			{
+				return null;
+			}
+			
+			Calendar curr = Calendar.getInstance();
+			Calendar longest = Calendar.getInstance();
+			
+			for (Calendar currVal : timestamps)
+			{
+				// Updates longest timestamp if one found in list surpass it.
+				if (longest.compareTo(currVal) < 0)
+				{
+					longest = currVal;
+				}
+			}
+			
+			// Only returns the longest time if the longest timestamp is still active
+			return (curr.compareTo(longest) < 0) ? longest : null;
+		}
+		
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

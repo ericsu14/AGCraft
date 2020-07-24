@@ -48,6 +48,9 @@ commands:
   punishplayer:
     description: Punishes a player by forcing him/her to wear a clown mask for a certain amount of time. Can only be ran by server admins.
     usage: /punishplayer <player> {<duration> <calendar_field> }
+  forgiveplayer:
+    description: Removes all of a player's inactive and active consequences from the database. Can only be ran by server admins.
+    usage: /forgiveplayer <player>
     
 
   
