@@ -73,7 +73,7 @@ public class ConsequenceManager implements Listener
 				p.getWorld().dropItem(p.getLocation(), helmet);
 			}
 		}
-		inventory.setHelmet(new ClownHead (ChatColor.RED, longest));
+		inventory.setHelmet(new ClownHead (ChatColor.DARK_RED, longest));
 		p.sendMessage(ChatColor.DARK_RED + message);
 		p.sendMessage(ChatColor.RED + "This will take effect until " + longest.getTime().toString());
 	}

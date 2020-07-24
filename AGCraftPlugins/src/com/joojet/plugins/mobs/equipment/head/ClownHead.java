@@ -18,11 +18,12 @@ public class ClownHead extends Equipment
 		super (PlayerHead.CLOWN, color);
 		this.setDisplayName("#AGClown");
 		StringBuilder lore = new StringBuilder ();
+		lore.append("- - - - ");
 		lore.append("BAD SPORT! Because of your recent actions in this server,");
 		lore.append(" you will be forced to wear this clown head as a consequence for ");
 		lore.append("your actions. This head will disappear from your inventory on: ");
 		lore.append(ChatColor.AQUA);
-		lore.append(expirationTimestamp.get(Calendar.MONTH + 1));
+		lore.append(expirationTimestamp.get(Calendar.MONTH) + 1);
 		lore.append("/");
 		lore.append(expirationTimestamp.get(Calendar.DAY_OF_MONTH));
 		lore.append("/");

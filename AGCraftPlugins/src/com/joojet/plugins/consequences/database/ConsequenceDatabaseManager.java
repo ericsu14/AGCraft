@@ -61,7 +61,6 @@ public class ConsequenceDatabaseManager
 			do {
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(result.getDate("EXPIRE"));
-				System.out.println ("Found " + cal);
 				timestamps.add(cal);
 			} while (result.next());
 		}
