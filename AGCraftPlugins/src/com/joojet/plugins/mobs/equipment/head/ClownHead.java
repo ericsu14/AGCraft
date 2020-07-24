@@ -3,13 +3,16 @@ package com.joojet.plugins.mobs.equipment.head;
 import java.util.Calendar;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class ClownHead extends Equipment 
 {
+	public static final String clownString = "clown";
 	public ClownHead (ChatColor color, Calendar expirationTimestamp)
 	{
 		super (PlayerHead.CLOWN, color);
@@ -27,6 +30,13 @@ public class ClownHead extends Equipment
 		this.addLoreToItemMeta(lore.toString());
 		this.addUnsafeEnchantment(Enchantment.BINDING_CURSE, 1);
 		this.addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1);
-		this.setLocalizedName("clown");
+		this.setLocalizedName(clownString);
+	}
+	
+	/** Returns true if this item is a clown head */
+	public static boolean isClownHead (ItemStack item)
+	{
+		return (item.getItemMeta().getLocalizedName().equals(clownString)
+				&& item.getType() == Material.PLAYER_HEAD);
 	}
 }

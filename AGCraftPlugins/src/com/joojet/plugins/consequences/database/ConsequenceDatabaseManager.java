@@ -80,7 +80,6 @@ public class ConsequenceDatabaseManager
 		query.append(CreateRewardsDatabase.kConsequenceDatabaseName);
 		query.append(" WHERE UUID = ?");
 		
-		c.setAutoCommit(false);
 		PreparedStatement pstmt = c.prepareStatement(query.toString());
 		pstmt.setString(1, uuid.toString());
 		

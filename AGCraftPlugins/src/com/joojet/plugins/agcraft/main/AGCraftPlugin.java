@@ -7,6 +7,8 @@ import com.joojet.biblefetcher.interpreter.CommandInterpreter;
 import com.joojet.plugins.biblefetcher.commands.Bible;
 import com.joojet.plugins.biblefetcher.commands.ClearBibles;
 import com.joojet.plugins.biblefetcher.commands.tabcompleter.*;
+import com.joojet.plugins.consequences.ConsequenceManager;
+import com.joojet.plugins.consequences.commands.ForgivePlayer;
 import com.joojet.plugins.consequences.commands.PunishPlayer;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
@@ -96,7 +98,10 @@ public class AGCraftPlugin extends JavaPlugin
 		this.getCommand("toggledebugmode").setExecutor(new ToggleDebugMode ());
 		
 		// Punish player command
-		this.getCommand("punishPlayer").setExecutor(new PunishPlayer ());
+		this.getCommand("punishplayer").setExecutor(new PunishPlayer ());
+		
+		// Forgive player command
+		this.getCommand("forgiveplayer").setExecutor(new ForgivePlayer());
 		
 		// Death counter
 		deathCounter = new DeathCounter();
@@ -106,6 +111,9 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Player login handler
 		Bukkit.getPluginManager().registerEvents(new RewardManager(), this);
+		
+		// Player consequence handler
+		Bukkit.getPluginManager().registerEvents (new ConsequenceManager(), this);
 	}
 	
 	@Override
