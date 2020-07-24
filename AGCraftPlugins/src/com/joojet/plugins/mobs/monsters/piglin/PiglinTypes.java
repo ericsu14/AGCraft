@@ -6,7 +6,7 @@ public class PiglinTypes extends MonsterTypes
 {
 	public PiglinTypes ()
 	{
-		this.addEquipment(new PiglinSoldier (), 45);
-		this.addEquipment(new PiglinHunter (), 45);
+		this.addEquipment(new PiglinHunter (), 60);
+		this.addEquipment(new PiglinSoldier (), 40);
 	}
 }
