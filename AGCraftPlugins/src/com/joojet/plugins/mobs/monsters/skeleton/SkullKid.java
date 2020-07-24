@@ -20,7 +20,7 @@ public class SkullKid extends MobEquipment
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
 		
-		this.health = 50;
+		this.health = 40;
 		this.color = ChatColor.DARK_RED;
 		this.showName = true;
 		this.spawnLightning = true;
