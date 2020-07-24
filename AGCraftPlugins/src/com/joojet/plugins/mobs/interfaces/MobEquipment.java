@@ -232,9 +232,12 @@ public abstract class MobEquipment
 	}
 	
 	/** Adds a custom potion effect to the monster */
-	public void addPotionEffect (CustomPotionEffect effect)
+	public void addPotionEffect (CustomPotionEffect... effects)
 	{
-		this.effects.add(effect.getPotionEffect());
+		for (CustomPotionEffect effect : effects)
+		{
+			this.effects.add(effect.getPotionEffect());
+		}
 	}
 	
 	/** Americanizes a name by applying the USA colors to every character in a string

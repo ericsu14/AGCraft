@@ -16,7 +16,12 @@ public class BadlandsBandit extends MobEquipment
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
-		this.addBiomes(Biome.BADLANDS, Biome.BADLANDS_PLATEAU, Biome.SAVANNA, Biome.SAVANNA_PLATEAU, Biome.SHATTERED_SAVANNA, Biome.SHATTERED_SAVANNA_PLATEAU);
+		this.addBiomes(Biome.BADLANDS, 
+				Biome.BADLANDS_PLATEAU, 
+				Biome.SAVANNA, 
+				Biome.SAVANNA_PLATEAU, 
+				Biome.SHATTERED_SAVANNA, 
+				Biome.SHATTERED_SAVANNA_PLATEAU);
 		
 		this.health = 30;
 		

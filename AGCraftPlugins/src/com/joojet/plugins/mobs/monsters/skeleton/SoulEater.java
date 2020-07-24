@@ -20,8 +20,8 @@ public class SoulEater extends MobEquipment
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
 		
-		this.addPotionEffect(CustomPotionEffect.SPEED);
-		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
+		this.addPotionEffect(CustomPotionEffect.SPEED,
+				CustomPotionEffect.FIRE_RESISTANCE);
 		
 		// Weapon
 		this.weapon = new AngelOfDeath (this.color);

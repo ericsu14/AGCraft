@@ -15,8 +15,7 @@ public class Cookie extends MobEquipment
 		this.setDropRates(0.00f, 1.15f, 0.00f, 0.00f, 0.00f, 0.00f);
 		this.color = ChatColor.GOLD;
 		this.name = "Cookie";
-		this.addPotionEffect(CustomPotionEffect.REGEN);
-		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
+		this.addPotionEffect(CustomPotionEffect.REGEN, CustomPotionEffect.FIRE_RESISTANCE);
 		this.chestplate = new CookieHeart (this.color);
 	}
 }

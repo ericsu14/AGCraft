@@ -23,8 +23,8 @@ public class PatrioticSkeleton extends MobEquipment
 		
 		this.addBiomes(Biome.THE_VOID);
 		
-		this.addPotionEffect(CustomPotionEffect.STRENGTH);
-		this.addPotionEffect(CustomPotionEffect.SPEED);
+		this.addPotionEffect(CustomPotionEffect.STRENGTH,
+				CustomPotionEffect.SPEED);
 		
 		this.setDropRates(0.05f, 0.03f, 0.03f, 0.03f, 0.05f, 0.75f);
 		

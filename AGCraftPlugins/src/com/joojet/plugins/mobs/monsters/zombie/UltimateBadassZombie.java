@@ -25,19 +25,11 @@ public class UltimateBadassZombie extends MobEquipment
 		// Custom potion effects
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
-		// Weapon
+		// Equipment
 		this.weapon = new SpiritualTravesty (this.color);
-		
-		// Helmet
 		this.helmet = new DarkNetheriteHelmet (this.color);
-		
-		// Chestplate
 		this.chestplate = new DarkNetheriteChestplate (this.color);
-		
-		// Leggings
 		this.leggings = new DarkNetheriteLeggings (this.color);
-		
-		// Boots
 		this.boots = new LightweightNetheriteBoots (this.color);
 	}
 }

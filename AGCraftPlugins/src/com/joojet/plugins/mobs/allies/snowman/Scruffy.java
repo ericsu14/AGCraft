@@ -18,11 +18,8 @@ public class Scruffy extends MobEquipment
 		this.health = 40;
 		this.showName = true;
 		
-		this.addPotionEffect(CustomPotionEffect.RESISTANCE);
-		this.addPotionEffect(CustomPotionEffect.WATER_BREATHING);
-		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
-		this.addPotionEffect(CustomPotionEffect.REGEN);
-		this.addPotionEffect(CustomPotionEffect.SPEED);
+		this.addPotionEffect(CustomPotionEffect.RESISTANCE, CustomPotionEffect.WATER_BREATHING,
+				CustomPotionEffect.FIRE_RESISTANCE, CustomPotionEffect.REGEN, CustomPotionEffect.SPEED);
 		
 		// Chestplate
 		this.helmet = new ScruffyFace (this.color);

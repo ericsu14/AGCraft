@@ -16,8 +16,8 @@ public class WanderingHusk extends MobEquipment
 		this.name = "Wandering Husk";
 		this.color = ChatColor.GREEN;
 		
-		this.addPotionEffect(CustomPotionEffect.STRENGTH);
-		this.addPotionEffect(CustomPotionEffect.SPEED);
+		this.addPotionEffect(CustomPotionEffect.STRENGTH,
+				CustomPotionEffect.SPEED);
 		
 		this.boots = new DesertSandals (this.color);
 	}

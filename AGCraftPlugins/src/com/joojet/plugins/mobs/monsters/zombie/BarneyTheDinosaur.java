@@ -24,6 +24,8 @@ public class BarneyTheDinosaur extends MobEquipment
 		this.addBiomes(Biome.FLOWER_FOREST, Biome.DARK_FOREST, Biome.DARK_FOREST_HILLS,
 				Biome.SWAMP, Biome.SWAMP_HILLS, Biome.JUNGLE, Biome.JUNGLE_HILLS, Biome.JUNGLE_EDGE,
 				Biome.GRAVELLY_MOUNTAINS, Biome.SUNFLOWER_PLAINS);
+		this.addPotionEffect(CustomPotionEffect.SPEED,
+				CustomPotionEffect.FIRE_RESISTANCE);
 		this.name = "Barney the Dinosaur";
 		this.color = ChatColor.DARK_PURPLE;
 		this.setDropRates(0.01f, 0.01f, 0.01f, 0.01f, 0.01f, 1.00f);
@@ -33,7 +35,5 @@ public class BarneyTheDinosaur extends MobEquipment
 		this.boots = new BarneyFeet (this.color);
 		this.weapon = new BarneyDagger (this.color);
 		this.offhand = new BarneyTotem (this.color);
-		this.addPotionEffect(CustomPotionEffect.SPEED);
-		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
 	}
 }

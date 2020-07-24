@@ -17,10 +17,10 @@ public class Frosty extends MobEquipment
 		this.health = 30;
 		this.showName = true;
 		
-		this.addPotionEffect(CustomPotionEffect.RESISTANCE);
-		this.addPotionEffect(CustomPotionEffect.WATER_BREATHING);
-		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
-		this.addPotionEffect(CustomPotionEffect.REGEN);
+		this.addPotionEffect(CustomPotionEffect.RESISTANCE, 
+				CustomPotionEffect.WATER_BREATHING, 
+				CustomPotionEffect.FIRE_RESISTANCE, 
+				CustomPotionEffect.REGEN);
 		
 		// Chestplate
 		this.helmet = new FrostyFace (this.color);
