@@ -22,6 +22,5 @@ public class PiglinHunter extends MobEquipment
 		this.helmet = new PiglinHunterHelmet (this.color);
 		this.boots = new RoyalGoldBoots (this.color);
 		this.weapon = new ShotBow (ChatColor.GOLD);
-		this.offhand = new HurtfulArrow (this.color, 64);
 	}
 }
