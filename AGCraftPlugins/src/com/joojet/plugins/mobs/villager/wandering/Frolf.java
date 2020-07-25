@@ -54,28 +54,28 @@ public class Frolf extends VillagerEquipment
 		this.addRecipe(luckPotion, Material.DIAMOND, 2, 4);
 		
 		/** Trade 7: Enhanced Potion of Strength
-		 * 		- Price: 5 Diamonds
+		 * 		- Price: 4 Diamonds
 		 * 		- Max stock: 4 */
 		EnhancedStrengthPotion enhancedStrengthPotion = new EnhancedStrengthPotion (this.color);
-		this.addRecipe(enhancedStrengthPotion, Material.DIAMOND, 5, 3);
+		this.addRecipe(enhancedStrengthPotion, Material.DIAMOND, 4, 3);
 		
 		/** Trade 8: Enhanced Potion of Speed 
-		 * 		- Price: 5 Diamonds
+		 * 		- Price: 4 Diamonds
 		 * 		- Max stock: 3 */
 		EnhancedSpeedPotion enhancedSpeedPotion = new EnhancedSpeedPotion (this.color);
-		this.addRecipe(enhancedSpeedPotion, Material.DIAMOND, 5, 3);
+		this.addRecipe(enhancedSpeedPotion, Material.DIAMOND, 4, 3);
 		
-		/** Trade 9: Enhanced Potion of Haste
+		/** Trade 9: Enhanced Potion of Luck
+		 * 		- Price: 5 Diamonds
+		 * 		- Max Stock: 3 */
+		EnhancedLuckPotion enhancedLuckPotion = new EnhancedLuckPotion (this.color);
+		this.addRecipe(enhancedLuckPotion, Material.DIAMOND, 4, 3);
+		
+		/** Trade 10: Enhanced Potion of Haste
 		 *  	- Price: 5 Diamonds
 		 *  	- Max Stock: 3 */
 		EnhancedHastePotion enhancedHastePotion = new EnhancedHastePotion (this.color);
 		this.addRecipe(enhancedHastePotion, Material.DIAMOND, 5, 3);
-		
-		/** Trade 10: Enhanced Potion of Luck
-		 * 		- Price: 5 Diamonds
-		 * 		- Max Stock: 3 */
-		EnhancedLuckPotion enhancedLuckPotion = new EnhancedLuckPotion (this.color);
-		this.addRecipe(enhancedLuckPotion, Material.DIAMOND, 5, 3);
 		
 		/** Trade 11: Summon Frosty
 		 * 		- Price: 16 Emeralds

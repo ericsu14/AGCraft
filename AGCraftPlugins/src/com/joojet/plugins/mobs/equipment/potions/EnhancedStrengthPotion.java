@@ -11,7 +11,7 @@ public class EnhancedStrengthPotion extends PotionEquipment
 		super (color);
 		this.addPotionEffect(PotionEffectType.INCREASE_DAMAGE, 6000, 1);
 		this.setDisplayName("Enhanced Potion of Strength");
-		this.addLoreToItemMeta("Significantly increases attack damage for four minutes.");
+		this.addLoreToItemMeta("Significantly increases attack damage for five minutes.");
 		this.setColor(Color.MAROON);
 	}
 }
