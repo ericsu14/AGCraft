@@ -5,6 +5,7 @@ import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.equipment.boots.RoyalGoldBoots;
 import com.joojet.plugins.mobs.equipment.head.PiglinHunterHelmet;
+import com.joojet.plugins.mobs.equipment.offhand.HurtfulArrow;
 import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -21,5 +22,6 @@ public class PiglinHunter extends MobEquipment
 		this.helmet = new PiglinHunterHelmet (this.color);
 		this.boots = new RoyalGoldBoots (this.color);
 		this.weapon = new ShotBow (ChatColor.GOLD);
+		this.offhand = new HurtfulArrow (this.color, 64);
 	}
 }

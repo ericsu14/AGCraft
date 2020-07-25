@@ -9,6 +9,11 @@ public class EnhancedLuckPotion extends PotionEquipment
 	public EnhancedLuckPotion (ChatColor color)
 	{
 		super (color);
+	}
+	
+	@Override
+	public void addPotionData ()
+	{
 		this.addPotionEffect(PotionEffectType.LUCK, 6000, 1);
 		this.setDisplayName("Enhanced Potion of Luck");
 		this.addLoreToItemMeta("Significantly increases loot table rewards for five minutes.");

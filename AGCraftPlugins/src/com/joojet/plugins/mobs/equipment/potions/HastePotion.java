@@ -14,4 +14,13 @@ public class HastePotion extends PotionEquipment
 		this.addLoreToItemMeta("Slightly increases mining speed for eight minutes.");
 		this.setColor(Color.YELLOW);
 	}
+	
+	@Override
+	public void addPotionData ()
+	{
+		this.addPotionEffect(PotionEffectType.FAST_DIGGING, 9600, 0);
+		this.setDisplayName("Potion of Haste");
+		this.addLoreToItemMeta("Slightly increases mining speed for eight minutes.");
+		this.setColor(Color.YELLOW);
+	}
 }

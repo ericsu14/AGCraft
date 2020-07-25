@@ -43,6 +43,16 @@ public abstract class Equipment extends ItemStack
 		this.wordsPerLine = 4;
 	}
 	
+	/** Constructs a item with a specified item count */
+	public Equipment (Material material, EquipmentSlot equipmentSlot, ChatColor chatColor, int count)
+	{		
+		super (material, (count > 64) ? 64 : count);
+		this.equipmentSlot = equipmentSlot;
+		this.chatColor = chatColor;
+		this.playerHead = null;
+		this.wordsPerLine = 4;
+	}
+	
 	/** Constructs a basic playerhead item */
 	public Equipment (PlayerHead head, ChatColor chatColor)
 	{

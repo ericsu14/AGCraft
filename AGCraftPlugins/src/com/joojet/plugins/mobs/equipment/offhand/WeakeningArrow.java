@@ -9,6 +9,11 @@ public class WeakeningArrow extends TippedArrow
 	public WeakeningArrow (ChatColor color)
 	{
 		super (color);
+	}
+	
+	@Override
+	public void addPotionData ()
+	{
 		this.setColor(Color.GRAY);
 		this.addPotionEffect(PotionEffectType.WEAKNESS, 70, 0);
 		this.setDisplayName("Weakening Arrow");

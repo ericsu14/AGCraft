@@ -9,6 +9,11 @@ public class CursedArrow extends TippedArrow
 	public CursedArrow (ChatColor color)
 	{
 		super (color);
+	}
+	
+	@Override
+	public void addPotionData ()
+	{
 		this.setDisplayName("Cursed Arrow");
 		this.addLoreToItemMeta("You’ve met with a terrible fate, haven’t you?");
 		this.addPotionEffect(PotionEffectType.BLINDNESS, 70, 0);

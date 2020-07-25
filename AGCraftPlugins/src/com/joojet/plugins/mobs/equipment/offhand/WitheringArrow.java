@@ -9,6 +9,11 @@ public class WitheringArrow extends TippedArrow
 	public WitheringArrow (ChatColor color)
 	{
 		super (color);
+	}
+	
+	@Override
+	public void addPotionData ()
+	{
 		this.setColor(Color.BLACK);
 		this.addPotionEffect(PotionEffectType.WITHER, 280, 140);
 		this.addPotionEffect(PotionEffectType.HARM, 1, 1);

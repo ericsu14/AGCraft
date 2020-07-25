@@ -68,7 +68,7 @@ public class RewardGUI implements Listener
 	        	++index;
 	        }
 	        player.openInventory(inv);
-		} 
+	    } 
     	catch (SQLException e) 
     	{
     		player.sendMessage(ChatColor.RED + "An internal error occured while trying to fetch rewards.");
