@@ -5,7 +5,6 @@ import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.equipment.boots.RoyalGoldBoots;
 import com.joojet.plugins.mobs.equipment.head.PiglinHunterHelmet;
-import com.joojet.plugins.mobs.equipment.offhand.HurtfulArrow;
 import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
