@@ -13,7 +13,7 @@ public class ShotBow extends Equipment
 	{
 		super (Material.CROSSBOW, EquipmentSlot.HAND, color);
 		this.setDisplayName("ShotBow");
-		this.addLoreToItemMeta("A quick-firing crossbow that shoots multiple high-penetrating arrows at quick succession. Mending cannot be applied to this weapon.");
+		this.addLoreToItemMeta("A quick firing crossbow that shoots multiple high penetrating arrows at quick succession. Mending cannot be applied to this weapon.");
 		this.addUnsafeEnchantment(Enchantment.QUICK_CHARGE, 5);
 		this.addUnsafeEnchantment(Enchantment.PIERCING, 3);
 		this.addUnsafeEnchantment(Enchantment.MULTISHOT, 1);

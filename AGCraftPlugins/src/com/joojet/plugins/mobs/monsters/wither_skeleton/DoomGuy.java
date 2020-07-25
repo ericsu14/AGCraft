@@ -19,7 +19,7 @@ public class DoomGuy extends MobEquipment
 	{
 		this.name = "The Doom Slayer";
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.05f, 0.15f);
-		this.color = ChatColor.GOLD;
+		this.color = ChatColor.DARK_RED;
 		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);

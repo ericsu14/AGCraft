@@ -18,8 +18,9 @@ public class SoulObliterator extends MobEquipment
 	public SoulObliterator ()
 	{
 		this.name = "Soul Obliterator";
-		this.color = ChatColor.LIGHT_PURPLE;
+		this.color = ChatColor.GOLD;
 		this.health = 16;
+		this.showName = true;
 		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);

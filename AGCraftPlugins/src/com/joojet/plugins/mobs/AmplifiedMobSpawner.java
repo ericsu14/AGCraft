@@ -146,7 +146,7 @@ public class AmplifiedMobSpawner implements Listener
 		if (event.getDamager() instanceof Arrow)
 		{
 			Arrow arr = (Arrow) event.getDamager();
-			if (arr.getShooter() instanceof Player)
+			if (arr.getShooter() instanceof Player && event.getEntity() instanceof LivingEntity)
 			{
 				Player p = (Player) arr.getShooter();
 				LivingEntity e = (LivingEntity) event.getEntity();

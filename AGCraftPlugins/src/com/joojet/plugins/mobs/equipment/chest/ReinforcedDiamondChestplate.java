@@ -17,6 +17,6 @@ public class ReinforcedDiamondChestplate extends Equipment
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
 		this.setDisplayName("Enhanced Diamond Chestplate");
 		this.addLoreToItemMeta("Forged from a higher-grade cut of Diamond, this chestplate offers improved resistance towards high damaging attacks.");
-		this.addDefenseAttributes(8.0, 4.0, 0.0);
+		this.addDefenseAttributes(8.0, 2.5, 0.10);
 	}
 }
