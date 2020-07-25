@@ -8,9 +8,9 @@ public class EnhancedSpeedPotion extends PotionEquipment {
 	public EnhancedSpeedPotion (ChatColor color)
 	{
 		super (color);
-		this.addPotionEffect(PotionEffectType.SPEED, 4800, 1);
+		this.addPotionEffect(PotionEffectType.SPEED, 6000, 1);
 		this.setDisplayName("Enhanced Potion of Speed");
-		this.addLoreToItemMeta("Significantly increases movement speed for four minutes.");
+		this.addLoreToItemMeta("Significantly increases movement speed for five minutes.");
 		this.setColor(Color.fromRGB(137, 207, 240));
 	}
 }

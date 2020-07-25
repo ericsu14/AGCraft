@@ -31,9 +31,9 @@ public class Frolf extends VillagerEquipment
 		this.addRecipe(sponges, Material.EMERALD, 12, 2);
 		
 		/** Trade 3: Enchanted Golden Apple 
-		 *		- Price: 5 diamonds, max stock: 3 */
+		 *		- Price: 3 diamonds, max stock: 8 */
 		ItemStack goldApple = new ItemStack (Material.ENCHANTED_GOLDEN_APPLE, 1);
-		this.addRecipe(goldApple, Material.DIAMOND, 5, 5);
+		this.addRecipe(goldApple, Material.DIAMOND, 3, 8);
 		
 		/** Trade 4: Netherite Ingot
 		 * 		- Price: 12 Diamonds
@@ -41,41 +41,41 @@ public class Frolf extends VillagerEquipment
 		ItemStack netheriteIgnot = new ItemStack (Material.NETHERITE_INGOT, 1);
 		this.addRecipe(netheriteIgnot, Material.DIAMOND, 12, 1);
 		
-		/** Trade 5: Enhanced Potion of Strength
-		 * 		- Price: 4 Diamonds
-		 * 		- Max stock: 2 */
-		EnhancedStrengthPotion enhancedStrengthPotion = new EnhancedStrengthPotion (this.color);
-		this.addRecipe(enhancedStrengthPotion, Material.DIAMOND, 4, 2);
-		
-		/** Trade 6: Enhanced Potion of Speed 
-		 * 		- Price: 4 Diamonds
-		 * 		- Max stock: 2 */
-		EnhancedSpeedPotion enhancedSpeedPotion = new EnhancedSpeedPotion (this.color);
-		this.addRecipe(enhancedSpeedPotion, Material.DIAMOND, 4, 2);
-		
-		/** Trade 7: Potion of Haste
-		 * 		- Price: 3 Diamonds
+		/** Trade 5: Potion of Haste
+		 * 		- Price: 2 Diamonds
 		 * 		- Max stock: 3 */
 		HastePotion hastePotion = new HastePotion (this.color);
-		this.addRecipe(hastePotion, Material.DIAMOND, 3, 3);
+		this.addRecipe(hastePotion, Material.DIAMOND, 2, 4);
 		
-		/** Trade 8: Potion of Luck
-		 * 		- Price: 3 Diamonds
-		 * 		- Max Stock: 3 */
+		/** Trade 6: Potion of Luck
+		 * 		- Price: 2 Diamonds
+		 * 		- Max Stock: 4 */
 		LuckPotion luckPotion = new LuckPotion (this.color);
-		this.addRecipe(luckPotion, Material.DIAMOND, 3, 3);
+		this.addRecipe(luckPotion, Material.DIAMOND, 2, 4);
+		
+		/** Trade 7: Enhanced Potion of Strength
+		 * 		- Price: 5 Diamonds
+		 * 		- Max stock: 4 */
+		EnhancedStrengthPotion enhancedStrengthPotion = new EnhancedStrengthPotion (this.color);
+		this.addRecipe(enhancedStrengthPotion, Material.DIAMOND, 5, 3);
+		
+		/** Trade 8: Enhanced Potion of Speed 
+		 * 		- Price: 5 Diamonds
+		 * 		- Max stock: 3 */
+		EnhancedSpeedPotion enhancedSpeedPotion = new EnhancedSpeedPotion (this.color);
+		this.addRecipe(enhancedSpeedPotion, Material.DIAMOND, 5, 3);
 		
 		/** Trade 9: Enhanced Potion of Haste
 		 *  	- Price: 5 Diamonds
-		 *  	- Max Stock: 2 */
+		 *  	- Max Stock: 3 */
 		EnhancedHastePotion enhancedHastePotion = new EnhancedHastePotion (this.color);
-		this.addRecipe(enhancedHastePotion, Material.DIAMOND, 5, 2);
+		this.addRecipe(enhancedHastePotion, Material.DIAMOND, 5, 3);
 		
 		/** Trade 10: Enhanced Potion of Luck
 		 * 		- Price: 5 Diamonds
-		 * 		- Max Stock: 2 */
+		 * 		- Max Stock: 3 */
 		EnhancedLuckPotion enhancedLuckPotion = new EnhancedLuckPotion (this.color);
-		this.addRecipe(enhancedLuckPotion, Material.DIAMOND, 5, 2);
+		this.addRecipe(enhancedLuckPotion, Material.DIAMOND, 5, 3);
 		
 		/** Trade 11: Summon Frosty
 		 * 		- Price: 16 Emeralds
