@@ -122,71 +122,85 @@ public abstract class MobEquipment
 		return this.dropRates;
 	}
 	
+	/** Returns the monster's helmet */
 	public ItemStack getHelmet ()
 	{
 		return this.helmet;
 	}
 	
+	/** Returns the monster's chestplate */
 	public ItemStack getChestplate ()
 	{
 		return this.chestplate;
 	}
 	
+	/** Returns the monster's leggings */
 	public ItemStack getLeggings ()
 	{
 		return this.leggings;
 	}
 	
+	/** Returns the monster's boots */
 	public ItemStack getBoots ()
 	{
 		return this.boots;
 	}
 	
+	/** Returns the monster's weapon */
 	public ItemStack getWeapon ()
 	{
 		return this.weapon;
 	}
 	
+	/** Returns the monster's offhand item */
 	public ItemStack getOffhand ()
 	{
 		return this.offhand;
 	}
 	
+	/** Returns the monster's name */
 	public String getName ()
 	{
 		return this.name;
 	}
 	
+	/** Returns the monster's ChatColor used to color their nametag */
 	public ChatColor getChatColor ()
 	{
 		return this.color;
 	}
 	
+	/** Returns the monster's custom health points */
 	public double getHealth ()
 	{
 		return this.health;
 	}
 	
+	/** Returns the monster's active potion effects as an ArrayList */
 	public ArrayList <PotionEffect> getEffects ()
 	{
 		return this.effects;
 	}
 	
+	/** Determines if the monster spawns with a permanent fire effect */
 	public boolean onFire ()
 	{
 		return this.onFire;
 	}
 	
+	/** Determines if the monster's nametag should be permanently visible to all players. */
 	public boolean showName ()
 	{
 		return this.showName;
 	}
 	
+	/** Determines if the monster should spawn with an active lightning bolt struck on its location. */
 	public boolean spawnLightning ()
 	{
 		return this.spawnLightning;
 	}
 	
+	/** Returns the monster's custom base attack damage */
 	public double getBaseAttackDamage ()
 	{
 		return this.attackDamage;
