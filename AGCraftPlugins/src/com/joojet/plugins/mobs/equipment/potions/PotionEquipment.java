@@ -4,7 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.interfaces.AbstractPotionEquipment;
+import com.joojet.plugins.mobs.equipment.AbstractPotionEquipment;
 
 public abstract class PotionEquipment extends AbstractPotionEquipment 
 {

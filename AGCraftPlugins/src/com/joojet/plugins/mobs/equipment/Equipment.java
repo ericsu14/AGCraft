@@ -65,7 +65,7 @@ public abstract class Equipment extends ItemStack
 	}
 	
 	/** Adds an attack speed attribute to a piece of armor or weapon */
-	public void addAttackAttributes (double attackDamage, double attackSpeed)
+	protected void addAttackAttributes (double attackDamage, double attackSpeed)
 	{
 		ItemMeta meta = this.getItemMeta();
 		if (attackDamage > 0.0)
@@ -83,7 +83,7 @@ public abstract class Equipment extends ItemStack
 	}
 	
 	/** Adds a speed attribute to a piece of armor or weapon */
-	public void addSpeedAttribute (double speed)
+	protected void addSpeedAttribute (double speed)
 	{
 		ItemMeta meta = this.getItemMeta();
 		if (speed > 0.0)
@@ -100,7 +100,7 @@ public abstract class Equipment extends ItemStack
 	 * 	@param armor - Armor points the equipment carries
 	 * 	@param armorToughness - Armor toughness points the equipment carries
 	 * 	@param knockbackResistance - Knockback resistance points the equipment carries */
-	public void addDefenseAttributes (double armor, double armorToughness, double knockbackResistance)
+	protected void addDefenseAttributes (double armor, double armorToughness, double knockbackResistance)
 	{
 		ItemMeta meta = this.getItemMeta();
 		if (armor > 0.0)
@@ -123,7 +123,7 @@ public abstract class Equipment extends ItemStack
 	
 	/** Adds max health attributes to a piece of armor or weapon
 	 * 		@param health - The amount of max health bonuses this equipment carries */
-	public void addHealthAttributes (double health)
+	protected void addHealthAttributes (double health)
 	{
 		ItemMeta meta = this.getItemMeta();
 		if (health > 0.0)
@@ -139,7 +139,7 @@ public abstract class Equipment extends ItemStack
 	 *  	https://www.spigotmc.org/threads/custom-textured-non-player-skulls.244561/#post-2448313
 	 *  @param meta - the item we are adding head data to.
 	 *  @param head - Type of skin the player head is using */
-	public void createHeadData (PlayerHead head)
+	protected void createHeadData (PlayerHead head)
 	{
 		SkullMeta localSkullMeta = (SkullMeta) this.getItemMeta();
 
@@ -165,7 +165,7 @@ public abstract class Equipment extends ItemStack
 	
 	/** Americanizes a name by applying the USA colors to every character in a string
 	 *  in an alternating pattern */
-	public String americanizeText (String str)
+	protected String americanizeText (String str)
 	{
 		StringBuilder result = new StringBuilder ();
 		
@@ -199,7 +199,7 @@ public abstract class Equipment extends ItemStack
 	/** Adds a new lore string into the equipment. The String will be split into multiple tokens depending on how many
 	 *  words can fit in a single line.
 	 * 		@param meta - ItemMeta we are adding the lore info into */
-	public void addLoreToItemMeta (String lore)
+	protected void addLoreToItemMeta (String lore)
 	{
 		ArrayList <String> itemLore = new ArrayList <String> ();
 		StringBuilder str = new StringBuilder();
@@ -233,7 +233,7 @@ public abstract class Equipment extends ItemStack
 	}
 	
 	/** Sets the display name for this equipment */
-	public void setDisplayName (String name)
+	protected void setDisplayName (String name)
 	{
 		ItemMeta meta = this.getItemMeta();
 		meta.setDisplayName(this.chatColor + name);
@@ -241,7 +241,7 @@ public abstract class Equipment extends ItemStack
 	}
 	
 	/** Modifies the localized name field of this item */
-	public void setLocalizedName (String text)
+	protected void setLocalizedName (String text)
 	{
 		ItemMeta meta = this.getItemMeta();
 		meta.setLocalizedName(text);
