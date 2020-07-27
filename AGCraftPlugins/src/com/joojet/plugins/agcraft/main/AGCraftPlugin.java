@@ -13,6 +13,7 @@ import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.agcraft.interfaces.AGTabCompleter;
 import com.joojet.plugins.agcraft.interfaces.PlayerCommand;
 import com.joojet.plugins.biblefetcher.commands.*;
+import com.joojet.plugins.biblefetcher.commands.tabcompleter.BibleTabCompleter;
 import com.joojet.plugins.consequences.ConsequenceManager;
 import com.joojet.plugins.consequences.commands.*;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
@@ -24,7 +25,9 @@ import com.joojet.plugins.rewards.database.CreateRewardsDatabase;
 import com.joojet.plugins.rewards.interpreter.EventTypeInterpreter;
 import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
 import com.joojet.plugins.utility.commands.*;
+import com.joojet.plugins.utility.commands.tabcompleter.ClearJunkTabCompleter;
 import com.joojet.plugins.warp.commands.*;
+import com.joojet.plugins.warp.commands.tabcompleter.*;
 import com.joojet.plugins.warp.database.CreateLocationDatabase;
 
 public class AGCraftPlugin extends JavaPlugin 
@@ -42,11 +45,12 @@ public class AGCraftPlugin extends JavaPlugin
 	// Stores the server mode, which enables or disables commands and listeners depending on what mode the server is ran in
 	public static ServerMode serverMode = ServerMode.NORMAL;
 	// A list containing all known commands
-	private static HashMap <CommandType, PlayerCommand> playerCommands = new HashMap <CommandType, PlayerCommand> ();
+	private HashMap <CommandType, PlayerCommand> playerCommands;
 	
 	public AGCraftPlugin ()
 	{
 		super ();
+		this.playerCommands = new HashMap <CommandType, PlayerCommand> ();
 	}
 	
 	@Override
@@ -82,13 +86,6 @@ public class AGCraftPlugin extends JavaPlugin
 
 	}
 	
-	/** Adds a tab completer into this command list
-	 * 		@param commandType - The type of command the tab completer instance is being attached to
-	 * 		@param tabCompleter - A reference to the tab completer instance being attached */
-	public static void addTabCompleter (AGTabCompleter tabCompleter)
-	{
-		playerCommands.get(tabCompleter.getCommandType()).setTabCompleter(tabCompleter);
-	}
 	
 	/** Initializes all commands */
 	public void initCommands ()
@@ -110,6 +107,14 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addPlayerCommand (new SetLocation ());
 		this.addPlayerCommand (new Warp ());
 		this.addPlayerCommand (new RemoveOldNetherLocations());
+		
+		// Tab Completers
+		this.addTabCompleter(new BibleTabCompleter ());
+		this.addTabCompleter(new ClearJunkTabCompleter());
+		this.addTabCompleter(new GetLocationsTabCompleter ());
+		this.addTabCompleter(new RemoveLocationTabCompleter ());
+		this.addTabCompleter(new SetLocationTabCompleter ());
+		this.addTabCompleter(new WarpTabCompleter ());
 	}
 	
 	/** Loads in all known commands into the plugin */
@@ -160,5 +165,12 @@ public class AGCraftPlugin extends JavaPlugin
 		playerCommands.put(executor.getCommandType(), new PlayerCommand (executor.getCommandType(), executor));
 	}
 	
+	/** Adds a tab completer into this command list
+	 * 		@param commandType - The type of command the tab completer instance is being attached to
+	 * 		@param tabCompleter - A reference to the tab completer instance being attached */
+	private void addTabCompleter (AGTabCompleter tabCompleter)
+	{
+		playerCommands.get(tabCompleter.getCommandType()).setTabCompleter(tabCompleter);
+	}
 	
 }

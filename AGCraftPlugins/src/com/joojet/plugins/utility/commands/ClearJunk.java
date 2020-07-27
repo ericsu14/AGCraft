@@ -15,9 +15,7 @@ import org.bukkit.ChatColor;
 
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
-import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
-import com.joojet.plugins.utility.commands.tabcompleter.ClearJunkTabCompleter;
 import com.joojet.plugins.utility.enums.JunkClassifier;
 import com.joojet.plugins.utility.interpreter.JunkCommandInterpreter;
 
@@ -81,8 +79,6 @@ public class ClearJunk extends AGCommandExecutor
 		
 		// Initializes command interpreter
 		this.commandInterpreter = new JunkCommandInterpreter ();
-		
-		AGCraftPlugin.addTabCompleter(new ClearJunkTabCompleter ());
 	}
 	
 	/** Removes junk items from the player's inventory

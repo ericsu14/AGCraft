@@ -9,8 +9,6 @@ import org.bukkit.ChatColor;
 
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
-import com.joojet.plugins.agcraft.main.AGCraftPlugin;
-import com.joojet.plugins.warp.commands.tabcompleter.RemoveLocationTabCompleter;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 
 public class RemoveLocation extends AGCommandExecutor
@@ -18,7 +16,6 @@ public class RemoveLocation extends AGCommandExecutor
 	public RemoveLocation ()
 	{
 		super (CommandType.REMOVE_LOCATION);
-		AGCraftPlugin.addTabCompleter(new RemoveLocationTabCompleter ());
 	}
 	
 	/** Removes a location from the player's list of implemented locations.

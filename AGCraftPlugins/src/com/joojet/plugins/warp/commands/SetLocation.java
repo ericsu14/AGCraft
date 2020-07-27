@@ -7,8 +7,6 @@ import org.bukkit.ChatColor;
 
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
-import com.joojet.plugins.agcraft.main.AGCraftPlugin;
-import com.joojet.plugins.warp.commands.tabcompleter.SetLocationTabCompleter;
 import com.joojet.plugins.warp.constants.WarpAccessLevel;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 import com.joojet.plugins.warp.interpreter.AccessLevelInterpreter;
@@ -21,7 +19,6 @@ public class SetLocation extends AGCommandExecutor
 	{
 		super (CommandType.SET_LOCATION);
 		interpreter = new AccessLevelInterpreter ();
-		AGCraftPlugin.addTabCompleter(new SetLocationTabCompleter ());
 	}
 	
 	/** Registers the player's current location as a new location in the database as

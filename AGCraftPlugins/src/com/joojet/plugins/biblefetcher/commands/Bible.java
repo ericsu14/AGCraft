@@ -18,7 +18,6 @@ import com.joojet.biblefetcher.fetcher.BibleFetcher;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
-import com.joojet.plugins.biblefetcher.commands.tabcompleter.BibleTabCompleter;
 import com.joojet.plugins.biblefetcher.string.ContentParser;
 
 public class Bible extends AGCommandExecutor
@@ -41,8 +40,6 @@ public class Bible extends AGCommandExecutor
 		this.end = 1;
 		this.n = 3;
 		this.verseSize = 0;
-		
-		AGCraftPlugin.addTabCompleter(new BibleTabCompleter ());
 	}
 	
 	/** Represents the /bible command.
