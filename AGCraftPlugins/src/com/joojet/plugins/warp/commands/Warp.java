@@ -13,7 +13,9 @@ import org.bukkit.ChatColor;
 
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
+import com.joojet.plugins.warp.commands.tabcompleter.WarpTabCompleter;
 import com.joojet.plugins.warp.database.EWarpDatabaseManager;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 import com.joojet.plugins.warp.scantools.ScanEntities;
@@ -29,6 +31,7 @@ public class Warp extends AGCommandExecutor
 	public Warp ()
 	{
 		super (CommandType.WARP);
+		AGCraftPlugin.addTabCompleter(new WarpTabCompleter ());
 	}
 	
 	/** Warps a player to either a designated location or their bed spawn.

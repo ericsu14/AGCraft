@@ -3,22 +3,28 @@ package com.joojet.plugins.agcraft.main;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.joojet.biblefetcher.database.CreateDatabase;
 import com.joojet.biblefetcher.interpreter.CommandInterpreter;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.enums.PermissionType;
 import com.joojet.plugins.agcraft.enums.ServerMode;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
+import com.joojet.plugins.agcraft.interfaces.AGTabCompleter;
 import com.joojet.plugins.agcraft.interfaces.PlayerCommand;
+import com.joojet.plugins.biblefetcher.commands.*;
 import com.joojet.plugins.consequences.ConsequenceManager;
+import com.joojet.plugins.consequences.commands.*;
+import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.rewards.RewardManager;
+import com.joojet.plugins.rewards.commands.*;
 import com.joojet.plugins.rewards.database.CreateRewardsDatabase;
 import com.joojet.plugins.rewards.interpreter.EventTypeInterpreter;
 import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
+import com.joojet.plugins.utility.commands.*;
+import com.joojet.plugins.warp.commands.*;
 import com.joojet.plugins.warp.database.CreateLocationDatabase;
 
 public class AGCraftPlugin extends JavaPlugin 
@@ -53,6 +59,7 @@ public class AGCraftPlugin extends JavaPlugin
 		CreateRewardsDatabase.createDatabase();
 		
 		// Loads in all commands
+		this.initCommands();
 		this.loadCommands();
 		this.setCommandPermissions();
 		
@@ -75,6 +82,36 @@ public class AGCraftPlugin extends JavaPlugin
 
 	}
 	
+	/** Adds a tab completer into this command list
+	 * 		@param commandType - The type of command the tab completer instance is being attached to
+	 * 		@param tabCompleter - A reference to the tab completer instance being attached */
+	public static void addTabCompleter (AGTabCompleter tabCompleter)
+	{
+		playerCommands.get(tabCompleter.getCommandType()).setTabCompleter(tabCompleter);
+	}
+	
+	/** Initializes all commands */
+	public void initCommands ()
+	{
+		// Commands
+		this.addPlayerCommand (new Bible ());
+		this.addPlayerCommand (new ClearBibles ());
+		this.addPlayerCommand (new ForgivePlayer ());
+		this.addPlayerCommand (new PunishPlayer ());
+		this.addPlayerCommand (new GetCoordinates ());
+		this.addPlayerCommand (new OpenRewards ());
+		this.addPlayerCommand (new RewardPlayer ());
+		this.addPlayerCommand (new AutoSmelt ());
+		this.addPlayerCommand (new ClearJunk ());
+		this.addPlayerCommand (new ToggleDebugMode ());
+		this.addPlayerCommand (new GetLocations ());
+		this.addPlayerCommand (new GiveRespawnTicket ());
+		this.addPlayerCommand (new RemoveLocation ());
+		this.addPlayerCommand (new SetLocation ());
+		this.addPlayerCommand (new Warp ());
+		this.addPlayerCommand (new RemoveOldNetherLocations());
+	}
+	
 	/** Loads in all known commands into the plugin */
 	public void loadCommands ()
 	{
@@ -87,8 +124,8 @@ public class AGCraftPlugin extends JavaPlugin
 			{
 				this.getCommand(commandName).setTabCompleter(pCommand.getTabCompleter());
 			}
+			System.out.println ("Inserted " + commandName);
 		}
-		this.setCommandPermissions();
 	}
 	
 	/** Changes permissions for all known server commands based on the current server mode */
@@ -107,22 +144,6 @@ public class AGCraftPlugin extends JavaPlugin
 		}
 	}
 	
-	/** Adds in a new player command without a tab completer
-	 * 		@param commandType - Type of command the command executor is being attached to
-	 * 		@param executor - A reference to the command executor instance */
-	public static void addPlayerCommand (CommandType commandType, CommandExecutor executor)
-	{
-		playerCommands.put(commandType, new PlayerCommand (commandType, executor));
-	}
-	
-	/** Adds a tab completer into this command list
-	 * 		@param commandType - The type of command the tab completer instance is being attached to
-	 * 		@param tabCompleter - A reference to the tab completer instance being attached */
-	public static void addTabCompleter (CommandType commandType, TabCompleter tabCompleter)
-	{
-		playerCommands.get(commandType).setTabCompleter(tabCompleter);
-	}
-	
 	/** Switches the server's mode to a new value
 	 * 		@param mode - The new mode the server is being switched to */
 	public void switchServerMode (ServerMode mode)
@@ -130,5 +151,14 @@ public class AGCraftPlugin extends JavaPlugin
 		serverMode = mode;
 		setCommandPermissions ();
 	}
+	
+	/** Adds in a new player command without a tab completer
+	 * 		@param commandType - Type of command the command executor is being attached to
+	 * 		@param executor - A reference to the command executor instance */
+	private void addPlayerCommand (AGCommandExecutor executor)
+	{
+		playerCommands.put(executor.getCommandType(), new PlayerCommand (executor.getCommandType(), executor));
+	}
+	
 	
 }
