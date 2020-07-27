@@ -6,51 +6,84 @@ commands:
   bible:
     description: Generates a written book containing specified sections of the Bible. The <start> and <end> parameters are optional.
     usage: /bible <translation> <book> <chapter> <start> <end>
+    permission: agcraft.all
   clearBibles:
     description: Removes all command-generated bibles from your inventory.
     usage: /clearbibles
+    permission: agcraft.all
   getCoordinates:
     description: Returns the coordinates of your current location in {X,Y,Z format}. This also returns the coordinates of another player in this server if another player is specified.
     usage: /getcoordinates or /getCoordinates <player>
+    permission: agcraft.player
   clearJunk:
     description: Removes junk items from your inventory based on a list of classifiers. Listed classifiers are common, stone, natural, brewing, and armor.
     usage: / clearjunk or / clearJunk <list of classifiers>
+    permission: agcraft.player
   autosmelt:
     description: Uses the coal / coal blocks / charcoal in your inventory to automatically smelt gold / iron ores to their respective counterparts
     usage: /autosmelt
+    permission: agcraft.player
   warp:
     description: Warps you to either a designated location or their bed spawn. Use /warp home to teleport to your bed spawn.
     usage: /warp <location name>
+    permission: agcraft.player
   getLocations:
     description: Prints all known location name to your chat as a list
     usage: /getlocations <PUBLIC | PRIVATE>
+    permission: agcraft.player
   removeLocation:
     description: Removes a location from the player's list of implemented locations.
     usage: /removelocation <location name>
+    permission: agcraft.player
   setLocation:
     description: Registers the player's current location as a new location in the database as a specified name
     usage: /setlocation <name of location> <PUBLIC | PRIVATE>
+    permission: agcraft.player
   giverespawnticket:
     description: Admin use only
     usage: /giverespawnticket <username>
+    permission: agcraft.admin
   removeoldnetherlocations:
     description: Admin use only. Removes all old nether warps from the database.
     usage: /removeoldnetherlocations
+    permission: agcraft.admin
   rewards:
     description: Use this command to open the rewards GUI. Rewards can be earned by partaking in events!
     usage: /rewards
+    permission: agcraft.player
   grantreward:
     description: Admin use only.
     usage: /grantreward <type of reward> <type of event> [list of players]
+    permission: agcraft.admin
   toggledebugmode:
     description: Toggles debug mode used to display damage outputs of player or mob attacks. To be used only by the administrator.
     usage: /toggledebugmode
+    permission: agcraft.admin
   punishplayer:
     description: Punishes a player by forcing him/her to wear a clown mask for a certain amount of time. Can only be ran by server admins.
     usage: /punishplayer <player> {<duration> <calendar_field> }
+    permission: agcraft.admin
   forgiveplayer:
     description: Removes all of a player's inactive and active consequences from the database. Can only be ran by server admins.
     usage: /forgiveplayer <player>
+    permission: agcraft.admin
+
+permissions:
+  agcraft.*:
+    description: Permissions specifiers for AGCraft plugin commands
+    children:
+      agcraft.player: true
+      agcraft.admin: true
+
+  agcraft.all:
+    description: Specifies a command usable by all players in any minigame or normal server instance
+    default: true
+  agcraft.admin:
+    description: Specifies a command usable only through server OPs and admins.
+    default: op
+  agcraft.player:
+    description: Specifies a command usuable only in normal gameplay, but not minigames.
+    default: true
     
 
   
