@@ -11,6 +11,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.rewards.database.RewardDatabaseManager;
 import com.joojet.plugins.rewards.enums.EventType;
@@ -18,9 +20,14 @@ import com.joojet.plugins.rewards.enums.RewardType;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class RewardPlayer implements CommandExecutor 
+public class RewardPlayer extends AGCommandExecutor
 {
 	
+	public RewardPlayer(CommandType commandType) 
+	{
+		super(commandType);
+	}
+
 	/** Usage:
 	 * 		/rewardplayer <Reward Type> <Event Type> [List of Players] */
 	@SuppressWarnings("deprecation")

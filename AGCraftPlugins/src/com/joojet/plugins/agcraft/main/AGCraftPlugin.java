@@ -1,9 +1,18 @@
 package com.joojet.plugins.agcraft.main;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.joojet.biblefetcher.database.CreateDatabase;
 import com.joojet.biblefetcher.interpreter.CommandInterpreter;
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.enums.PermissionType;
+import com.joojet.plugins.agcraft.enums.ServerMode;
+import com.joojet.plugins.agcraft.interfaces.PlayerCommand;
 import com.joojet.plugins.biblefetcher.commands.Bible;
 import com.joojet.plugins.biblefetcher.commands.ClearBibles;
 import com.joojet.plugins.biblefetcher.commands.tabcompleter.*;
@@ -39,6 +48,15 @@ public class AGCraftPlugin extends JavaPlugin
 	public static RewardTypeInterpreter rewardInterpreter = new RewardTypeInterpreter();
 	// Stores the command interpreter used for event types
 	public static EventTypeInterpreter eventInterpreter = new EventTypeInterpreter();
+	// Stores the server mode, which enables or disables commands and listeners depending on what mode the server is ran in
+	public static ServerMode serverMode = ServerMode.NORMAL;
+	// A list containing all known commands
+	private static HashMap <CommandType, PlayerCommand> playerCommands = new HashMap <CommandType, PlayerCommand> ();
+	
+	public AGCraftPlugin ()
+	{
+		super ();
+	}
 	
 	@Override
 	public void onEnable ()
@@ -49,59 +67,7 @@ public class AGCraftPlugin extends JavaPlugin
 		CreateLocationDatabase.createDatabase();
 		CreateRewardsDatabase.createDatabase();
 		
-		//Bible
-		this.getCommand("bible").setExecutor(new Bible ());
-		this.getCommand("bible").setTabCompleter(new BibleTabCompleter());
-		
-		// Clear Bible
-		this.getCommand("clearBibles").setExecutor(new ClearBibles());
-		
-		// Get Coordinates
-		this.getCommand("getCoordinates").setExecutor(new GetCoordinates());
-		
-		// Clear Junk
-		this.getCommand("clearJunk").setExecutor(new ClearJunk());
-		this.getCommand("clearJunk").setTabCompleter(new ClearJunkTabCompleter());
-		
-		// AutoSmelt
-		this.getCommand("autosmelt").setExecutor(new AutoSmelt());
-		
-		// Warp
-		this.getCommand("warp").setExecutor(new Warp());
-		this.getCommand("warp").setTabCompleter(new WarpTabCompleter());
-		
-		// Set Location
-		this.getCommand("setlocation").setExecutor(new SetLocation());
-		this.getCommand("setlocation").setTabCompleter(new SetLocationTabCompleter());
-		
-		// Remove Location
-		this.getCommand("removelocation").setExecutor(new RemoveLocation());
-		this.getCommand("removelocation").setTabCompleter(new RemoveLocationTabCompleter());
-		
-		// Get Locations
-		this.getCommand("getlocations").setExecutor(new GetLocations());
-		this.getCommand("getlocations").setTabCompleter(new GetLocationsTabCompleter());
-		
-		// Respawn ticket
-		this.getCommand("giverespawnticket").setExecutor(new GiveRespawnTicket());
-		
-		// Remove all old nether locations
-		this.getCommand("removeoldnetherlocations").setExecutor(new RemoveOldNetherLocations());
-		
-		// Reward player
-		this.getCommand("grantreward").setExecutor(new RewardPlayer ());
-		
-		// Open reward gui
-		this.getCommand("rewards").setExecutor(new OpenRewards());
-		
-		// Toggles debug mode
-		this.getCommand("toggledebugmode").setExecutor(new ToggleDebugMode ());
-		
-		// Punish player command
-		this.getCommand("punishplayer").setExecutor(new PunishPlayer ());
-		
-		// Forgive player command
-		this.getCommand("forgiveplayer").setExecutor(new ForgivePlayer());
+		this.loadCommands();
 		
 		// Death counter
 		deathCounter = new DeathCounter();
@@ -120,5 +86,39 @@ public class AGCraftPlugin extends JavaPlugin
 	public void onDisable ()
 	{
 
+	}
+	
+	/** Loads in all known commands into the plugin */
+	public void loadCommands ()
+	{
+		String commandName;
+		for (PlayerCommand pCommand : playerCommands.values())
+		{
+			commandName = pCommand.getClass().toString().toLowerCase();
+			this.getCommand(commandName).setExecutor(pCommand.getExecutor());
+			if (pCommand.getTabCompleter() != null)
+			{
+				this.getCommand(commandName).setTabCompleter(pCommand.getTabCompleter());
+			}
+		}
+		this.setCommandPermissions();
+	}
+	
+	/** Changes permissions for all known server commands based on the current server mode */
+	public void setCommandPermissions ()
+	{
+		
+	}
+	
+	/** Adds in a new player command without a tab completer */
+	public static void addPlayerCommand (CommandType commandType, CommandExecutor executor)
+	{
+		playerCommands.put(commandType, new PlayerCommand (commandType, executor));
+	}
+	
+	/** Adds a tab completer into this command list */
+	public static void addPlayerCommand (CommandType commandType, TabCompleter tabCompleter)
+	{
+		playerCommands.get(commandType).setTabCompleter(tabCompleter);
 	}
 }

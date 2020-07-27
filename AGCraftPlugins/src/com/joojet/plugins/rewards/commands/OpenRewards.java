@@ -5,10 +5,17 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.rewards.gui.RewardGUI;
 
-public class OpenRewards implements CommandExecutor  
+public class OpenRewards extends AGCommandExecutor
 {
+
+	public OpenRewards(CommandType commandType) 
+	{
+		super(commandType);
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String [] args) 

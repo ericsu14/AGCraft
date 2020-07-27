@@ -9,8 +9,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class GetCoordinates implements CommandExecutor 
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
+
+public class GetCoordinates extends AGCommandExecutor
 {
+	public GetCoordinates(CommandType commandType) 
+	{
+		super(commandType);
+	}
+
 	/** A simple command that tells the player their current coordinates
 	 * 	Usage:
 	 * 		/coordinates - Returns your current position

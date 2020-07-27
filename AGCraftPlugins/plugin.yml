@@ -6,11 +6,11 @@ commands:
   bible:
     description: Generates a written book containing specified sections of the Bible. The <start> and <end> parameters are optional.
     usage: /bible <translation> <book> <chapter> <start> <end>
-    permission: agcraft.all
+    permission: agcraft.player
   clearBibles:
     description: Removes all command-generated bibles from your inventory.
     usage: /clearbibles
-    permission: agcraft.all
+    permission: agcraft.player
   getCoordinates:
     description: Returns the coordinates of your current location in {X,Y,Z format}. This also returns the coordinates of another player in this server if another player is specified.
     usage: /getcoordinates or /getCoordinates <player>
@@ -75,9 +75,6 @@ permissions:
       agcraft.player: true
       agcraft.admin: true
 
-  agcraft.all:
-    description: Specifies a command usable by all players in any minigame or normal server instance
-    default: true
   agcraft.admin:
     description: Specifies a command usable only through server OPs and admins.
     default: op
