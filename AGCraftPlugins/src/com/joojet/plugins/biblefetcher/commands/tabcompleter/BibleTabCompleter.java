@@ -6,14 +6,20 @@ import java.util.List;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 
 import com.joojet.biblefetcher.constants.BibleID;
 import com.joojet.biblefetcher.constants.BookID;
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGTabCompleter;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 
-public class BibleTabCompleter implements TabCompleter 
+public class BibleTabCompleter extends AGTabCompleter 
 {
+	public BibleTabCompleter ()
+	{
+		super (CommandType.BIBLE);
+	}
+	
 	@Override
 	public List <String> onTabComplete (CommandSender sender, Command command, String alias, String[] args)
 	{

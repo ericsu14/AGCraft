@@ -1,21 +1,23 @@
 package com.joojet.plugins.warp.commands;
 
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
 
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.warp.constants.WarpAccessLevel;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 import com.joojet.plugins.warp.interpreter.AccessLevelInterpreter;
 
-public class SetLocation implements CommandExecutor
+public class SetLocation extends AGCommandExecutor
 {
 	private AccessLevelInterpreter interpreter;
 	
 	public SetLocation ()
 	{
+		super (CommandType.SET_LOCATION);
 		interpreter = new AccessLevelInterpreter ();
 	}
 	

@@ -6,7 +6,6 @@ import java.util.Hashtable;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -14,18 +13,21 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.ChatColor;
 
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 import com.joojet.plugins.utility.enums.JunkClassifier;
 import com.joojet.plugins.utility.interpreter.JunkCommandInterpreter;
 
 
-public class ClearJunk implements CommandExecutor
+public class ClearJunk extends AGCommandExecutor
 {
 	private JunkCommandInterpreter commandInterpreter;
 	private Hashtable <Material, JunkClassifier> junkItems;
 	
 	public ClearJunk ()
 	{
+		super (CommandType.CLEAR_JUNK);
 		this.junkItems = new Hashtable <Material, JunkClassifier> ();
 		
 		// Common

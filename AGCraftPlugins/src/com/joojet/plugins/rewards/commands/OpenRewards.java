@@ -1,7 +1,6 @@
 package com.joojet.plugins.rewards.commands;
 
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -12,9 +11,9 @@ import com.joojet.plugins.rewards.gui.RewardGUI;
 public class OpenRewards extends AGCommandExecutor
 {
 
-	public OpenRewards(CommandType commandType) 
+	public OpenRewards() 
 	{
-		super(commandType);
+		super(CommandType.REWARDS);
 	}
 
 	@Override

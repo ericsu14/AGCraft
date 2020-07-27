@@ -6,19 +6,24 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.consequences.ConsequenceManager;
 import com.joojet.plugins.consequences.database.ConsequenceDatabaseManager;
 import com.joojet.plugins.consequences.enums.CalendarField;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class PunishPlayer implements CommandExecutor
+public class PunishPlayer extends AGCommandExecutor
 {
+	public PunishPlayer ()
+	{
+		super (CommandType.PUNISH_PLAYER);
+	}
 	
 	/** Punishes a specific player for a certain period of time, forcing him to wear a clown mask the
 	 *  next time he/she logs on.

@@ -8,6 +8,7 @@ public enum CommandType
 	CLEAR_JUNK (PermissionType.PLAYER),
 	AUTOSMELT (PermissionType.PLAYER),
 	WARP (PermissionType.PLAYER),
+	GET_LOCATIONS (PermissionType.PLAYER),
 	SET_LOCATION (PermissionType.PLAYER),
 	REMOVE_LOCATION (PermissionType.PLAYER),
 	GIVE_RESPAWN_TICKET (PermissionType.ADMIN),

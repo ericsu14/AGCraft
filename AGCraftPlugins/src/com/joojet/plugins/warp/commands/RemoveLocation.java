@@ -3,15 +3,21 @@ package com.joojet.plugins.warp.commands;
 import java.sql.SQLException;
 
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
 
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 
-public class RemoveLocation implements CommandExecutor
+public class RemoveLocation extends AGCommandExecutor
 {
+	public RemoveLocation ()
+	{
+		super (CommandType.REMOVE_LOCATION);
+	}
+	
 	/** Removes a location from the player's list of implemented locations.
 	 * 	Usage:
 	 * 		/removeLocation <locationName> */

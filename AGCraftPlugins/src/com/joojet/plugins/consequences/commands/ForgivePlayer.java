@@ -5,17 +5,23 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.consequences.database.ConsequenceDatabaseManager;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class ForgivePlayer implements CommandExecutor
+public class ForgivePlayer extends AGCommandExecutor
 {
+
+	public ForgivePlayer() 
+	{
+		super(CommandType.FORGIVE_PLAYER);
+	}
 
 	@SuppressWarnings("deprecation")
 	@Override

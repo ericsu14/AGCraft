@@ -6,25 +6,30 @@ import java.util.ArrayList;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
 
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.warp.database.EWarpDatabaseManager;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
-public class Warp implements CommandExecutor
+public class Warp extends AGCommandExecutor
 {
-	
 	public final static String home = "home";
 	// Max. search radius of nearby enemies check
 	private int maxMobRadius = 10;
 	// Min. player health needs to exceed before warping
 	private double healthThreshold = 20 * 0.29;
+	
+	public Warp ()
+	{
+		super (CommandType.WARP);
+	}
 	
 	/** Warps a player to either a designated location or their bed spawn.
 	 * 	Usage:

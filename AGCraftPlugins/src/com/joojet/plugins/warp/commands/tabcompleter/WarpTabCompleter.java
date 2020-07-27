@@ -6,15 +6,21 @@ import java.util.List;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGTabCompleter;
 import com.joojet.plugins.warp.commands.Warp;
 import com.joojet.plugins.warp.constants.WarpAccessLevel;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 
-public class WarpTabCompleter implements TabCompleter 
+public class WarpTabCompleter extends AGTabCompleter 
 {
+	public WarpTabCompleter ()
+	{
+		super (CommandType.WARP);
+	}
+	
 	@Override
 	public List <String> onTabComplete (CommandSender sender, Command command, String alias, String[] args)
 	{

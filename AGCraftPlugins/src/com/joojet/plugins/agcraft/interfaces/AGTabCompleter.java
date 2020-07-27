@@ -12,7 +12,7 @@ public abstract class AGTabCompleter implements TabCompleter
 	public AGTabCompleter (CommandType commandType)
 	{
 		this.commandType = commandType;
-		AGCraftPlugin.addPlayerCommand(commandType, this);
+		AGCraftPlugin.addTabCompleter(commandType, this);
 	}
 	
 }

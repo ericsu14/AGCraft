@@ -5,9 +5,9 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -15,12 +15,12 @@ import org.bukkit.inventory.meta.BookMeta;
 
 import com.joojet.biblefetcher.constants.*;
 import com.joojet.biblefetcher.fetcher.BibleFetcher;
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.biblefetcher.string.ContentParser;
 
-import net.md_5.bungee.api.ChatColor;
-
-public class Bible implements CommandExecutor 
+public class Bible extends AGCommandExecutor
 {
 	private BibleID bibleID;
 	private BookID bookID;
@@ -32,6 +32,7 @@ public class Bible implements CommandExecutor
 	
 	public Bible ()
 	{
+		super (CommandType.BIBLE);
 		this.bookID = BookID.GEN;
 		this.bibleID = BibleID.KJV;
 		this.chapter = 1;

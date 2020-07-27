@@ -5,7 +5,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World.Environment;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -14,9 +13,9 @@ import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 
 public class GetCoordinates extends AGCommandExecutor
 {
-	public GetCoordinates(CommandType commandType) 
+	public GetCoordinates() 
 	{
-		super(commandType);
+		super(CommandType.GET_COORDINATES);
 	}
 
 	/** A simple command that tells the player their current coordinates

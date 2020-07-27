@@ -4,13 +4,16 @@ import java.util.ArrayList;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
+
 import org.bukkit.ChatColor;
 
-public class AutoSmelt implements CommandExecutor 
+public class AutoSmelt extends AGCommandExecutor
 {
 	// Number of coal / charcoal in the player's inventory
 	private int numCoals;
@@ -23,6 +26,7 @@ public class AutoSmelt implements CommandExecutor
 	
 	public AutoSmelt ()
 	{
+		super (CommandType.AUTOSMELT);
 		this.resetCountingVariables();
 	}
 	

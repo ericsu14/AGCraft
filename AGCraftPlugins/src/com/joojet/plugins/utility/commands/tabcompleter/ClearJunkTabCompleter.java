@@ -5,13 +5,19 @@ import java.util.List;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGTabCompleter;
 import com.joojet.plugins.utility.enums.JunkClassifier;
 
-public class ClearJunkTabCompleter implements TabCompleter 
+public class ClearJunkTabCompleter extends AGTabCompleter 
 {
+	public ClearJunkTabCompleter ()
+	{
+		super (CommandType.CLEAR_JUNK);
+	}
+	
 	@Override
 	public List <String> onTabComplete (CommandSender sender, Command command, String alias, String[] args)
 	{

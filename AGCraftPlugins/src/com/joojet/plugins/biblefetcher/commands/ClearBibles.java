@@ -5,15 +5,21 @@ import java.util.ArrayList;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.ItemStack;
 import com.joojet.biblefetcher.constants.BibleID;
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 
-public class ClearBibles implements CommandExecutor  {
-
+public class ClearBibles extends AGCommandExecutor
+{
+	public ClearBibles ()
+	{
+		super (CommandType.CLEAR_BIBLES);
+	}
+	
 	/** Clears all generated Bibles from the player's inventory */
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String [] args) 

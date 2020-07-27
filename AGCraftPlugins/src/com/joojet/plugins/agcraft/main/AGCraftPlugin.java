@@ -1,6 +1,5 @@
 package com.joojet.plugins.agcraft.main;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
@@ -10,30 +9,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.joojet.biblefetcher.database.CreateDatabase;
 import com.joojet.biblefetcher.interpreter.CommandInterpreter;
 import com.joojet.plugins.agcraft.enums.CommandType;
-import com.joojet.plugins.agcraft.enums.PermissionType;
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.interfaces.PlayerCommand;
-import com.joojet.plugins.biblefetcher.commands.Bible;
-import com.joojet.plugins.biblefetcher.commands.ClearBibles;
-import com.joojet.plugins.biblefetcher.commands.tabcompleter.*;
 import com.joojet.plugins.consequences.ConsequenceManager;
-import com.joojet.plugins.consequences.commands.ForgivePlayer;
-import com.joojet.plugins.consequences.commands.PunishPlayer;
-import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.rewards.RewardManager;
-import com.joojet.plugins.rewards.commands.OpenRewards;
-import com.joojet.plugins.rewards.commands.RewardPlayer;
 import com.joojet.plugins.rewards.database.CreateRewardsDatabase;
 import com.joojet.plugins.rewards.interpreter.EventTypeInterpreter;
 import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
-import com.joojet.plugins.utility.commands.AutoSmelt;
-import com.joojet.plugins.utility.commands.ClearJunk;
-import com.joojet.plugins.utility.commands.ToggleDebugMode;
-import com.joojet.plugins.utility.commands.tabcompleter.*;
-import com.joojet.plugins.warp.commands.*;
-import com.joojet.plugins.warp.commands.tabcompleter.*;
 import com.joojet.plugins.warp.database.CreateLocationDatabase;
 
 public class AGCraftPlugin extends JavaPlugin 
@@ -117,7 +101,7 @@ public class AGCraftPlugin extends JavaPlugin
 	}
 	
 	/** Adds a tab completer into this command list */
-	public static void addPlayerCommand (CommandType commandType, TabCompleter tabCompleter)
+	public static void addTabCompleter (CommandType commandType, TabCompleter tabCompleter)
 	{
 		playerCommands.get(commandType).setTabCompleter(tabCompleter);
 	}

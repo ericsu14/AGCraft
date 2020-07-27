@@ -4,22 +4,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
 
+import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.warp.constants.WarpAccessLevel;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 import com.joojet.plugins.warp.database.LocationEntry;
 import com.joojet.plugins.warp.interpreter.AccessLevelInterpreter;
 
-public class GetLocations implements CommandExecutor 
+public class GetLocations extends AGCommandExecutor
 {
 	private AccessLevelInterpreter interpreter;
 	
 	public GetLocations ()
 	{
+		super (CommandType.GET_LOCATIONS);
 		interpreter = new AccessLevelInterpreter ();
 	}
 	
