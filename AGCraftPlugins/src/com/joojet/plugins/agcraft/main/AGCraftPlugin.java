@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.joojet.biblefetcher.database.CreateDatabase;
 import com.joojet.biblefetcher.interpreter.CommandInterpreter;
 import com.joojet.plugins.agcraft.enums.CommandType;
+import com.joojet.plugins.agcraft.enums.PermissionType;
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.interfaces.PlayerCommand;
 import com.joojet.plugins.consequences.ConsequenceManager;
@@ -51,7 +52,9 @@ public class AGCraftPlugin extends JavaPlugin
 		CreateLocationDatabase.createDatabase();
 		CreateRewardsDatabase.createDatabase();
 		
+		// Loads in all commands
 		this.loadCommands();
+		this.setCommandPermissions();
 		
 		// Death counter
 		deathCounter = new DeathCounter();
@@ -78,7 +81,7 @@ public class AGCraftPlugin extends JavaPlugin
 		String commandName;
 		for (PlayerCommand pCommand : playerCommands.values())
 		{
-			commandName = pCommand.getClass().toString().toLowerCase();
+			commandName = pCommand.getCommandType().toString().toLowerCase();
 			this.getCommand(commandName).setExecutor(pCommand.getExecutor());
 			if (pCommand.getTabCompleter() != null)
 			{
@@ -91,18 +94,41 @@ public class AGCraftPlugin extends JavaPlugin
 	/** Changes permissions for all known server commands based on the current server mode */
 	public void setCommandPermissions ()
 	{
-		
+		String commandName;
+		for (PlayerCommand pCommand : playerCommands.values ())
+		{
+			commandName = pCommand.getCommandType().toString().toLowerCase();
+			// Only change permission of commands whose permission type is PLAYER
+			if (pCommand.getPermissionType() == PermissionType.PLAYER)
+			{
+				PermissionType curr = serverMode == ServerMode.NORMAL ? PermissionType.PLAYER : PermissionType.ADMIN;
+				this.getCommand(commandName).setPermission(curr.getPermission());
+			}
+		}
 	}
 	
-	/** Adds in a new player command without a tab completer */
+	/** Adds in a new player command without a tab completer
+	 * 		@param commandType - Type of command the command executor is being attached to
+	 * 		@param executor - A reference to the command executor instance */
 	public static void addPlayerCommand (CommandType commandType, CommandExecutor executor)
 	{
 		playerCommands.put(commandType, new PlayerCommand (commandType, executor));
 	}
 	
-	/** Adds a tab completer into this command list */
+	/** Adds a tab completer into this command list
+	 * 		@param commandType - The type of command the tab completer instance is being attached to
+	 * 		@param tabCompleter - A reference to the tab completer instance being attached */
 	public static void addTabCompleter (CommandType commandType, TabCompleter tabCompleter)
 	{
 		playerCommands.get(commandType).setTabCompleter(tabCompleter);
 	}
+	
+	/** Switches the server's mode to a new value
+	 * 		@param mode - The new mode the server is being switched to */
+	public void switchServerMode (ServerMode mode)
+	{
+		serverMode = mode;
+		setCommandPermissions ();
+	}
+	
 }
