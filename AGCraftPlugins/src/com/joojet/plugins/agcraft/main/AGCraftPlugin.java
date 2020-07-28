@@ -19,6 +19,7 @@ import com.joojet.plugins.consequences.commands.*;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
+import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.commands.*;
 import com.joojet.plugins.rewards.database.CreateRewardsDatabase;
@@ -73,6 +74,9 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Amplified mob spawner
 		Bukkit.getPluginManager().registerEvents(new AmplifiedMobSpawner(), this);
+		
+		// Summoning Scroll listener
+		Bukkit.getPluginManager().registerEvents (new SummoningScrollListener(), this);
 		
 		// Player login handler
 		Bukkit.getPluginManager().registerEvents(new RewardManager(), this);
@@ -132,7 +136,6 @@ public class AGCraftPlugin extends JavaPlugin
 			{
 				this.getCommand(commandName).setTabCompleter(pCommand.getTabCompleter());
 			}
-			System.out.println ("Inserted " + commandName);
 		}
 	}
 	
@@ -148,7 +151,6 @@ public class AGCraftPlugin extends JavaPlugin
 			{
 				PermissionType curr = serverMode == ServerMode.NORMAL ? PermissionType.PLAYER : PermissionType.ADMIN;
 				this.getCommand(commandName).setPermission(curr.getPermission());
-				System.out.println ("Changed permission of " + commandName  + " to " + curr.getPermission());
 			}
 		}
 	}

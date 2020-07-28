@@ -40,7 +40,6 @@ public class ChangeServerMode extends AGCommandExecutor
 			}
 			
 			AGCraftPlugin.plugin.switchServerMode(mode);
-			System.out.println ("Changed server mode to " + mode.toString());
 			sender.sendMessage ("Changed server mode to " + mode.toString());
 			return true;
 		}
