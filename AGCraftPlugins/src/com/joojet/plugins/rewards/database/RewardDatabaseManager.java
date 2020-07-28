@@ -162,16 +162,15 @@ public class RewardDatabaseManager
 	
 	/** Checks if a player already has a reward from the current event
 	 * 		@param UUID - uuid of the player we are checking
-	 * 		@param reward - Reward we are seeing if the player already has
 	 * 		@param event - Type of event this is 
 	 * 		@throws SQLException - Internal connection error */
-	public static boolean checkIfPlayerHasReward (UUID uuid, RewardType reward, EventType event) throws SQLException
+	public static boolean checkIfPlayerHasReward (UUID uuid, EventType event) throws SQLException
 	{
 		ArrayList <RewardEntry> rewards = fetchAllRewards (uuid);
 		
 		for (RewardEntry entry : rewards)
 		{
-			if (reward.equals(entry.getReward()) && event.equals(entry.getEvent()))
+			if (event == entry.getEvent())
 			{
 				return true;
 			}

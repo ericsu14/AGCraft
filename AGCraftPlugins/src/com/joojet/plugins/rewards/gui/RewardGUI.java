@@ -21,6 +21,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.rewards.database.RewardDatabaseManager;
 import com.joojet.plugins.rewards.interfaces.RewardEntry;
+import com.joojet.plugins.rewards.util.StringUtil;
 
 import org.bukkit.ChatColor;
 
@@ -202,15 +203,8 @@ public class RewardGUI implements Listener
 		// If display name does not exist, create one automatically for the item
 		if (!meta.hasDisplayName())
 		{
-			String rawItemName = item.getType().toString();
-			String[] tokens = rawItemName.split("_");
-			StringBuilder name = new StringBuilder ();
-			for (String token : tokens)
-			{
-				name.append(this.captializeString(token));
-				name.append(" ");
-			}
-			meta.setDisplayName(ChatColor.AQUA + name.toString().trim());
+			String displayName = StringUtil.generateReadableName(item.getType().toString());
+			meta.setDisplayName(ChatColor.AQUA + displayName);
 		}
 		
 		String[] tokens = lore.split(" ");
@@ -239,11 +233,4 @@ public class RewardGUI implements Listener
 		item.setItemMeta(meta);
 	}
     
-    /** Captializes the first letter of the string */
-    public String captializeString (String str)
-    {
-    	StringBuilder string = new StringBuilder (str.toLowerCase());
-    	string.replace(0, 1, str.toUpperCase().substring(0, 1));
-    	return string.toString();
-    }
 }
