@@ -70,7 +70,7 @@ public class RewardManager implements Listener
 		try 
 		{
 			// If the player does not already have a reward from this current event, give them the rewards
-			if (!RewardDatabaseManager.checkIfPlayerHasReward(playerUUID, this.currentEventType))
+			if (RewardDatabaseManager.checkIfPlayerHasReward(playerUUID, this.currentEventType))
 			{
 				player.sendMessage(ChatColor.GREEN + "Thanks for taking part in " + ChatColor.GOLD + this.currentEventType.getFullName() + "!");
 				player.sendMessage(ChatColor.GREEN + "As a token of apprication, I have added the following rewards to your account, which are: ");
@@ -111,12 +111,13 @@ public class RewardManager implements Listener
 		ItemMeta meta = reward.getReward().getItemMeta();
 		if (meta.hasDisplayName())
 		{
-			displayName = meta.getDisplayName(); 
+			StringBuilder temp = new StringBuilder (meta.getDisplayName().substring(0, 2));
+			temp.append(StringUtil.generateReadableName (meta.getDisplayName().substring(2), "\\s+")); 
+			displayName = temp.toString();
 		}
 		else
 		{
-			displayName = reward.getReward().getType().toString();
-			displayName = StringUtil.generateReadableName(displayName, "_");
+			displayName = StringUtil.generateReadableName(reward.getReward().getType().toString(), "_");
 		}
 		
 		player.sendMessage(ChatColor.AQUA + "Acquired " + ChatColor.GOLD + displayName + " ( x" + reward.getReward().getAmount() + ")");
