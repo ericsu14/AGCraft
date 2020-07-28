@@ -145,6 +145,7 @@ public class AGCraftPlugin extends JavaPlugin
 			{
 				PermissionType curr = serverMode == ServerMode.NORMAL ? PermissionType.PLAYER : PermissionType.ADMIN;
 				this.getCommand(commandName).setPermission(curr.getPermission());
+				System.out.println ("Changed permission of " + commandName  + " to " + curr.getPermission());
 			}
 		}
 	}
