@@ -17,7 +17,8 @@ public enum CommandType
 	REWARDS (PermissionType.PLAYER),
 	TOGGLE_DEBUG_MODE (PermissionType.ADMIN),
 	PUNISH_PLAYER (PermissionType.ADMIN),
-	FORGIVE_PLAYER (PermissionType.ADMIN);
+	FORGIVE_PLAYER (PermissionType.ADMIN),
+	CHANGE_SERVER_MODE (PermissionType.ADMIN);
 	
 	private PermissionType permissionType;
 	

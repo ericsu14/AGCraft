@@ -67,6 +67,10 @@ commands:
     description: Removes all of a player's inactive and active consequences from the database. Can only be ran by server admins.
     usage: /forgiveplayer <player>
     permission: agcraft.admin
+  changeservermode:
+    description: Dynamically changes the server mode to a new mode passed by the parameter. Can only be ran by server admins.
+    usage: /changeservermode <mode>
+    permission: agcraft.admin
 
 permissions:
   agcraft.*:

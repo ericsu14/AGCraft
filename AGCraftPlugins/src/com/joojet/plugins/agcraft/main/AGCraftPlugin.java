@@ -107,6 +107,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addPlayerCommand (new SetLocation ());
 		this.addPlayerCommand (new Warp ());
 		this.addPlayerCommand (new RemoveOldNetherLocations());
+		this.addPlayerCommand( new ChangeServerMode ());
 		
 		// Tab Completers
 		this.addTabCompleter(new BibleTabCompleter ());
