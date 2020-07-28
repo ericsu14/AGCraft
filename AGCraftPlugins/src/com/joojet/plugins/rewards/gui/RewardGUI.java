@@ -203,7 +203,7 @@ public class RewardGUI implements Listener
 		// If display name does not exist, create one automatically for the item
 		if (!meta.hasDisplayName())
 		{
-			String displayName = StringUtil.generateReadableName(item.getType().toString());
+			String displayName = StringUtil.generateReadableName(item.getType().toString(), "_");
 			meta.setDisplayName(ChatColor.AQUA + displayName);
 		}
 		
