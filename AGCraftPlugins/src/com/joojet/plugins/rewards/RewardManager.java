@@ -70,7 +70,7 @@ public class RewardManager implements Listener
 		try 
 		{
 			// If the player does not already have a reward from this current event, give them the rewards
-			if (RewardDatabaseManager.checkIfPlayerHasReward(playerUUID, this.currentEventType))
+			if (!RewardDatabaseManager.checkIfPlayerHasReward(playerUUID, this.currentEventType))
 			{
 				player.sendMessage(ChatColor.GREEN + "Thanks for taking part in " + ChatColor.GOLD + this.currentEventType.getFullName() + "!");
 				player.sendMessage(ChatColor.GREEN + "As a token of apprication, I have added the following rewards to your account, which are: ");
