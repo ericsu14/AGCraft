@@ -116,9 +116,9 @@ public class RewardManager implements Listener
 		else
 		{
 			displayName = reward.getReward().getType().toString();
+			displayName = StringUtil.generateReadableName(displayName, "_");
 		}
 		
-		displayName = StringUtil.generateReadableName(displayName, " ");
 		player.sendMessage(ChatColor.AQUA + "Acquired " + ChatColor.GOLD + displayName + " ( x" + reward.getReward().getAmount() + ")");
 	}
 }
