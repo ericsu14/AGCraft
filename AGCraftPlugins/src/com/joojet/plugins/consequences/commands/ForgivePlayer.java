@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -12,8 +13,6 @@ import org.bukkit.entity.Player;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.consequences.database.ConsequenceDatabaseManager;
-
-import net.md_5.bungee.api.ChatColor;
 
 public class ForgivePlayer extends AGCommandExecutor
 {
@@ -26,21 +25,13 @@ public class ForgivePlayer extends AGCommandExecutor
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command arg1, String arg2, String[] args) 
-	{
-		// TODO Auto-generated method stub
-		if (sender instanceof Player)
-		{
-			Player player = (Player) sender;
-			player.sendMessage(ChatColor.RED + "I am sorry, but this command can only be executed by the server administrator.");
-			return false;
-		}
-		
-		else if (sender instanceof ConsoleCommandSender)
+	{		
+		if (sender instanceof ConsoleCommandSender || sender instanceof Player)
 		{
 			int n = args.length;
 			if (n < 1)
 			{
-				System.out.println ("Not enough parameters.");
+				sender.sendMessage (ChatColor.RED + "Not enough parameters.");
 				return false;
 			}
 			
@@ -50,7 +41,7 @@ public class ForgivePlayer extends AGCommandExecutor
 							
 			if (Bukkit.getOfflinePlayer(username) == null && Bukkit.getPlayer(username) == null)
 			{
-				System.out.println ("Cannot find player " + username);
+				sender.sendMessage ("Cannot find player " + username);
 				return false;
 			}	
 			UUID uuid = Bukkit.getOfflinePlayer(username) == null ? Bukkit.getPlayer(username).getUniqueId() : Bukkit.getOfflinePlayer(username).getUniqueId();
@@ -58,7 +49,7 @@ public class ForgivePlayer extends AGCommandExecutor
 			try 
 			{
 				ConsequenceDatabaseManager.forgivePlayer(uuid);
-				System.out.println (username + "'s consequences have been lifted.");
+				sender.sendMessage (username + "'s consequences have been lifted.");
 			} 
 			catch (SQLException e) 
 			{

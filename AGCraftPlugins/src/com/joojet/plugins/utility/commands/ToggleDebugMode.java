@@ -9,8 +9,6 @@ import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 
-import net.md_5.bungee.api.ChatColor;
-
 public class ToggleDebugMode extends AGCommandExecutor
 {
 	public ToggleDebugMode ()
@@ -23,12 +21,7 @@ public class ToggleDebugMode extends AGCommandExecutor
 	@Override
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) 
 	{
-		if (arg0 instanceof Player)
-		{
-			Player p = (Player) arg0;
-			p.sendMessage(ChatColor.RED + "I am sorry, but this command can only be executed by the server administrator.");
-		}
-		else if (arg0 instanceof ConsoleCommandSender)
+		if (arg0 instanceof ConsoleCommandSender || arg0 instanceof Player)
 		{
 			AmplifiedMobSpawner.toggleDebug();
 			return true;

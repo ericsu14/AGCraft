@@ -12,7 +12,6 @@ import com.joojet.plugins.warp.database.EWarpDatabaseManager;
 import java.sql.SQLException;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 
 public class GiveRespawnTicket extends AGCommandExecutor
 {
@@ -25,13 +24,7 @@ public class GiveRespawnTicket extends AGCommandExecutor
 	@Override
 	public boolean onCommand (CommandSender sender, Command command, String label, String [] args)
 	{
-		if (sender instanceof Player)
-		{
-			Player p = (Player) sender;
-			p.sendMessage(ChatColor.RED + "I am sorry, but this command can only be executed by the server administrator.");
-			return false;
-		}
-		else if (sender instanceof ConsoleCommandSender)
+		if (sender instanceof ConsoleCommandSender || sender instanceof Player)
 		{
 			int n = args.length;
 			if (n >= 1)
@@ -39,7 +32,7 @@ public class GiveRespawnTicket extends AGCommandExecutor
 				String username = args[0];
 				if (Bukkit.getOfflinePlayer(username) == null && Bukkit.getPlayer(username) == null)
 				{
-					System.out.println ("Cannot find the player.");
+					sender.sendMessage ("Cannot find the player.");
 					return false;
 				}
 				
@@ -50,8 +43,8 @@ public class GiveRespawnTicket extends AGCommandExecutor
 					try 
 					{
 						EWarpDatabaseManager.incrementTicketCount(uuid);
-						System.out.println ("Gave one respawn ticket to " + username + "!");
-						System.out.println (username + " now has " + EWarpDatabaseManager.getTicketCount(uuid) + " tickets.");
+						sender.sendMessage ("Gave one respawn ticket to " + username + "!");
+						sender.sendMessage (username + " now has " + EWarpDatabaseManager.getTicketCount(uuid) + " tickets.");
 					} 
 					catch (SQLException e) {
 						// TODO Auto-generated catch block

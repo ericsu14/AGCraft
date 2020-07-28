@@ -16,8 +16,6 @@ import com.joojet.plugins.consequences.ConsequenceManager;
 import com.joojet.plugins.consequences.database.ConsequenceDatabaseManager;
 import com.joojet.plugins.consequences.enums.CalendarField;
 
-import net.md_5.bungee.api.ChatColor;
-
 public class PunishPlayer extends AGCommandExecutor
 {
 	public PunishPlayer ()
@@ -36,18 +34,12 @@ public class PunishPlayer extends AGCommandExecutor
 	@Override
 	public boolean onCommand(CommandSender sender, Command arg1, String arg2, String[] args) 
 	{
-		if (sender instanceof Player)
-		{
-			Player player = (Player) sender;
-			player.sendMessage(ChatColor.RED + "I am sorry, but this command can only be executed by the server administrator.");
-			return false;
-		}
-		else if (sender instanceof ConsoleCommandSender)
+		if (sender instanceof ConsoleCommandSender || sender instanceof Player)
 		{
 			int n = args.length;
 			if (n < 3)
 			{
-				System.out.println ("Not enough parameters.");
+				sender.sendMessage ("Not enough parameters.");
 				return false;
 			}
 			
@@ -57,7 +49,7 @@ public class PunishPlayer extends AGCommandExecutor
 				
 			if (Bukkit.getOfflinePlayer(username) == null && Bukkit.getPlayer(username) == null)
 			{
-				System.out.println ("Cannot find player " + username);
+				sender.sendMessage ("Cannot find player " + username);
 				return false;
 			}	
 			UUID uuid = Bukkit.getOfflinePlayer(username) == null ? Bukkit.getPlayer(username).getUniqueId() : Bukkit.getOfflinePlayer(username).getUniqueId();
@@ -82,7 +74,7 @@ public class PunishPlayer extends AGCommandExecutor
 					
 					if (field == null)
 					{
-						System.out.println ("Invalid timefield detected | " + args[i + 1]);
+						sender.sendMessage ("Invalid timefield detected | " + args[i + 1]);
 						return false;
 					}
 					
@@ -93,7 +85,7 @@ public class PunishPlayer extends AGCommandExecutor
 			
 			catch (NumberFormatException e)
 			{
-				System.out.println ("Detected an invalid input.");
+				sender.sendMessage ("Detected an invalid input.");
 				return false;
 			}
 			
@@ -104,7 +96,7 @@ public class PunishPlayer extends AGCommandExecutor
 				cal.add(calField.getField(), timeModifiers[calField.ordinal()]);
 			}
 			
-			System.out.println ("Consequence expires in: " + cal.getTime().toString());
+			sender.sendMessage ("Consequence expires in: " + cal.getTime().toString());
 			
 			try 
 			{
