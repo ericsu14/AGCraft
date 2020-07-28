@@ -20,7 +20,7 @@ public class StrawberryMocktail extends PotionEquipment
 		this.addPotionEffect(PotionEffectType.LUCK, 36000, 1);
 		this.addPotionEffect(PotionEffectType.FIRE_RESISTANCE, 36000, 0);
 		this.addPotionEffect(PotionEffectType.NIGHT_VISION, 36000, 0);
-		this.addLoreToItemMeta("A special mocktail specially created by frolf. Drink to enjoy some strawberry goodness and a whole variety of special buffs!");
+		this.addLoreToItemMeta("A special mocktail created by frolf. Drink to enjoy some strawberry goodness and a whole variety of special buffs!");
 		this.setColor(Color.fromRGB(252, 90, 141));
 	}
 	

@@ -13,6 +13,8 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import com.joojet.plugins.agcraft.enums.ServerMode;
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.consequences.database.ConsequenceDatabaseManager;
 import com.joojet.plugins.consequences.interpreter.CalendarFieldInterpreter;
 import com.joojet.plugins.mobs.equipment.head.ClownHead;
@@ -24,6 +26,12 @@ public class ConsequenceManager implements Listener
 	@EventHandler
 	public void handleConsequenceLoginEvent (PlayerJoinEvent event)
 	{
+		// Disables this listener if server mode is anything but normal
+		if (AGCraftPlugin.serverMode != ServerMode.NORMAL)
+		{
+			return;
+		}
+		
 		Player p = event.getPlayer();
 		
 		UUID uuid = p.getUniqueId();
@@ -44,6 +52,12 @@ public class ConsequenceManager implements Listener
 	@EventHandler
 	public void handlePlayerDeathEvent (PlayerRespawnEvent event)
 	{
+		// Disables this listener if server mode is anything but normal
+		if (AGCraftPlugin.serverMode != ServerMode.NORMAL)
+		{
+			return;
+		}
+		
 		Player p = event.getPlayer();
 		UUID uuid = p.getUniqueId();
 		
