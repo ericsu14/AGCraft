@@ -25,6 +25,7 @@ import com.joojet.plugins.rewards.database.CreateRewardsDatabase;
 import com.joojet.plugins.rewards.interpreter.EventTypeInterpreter;
 import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
 import com.joojet.plugins.utility.commands.*;
+import com.joojet.plugins.utility.commands.tabcompleter.ChangeServerModeTabCompleter;
 import com.joojet.plugins.utility.commands.tabcompleter.ClearJunkTabCompleter;
 import com.joojet.plugins.warp.commands.*;
 import com.joojet.plugins.warp.commands.tabcompleter.*;
@@ -109,13 +110,14 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addPlayerCommand (new RemoveOldNetherLocations());
 		this.addPlayerCommand( new ChangeServerMode ());
 		
-		// Tab Completers
+		// Tab Completer
 		this.addTabCompleter(new BibleTabCompleter ());
 		this.addTabCompleter(new ClearJunkTabCompleter());
 		this.addTabCompleter(new GetLocationsTabCompleter ());
 		this.addTabCompleter(new RemoveLocationTabCompleter ());
 		this.addTabCompleter(new SetLocationTabCompleter ());
 		this.addTabCompleter(new WarpTabCompleter ());
+		this.addTabCompleter(new ChangeServerModeTabCompleter ());
 	}
 	
 	/** Loads in all known commands into the plugin */
