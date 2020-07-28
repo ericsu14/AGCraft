@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.equipment.offhand.CaptainAmericaShield;
+import com.joojet.plugins.mobs.equipment.potions.StrawberryMocktail;
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
 import com.joojet.plugins.mobs.fireworks.PaintTheSky;
@@ -28,7 +29,8 @@ public enum RewardType
 	FIREWORK_LAUNCHER,
 	COOKIE,
 	SNOWBALL,
-	SHOTBOW;
+	SHOTBOW,
+	STRAWBERRY_MOCKTAIL;
 	
 	public ItemStack getReward ()
 	{
@@ -60,6 +62,8 @@ public enum RewardType
 				return new SummonSnowball ();
 			case SHOTBOW:
 				return new ShotBow (ChatColor.GOLD);
+			case STRAWBERRY_MOCKTAIL:
+				return new StrawberryMocktail (ChatColor.LIGHT_PURPLE);
 			default:
 				break;
 		}

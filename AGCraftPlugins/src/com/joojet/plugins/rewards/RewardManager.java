@@ -81,13 +81,14 @@ public class RewardManager implements Listener
 						this.grantReward(player, RewardType.FROLF);
 						this.grantReward(player, RewardType.SNOWBALL);
 						this.grantReward(player, RewardType.ENCHANTED_GOLDEN_APPLE);
-						this.grantReward(player, RewardType.GOLDEN_CARROTS);
+						this.grantReward(player, RewardType.STRAWBERRY_MOCKTAIL);
 						this.grantReward(player, RewardType.GOLDEN_CARROTS);
 						break;
 					default:
 						break;
 				}
 				player.sendMessage(ChatColor.GREEN + "Be sure to run " + ChatColor.GOLD + "/rewards" + ChatColor.GREEN + " to claim your rewards once we revert back to the main server!");
+				System.out.println ("I just awarded " + player.getDisplayName() + " prizes for " + this.currentEventType.toString() + "!");
 			}
 		} 
 		catch (SQLException e) 
