@@ -71,6 +71,10 @@ commands:
     description: Dynamically changes the server mode to a new mode passed by the parameter. Can only be ran by server admins.
     usage: /changeservermode <mode>
     permission: agcraft.admin
+  reloadconfigfile:
+    description: Dynamically reloads the server's configuration variables by reloading the config file. Can only be ran by server admins
+    usage: /reloadconfigfile
+    permission: agcraft.admin
 
 permissions:
   agcraft.*:

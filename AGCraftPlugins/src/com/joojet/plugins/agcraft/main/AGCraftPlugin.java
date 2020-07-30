@@ -142,6 +142,9 @@ public class AGCraftPlugin extends JavaPlugin
 		// Server mode
 		this.serverMode = this.searchElementFromInterpreter (serverModeInterpreter,
 				ServerMode.getKey(), ServerMode.NORMAL);
+		// Prints out other values
+		System.out.println ("Set amplified mob spawn chance to " + this.customMobSpawnChance);
+		System.out.println ("Debug Mode: " + this.enableDebugMode);
 	}
 
 	/** Initializes all commands */
