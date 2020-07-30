@@ -20,7 +20,7 @@ public class DeathCounter
 	public DeathCounter ()
 	{		
 		this.scoreboard = AGCraftPlugin.plugin.getServer().getScoreboardManager().getMainScoreboard();
-		if (AGCraftPlugin.serverMode == ServerMode.NORMAL)
+		if (AGCraftPlugin.plugin.serverMode == ServerMode.NORMAL)
 		{
 			// Create a new deathcounter scoreboard if one doesn't already exist
 			deathCounterObj = this.scoreboard.getObjective(scoreboardName);

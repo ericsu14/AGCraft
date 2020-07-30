@@ -23,6 +23,7 @@ public class ServerConfigFile extends AbstractConfigFile
 		data.put(ServerEvent.getKey(), ServerEvent.DEFAULT.toString());
 		data.put(MinigameRewardType.getKey(), MinigameRewardType.GIFT.toString());
 		data.put(AmplifiedMobSpawner.spawnChanceKey, 0.15);
+		data.put(AmplifiedMobSpawner.debugModeKey, false);
 		return data;
 	}
 }

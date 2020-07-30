@@ -51,7 +51,7 @@ public class RewardPlayer extends AGCommandExecutor
 			}
 			
 			RewardType rewardType = AGCraftPlugin.rewardInterpreter.searchTrie(args[0]);
-			MinigameRewardType eventType = AGCraftPlugin.eventInterpreter.searchTrie(args[1]);
+			MinigameRewardType eventType = AGCraftPlugin.minigameRewardTypeInterpreter.searchTrie(args[1]);
 			
 			if (rewardType == null)
 			{

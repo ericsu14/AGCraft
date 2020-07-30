@@ -25,10 +25,9 @@ public class RewardManager implements Listener
 	
 	/** Creates a new instance of a reward manager with a set minigame type
 	 * 		@param minigameType - Type of minigame being played, which is used to determine types of participation rewards */
-	public RewardManager (MinigameRewardType minigameRewardType)
+	public RewardManager ()
 	{
 		super ();
-		this.minigameRewardType = minigameRewardType;
 	}
 	
 	/** Alerts the player of any unclaimed items if he has some */
@@ -36,7 +35,7 @@ public class RewardManager implements Listener
 	public void handlePlayerLogin (PlayerJoinEvent event)
 	{
 		Player player = event.getPlayer();
-		switch (AGCraftPlugin.serverMode)
+		switch (AGCraftPlugin.plugin.serverMode)
 		{
 			case NORMAL:
 				this.handleNormalLoginEvent(player);

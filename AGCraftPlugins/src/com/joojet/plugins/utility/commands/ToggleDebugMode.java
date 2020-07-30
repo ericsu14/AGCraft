@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
-import com.joojet.plugins.mobs.AmplifiedMobSpawner;
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 
 public class ToggleDebugMode extends AGCommandExecutor
 {
@@ -23,7 +23,7 @@ public class ToggleDebugMode extends AGCommandExecutor
 	{
 		if (arg0 instanceof ConsoleCommandSender || arg0 instanceof Player)
 		{
-			AmplifiedMobSpawner.toggleDebug();
+			AGCraftPlugin.plugin.toggleDebugMode();
 			return true;
 		}
 		return false;

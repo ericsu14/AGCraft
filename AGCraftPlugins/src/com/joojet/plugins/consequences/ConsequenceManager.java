@@ -27,7 +27,7 @@ public class ConsequenceManager implements Listener
 	public void handleConsequenceLoginEvent (PlayerJoinEvent event)
 	{
 		// Disables this listener if server mode is anything but normal
-		if (AGCraftPlugin.serverMode != ServerMode.NORMAL)
+		if (AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL)
 		{
 			return;
 		}
@@ -53,7 +53,7 @@ public class ConsequenceManager implements Listener
 	public void handlePlayerDeathEvent (PlayerRespawnEvent event)
 	{
 		// Disables this listener if server mode is anything but normal
-		if (AGCraftPlugin.serverMode != ServerMode.NORMAL)
+		if (AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL)
 		{
 			return;
 		}

@@ -25,7 +25,6 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.allies.golem.GolemTypes;
 import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
 import com.joojet.plugins.mobs.allies.wolf.WolfTypes;
-import com.joojet.plugins.mobs.enums.ServerEvent;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.ghast.UHCGhastTypes;
@@ -48,15 +47,12 @@ import com.joojet.plugins.warp.scantools.ScanEntities;
 import net.md_5.bungee.api.ChatColor;
 
 public class AmplifiedMobSpawner implements Listener 
-{
-	// Chance of spawning a elite monster
-	private double chance;
-	
+{	
 	// Key used to reference the Amplified mob spawner's spawn chance
 	public final static String spawnChanceKey = "amplified-spawn-chance";
 	
-	// Show debug info if set to true
-	public static boolean debug = false;
+	// Key used to reference the amplified mob spawner's debug mode
+	public final static String debugModeKey = "amplified-debug-mode";
 	
 	private Random rand = new Random ();
 	
@@ -73,9 +69,7 @@ public class AmplifiedMobSpawner implements Listener
 	private ZombiePigmenTypes zombiePigmenTypes;
 	private PiglinTypes piglinTypes;
 	private UHCGhastTypes uhcGhastTypes;
-	
-	// Type of server event that is happening right now
-	private ServerEvent serverEvent;;
+
 	
 	// Used to generate random fireworks
 	private FireworkTypes fwTypes;
@@ -85,10 +79,8 @@ public class AmplifiedMobSpawner implements Listener
 	 *  having a certain chance of equipping them with custom armor, buffs, and weapons.
 	 *  	@param serverEvent - Defines a special server event, which if set to any registered value other than DEFAULT,
 	 *                           custom holiday themed mobs and special events will start occuring. */
-	public AmplifiedMobSpawner (ServerEvent serverEvent, double chance)
+	public AmplifiedMobSpawner ()
 	{
-		this.serverEvent = serverEvent;
-		this.chance = chance;
 		this.zombieTypes = new ZombieTypes();
 		this.skeletonTypes = new SkeletonTypes();
 		this.spiderTypes = new SpiderTypes();
@@ -124,7 +116,7 @@ public class AmplifiedMobSpawner implements Listener
 	@EventHandler
 	public void showDamageInfo (EntityDamageByEntityEvent event)
 	{
-		if (!debug)
+		if (!AGCraftPlugin.plugin.enableDebugMode)
 		{
 			return;
 		}
@@ -179,7 +171,7 @@ public class AmplifiedMobSpawner implements Listener
 		double roll = rand.nextDouble();
 		
 		// Handles Server Mode mob spawns
-		switch (AGCraftPlugin.serverMode)
+		switch (AGCraftPlugin.plugin.serverMode)
 		{
 			case UHC:
 				this.handleUHCMobSpawns(type, reason, entity, biome);
@@ -191,7 +183,7 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		// Handles server wide event mob spawns
-		switch (this.serverEvent)
+		switch (AGCraftPlugin.plugin.serverEventMode)
 		{
 			case JULY_FOURTH:
 				this.handleJulyFourthSpawns(type, reason, entity, roll);
@@ -215,7 +207,7 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		// Do not alter any mob that isn't spawned into the world naturally or dice roll fails
-		if ((!reasonFilter(reason) || roll > chance) && !debug)
+		if ((!reasonFilter(reason) || roll > AGCraftPlugin.plugin.customMobSpawnChance) && !AGCraftPlugin.plugin.enableDebugMode)
 		{
 			return;
 		}
@@ -345,13 +337,5 @@ public class AmplifiedMobSpawner implements Listener
 		VillagerEquipment equipment = (VillagerEquipment) wanderingTypes.getRandomEquipment(biome);
 		trader.setRecipes(equipment.getRecipes());
 		EquipmentTools.equipEntity(trader, (MobEquipment) equipment);
-	}
-	
-	
-	/** Toggles debug mode on or off */
-	public static void toggleDebug ()
-	{
-		debug = !(debug);
-		System.out.println ("Debug mode " + ((debug) ? "activated" : "disabled") + ".");
 	}
 }

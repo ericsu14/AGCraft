@@ -1,32 +1,13 @@
 package com.joojet.plugins.rewards.interpreter;
 
-import com.joojet.biblefetcher.trie.TrieNode;
-import com.joojet.biblefetcher.trie.TrieUtil;
+import com.joojet.plugins.agcraft.interfaces.AbstractInterpreter;
 import com.joojet.plugins.rewards.enums.RewardType;
 
-public class RewardTypeInterpreter 
+public class RewardTypeInterpreter extends AbstractInterpreter <RewardType>
 {
-	private TrieNode <RewardType> rewardRoot;
-	
 	public RewardTypeInterpreter ()
 	{
-		this.rewardRoot = new TrieNode <RewardType> (' ' , null);
-		this.populateTrie();
+		super (RewardType.values());
 	}
 	
-	/** Populates the trie with all enums in RewardTypes */
-	private void populateTrie ()
-	{
-		for (RewardType ele : RewardType.values())
-		{
-			TrieUtil.insertWord(ele.toString(), ele, this.rewardRoot);
-		}
-	}
-	
-	/** Searches the trie for the search term and returns the RewardType related to
-	 *  that search term. */
-	public RewardType searchTrie (String input)
-	{
-		return TrieUtil.searchTrie(input, this.rewardRoot);
-	}
 }

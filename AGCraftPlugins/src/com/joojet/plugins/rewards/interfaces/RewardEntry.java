@@ -24,7 +24,7 @@ public class RewardEntry
 		this.rewardID = rewardID;
 		this.uuid = UUID.fromString(uuid);
 		this.reward = AGCraftPlugin.rewardInterpreter.searchTrie(reward);
-		this.event = AGCraftPlugin.eventInterpreter.searchTrie(event);
+		this.event = AGCraftPlugin.minigameRewardTypeInterpreter.searchTrie(event);
 		this.claimed = claimed;
 		
 		if (this.reward == null)

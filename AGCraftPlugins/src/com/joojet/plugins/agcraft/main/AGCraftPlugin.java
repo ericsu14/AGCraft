@@ -6,11 +6,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.joojet.biblefetcher.database.CreateDatabase;
 import com.joojet.biblefetcher.interpreter.CommandInterpreter;
+import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.enums.PermissionType;
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.agcraft.interfaces.AGTabCompleter;
+import com.joojet.plugins.agcraft.interfaces.AbstractInterpreter;
 import com.joojet.plugins.agcraft.interfaces.PlayerCommand;
 import com.joojet.plugins.biblefetcher.commands.*;
 import com.joojet.plugins.biblefetcher.commands.tabcompleter.BibleTabCompleter;
@@ -21,15 +23,17 @@ import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.enums.ServerEvent;
+import com.joojet.plugins.mobs.interpreter.ServerEventInterpreter;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.commands.*;
 import com.joojet.plugins.rewards.database.CreateRewardsDatabase;
 import com.joojet.plugins.rewards.enums.MinigameRewardType;
-import com.joojet.plugins.rewards.interpreter.EventTypeInterpreter;
+import com.joojet.plugins.rewards.interpreter.MinigameRewardTypeInterpreter;
 import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
 import com.joojet.plugins.utility.commands.*;
 import com.joojet.plugins.utility.commands.tabcompleter.ChangeServerModeTabCompleter;
 import com.joojet.plugins.utility.commands.tabcompleter.ClearJunkTabCompleter;
+import com.joojet.plugins.utility.interpreter.ServerModeInterpreter;
 import com.joojet.plugins.warp.commands.*;
 import com.joojet.plugins.warp.commands.tabcompleter.*;
 import com.joojet.plugins.warp.database.CreateLocationDatabase;
@@ -42,25 +46,47 @@ public class AGCraftPlugin extends JavaPlugin
 	public static AGCraftPlugin plugin;
 	// Stores a reference to the death counter object
 	public static DeathCounter deathCounter;
-	// Stores the command interpreter used for reward types
-	public static RewardTypeInterpreter rewardInterpreter = new RewardTypeInterpreter();
-	// Stores the command interpreter used for event types
-	public static EventTypeInterpreter eventInterpreter = new EventTypeInterpreter();
-	// Stores the server mode, which enables or disables commands and listeners depending on what mode the server is ran in
-	public static ServerMode serverMode = ServerMode.NORMAL;
+	// Config file manager
+	public ServerConfigFile serverConfigFile;
 	// A list containing all known commands
 	private HashMap <CommandType, PlayerCommand> playerCommands;
+	
+	/** Search term interpreters */
+	// Stores the command interpreter used for reward types
+	public static RewardTypeInterpreter rewardInterpreter = new RewardTypeInterpreter();
+	// Stores the command interpreter used for minigame reward types
+	public static MinigameRewardTypeInterpreter minigameRewardTypeInterpreter = new MinigameRewardTypeInterpreter();
+	// Stores the command interpreter used for server event types
+	public static ServerEventInterpreter serverEventInterpreter = new ServerEventInterpreter ();
+	// Stores the command interpreter used for server mode types
+	public static ServerModeInterpreter serverModeInterpreter = new ServerModeInterpreter ();
+	
+	/** Config file values */
+	// Stores the server mode, which enables or disables commands and listeners depending on what mode the server is ran in
+	public ServerMode serverMode = ServerMode.NORMAL;
+	// Stores the server-wide event mode, which may add custom themed mobs or events into the normal game world
+	public ServerEvent serverEventMode = ServerEvent.DEFAULT;
+	// Stores the chance of custom mobs spawning into the game
+	public double customMobSpawnChance = 0.15;
+	// Determines if debug mode is enabled for the amplified mob spawner plugin
+	public boolean enableDebugMode = false;
+	// Stores type of minigame reward type currently active on minigame nights
+	public MinigameRewardType minigameEventType = MinigameRewardType.GIFT;
+	
 	
 	public AGCraftPlugin ()
 	{
 		super ();
 		this.playerCommands = new HashMap <CommandType, PlayerCommand> ();
+		this.serverConfigFile = null;
 	}
 	
 	@Override
 	public void onEnable ()
 	{
 		plugin = this;
+		// Loads in the server config file and initializes its values
+		
 		// Attempts to create a database
 		CreateDatabase.createNewDatabase();
 		CreateLocationDatabase.createDatabase();
@@ -75,13 +101,13 @@ public class AGCraftPlugin extends JavaPlugin
 		deathCounter = new DeathCounter();
 		
 		// Amplified mob spawner
-		Bukkit.getPluginManager().registerEvents(new AmplifiedMobSpawner(ServerEvent.DEFAULT, 0.15), this);
+		Bukkit.getPluginManager().registerEvents(new AmplifiedMobSpawner(), this);
 		
 		// Summoning Scroll listener
 		Bukkit.getPluginManager().registerEvents (new SummoningScrollListener(), this);
 		
 		// Player login handler
-		Bukkit.getPluginManager().registerEvents(new RewardManager(MinigameRewardType.UHC_I), this);
+		Bukkit.getPluginManager().registerEvents(new RewardManager(), this);
 		
 		// Player consequence handler
 		Bukkit.getPluginManager().registerEvents (new ConsequenceManager(), this);
@@ -93,7 +119,22 @@ public class AGCraftPlugin extends JavaPlugin
 
 	}
 	
-	
+	/** Loads in the server config file and initializes its variables to the plugin */
+	public void loadServerConfigFile ()
+	{
+		this.serverConfigFile = new ServerConfigFile ();
+		
+		this.customMobSpawnChance = (double) this.serverConfigFile.getValue(AmplifiedMobSpawner.spawnChanceKey);
+		this.enableDebugMode = (boolean) this.serverConfigFile.getValue(AmplifiedMobSpawner.debugModeKey);
+		
+		this.minigameEventType = this.searchElementFromInterpreter(minigameRewardTypeInterpreter,
+				MinigameRewardType.getKey(), MinigameRewardType.GIFT);
+		this.serverEventMode = this.searchElementFromInterpreter(serverEventInterpreter,
+				ServerEvent.getKey(), ServerEvent.DEFAULT);
+		this.serverMode = this.searchElementFromInterpreter (serverModeInterpreter,
+				ServerMode.getKey(), ServerMode.NORMAL);
+	}
+
 	/** Initializes all commands */
 	public void initCommands ()
 	{
@@ -165,6 +206,13 @@ public class AGCraftPlugin extends JavaPlugin
 		setCommandPermissions ();
 	}
 	
+	/** Toggles debug mode on or off */
+	public void toggleDebugMode ()
+	{
+		enableDebugMode = !(enableDebugMode);
+		System.out.println ("Debug mode " + ((enableDebugMode) ? "activated" : "disabled") + ".");
+	}
+	
 	/** Adds in a new player command without a tab completer
 	 * 		@param commandType - Type of command the command executor is being attached to
 	 * 		@param executor - A reference to the command executor instance */
@@ -179,6 +227,23 @@ public class AGCraftPlugin extends JavaPlugin
 	private void addTabCompleter (AGTabCompleter tabCompleter)
 	{
 		playerCommands.get(tabCompleter.getCommandType()).setTabCompleter(tabCompleter);
+	}
+	
+	/** Searches a search trie for a value based on a key. If not found, throw an error and use a
+	 *  default.
+	 * @param <E>
+	 *  @param interpreter - Instance of a search term interpreter to be searched
+	 *  @param key - Key used in the interpreter to search for the value
+	 *  @param defaultValue - Default value to be used in the event of failure */
+	private <E> E searchElementFromInterpreter (AbstractInterpreter<E> interpreter, String key, E defaultValue)
+	{
+		E result = interpreter.searchTrie(key);
+		if (result == null)
+		{
+			System.err.println ("Error: Cannot find value for " + key + ". Using default value " + defaultValue.toString() + " instead...");
+			result = defaultValue;
+		}
+		return result;
 	}
 	
 }
