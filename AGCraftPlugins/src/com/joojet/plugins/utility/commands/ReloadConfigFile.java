@@ -21,7 +21,7 @@ public class ReloadConfigFile extends AGCommandExecutor {
 	{
 		if (sender instanceof ConsoleCommandSender || sender instanceof Player)
 		{
-			AGCraftPlugin.plugin.reloadConfig();
+			AGCraftPlugin.plugin.loadServerConfigFile();
 			return true;
 		}
 		return false;
