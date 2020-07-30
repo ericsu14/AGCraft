@@ -252,6 +252,10 @@ public class AGCraftPlugin extends JavaPlugin
 			System.err.println ("Error: Cannot find value for " + key + ". Using default value " + defaultValue.toString() + " instead...");
 			result = defaultValue;
 		}
+		else
+		{
+			System.out.println ("Loaded variable " + result.toString() + " for key " + key + "!");
+		}
 		return result;
 	}
 	
