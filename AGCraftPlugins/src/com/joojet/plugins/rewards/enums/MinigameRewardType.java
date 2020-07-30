@@ -78,7 +78,7 @@ public enum MinigameRewardType
 	}
 	
 	/** Returns the key used to identify where this entry is in the YAML config file */
-	public String getKey ()
+	public static String getKey ()
 	{
 		return "minigame-reward-type";
 	}

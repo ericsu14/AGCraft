@@ -46,7 +46,7 @@ public class APIKeyReader
 	 * 		@throws RuntimeException if the config file is missing. This would also create a new, empty file. */
 	public static String getAPIKey (APIName id) throws IOException, RuntimeException
 	{
-		if (!checkConfigFile())
+		if (!checkConfigFile(getConfigFilePath()))
 		{
 			createConfigFile();
 			throw new RuntimeException ("Config file not found.");
@@ -84,9 +84,9 @@ public class APIKeyReader
 	
 	/** Returns true if the config file already exists in the plugin directory 
 	 * 		@throws IOException - If there is a problem reading this file*/
-	public static boolean checkConfigFile () throws IOException
+	public static boolean checkConfigFile (String path) throws IOException
 	{
-		File file = new File (getConfigFilePath());
+		File file = new File (path);
 		return file.exists();
 	}
 	

@@ -7,7 +7,7 @@ public enum ServerEvent
 	DEFAULT, JULY_FOURTH;
 	
 	/** Returns the key used to identify where this entry is in the YAML config file */
-	public String getKey ()
+	public static String getKey ()
 	{
 		return "server-event-mode";
 	}

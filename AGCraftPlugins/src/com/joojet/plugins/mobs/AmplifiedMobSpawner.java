@@ -50,7 +50,10 @@ import net.md_5.bungee.api.ChatColor;
 public class AmplifiedMobSpawner implements Listener 
 {
 	// Chance of spawning a elite monster
-	private double chance = 0.15;
+	private double chance;
+	
+	// Key used to reference the Amplified mob spawner's spawn chance
+	public final static String spawnChanceKey = "amplified-spawn-chance";
 	
 	// Show debug info if set to true
 	public static boolean debug = false;

@@ -24,7 +24,7 @@ public class CreateDatabase
 		{
 			/* Check for the existence of a plugin configuration file. If not, create one and prompt the server
 			 * admin to provide needed API keys. */
-			if (!APIKeyReader.checkConfigFile())
+			if (!APIKeyReader.checkConfigFile(APIKeyReader.getConfigFilePath()))
 			{
 				APIKeyReader.createConfigFile();
 			}
