@@ -50,7 +50,7 @@ import net.md_5.bungee.api.ChatColor;
 public class AmplifiedMobSpawner implements Listener 
 {
 	// Chance of spawning a elite monster
-	private final double chance = 0.15;
+	private double chance = 0.15;
 	
 	// Show debug info if set to true
 	public static boolean debug = false;
@@ -72,13 +72,20 @@ public class AmplifiedMobSpawner implements Listener
 	private UHCGhastTypes uhcGhastTypes;
 	
 	// Type of server event that is happening right now
-	private ServerEvent serverEvent = ServerEvent.DEFAULT;
+	private ServerEvent serverEvent;;
 	
 	// Used to generate random fireworks
 	private FireworkTypes fwTypes;
 	
-	public AmplifiedMobSpawner ()
+	/** Creates a new instance of this mob spawner class,
+	 *  which adds listeners to Minecraft's mob spawn events for
+	 *  having a certain chance of equipping them with custom armor, buffs, and weapons.
+	 *  	@param serverEvent - Defines a special server event, which if set to any registered value other than DEFAULT,
+	 *                           custom holiday themed mobs and special events will start occuring. */
+	public AmplifiedMobSpawner (ServerEvent serverEvent, double chance)
 	{
+		this.serverEvent = serverEvent;
+		this.chance = chance;
 		this.zombieTypes = new ZombieTypes();
 		this.skeletonTypes = new SkeletonTypes();
 		this.spiderTypes = new SpiderTypes();

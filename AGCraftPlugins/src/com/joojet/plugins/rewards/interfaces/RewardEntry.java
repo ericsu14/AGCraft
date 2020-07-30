@@ -3,7 +3,7 @@ package com.joojet.plugins.rewards.interfaces;
 import java.util.UUID;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
-import com.joojet.plugins.rewards.enums.MinigameType;
+import com.joojet.plugins.rewards.enums.MinigameRewardType;
 import com.joojet.plugins.rewards.enums.RewardType;
 
 public class RewardEntry 
@@ -15,7 +15,7 @@ public class RewardEntry
 	/** The type of prize being distributed */
 	private RewardType reward;
 	/** The name of the event in which this reward is distributed from */
-	private MinigameType event;
+	private MinigameRewardType event;
 	/** True if the prize is already claimed by the user */
 	private boolean claimed;
 	
@@ -35,12 +35,12 @@ public class RewardEntry
 		
 		if (this.event == null)
 		{
-			this.event = MinigameType.UHC_I;
+			this.event = MinigameRewardType.UHC_I;
 			System.out.println ("Warning: Event is null | " + event);
 		}
 	}
 	
-	public RewardEntry (int rewardID, UUID uuid, RewardType reward, MinigameType event, boolean claimed)
+	public RewardEntry (int rewardID, UUID uuid, RewardType reward, MinigameRewardType event, boolean claimed)
 	{
 		this.rewardID = rewardID;
 		this.uuid = uuid;
@@ -79,12 +79,12 @@ public class RewardEntry
 		this.reward = reward;
 	}
 
-	public MinigameType getEvent() 
+	public MinigameRewardType getEvent() 
 	{
 		return event;
 	}
 
-	public void setEvent(MinigameType event) 
+	public void setEvent(MinigameRewardType event) 
 	{
 		this.event = event;
 	}

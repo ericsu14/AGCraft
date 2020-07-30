@@ -5,11 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public enum MinigameType 
+public enum MinigameRewardType 
 {
 	/** A list of minigame events that has happened in this server */
 	UHC_I ("UHC I", "07-31-2020"),
-	UHC_I_WINNER ("UHC I", "07-31-2020", "Awarded for dominating in our very first UHC event! Congrats team <team>!"),
+	UHC_I_WINNER ("UHC I", "08-01-202", "Awarded for dominating in the first round of our very first UHC event! Congrats team <team>!"),
+	UHC_I_WINNNER_I ("UHC I - Round 2", "08-01-2020", "Awarded for dominating in the second round of our very first UHC event! Congrats team <team>!"),
 	GIFT ("Gift", "now", "A small gift from the administrator!");
 	
 	/** Full name of the event */
@@ -19,7 +20,7 @@ public enum MinigameType
 	/** Used to display custom lore information */
 	private String customLore;
 	
-	private MinigameType (String fullName, String date)
+	private MinigameRewardType (String fullName, String date)
 	{
 		this.fullName = fullName;
 		this.date = new Calendar.Builder().build();
@@ -27,7 +28,7 @@ public enum MinigameType
 		this.customLore = null;
 	}
 	
-	private MinigameType (String fullName, String date, String customLore)
+	private MinigameRewardType (String fullName, String date, String customLore)
 	{
 		this.fullName = fullName;
 		this.date = new Calendar.Builder().build();
@@ -74,6 +75,12 @@ public enum MinigameType
 	public String toString ()
 	{
 		return this.name();
+	}
+	
+	/** Returns the key used to identify where this entry is in the YAML config file */
+	public String getKey ()
+	{
+		return "minigame-reward-type";
 	}
 	
 	/** Converts a datestring formatted in MM-dd-yyyy to

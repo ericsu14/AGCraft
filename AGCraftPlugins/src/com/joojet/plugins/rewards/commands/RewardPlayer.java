@@ -14,7 +14,7 @@ import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.rewards.database.RewardDatabaseManager;
-import com.joojet.plugins.rewards.enums.MinigameType;
+import com.joojet.plugins.rewards.enums.MinigameRewardType;
 import com.joojet.plugins.rewards.enums.RewardType;
 
 import net.md_5.bungee.api.ChatColor;
@@ -51,7 +51,7 @@ public class RewardPlayer extends AGCommandExecutor
 			}
 			
 			RewardType rewardType = AGCraftPlugin.rewardInterpreter.searchTrie(args[0]);
-			MinigameType eventType = AGCraftPlugin.eventInterpreter.searchTrie(args[1]);
+			MinigameRewardType eventType = AGCraftPlugin.eventInterpreter.searchTrie(args[1]);
 			
 			if (rewardType == null)
 			{

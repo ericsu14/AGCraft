@@ -20,9 +20,11 @@ import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.SummoningScrollListener;
+import com.joojet.plugins.mobs.enums.ServerEvent;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.commands.*;
 import com.joojet.plugins.rewards.database.CreateRewardsDatabase;
+import com.joojet.plugins.rewards.enums.MinigameRewardType;
 import com.joojet.plugins.rewards.interpreter.EventTypeInterpreter;
 import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
 import com.joojet.plugins.utility.commands.*;
@@ -73,13 +75,13 @@ public class AGCraftPlugin extends JavaPlugin
 		deathCounter = new DeathCounter();
 		
 		// Amplified mob spawner
-		Bukkit.getPluginManager().registerEvents(new AmplifiedMobSpawner(), this);
+		Bukkit.getPluginManager().registerEvents(new AmplifiedMobSpawner(ServerEvent.DEFAULT, 0.15), this);
 		
 		// Summoning Scroll listener
 		Bukkit.getPluginManager().registerEvents (new SummoningScrollListener(), this);
 		
 		// Player login handler
-		Bukkit.getPluginManager().registerEvents(new RewardManager(), this);
+		Bukkit.getPluginManager().registerEvents(new RewardManager(MinigameRewardType.UHC_I), this);
 		
 		// Player consequence handler
 		Bukkit.getPluginManager().registerEvents (new ConsequenceManager(), this);
