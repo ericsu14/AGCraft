@@ -89,8 +89,6 @@ public class AGCraftPlugin extends JavaPlugin
 	public void onEnable ()
 	{
 		plugin = this;
-		// Loads in the server config file and initializes its values
-		this.loadServerConfigFile();
 		
 		// Attempts to create a database
 		CreateDatabase.createNewDatabase();
@@ -100,7 +98,9 @@ public class AGCraftPlugin extends JavaPlugin
 		// Loads in all commands
 		this.initCommands();
 		this.loadCommands();
-		this.setCommandPermissions();
+		
+		// Loads in the server config file and initializes its values
+		this.loadServerConfigFile();
 		
 		// Death counter
 		deathCounter = new DeathCounter();
@@ -140,8 +140,8 @@ public class AGCraftPlugin extends JavaPlugin
 		this.serverEventMode = this.searchElementFromInterpreter(serverEventInterpreter,
 				ServerEvent.getKey(), ServerEvent.DEFAULT);
 		// Server mode
-		this.serverMode = this.searchElementFromInterpreter (serverModeInterpreter,
-				ServerMode.getKey(), ServerMode.NORMAL);
+		this.switchServerMode(this.searchElementFromInterpreter (serverModeInterpreter,
+				ServerMode.getKey(), ServerMode.NORMAL));
 		// Prints out other values
 		System.out.println ("Set amplified mob spawn chance to " + this.customMobSpawnChance);
 		System.out.println ("Debug Mode: " + this.enableDebugMode);
@@ -215,7 +215,7 @@ public class AGCraftPlugin extends JavaPlugin
 	 * 		@param mode - The new mode the server is being switched to */
 	public void switchServerMode (ServerMode mode)
 	{
-		serverMode = mode;
+		this.serverMode = mode;
 		setCommandPermissions ();
 	}
 	
