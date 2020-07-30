@@ -24,5 +24,6 @@ public class DoomGuyFeet extends LeatherEquipment
 		this.addDefenseAttributes(3.0, 5.0, 0.0);
 		this.addSpeedAttribute(0.30);
 		this.setColor(Color.fromRGB(91, 70, 63));
+		this.makeUnbreakable();
 	}
 }

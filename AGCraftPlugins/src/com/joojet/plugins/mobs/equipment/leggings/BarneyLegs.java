@@ -19,5 +19,6 @@ public class BarneyLegs extends LeatherEquipment
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
 		this.setColor(Color.fromRGB(182, 38, 132));
+		this.makeUnbreakable();
 	}
 }

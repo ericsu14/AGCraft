@@ -247,4 +247,12 @@ public abstract class Equipment extends ItemStack
 		meta.setLocalizedName(text);
 		this.setItemMeta(meta);
 	}
+	
+	/** Makes this equipment carry the unbreakable attribute */
+	protected void makeUnbreakable ()
+	{
+		ItemMeta meta = this.getItemMeta();
+		meta.setUnbreakable(true);
+		this.setItemMeta(meta);
+	}
 }

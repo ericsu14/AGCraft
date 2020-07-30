@@ -17,7 +17,7 @@ public class SkullKidHelmet extends Equipment
 		
 		this.addDefenseAttributes(3.0, 4.0, 0.25);
 		this.addAttackAttributes(0.0, 0.15);
-		this.addHealthAttributes(6.0);
+		this.addHealthAttributes(10.0);
 		
 		Map <Enchantment, Integer> enchants = new HashMap <Enchantment, Integer> ();
 		enchants.put(Enchantment.PROTECTION_ENVIRONMENTAL, 4);

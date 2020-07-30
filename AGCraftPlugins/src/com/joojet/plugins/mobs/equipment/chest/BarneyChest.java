@@ -20,5 +20,6 @@ public class BarneyChest extends LeatherEquipment
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
 		this.addDefenseAttributes(7.0, 5.0, 0.15);
 		this.setColor(Color.fromRGB(0, 152, 73));
+		this.makeUnbreakable();
 	}
 }

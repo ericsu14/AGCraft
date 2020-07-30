@@ -20,5 +20,6 @@ public class SkullKidBoots extends LeatherEquipment
 		this.addSpeedAttribute(0.25);
 		this.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, 3);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 4);
+		this.makeUnbreakable();
 	}
 }

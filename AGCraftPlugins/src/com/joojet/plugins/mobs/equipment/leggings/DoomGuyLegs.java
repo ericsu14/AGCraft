@@ -20,6 +20,6 @@ public class DoomGuyLegs extends LeatherEquipment
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
 		this.setColor(Color.fromRGB(140, 143, 62));
 		this.addLoreToItemMeta("None could stand before the horde but the Doom Slayer...");
-		
+		this.makeUnbreakable();
 	}
 }

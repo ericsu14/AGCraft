@@ -16,5 +16,6 @@ public class SkullKidPants extends LeatherEquipment
 		this.addLoreToItemMeta("You’ve met with a terrible fate, haven’t you?");
 		this.addDefenseAttributes(6.0, 5.0, 0.10);
 		this.setColor(Color.fromRGB(173, 61, 24));
+		this.makeUnbreakable();
 	}
 }

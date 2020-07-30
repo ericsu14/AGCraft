@@ -23,5 +23,6 @@ public class BarneyFeet extends LeatherEquipment
 		this.setDisplayName("Barney's Wacky Feet");
 		this.addLoreToItemMeta("I'm gonna stick this foot deep inside of uranus.");
 		this.setColor(Color.fromRGB(182, 38, 132));
+		this.makeUnbreakable();
 	}
 }
