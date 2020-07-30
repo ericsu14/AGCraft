@@ -86,6 +86,7 @@ public class AGCraftPlugin extends JavaPlugin
 	{
 		plugin = this;
 		// Loads in the server config file and initializes its values
+		this.loadServerConfigFile();
 		
 		// Attempts to create a database
 		CreateDatabase.createNewDatabase();
@@ -122,15 +123,19 @@ public class AGCraftPlugin extends JavaPlugin
 	/** Loads in the server config file and initializes its variables to the plugin */
 	public void loadServerConfigFile ()
 	{
+		// Creates a new instance of a config file
 		this.serverConfigFile = new ServerConfigFile ();
-		
+		// Spawn chance
 		this.customMobSpawnChance = (double) this.serverConfigFile.getValue(AmplifiedMobSpawner.spawnChanceKey);
+		// Debug mode
 		this.enableDebugMode = (boolean) this.serverConfigFile.getValue(AmplifiedMobSpawner.debugModeKey);
-		
+		// Minigame event type
 		this.minigameEventType = this.searchElementFromInterpreter(minigameRewardTypeInterpreter,
 				MinigameRewardType.getKey(), MinigameRewardType.GIFT);
+		// Server event mode
 		this.serverEventMode = this.searchElementFromInterpreter(serverEventInterpreter,
 				ServerEvent.getKey(), ServerEvent.DEFAULT);
+		// Server mode
 		this.serverMode = this.searchElementFromInterpreter (serverModeInterpreter,
 				ServerMode.getKey(), ServerMode.NORMAL);
 	}
