@@ -6,6 +6,7 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
+import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 
 public class DeathCounter 
@@ -17,17 +18,19 @@ public class DeathCounter
 	private Objective deathCounterObj;
 	
 	public DeathCounter ()
-	{
+	{		
 		this.scoreboard = AGCraftPlugin.plugin.getServer().getScoreboardManager().getMainScoreboard();
-		
-		// Create a new deathcounter scoreboard if one doesn't already exist
-		deathCounterObj = this.scoreboard.getObjective(scoreboardName);
-		if (deathCounterObj == null)
+		if (AGCraftPlugin.serverMode == ServerMode.NORMAL)
 		{
-			deathCounterObj = this.scoreboard.registerNewObjective(scoreboardName, deathCriteriaName, scoreboardDisplayName);
-			deathCounterObj.setDisplaySlot(DisplaySlot.BELOW_NAME);
+			// Create a new deathcounter scoreboard if one doesn't already exist
+			deathCounterObj = this.scoreboard.getObjective(scoreboardName);
+			if (deathCounterObj == null)
+			{
+				deathCounterObj = this.scoreboard.registerNewObjective(scoreboardName, deathCriteriaName, scoreboardDisplayName);
+				deathCounterObj.setDisplaySlot(DisplaySlot.BELOW_NAME);
+			}
+			this.syncDeathCounts();
 		}
-		this.syncDeathCounts();
 	}
 	
 	/** Synchronizes the death counter scoreboard to reflect values found in each player's statistics */
