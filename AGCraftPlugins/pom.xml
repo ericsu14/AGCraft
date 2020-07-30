@@ -19,4 +19,11 @@
       </plugin>
     </plugins>
   </build>
+  <dependencies>
+	<dependency>
+	    <groupId>org.yaml</groupId>
+	    <artifactId>snakeyaml</artifactId>
+	    <version>1.26</version>            
+	</dependency>
+  </dependencies>
 </project>

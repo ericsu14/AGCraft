@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public enum EventType 
+public enum MinigameType 
 {
 	/** A list of minigame events that has happened in this server */
 	UHC_I ("UHC I", "07-31-2020"),
@@ -19,7 +19,7 @@ public enum EventType
 	/** Used to display custom lore information */
 	private String customLore;
 	
-	private EventType (String fullName, String date)
+	private MinigameType (String fullName, String date)
 	{
 		this.fullName = fullName;
 		this.date = new Calendar.Builder().build();
@@ -27,7 +27,7 @@ public enum EventType
 		this.customLore = null;
 	}
 	
-	private EventType (String fullName, String date, String customLore)
+	private MinigameType (String fullName, String date, String customLore)
 	{
 		this.fullName = fullName;
 		this.date = new Calendar.Builder().build();

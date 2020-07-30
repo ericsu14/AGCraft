@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import com.joojet.plugins.rewards.enums.EventType;
+import com.joojet.plugins.rewards.enums.MinigameType;
 import com.joojet.plugins.rewards.enums.RewardType;
 import com.joojet.plugins.rewards.interfaces.RewardEntry;
 
@@ -20,7 +20,7 @@ public class RewardDatabaseManager
 	 * 		@param reward - The type of reward that is being granted to the player
 	 * 		@param event - The name of the event from where the reward is distributed 
 	 * 		@throws SQLException - Internal connection error */
-	public static void grantReward (UUID uuid, RewardType reward, EventType event) throws SQLException
+	public static void grantReward (UUID uuid, RewardType reward, MinigameType event) throws SQLException
 	{
 		Connection c = null;
 		
@@ -164,7 +164,7 @@ public class RewardDatabaseManager
 	 * 		@param UUID - uuid of the player we are checking
 	 * 		@param event - Type of event this is 
 	 * 		@throws SQLException - Internal connection error */
-	public static boolean checkIfPlayerHasReward (UUID uuid, EventType event) throws SQLException
+	public static boolean checkIfPlayerHasReward (UUID uuid, MinigameType event) throws SQLException
 	{
 		ArrayList <RewardEntry> rewards = fetchAllRewards (uuid);
 		

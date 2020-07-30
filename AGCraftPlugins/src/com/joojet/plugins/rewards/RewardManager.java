@@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.rewards.database.RewardDatabaseManager;
-import com.joojet.plugins.rewards.enums.EventType;
+import com.joojet.plugins.rewards.enums.MinigameType;
 import com.joojet.plugins.rewards.enums.RewardType;
 import com.joojet.plugins.rewards.util.StringUtil;
 
@@ -21,7 +21,7 @@ public class RewardManager implements Listener
 {
 	/** If we are hosting a minigame, specify which event we are running to
 	 *  determine participation rewards for joining the server */
-	private final EventType currentEventType = EventType.UHC_I;
+	private final MinigameType minigameType = MinigameType.UHC_I;
 	
 	/** Alerts the player of any unclaimed items if he has some */
 	@EventHandler
@@ -70,11 +70,11 @@ public class RewardManager implements Listener
 		try 
 		{
 			// If the player does not already have a reward from this current event, give them the rewards
-			if (!RewardDatabaseManager.checkIfPlayerHasReward(playerUUID, this.currentEventType))
+			if (!RewardDatabaseManager.checkIfPlayerHasReward(playerUUID, this.minigameType))
 			{
-				player.sendMessage(ChatColor.GREEN + "Thanks for taking part in " + ChatColor.GOLD + this.currentEventType.getFullName() + "!");
+				player.sendMessage(ChatColor.GREEN + "Thanks for taking part in " + ChatColor.GOLD + this.minigameType.getFullName() + "!");
 				player.sendMessage(ChatColor.GREEN + "As a token of apprication, I have added the following rewards to your account, which are: ");
-				switch (this.currentEventType)
+				switch (this.minigameType)
 				{
 					case UHC_I:
 						this.grantReward(player, RewardType.DIAMONDS);
@@ -88,7 +88,7 @@ public class RewardManager implements Listener
 						break;
 				}
 				player.sendMessage(ChatColor.GREEN + "Be sure to run " + ChatColor.GOLD + "/rewards" + ChatColor.GREEN + " to claim your rewards once we revert back to the main server!");
-				System.out.println ("I just awarded " + player.getDisplayName() + " prizes for " + this.currentEventType.toString() + "!");
+				System.out.println ("I just awarded " + player.getDisplayName() + " prizes for " + this.minigameType.toString() + "!");
 			}
 		} 
 		catch (SQLException e) 
@@ -105,7 +105,7 @@ public class RewardManager implements Listener
 	private void grantReward (Player player, RewardType reward) throws SQLException
 	{
 		UUID playerUUID = player.getUniqueId();
-		RewardDatabaseManager.grantReward(playerUUID, reward , this.currentEventType);
+		RewardDatabaseManager.grantReward(playerUUID, reward , this.minigameType);
 		
 		String displayName;
 		ItemMeta meta = reward.getReward().getItemMeta();
