@@ -1,5 +1,6 @@
 package com.joojet.plugins.agcraft.config;
 
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,7 +58,6 @@ public abstract class AbstractConfigFile
 		Yaml yaml = new Yaml ();
 		FileWriter writer = new FileWriter (this.configFilePath);
 		yaml.dump(this.createConfigFileContents(), writer);
-		writer.close();
 	}
 	
 	/** Returns the value of a key written in the config file
@@ -74,9 +74,8 @@ public abstract class AbstractConfigFile
 	protected void loadConfigFile () throws IOException
 	{
 		Yaml yaml = new Yaml ();
-		InputStream configFile = this.getClass().getClassLoader().getResourceAsStream(this.configFilePath);
+		InputStream configFile = new FileInputStream (this.configFilePath);
 		this.configFileValues = yaml.load(configFile);
-		configFile.close();
 	}
 	
 	

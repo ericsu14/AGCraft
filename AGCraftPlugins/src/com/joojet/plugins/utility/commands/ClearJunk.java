@@ -103,7 +103,7 @@ public class ClearJunk extends AGCommandExecutor
 			
 			for (String arg : args)
 			{
-				JunkClassifier param = this.commandInterpreter.searchJunkClassifierTrie(arg);
+				JunkClassifier param = this.commandInterpreter.searchTrie(arg);
 				if (param != null)
 				{
 					classifiers.add(param);

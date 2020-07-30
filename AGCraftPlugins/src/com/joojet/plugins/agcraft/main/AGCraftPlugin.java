@@ -53,13 +53,13 @@ public class AGCraftPlugin extends JavaPlugin
 	
 	/** Search term interpreters */
 	// Stores the command interpreter used for reward types
-	public static RewardTypeInterpreter rewardInterpreter = new RewardTypeInterpreter();
+	public static RewardTypeInterpreter rewardInterpreter;
 	// Stores the command interpreter used for minigame reward types
-	public static MinigameRewardTypeInterpreter minigameRewardTypeInterpreter = new MinigameRewardTypeInterpreter();
+	public static MinigameRewardTypeInterpreter minigameRewardTypeInterpreter;
 	// Stores the command interpreter used for server event types
-	public static ServerEventInterpreter serverEventInterpreter = new ServerEventInterpreter ();
+	public static ServerEventInterpreter serverEventInterpreter;
 	// Stores the command interpreter used for server mode types
-	public static ServerModeInterpreter serverModeInterpreter = new ServerModeInterpreter ();
+	public static ServerModeInterpreter serverModeInterpreter;
 	
 	/** Config file values */
 	// Stores the server mode, which enables or disables commands and listeners depending on what mode the server is ran in
@@ -79,6 +79,10 @@ public class AGCraftPlugin extends JavaPlugin
 		super ();
 		this.playerCommands = new HashMap <CommandType, PlayerCommand> ();
 		this.serverConfigFile = null;
+		rewardInterpreter = new RewardTypeInterpreter ();
+		minigameRewardTypeInterpreter = new MinigameRewardTypeInterpreter ();
+		serverEventInterpreter = new ServerEventInterpreter ();
+		serverModeInterpreter = new ServerModeInterpreter ();
 	}
 	
 	@Override
@@ -242,7 +246,7 @@ public class AGCraftPlugin extends JavaPlugin
 	 *  @param defaultValue - Default value to be used in the event of failure */
 	private <E> E searchElementFromInterpreter (AbstractInterpreter<E> interpreter, String key, E defaultValue)
 	{
-		E result = interpreter.searchTrie(key);
+		E result = interpreter.searchTrie(this.serverConfigFile.getValue(key).toString());
 		if (result == null)
 		{
 			System.err.println ("Error: Cannot find value for " + key + ". Using default value " + defaultValue.toString() + " instead...");

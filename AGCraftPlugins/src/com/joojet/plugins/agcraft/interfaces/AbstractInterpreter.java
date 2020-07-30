@@ -18,7 +18,7 @@ public abstract class AbstractInterpreter <E>
 	{
 		this.root = new TrieNode <E> (' ', null);
 		this.values = values;
-		
+		this.populateTrie();
 	}
 	
 	/** Populates the search trie with the set of values that are passed into this
