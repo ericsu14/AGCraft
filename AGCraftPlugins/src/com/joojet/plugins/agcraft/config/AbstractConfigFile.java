@@ -23,14 +23,18 @@ public abstract class AbstractConfigFile
 	/** A hashmap containing keys and values for each config file  */
 	protected HashMap <String, Object> configFileValues;
 	
-	/** Creates or loads in a new server config YAML file in the AGCraft directory folder
+	/** Creates a new unloaded instance of this config file class.
 	 * 		@param configFileName - Filename of the config file */
 	public AbstractConfigFile (String configFileName)
 	{
 		this.configFileName = configFileName;
 		this.configFilePath = this.getConfigPath (this.configFileName);
 		this.configFileValues = new HashMap <String, Object> ();
-		
+	}
+	
+	/** Creates or loads in a config file from the directory where it is stored */
+	public void reload ()
+	{
 		try 
 		{
 			// If the file does not exist, create a new config file

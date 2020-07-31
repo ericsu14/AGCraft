@@ -86,6 +86,7 @@ public class AGCraftPlugin extends JavaPlugin
 		minigameRewardTypeInterpreter = new MinigameRewardTypeInterpreter ();
 		serverEventInterpreter = new ServerEventInterpreter ();
 		serverModeInterpreter = new ServerModeInterpreter ();
+		this.serverConfigFile = new ServerConfigFile ();
 	}
 	
 	@Override
@@ -130,8 +131,9 @@ public class AGCraftPlugin extends JavaPlugin
 	/** Loads in the server config file and initializes its variables to the plugin */
 	public void loadServerConfigFile ()
 	{
-		// Creates a new instance of a config file
-		this.serverConfigFile = new ServerConfigFile ();
+		// Loads in the config file's contents
+		this.serverConfigFile.reload();
+		
 		// Spawn chance
 		this.customMobSpawnChance = (double) this.serverConfigFile.getValue(AmplifiedMobSpawner.spawnChanceKey);
 		// Debug mode

@@ -36,13 +36,13 @@ public class ClearJunk extends AGCommandExecutor
 		super (CommandType.CLEAR_JUNK);
 		// Initializes command interpreter
 		this.commandInterpreter = new JunkCommandInterpreter ();
+		this.config = new JunkItemConfig ();
 	}
 	
-	/** Reloads the config file for the clearjunk command */
+	/** Reloads the config file used for the clearjunk command */
 	public void reloadConfigFile ()
 	{
-		// Init config file instance and load mappings from file
-		this.config = new JunkItemConfig ();
+		this.config.reload();
 		try
 		{
 			this.junkItems = this.config.generateMapping();
