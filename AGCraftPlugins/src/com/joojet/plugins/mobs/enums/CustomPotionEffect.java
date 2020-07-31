@@ -18,7 +18,7 @@ public enum CustomPotionEffect
 	private PotionEffect effect;
 	private CustomPotionEffect (PotionEffectType effect, int amplifier)
 	{
-		this.effect = new PotionEffect (effect, 9999999, amplifier);
+		this.effect = new PotionEffect (effect, Integer.MAX_VALUE, amplifier);
 	}
 	
 	public PotionEffect getPotionEffect ()
