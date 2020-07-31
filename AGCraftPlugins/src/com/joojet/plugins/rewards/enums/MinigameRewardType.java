@@ -80,7 +80,7 @@ public enum MinigameRewardType
 	/** Returns the key used to identify where this entry is in the YAML config file */
 	public static String getKey ()
 	{
-		return "minigame-reward-type";
+		return "participation-reward-type";
 	}
 	
 	/** Converts a datestring formatted in MM-dd-yyyy to
