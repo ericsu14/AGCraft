@@ -16,7 +16,7 @@ public class HurtfulSkeleton extends MobEquipment
 {
 	public HurtfulSkeleton ()
 	{
-		this.name = "Skeleguard";
+		this.name = "Hurtful Skeleton";
 		this.color = ChatColor.BLUE;
 		
 		this.addBiomes(Biome.THE_VOID);
