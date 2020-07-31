@@ -22,7 +22,7 @@ import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.SummoningScrollListener;
-import com.joojet.plugins.mobs.enums.ServerEvent;
+import com.joojet.plugins.mobs.enums.ThemedServerEvent;
 import com.joojet.plugins.mobs.interpreter.ServerEventInterpreter;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.commands.*;
@@ -65,7 +65,7 @@ public class AGCraftPlugin extends JavaPlugin
 	// Stores the server mode, which enables or disables commands and listeners depending on what mode the server is ran in
 	public ServerMode serverMode = ServerMode.NORMAL;
 	// Stores the server-wide event mode, which may add custom themed mobs or events into the normal game world
-	public ServerEvent serverEventMode = ServerEvent.DEFAULT;
+	public ThemedServerEvent serverEventMode = ThemedServerEvent.DEFAULT;
 	// Stores the chance of custom mobs spawning into the game
 	public double customMobSpawnChance = 0.15;
 	// Determines if debug mode is enabled for the amplified mob spawner plugin
@@ -138,7 +138,7 @@ public class AGCraftPlugin extends JavaPlugin
 				MinigameRewardType.getKey(), MinigameRewardType.GIFT);
 		// Server event mode
 		this.serverEventMode = this.searchElementFromInterpreter(serverEventInterpreter,
-				ServerEvent.getKey(), ServerEvent.DEFAULT);
+				ThemedServerEvent.getKey(), ThemedServerEvent.DEFAULT);
 		// Server mode
 		this.switchServerMode(this.searchElementFromInterpreter (serverModeInterpreter,
 				ServerMode.getKey(), ServerMode.NORMAL));
