@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
 import com.joojet.biblefetcher.api.APIKeyReader;
@@ -55,7 +56,9 @@ public abstract class AbstractConfigFile
 	 *  @throws IOException - File I/O error */
 	protected void createConfigFile () throws IOException
 	{
-		Yaml yaml = new Yaml ();
+		DumperOptions dumperOptions = new DumperOptions ();
+		dumperOptions.setPrettyFlow(true);
+		Yaml yaml = new Yaml (dumperOptions);
 		FileWriter writer = new FileWriter (this.configFilePath);
 		yaml.dump(this.createConfigFileContents(), writer);
 	}
