@@ -1,8 +1,8 @@
 package com.joojet.plugins.utility.commands;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -16,69 +16,43 @@ import org.bukkit.ChatColor;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
+import com.joojet.plugins.utility.config.JunkItemConfig;
 import com.joojet.plugins.utility.enums.JunkClassifier;
 import com.joojet.plugins.utility.interpreter.JunkCommandInterpreter;
 
 
 public class ClearJunk extends AGCommandExecutor
 {
+	/** Used to interpret junk classifier commands */
 	private JunkCommandInterpreter commandInterpreter;
-	private Hashtable <Material, JunkClassifier> junkItems;
+	/** Stores mapping between targeted material items and their junk classifier categories */
+	private HashMap <Material, JunkClassifier> junkItems;
+	/** Stores the config file instance used to load in junk items from file */
+	private JunkItemConfig config;
+	
 	
 	public ClearJunk ()
 	{
 		super (CommandType.CLEAR_JUNK);
-		this.junkItems = new Hashtable <Material, JunkClassifier> ();
-		
-		// Common
-		this.junkItems.put(Material.ROTTEN_FLESH, JunkClassifier.COMMON);
-		this.junkItems.put(Material.BONE, JunkClassifier.COMMON);
-		this.junkItems.put(Material.STRING, JunkClassifier.COMMON);
-		this.junkItems.put(Material.WHEAT_SEEDS, JunkClassifier.COMMON);
-		this.junkItems.put(Material.GREEN_DYE, JunkClassifier.COMMON);
-		this.junkItems.put(Material.PAPER, JunkClassifier.COMMON);
-		this.junkItems.put(Material.POISONOUS_POTATO, JunkClassifier.COMMON);
-		
-		// Natural blocks
-		this.junkItems.put(Material.DIRT, JunkClassifier.NATURAL);
-		this.junkItems.put(Material.SAND, JunkClassifier.NATURAL);
-		this.junkItems.put(Material.GRAVEL, JunkClassifier.NATURAL);
-		this.junkItems.put(Material.CACTUS, JunkClassifier.NATURAL);
-		
-		// Stones
-		this.junkItems.put(Material.COBBLESTONE, JunkClassifier.STONE);
-		this.junkItems.put(Material.ANDESITE, JunkClassifier.STONE);
-		this.junkItems.put(Material.GRANITE, JunkClassifier.STONE);
-		this.junkItems.put(Material.DIORITE, JunkClassifier.STONE);
-		this.junkItems.put(Material.STONE, JunkClassifier.STONE);
-		
-		// Mob armor
-		this.junkItems.put(Material.GOLDEN_BOOTS, JunkClassifier.ARMOR);
-		this.junkItems.put(Material.GOLDEN_CHESTPLATE, JunkClassifier.ARMOR);
-		this.junkItems.put(Material.GOLDEN_HELMET, JunkClassifier.ARMOR);
-		this.junkItems.put(Material.GOLDEN_LEGGINGS, JunkClassifier.ARMOR);
-		this.junkItems.put(Material.CHAINMAIL_BOOTS, JunkClassifier.ARMOR);
-		this.junkItems.put(Material.CHAINMAIL_CHESTPLATE, JunkClassifier.ARMOR);
-		this.junkItems.put(Material.CHAINMAIL_LEGGINGS, JunkClassifier.ARMOR);
-		this.junkItems.put(Material.CHAINMAIL_HELMET, JunkClassifier.ARMOR);
-		this.junkItems.put(Material.LEATHER_BOOTS, JunkClassifier.ARMOR);
-		this.junkItems.put(Material.LEATHER_HELMET, JunkClassifier.ARMOR);
-		this.junkItems.put(Material.LEATHER_CHESTPLATE, JunkClassifier.ARMOR);
-		this.junkItems.put(Material.LEATHER_LEGGINGS, JunkClassifier.ARMOR);
-		
-		// Brewing
-		this.junkItems.put(Material.SPIDER_EYE, JunkClassifier.BREWING);
-		
-		// Damaged, unenchanted weapon drops
-		this.junkItems.put(Material.BOW, JunkClassifier.WEAPONS);
-		this.junkItems.put(Material.GOLDEN_SWORD, JunkClassifier.WEAPONS);
-		this.junkItems.put(Material.CROSSBOW, JunkClassifier.WEAPONS);
-		
-		// Nether
-		this.junkItems.put(Material.NETHERRACK, JunkClassifier.NETHER);
-		
 		// Initializes command interpreter
 		this.commandInterpreter = new JunkCommandInterpreter ();
+	}
+	
+	/** Reloads the config file for the clearjunk command */
+	public void reloadConfigFile ()
+	{
+		// Init config file instance and load mappings from file
+		this.config = new JunkItemConfig ();
+		try
+		{
+			this.junkItems = this.config.generateMapping();
+		}
+		catch (RuntimeException error)
+		{
+			error.printStackTrace();
+			System.err.println (error.getMessage());
+			System.err.println ("Please delete the config file and run /reloadconfigfile on the terminal");
+		}
 	}
 	
 	/** Removes junk items from the player's inventory

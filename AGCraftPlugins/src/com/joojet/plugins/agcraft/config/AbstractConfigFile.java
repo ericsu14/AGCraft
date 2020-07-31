@@ -4,7 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
@@ -79,6 +81,39 @@ public abstract class AbstractConfigFile
 		Yaml yaml = new Yaml ();
 		InputStream configFile = new FileInputStream (this.configFilePath);
 		this.configFileValues = yaml.load(configFile);
+	}
+	
+	/** Safely converts an object to a generic list of Strings.
+	 *  The object must be an instance of a list for this to work,
+	 *  otherwise a runtime exception will be thrown.
+	 *  
+	 *  This function is necessary to parse list of strings specified in the config file
+	 *  while avoiding the use of supress warnings.
+	 *  
+	 *  Code stolen from:
+	 *     - https://stackoverflow.com/questions/14642985/type-safety-unchecked-cast-from-object-to-listmyobject
+	 * 	@param value - object to be converted to a list
+	 *  @throws RuntimeException if the @param value is not an instance of a list */
+	protected List<String> convertObjectToList (Object value)
+	{
+		if (!(value instanceof List))
+		{
+			throw new RuntimeException ("Error! Expected a list but got a " + value.getClass().getTypeName() + " instead!");
+		}
+		
+		Object curr;
+		List <String> list = new ArrayList <String> ();
+
+		for (int i = 0; i < ((List<?>)value).size(); ++i)
+		{
+			curr = ((List<?>) value).get(i);
+			if (curr instanceof String)
+			{
+				list.add((String) curr);
+			}
+		}
+		
+		return list;
 	}
 	
 	

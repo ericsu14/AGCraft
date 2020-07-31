@@ -10,4 +10,10 @@ public enum JunkClassifier
 	{
 		return this.name();
 	}
+	
+	/** Returns the enum's config file key */
+	public String getKey ()
+	{
+		return this.toString().toLowerCase();
+	}
 }

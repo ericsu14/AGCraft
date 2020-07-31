@@ -48,6 +48,8 @@ public class AGCraftPlugin extends JavaPlugin
 	public ServerConfigFile serverConfigFile;
 	// A list containing all known commands
 	private HashMap <CommandType, PlayerCommand> playerCommands;
+	// Stores a reference to the junk command since that command manages its own config files
+	private ClearJunk clearJunk;
 	
 	/** Search term interpreters */
 	// Stores the command interpreter used for reward types
@@ -146,12 +148,17 @@ public class AGCraftPlugin extends JavaPlugin
 		// Prints out other values
 		System.out.println ("Set amplified mob spawn chance to " + this.customMobSpawnChance);
 		System.out.println ("Debug Mode: " + this.enableDebugMode);
+		
+		// Reloads the clearjunk file
+		this.clearJunk.reloadConfigFile();
 	}
 
 	/** Initializes all commands */
 	public void initCommands ()
 	{
 		// Commands
+		this.clearJunk = new ClearJunk();
+		
 		this.addPlayerCommand (new Bible ());
 		this.addPlayerCommand (new ClearBibles ());
 		this.addPlayerCommand (new ForgivePlayer ());
@@ -160,7 +167,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addPlayerCommand (new OpenRewards ());
 		this.addPlayerCommand (new RewardPlayer ());
 		this.addPlayerCommand (new AutoSmelt ());
-		this.addPlayerCommand (new ClearJunk ());
+		this.addPlayerCommand (this.clearJunk);
 		this.addPlayerCommand (new ToggleDebugMode ());
 		this.addPlayerCommand (new GetLocations ());
 		this.addPlayerCommand (new GiveRespawnTicket ());
@@ -168,8 +175,8 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addPlayerCommand (new SetLocation ());
 		this.addPlayerCommand (new Warp ());
 		this.addPlayerCommand (new RemoveOldNetherLocations());
-		this.addPlayerCommand( new ChangeServerMode ());
-		this.addPlayerCommand( new ReloadConfigFile ());
+		this.addPlayerCommand (new ChangeServerMode ());
+		this.addPlayerCommand (new ReloadConfigFile ());
 		
 		// Tab Completer
 		this.addTabCompleter(new BibleTabCompleter ());
@@ -259,7 +266,7 @@ public class AGCraftPlugin extends JavaPlugin
 		}
 		else
 		{
-			System.out.println ("Loaded variable " + result.toString() + " for key " + key + "!");
+			System.out.println ("Loaded variable " + result.toString() + " for " + key + "!");
 		}
 		return result;
 	}
