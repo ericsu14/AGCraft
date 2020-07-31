@@ -55,7 +55,11 @@ public class FetchBibleTask extends Thread
 		this.n = 3;
 		this.verseSize = 0;
 	}
-
+	
+	/** Runs a new instance of the BibleFetcher command on another thread, which calls the 
+	 *  BibleFetcher API to fetch for the player's requested chapter and verses. All of the fetched
+	 *  content will be formatted to fit into a written book that will be distributed to the player's inventory
+	 *  in game if the calls are successful. */
 	@Override
 	public void run() 
 	{
