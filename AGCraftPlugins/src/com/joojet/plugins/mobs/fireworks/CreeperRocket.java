@@ -34,6 +34,7 @@ public class CreeperRocket extends Firework
 				.withFade(Color.WHITE)
 				.build());
 		firework.setPower(power);
+		firework.setDisplayName(ChatColor.GREEN + "Creeper Rocket");
 		fw.setItemMeta(firework);
 		
 		return fw;
