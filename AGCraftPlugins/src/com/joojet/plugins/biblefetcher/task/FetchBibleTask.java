@@ -116,8 +116,8 @@ public class FetchBibleTask extends Thread
 			throw new RuntimeException ("Insufficient parameters.\nUsage: /bible <translation> <book> <chapter> <start> <end>");
 		}
 		
-		this.bibleID = AGCraftPlugin.interpreter.searchBibleTrie(args[0]);
-		this.bookID = AGCraftPlugin.interpreter.searchBookTrie(args[1]);
+		this.bibleID = AGCraftPlugin.bibleInterpreter.searchBibleTrie(args[0]);
+		this.bookID = AGCraftPlugin.bibleInterpreter.searchBookTrie(args[1]);
 		this.chapter = Integer.parseInt(args[2]);
 		
 		if (this.bibleID == null)

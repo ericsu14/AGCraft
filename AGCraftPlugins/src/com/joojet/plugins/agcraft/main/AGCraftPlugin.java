@@ -5,7 +5,7 @@ import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.joojet.biblefetcher.database.CreateDatabase;
-import com.joojet.biblefetcher.interpreter.CommandInterpreter;
+import com.joojet.biblefetcher.interpreter.BibleCommandInterpreter;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.enums.PermissionType;
@@ -40,8 +40,6 @@ import com.joojet.plugins.warp.database.CreateLocationDatabase;
 
 public class AGCraftPlugin extends JavaPlugin 
 {
-	// Stores the command interpreter used for the bible plugin
-	public static CommandInterpreter interpreter = new CommandInterpreter ();
 	// Stores an instance of the plugin itself
 	public static AGCraftPlugin plugin;
 	// Stores a reference to the death counter object
@@ -60,6 +58,8 @@ public class AGCraftPlugin extends JavaPlugin
 	public static ServerEventInterpreter serverEventInterpreter;
 	// Stores the command interpreter used for server mode types
 	public static ServerModeInterpreter serverModeInterpreter;
+	// Stores the command interpreter used for the bible plugin
+	public static BibleCommandInterpreter bibleInterpreter;
 	
 	/** Config file values */
 	// Stores the server mode, which enables or disables commands and listeners depending on what mode the server is ran in
@@ -79,6 +79,7 @@ public class AGCraftPlugin extends JavaPlugin
 		super ();
 		this.playerCommands = new HashMap <CommandType, PlayerCommand> ();
 		this.serverConfigFile = null;
+		bibleInterpreter = new BibleCommandInterpreter();
 		rewardInterpreter = new RewardTypeInterpreter ();
 		minigameRewardTypeInterpreter = new MinigameRewardTypeInterpreter ();
 		serverEventInterpreter = new ServerEventInterpreter ();

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import com.joojet.biblefetcher.constants.BibleID;
 import com.joojet.biblefetcher.constants.BookID;
 import com.joojet.biblefetcher.fetcher.BibleFetcher;
-import com.joojet.biblefetcher.interpreter.CommandInterpreter;
+import com.joojet.biblefetcher.interpreter.BibleCommandInterpreter;
 
 public class Test {
 	
@@ -53,7 +53,7 @@ public class Test {
 	{
 		try 
 		{
-			CommandInterpreter interpreter = new CommandInterpreter ();
+			BibleCommandInterpreter interpreter = new BibleCommandInterpreter ();
 			BookID test = interpreter.searchBookTrie("number");
 			System.out.println (test.getTitle());
 			

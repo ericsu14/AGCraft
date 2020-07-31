@@ -7,12 +7,12 @@ import com.joojet.biblefetcher.constants.BookID;
 import com.joojet.biblefetcher.trie.TrieNode;
 import com.joojet.biblefetcher.trie.TrieUtil;
 
-public class CommandInterpreter 
+public class BibleCommandInterpreter 
 {
 	TrieNode <BibleID> bibRoot;
 	TrieNode <BookID> bookRoot;
 	
-	public CommandInterpreter ()
+	public BibleCommandInterpreter ()
 	{
 		this.bibRoot = new TrieNode <BibleID> (' ', null);
 		this.bookRoot = new TrieNode <BookID> (' ', null);

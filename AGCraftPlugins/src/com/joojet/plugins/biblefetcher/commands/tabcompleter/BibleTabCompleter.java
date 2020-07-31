@@ -51,7 +51,7 @@ public class BibleTabCompleter extends AGTabCompleter
 					
 				// List all the chapters in the book.
 				case 3:
-					BookID book = AGCraftPlugin.interpreter.searchBookTrie(args[1]);
+					BookID book = AGCraftPlugin.bibleInterpreter.searchBookTrie(args[1]);
 					
 					// If the book is not found, return an empty array
 					if (book == null)

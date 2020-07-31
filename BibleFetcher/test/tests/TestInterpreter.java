@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import com.joojet.biblefetcher.constants.*;
-import com.joojet.biblefetcher.interpreter.CommandInterpreter;
+import com.joojet.biblefetcher.interpreter.BibleCommandInterpreter;
 
 class TestInterpreter 
 {
 
-	private final CommandInterpreter interpreter = new CommandInterpreter ();
+	private final BibleCommandInterpreter interpreter = new BibleCommandInterpreter ();
 	
 	
 	/** Tests the command interpreter by feeding it with valid bible IDs */
