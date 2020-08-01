@@ -25,7 +25,7 @@ public class JunkItemConfig extends AbstractConfigFile
 	public HashMap <Material, JunkClassifier> generateMapping () throws RuntimeException
 	{
 		String currKey;
-		Object currVal;
+		List<String> currVal;
 		HashMap <Material, JunkClassifier> mapping = new HashMap <Material, JunkClassifier> ();
 		
 		for (JunkClassifier classifier : JunkClassifier.values())
@@ -33,8 +33,8 @@ public class JunkItemConfig extends AbstractConfigFile
 			currKey = classifier.getKey();
 			if (this.configFileValues.containsKey(currKey))
 			{
-				currVal = this.getValue(currKey);
-				Material[] materials = this.convertMaterialNames(this.convertObjectToList(currVal));
+				currVal = this.getValueAsList(currKey);
+				Material[] materials = this.convertMaterialNames(currVal);
 				for (Material material : materials)
 				{
 					mapping.put(material, classifier);

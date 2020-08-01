@@ -77,6 +77,15 @@ public abstract class AbstractConfigFile
 		return this.configFileValues.get(key);
 	}
 	
+	/** Returns the value of a key as a list of Strings
+	 * 	@param key - Value's key to be looked up
+	 *  @return The key's value as a list of strings, if it is originally written in that format.
+	 *  @throws RuntimeException if the key's value is not properly written as a list of strings */
+	public List <String> getValueAsList (String key) throws RuntimeException
+	{
+		return this.convertObjectToList(this.configFileValues.get(key));
+	}
+	
 	/** Loads in the contents of a config file into memory and stores its data into an internal
 	 *  hash map. 
 	 *  @throws IOException - File I/O error */
@@ -98,7 +107,7 @@ public abstract class AbstractConfigFile
 	 *     - https://stackoverflow.com/questions/14642985/type-safety-unchecked-cast-from-object-to-listmyobject
 	 * 	@param value - object to be converted to a list
 	 *  @throws RuntimeException if the @param value is not an instance of a list */
-	protected List<String> convertObjectToList (Object value)
+	protected List<String> convertObjectToList (Object value) throws RuntimeException
 	{
 		if (!(value instanceof List))
 		{
