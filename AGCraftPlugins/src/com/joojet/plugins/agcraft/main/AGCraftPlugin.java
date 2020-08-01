@@ -23,7 +23,7 @@ import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.enums.ThemedServerEvent;
-import com.joojet.plugins.mobs.interpreter.ServerEventInterpreter;
+import com.joojet.plugins.mobs.interpreter.ThemedServerEventInterpreter;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.commands.*;
 import com.joojet.plugins.rewards.database.CreateRewardsDatabase;
@@ -57,7 +57,7 @@ public class AGCraftPlugin extends JavaPlugin
 	// Stores the command interpreter used for minigame reward types
 	public static MinigameRewardTypeInterpreter minigameRewardTypeInterpreter;
 	// Stores the command interpreter used for server event types
-	public static ServerEventInterpreter serverEventInterpreter;
+	public static ThemedServerEventInterpreter serverEventInterpreter;
 	// Stores the command interpreter used for server mode types
 	public static ServerModeInterpreter serverModeInterpreter;
 	// Stores the command interpreter used for the bible plugin
@@ -84,7 +84,7 @@ public class AGCraftPlugin extends JavaPlugin
 		bibleInterpreter = new BibleCommandInterpreter();
 		rewardInterpreter = new RewardTypeInterpreter ();
 		minigameRewardTypeInterpreter = new MinigameRewardTypeInterpreter ();
-		serverEventInterpreter = new ServerEventInterpreter ();
+		serverEventInterpreter = new ThemedServerEventInterpreter ();
 		serverModeInterpreter = new ServerModeInterpreter ();
 		this.serverConfigFile = new ServerConfigFile ();
 	}
