@@ -17,7 +17,7 @@ public class FreedomStar extends Firework
 	public ItemStack generateFirework (int amount, int power)
 	{
 		ItemStack fw = new ItemStack (Material.FIREWORK_ROCKET, amount);
-		this.addLoreToItemMeta(fw, "Light up the skies with this patriotic rocket!", ChatColor.LIGHT_PURPLE);
+		this.addLoreToItemMeta(fw, "Light up the skies with this patriotic rocket!", ChatColor.GOLD);
 		FireworkMeta firework = (FireworkMeta) fw.getItemMeta();
 		firework.addEffect(FireworkEffect.builder()
 				.withColor(Color.BLUE)

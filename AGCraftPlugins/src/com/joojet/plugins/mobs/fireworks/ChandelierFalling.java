@@ -16,7 +16,7 @@ public class ChandelierFalling extends Firework
 	public ItemStack generateFirework(int amount, int power) 
 	{
 		ItemStack fw = new ItemStack (Material.FIREWORK_ROCKET, amount);
-		this.addLoreToItemMeta(fw, "Can't ever have a firework show without a classic!", ChatColor.YELLOW);
+		this.addLoreToItemMeta(fw, "Can't ever have a firework show without a classic!", ChatColor.GOLD);
 		FireworkMeta firework = (FireworkMeta) fw.getItemMeta();
 		firework.addEffect(FireworkEffect.builder()
 				.with(Type.BALL)

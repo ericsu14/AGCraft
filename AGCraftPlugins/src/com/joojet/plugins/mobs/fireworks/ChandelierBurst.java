@@ -18,7 +18,7 @@ public class ChandelierBurst extends Firework
 	public ItemStack generateFirework(int amount, int power) 
 	{
 		ItemStack fw = new ItemStack (Material.FIREWORK_ROCKET, amount);
-		this.addLoreToItemMeta(fw, "Just like Disneyland!", ChatColor.YELLOW);
+		this.addLoreToItemMeta(fw, "Just like Disneyland!", ChatColor.GOLD);
 		FireworkMeta firework = (FireworkMeta) fw.getItemMeta();
 		firework.addEffect(FireworkEffect.builder()
 				.withColor(Color.WHITE)

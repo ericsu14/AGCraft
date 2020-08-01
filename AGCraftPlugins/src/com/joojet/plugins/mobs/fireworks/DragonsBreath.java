@@ -16,7 +16,7 @@ public class DragonsBreath extends Firework
 	public ItemStack generateFirework(int amount, int power) 
 	{
 		ItemStack fw = new ItemStack (Material.FIREWORK_ROCKET, amount);
-		this.addLoreToItemMeta(fw, "Light 'em up!", ChatColor.GOLD);
+		this.addLoreToItemMeta(fw, "Light 'em up!", ChatColor.WHITE);
 		FireworkMeta firework = (FireworkMeta) fw.getItemMeta();
 		firework.addEffect(FireworkEffect.builder()
 				.withColor(Color.ORANGE)
