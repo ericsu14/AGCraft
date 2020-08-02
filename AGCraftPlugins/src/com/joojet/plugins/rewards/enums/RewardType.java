@@ -39,7 +39,7 @@ public enum RewardType
 			case TEST_STICK:
 				return new ItemStack (Material.STICK, 1);
 			case DIAMONDS:
-				return new ItemStack (Material.DIAMOND_BLOCK, 2);
+				return new ItemStack (Material.DIAMOND_BLOCK, 3);
 			case FROLF:
 				return new SummonFrolf ();
 			case GOLDEN_CARROTS:
