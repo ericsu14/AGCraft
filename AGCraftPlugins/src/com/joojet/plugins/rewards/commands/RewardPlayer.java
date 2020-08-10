@@ -17,8 +17,6 @@ import com.joojet.plugins.rewards.database.RewardDatabaseManager;
 import com.joojet.plugins.rewards.enums.MinigameRewardType;
 import com.joojet.plugins.rewards.enums.RewardType;
 
-import net.md_5.bungee.api.ChatColor;
-
 public class RewardPlayer extends AGCommandExecutor
 {
 	
@@ -32,21 +30,14 @@ public class RewardPlayer extends AGCommandExecutor
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String [] args) 
-	{
-		if (sender instanceof Player)
-		{
-			Player player = (Player) sender;
-			player.sendMessage(ChatColor.RED + "I am sorry, but this command can only be executed by the server administrator.");
-			return false;
-		}
-		
-		if (sender instanceof ConsoleCommandSender)
+	{		
+		if (sender instanceof Player || sender instanceof ConsoleCommandSender)
 		{
 			int n = args.length;
 			
 			if (n < 3)
 			{
-				System.out.println ("Not enough parameters");
+				sender.sendMessage ("Not enough parameters");
 				return false;
 			}
 			
@@ -55,13 +46,13 @@ public class RewardPlayer extends AGCommandExecutor
 			
 			if (rewardType == null)
 			{
-				System.out.println ("Invalid reward");
+				sender.sendMessage ("Invalid reward");
 				return false;
 			}
 			
 			if (eventType == null)
 			{
-				System.out.println ("Invalid event");
+				sender.sendMessage ("Invalid event");
 				return false;
 			}
 			
@@ -74,7 +65,7 @@ public class RewardPlayer extends AGCommandExecutor
 				
 				if (Bukkit.getOfflinePlayer(username) == null && Bukkit.getPlayer(username) == null)
 				{
-					System.out.println ("Cannot find player " + username);
+					sender.sendMessage ("Cannot find player " + username);
 					return false;
 				}
 				
@@ -88,17 +79,17 @@ public class RewardPlayer extends AGCommandExecutor
 				for (UUID p : players)
 				{
 					RewardDatabaseManager.grantReward(p, rewardType, eventType);
-					System.out.println ("Sucessfully rewarded player with uuid " + p.toString() + " | " + rewardType.toString());
+					sender.sendMessage ("Sucessfully rewarded player with uuid " + p.toString() + " | " + rewardType.toString());
 				}
 			}
 			catch (SQLException e)
 			{
-				System.out.println ("Error: " + e.getMessage());
+				sender.sendMessage ("Error: " + e.getMessage());
 			}
 			
 			return true;
 		}
-		System.out.println ("Invalid source");
+		sender.sendMessage ("Invalid source");
 		return false;
 	}
 }

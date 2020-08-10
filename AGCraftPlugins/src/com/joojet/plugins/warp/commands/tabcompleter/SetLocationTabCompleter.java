@@ -1,7 +1,6 @@
 package com.joojet.plugins.warp.commands.tabcompleter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.command.Command;
@@ -27,22 +26,14 @@ public class SetLocationTabCompleter extends AGTabCompleter
 		if (sender instanceof Player && n >= 1)
 		{
 			String input = args[n-1].toLowerCase();
-			Object[] values = null;
 			
 			switch (n)
 			{
 				case 2:
-					values = Arrays.asList(WarpAccessLevel.values()).stream().
-						map (entry -> entry.toString().toLowerCase()).
-						filter (entry -> entry.contains(input)).
-						sorted().
-						toArray();
-					break;
+					return this.filterArrayByInput(WarpAccessLevel.values(), input);
 				default:
 					return new ArrayList <String> ();
 			}
-			
-			return (List<String>) Arrays.asList(Arrays.copyOf(values, values.length, String[].class));  
 		}
 		return null;
 	}

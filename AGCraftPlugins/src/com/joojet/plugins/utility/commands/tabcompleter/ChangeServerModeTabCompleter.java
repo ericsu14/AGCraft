@@ -1,6 +1,5 @@
 package com.joojet.plugins.utility.commands.tabcompleter;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.command.Command;
@@ -24,12 +23,7 @@ public class ChangeServerModeTabCompleter extends AGTabCompleter
 		if (sender instanceof Player && n == 1)
 		{
 			String input = args[n-1].toLowerCase();
-			Object[] values = Arrays.stream(ServerMode.values()).
-					map(entry -> (String) entry.toString().toLowerCase()).
-					filter(val -> val.contains(input)).
-					sorted().
-					toArray();
-			return (List<String>) Arrays.asList(Arrays.copyOf(values, values.length, String[].class));
+			return this.filterArrayByInput(ServerMode.values(), input);
 		}
 		return null;
 	}

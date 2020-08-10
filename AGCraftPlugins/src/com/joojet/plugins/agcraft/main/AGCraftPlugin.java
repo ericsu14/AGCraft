@@ -26,6 +26,7 @@ import com.joojet.plugins.mobs.enums.ThemedServerEvent;
 import com.joojet.plugins.mobs.interpreter.ThemedServerEventInterpreter;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.commands.*;
+import com.joojet.plugins.rewards.commands.tabcompleter.RewardPlayerTabCompleter;
 import com.joojet.plugins.rewards.database.CreateRewardsDatabase;
 import com.joojet.plugins.rewards.enums.MinigameRewardType;
 import com.joojet.plugins.rewards.interpreter.MinigameRewardTypeInterpreter;
@@ -188,6 +189,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addTabCompleter(new SetLocationTabCompleter ());
 		this.addTabCompleter(new WarpTabCompleter ());
 		this.addTabCompleter(new ChangeServerModeTabCompleter ());
+		this.addTabCompleter(new RewardPlayerTabCompleter());
 	}
 	
 	/** Loads in all known commands into the plugin */

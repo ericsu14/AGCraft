@@ -1,7 +1,6 @@
 package com.joojet.plugins.warp.commands.tabcompleter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.command.Command;
@@ -29,7 +28,6 @@ public class WarpTabCompleter extends AGTabCompleter
 		{
 			Player p = (Player) sender;
 			String input = args[n-1].toLowerCase();
-			Object [] values = null;
 			
 			switch (n)
 			{
@@ -45,22 +43,15 @@ public class WarpTabCompleter extends AGTabCompleter
 							forEach(entry -> allLocations.add(entry.getLocationName()));	
 						allLocations.add(Warp.home);
 						
-						values = allLocations.stream().
-								filter(entry -> entry.toLowerCase().
-								contains(input)).
-								sorted().
-								toArray();
+						return this.filterArrayByInput(allLocations.toArray(), input);
 					}
 					catch (Exception e)
 					{
 						return new ArrayList <String> ();
 					}
-					break;
 				default:
 					return new ArrayList <String> ();
 			}
-			
-			return (List<String>) Arrays.asList(Arrays.copyOf(values, values.length, String[].class));
 		}
 		return null;
 	}
