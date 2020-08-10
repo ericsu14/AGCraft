@@ -9,8 +9,10 @@ public enum MinigameRewardType
 {
 	/** A list of minigame events that has happened in this server */
 	UHC_I ("UHC I", "08-01-2020"),
-	UHC_I_WINNER ("UHC I", "08-01-2020", "Awarded for dominating in the first round of our very first UHC event! Congrats team men!"),
+	UHC_I_WINNER ("UHC I - Round 1", "08-01-2020", "Awarded for dominating in the first round of our very first UHC event! Congrats team men!"),
 	UHC_I_WINNNER_I ("UHC I - Round 2", "08-01-2020", "Awarded for dominating in the second round of our very first UHC event! Congrats team Team 19!"),
+	UHC_RUSH ("UHC Rush", "08-26-2020"),
+	UHC_RUSH_WINNER ("UHC Rush - Winner", "08-26-2020", "Awarded for dominating a round of UHC during AGO's very own rush week! Fight on!"),
 	GIFT ("Gift", "now", "A small gift from the administrator!");
 	
 	/** Full name of the event */

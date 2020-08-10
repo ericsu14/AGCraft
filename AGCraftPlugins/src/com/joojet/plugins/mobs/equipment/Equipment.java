@@ -31,7 +31,8 @@ public abstract class Equipment extends ItemStack
 	protected int wordsPerLine;
 	/** Playerhead enum used to fetch the skin of the playerhead */
 	protected PlayerHead playerHead;
-	
+	/** Chat color applied to the equipment's lore. Defalut color is set to chatColor */
+	protected ChatColor loreColor;
 	
 	/** Constructs a basic item with a count of 1 */
 	public Equipment (Material material, EquipmentSlot equipmentSlot, ChatColor chatColor)
@@ -41,6 +42,7 @@ public abstract class Equipment extends ItemStack
 		this.chatColor = chatColor;
 		this.playerHead = null;
 		this.wordsPerLine = 4;
+		this.loreColor = chatColor;
 	}
 	
 	/** Constructs a item with a specified item count */
@@ -51,6 +53,7 @@ public abstract class Equipment extends ItemStack
 		this.chatColor = chatColor;
 		this.playerHead = null;
 		this.wordsPerLine = 4;
+		this.loreColor = chatColor;
 	}
 	
 	/** Constructs a basic playerhead item */
@@ -203,7 +206,7 @@ public abstract class Equipment extends ItemStack
 	{
 		ArrayList <String> itemLore = new ArrayList <String> ();
 		StringBuilder str = new StringBuilder();
-		str.append(this.chatColor);
+		str.append(this.loreColor);
 		ItemMeta meta = this.getItemMeta();
 		
 		String[] tokens = lore.split(" ");
@@ -220,7 +223,7 @@ public abstract class Equipment extends ItemStack
 				itemLore.add(str.toString().trim());
 				str = new StringBuilder();
 				count = 0;
-				str.append(this.chatColor);
+				str.append(this.loreColor);
 			}
 		}
 		
