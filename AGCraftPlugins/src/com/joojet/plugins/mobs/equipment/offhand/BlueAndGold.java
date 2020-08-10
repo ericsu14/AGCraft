@@ -54,7 +54,7 @@ public class BlueAndGold extends Equipment
 		this.setItemMeta(itemMeta);
 		
 		this.addAttackAttributes(3.0, 0.0);
-		this.addDefenseAttributes(0.0, 4.0, 0.15);
+		this.addDefenseAttributes(2.0, 4.0, 0.10);
 		this.addHealthAttributes(20.0);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
 	}
