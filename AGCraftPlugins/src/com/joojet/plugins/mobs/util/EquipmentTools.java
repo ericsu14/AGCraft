@@ -38,26 +38,25 @@ public class EquipmentTools
 			return;
 		}
 		
-		switch (entity.getType())
+		// Prevents baby entities from spawning
+		if (entity instanceof Zombie)
 		{
-			// Prevents baby entities from spawning
-			case ZOMBIE:
-				Zombie zombie = (Zombie) entity;
-				zombie.setBaby(false);
-				break;
-			// Prevents baby piglins from spawning
-			case PIGLIN:
-				Piglin piglin = (Piglin) entity;
-				piglin.setBaby(false);
-				piglin.setIsAbleToHunt(true);
-				break;
-			// Changes color of wolf's collar if this entity is a wolf
-			case WOLF:
-				Wolf wolf = (Wolf) entity;
-				wolf.setCollarColor(mobEquipment.getDyeColor());
-				break;
-			default:
-				break;
+			Zombie zombie = (Zombie) entity;
+			zombie.setBaby(false);
+		}
+		
+		// Prevents baby piglins from spawning
+		if (entity instanceof Piglin)
+		{
+			Piglin piglin = (Piglin) entity;
+			piglin.setBaby(false);
+			piglin.setIsAbleToHunt(true);
+		}
+		// Changes color of wolf's collar if this entity is a wolf
+		if (entity instanceof Wolf)
+		{
+			Wolf wolf = (Wolf) entity;
+			wolf.setCollarColor(mobEquipment.getDyeColor());
 		}
 		
 		// Sets up entity's custom metadata values
