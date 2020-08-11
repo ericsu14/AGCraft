@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Damageable;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Piglin;
@@ -22,12 +23,19 @@ import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
+import net.minecraft.server.v1_16_R1.EntityMonster;
+import net.minecraft.server.v1_16_R1.PathfinderGoalNearestAttackableTarget;
+
+import org.bukkit.craftbukkit.v1_16_R1.entity.CraftMonster;
+
 public class EquipmentTools 
 {
 	
 	/** Equips a living entity with the items stored in a MobEquipment object
 	 * 	@param entity - Entity we are equipping custom armor to
 	 *  @param mobEquipment - Object containing custom mob equipment */
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void equipEntity (LivingEntity entity, MobEquipment mobEquipment)
 	{
 		Random rand = new Random ();
@@ -43,6 +51,9 @@ public class EquipmentTools
 		{
 			Zombie zombie = (Zombie) entity;
 			zombie.setBaby(false);
+			EntityMonster nmsZombie = ((CraftMonster) entity).getHandle();
+			Class<?> mobClass = ConvertEntity.getNMSEntity(EntityType.PIG);
+			nmsZombie.targetSelector.a(0, new PathfinderGoalNearestAttackableTarget  (nmsZombie, mobClass, true));
 		}
 		
 		// Prevents baby piglins from spawning
