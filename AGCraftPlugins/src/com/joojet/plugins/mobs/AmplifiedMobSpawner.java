@@ -81,9 +81,7 @@ public class AmplifiedMobSpawner implements Listener
 	
 	/** Creates a new instance of this mob spawner class,
 	 *  which adds listeners to Minecraft's mob spawn events for
-	 *  having a certain chance of equipping them with custom armor, buffs, and weapons.
-	 *  	@param serverEvent - Defines a special server event, which if set to any registered value other than DEFAULT,
-	 *                           custom holiday themed mobs and special events will start occuring. */
+	 *  having a certain chance of equipping them with custom armor, buffs, and weapons. */
 	public AmplifiedMobSpawner ()
 	{
 		this.zombieTypes = new ZombieTypes();

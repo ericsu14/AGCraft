@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.util;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Damageable;
@@ -20,8 +21,6 @@ import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.warp.scantools.ScanEntities;
-
-import net.md_5.bungee.api.ChatColor;
 
 public class EquipmentTools 
 {

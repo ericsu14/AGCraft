@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
@@ -65,6 +66,18 @@ public abstract class MobEquipment
 	protected MonsterType mobType;
 	/** A list of factions this monster is apart of */
 	protected HashSet <Faction> factions;
+	/** A list of factions that this monster is set to target.
+	 *  If this set has at least one value inserted, the monster only attack
+	 *  entities that are either in this list and the monster's hit list or monsters
+	 *  that are in its hit list but does not carry a faction tag. */
+	protected HashSet <Faction> rivalFactions;
+	/** A list of entities this monster should hunt either in addition not including
+	 *  the entities the monster naturally hunts in vanilla MineCraft. This behavior can
+	 *  be controlled by the variable, huntFromCustomListOnly. */
+	protected ArrayList <EntityType> hitlist;
+	/** Determines if the monster should only hunt monsters included from the ones defined in
+	 *  hitlist. */
+	protected boolean huntFromCustomListOnly;
 	
 	public MobEquipment (MonsterType mobType)
 	{
@@ -77,7 +90,6 @@ public abstract class MobEquipment
 		this.showName = false;
 		this.spawnLightning = false;
 		this.effects = new ArrayList <PotionEffect> ();
-		this.factions = new HashSet <Faction> ();
 		// Set up default drop rates
 		this.dropRates = new float[6];
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.01f, 0.05f);
@@ -90,6 +102,13 @@ public abstract class MobEquipment
 		this.huntRadius = 25;
 		// Use default (unmodified) attack damage if set to -1.0
 		this.attackDamage = -1.0;
+		// Factions
+		this.factions = new HashSet <Faction> ();
+		this.rivalFactions = new HashSet <Faction> ();
+		// Hitlist
+		this.hitlist = new ArrayList <EntityType> ();
+		this.huntFromCustomListOnly = false;
+		
 	}
 	
 	/** Sets up drop rates for this entity.
@@ -273,6 +292,15 @@ public abstract class MobEquipment
 		}
 	}
 	
+	/** Adds a list of rivaling factions this entity should hunt down */
+	public void addRivalFactions (Faction... targets)
+	{
+		for (Faction faction : targets)
+		{
+			this.rivalFactions.add(faction);
+		}
+	}
+	
 	/** Americanizes a name by applying the USA colors to every character in a string
 	 *  in an alternating pattern */
 	public String americanizeText (String str)
@@ -328,6 +356,18 @@ public abstract class MobEquipment
 	public HashSet <Faction> getFactions ()
 	{
 		return this.factions;
+	}
+	
+	/** Returns the list of factions this entity should hunt */
+	public HashSet <Faction> getRivalFactions ()
+	{
+		return this.rivalFactions;
+	}
+	
+	/** Determines if the mosnter should reset its list of hunted enemies and replace it with its own custom-defined hitlist */
+	public boolean huntFromCustomListOnly ()
+	{
+		return this.huntFromCustomListOnly;
 	}
 	
 	/** Generates monster type metadata based on the mob equipment's properties*/
