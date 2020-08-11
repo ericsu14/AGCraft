@@ -3,10 +3,13 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 
 public class MonsterTypeMetadata extends AbstractMetadata <MonsterType> 
 {	
+	/** Identifier for the monster type metadata */
+	public static String MOB_TAG = "monster-tag";
+	
 	/** A simple implementation of Spigot's MetadataValue allowing
 	 *  custom mob names to be stored as metadata within an entity. */
 	public MonsterTypeMetadata (MonsterType type)
 	{
-		super ("monster-type", type);
+		super (MOB_TAG, type);
 	}
 }

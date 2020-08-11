@@ -61,8 +61,7 @@ public class EquipmentTools
 		}
 		
 		// Sets up entity's custom metadata values
-		MonsterTypeMetadata mobType = mobEquipment.generateMobTypeMetadata();
-		entity.setMetadata(mobType.getTag(), mobType);
+		entity.setMetadata(MonsterTypeMetadata.MOB_TAG, mobEquipment.generateMobTypeMetadata());
 
 		EntityEquipment equipment = entity.getEquipment();
 		ItemStack[] items = mobEquipment.getEquipment();

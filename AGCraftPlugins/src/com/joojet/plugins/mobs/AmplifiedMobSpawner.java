@@ -19,6 +19,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
@@ -27,6 +28,7 @@ import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
 import com.joojet.plugins.mobs.allies.wolf.WolfTypes;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.ghast.UHCGhastTypes;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
@@ -130,6 +132,12 @@ public class AmplifiedMobSpawner implements Listener
 			LivingEntity e = (LivingEntity) event.getEntity();
 			p.sendMessage("Dealt " + event.getDamage() + " damage.");
 			p.sendMessage("The enemy has " + (e.getHealth() - event.getFinalDamage()) + " health remaining");
+			
+			// Test metadata
+			for (MetadataValue value : e.getMetadata(MonsterTypeMetadata.MOB_TAG))
+			{
+				p.sendMessage("Custom name: " + value.asString());
+			}
 		}
 		
 		if (event.getDamager() instanceof Arrow)
