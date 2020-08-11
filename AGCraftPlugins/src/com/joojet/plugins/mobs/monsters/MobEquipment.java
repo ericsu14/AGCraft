@@ -64,7 +64,7 @@ public abstract class MobEquipment
 	/** Identifier for this custom mob type */
 	protected MonsterType mobType;
 	/** A list of factions this monster is apart of */
-	protected ArrayList <Faction> factions;
+	protected HashSet <Faction> factions;
 	
 	public MobEquipment (MonsterType mobType)
 	{
@@ -77,7 +77,7 @@ public abstract class MobEquipment
 		this.showName = false;
 		this.spawnLightning = false;
 		this.effects = new ArrayList <PotionEffect> ();
-		this.factions = new ArrayList <Faction> ();
+		this.factions = new HashSet <Faction> ();
 		// Set up default drop rates
 		this.dropRates = new float[6];
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.01f, 0.05f);
@@ -325,7 +325,7 @@ public abstract class MobEquipment
 	}
 	
 	/** Returns the list of factions this monster is apart of */
-	public ArrayList <Faction> getFactions ()
+	public HashSet <Faction> getFactions ()
 	{
 		return this.factions;
 	}
