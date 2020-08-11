@@ -16,6 +16,7 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
+import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.warp.scantools.ScanEntities;
@@ -61,6 +62,11 @@ public class EquipmentTools
 		
 		// Sets up entity's custom metadata values
 		entity.setMetadata(MonsterTypeMetadata.MOB_TAG, mobEquipment.generateMobTypeMetadata());
+		ArrayList <FactionMetadata> factions = mobEquipment.generateFactionMetadata();
+		for (FactionMetadata faction : factions)
+		{
+			entity.setMetadata(faction.getTag(), faction);
+		}
 
 		EntityEquipment equipment = entity.getEquipment();
 		ItemStack[] items = mobEquipment.getEquipment();
