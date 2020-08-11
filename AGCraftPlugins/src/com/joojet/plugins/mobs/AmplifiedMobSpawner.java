@@ -26,6 +26,7 @@ import com.joojet.plugins.mobs.allies.golem.GolemTypes;
 import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
 import com.joojet.plugins.mobs.allies.wolf.WolfTypes;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.ghast.UHCGhastTypes;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
@@ -54,6 +55,9 @@ public class AmplifiedMobSpawner implements Listener
 	// Key used to reference the amplified mob spawner's debug mode
 	public final static String debugModeKey = "amplified-debug-mode";
 	
+	// Search trie used to lookup custom monsters by name
+	public static MonsterTypeInterpreter mobTable = new MonsterTypeInterpreter ();
+	
 	private Random rand = new Random ();
 	
 	// Mob equipment factories
@@ -69,7 +73,6 @@ public class AmplifiedMobSpawner implements Listener
 	private ZombiePigmenTypes zombiePigmenTypes;
 	private PiglinTypes piglinTypes;
 	private UHCGhastTypes uhcGhastTypes;
-
 	
 	// Used to generate random fireworks
 	private FireworkTypes fwTypes;

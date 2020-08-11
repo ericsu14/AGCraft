@@ -302,4 +302,17 @@ public abstract class MobEquipment
 	{
 		return ConvertColors.convertDyeColorToColor(this.color);
 	}
+	
+	/** Return the equipment's monster type identifier */
+	public MonsterType getMonsterType ()
+	{
+		return this.mobType;
+	}
+	
+	/** Return the equipment's monster type identifier as a string. */
+	@Override
+	public String toString ()
+	{
+		return this.mobType.toString();
+	}
 }

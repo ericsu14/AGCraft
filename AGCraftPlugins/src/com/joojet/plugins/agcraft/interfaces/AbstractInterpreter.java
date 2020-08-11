@@ -10,7 +10,14 @@ public abstract class AbstractInterpreter <E>
 	/** Array of values used to populate the trie */
 	protected E[] values;
 	
-	/** Creates a new instance of a search term interpreter.
+	/** Creates a new instance of the search term interpreter
+	 *  with an initially empty search trie. */
+	public AbstractInterpreter ()
+	{
+		this.root = new TrieNode <E> (' ', null);
+		this.values = null;
+	}
+	/** Creates a new instance of the search term interpreter.
 	 *  This class stores the list of values into an internal search trie,
 	 *  where the value's toString() method is used as a key.
 	 *  @param values - List of values to be inserted into this trie */
@@ -30,6 +37,14 @@ public abstract class AbstractInterpreter <E>
 		{
 			TrieUtil.insertWord(element.toString(), element, this.root);
 		}
+	}
+	
+	/** Inserts a new entry into the trie
+	 * 		@param key - Entry's key that is used for lookup
+	 * 		@param value - Entry's value that is referenced by the key */
+	public void insertWord (String key, E value)
+	{
+		TrieUtil.insertWord(key, value, this.root);
 	}
 	
 	/** Searches the internal search trie for a stored value that is referenced by its
