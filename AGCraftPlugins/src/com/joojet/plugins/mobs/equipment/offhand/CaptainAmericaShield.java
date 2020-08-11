@@ -22,7 +22,7 @@ public class CaptainAmericaShield extends Equipment
 	public CaptainAmericaShield (ChatColor color)
 	{
 		super (Material.SHIELD, EquipmentSlot.OFF_HAND, color);
-		
+		this.loreColor = ChatColor.AQUA;
 		this.setDisplayName("Captain America's Shield");
 		
 		/* Sets up custom shield patterns */
