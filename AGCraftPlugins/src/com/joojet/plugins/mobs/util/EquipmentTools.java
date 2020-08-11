@@ -16,6 +16,7 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
+import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
@@ -23,6 +24,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class EquipmentTools 
 {
+	
 	/** Equips a living entity with the items stored in a MobEquipment object
 	 * 	@param entity - Entity we are equipping custom armor to
 	 *  @param mobEquipment - Object containing custom mob equipment */
@@ -36,28 +38,32 @@ public class EquipmentTools
 			return;
 		}
 		
-		// Prevents baby entities from spawning
-		if (entity instanceof Zombie)
+		switch (entity.getType())
 		{
-			Zombie zombie = (Zombie) entity;
-			zombie.setBaby(false);
+			// Prevents baby entities from spawning
+			case ZOMBIE:
+				Zombie zombie = (Zombie) entity;
+				zombie.setBaby(false);
+				break;
+			// Prevents baby piglins from spawning
+			case PIGLIN:
+				Piglin piglin = (Piglin) entity;
+				piglin.setBaby(false);
+				piglin.setIsAbleToHunt(true);
+				break;
+			// Changes color of wolf's collar if this entity is a wolf
+			case WOLF:
+				Wolf wolf = (Wolf) entity;
+				wolf.setCollarColor(mobEquipment.getDyeColor());
+				break;
+			default:
+				break;
 		}
 		
-		// Prevents baby piglins from spawning
-		if (entity instanceof Piglin)
-		{
-			Piglin piglin = (Piglin) entity;
-			piglin.setBaby(false);
-			piglin.setIsAbleToHunt(true);
-		}
-		
-		// Changes color of wolf's collar if this entity is a wolf
-		if (entity instanceof Wolf)
-		{
-			Wolf wolf = (Wolf) entity;
-			wolf.setCollarColor(mobEquipment.getDyeColor());
-		}
-		
+		// Sets up entity's custom metadata values
+		MonsterTypeMetadata mobType = mobEquipment.generateMobTypeMetadata();
+		entity.setMetadata(mobType.getTag(), mobType);
+
 		EntityEquipment equipment = entity.getEquipment();
 		ItemStack[] items = mobEquipment.getEquipment();
 		float[] dropRates = mobEquipment.getDropRates();
@@ -137,7 +143,7 @@ public class EquipmentTools
 		// Forever ablaze
 		if (mobEquipment.onFire())
 		{
-			entity.setFireTicks(9999999);
+			entity.setFireTicks(Integer.MAX_VALUE);
 		}
 		
 		// Spawns a lightning bolt on the mob's current location if enabled. This should scare the **** out of unsuspecting players

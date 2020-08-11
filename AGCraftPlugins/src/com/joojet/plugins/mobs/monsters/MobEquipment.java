@@ -12,6 +12,7 @@ import org.bukkit.potion.PotionEffect;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.util.ConvertColors;
 
 public abstract class MobEquipment 
@@ -307,6 +308,12 @@ public abstract class MobEquipment
 	public MonsterType getMonsterType ()
 	{
 		return this.mobType;
+	}
+	
+	/** Generates monster type metadata based on the mob equipment's propetries*/
+	public MonsterTypeMetadata generateMobTypeMetadata ()
+	{
+		return new MonsterTypeMetadata (this.mobType);
 	}
 	
 	/** Return the equipment's monster type identifier as a string. */
