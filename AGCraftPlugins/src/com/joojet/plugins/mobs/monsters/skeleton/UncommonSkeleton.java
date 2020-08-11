@@ -4,6 +4,7 @@ package com.joojet.plugins.mobs.monsters.skeleton;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightChainmailBoots;
 import com.joojet.plugins.mobs.equipment.chest.BulletproofChainmailChestplate;
 import com.joojet.plugins.mobs.equipment.head.ReinforcedChainmailHelmet;
@@ -16,6 +17,7 @@ public class UncommonSkeleton extends MobEquipment
 {
 	public UncommonSkeleton ()
 	{
+		super (MonsterType.UNCOMMON_SKELETON);
 		this.name = "Annoying Skeleton";
 		this.color = ChatColor.GREEN;
 		this.health = 16;

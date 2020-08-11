@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.potions.*;
 import com.joojet.plugins.mobs.scrolls.*;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
@@ -13,6 +14,7 @@ public class Frolf extends VillagerEquipment
 {
 	public Frolf ()
 	{
+		super (MonsterType.FROLF);
 		this.name = "frolf";
 		this.color = ChatColor.GOLD;
 		this.showName = true;

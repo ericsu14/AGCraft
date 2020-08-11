@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.SkullKidBoots;
 import com.joojet.plugins.mobs.equipment.chest.SkullKidChest;
 import com.joojet.plugins.mobs.equipment.head.SkullKidHelmet;
@@ -16,6 +17,7 @@ public class SkullKid extends MobEquipment
 {
 	public SkullKid ()
 	{
+		super (MonsterType.SKULL_KID);
 		this.name = "Skull Kid";
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);

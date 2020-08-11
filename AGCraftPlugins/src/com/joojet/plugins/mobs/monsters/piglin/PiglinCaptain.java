@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.monsters.piglin;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.PiglinCaptainHead;
 import com.joojet.plugins.mobs.equipment.weapons.PiglinAxe;
@@ -12,6 +13,7 @@ public class PiglinCaptain extends MobEquipment
 {
 	public PiglinCaptain ()
 	{
+		super (MonsterType.PIGLIN_CAPTAIN);
 		this.name = "Piglin Captain";
 		this.color = ChatColor.GOLD;
 		this.showName = true;

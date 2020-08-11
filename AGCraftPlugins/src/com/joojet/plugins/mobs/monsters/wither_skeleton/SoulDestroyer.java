@@ -6,6 +6,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightNetheriteBoots;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.weapons.PerpetualTorment;
@@ -15,6 +16,7 @@ public class SoulDestroyer extends MobEquipment
 {
 	public SoulDestroyer ()
 	{
+		super (MonsterType.SOUL_DESTROYER);
 		this.name = "Soul Destroyer";
 		this.color = ChatColor.LIGHT_PURPLE;
 		

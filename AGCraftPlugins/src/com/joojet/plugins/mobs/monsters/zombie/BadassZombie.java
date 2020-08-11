@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightIronBoots;
 import com.joojet.plugins.mobs.equipment.chest.ReinforcedDiamondChestplate;
 import com.joojet.plugins.mobs.equipment.head.ReinforcedIronHelmet;
@@ -15,6 +16,7 @@ public class BadassZombie extends MobEquipment
 {
 	public BadassZombie ()
 	{
+		super (MonsterType.BADASS_ZOMBIE);
 		this.name = "Badass Zombie";
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.health = 16;

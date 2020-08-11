@@ -11,6 +11,7 @@ public class Cookie extends MobEquipment
 {
 	public Cookie ()
 	{
+		super (MonsterType.COOKIE);
 		this.addBiomes(Biome.THE_VOID);
 		this.setDropRates(0.00f, 1.15f, 0.00f, 0.00f, 0.00f, 0.00f);
 		this.color = ChatColor.GOLD;

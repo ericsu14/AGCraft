@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.monsters.zombie_pigmen;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.head.ZombiePigmenHead;
 import com.joojet.plugins.mobs.equipment.leggings.RoyalGoldLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.PigmanSword;
@@ -13,6 +14,7 @@ public class VeteranZombiePigmen extends MobEquipment
 {
 	public VeteranZombiePigmen ()
 	{
+		super (MonsterType.VETERAN_ZOMBIE_PIGMAN);
 		this.name = "Veteran Zombie Pigmen";
 		this.color = ChatColor.LIGHT_PURPLE;
 		

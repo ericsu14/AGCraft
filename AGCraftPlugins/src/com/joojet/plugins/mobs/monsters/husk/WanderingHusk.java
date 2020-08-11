@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.DesertSandals;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -11,6 +12,7 @@ public class WanderingHusk extends MobEquipment
 {
 	public WanderingHusk ()
 	{
+		super (MonsterType.WANDERING_HUSK);
 		this.addBiomes(Biome.THE_VOID);
 		
 		this.name = "Wandering Husk";

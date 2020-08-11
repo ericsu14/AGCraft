@@ -6,15 +6,19 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public abstract class VillagerEquipment extends MobEquipment
 {
 	protected ArrayList <MerchantRecipe> recipes;
 	
-	public VillagerEquipment ()
+	/** Creates a new villager equipment object, which can be used to
+	 *  set custom trades for our custom villagers.
+	 *  @param type - Monster type identifier */
+	public VillagerEquipment (MonsterType type)
 	{
-		super();
+		super(type);
 		this.recipes = new ArrayList <MerchantRecipe> ();
 	}
 	

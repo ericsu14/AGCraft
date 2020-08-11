@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.DarkNetheriteHelmet;
 import com.joojet.plugins.mobs.equipment.offhand.WitheringArrow;
@@ -14,6 +15,7 @@ public class SoulEater extends MobEquipment
 {
 	public SoulEater ()
 	{
+		super (MonsterType.SOUL_EATER);
 		this.name = "Soul Eater";
 		this.color = ChatColor.LIGHT_PURPLE;
 		

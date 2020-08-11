@@ -4,12 +4,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class AdvancedGolem extends MobEquipment
 {
 	public AdvancedGolem ()
 	{
+		super (MonsterType.ADVANCED_GOLEM);
 		this.addBiomes(Biome.THE_VOID);
 		
 		this.name = "Advanced Golem";

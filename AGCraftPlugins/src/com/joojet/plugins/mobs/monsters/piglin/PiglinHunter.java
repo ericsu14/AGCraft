@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.monsters.piglin;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.RoyalGoldBoots;
 import com.joojet.plugins.mobs.equipment.head.PiglinHunterHelmet;
 import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
@@ -12,6 +13,7 @@ public class PiglinHunter extends MobEquipment
 {
 	public PiglinHunter ()
 	{
+		super (MonsterType.PIGLIN_HUNTER);
 		this.name = "Piglin Hunter";
 		this.color = ChatColor.BLUE;
 		

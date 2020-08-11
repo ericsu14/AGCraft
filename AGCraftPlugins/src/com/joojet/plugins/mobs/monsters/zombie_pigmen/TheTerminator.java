@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightNetheriteBoots;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.CyborgPigmanHead;
@@ -16,6 +17,7 @@ public class TheTerminator extends MobEquipment
 {
 	public TheTerminator ()
 	{
+		super (MonsterType.THE_TERMINATOR);
 		this.name = "The Terminator";
 		this.color = ChatColor.DARK_RED;
 		this.health = 12;

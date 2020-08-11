@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightIronBoots;
 import com.joojet.plugins.mobs.equipment.chest.BulletproofIronChestplate;
 import com.joojet.plugins.mobs.equipment.head.ReinforcedIronHelmet;
@@ -16,6 +17,7 @@ public class HurtfulSkeleton extends MobEquipment
 {
 	public HurtfulSkeleton ()
 	{
+		super (MonsterType.HURTFUL_SKELETON);
 		this.name = "Hurtful Skeleton";
 		this.color = ChatColor.BLUE;
 		

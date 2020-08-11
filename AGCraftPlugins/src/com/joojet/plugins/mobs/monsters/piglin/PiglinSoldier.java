@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.monsters.piglin;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.RoyalGoldChestplate;
 import com.joojet.plugins.mobs.equipment.head.PiglinSoldierHat;
 import com.joojet.plugins.mobs.equipment.leggings.RoyalGoldLeggings;
@@ -12,6 +13,7 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 public class PiglinSoldier extends MobEquipment {
 	public PiglinSoldier ()
 	{
+		super (MonsterType.PIGLIN_SOLDIER);
 		this.name = "Piglin Soldier";
 		this.color = ChatColor.LIGHT_PURPLE;
 		

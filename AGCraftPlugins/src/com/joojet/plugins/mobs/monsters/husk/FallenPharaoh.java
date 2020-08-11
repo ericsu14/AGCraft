@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.monsters.husk;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.RoyalGoldBoots;
 import com.joojet.plugins.mobs.equipment.chest.RoyalGoldChestplate;
 import com.joojet.plugins.mobs.equipment.head.PharaohHead;
@@ -14,6 +15,7 @@ public class FallenPharaoh extends MobEquipment
 {
 	public FallenPharaoh ()
 	{
+		super (MonsterType.FALLEN_PHARAOH);
 		this.addBiomes(Biome.THE_VOID);
 		
 		this.name = "Fallen Pharaoh";

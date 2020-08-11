@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LetItGo;
 import com.joojet.plugins.mobs.equipment.chest.SnowballHeart;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -12,6 +13,7 @@ public class Snowball extends MobEquipment
 {
 	public Snowball ()
 	{
+		super (MonsterType.SNOWBALL);
 		this.addBiomes(Biome.THE_VOID);
 		this.color = ChatColor.AQUA;
 		this.name = "Snowball";

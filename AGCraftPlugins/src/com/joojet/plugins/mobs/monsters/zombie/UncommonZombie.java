@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.monsters.zombie;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightChainmailBoots;
 import com.joojet.plugins.mobs.equipment.chest.ReinforcedChainmailChestplate;
 import com.joojet.plugins.mobs.equipment.head.ReinforcedChainmailHelmet;
@@ -14,6 +15,7 @@ public class UncommonZombie extends MobEquipment
 {
 	public UncommonZombie ()
 	{
+		super (MonsterType.UNCOMMON_ZOMBIE);
 		this.name = "Bulky Zombie";
 		this.color = ChatColor.GREEN;
 		this.health = 16;

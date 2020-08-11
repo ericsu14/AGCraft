@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.ThePecks;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -11,6 +12,7 @@ public class JohnJae extends MobEquipment
 {
 	public JohnJae ()
 	{
+		super (MonsterType.JOHN_JAE);
 		this.addBiomes(Biome.THE_VOID);
 		this.name = "John Jae";
 		this.color = ChatColor.GOLD;

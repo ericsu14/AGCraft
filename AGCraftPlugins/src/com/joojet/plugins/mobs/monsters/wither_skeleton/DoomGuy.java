@@ -6,6 +6,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.DoomGuyFeet;
 import com.joojet.plugins.mobs.equipment.chest.DoomChest;
 import com.joojet.plugins.mobs.equipment.head.DoomSlayerHead;
@@ -17,6 +18,7 @@ public class DoomGuy extends MobEquipment
 {
 	public DoomGuy ()
 	{
+		super (MonsterType.DOOM_GUY);
 		this.name = "The Doom Slayer";
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.05f, 0.15f);
 		this.color = ChatColor.DARK_RED;

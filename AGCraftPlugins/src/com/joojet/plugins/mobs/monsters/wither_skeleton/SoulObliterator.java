@@ -6,6 +6,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightDiamondBoots;
 import com.joojet.plugins.mobs.equipment.chest.ReinforcedDiamondChestplate;
 import com.joojet.plugins.mobs.equipment.offhand.EnhancedWitheringArrow;
@@ -17,6 +18,7 @@ public class SoulObliterator extends MobEquipment
 {
 	public SoulObliterator ()
 	{
+		super (MonsterType.SOUL_OBLITERATOR);
 		this.name = "Soul Obliterator";
 		this.color = ChatColor.GOLD;
 		this.health = 16;

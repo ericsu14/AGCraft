@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightNetheriteBoots;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.AGSpotted;
@@ -16,6 +17,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 {
 	public UltimateBadassSkeleton ()
 	{
+		super (MonsterType.ULTIMATE_BADASS_SKELETON);
 		this.name = "#agspotted";
 		this.color = ChatColor.GOLD;
 		this.showName = true;

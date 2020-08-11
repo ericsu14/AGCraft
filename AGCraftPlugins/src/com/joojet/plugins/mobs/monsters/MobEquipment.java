@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.util.ConvertColors;
 
 public abstract class MobEquipment 
@@ -57,9 +58,12 @@ public abstract class MobEquipment
 	protected int huntRadius;
 	/** Base attack damage of this mob */
 	protected double attackDamage;
+	/** Identifier for this custom mob type */
+	protected MonsterType mobType;
 	
-	public MobEquipment ()
+	public MobEquipment (MonsterType mobType)
 	{
+		this.mobType = mobType;
 		this.name = "";
 		this.color = ChatColor.WHITE;
 		// -1 represents default health
