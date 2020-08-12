@@ -2,6 +2,7 @@ package com.joojet.plugins.mobs.monsters.zombie_pigmen;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -22,6 +23,8 @@ public class TheTerminator extends MobEquipment
 		this.color = ChatColor.DARK_RED;
 		this.health = 12;
 		this.showName = true;
+		
+		this.addTargetsToHitList(EntityType.PLAYER);
 		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);

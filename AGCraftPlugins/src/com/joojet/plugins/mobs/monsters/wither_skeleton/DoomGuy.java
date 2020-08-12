@@ -34,13 +34,12 @@ public class DoomGuy extends MobEquipment
 		this.addRivalFactions(Faction.NETHER);
 		this.addTargetsToHitList(EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER_SKELETON,
 				EntityType.MAGMA_CUBE, EntityType.SKELETON, EntityType.ZOMBIE, EntityType.CREEPER,
-				EntityType.SPIDER, EntityType.CAVE_SPIDER);
+				EntityType.SPIDER, EntityType.CAVE_SPIDER, EntityType.PLAYER);
 		
 		this.spawnLightning = true;
 		this.showName = true;
-		this.huntOnSpawn = true;
 		this.huntRadius = 125;
-		this.health = 40;
+		this.health = 30;
 		
 		this.helmet = new DoomSlayerHead (this.color);
 		this.chestplate = new DoomChest (this.color);

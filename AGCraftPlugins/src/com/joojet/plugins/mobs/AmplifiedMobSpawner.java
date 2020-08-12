@@ -9,7 +9,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -23,6 +22,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -178,6 +178,13 @@ public class AmplifiedMobSpawner implements Listener
 	{
 		// Do nothing if entity is not a living entity
 		if (!(event.getEntity() instanceof LivingEntity))
+		{
+			return;
+		}
+		
+		// Do nothing if the targeting event is set by plugin
+		if (event.getReason() == TargetReason.CUSTOM
+				|| event.getReason() == TargetReason.FORGOT_TARGET)
 		{
 			return;
 		}
@@ -453,7 +460,7 @@ public class AmplifiedMobSpawner implements Listener
 	/** Forcefully causes a custom monster to retarget another eligible mob based on its properties */
 	private void retargetCustomMob (LivingEntity hunter)
 	{
-		double scanRadius = 12.0;
+		double scanRadius = 20.0;
 		
 		// If the event is canceled, tell the hunter to scan for
 		// any nearby entities and hunt a nearby entity that
@@ -467,7 +474,7 @@ public class AmplifiedMobSpawner implements Listener
 		
 		LivingEntity victim = null;
 		MobEquipment victimEquipment;
-		List <Entity> entities = hunter.getNearbyEntities(scanRadius, scanRadius / 3.0, scanRadius);
+		List <Entity> entities = hunter.getNearbyEntities(scanRadius, scanRadius / 4.0, scanRadius);
 		
 		boolean foundVictim = false;
 		for (Entity target : entities)
