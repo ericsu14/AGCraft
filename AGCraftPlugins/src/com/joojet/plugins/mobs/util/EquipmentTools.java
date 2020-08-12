@@ -1,6 +1,5 @@
 package com.joojet.plugins.mobs.util;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -217,29 +216,5 @@ public class EquipmentTools
 			nmsMob.targetSelector.a (1, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
 		}
 	}
-	
-	/** Retrieves a private field from a class
-	 *  Code stolen from:
-	 *    - https://www.spigotmc.org/threads/tutorial-creating-custom-entities-with-pathfindergoals.18519/ */
-	@SuppressWarnings("rawtypes")
-	public static Object getPrivateField(String fieldName, Class clazz, Object object)
-    {
-        Field field;
-        Object o = null;
-        try
-        {
-            field = clazz.getDeclaredField(fieldName);
-            field.setAccessible(true);
-            o = field.get(object);
-        }
-        catch(NoSuchFieldException e)
-        {
-            e.printStackTrace();
-        }
-        catch(IllegalAccessException e)
-        {
-            e.printStackTrace();
-        }
-        return o;
-    }
+
 }
