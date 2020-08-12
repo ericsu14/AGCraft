@@ -1,9 +1,11 @@
 package com.joojet.plugins.mobs;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
@@ -17,6 +19,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.metadata.MetadataValue;
@@ -26,6 +29,7 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.allies.golem.GolemTypes;
 import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
 import com.joojet.plugins.mobs.allies.wolf.WolfTypes;
+import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
@@ -46,8 +50,6 @@ import com.joojet.plugins.mobs.util.EquipmentTools;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 import com.joojet.plugins.mobs.villager.wandering.WanderingVillagerTypes;
 import com.joojet.plugins.warp.scantools.ScanEntities;
-
-import net.md_5.bungee.api.ChatColor;
 
 public class AmplifiedMobSpawner implements Listener 
 {	
@@ -166,6 +168,68 @@ public class AmplifiedMobSpawner implements Listener
 		}
 	}
 	
+	/** Listens to AI target events and cancels targeting events based on certain conditions */
+	@EventHandler
+	public void onTargetEvent (EntityTargetLivingEntityEvent event)
+	{
+		// Do nothing if entity is not a living entity
+		if (!(event.getEntity() instanceof LivingEntity))
+		{
+			return;
+		}
+		
+		LivingEntity hunter = (LivingEntity) event.getEntity();
+		LivingEntity hunted = event.getTarget();
+		
+		// Null check
+		if (hunted == null || hunter == null)
+		{
+			return;
+		}
+		
+		MobEquipment hunterEquipment = this.getMobEquipmentFromEntity(hunter);
+		MobEquipment huntedEquipment = this.getMobEquipmentFromEntity(hunted);
+		
+		// First, check if the hunter is in the huntee's ignore list
+		// This is used to avoid iron golems, snowman, and wolves from aggro allied monsters
+		if (huntedEquipment != null && huntedEquipment.getIgnoreList().contains(hunter.getType()))
+		{
+			event.setCancelled(true);
+			return;
+		}
+		
+		// Secondly, check if the hunted is in the hunter's ignore list. If so, cancel
+		// the targeting event
+		if (hunterEquipment != null && hunterEquipment.getIgnoreList().contains(hunted.getType()))
+		{
+			event.setCancelled(true);
+			return;
+		}
+		
+		// Require both hunted and hunter equipment to be active
+		if (hunterEquipment == null || huntedEquipment == null)
+		{
+			return;
+		}
+		
+		// Lastly, check if the hunter has any rivaling factions and
+		// the hunted is in at least one faction
+		if (!hunterEquipment.getRivalFactions().isEmpty()
+				&& !huntedEquipment.getFactions().isEmpty())
+		{
+			// Cancel the target event if the hunted is not in the hunter's rivaling factions
+			HashSet <Faction> huntedFactions = huntedEquipment.getFactions();
+			for (Faction faction : huntedFactions)
+			{
+				if (hunterEquipment.getRivalFactions().contains(faction))
+				{
+					return;
+				}
+			}
+			event.setCancelled(true);
+		}
+	}
+	
 	
 	/** Amplifies mob spawns */
 	@EventHandler
@@ -281,6 +345,7 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		EquipmentTools.equipEntity(entity, mobEquipment);
+		
 	}
 	
 	/** Handles 4th of july mob spawns */
@@ -346,5 +411,23 @@ public class AmplifiedMobSpawner implements Listener
 		VillagerEquipment equipment = (VillagerEquipment) wanderingTypes.getRandomEquipment(biome);
 		trader.setRecipes(equipment.getRecipes());
 		EquipmentTools.equipEntity(trader, (MobEquipment) equipment);
+	}
+	
+	/** Finds and returns a LivingEntity's custom mob equipment object.
+	 *  Returns null if the entity does not have custom mob metadata.
+	 *  @param entity - The living entity where we are extracting its custom mob equipment from */
+	private MobEquipment getMobEquipmentFromEntity (LivingEntity entity)
+	{
+		// First check if the entity has custom mob metadata
+		if (entity.getMetadata(MonsterTypeMetadata.MOB_TAG) == null || entity.getMetadata(MonsterTypeMetadata.MOB_TAG).isEmpty())
+		{
+			return null;
+		}
+		
+		// Extract custom metadata from the entity and use its string to lookup its own mob equipment
+		MetadataValue entityMeta = entity.getMetadata(MonsterTypeMetadata.MOB_TAG).get(0);
+		MobEquipment entityEquipment = mobTable.searchTrie(entityMeta.asString());
+		
+		return entityEquipment;
 	}
 }
