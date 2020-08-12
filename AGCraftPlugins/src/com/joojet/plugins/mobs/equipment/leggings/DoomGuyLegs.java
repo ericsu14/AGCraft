@@ -13,6 +13,8 @@ public class DoomGuyLegs extends LeatherEquipment
 	public DoomGuyLegs (ChatColor color)
 	{
 		super (Material.LEATHER_LEGGINGS, EquipmentSlot.LEGS, color);
+		this.wordsPerLine = 8;
+		this.loreColor = ChatColor.RED;
 		this.setDisplayName("Leggings of the Doom Slayer");
 		this.addDefenseAttributes(6.0, 5.0, 0.0);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);

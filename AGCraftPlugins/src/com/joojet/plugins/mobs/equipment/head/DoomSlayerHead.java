@@ -11,6 +11,8 @@ public class DoomSlayerHead extends Equipment
 	public DoomSlayerHead (ChatColor color)
 	{
 		super (PlayerHead.DOOM_SLAYER, color);
+		this.wordsPerLine = 8;
+		this.loreColor = ChatColor.RED;
 		this.setDisplayName("The Head of The Doom Slayer");
 		this.addLoreToItemMeta("Tempered by the fires of Hell, his iron will remained steadfast through the passage that preys upon the weak....");
 		this.addDefenseAttributes(3.0, 5.0, 0.20);

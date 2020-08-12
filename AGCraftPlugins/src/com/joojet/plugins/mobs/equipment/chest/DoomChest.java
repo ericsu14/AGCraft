@@ -13,6 +13,8 @@ public class DoomChest extends LeatherEquipment
 	public DoomChest (ChatColor color)
 	{
 		super (Material.LEATHER_CHESTPLATE, EquipmentSlot.CHEST, color);
+		this.wordsPerLine = 8;
+		this.loreColor = ChatColor.RED;
 		this.addDefenseAttributes(8.0, 6.0, 0.0);
 		this.addUnsafeEnchantment(Enchantment.THORNS, 4);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
