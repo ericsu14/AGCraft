@@ -4,7 +4,6 @@ import com.joojet.plugins.mobs.interfaces.MonsterTypes;
 
 public class ZombieTypes extends MonsterTypes
 {
-	
 	public ZombieTypes ()
 	{
 		super();
@@ -14,5 +13,4 @@ public class ZombieTypes extends MonsterTypes
 		this.addEquipment(new Shrek(), 30);
 		this.addEquipment(new BarneyTheDinosaur (), 1);
 	}
-
 }

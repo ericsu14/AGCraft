@@ -19,6 +19,7 @@ import net.minecraft.server.v1_16_R1.EntityOcelot;
 import net.minecraft.server.v1_16_R1.EntityPig;
 import net.minecraft.server.v1_16_R1.EntityPiglin;
 import net.minecraft.server.v1_16_R1.EntityPillager;
+import net.minecraft.server.v1_16_R1.EntityPlayer;
 import net.minecraft.server.v1_16_R1.EntityPolarBear;
 import net.minecraft.server.v1_16_R1.EntityRabbit;
 import net.minecraft.server.v1_16_R1.EntityRavager;
@@ -125,6 +126,8 @@ public class ConvertEntity
 				return EntitySpider.class;
 			case CAVE_SPIDER:
 				return EntityCaveSpider.class;
+			case PLAYER:
+				return EntityPlayer.class;
 			default:
 				break;
 		}

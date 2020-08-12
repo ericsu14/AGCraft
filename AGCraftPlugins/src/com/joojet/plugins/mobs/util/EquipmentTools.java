@@ -1,5 +1,6 @@
 package com.joojet.plugins.mobs.util;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -29,13 +30,10 @@ import net.minecraft.server.v1_16_R1.PathfinderGoalNearestAttackableTarget;
 import org.bukkit.craftbukkit.v1_16_R1.entity.CraftMonster;
 
 public class EquipmentTools 
-{
-	
+{	
 	/** Equips a living entity with the items stored in a MobEquipment object
 	 * 	@param entity - Entity we are equipping custom armor to
 	 *  @param mobEquipment - Object containing custom mob equipment */
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void equipEntity (LivingEntity entity, MobEquipment mobEquipment)
 	{
 		Random rand = new Random ();
@@ -51,9 +49,6 @@ public class EquipmentTools
 		{
 			Zombie zombie = (Zombie) entity;
 			zombie.setBaby(false);
-			EntityMonster nmsZombie = ((CraftMonster) entity).getHandle();
-			Class<?> mobClass = ConvertEntity.getNMSEntity(EntityType.PIG);
-			nmsZombie.targetSelector.a(0, new PathfinderGoalNearestAttackableTarget  (nmsZombie, mobClass, true));
 		}
 		
 		// Prevents baby piglins from spawning
@@ -190,5 +185,61 @@ public class EquipmentTools
 				}
 			}
 		}
+		
+		// Initialize custom pathfinding targets
+		modifyPathfindingTargets (entity, mobEquipment);
 	}
+	
+	/** Modifies an entity's pathfinding properties based on what is stored in
+	 *  its custom mob equipment instance. The Entity must be an instance of
+	 *  a monster in order for this to work.
+	 *   @param entity - The Living Entity we are modifying its pathfinding propetries for
+	 *   @param mobEquipment - Object containing custom mob equipment */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void modifyPathfindingTargets (LivingEntity entity, MobEquipment mobEquipment)
+	{
+		// If the entity is not a monster, do nothing.
+		if (!(entity instanceof Monster))
+		{
+			return;
+		}
+		
+		// Cast this into a NMS entity monster
+		EntityMonster nmsMob = ((CraftMonster) entity).getHandle();
+		
+		// Retrieves the monster's hitlist
+		ArrayList <EntityType> hitlist = mobEquipment.getHitList();
+		
+		// Add target entity goals based on the values stored in the mob equipment's hitlist.
+		for (EntityType victim : hitlist)
+		{
+			Class <?> mobClass = ConvertEntity.getNMSEntity(victim);
+			nmsMob.targetSelector.a (1, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
+		}
+	}
+	
+	/** Retrieves a private field from a class
+	 *  Code stolen from:
+	 *    - https://www.spigotmc.org/threads/tutorial-creating-custom-entities-with-pathfindergoals.18519/ */
+	@SuppressWarnings("rawtypes")
+	public static Object getPrivateField(String fieldName, Class clazz, Object object)
+    {
+        Field field;
+        Object o = null;
+        try
+        {
+            field = clazz.getDeclaredField(fieldName);
+            field.setAccessible(true);
+            o = field.get(object);
+        }
+        catch(NoSuchFieldException e)
+        {
+            e.printStackTrace();
+        }
+        catch(IllegalAccessException e)
+        {
+            e.printStackTrace();
+        }
+        return o;
+    }
 }

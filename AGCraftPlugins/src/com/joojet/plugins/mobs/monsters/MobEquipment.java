@@ -75,9 +75,6 @@ public abstract class MobEquipment
 	 *  the entities the monster naturally hunts in vanilla MineCraft. This behavior can
 	 *  be controlled by the variable, huntFromCustomListOnly. */
 	protected ArrayList <EntityType> hitlist;
-	/** Determines if the monster should only hunt monsters included from the ones defined in
-	 *  hitlist. */
-	protected boolean huntFromCustomListOnly;
 	
 	public MobEquipment (MonsterType mobType)
 	{
@@ -107,8 +104,6 @@ public abstract class MobEquipment
 		this.rivalFactions = new HashSet <Faction> ();
 		// Hitlist
 		this.hitlist = new ArrayList <EntityType> ();
-		this.huntFromCustomListOnly = false;
-		
 	}
 	
 	/** Sets up drop rates for this entity.
@@ -301,6 +296,15 @@ public abstract class MobEquipment
 		}
 	}
 	
+	/** Adds a list of targets for this entity to hunt down */
+	public void addTargetsToHitList (EntityType... targets)
+	{
+		for (EntityType entity : targets)
+		{
+			this.hitlist.add(entity);
+		}
+	}
+	
 	/** Americanizes a name by applying the USA colors to every character in a string
 	 *  in an alternating pattern */
 	public String americanizeText (String str)
@@ -364,10 +368,10 @@ public abstract class MobEquipment
 		return this.rivalFactions;
 	}
 	
-	/** Determines if the mosnter should reset its list of hunted enemies and replace it with its own custom-defined hitlist */
-	public boolean huntFromCustomListOnly ()
+	/** Returns the list of custom entities this monster should hunt */
+	public ArrayList <EntityType> getHitList ()
 	{
-		return this.huntFromCustomListOnly;
+		return this.hitlist;
 	}
 	
 	/** Generates monster type metadata based on the mob equipment's properties*/

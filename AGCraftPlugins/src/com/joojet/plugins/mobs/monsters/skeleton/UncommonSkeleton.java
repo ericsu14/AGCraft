@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.monsters.skeleton;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightChainmailBoots;
@@ -23,6 +24,7 @@ public class UncommonSkeleton extends MobEquipment
 		this.health = 16;
 		
 		this.addBiomes(Biome.THE_VOID);
+		this.addTargetsToHitList(EntityType.ZOMBIE);
 		
 		this.weapon = new PotentBow (this.color);
 		this.offhand = new WeakeningArrow (this.color);
