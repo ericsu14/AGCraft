@@ -11,6 +11,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
+import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -109,6 +110,8 @@ public abstract class MobEquipment
 		this.hitlist = new ArrayList <EntityType> ();
 		// Ignore List
 		this.ignoreList = new HashSet <EntityType> ();
+		// Adds the mob-equipment into the custom monster search trie
+		AmplifiedMobSpawner.mobTable.insertWord(this.toString(), this);
 	}
 	
 	/** Sets up drop rates for this entity.

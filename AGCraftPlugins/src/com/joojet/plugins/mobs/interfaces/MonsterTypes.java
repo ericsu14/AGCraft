@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.Random;
 
 import org.bukkit.block.Biome;
-
-import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public abstract class MonsterTypes 
@@ -29,8 +27,6 @@ public abstract class MonsterTypes
 	{
 		equipment.setSpawnWeight(weight);
 		equipmentList.add(equipment);
-		// Adds the mob-equipment into the custom monster search trie
-		AmplifiedMobSpawner.mobTable.insertWord(equipment.toString(), equipment);
 		++this.size;
 	}
 	

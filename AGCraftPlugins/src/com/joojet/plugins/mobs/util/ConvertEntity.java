@@ -14,7 +14,7 @@ import net.minecraft.server.v1_16_R1.EntityEvoker;
 import net.minecraft.server.v1_16_R1.EntityFox;
 import net.minecraft.server.v1_16_R1.EntityGhast;
 import net.minecraft.server.v1_16_R1.EntityHoglin;
-import net.minecraft.server.v1_16_R1.EntityLiving;
+import net.minecraft.server.v1_16_R1.EntityMagmaCube;
 import net.minecraft.server.v1_16_R1.EntityOcelot;
 import net.minecraft.server.v1_16_R1.EntityPig;
 import net.minecraft.server.v1_16_R1.EntityPiglin;
@@ -128,10 +128,12 @@ public class ConvertEntity
 				return EntityCaveSpider.class;
 			case PLAYER:
 				return EntityPlayer.class;
+			case MAGMA_CUBE:
+				return EntityMagmaCube.class;
 			default:
 				break;
 		}
 		
-		return EntityLiving.class;
+		return null;
 	}
 }

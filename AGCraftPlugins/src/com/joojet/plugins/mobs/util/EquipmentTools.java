@@ -213,7 +213,10 @@ public class EquipmentTools
 		for (EntityType victim : hitlist)
 		{
 			Class <?> mobClass = ConvertEntity.getNMSEntity(victim);
-			nmsMob.targetSelector.a (5, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
+			if (mobClass != null)
+			{
+				nmsMob.targetSelector.a (5, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
+			}
 		}
 	}
 
