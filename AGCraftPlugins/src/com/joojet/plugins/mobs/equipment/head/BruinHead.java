@@ -15,9 +15,8 @@ public class BruinHead extends Equipment
 		this.loreColor = ChatColor.GOLD;
 		this.setDisplayName("The Helmet of the UCLA Bruin");
 		this.addLoreToItemMeta("This is one school you definitely don't want to see winnin'");
-		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
-		this.addUnsafeEnchantment(Enchantment.BINDING_CURSE, 1);
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
 		this.addDefenseAttributes(3.0, 2.0, 0.15);
-		this.addAttackAttributes(1.0, 0.0);
+		this.addAttackAttributes(2.0, 0.0);
 	}
 }

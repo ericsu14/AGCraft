@@ -10,7 +10,8 @@ public enum SummonTypes
 	FROSTY,
 	FROLF,
 	COOKIE,
-	SNOWBALL;
+	SNOWBALL,
+	THE_DOOM_SLAYER;
 	
 	public SummoningScroll getSummon ()
 	{
@@ -30,6 +31,8 @@ public enum SummonTypes
 				return new SummonCookie();
 			case SNOWBALL:
 				return new SummonSnowball ();
+			case THE_DOOM_SLAYER:
+				return new SummonDoomGuy();
 			default:
 				break;
 		}

@@ -14,6 +14,7 @@ import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
 import com.joojet.plugins.mobs.fireworks.PaintTheSky;
 import com.joojet.plugins.mobs.scrolls.SummonAdvancedGolem;
 import com.joojet.plugins.mobs.scrolls.SummonCookie;
+import com.joojet.plugins.mobs.scrolls.SummonDoomGuy;
 import com.joojet.plugins.mobs.scrolls.SummonFrolf;
 import com.joojet.plugins.mobs.scrolls.SummonJohnJae;
 import com.joojet.plugins.mobs.scrolls.SummonSnowball;
@@ -36,7 +37,8 @@ public enum RewardType
 	STRAWBERRY_MOCKTAIL,
 	BLUE_AND_GOLD,
 	BRUIN_SHIELD,
-	BRUIN_HEAD;
+	BRUIN_HEAD,
+	DOOM_GUY;
 	
 	public ItemStack getReward ()
 	{
@@ -76,6 +78,8 @@ public enum RewardType
 				return new BruinShield ();
 			case BRUIN_HEAD:
 				return new BruinHead ();
+			case DOOM_GUY:
+				return new SummonDoomGuy ();
 			default:
 				break;
 		}

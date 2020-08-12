@@ -3,9 +3,11 @@ package com.joojet.plugins.mobs.monsters.wither_skeleton;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightDiamondBoots;
 import com.joojet.plugins.mobs.equipment.chest.ReinforcedDiamondChestplate;
@@ -26,6 +28,10 @@ public class SoulObliterator extends MobEquipment
 		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
+		
+		this.addFactions(Faction.NETHER);
+		this.addRivalFactions(Faction.DOOM_GUY);
+		this.addTargetsToHitList(EntityType.WITHER_SKELETON);
 		
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
 		this.helmet = new ItemStack (Material.WITHER_SKELETON_SKULL, 1);

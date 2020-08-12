@@ -3,9 +3,11 @@ package com.joojet.plugins.mobs.monsters.wither_skeleton;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.DoomGuyFeet;
 import com.joojet.plugins.mobs.equipment.chest.DoomChest;
@@ -28,10 +30,16 @@ public class DoomGuy extends MobEquipment
 		
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
 		
+		this.addFactions(Faction.DOOM_GUY);
+		this.addRivalFactions(Faction.NETHER);
+		this.addTargetsToHitList(EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER_SKELETON,
+				EntityType.MAGMA_CUBE, EntityType.SKELETON);
+		
 		this.spawnLightning = true;
 		this.showName = true;
 		this.huntOnSpawn = true;
 		this.huntRadius = 125;
+		this.health = 40;
 		
 		this.helmet = new DoomSlayerHead (this.color);
 		this.chestplate = new DoomChest (this.color);

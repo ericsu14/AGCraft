@@ -4,5 +4,7 @@ package com.joojet.plugins.mobs.enums;
 public enum Faction 
 {
 	USC,
-	UCLA
+	UCLA,
+	DOOM_GUY,
+	NETHER
 }

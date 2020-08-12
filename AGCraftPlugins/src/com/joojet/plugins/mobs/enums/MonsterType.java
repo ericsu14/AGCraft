@@ -37,5 +37,6 @@ public enum MonsterType
 	FROSTY_THE_SNOWMAN,
 	SCRUFFY,
 	COOKIE,
-	SNOWBALL
+	SNOWBALL,
+	UCLA_JOCK;
 }
