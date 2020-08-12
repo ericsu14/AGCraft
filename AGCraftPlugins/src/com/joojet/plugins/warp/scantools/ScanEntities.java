@@ -16,7 +16,7 @@ public class ScanEntities
 	public static boolean ScanNearbyEnemies (Player p, int radius)
 	{
 		int halfRadius = (int) (radius / 2.0);
-		ArrayList <Entity> entities = (ArrayList<Entity>) p.getNearbyEntities(radius, radius, halfRadius);
+		ArrayList <Entity> entities = (ArrayList<Entity>) p.getNearbyEntities(radius, halfRadius, radius);
 		
 		for (Entity e : entities)
 		{
@@ -33,7 +33,7 @@ public class ScanEntities
 	{
 		int halfRadius = (int) (radius / 2.0);
 		ArrayList <Player> players = new ArrayList <Player> ();
-		ArrayList <Entity> entities = (ArrayList<Entity>) e.getNearbyEntities(radius, radius, halfRadius);
+		ArrayList <Entity> entities = (ArrayList<Entity>) e.getNearbyEntities(radius, halfRadius, radius);
 		
 		for (Entity ent : entities)
 		{
@@ -49,7 +49,7 @@ public class ScanEntities
 	public static ArrayList <Entity> ScanNearbyPlayerOwnedEntities (Player p, int radius)
 	{
 		int halfRadius = (int) (radius / 2.0);
-		ArrayList <Entity> entities = (ArrayList<Entity>) p.getNearbyEntities(radius, radius, halfRadius);
+		ArrayList <Entity> entities = (ArrayList<Entity>) p.getNearbyEntities(radius, halfRadius, radius);
 		ArrayList <Entity> ownedEntities = new ArrayList <Entity> ();
 		
 		for (Entity ent : entities)

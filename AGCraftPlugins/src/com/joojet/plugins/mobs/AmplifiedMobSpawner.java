@@ -522,7 +522,6 @@ public class AmplifiedMobSpawner implements Listener
 		// Retargets the monster to another eligible mob, if it exists.
 		if (foundVictim && victim != null)
 		{
-			System.out.println ("Victim: " + victim.getType());
 			Mob hunterMob = (Mob) hunter;
 			hunterMob.setTarget(victim);
 		}
