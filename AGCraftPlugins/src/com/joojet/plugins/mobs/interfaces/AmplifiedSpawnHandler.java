@@ -12,8 +12,14 @@ public abstract class AmplifiedSpawnHandler
 	/** Used to control mob spawns based on the passed spawn reason.
 	 *  Thus, mobs can only be converted into custom mobs if its given spawn
 	 *  reason exists in this set */
-	
 	protected HashSet <SpawnReason> spawnReasonFilter;
+	
+	/** Creates a new instance of the Amplified Spawn Handler */
+	public AmplifiedSpawnHandler ()
+	{
+		this.spawnReasonFilter = new HashSet <SpawnReason> ();
+	}
+	
 	/** Handles a mob spawn event caught in the Amplified Mob Spawn listener.
 	 *  @param entity - The entity potentially being transformed into a custom mob
 	 *  @param type - The entity'EntityType
