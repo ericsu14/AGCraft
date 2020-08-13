@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightDiamondBoots;
 import com.joojet.plugins.mobs.equipment.chest.ReinforcedDiamondChestplate;
@@ -24,7 +25,7 @@ public class SoulObliterator extends MobEquipment
 		this.name = "Soul Obliterator";
 		this.color = ChatColor.GOLD;
 		this.health = 16;
-		this.showName = true;
+		this.addMobFlags(MobFlag.SHOW_NAME);
 		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);

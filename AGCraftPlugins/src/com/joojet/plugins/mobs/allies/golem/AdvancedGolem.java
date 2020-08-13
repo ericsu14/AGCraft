@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -17,7 +18,7 @@ public class AdvancedGolem extends MobEquipment
 		this.name = "Advanced Golem";
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.health = 200;
-		this.showName = true;
+		this.addMobFlags(MobFlag.SHOW_NAME);
 		
 		this.addPotionEffect(CustomPotionEffect.RESISTANCE, CustomPotionEffect.SPEED,
 				CustomPotionEffect.STRENGTH);

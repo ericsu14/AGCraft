@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.head.DarkNetheriteHelmet;
 import com.joojet.plugins.mobs.equipment.offhand.PigmanDagger;
@@ -19,7 +20,7 @@ public class AkimboPigman extends MobEquipment
 		this.name = "Akimbo Pigman";
 		this.health = 40;
 		this.color = ChatColor.GOLD;
-		this.showName = true;
+		this.addMobFlags(MobFlag.SHOW_NAME);
 		
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		

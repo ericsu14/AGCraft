@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionEffect;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
@@ -39,12 +40,6 @@ public abstract class MobEquipment
 	protected ItemStack weapon;
 	/** The entity's offhand item */
 	protected ItemStack offhand;
-	/** If set to true, the entity will spawn with a permanent burning effect */
-	protected boolean onFire;
-	/** If set to true, the entity will have its nametag visible to everyone */
-	protected boolean showName;
-	/** If true, a lightning bolt is summoned upon spawning the monster */
-	protected boolean spawnLightning;
 	/** A list of potion effects applied on the entity upon spawning */
 	protected ArrayList <PotionEffect> effects;
 	/** URL base for custom player head skins */
@@ -57,8 +52,6 @@ public abstract class MobEquipment
 	protected HashSet <Biome> biomes;
 	/** The spawn weight for this monster. Higher weights equates to higher chances of the mob spawning */
 	protected int spawnWeight;
-	/** Determines if the monster should automatically hunt a random nearby player upon spawning */
-	protected boolean huntOnSpawn;
 	/** Max radius in which the enemy will hunt their pray of huntOnSpawn is true */
 	protected int huntRadius;
 	/** Base attack damage of this mob */
@@ -79,6 +72,8 @@ public abstract class MobEquipment
 	/** A list of entities that this monster should ignore, meaning that they will never
 	 *  become hostile to that entity. */
 	protected HashSet <EntityType> ignoreList;
+	/** A set of flags that could be applied to the monster upon spawning */
+	protected HashSet <MobFlag> mobFlags;
 	
 	public MobEquipment (MonsterType mobType)
 	{
@@ -87,9 +82,6 @@ public abstract class MobEquipment
 		this.color = ChatColor.WHITE;
 		// -1 represents default health
 		this.health = -1.0;
-		this.onFire = false;
-		this.showName = false;
-		this.spawnLightning = false;
 		this.effects = new ArrayList <PotionEffect> ();
 		// Set up default drop rates
 		this.dropRates = new float[6];
@@ -99,7 +91,6 @@ public abstract class MobEquipment
 		this.biomes = new HashSet <Biome> ();
 		// Spawn weight set to default
 		this.spawnWeight = 1;
-		this.huntOnSpawn = false;
 		this.huntRadius = 25;
 		// Use default (unmodified) attack damage if set to -1.0
 		this.attackDamage = -1.0;
@@ -112,6 +103,8 @@ public abstract class MobEquipment
 		this.ignoreList = new HashSet <EntityType> ();
 		// Adds the mob-equipment into the custom monster search trie
 		AmplifiedMobSpawner.mobTable.insertWord(this.toString(), this);
+		// Mob flags
+		this.mobFlags = new HashSet <MobFlag> ();
 	}
 	
 	/** Sets up drop rates for this entity.
@@ -214,34 +207,10 @@ public abstract class MobEquipment
 		return this.effects;
 	}
 	
-	/** Determines if the monster spawns with a permanent fire effect */
-	public boolean onFire ()
-	{
-		return this.onFire;
-	}
-	
-	/** Determines if the monster's nametag should be permanently visible to all players. */
-	public boolean showName ()
-	{
-		return this.showName;
-	}
-	
-	/** Determines if the monster should spawn with an active lightning bolt struck on its location. */
-	public boolean spawnLightning ()
-	{
-		return this.spawnLightning;
-	}
-	
 	/** Returns the monster's custom base attack damage */
 	public double getBaseAttackDamage ()
 	{
 		return this.attackDamage;
-	}
-	
-	/** True if the mob is set to hunt upon spawning */
-	public boolean huntOnSpawn()
-	{
-		return this.huntOnSpawn;
 	}
 	
 	/** Returns the monster's hunt on spawn radius */
@@ -322,6 +291,15 @@ public abstract class MobEquipment
 		}
 	}
 	
+	/** Adds a list of mob flags that should be applied to the entity upon spawning */
+	public void addMobFlags (MobFlag... flags)
+	{
+		for (MobFlag flag : flags)
+		{
+			this.mobFlags.add(flag);
+		}
+	}
+	
 	/** Americanizes a name by applying the USA colors to every character in a string
 	 *  in an alternating pattern */
 	public String americanizeText (String str)
@@ -395,6 +373,12 @@ public abstract class MobEquipment
 	public HashSet <EntityType> getIgnoreList ()
 	{
 		return this.ignoreList;
+	}
+	
+	/** Returns this entity's set of mob flags */
+	public HashSet <MobFlag> getMobFlags ()
+	{
+		return this.mobFlags;
 	}
 	
 	/** Generates monster type metadata based on the mob equipment's properties*/

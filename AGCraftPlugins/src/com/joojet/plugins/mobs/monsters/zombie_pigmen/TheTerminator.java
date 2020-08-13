@@ -5,6 +5,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightNetheriteBoots;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
@@ -22,17 +23,13 @@ public class TheTerminator extends MobEquipment
 		this.name = "The Terminator";
 		this.color = ChatColor.DARK_RED;
 		this.health = 12;
-		this.showName = true;
 		
+		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING, MobFlag.HUNT_ON_SPAWN);
 		this.addTargetsToHitList(EntityType.PLAYER);
-		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
-		
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
-		this.huntOnSpawn = true;
-		this.spawnLightning = true;
 		this.huntRadius = 100;
 		
 		this.helmet = new CyborgPigmanHead (this.color);

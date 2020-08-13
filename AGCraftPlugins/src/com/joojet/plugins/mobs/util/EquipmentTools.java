@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.util;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
@@ -18,6 +19,7 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -75,6 +77,7 @@ public class EquipmentTools
 		EntityEquipment equipment = entity.getEquipment();
 		ItemStack[] items = mobEquipment.getEquipment();
 		float[] dropRates = mobEquipment.getDropRates();
+		HashSet <MobFlag> mobFlags = mobEquipment.getMobFlags();
 		
 		// Helmet
 		if (items[0] != null)
@@ -122,7 +125,7 @@ public class EquipmentTools
 		if (!mobEquipment.getName().equals(""))
 		{
 			entity.setCustomName(mobEquipment.getChatColor() + "" + mobEquipment.getName());
-			entity.setCustomNameVisible(mobEquipment.showName());
+			entity.setCustomNameVisible(mobFlags.contains(MobFlag.SHOW_NAME));
 		}
 		
 		// Custom health
@@ -149,13 +152,13 @@ public class EquipmentTools
 		}
 		
 		// Forever ablaze
-		if (mobEquipment.onFire())
+		if (mobFlags.contains(MobFlag.ON_FIRE))
 		{
 			entity.setFireTicks(Integer.MAX_VALUE);
 		}
 		
 		// Spawns a lightning bolt on the mob's current location if enabled. This should scare the **** out of unsuspecting players
-		if (mobEquipment.spawnLightning())
+		if (mobFlags.contains(MobFlag.SPAWN_LIGHTNING))
 		{
 			Location loc = entity.getLocation();
 			entity.getWorld().strikeLightningEffect(loc);
@@ -169,7 +172,7 @@ public class EquipmentTools
 		}
 		
 		// Automatically sets the mob's target to a random nearby player if huntOnSpawn is set to true
-		if (mobEquipment.huntOnSpawn())
+		if (mobFlags.contains(MobFlag.HUNT_ON_SPAWN))
 		{
 			if (entity instanceof Monster)
 			{

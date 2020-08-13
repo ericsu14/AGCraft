@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.weapons.FireVenomFang;
@@ -16,7 +17,7 @@ public class EnragedSpider extends MobEquipment
 		super (MonsterType.ENRAGED_SPIDER);
 		this.name = "One Enraged Firey Boi";
 		this.color = ChatColor.LIGHT_PURPLE;
-		this.onFire = true;
+		this.addMobFlags(MobFlag.ON_FIRE);
 		
 		this.addBiomes(Biome.THE_VOID);
 		

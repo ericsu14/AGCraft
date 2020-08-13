@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.potions.*;
 import com.joojet.plugins.mobs.scrolls.*;
@@ -17,7 +18,7 @@ public class Frolf extends VillagerEquipment
 		super (MonsterType.FROLF);
 		this.name = "frolf";
 		this.color = ChatColor.GOLD;
-		this.showName = true;
+		this.addMobFlags(MobFlag.SHOW_NAME);
 		this.addBiomes(Biome.THE_VOID);
 		
 		/** Trade 1: Golden Carrots (bundles of 16)

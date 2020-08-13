@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.head.FrostyFace;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -17,7 +18,7 @@ public class Frosty extends MobEquipment
 		this.name = "Frosty the Snowman";
 		this.color = ChatColor.AQUA;
 		this.health = 30;
-		this.showName = true;
+		this.addMobFlags(MobFlag.SHOW_NAME);
 		
 		this.addPotionEffect(CustomPotionEffect.RESISTANCE, 
 				CustomPotionEffect.WATER_BREATHING, 

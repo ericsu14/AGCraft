@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.SkullKidBoots;
 import com.joojet.plugins.mobs.equipment.chest.SkullKidChest;
@@ -24,9 +25,7 @@ public class SkullKid extends MobEquipment
 		
 		this.health = 40;
 		this.color = ChatColor.DARK_RED;
-		this.showName = true;
-		this.spawnLightning = true;
-		this.huntOnSpawn = true;
+		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING, MobFlag.HUNT_ON_SPAWN);
 		this.huntRadius = 100;
 		
 		this.setDropRates(0.25f, 0.10f, 0.10f, 0.10f, 0.05f, 0.10f);

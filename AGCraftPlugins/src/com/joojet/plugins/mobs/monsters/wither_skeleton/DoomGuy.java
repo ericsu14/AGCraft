@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.DoomGuyFeet;
 import com.joojet.plugins.mobs.equipment.chest.DoomChest;
@@ -36,8 +37,7 @@ public class DoomGuy extends MobEquipment
 				EntityType.MAGMA_CUBE, EntityType.SKELETON, EntityType.ZOMBIE, EntityType.CREEPER,
 				EntityType.SPIDER, EntityType.CAVE_SPIDER, EntityType.PLAYER);
 		
-		this.spawnLightning = true;
-		this.showName = true;
+		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME);
 		this.huntRadius = 125;
 		this.health = 30;
 		

@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.BarneyFeet;
 import com.joojet.plugins.mobs.equipment.chest.BarneyChest;
@@ -18,16 +19,16 @@ public class BarneyTheDinosaur extends MobEquipment
 	public BarneyTheDinosaur ()
 	{
 		super (MonsterType.BARNEY_THE_DINOSAUR);
-		this.huntOnSpawn = true;
-		this.spawnLightning = true;
-		this.showName = true;
 		this.huntRadius = 50;
 		this.health = 8;
+		
 		this.addBiomes(Biome.FLOWER_FOREST, Biome.DARK_FOREST, Biome.DARK_FOREST_HILLS,
 				Biome.SWAMP, Biome.SWAMP_HILLS, Biome.JUNGLE, Biome.JUNGLE_HILLS, Biome.JUNGLE_EDGE,
 				Biome.GRAVELLY_MOUNTAINS, Biome.SUNFLOWER_PLAINS);
 		this.addPotionEffect(CustomPotionEffect.SPEED,
 				CustomPotionEffect.FIRE_RESISTANCE);
+		this.addMobFlags(MobFlag.HUNT_ON_SPAWN, MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME);
+		
 		this.name = "Barney the Dinosaur";
 		this.color = ChatColor.DARK_PURPLE;
 		this.setDropRates(0.01f, 0.01f, 0.01f, 0.01f, 0.01f, 1.00f);
