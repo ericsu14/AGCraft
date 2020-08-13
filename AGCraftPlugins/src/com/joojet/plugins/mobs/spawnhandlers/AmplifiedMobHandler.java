@@ -20,18 +20,27 @@ import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
 import com.joojet.plugins.mobs.monsters.zombie_pigmen.ZombiePigmenTypes;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
-public class AmplifiedMobHandler implements AmplifiedSpawnHandler 
+public class AmplifiedMobHandler extends AmplifiedSpawnHandler 
 {
-	/** Mob equipment factories */
+	/** Zombies */
 	private ZombieTypes zombieTypes;
+	/** Skeletons */
 	private SkeletonTypes skeletonTypes;
+	/** Spiders */
 	private SpiderTypes spiderTypes;
+	/** Iron Golems */
 	private GolemTypes golemTypes;
+	/** Snow Golems */
 	private SnowmanTypes snowmanTypes;
+	/** Husks */
 	private HuskTypes huskTypes;
+	/** Wolves */
 	private WolfTypes wolfTypes;
+	/** Wither Skeletons */
 	private WitherSkeletonTypes witherSkeletonTypes;
+	/** Zombie Pigman */
 	private ZombiePigmenTypes zombiePigmenTypes;
+	/** Piglins */
 	private PiglinTypes piglinTypes;
 	
 	public AmplifiedMobHandler ()
@@ -46,6 +55,8 @@ public class AmplifiedMobHandler implements AmplifiedSpawnHandler
 		this.witherSkeletonTypes = new WitherSkeletonTypes();
 		this.zombiePigmenTypes = new ZombiePigmenTypes();
 		this.piglinTypes = new PiglinTypes();
+		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.BUILD_IRONGOLEM,
+				SpawnReason.BUILD_SNOWMAN, SpawnReason.VILLAGE_DEFENSE, SpawnReason.BREEDING);
 	}
 	
 	@Override
@@ -96,16 +107,6 @@ public class AmplifiedMobHandler implements AmplifiedSpawnHandler
 		
 		EquipmentTools.equipEntity(entity, mobEquipment);
 		
-	}
-
-	@Override
-	public boolean reasonFilter(SpawnReason reason) 
-	{
-		return (reason == SpawnReason.NATURAL ||
-				reason == SpawnReason.BUILD_SNOWMAN ||
-				reason == SpawnReason.BUILD_IRONGOLEM ||
-				reason == SpawnReason.VILLAGE_DEFENSE ||
-				reason == SpawnReason.BREEDING);
 	}
 
 }

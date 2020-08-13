@@ -10,13 +10,14 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.ghast.UHCGhastTypes;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
-public class UHCHandler implements AmplifiedSpawnHandler
+public class UHCHandler extends AmplifiedSpawnHandler
 {
 	private UHCGhastTypes uhcGhastTypes;
 	
 	public UHCHandler ()
 	{
 		this.uhcGhastTypes = new UHCGhastTypes();
+		this.addSpawnReasons(SpawnReason.NATURAL);
 	}
 	
 	/** Handles UHC-specific Mob Spawns */
@@ -40,11 +41,5 @@ public class UHCHandler implements AmplifiedSpawnHandler
 		
 		EquipmentTools.equipEntity(entity, mobEquipment);
 		
-	}
-
-	@Override
-	public boolean reasonFilter(SpawnReason reason) 
-	{
-		return (reason == SpawnReason.NATURAL);
 	}
 }
