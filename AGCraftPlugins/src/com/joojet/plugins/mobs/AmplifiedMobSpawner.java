@@ -23,6 +23,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
+import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 
@@ -156,6 +157,55 @@ public class AmplifiedMobSpawner implements Listener
 		}
 	}
 	
+	/** If a custom mob is damaged by another entity, retarget to that entity */
+	@EventHandler
+	public void onDamageEvent (EntityDamageByEntityEvent event)
+	{
+		if (!(event.getEntity() instanceof LivingEntity)
+				|| !(event.getDamager() instanceof LivingEntity))
+		{
+			return;
+		}
+		
+		LivingEntity entity = (LivingEntity) event.getEntity();
+		MobEquipment entityEquipment = this.getMobEquipmentFromEntity(entity);
+		
+		if (entityEquipment == null)
+		{
+			return;
+		}
+		
+		LivingEntity damager = (LivingEntity) event.getDamager();
+		
+		if (entity instanceof Mob && 
+				!entityEquipment.getIgnoreList().contains(damager.getType()))
+		{
+			Mob mob = (Mob) entity;
+			mob.setTarget(damager);
+		}
+	}
+	
+	/** Resets custom mob targets upon chunk load events */
+	@EventHandler
+	public void resetTargetsonChunkLoad (ChunkLoadEvent event)
+	{
+		Entity[] chunkEntities = event.getChunk().getEntities();
+		
+		LivingEntity livingEntity;
+		MobEquipment entityEquipment;
+		for (Entity entity : chunkEntities)
+		{
+			if (entity != null && entity instanceof LivingEntity)
+			{
+				livingEntity = (LivingEntity) entity;
+				entityEquipment = this.getMobEquipmentFromEntity(livingEntity);
+				if (entityEquipment != null)
+				{
+					EquipmentTools.modifyPathfindingTargets(livingEntity, entityEquipment);
+				}
+			}
+		}
+	}
 	
 	/** Amplifies mob spawns */
 	@EventHandler
