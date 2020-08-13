@@ -16,9 +16,9 @@ public class BruinTunic extends LeatherEquipment
 		this.wordsPerLine = 6;
 		this.loreColor = ChatColor.GOLD;
 		this.setDisplayName("UCLA Football Chestplate");
-		this.addLoreToItemMeta("Show off your school spirit in the most evil way possible!");
+		this.addLoreToItemMeta("Show off your school spirit in the most wrong way possible!");
 		this.setColor(Color.fromRGB(39, 116, 174));
-		this.addDefenseAttributes(7.0, 2.0, 0.10);
+		this.addDefenseAttributes(5.0, 2.0, 0.10);
 		this.addAttackAttributes(2.0, 0.5);
 	}
 }

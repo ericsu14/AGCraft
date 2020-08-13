@@ -33,6 +33,7 @@ import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.spawnhandlers.AmplifiedMobHandler;
+import com.joojet.plugins.mobs.spawnhandlers.BeatTheBruinsHandler;
 import com.joojet.plugins.mobs.spawnhandlers.JulyFourthHandler;
 import com.joojet.plugins.mobs.spawnhandlers.UHCHandler;
 import com.joojet.plugins.mobs.util.EquipmentTools;
@@ -61,6 +62,7 @@ public class AmplifiedMobSpawner implements Listener
 	private JulyFourthHandler julyFourthHandler;
 	private UHCHandler uhcHandler;
 	private AmplifiedMobHandler amplifiedMobHandler;
+	private BeatTheBruinsHandler bruinHandler;
 	
 	/** Creates a new instance of this mob spawner class,
 	 *  which adds listeners to Minecraft's mob spawn events for
@@ -70,6 +72,7 @@ public class AmplifiedMobSpawner implements Listener
 		this.wanderingTypes = new WanderingVillagerTypes();
 		this.julyFourthHandler = new JulyFourthHandler ();
 		this.amplifiedMobHandler = new AmplifiedMobHandler();
+		this.bruinHandler = new BeatTheBruinsHandler ();
 	}
 	
 	public void onEnable ()
@@ -236,6 +239,9 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			case JULY_FOURTH:
 				this.julyFourthHandler.handleSpawnEvent(entity, type, reason, biome, roll);
+				break;
+			case BEAT_THE_BRUINS:
+				this.bruinHandler.handleSpawnEvent(entity, type, reason, biome, roll);
 				break;
 			default:
 				break;

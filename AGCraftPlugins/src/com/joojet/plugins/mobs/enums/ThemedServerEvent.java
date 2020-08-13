@@ -4,7 +4,7 @@ package com.joojet.plugins.mobs.enums;
  *  themed mob spawns. */
 public enum ThemedServerEvent 
 {
-	DEFAULT, JULY_FOURTH;
+	DEFAULT, JULY_FOURTH, BEAT_THE_BRUINS;
 	
 	/** Returns the key used to identify where this entry is in the YAML config file */
 	public static String getKey ()

@@ -9,7 +9,9 @@ import net.minecraft.server.v1_16_R1.EntityCaveSpider;
 import net.minecraft.server.v1_16_R1.EntityChicken;
 import net.minecraft.server.v1_16_R1.EntityCow;
 import net.minecraft.server.v1_16_R1.EntityCreeper;
+import net.minecraft.server.v1_16_R1.EntityDrowned;
 import net.minecraft.server.v1_16_R1.EntityEnderman;
+import net.minecraft.server.v1_16_R1.EntityEndermite;
 import net.minecraft.server.v1_16_R1.EntityEvoker;
 import net.minecraft.server.v1_16_R1.EntityFox;
 import net.minecraft.server.v1_16_R1.EntityGhast;
@@ -28,12 +30,15 @@ import net.minecraft.server.v1_16_R1.EntitySkeleton;
 import net.minecraft.server.v1_16_R1.EntitySkeletonStray;
 import net.minecraft.server.v1_16_R1.EntityZombie;
 import net.minecraft.server.v1_16_R1.EntityZombieHusk;
+import net.minecraft.server.v1_16_R1.EntityZombieVillager;
 import net.minecraft.server.v1_16_R1.EntitySkeletonWither;
 import net.minecraft.server.v1_16_R1.EntitySlime;
 import net.minecraft.server.v1_16_R1.EntitySnowman;
 import net.minecraft.server.v1_16_R1.EntitySpider;
+import net.minecraft.server.v1_16_R1.EntityVex;
 import net.minecraft.server.v1_16_R1.EntityVillager;
 import net.minecraft.server.v1_16_R1.EntityVillagerTrader;
+import net.minecraft.server.v1_16_R1.EntityVindicator;
 import net.minecraft.server.v1_16_R1.EntityWitch;
 import net.minecraft.server.v1_16_R1.EntityWolf;
 import net.minecraft.server.v1_16_R1.EntityPigZombie;
@@ -130,6 +135,16 @@ public class ConvertEntity
 				return EntityPlayer.class;
 			case MAGMA_CUBE:
 				return EntityMagmaCube.class;
+			case DROWNED:
+				return EntityDrowned.class;
+			case VEX:
+				return EntityVex.class;
+			case VINDICATOR:
+				return EntityVindicator.class;
+			case ENDERMITE:
+				return EntityEndermite.class;
+			case ZOMBIE_VILLAGER:
+				return EntityZombieVillager.class;
 			default:
 				break;
 		}
