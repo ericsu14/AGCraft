@@ -13,7 +13,6 @@ public class BruinSword extends Equipment
 	{
 		super (Material.IRON_SWORD, EquipmentSlot.HAND, color);
 		this.setDisplayName("Bruin Sword");
-		this.addAttackAttributes(8.0, 1.6);
-		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 4);
+		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 3);
 	}
 }

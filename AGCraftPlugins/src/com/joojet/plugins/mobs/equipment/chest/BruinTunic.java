@@ -12,13 +12,12 @@ public class BruinTunic extends LeatherEquipment
 {
 	public BruinTunic (ChatColor color)
 	{
-		super (Material.LEATHER_HELMET, EquipmentSlot.CHEST, color);
+		super (Material.LEATHER_CHESTPLATE, EquipmentSlot.CHEST, color);
 		this.wordsPerLine = 6;
 		this.loreColor = ChatColor.GOLD;
 		this.setDisplayName("UCLA Football Chestplate");
 		this.addLoreToItemMeta("Show off your school spirit in the most wrong way possible!");
 		this.setColor(Color.fromRGB(39, 116, 174));
 		this.addDefenseAttributes(5.0, 2.0, 0.10);
-		this.addAttackAttributes(2.0, 0.5);
 	}
 }

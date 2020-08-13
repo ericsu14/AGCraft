@@ -10,7 +10,6 @@ import org.bukkit.block.Banner;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.BlockStateMeta;
@@ -49,12 +48,10 @@ public class BruinShield extends Equipment
 		bannerState.update();
 		itemMeta.setBlockState(bannerState);
 		itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ENCHANTS);
-		itemMeta.setUnbreakable(true);
 		this.setItemMeta(itemMeta);
 		
 		this.addAttackAttributes(2.0, 0.0);
 		this.addDefenseAttributes(0.0, 2.0, 0.10);
 		this.addHealthAttributes(10.0);
-		this.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
 	}
 }
