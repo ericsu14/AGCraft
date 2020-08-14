@@ -18,7 +18,7 @@ public class UCLAArcher extends UCLAFaction
 	{
 		super (MonsterType.UCLA_ARCHER);
 		this.name = "The " + ChatColor.AQUA + "U" + ChatColor.GOLD + "C"
-				+ ChatColor.AQUA + "L" + ChatColor.GOLD + "A" + " Archer";
+				+ ChatColor.AQUA + "L" + ChatColor.GOLD + "A" + ChatColor.AQUA + " Archer";
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		this.color = ChatColor.AQUA;
