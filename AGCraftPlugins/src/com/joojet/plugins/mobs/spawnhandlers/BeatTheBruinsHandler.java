@@ -21,12 +21,13 @@ public class BeatTheBruinsHandler extends AmplifiedSpawnHandler
 	{
 		this.collegeZombies = new CollegeZombieTypes ();
 		this.collegeSkeletons = new CollegeSkeletonTypes ();
+		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.SPAWNER_EGG, SpawnReason.REINFORCEMENTS);
 	}
 	
 	@Override
 	public void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll) 
 	{
-		if (reason != SpawnReason.RAID && roll >= 0.30 && roll <= 0.60)
+		if (this.reasonFilter(reason) && roll >= 0.30 && roll <= 0.60)
 		{
 			MobEquipment mobEquipment;
 			switch (type)
@@ -35,6 +36,12 @@ public class BeatTheBruinsHandler extends AmplifiedSpawnHandler
 					mobEquipment = this.collegeZombies.getRandomEquipment(biome);
 					break;
 				case SKELETON:
+					mobEquipment = this.collegeSkeletons.getRandomEquipment(biome);
+					break;
+				case HUSK:
+					mobEquipment = this.collegeZombies.getRandomEquipment(biome);
+					break;
+				case STRAY:
 					mobEquipment = this.collegeSkeletons.getRandomEquipment(biome);
 					break;
 				default:

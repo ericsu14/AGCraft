@@ -101,7 +101,7 @@ public abstract class AbstractConfigFile
 	 *  otherwise a runtime exception will be thrown.
 	 *  
 	 *  This function is necessary to parse list of strings specified in the config file
-	 *  while avoiding the use of supress warnings.
+	 *  while avoiding the use of suppress warnings.
 	 *  
 	 *  Code stolen from:
 	 *     - https://stackoverflow.com/questions/14642985/type-safety-unchecked-cast-from-object-to-listmyobject
