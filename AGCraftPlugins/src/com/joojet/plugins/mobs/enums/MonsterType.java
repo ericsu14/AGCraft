@@ -39,5 +39,7 @@ public enum MonsterType
 	COOKIE,
 	SNOWBALL,
 	UCLA_JOCK,
+	UCLA_ARCHER,
+	USC_ARCHER,
 	USC_WARRIOR;
 }

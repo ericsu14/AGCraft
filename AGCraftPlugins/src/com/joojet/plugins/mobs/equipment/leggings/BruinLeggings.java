@@ -14,7 +14,7 @@ public class BruinLeggings extends LeatherEquipment
 		super (Material.LEATHER_LEGGINGS, EquipmentSlot.LEGS, color);
 		this.wordsPerLine = 6;
 		this.loreColor = ChatColor.GOLD;
-		this.setDisplayName("UCLA Football Leggings");
+		this.setDisplayName("UCLA Bulky Leggings");
 		this.setColor(Color.fromRGB(255, 209, 0));
 		this.addLoreToItemMeta("These people never skip leg day...");
 		this.addDefenseAttributes(5.0, 1.0, 0.10);

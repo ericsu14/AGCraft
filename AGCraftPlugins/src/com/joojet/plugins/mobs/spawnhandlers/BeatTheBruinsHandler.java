@@ -7,6 +7,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import com.joojet.plugins.mobs.interfaces.AmplifiedSpawnHandler;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.skeleton.CollegeSkeletonTypes;
 import com.joojet.plugins.mobs.monsters.zombie.CollegeZombieTypes;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
@@ -14,10 +15,13 @@ public class BeatTheBruinsHandler extends AmplifiedSpawnHandler
 {
 	/** College Zombie types */
 	private CollegeZombieTypes collegeZombies;
+	/** College Skeleton types */
+	private CollegeSkeletonTypes collegeSkeletons;
 	
 	public BeatTheBruinsHandler ()
 	{
 		this.collegeZombies = new CollegeZombieTypes ();
+		this.collegeSkeletons = new CollegeSkeletonTypes ();
 	}
 	
 	@Override
@@ -30,6 +34,9 @@ public class BeatTheBruinsHandler extends AmplifiedSpawnHandler
 			{
 				case ZOMBIE:
 					mobEquipment = this.collegeZombies.getRandomEquipment(biome);
+					break;
+				case SKELETON:
+					mobEquipment = this.collegeSkeletons.getRandomEquipment(biome);
 					break;
 				default:
 					return;

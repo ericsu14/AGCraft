@@ -14,7 +14,7 @@ public class USCFootballTrousers extends LeatherEquipment
 		super (Material.LEATHER_LEGGINGS, EquipmentSlot.LEGS, color);
 		this.setColor(Color.fromRGB(255, 198, 81));
 		this.setDisplayName(ChatColor.RED + "U" + ChatColor.GOLD + "S" + ChatColor.RED + "C" 
-		+ ChatColor.GOLD + " Football" + ChatColor.RED + " Pants");
+		+ ChatColor.GOLD + " Bulky" + ChatColor.RED + " Pants");
 		this.addDefenseAttributes(5.0, 1.5, 0.07);
 		this.wordsPerLine = 6;
 		this.loreColor = ChatColor.GOLD;
