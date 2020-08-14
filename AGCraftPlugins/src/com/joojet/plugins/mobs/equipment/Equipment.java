@@ -65,6 +65,7 @@ public abstract class Equipment extends ItemStack
 		this.chatColor = chatColor;
 		this.createHeadData(this.playerHead);
 		this.wordsPerLine = 4;
+		this.loreColor = chatColor;
 	}
 	
 	/** Adds an attack speed attribute to a piece of armor or weapon */
