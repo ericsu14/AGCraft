@@ -20,7 +20,7 @@ public class PunishPlayerTabCompleter extends AGTabCompleter
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command arg1, String arg2, String[] args) 
 	{
-		int n = args.length;
+		int n = args.length - 1;
 		
 		if (n > 0)
 		{
