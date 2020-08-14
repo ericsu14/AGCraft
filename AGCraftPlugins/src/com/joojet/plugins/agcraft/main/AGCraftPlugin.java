@@ -18,6 +18,7 @@ import com.joojet.plugins.biblefetcher.commands.*;
 import com.joojet.plugins.biblefetcher.commands.tabcompleter.BibleTabCompleter;
 import com.joojet.plugins.consequences.ConsequenceManager;
 import com.joojet.plugins.consequences.commands.*;
+import com.joojet.plugins.consequences.commands.tabcompleter.PunishPlayerTabCompleter;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
@@ -190,6 +191,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addTabCompleter(new WarpTabCompleter ());
 		this.addTabCompleter(new ChangeServerModeTabCompleter ());
 		this.addTabCompleter(new RewardPlayerTabCompleter());
+		this.addTabCompleter(new PunishPlayerTabCompleter());
 	}
 	
 	/** Loads in all known commands into the plugin */
