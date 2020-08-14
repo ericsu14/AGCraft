@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
-import com.joojet.plugins.mobs.interfaces.AmplifiedSpawnHandler;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.phantom.julyfourth.FireworkPhantom;
 import com.joojet.plugins.mobs.monsters.pillager.julyfourth.PatrioticPillager;

@@ -9,7 +9,6 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.allies.golem.GolemTypes;
 import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
 import com.joojet.plugins.mobs.allies.wolf.WolfTypes;
-import com.joojet.plugins.mobs.interfaces.AmplifiedSpawnHandler;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
 import com.joojet.plugins.mobs.monsters.piglin.PiglinTypes;

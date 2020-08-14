@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.interfaces;
+package com.joojet.plugins.mobs.spawnhandlers;
 
 import java.util.HashSet;
 
