@@ -32,7 +32,7 @@ public class DoomGuy extends MobEquipment
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
 		
 		this.addFactions(Faction.DOOM_GUY);
-		this.addRivalFactions(Faction.NETHER);
+		this.addRivalFactions(Faction.NETHER, Faction.USC, Faction.UCLA);
 		this.addTargetsToHitList(EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER_SKELETON,
 				EntityType.MAGMA_CUBE, EntityType.SKELETON, EntityType.ZOMBIE, EntityType.CREEPER,
 				EntityType.SPIDER, EntityType.CAVE_SPIDER, EntityType.PLAYER);
