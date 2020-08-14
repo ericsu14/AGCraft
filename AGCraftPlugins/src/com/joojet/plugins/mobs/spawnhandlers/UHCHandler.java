@@ -7,7 +7,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import com.joojet.plugins.mobs.interfaces.AmplifiedSpawnHandler;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
-import com.joojet.plugins.mobs.monsters.ghast.UHCGhastTypes;
+import com.joojet.plugins.mobs.monsters.ghast.UHC.UHCGhastTypes;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class UHCHandler extends AmplifiedSpawnHandler

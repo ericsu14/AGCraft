@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.monsters.pillager;
+package com.joojet.plugins.mobs.monsters.pillager.julyfourth;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;

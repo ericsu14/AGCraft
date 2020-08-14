@@ -7,8 +7,8 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import com.joojet.plugins.mobs.interfaces.AmplifiedSpawnHandler;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
-import com.joojet.plugins.mobs.monsters.skeleton.CollegeSkeletonTypes;
-import com.joojet.plugins.mobs.monsters.zombie.CollegeZombieTypes;
+import com.joojet.plugins.mobs.monsters.skeleton.beatthebruins.CollegeSkeletonTypes;
+import com.joojet.plugins.mobs.monsters.zombie.beatthebruins.CollegeZombieTypes;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class BeatTheBruinsHandler extends AmplifiedSpawnHandler

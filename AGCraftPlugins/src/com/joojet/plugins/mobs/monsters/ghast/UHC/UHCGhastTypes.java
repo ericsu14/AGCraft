@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.monsters.ghast;
+package com.joojet.plugins.mobs.monsters.ghast.UHC;
 
 import com.joojet.plugins.mobs.interfaces.MonsterTypes;
 

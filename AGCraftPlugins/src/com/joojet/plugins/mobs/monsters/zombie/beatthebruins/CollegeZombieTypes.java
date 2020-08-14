@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.monsters.zombie;
+package com.joojet.plugins.mobs.monsters.zombie.beatthebruins;
 
 import com.joojet.plugins.mobs.interfaces.MonsterTypes;
 

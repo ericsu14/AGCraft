@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.monsters.phantom;
+package com.joojet.plugins.mobs.monsters.phantom.julyfourth;
 
 import org.bukkit.block.Biome;
 

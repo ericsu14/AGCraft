@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.monsters.ghast;
+package com.joojet.plugins.mobs.monsters.ghast.UHC;
 
 import org.bukkit.Material;
 import org.bukkit.block.Biome;

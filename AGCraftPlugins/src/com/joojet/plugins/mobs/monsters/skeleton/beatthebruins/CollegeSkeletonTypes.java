@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.monsters.skeleton;
+package com.joojet.plugins.mobs.monsters.skeleton.beatthebruins;
 
 import com.joojet.plugins.mobs.interfaces.MonsterTypes;
 

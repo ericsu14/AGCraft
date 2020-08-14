@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.monsters.zombie;
+package com.joojet.plugins.mobs.monsters.zombie.julyfourth;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;

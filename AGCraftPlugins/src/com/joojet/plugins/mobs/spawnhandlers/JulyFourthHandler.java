@@ -11,10 +11,10 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.interfaces.AmplifiedSpawnHandler;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
-import com.joojet.plugins.mobs.monsters.phantom.FireworkPhantom;
-import com.joojet.plugins.mobs.monsters.pillager.PatrioticPillager;
-import com.joojet.plugins.mobs.monsters.skeleton.PatrioticSkeleton;
-import com.joojet.plugins.mobs.monsters.zombie.PatrioticZombie;
+import com.joojet.plugins.mobs.monsters.phantom.julyfourth.FireworkPhantom;
+import com.joojet.plugins.mobs.monsters.pillager.julyfourth.PatrioticPillager;
+import com.joojet.plugins.mobs.monsters.skeleton.julyfourth.PatrioticSkeleton;
+import com.joojet.plugins.mobs.monsters.zombie.julyfourth.PatrioticZombie;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class JulyFourthHandler extends AmplifiedSpawnHandler
