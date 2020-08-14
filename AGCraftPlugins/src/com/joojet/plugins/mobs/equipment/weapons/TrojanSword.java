@@ -22,6 +22,5 @@ public class TrojanSword extends Equipment
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
 		this.addUnsafeEnchantment(Enchantment.SWEEPING_EDGE, 3);
 		this.addUnsafeEnchantment(Enchantment.LOOT_BONUS_MOBS, 3);
-		this.makeUnbreakable();
 	}
 }

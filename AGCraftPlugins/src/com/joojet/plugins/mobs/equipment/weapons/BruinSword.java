@@ -15,6 +15,6 @@ public class BruinSword extends Equipment
 		this.setDisplayName("Bruin Sword");
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 4);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
-		this.addAttackAttributes(6.5, 1.6);
+		this.addAttackAttributes(7.5, 1.6);
 	}
 }
