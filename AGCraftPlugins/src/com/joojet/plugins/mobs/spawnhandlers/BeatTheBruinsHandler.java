@@ -23,7 +23,7 @@ public class BeatTheBruinsHandler extends AmplifiedSpawnHandler
 	@Override
 	public void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll) 
 	{
-		if (reason != SpawnReason.RAID && roll >= 0.30 && roll <= 0.50)
+		if (reason != SpawnReason.RAID && roll >= 0.30 && roll <= 0.60)
 		{
 			MobEquipment mobEquipment;
 			switch (type)

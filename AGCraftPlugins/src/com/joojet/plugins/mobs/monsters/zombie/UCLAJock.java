@@ -18,10 +18,12 @@ public class UCLAJock extends UCLAFaction
 	public UCLAJock ()
 	{
 		super (MonsterType.UCLA_JOCK);
-		this.name = "The UCLA Jock";
+		this.name = "The " + ChatColor.AQUA + "U" + ChatColor.GOLD + "C"
+				+ ChatColor.AQUA + "L" + ChatColor.GOLD + "A" + " Jock";
 		this.color = ChatColor.AQUA;
 		this.addBiomes(Biome.THE_VOID);
-		this.addPotionEffect(CustomPotionEffect.SPEED);
+		this.addPotionEffect(CustomPotionEffect.SPEED,
+				CustomPotionEffect.STRENGTH);
 		
 		this.weapon = new BruinSword (this.color);
 		this.helmet = new BruinHead ();

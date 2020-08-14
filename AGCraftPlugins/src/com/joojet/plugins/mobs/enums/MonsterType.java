@@ -38,5 +38,6 @@ public enum MonsterType
 	SCRUFFY,
 	COOKIE,
 	SNOWBALL,
-	UCLA_JOCK;
+	UCLA_JOCK,
+	USC_WARRIOR;
 }

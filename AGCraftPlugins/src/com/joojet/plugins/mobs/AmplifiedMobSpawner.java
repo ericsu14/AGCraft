@@ -171,7 +171,7 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		LivingEntity entity = (LivingEntity) event.getEntity();
-		MobEquipment entityEquipment = this.getMobEquipmentFromEntity(entity);
+		MobEquipment entityEquipment = getMobEquipmentFromEntity(entity);
 		
 		if (entityEquipment == null)
 		{
@@ -201,7 +201,7 @@ public class AmplifiedMobSpawner implements Listener
 			if (entity != null && entity instanceof LivingEntity)
 			{
 				livingEntity = (LivingEntity) entity;
-				entityEquipment = this.getMobEquipmentFromEntity(livingEntity);
+				entityEquipment = getMobEquipmentFromEntity(livingEntity);
 				if (entityEquipment != null)
 				{
 					EquipmentTools.modifyPathfindingTargets(livingEntity, entityEquipment);
@@ -287,7 +287,7 @@ public class AmplifiedMobSpawner implements Listener
 	/** Finds and returns a LivingEntity's custom mob equipment object.
 	 *  Returns null if the entity does not have custom mob metadata.
 	 *  @param entity - The living entity where we are extracting its custom mob equipment from */
-	private MobEquipment getMobEquipmentFromEntity (LivingEntity entity)
+	public static MobEquipment getMobEquipmentFromEntity (LivingEntity entity)
 	{
 		// First check if the entity has custom mob metadata
 		if (entity == null || 
@@ -315,8 +315,8 @@ public class AmplifiedMobSpawner implements Listener
 			return false;
 		}
 				
-		MobEquipment hunterEquipment = this.getMobEquipmentFromEntity(hunter);
-		MobEquipment huntedEquipment = this.getMobEquipmentFromEntity(hunted);
+		MobEquipment hunterEquipment = getMobEquipmentFromEntity(hunter);
+		MobEquipment huntedEquipment = getMobEquipmentFromEntity(hunted);
 				
 		// First, check if the hunter is in the huntee's ignore list
 		// This is used to avoid iron golems, snowman, and wolves from aggro allied monsters
@@ -337,6 +337,9 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			return false;
 		}
+		
+		// Return true if the hunter and hunted is in the same faction
+		
 				
 		// Lastly, check if the hunter has any rivaling factions and
 		// the hunted is in at least one faction
@@ -365,7 +368,7 @@ public class AmplifiedMobSpawner implements Listener
 		// If the event is canceled, tell the hunter to scan for
 		// any nearby entities and hunt a nearby entity that
 		// are in its hitlist and satisfies its properties.
-		MobEquipment hunterEquipment = this.getMobEquipmentFromEntity(hunter);
+		MobEquipment hunterEquipment = getMobEquipmentFromEntity(hunter);
 		
 		if (hunterEquipment == null)
 		{
@@ -398,8 +401,10 @@ public class AmplifiedMobSpawner implements Listener
 				!hunterEquipment.getIgnoreList().contains(victim.getType()))
 			{
 				// If so, attempt to get the victim's mob equipment
-				victimEquipment = this.getMobEquipmentFromEntity(victim);
-				if (victimEquipment != null)
+				victimEquipment = getMobEquipmentFromEntity(victim);
+				if (victimEquipment != null
+						&& !hunterEquipment.getRivalFactions().isEmpty()
+						&& !victimEquipment.getFactions().isEmpty())
 				{
 					// Check if the victim's faction is in the hunter's rivaling factions
 					HashSet <Faction> victimFactions = victimEquipment.getFactions();

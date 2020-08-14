@@ -47,8 +47,13 @@ public class TrieNode <T>
 		T result = null;
 		int currentCount = -1;
 		for (Entry<T, Integer> entry : this.linkedIDs.entrySet())
-		{
+		{	
 			/* Check if length of searchTerm matches length of formatted title */
+			if (entry.getKey().toString().equalsIgnoreCase(searchTerm))
+			{
+				return entry.getKey();
+			}
+			
 			if (entry.getKey() instanceof Enum)
 			{
 				@SuppressWarnings("rawtypes")
