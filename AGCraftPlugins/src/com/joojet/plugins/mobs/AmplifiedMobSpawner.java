@@ -7,6 +7,7 @@ import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.NamespacedKey;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -24,7 +25,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
-import org.bukkit.metadata.MetadataValue;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
@@ -97,9 +99,11 @@ public class AmplifiedMobSpawner implements Listener
 			p.sendMessage("The enemy has " + (e.getHealth() - event.getFinalDamage()) + " health remaining");
 			
 			// Test metadata
-			for (MetadataValue value : e.getMetadata(MonsterTypeMetadata.MOB_TAG))
+			NamespacedKey key = MonsterTypeMetadata.generateGenericNamespacedKey();
+			if (!e.getPersistentDataContainer().isEmpty() && 
+					e.getPersistentDataContainer().has(key, PersistentDataType.STRING))
 			{
-				p.sendMessage("Custom name: " + value.asString());
+				p.sendMessage("Custom name: " + e.getPersistentDataContainer().get(key, PersistentDataType.STRING));
 			}
 		}
 		
@@ -290,16 +294,18 @@ public class AmplifiedMobSpawner implements Listener
 	public static MobEquipment getMobEquipmentFromEntity (LivingEntity entity)
 	{
 		// First check if the entity has custom mob metadata
-		if (entity == null || 
-				entity.getMetadata(MonsterTypeMetadata.MOB_TAG) == null || 
-				entity.getMetadata(MonsterTypeMetadata.MOB_TAG).isEmpty())
+		PersistentDataContainer metadata = entity.getPersistentDataContainer();
+		NamespacedKey key = MonsterTypeMetadata.generateGenericNamespacedKey();
+		if (entity == null ||
+				metadata.isEmpty() ||
+				!metadata.has(key, PersistentDataType.STRING))
 		{
 			return null;
 		}
 		
 		// Extract custom metadata from the entity and use its string to lookup its own mob equipment
-		MetadataValue entityMeta = entity.getMetadata(MonsterTypeMetadata.MOB_TAG).get(0);
-		MobEquipment entityEquipment = mobTable.searchTrie(entityMeta.asString());
+		String entityMeta = metadata.get(key, PersistentDataType.STRING);
+		MobEquipment entityEquipment = mobTable.searchTrie(entityMeta);
 		
 		return entityEquipment;
 	}

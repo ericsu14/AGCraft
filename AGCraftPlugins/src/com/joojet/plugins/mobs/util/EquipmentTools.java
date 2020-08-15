@@ -17,6 +17,8 @@ import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -67,13 +69,14 @@ public class EquipmentTools
 		}
 		
 		// Sets up entity's custom metadata values
-		entity.setMetadata(MonsterTypeMetadata.MOB_TAG, mobEquipment.generateMobTypeMetadata());
+		PersistentDataContainer metadata = entity.getPersistentDataContainer();
+		metadata.set(MonsterTypeMetadata.generateGenericNamespacedKey(), PersistentDataType.STRING, mobEquipment.getMonsterType().toString());
 		ArrayList <FactionMetadata> factions = mobEquipment.generateFactionMetadata();
 		for (FactionMetadata faction : factions)
 		{
-			entity.setMetadata(faction.getTag(), faction);
+			metadata.set(faction.generateNamespacedKey(), PersistentDataType.STRING, faction.asString());
 		}
-
+		
 		EntityEquipment equipment = entity.getEquipment();
 		ItemStack[] items = mobEquipment.getEquipment();
 		float[] dropRates = mobEquipment.getDropRates();

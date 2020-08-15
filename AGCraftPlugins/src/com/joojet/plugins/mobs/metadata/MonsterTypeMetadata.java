@@ -1,4 +1,7 @@
 package com.joojet.plugins.mobs.metadata;
+import org.bukkit.NamespacedKey;
+
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.enums.MonsterType;
 
 public class MonsterTypeMetadata extends AbstractMetadata <MonsterType> 
@@ -11,5 +14,10 @@ public class MonsterTypeMetadata extends AbstractMetadata <MonsterType>
 	public MonsterTypeMetadata (MonsterType type)
 	{
 		super (MOB_TAG, type);
+	}
+	
+	public static NamespacedKey generateGenericNamespacedKey ()
+	{
+		return new NamespacedKey (AGCraftPlugin.plugin, MOB_TAG);
 	}
 }

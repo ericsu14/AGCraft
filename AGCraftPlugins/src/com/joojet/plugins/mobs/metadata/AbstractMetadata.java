@@ -1,12 +1,13 @@
 package com.joojet.plugins.mobs.metadata;
 
-import org.bukkit.metadata.MetadataValue;
+import org.bukkit.NamespacedKey;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 
 
-public abstract class AbstractMetadata <E> implements MetadataValue 
+public abstract class AbstractMetadata <E> extends FixedMetadataValue 
 {
 	/** Tag identifier for the entity's metadata */
 	public String tag = "";
@@ -15,8 +16,14 @@ public abstract class AbstractMetadata <E> implements MetadataValue
 	
 	public AbstractMetadata (String tag, E type)
 	{
+		super (AGCraftPlugin.plugin, type);
 		this.tag = tag;
 		this.type = type;
+	}
+	
+	public NamespacedKey generateNamespacedKey ()
+	{
+		return new NamespacedKey (AGCraftPlugin.plugin, this.tag);
 	}
 	
 	/** Returns the object's tag used as an identifier for the metadata */
