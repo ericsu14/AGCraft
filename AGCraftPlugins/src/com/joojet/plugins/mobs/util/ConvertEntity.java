@@ -18,6 +18,7 @@ import net.minecraft.server.v1_16_R1.EntityGhast;
 import net.minecraft.server.v1_16_R1.EntityHoglin;
 import net.minecraft.server.v1_16_R1.EntityMagmaCube;
 import net.minecraft.server.v1_16_R1.EntityOcelot;
+import net.minecraft.server.v1_16_R1.EntityPhantom;
 import net.minecraft.server.v1_16_R1.EntityPig;
 import net.minecraft.server.v1_16_R1.EntityPiglin;
 import net.minecraft.server.v1_16_R1.EntityPillager;
@@ -145,6 +146,8 @@ public class ConvertEntity
 				return EntityEndermite.class;
 			case ZOMBIE_VILLAGER:
 				return EntityZombieVillager.class;
+			case PHANTOM:
+				return EntityPhantom.class;
 			default:
 				break;
 		}
