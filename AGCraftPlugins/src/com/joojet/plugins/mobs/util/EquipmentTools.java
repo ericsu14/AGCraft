@@ -7,6 +7,7 @@ import java.util.Random;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -14,7 +15,6 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.Piglin;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
-import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -27,10 +27,10 @@ import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
-import net.minecraft.server.v1_16_R1.EntityMonster;
-import net.minecraft.server.v1_16_R1.PathfinderGoalNearestAttackableTarget;
+import net.minecraft.server.v1_16_R2.EntityMonster;
+import net.minecraft.server.v1_16_R2.PathfinderGoalNearestAttackableTarget;
 
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftMonster;
+import org.bukkit.craftbukkit.v1_16_R2.entity.CraftMonster;
 
 public class EquipmentTools 
 {	
@@ -48,19 +48,19 @@ public class EquipmentTools
 		}
 		
 		// Prevents baby entities from spawning
-		if (entity instanceof Zombie)
+		if (entity instanceof Ageable)
 		{
-			Zombie zombie = (Zombie) entity;
-			zombie.setBaby(false);
+			Ageable ageableEntity = (Ageable) entity;
+			ageableEntity.setAdult();
 		}
 		
-		// Prevents baby piglins from spawning
+		// Forces Piglins to always hunt
 		if (entity instanceof Piglin)
 		{
 			Piglin piglin = (Piglin) entity;
-			piglin.setBaby(false);
 			piglin.setIsAbleToHunt(true);
 		}
+		
 		// Changes color of wolf's collar if this entity is a wolf
 		if (entity instanceof Wolf)
 		{
