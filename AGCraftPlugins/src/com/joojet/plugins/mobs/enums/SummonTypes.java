@@ -40,8 +40,16 @@ public enum SummonTypes
 		return null;
 	}
 	
+	/** Returns the summon's monster type as a String */
 	@Override
 	public String toString ()
+	{
+		return this.getSummon().getMobType().toString();
+	}
+	
+	/** Used for legacy scrolls that uses the monster's name
+	 *  in their localized meta */
+	public String getMonsterName ()
 	{
 		return this.getSummon().getName();
 	}
