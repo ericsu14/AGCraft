@@ -231,6 +231,7 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			LivingEntity drownedEntity = (LivingEntity) event.getTransformedEntity();
 			EquipmentTools.setCustomMetadata(drownedEntity, ogZombieEquipment);
+			EquipmentTools.modifyPathfindingTargets(drownedEntity, ogZombieEquipment);
 		}
 	}
 	
