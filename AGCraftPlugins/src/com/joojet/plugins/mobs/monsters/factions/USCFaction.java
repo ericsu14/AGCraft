@@ -12,7 +12,7 @@ public class USCFaction extends MobEquipment
 	{
 		super (type);
 		this.addFactions(Faction.USC);
-		this.addRivalFactions(Faction.UCLA, Faction.DOOM_GUY);
+		this.addRivalFactions(Faction.UCLA, Faction.DOOM_GUY, Faction.PHANTOM);
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.PILLAGER,
 				EntityType.SPIDER, EntityType.CAVE_SPIDER, EntityType.EVOKER, EntityType.STRAY,
 				EntityType.HUSK, EntityType.BLAZE, EntityType.PIGLIN, EntityType.DROWNED,

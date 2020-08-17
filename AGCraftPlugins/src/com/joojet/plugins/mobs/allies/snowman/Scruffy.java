@@ -2,6 +2,7 @@ package com.joojet.plugins.mobs.allies.snowman;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -20,6 +21,7 @@ public class Scruffy extends MobEquipment
 		this.color = ChatColor.GOLD;
 		this.health = 40;
 		this.addMobFlags(MobFlag.SHOW_NAME);
+		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.WOLF, EntityType.SNOWMAN, EntityType.IRON_GOLEM);
 		
 		this.addPotionEffect(CustomPotionEffect.RESISTANCE, CustomPotionEffect.WATER_BREATHING,
 				CustomPotionEffect.FIRE_RESISTANCE, CustomPotionEffect.REGEN, CustomPotionEffect.SPEED);

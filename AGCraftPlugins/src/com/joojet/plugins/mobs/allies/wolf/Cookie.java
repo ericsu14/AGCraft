@@ -2,6 +2,7 @@ package com.joojet.plugins.mobs.allies.wolf;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -19,5 +20,6 @@ public class Cookie extends MobEquipment
 		this.name = "Cookie";
 		this.addPotionEffect(CustomPotionEffect.REGEN, CustomPotionEffect.FIRE_RESISTANCE);
 		this.chestplate = new CookieHeart (this.color);
+		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.WOLF, EntityType.SNOWMAN, EntityType.IRON_GOLEM);
 	}
 }

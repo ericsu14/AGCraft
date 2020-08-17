@@ -6,5 +6,6 @@ public enum Faction
 	USC,
 	UCLA,
 	DOOM_GUY,
-	NETHER
+	NETHER,
+	PHANTOM
 }

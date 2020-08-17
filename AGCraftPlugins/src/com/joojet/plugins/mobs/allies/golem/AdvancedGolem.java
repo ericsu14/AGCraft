@@ -2,6 +2,7 @@ package com.joojet.plugins.mobs.allies.golem;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -19,6 +20,7 @@ public class AdvancedGolem extends MobEquipment
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.health = 200;
 		this.addMobFlags(MobFlag.SHOW_NAME);
+		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.WOLF, EntityType.SNOWMAN);
 		
 		this.addPotionEffect(CustomPotionEffect.RESISTANCE, CustomPotionEffect.SPEED,
 				CustomPotionEffect.STRENGTH);

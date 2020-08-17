@@ -2,6 +2,7 @@ package com.joojet.plugins.mobs.allies.wolf;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -21,5 +22,6 @@ public class Snowball extends MobEquipment
 		this.chestplate = new SnowballHeart (this.color);
 		this.boots = new LetItGo (this.color);
 		this.setDropRates(0.0f, 1.15f, 0.0f, 0.0f, 0.0f, 0.0f);
+		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.WOLF, EntityType.SNOWMAN, EntityType.IRON_GOLEM);
 	}
 }

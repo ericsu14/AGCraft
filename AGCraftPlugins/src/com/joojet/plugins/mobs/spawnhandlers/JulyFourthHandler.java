@@ -30,7 +30,7 @@ public class JulyFourthHandler extends AmplifiedSpawnHandler
 	public void handleSpawnEvent (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll)
 	{
 		// Insta kill phantoms and let them explode
-		if (type.equals(EntityType.PHANTOM))
+		if (type == EntityType.PHANTOM)
 		{
 			this.transformFireworkPhantom(entity);
 			return;
