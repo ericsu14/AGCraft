@@ -53,7 +53,6 @@ public abstract class MonsterTypes
 		}
 		
 		// Binary searches the list with a random number and returns a random mob
-		
 		if (!mobList.isEmpty())
 		{
 			int roll = this.random.nextInt (minWeight);

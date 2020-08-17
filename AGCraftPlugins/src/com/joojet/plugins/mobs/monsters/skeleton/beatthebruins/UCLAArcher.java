@@ -21,11 +21,12 @@ public class UCLAArcher extends UCLAFaction
 				+ ChatColor.AQUA + "L" + ChatColor.GOLD + "A" + ChatColor.AQUA + " Archer";
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
+		this.health = 16;
 		this.color = ChatColor.AQUA;
 		this.helmet = new BruinHead ();
 		this.chestplate = new BruinTunic (this.color);
 		this.leggings = new BruinLeggings (this.color);
 		this.boots = new BruinFootballBoots (this.color);
-		this.weapon = new SpiritualFantasy (this.color);
+		this.weapon = new SpiritualFantasy (ChatColor.GOLD);
 	}
 }

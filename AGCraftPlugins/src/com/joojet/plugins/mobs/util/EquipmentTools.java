@@ -69,13 +69,7 @@ public class EquipmentTools
 		}
 		
 		// Sets up entity's custom metadata values
-		PersistentDataContainer metadata = entity.getPersistentDataContainer();
-		metadata.set(MonsterTypeMetadata.generateGenericNamespacedKey(), PersistentDataType.STRING, mobEquipment.getMonsterType().toString());
-		ArrayList <FactionMetadata> factions = mobEquipment.generateFactionMetadata();
-		for (FactionMetadata faction : factions)
-		{
-			metadata.set(faction.generateNamespacedKey(), PersistentDataType.STRING, faction.asString());
-		}
+		setCustomMetadata (entity, mobEquipment);
 		
 		EntityEquipment equipment = entity.getEquipment();
 		ItemStack[] items = mobEquipment.getEquipment();
@@ -195,6 +189,26 @@ public class EquipmentTools
 		modifyPathfindingTargets (entity, mobEquipment);
 	}
 	
+	/** Sets custom metadata provided in mobEquipment onto the passed living entity.
+	 * 	@param entity - The Living Entity we are adding custom metadata to
+	 * 	@param mobEquipment - Class containing custom metadata information */
+	public static void setCustomMetadata (LivingEntity entity, MobEquipment mobEquipment)
+	{
+		// NULL check
+		if (entity == null || mobEquipment == null)
+		{
+			return;
+		}
+		
+		PersistentDataContainer metadata = entity.getPersistentDataContainer();
+		metadata.set(MonsterTypeMetadata.generateGenericNamespacedKey(), PersistentDataType.STRING, mobEquipment.getMonsterType().toString());
+		ArrayList <FactionMetadata> factions = mobEquipment.generateFactionMetadata();
+		for (FactionMetadata faction : factions)
+		{
+			metadata.set(faction.generateNamespacedKey(), PersistentDataType.STRING, faction.asString());
+		}
+	}
+	
 	/** Modifies an entity's pathfinding properties based on what is stored in
 	 *  its custom mob equipment instance. The Entity must be an instance of
 	 *  a monster in order for this to work.
@@ -203,6 +217,12 @@ public class EquipmentTools
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void modifyPathfindingTargets (LivingEntity entity, MobEquipment mobEquipment)
 	{
+		// NULL check
+		if (entity == null || mobEquipment == null)
+		{
+			return;
+		}
+		
 		// If the entity is not a monster, do nothing.
 		if (!(entity instanceof Monster))
 		{

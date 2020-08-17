@@ -24,6 +24,8 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
+import org.bukkit.event.entity.EntityTransformEvent;
+import org.bukkit.event.entity.EntityTransformEvent.TransformReason;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -211,6 +213,24 @@ public class AmplifiedMobSpawner implements Listener
 					EquipmentTools.modifyPathfindingTargets(livingEntity, entityEquipment);
 				}
 			}
+		}
+	}
+	
+	/** Captures zombie to drowned conversion events and transfers custom metadata to
+	 *  that new mob, if it exists. */
+	@EventHandler
+	public void transferMobDataOnDrownedConversionEvent (EntityTransformEvent event)
+	{
+		if (event.getTransformReason() != TransformReason.DROWNED)
+		{
+			return;
+		}
+		LivingEntity originalZombie = (LivingEntity) event.getEntity();
+		MobEquipment ogZombieEquipment = getMobEquipmentFromEntity(originalZombie);
+		if (ogZombieEquipment != null)
+		{
+			LivingEntity drownedEntity = (LivingEntity) event.getEntity();
+			EquipmentTools.setCustomMetadata(drownedEntity, ogZombieEquipment);
 		}
 	}
 	

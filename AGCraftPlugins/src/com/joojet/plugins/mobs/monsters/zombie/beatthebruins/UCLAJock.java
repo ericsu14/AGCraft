@@ -22,9 +22,9 @@ public class UCLAJock extends UCLAFaction
 				+ ChatColor.AQUA + "L" + ChatColor.GOLD + "A" + ChatColor.AQUA + " Jock";
 		this.color = ChatColor.AQUA;
 		this.addBiomes(Biome.THE_VOID);
-		this.addPotionEffect(CustomPotionEffect.SPEED,
-				CustomPotionEffect.STRENGTH);
+		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
+		this.health = 12;
 		this.weapon = new BruinSword (this.color);
 		this.helmet = new BruinHead ();
 		this.chestplate = new BruinTunic (this.color);
