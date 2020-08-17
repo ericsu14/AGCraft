@@ -17,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Merchant;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
@@ -25,6 +26,7 @@ import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.villager.VillagerEquipment;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
 import net.minecraft.server.v1_16_R2.EntityMonster;
@@ -66,6 +68,14 @@ public class EquipmentTools
 		{
 			Wolf wolf = (Wolf) entity;
 			wolf.setCollarColor(mobEquipment.getDyeColor());
+		}
+		
+		// If the spawned entity is an instance of a villager, set up its trades
+		if (entity instanceof Merchant && mobEquipment instanceof VillagerEquipment)
+		{
+			VillagerEquipment villagerEquipment = (VillagerEquipment) mobEquipment;
+			Merchant merchant = (Merchant) entity;
+			merchant.setRecipes(villagerEquipment.getRecipes());
 		}
 		
 		// Sets up entity's custom metadata values

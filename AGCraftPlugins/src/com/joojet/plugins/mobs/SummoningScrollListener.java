@@ -14,6 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
@@ -21,6 +22,7 @@ import com.joojet.plugins.mobs.enums.SummonTypes;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 import com.joojet.plugins.mobs.util.EquipmentTools;
+import com.joojet.plugins.mobs.villager.VillagerEquipment;
 
 
 public class SummoningScrollListener implements Listener

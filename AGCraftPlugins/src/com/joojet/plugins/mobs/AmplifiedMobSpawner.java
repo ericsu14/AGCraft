@@ -273,14 +273,15 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		// If the entity is a wandering trader, transform him
-		if (type.equals(EntityType.WANDERING_TRADER))
+		if ((reason == SpawnReason.NATURAL || reason == SpawnReason.SPAWNER_EGG) 
+				&& type == EntityType.WANDERING_TRADER)
 		{
 			this.transformWanderingTrader(entity, biome);
 			return;
 		}
 		
 		// Switch to raider handler if the spawn reason is RAID
-		if (reason.equals(SpawnReason.RAID))
+		if (reason == SpawnReason.RAID)
 		{
 			this.makeRaiderNameVisible(entity, type);
 			return;
@@ -305,7 +306,6 @@ public class AmplifiedMobSpawner implements Listener
 	{
 		WanderingTrader trader = (WanderingTrader) entity;
 		VillagerEquipment equipment = (VillagerEquipment) wanderingTypes.getRandomEquipment(biome);
-		trader.setRecipes(equipment.getRecipes());
 		EquipmentTools.equipEntity(trader, (MobEquipment) equipment);
 	}
 	
