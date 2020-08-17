@@ -21,7 +21,7 @@ public class PhantomMenace extends MobEquipment
 		this.addRivalFactions(Faction.UCLA, Faction.USC);
 		this.addTargetsToHitList(EntityType.SKELETON, EntityType.ZOMBIE, EntityType.SPIDER,
 				EntityType.WITCH, EntityType.CREEPER, EntityType.CAVE_SPIDER, EntityType.ZOMBIFIED_PIGLIN,
-				EntityType.HUSK, EntityType.STRAY, EntityType.ENDERMAN, EntityType.PHANTOM);
+				EntityType.HUSK, EntityType.STRAY, EntityType.ENDERMAN);
 		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.WOLF, EntityType.VILLAGER, EntityType.IRON_GOLEM, EntityType.SNOWMAN);
 		this.addPotionEffect(CustomPotionEffect.STRENGTH_II);
 	}
