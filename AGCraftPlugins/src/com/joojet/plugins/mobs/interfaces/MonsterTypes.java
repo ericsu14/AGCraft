@@ -5,19 +5,32 @@ import java.util.HashSet;
 import java.util.Random;
 
 import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
+
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public abstract class MonsterTypes 
 {
-	private ArrayList <MobEquipment> equipmentList;
-	private Random random;
-	private int size;
+	/** Stores a list of monsters the Mob Equipment tied to this class can equip */
+	protected ArrayList <EntityType> supportedEntities;
+	/** Stores custom mob equipment tied under this class */
+	protected ArrayList <MobEquipment> equipmentList;
+	/** RNG used for selecting a random monster when getRandomEquipment is called */
+	protected Random random;
+	/** Total number of custom mob equipment tied to this class */
+	protected int size;
 	
-	public MonsterTypes ()
+	public MonsterTypes (EntityType... entities)
 	{
 		this.equipmentList = new ArrayList <MobEquipment> ();
+		this.supportedEntities = new ArrayList <EntityType> ();
 		this.random = new Random ();
 		this.size = 0;
+		
+		for (EntityType entity : entities)
+		{
+			this.supportedEntities.add(entity);
+		}
 	}
 	
 	/** Adds in a new monster into the moblist.
@@ -65,6 +78,12 @@ public abstract class MonsterTypes
 	public int getSize ()
 	{
 		return this.size;
+	}
+	
+	/** Returns the entities in which the mob equipment tied to this class can equip */
+	public ArrayList <EntityType> getSupportedEntities ()
+	{
+		return this.supportedEntities;
 	}
 	
 	/** Conducts binary search upon the weighted mob list searching for the monster whose weight range

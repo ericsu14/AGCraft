@@ -21,39 +21,19 @@ import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class AmplifiedMobHandler extends AmplifiedSpawnHandler 
 {
-	/** Zombies */
-	private ZombieTypes zombieTypes;
-	/** Skeletons */
-	private SkeletonTypes skeletonTypes;
-	/** Spiders */
-	private SpiderTypes spiderTypes;
-	/** Iron Golems */
-	private GolemTypes golemTypes;
-	/** Snow Golems */
-	private SnowmanTypes snowmanTypes;
-	/** Husks */
-	private HuskTypes huskTypes;
-	/** Wolves */
-	private WolfTypes wolfTypes;
-	/** Wither Skeletons */
-	private WitherSkeletonTypes witherSkeletonTypes;
-	/** Zombie Pigman */
-	private ZombiePigmenTypes zombiePigmenTypes;
-	/** Piglins */
-	private PiglinTypes piglinTypes;
-	
 	public AmplifiedMobHandler ()
 	{
-		this.zombieTypes = new ZombieTypes();
-		this.skeletonTypes = new SkeletonTypes();
-		this.spiderTypes = new SpiderTypes();
-		this.golemTypes = new GolemTypes();
-		this.snowmanTypes = new SnowmanTypes();
-		this.huskTypes = new HuskTypes();
-		this.wolfTypes = new WolfTypes ();
-		this.witherSkeletonTypes = new WitherSkeletonTypes();
-		this.zombiePigmenTypes = new ZombiePigmenTypes();
-		this.piglinTypes = new PiglinTypes();
+		this.addMonsterTypes(new ZombieTypes(),
+				new SkeletonTypes(),
+				new SpiderTypes(),
+				new GolemTypes(),
+				new SnowmanTypes(),
+				new HuskTypes(),
+				new WolfTypes(),
+				new WitherSkeletonTypes(),
+				new ZombiePigmenTypes(),
+				new PiglinTypes());
+		
 		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.BUILD_IRONGOLEM,
 				SpawnReason.BUILD_SNOWMAN, SpawnReason.VILLAGE_DEFENSE, SpawnReason.BREEDING);
 	}
@@ -67,44 +47,11 @@ public class AmplifiedMobHandler extends AmplifiedSpawnHandler
 			return;
 		}
 		
-		MobEquipment mobEquipment;
-		switch (type)
+		MobEquipment mobEquipment = this.getRandomEqipment(type, biome);
+		if (mobEquipment != null)
 		{
-			case ZOMBIE:
-				mobEquipment = zombieTypes.getRandomEquipment(biome);
-				break;
-			case SKELETON:
-				mobEquipment = skeletonTypes.getRandomEquipment(biome);
-				break;
-			case SPIDER:
-				mobEquipment = spiderTypes.getRandomEquipment(biome);
-				break;
-			case IRON_GOLEM:
-				mobEquipment = golemTypes.getRandomEquipment(biome);
-				break;
-			case SNOWMAN:
-				mobEquipment = snowmanTypes.getRandomEquipment(biome);
-				break;
-			case HUSK:
-				mobEquipment = huskTypes.getRandomEquipment(biome);
-				break;
-			case WOLF:
-				mobEquipment = wolfTypes.getRandomEquipment(biome);
-				break;
-			case WITHER_SKELETON:
-				mobEquipment = this.witherSkeletonTypes.getRandomEquipment(biome);
-				break;
-			case ZOMBIFIED_PIGLIN:
-				mobEquipment = this.zombiePigmenTypes.getRandomEquipment(biome);
-				break;
-			case PIGLIN:
-				mobEquipment = this.piglinTypes.getRandomEquipment(biome);
-				break;
-			default:
-				return;
+			EquipmentTools.equipEntity(entity, mobEquipment);
 		}
-		
-		EquipmentTools.equipEntity(entity, mobEquipment);
 		
 	}
 
