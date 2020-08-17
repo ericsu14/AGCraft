@@ -229,7 +229,7 @@ public class AmplifiedMobSpawner implements Listener
 		MobEquipment ogZombieEquipment = getMobEquipmentFromEntity(originalZombie);
 		if (ogZombieEquipment != null)
 		{
-			LivingEntity drownedEntity = (LivingEntity) event.getEntity();
+			LivingEntity drownedEntity = (LivingEntity) event.getTransformedEntity();
 			EquipmentTools.setCustomMetadata(drownedEntity, ogZombieEquipment);
 		}
 	}
