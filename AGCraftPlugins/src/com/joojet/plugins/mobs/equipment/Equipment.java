@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.equipment;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
@@ -205,7 +206,12 @@ public abstract class Equipment extends ItemStack
 	 * 		@param meta - ItemMeta we are adding the lore info into */
 	protected void addLoreToItemMeta (String lore)
 	{
-		ArrayList <String> itemLore = new ArrayList <String> ();
+		List <String> itemLore = this.getItemMeta().getLore();
+		if (itemLore == null)
+		{
+			itemLore = new ArrayList <String> ();
+		}
+		
 		StringBuilder str = new StringBuilder();
 		str.append(this.loreColor);
 		ItemMeta meta = this.getItemMeta();
