@@ -22,7 +22,7 @@ public class Warp extends AGCommandExecutor
 {
 	public final static String home = "home";
 	// Max. search radius of nearby enemies check
-	private int maxMobRadius = 10;
+	private int maxMobRadius = 6;
 	// Min. player health needs to exceed before warping
 	private double healthThreshold = 20 * 0.29;
 	
