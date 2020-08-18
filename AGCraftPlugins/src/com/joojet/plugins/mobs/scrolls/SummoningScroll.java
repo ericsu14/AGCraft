@@ -5,15 +5,17 @@ import java.util.ArrayList;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.joojet.plugins.mobs.equipment.Equipment;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 import org.bukkit.ChatColor;
 
-public abstract class SummoningScroll extends ItemStack 
+public abstract class SummoningScroll extends Equipment 
 {
 	/** The mob to be summoned */
 	protected MobEquipment mob;
@@ -26,7 +28,7 @@ public abstract class SummoningScroll extends ItemStack
 	
 	public SummoningScroll (MobEquipment mob, EntityType type)
 	{
-		super (Material.PAPER, 1);
+		super (Material.PAPER, EquipmentSlot.HAND, ChatColor.GOLD);
 		ItemMeta scrollMeta = this.getItemMeta();
 		scrollMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		scrollMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
