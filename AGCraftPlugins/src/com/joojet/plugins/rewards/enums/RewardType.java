@@ -73,7 +73,7 @@ public enum RewardType
 			case STRAWBERRY_MOCKTAIL:
 				return new StrawberryMocktail (ChatColor.LIGHT_PURPLE);
 			case BLUE_AND_GOLD:
-				return new BlueAndGold (ChatColor.GOLD);
+				return new BlueAndGold ();
 			case BRUIN_SHIELD:
 				return new BruinShield ();
 			case BRUIN_HEAD:

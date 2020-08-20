@@ -1,58 +1,39 @@
 package com.joojet.plugins.mobs.equipment.offhand;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
-import org.bukkit.Material;
-import org.bukkit.block.Banner;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.meta.BlockStateMeta;
 
-import com.joojet.plugins.mobs.equipment.Equipment;
+import com.joojet.plugins.mobs.equipment.ShieldEquipment;
 
-public class BlueAndGold extends Equipment 
+public class BlueAndGold extends ShieldEquipment 
 {
-	public BlueAndGold (ChatColor color)
+	public BlueAndGold ()
 	{
-		super (Material.SHIELD, EquipmentSlot.OFF_HAND, color);
+		super (DyeColor.BLUE, EquipmentSlot.OFF_HAND, ChatColor.GOLD);
 		this.wordsPerLine = 8;
 		this.loreColor = ChatColor.AQUA;
-		this.setDisplayName("The Blue and Gold");
+		this.setDisplayName("The " + ChatColor.BLUE + "Blue " + this.chatColor + "and Gold");
 		this.addLoreToItemMeta("The LORD is my strength and my shield; "
 				+ "in him my heart trusts, and I am "
 				+ "helped; my heart exults, and with my song "
 				+ "I give thanks to him. -Psalm 28:7 ESV");
 		
-		/* Sets up custom shield patterns */
-		BlockStateMeta itemMeta = (BlockStateMeta) this.getItemMeta();
-		BlockState state = itemMeta.getBlockState();
-		Banner bannerState = (Banner) state;
+		this.addPatterns(new Pattern (DyeColor.YELLOW, PatternType.STRIPE_SMALL),
+				new Pattern (DyeColor.BLUE, PatternType.STRIPE_BOTTOM),
+				new Pattern (DyeColor.BLUE, PatternType.STRIPE_TOP),
+				new Pattern (DyeColor.BLUE, PatternType.RHOMBUS_MIDDLE),
+				new Pattern (DyeColor.YELLOW, PatternType.TRIANGLES_BOTTOM),
+				new Pattern (DyeColor.YELLOW, PatternType.TRIANGLES_TOP),
+				new Pattern (DyeColor.YELLOW, PatternType.STRAIGHT_CROSS),
+				new Pattern (DyeColor.BLUE, PatternType.CURLY_BORDER));
 		
-		bannerState.setBaseColor(DyeColor.BLUE);
-		
-		List <Pattern> pattern = new ArrayList <Pattern> ();
-		pattern.add(new Pattern (DyeColor.YELLOW, PatternType.STRIPE_SMALL));
-		pattern.add(new Pattern (DyeColor.BLUE, PatternType.STRIPE_BOTTOM));
-		pattern.add(new Pattern (DyeColor.BLUE, PatternType.STRIPE_TOP));
-		pattern.add(new Pattern (DyeColor.BLUE, PatternType.RHOMBUS_MIDDLE));
-		pattern.add(new Pattern (DyeColor.YELLOW, PatternType.TRIANGLES_BOTTOM));
-		pattern.add(new Pattern (DyeColor.YELLOW, PatternType.TRIANGLES_TOP));
-		pattern.add(new Pattern (DyeColor.YELLOW, PatternType.STRAIGHT_CROSS));
-		pattern.add(new Pattern (DyeColor.BLUE, PatternType.CURLY_BORDER));
-		bannerState.setPatterns(pattern);
-		bannerState.update();
-		itemMeta.setBlockState(bannerState);
-		itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ENCHANTS);
-		itemMeta.setUnbreakable(true);
-		this.setItemMeta(itemMeta);
-		
+		this.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ENCHANTS);
+		this.makeUnbreakable();
 		this.addAttackAttributes(3.0, 0.0);
 		this.addDefenseAttributes(2.0, 4.0, 0.10);
 		this.addHealthAttributes(20.0);
