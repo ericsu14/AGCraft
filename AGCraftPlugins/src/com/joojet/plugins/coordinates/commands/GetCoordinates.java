@@ -68,6 +68,14 @@ public class GetCoordinates extends AGCommandExecutor
 		Location loc = player.getLocation();
 		StringBuilder coordinates = new StringBuilder ();
 		coordinates.append ("coordinates: ");
+		coordinates.append (getCoordinates (loc));
+		return coordinates.toString();
+	}
+	
+	/** Returns the coordinates of a location as a formatted string */
+	public static String getCoordinates (Location loc)
+	{
+		StringBuilder coordinates = new StringBuilder ();
 		coordinates.append (ChatColor.AQUA + "");
 		coordinates.append ("{ X=");
 		coordinates.append (String.format("%.3f", loc.getX()));

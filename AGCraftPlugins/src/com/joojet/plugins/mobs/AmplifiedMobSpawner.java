@@ -404,6 +404,13 @@ public class AmplifiedMobSpawner implements Listener
 		
 		LivingEntity victim = null;
 		MobEquipment victimEquipment;
+		
+		// Allow phantoms to have a larger scan radius
+		if (hunter.getType() == EntityType.PHANTOM)
+		{
+			scanRadius *= 7;
+		}
+		
 		List <Entity> entities = hunter.getNearbyEntities(scanRadius, scanRadius / 4.0, scanRadius);
 		
 		boolean foundVictim = false;
