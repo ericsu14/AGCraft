@@ -34,8 +34,8 @@ public class BlueAndGold extends ShieldEquipment
 		
 		this.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ENCHANTS);
 		this.makeUnbreakable();
-		this.addAttackAttributes(3.0, 0.0);
-		this.addDefenseAttributes(2.0, 4.0, 0.10);
+		this.addAttackAttributes(4.0, 0.0);
+		this.addDefenseAttributes(4.0, 4.0, 0.10);
 		this.addHealthAttributes(20.0);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
 	}

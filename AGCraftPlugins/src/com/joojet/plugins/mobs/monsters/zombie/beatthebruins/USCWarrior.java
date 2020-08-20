@@ -9,6 +9,7 @@ import com.joojet.plugins.mobs.equipment.boots.USCSpikedBoots;
 import com.joojet.plugins.mobs.equipment.chest.USCFootballTunic;
 import com.joojet.plugins.mobs.equipment.head.USCTrojan;
 import com.joojet.plugins.mobs.equipment.leggings.USCFootballTrousers;
+import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.equipment.weapons.TrojanSword;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 
@@ -23,10 +24,12 @@ public class USCWarrior extends USCFaction
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED,
 				CustomPotionEffect.RESISTANCE);
+		this.health = 16;
 		this.helmet = new USCTrojan (this.color);
 		this.chestplate = new USCFootballTunic (this.color);
 		this.leggings = new USCFootballTrousers (this.color);
 		this.boots = new USCSpikedBoots (this.color);
 		this.weapon = new TrojanSword (this.color);
+		this.offhand = new USCCreeperShield ();
 	}
 }
