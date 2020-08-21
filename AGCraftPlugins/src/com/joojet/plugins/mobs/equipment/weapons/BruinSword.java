@@ -13,9 +13,9 @@ public class BruinSword extends Equipment
 	{
 		super (Material.IRON_SWORD, EquipmentSlot.HAND, color);
 		this.setDisplayName("Bruin Sword");
-		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 4);
+		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 3);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
-		this.addAttackAttributes(6.5, 1.6);
+		this.addAttackAttributes(6.0, 1.6);
 		this.loreColor = ChatColor.GOLD;
 		this.addLoreToItemMeta("The Bruins are up to no good. This weapons just proves it.");
 	}

@@ -20,6 +20,7 @@ public class USCArcher extends USCFaction
 				+ ChatColor.GOLD + " Bowman";
 		this.addBiomes(Biome.THE_VOID);
 		this.color = ChatColor.GOLD;
+		this.health = 16;
 		this.helmet = new USCTrojan (this.color);
 		this.chestplate = new USCFootballTunic (this.color);
 		this.leggings = new USCFootballTrousers (this.color);

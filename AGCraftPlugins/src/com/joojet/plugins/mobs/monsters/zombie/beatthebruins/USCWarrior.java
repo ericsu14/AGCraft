@@ -24,7 +24,7 @@ public class USCWarrior extends USCFaction
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED,
 				CustomPotionEffect.RESISTANCE);
-		this.health = 12;
+		this.health = 8;
 		this.helmet = new USCTrojan (this.color);
 		this.chestplate = new USCFootballTunic (this.color);
 		this.leggings = new USCFootballTrousers (this.color);

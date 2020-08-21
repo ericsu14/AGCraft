@@ -22,6 +22,7 @@ public class SpiritOfTroy extends USCFaction
 		this.name = "The " + ChatColor.GOLD + "Spirit " + ChatColor.RED + "of " + ChatColor.GOLD + "Troy";
 		this.color = ChatColor.RED;
 		this.addPotionEffect(CustomPotionEffect.SPEED);
+		this.health = 12;
 		this.helmet = new USCBandHead (this.color);
 		this.chestplate = new USCBandUniformTop (this.color);
 		this.leggings = new USCBandUniformBottom (this.color);

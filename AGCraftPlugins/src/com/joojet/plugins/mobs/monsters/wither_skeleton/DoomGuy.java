@@ -39,7 +39,7 @@ public class DoomGuy extends MobEquipment
 		
 		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		this.huntRadius = 125;
-		this.health = 30;
+		this.health = 50;
 		
 		this.helmet = new DoomSlayerHead (this.color);
 		this.chestplate = new DoomChest (this.color);

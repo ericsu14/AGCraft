@@ -24,7 +24,7 @@ public class UCLAJock extends UCLAFaction
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
-		this.health = 12;
+		this.health = 14;
 		this.weapon = new BruinSword (this.color);
 		this.helmet = new BruinHead ();
 		this.chestplate = new BruinTunic (this.color);
