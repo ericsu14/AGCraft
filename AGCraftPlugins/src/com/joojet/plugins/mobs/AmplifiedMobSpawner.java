@@ -24,6 +24,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.EntityTransformEvent;
@@ -144,7 +145,7 @@ public class AmplifiedMobSpawner implements Listener
 	
 	/** Captures entity damage events and adds the Player to the enemy's boss bar if it has one */
 	@EventHandler
-	public void addPlayerToEntityBossBarOnAttack (EntityDamageByEntityEvent event)
+	public void addPlayerToBossBarOnAttack (EntityDamageByEntityEvent event)
 	{
 		if (!(event.getEntity() instanceof LivingEntity))
 		{
@@ -166,6 +167,17 @@ public class AmplifiedMobSpawner implements Listener
 			{
 				BossBarAPI.addPlayerToBossBar((Player) projectile.getShooter(), entity); 
 			}
+		}
+	}
+	
+	/** Captures entity resurrect events and attempt to set its Boss Bar instance 
+	 *  to the resurrected entity if it exists */
+	@EventHandler
+	public void recreateBossBarOnResurrectEvent (EntityResurrectEvent event)
+	{
+		if (event.getEntity() instanceof LivingEntity && !event.isCancelled())
+		{
+			BossBarAPI.createBossBar((LivingEntity) event.getEntity());
 		}
 	}
 	
@@ -246,7 +258,7 @@ public class AmplifiedMobSpawner implements Listener
 	
 	/** Resets custom mob targets upon chunk load events */
 	@EventHandler
-	public void resetTargetsonChunkLoad (ChunkLoadEvent event)
+	public void resetTargetsOnChunkLoad (ChunkLoadEvent event)
 	{
 		Entity[] chunkEntities = event.getChunk().getEntities();
 		
@@ -286,6 +298,10 @@ public class AmplifiedMobSpawner implements Listener
 			LivingEntity drownedEntity = (LivingEntity) event.getTransformedEntity();
 			EquipmentTools.setCustomMetadata(drownedEntity, ogZombieEquipment);
 			EquipmentTools.modifyPathfindingTargets(drownedEntity, ogZombieEquipment);
+			if (ogZombieEquipment.getMobFlags().contains(MobFlag.BOSS_BAR))
+			{
+				BossBarAPI.createBossBar(drownedEntity);
+			}
 		}
 	}
 	
