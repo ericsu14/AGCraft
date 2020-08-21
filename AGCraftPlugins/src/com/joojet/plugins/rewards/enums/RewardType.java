@@ -13,6 +13,7 @@ import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
 import com.joojet.plugins.mobs.fireworks.PaintTheSky;
 import com.joojet.plugins.mobs.scrolls.SummonAdvancedGolem;
+import com.joojet.plugins.mobs.scrolls.SummonBarney;
 import com.joojet.plugins.mobs.scrolls.SummonCookie;
 import com.joojet.plugins.mobs.scrolls.SummonDoomGuy;
 import com.joojet.plugins.mobs.scrolls.SummonFrolf;
@@ -38,7 +39,8 @@ public enum RewardType
 	BLUE_AND_GOLD,
 	BRUIN_SHIELD,
 	BRUIN_HEAD,
-	DOOM_GUY;
+	DOOM_GUY,
+	BARNEY;
 	
 	public ItemStack getReward ()
 	{
@@ -80,6 +82,8 @@ public enum RewardType
 				return new BruinHead ();
 			case DOOM_GUY:
 				return new SummonDoomGuy ();
+			case BARNEY:
+				return new SummonBarney ();
 			default:
 				break;
 		}
