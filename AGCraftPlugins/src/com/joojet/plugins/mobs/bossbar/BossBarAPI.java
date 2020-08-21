@@ -1,6 +1,6 @@
 package com.joojet.plugins.mobs.bossbar;
 
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.UUID;
 
 import org.bukkit.NamespacedKey;
@@ -19,7 +19,7 @@ import com.joojet.plugins.mobs.metadata.BossMetadata;
 public class BossBarAPI 
 {
 	/** Stores a static table of all active custom boss bars in this server */
-	public static HashMap <UUID, BossBarNode> activeBossBars = new HashMap <UUID, BossBarNode> ();
+	public static Hashtable <UUID, BossBarNode> activeBossBars = new Hashtable <UUID, BossBarNode> ();
 	
 	/** Attempts to create a new Boss Bar for the passed living entity
 	 * 		@param entity - The Living entity we are creating the boss bar for */
@@ -53,7 +53,7 @@ public class BossBarAPI
 		BossBarNode bossNode = activeBossBars.get(uuidKey);
 		if (bossNode != null)
 		{
-			new BossBarTask (bossNode).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
+			new BossBarTask (bossNode).runTaskTimerAsynchronously(AGCraftPlugin.plugin, 0, 1);
 		}
 	}
 	
