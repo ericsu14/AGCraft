@@ -33,7 +33,6 @@ public class BossBarTask extends BukkitRunnable
 			this.bossBarNode.bossBar.setVisible(false);
 			BossBarAPI.activeBossBars.remove(bossUUID);
 			this.cancel();
-			System.out.println ("Active entries: " + BossBarAPI.activeBossBars.size());
 		}
 	}
 
