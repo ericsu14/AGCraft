@@ -61,7 +61,7 @@ public class JunkItemConfig extends AbstractConfigFile
 		this.addMaterialstoClassifier(items, JunkClassifier.STONE, Material.STONE, Material.COBBLESTONE, Material.DIORITE, Material.ANDESITE, Material.GRANITE);
 		// Armor
 		this.addMaterialstoClassifier(items, JunkClassifier.ARMOR, Material.LEATHER_BOOTS, Material.LEATHER_CHESTPLATE, Material.LEATHER_HELMET,
-				Material.LEATHER_HELMET, Material.GOLDEN_BOOTS, Material.GOLDEN_LEGGINGS, Material.GOLDEN_CHESTPLATE, Material.GOLDEN_HELMET,
+				Material.LEATHER_LEGGINGS, Material.GOLDEN_BOOTS, Material.GOLDEN_LEGGINGS, Material.GOLDEN_CHESTPLATE, Material.GOLDEN_HELMET,
 				Material.CHAINMAIL_BOOTS, Material.CHAINMAIL_LEGGINGS, Material.CHAINMAIL_CHESTPLATE, Material.CHAINMAIL_HELMET);
 		// Brewing
 		this.addMaterialstoClassifier(items, JunkClassifier.BREWING, Material.SPIDER_EYE);
