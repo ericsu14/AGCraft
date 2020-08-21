@@ -22,9 +22,10 @@ public class BossBarTask extends BukkitRunnable
 	@Override
 	public void run() 
 	{
-		if (!this.bossBarNode.entity.isDead())
+		if (this.bossBarNode.entity != null && !this.bossBarNode.entity.isDead())
 		{
-			double entityHealth = this.bossBarNode.entity.getHealth() / this.bossBarNode.entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+			double entityHealth = (this.bossBarNode.entity.getHealth() + this.bossBarNode.entity.getAbsorptionAmount()) /
+					this.bossBarNode.entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
 			this.bossBarNode.bossBar.setProgress(entityHealth);
 		}
 		else
