@@ -20,7 +20,7 @@ public class AkimboPigman extends MobEquipment
 		this.name = "Akimbo Pigman";
 		this.health = 40;
 		this.color = ChatColor.GOLD;
-		this.addMobFlags(MobFlag.SHOW_NAME);
+		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
