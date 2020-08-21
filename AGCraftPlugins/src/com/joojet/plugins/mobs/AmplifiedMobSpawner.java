@@ -32,7 +32,9 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.Faction;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -164,6 +166,16 @@ public class AmplifiedMobSpawner implements Listener
 			event.setCancelled(true);
 			this.retargetCustomMob(hunter);
 		}
+		else
+		{
+			// If the entity is a player, attempt to add that player
+			// to the hunters's boss bar if it exists
+			if (hunted instanceof Player)
+			{
+				System.out.println ("Attempting to add player to boss bar...");
+				BossBarAPI.addPlayerToBossBar((Player) hunted, hunter);
+			}
+		}
 	}
 	
 	/** If a custom mob is damaged by another entity, retarget to that entity */
@@ -211,6 +223,10 @@ public class AmplifiedMobSpawner implements Listener
 				if (entityEquipment != null)
 				{
 					EquipmentTools.modifyPathfindingTargets(livingEntity, entityEquipment);
+					if (entityEquipment.getMobFlags().contains(MobFlag.BOSS_BAR))
+					{
+						BossBarAPI.createBossBar(livingEntity);
+					}
 				}
 			}
 		}
@@ -463,6 +479,13 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			Mob hunterMob = (Mob) hunter;
 			hunterMob.setTarget(victim);
+			
+			// If the entity is a player, attempt to add that player
+			// to the hunters's boss bar if it exists
+			if (victim instanceof Player)
+			{
+				BossBarAPI.addPlayerToBossBar((Player) victim, hunter);
+			}
 		}
 	}
 }

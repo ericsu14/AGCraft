@@ -9,5 +9,7 @@ public enum MobFlag
 	/** A lightning bolt is summoned upon spawning the monster */
 	SPAWN_LIGHTNING,
 	/** Determines if the monster should automatically hunt a random nearby player upon spawning */
-	HUNT_ON_SPAWN;
+	HUNT_ON_SPAWN,
+	/** Displays a boss bar for this custom mob */
+	BOSS_BAR;
 }

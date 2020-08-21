@@ -22,6 +22,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 
+import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
@@ -193,6 +194,12 @@ public class EquipmentTools
 					p.sendMessage(ChatColor.DARK_RED + "You are being hunted...");
 				}
 			}
+		}
+		
+		// Active a custom boss bar to the entity
+		if (mobFlags.contains(MobFlag.BOSS_BAR))
+		{
+			BossBarAPI.createBossBar(entity);
 		}
 		
 		// Initialize custom pathfinding targets

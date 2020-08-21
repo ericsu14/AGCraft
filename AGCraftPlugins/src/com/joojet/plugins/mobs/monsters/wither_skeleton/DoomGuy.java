@@ -37,7 +37,7 @@ public class DoomGuy extends MobEquipment
 				EntityType.MAGMA_CUBE, EntityType.SKELETON, EntityType.ZOMBIE, EntityType.CREEPER,
 				EntityType.SPIDER, EntityType.CAVE_SPIDER, EntityType.PLAYER);
 		
-		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME);
+		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		this.huntRadius = 125;
 		this.health = 30;
 		
