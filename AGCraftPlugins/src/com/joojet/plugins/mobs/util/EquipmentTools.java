@@ -196,7 +196,7 @@ public class EquipmentTools
 			}
 		}
 		
-		// Active a custom boss bar to the entity
+		// Activates a custom boss bar for the entity
 		if (mobFlags.contains(MobFlag.BOSS_BAR))
 		{
 			BossBarAPI.createBossBar(entity);

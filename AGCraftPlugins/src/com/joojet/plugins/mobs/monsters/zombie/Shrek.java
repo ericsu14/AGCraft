@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.OgreBoots;
 import com.joojet.plugins.mobs.equipment.chest.OgreTunic;
@@ -19,6 +20,8 @@ public class Shrek extends MobEquipment
 		super (MonsterType.SHREK);
 		this.color = ChatColor.DARK_GREEN;
 		this.name = "Shrek";
+		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
+		this.health = 30;
 		this.addBiomes(Biome.SWAMP, Biome.SWAMP_HILLS);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		this.helmet = new ShrekHat (this.color);
