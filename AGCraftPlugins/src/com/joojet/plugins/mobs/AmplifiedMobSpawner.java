@@ -15,6 +15,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.entity.WanderingTrader;
 import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
@@ -91,13 +92,7 @@ public class AmplifiedMobSpawner implements Listener
 	/** For debugging purposes */
 	@EventHandler
 	public void showDamageInfo (EntityDamageByEntityEvent event)
-	{
-		// Attempts to add a player to an entity's boss bar if it has boss metadata
-		if (event.getDamager() instanceof Player && event.getEntity() instanceof LivingEntity)
-		{
-			BossBarAPI.addPlayerToBossBar((Player)event.getDamager(), (LivingEntity) event.getEntity()); 
-		}
-		
+	{		
 		if (!AGCraftPlugin.plugin.enableDebugMode)
 		{
 			return;
@@ -144,6 +139,33 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			Player p = (Player) event.getEntity();
 			p.sendMessage("Taken " + event.getDamage() + " damage.");
+		}
+	}
+	
+	/** Captures entity damage events and adds the Player to the enemy's boss bar if it has one */
+	@EventHandler
+	public void addPlayerToEntityBossBarOnAttack (EntityDamageByEntityEvent event)
+	{
+		if (!(event.getEntity() instanceof LivingEntity))
+		{
+			return;
+		}
+		LivingEntity entity = (LivingEntity) event.getEntity();
+		
+		// Adds a player to an entity's boss bar if it has boss metadata
+		if (event.getDamager() instanceof Player)
+		{
+			BossBarAPI.addPlayerToBossBar((Player)event.getDamager(), entity); 
+		}
+		
+		// Do the same as above for player projectiles as well
+		else if (event.getDamager() instanceof Projectile)
+		{
+			Projectile projectile = (Projectile) event.getDamager();
+			if (projectile.getShooter() instanceof Player)
+			{
+				BossBarAPI.addPlayerToBossBar((Player) projectile.getShooter(), entity); 
+			}
 		}
 	}
 	
