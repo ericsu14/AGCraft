@@ -27,7 +27,8 @@ public class BarneyTheDinosaur extends MobEquipment
 				Biome.GRAVELLY_MOUNTAINS, Biome.SUNFLOWER_PLAINS);
 		this.addPotionEffect(CustomPotionEffect.SPEED,
 				CustomPotionEffect.FIRE_RESISTANCE);
-		this.addMobFlags(MobFlag.HUNT_ON_SPAWN, MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME);
+		this.addMobFlags(MobFlag.HUNT_ON_SPAWN, MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME,
+				MobFlag.BOSS_BAR);
 		
 		this.name = "Barney the Dinosaur";
 		this.color = ChatColor.DARK_PURPLE;
