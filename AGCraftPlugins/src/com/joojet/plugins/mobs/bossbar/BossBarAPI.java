@@ -32,12 +32,16 @@ public class BossBarAPI
 			uuidKey = entity.getUniqueId();
 			setBossMetadataOnEntity (entity);
 		}
-		
-		// Don't create a boss bar if the entity has one already
 		if (!activeBossBars.containsKey(uuidKey))
 		{
 			activeBossBars.put(uuidKey, new BossBarNode (bossBar, entity, uuidKey));
 			activateBossBar (uuidKey);
+		}
+		else
+		{
+			BossBarNode entry = activeBossBars.get(uuidKey);
+			entry.entity = entity;
+			activeBossBars.replace(uuidKey, entry);
 		}
 	}
 	
@@ -59,11 +63,19 @@ public class BossBarAPI
 	public static void addPlayerToBossBar (Player player, LivingEntity bossEntity)
 	{
 		UUID uuidKey = getBossBarUUID (bossEntity);
-		if (uuidKey != null && activeBossBars.containsKey(uuidKey)
-				&& !activeBossBars.get(uuidKey).bossBar.getPlayers().contains(player))
+		if (uuidKey != null && activeBossBars.containsKey(uuidKey))
 		{
 			activeBossBars.get(uuidKey).bossBar.addPlayer(player);
-			activateBossBar (uuidKey);
+		}
+	}
+	
+	/** Removes a player from the boss entity's boss bar */
+	public static void removePlayerFromBossBar (Player player, LivingEntity bossEntity)
+	{
+		UUID uuidKey = getBossBarUUID (bossEntity);
+		if (uuidKey != null && activeBossBars.containsKey(uuidKey))
+		{
+			activeBossBars.get(uuidKey).bossBar.removePlayer(player);
 		}
 	}
 	

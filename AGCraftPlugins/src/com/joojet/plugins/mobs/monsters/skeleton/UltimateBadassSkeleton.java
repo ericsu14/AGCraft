@@ -21,7 +21,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		super (MonsterType.ULTIMATE_BADASS_SKELETON);
 		this.name = "#agspotted";
 		this.color = ChatColor.GOLD;
-		this.addMobFlags(MobFlag.SHOW_NAME);
+		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		this.health = 16;
 		
 		this.addBiomes(Biome.THE_VOID);

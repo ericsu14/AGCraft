@@ -20,7 +20,7 @@ public class UltimateBadassZombie extends MobEquipment
 		super (MonsterType.ULTIMATE_BADASS_ZOMBIE);
 		this.name = "Shadow Clone joojetsu";
 		this.color = ChatColor.GOLD;
-		this.addMobFlags(MobFlag.SHOW_NAME);
+		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		this.health = 14;
 		
 		this.addBiomes(Biome.THE_VOID);

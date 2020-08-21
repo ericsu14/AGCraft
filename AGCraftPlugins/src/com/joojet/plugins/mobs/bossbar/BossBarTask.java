@@ -28,13 +28,13 @@ public class BossBarTask extends BukkitRunnable
 	{
 		if (!entity.isDead())
 		{
-			double entityHealth = entity.getHealth() / entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-			bossBar.setProgress(entityHealth);
+			double entityHealth = this.bossBarNode.entity.getHealth() / this.bossBarNode.entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+			this.bossBarNode.bossBar.setProgress(entityHealth);
 		}
 		else
 		{
-			bossBar.removeAll();
-			bossBar.setVisible(false);
+			this.bossBarNode.bossBar.removeAll();
+			this.bossBarNode.bossBar.setVisible(false);
 			BossBarAPI.activeBossBars.remove(bossUUID);
 			this.cancel();
 			System.out.println ("Active entries: " + BossBarAPI.activeBossBars.size());

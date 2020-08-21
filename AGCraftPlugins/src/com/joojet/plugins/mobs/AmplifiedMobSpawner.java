@@ -22,11 +22,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.EntityTransformEvent;
 import org.bukkit.event.entity.EntityTransformEvent.TransformReason;
 import org.bukkit.event.world.ChunkLoadEvent;
+import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
@@ -90,6 +92,12 @@ public class AmplifiedMobSpawner implements Listener
 	@EventHandler
 	public void showDamageInfo (EntityDamageByEntityEvent event)
 	{
+		// Attempts to add a player to an entity's boss bar if it has boss metadata
+		if (event.getDamager() instanceof Player && event.getEntity() instanceof LivingEntity)
+		{
+			BossBarAPI.addPlayerToBossBar((Player)event.getDamager(), (LivingEntity) event.getEntity()); 
+		}
+		
 		if (!AGCraftPlugin.plugin.enableDebugMode)
 		{
 			return;
@@ -150,14 +158,23 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		// Do nothing if the targeting event is set by plugin
-		if (event.getReason() == TargetReason.CUSTOM
-				|| event.getReason() == TargetReason.FORGOT_TARGET)
+		if (event.getReason() == TargetReason.CUSTOM)
 		{
 			return;
 		}
 		
 		LivingEntity hunter = (LivingEntity) event.getEntity();
 		LivingEntity hunted = event.getTarget();
+		
+		// Attempts to remove the player from the entity's
+		// boss bar if the reason is set to FORGOT_TARGET
+		if (event.getReason() == TargetReason.FORGOT_TARGET)
+		{
+			if (hunted instanceof Player)
+			{
+				BossBarAPI.removePlayerFromBossBar((Player) hunted, hunter);
+			}
+		}
 		
 		boolean cancelEvent = this.checkTargetEvent(hunter, hunted);
 		
@@ -172,7 +189,6 @@ public class AmplifiedMobSpawner implements Listener
 			// to the hunters's boss bar if it exists
 			if (hunted instanceof Player)
 			{
-				System.out.println ("Attempting to add player to boss bar...");
 				BossBarAPI.addPlayerToBossBar((Player) hunted, hunter);
 			}
 		}
@@ -248,6 +264,36 @@ public class AmplifiedMobSpawner implements Listener
 			LivingEntity drownedEntity = (LivingEntity) event.getTransformedEntity();
 			EquipmentTools.setCustomMetadata(drownedEntity, ogZombieEquipment);
 			EquipmentTools.modifyPathfindingTargets(drownedEntity, ogZombieEquipment);
+		}
+	}
+	
+	/** Captures chunk unload events */
+	@EventHandler 
+	public void onChunkUnload (ChunkUnloadEvent event)
+	{
+		Entity[] chunkEntities = event.getChunk().getEntities();
+		
+		LivingEntity livingEntity;
+		
+		for (Entity ent : chunkEntities)
+		{
+			if (ent instanceof LivingEntity)
+			{
+				livingEntity = (LivingEntity) ent;
+				BossBarAPI.removeBossBar(livingEntity);
+			}
+		}
+	}
+	
+	/** Captures entity death events */
+	@EventHandler
+	public void onEntityDeath (EntityDeathEvent event)
+	{
+		// Attempts to remove the entity's active boss bar runnable if it has one 
+		if (event.getEntity() instanceof LivingEntity)
+		{
+			LivingEntity entity = (LivingEntity) event.getEntity();
+			BossBarAPI.removeBossBar(entity);
 		}
 	}
 	
