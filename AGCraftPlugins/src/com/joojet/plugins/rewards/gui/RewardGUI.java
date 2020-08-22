@@ -19,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.mobs.metadata.RewardIDMetadata;
 import com.joojet.plugins.rewards.database.RewardDatabaseManager;
 import com.joojet.plugins.rewards.interfaces.RewardEntry;
 import com.joojet.plugins.rewards.util.StringUtil;
@@ -61,10 +62,10 @@ public class RewardGUI implements Listener
 	        		break;
 	        	}
 	        	
-	        	// Appends lore and reward ID to the item. Reward ID is always in the last slot of the item's lore
+	        	// Appends lore and reward ID to the item.
 	        	ItemStack reward = entry.getReward().getReward();
 	        	this.addLoreToItemMeta(reward, entry.getEvent().getFormattedLore(), ChatColor.YELLOW);
-	        	this.addLoreToItemMeta(reward, entry.getRewardID() + "", ChatColor.MAGIC);
+	        	new RewardIDMetadata (entry.getRewardID()).addStringMetadata(reward.getItemMeta());
 	        	this.inv.addItem(reward);
 	        	++index;
 	        }
@@ -106,7 +107,6 @@ public class RewardGUI implements Listener
         	try
         	{
         		RewardDatabaseManager.claimReward(rewardID);
-        		this.removeIDField(clickedItem);
         		this.player.getInventory().addItem(clickedItem);
         		this.player.sendMessage (ChatColor.AQUA + "Acquired " + clickedItem.getItemMeta().getDisplayName() + ChatColor.AQUA +"!");
         		this.player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
@@ -141,21 +141,11 @@ public class RewardGUI implements Listener
     /** Returns the ID of an item
      * 		@param ItemStack item - item we are extracting the reward entry ID from */
     public int getRewardID (ItemStack item)
-    {
-    	ItemMeta meta = item.getItemMeta();
-    	List <String> lore = meta.getLore();
-    	
-    	if (lore == null)
-    	{
-    		return -1;
-    	}
-    	
+    {    	
     	int id = -1;
-    	int n = lore.size();
-    	
     	try
     	{
-    		id = Integer.parseInt(lore.get(n - 1).substring(2));
+    		id = Integer.parseInt(new RewardIDMetadata ().getStringMetadata(item.getItemMeta()));
     	}
     	catch (NumberFormatException e)
     	{
@@ -164,23 +154,6 @@ public class RewardGUI implements Listener
     		e.printStackTrace();
     	}
     	return id;
-    }
-    
-    /** Removes ID field from an item's lore
-     * 		@param item - Item we are stripping the ID info out of */
-    public void removeIDField (ItemStack item)
-    {
-    	ItemMeta meta = item.getItemMeta();
-    	List <String> itemLore = meta.getLore();
-    	if (itemLore == null)
-    	{
-    		return;
-    	}
-    	int n = itemLore.size();
-    	itemLore.remove(n - 1);
-    	
-    	meta.setLore(itemLore);
-    	item.setItemMeta(meta);
     }
     
 	/** Adds a new lore string into the passed ItemMeta. The String will be split into multiple tokens depending on how many
