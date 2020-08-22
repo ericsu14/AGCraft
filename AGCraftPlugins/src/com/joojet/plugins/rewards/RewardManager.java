@@ -84,12 +84,19 @@ public class RewardManager implements Listener
 				switch (this.minigameRewardType)
 				{
 					case UHC_I:
-						this.grantReward(player, RewardType.DIAMONDS);
-						this.grantReward(player, RewardType.FROLF);
-						this.grantReward(player, RewardType.SNOWBALL);
-						this.grantReward(player, RewardType.ENCHANTED_GOLDEN_APPLE);
-						this.grantReward(player, RewardType.STRAWBERRY_MOCKTAIL);
-						this.grantReward(player, RewardType.GOLDEN_CARROTS);
+						this.grantRewards(player, RewardType.DIAMONDS,
+								RewardType.FROLF,
+								RewardType.SNOWBALL,
+								RewardType.ENCHANTED_GOLDEN_APPLE,
+								RewardType.STRAWBERRY_MOCKTAIL,
+								RewardType.GOLDEN_CARROTS);
+						break;
+					case UHC_RUSH:
+						this.grantRewards(player, RewardType.DIAMONDS, 
+								RewardType.FROLF, 
+								RewardType.GOLDEN_CARROTS, 
+								RewardType.ENCHANTED_GOLDEN_APPLE,
+								RewardType.JOHN_JAE);
 						break;
 					default:
 						break;
@@ -102,6 +109,15 @@ public class RewardManager implements Listener
 		{
 			e.printStackTrace();
 			player.sendMessage(ChatColor.RED + "There seems to be an error automatically distributing your participation rewards. Please contact jooj about this immediately.");
+		}
+	}
+	
+	/** Grants a list of rewards to the player */
+	private void grantRewards (Player player, RewardType... rewards) throws SQLException
+	{
+		for (RewardType reward : rewards)
+		{
+			this.grantReward(player, reward);
 		}
 	}
 	

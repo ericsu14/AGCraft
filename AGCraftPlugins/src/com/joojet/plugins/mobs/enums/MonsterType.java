@@ -2,6 +2,7 @@ package com.joojet.plugins.mobs.enums;
 
 public enum MonsterType 
 {
+	NONE,
 	UHC_GHAST,
 	FALLEN_PHARAOH,
 	WANDERING_HUSK,

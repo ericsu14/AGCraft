@@ -1,24 +1,23 @@
 package com.joojet.plugins.mobs.metadata;
 
 import org.bukkit.NamespacedKey;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.persistence.PersistentDataHolder;
+import org.bukkit.persistence.PersistentDataType;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 
 
-public abstract class AbstractMetadata <E> extends FixedMetadataValue 
+public abstract class AbstractMetadata <E>
 {
 	/** Tag identifier for the entity's metadata */
 	public String tag = "";
 	/** Stores the object associated with the metadata */
-	protected E type;
+	protected E value;
 	
-	public AbstractMetadata (String tag, E type)
+	public AbstractMetadata (String tag, E value)
 	{
-		super (AGCraftPlugin.plugin, type);
 		this.tag = tag;
-		this.type = type;
+		this.value = value;
 	}
 	
 	public NamespacedKey generateNamespacedKey ()
@@ -33,78 +32,32 @@ public abstract class AbstractMetadata <E> extends FixedMetadataValue
 	}
 	
 	/** Returns the monster identifier as a string */
-	@Override
 	public String asString() 
 	{
-		return type.toString();
+		return value.toString();
 	}
 	
 	/** Returns the monster type identifier object */
-	@Override
 	public Object value() 
 	{
-		return this.type;
+		return this.value;
 	}
 	
-	/** Returns an instance to the AGCraft plugin */
-	@Override
-	public Plugin getOwningPlugin() 
+	/** Adds the value's toString data defined in this class into a PersistentDataHolder's data container */
+	public void addStringMetadata (PersistentDataHolder holder)
 	{
-		return AGCraftPlugin.plugin;
+		holder.getPersistentDataContainer().set(this.generateNamespacedKey(), PersistentDataType.STRING, this.asString());
 	}
 	
-	@Override
-	public int asInt() 
+	/** Returns the value's metadata stored by this class's instance as a string */
+	public String getStringMetadata (PersistentDataHolder holder)
 	{
-		return 0;
+		NamespacedKey key = this.generateNamespacedKey();
+		if (holder.getPersistentDataContainer().has(key, PersistentDataType.STRING))
+		{
+			return holder.getPersistentDataContainer().get(key, PersistentDataType.STRING);
+		}
+		return null;
 	}
 	
-	@Deprecated
-	@Override
-	public boolean asBoolean() 
-	{
-		return false;
-	}
-	
-	@Deprecated
-	@Override
-	public byte asByte() 
-	{
-		return 0;
-	}
-	
-	@Deprecated
-	@Override
-	public double asDouble() 
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	@Deprecated
-	@Override
-	public float asFloat() 
-	{
-		return 0;
-	}
-	
-	@Deprecated
-	@Override
-	public long asLong() 
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	@Deprecated
-	@Override
-	public short asShort() 
-	{
-		return 0;
-	}
-
-	
-	@Deprecated
-	@Override
-	public void invalidate() { }
 }

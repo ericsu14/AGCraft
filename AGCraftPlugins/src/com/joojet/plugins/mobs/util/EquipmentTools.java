@@ -18,8 +18,7 @@ import org.bukkit.entity.Wolf;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.potion.PotionEffect;
 
 import com.joojet.plugins.mobs.bossbar.BossBarAPI;
@@ -223,12 +222,12 @@ public class EquipmentTools
 			return;
 		}
 		
-		PersistentDataContainer metadata = entity.getPersistentDataContainer();
-		metadata.set(MonsterTypeMetadata.generateGenericNamespacedKey(), PersistentDataType.STRING, mobEquipment.getMonsterType().toString());
+		PersistentDataHolder holder = (PersistentDataHolder) entity;
+		new MonsterTypeMetadata(mobEquipment.getMonsterType()).addStringMetadata(holder);
 		ArrayList <FactionMetadata> factions = mobEquipment.generateFactionMetadata();
 		for (FactionMetadata faction : factions)
 		{
-			metadata.set(faction.generateNamespacedKey(), PersistentDataType.STRING, faction.asString());
+			faction.addStringMetadata(holder);
 		}
 	}
 	

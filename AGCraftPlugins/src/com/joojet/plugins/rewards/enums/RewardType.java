@@ -59,7 +59,7 @@ public enum RewardType
 			case JOHN_JAE:
 				return new SummonJohnJae ();
 			case ENCHANTED_GOLDEN_APPLE:
-				return new ItemStack (Material.ENCHANTED_GOLDEN_APPLE, 2);
+				return new ItemStack (Material.ENCHANTED_GOLDEN_APPLE, 5);
 			case CAPTAIN_AMERICA:
 				return new CaptainAmericaShield (ChatColor.GOLD);
 			case PAINT_THE_SKIES:

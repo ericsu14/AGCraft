@@ -3,15 +3,13 @@ package com.joojet.plugins.mobs.bossbar;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.bukkit.NamespacedKey;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.persistence.PersistentDataHolder;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.metadata.BossMetadata;
@@ -100,20 +98,12 @@ public class BossBarAPI
 	/** Gets the Boss Bar UUID key from the Living Entity's metadata */
 	public static UUID getBossBarUUID (LivingEntity entity)
 	{
-		PersistentDataContainer metadata = entity.getPersistentDataContainer();
-		NamespacedKey key = BossMetadata.generateGenericNamespacedKey();
-		if (metadata.has(key, PersistentDataType.STRING))
-		{
-			return UUID.fromString(metadata.get(key, PersistentDataType.STRING));
-		}
-		return null;
+		return UUID.fromString(new BossMetadata().getStringMetadata((PersistentDataHolder) entity));
 	}
 	
 	/** Attaches the entity's UUID as a new metadata for identifying custom boss bar events */
 	public static void setBossMetadataOnEntity (LivingEntity entity)
 	{
-		PersistentDataContainer metadata = entity.getPersistentDataContainer();
-		NamespacedKey key = BossMetadata.generateGenericNamespacedKey();
-		metadata.set(key, PersistentDataType.STRING, entity.getUniqueId().toString());
+		new BossMetadata(entity.getUniqueId()).addStringMetadata((PersistentDataHolder) entity);
 	}
 }

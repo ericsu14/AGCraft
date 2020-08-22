@@ -2,21 +2,18 @@ package com.joojet.plugins.mobs.metadata;
 
 import java.util.UUID;
 
-import org.bukkit.NamespacedKey;
-
-import com.joojet.plugins.agcraft.main.AGCraftPlugin;
-
 public class BossMetadata extends AbstractMetadata<UUID> 
 {
 	public static final String BOSS_TAG = "boss-tag";
 	
-	public BossMetadata(UUID type) 
+	public BossMetadata ()
 	{
-		super(BOSS_TAG, type);
+		super(BOSS_TAG, null);
 	}
 	
-	public static NamespacedKey generateGenericNamespacedKey ()
+	/** Creates a Boss Metadata with an ID */
+	public BossMetadata(UUID id) 
 	{
-		return new NamespacedKey (AGCraftPlugin.plugin, BOSS_TAG);
+		super(BOSS_TAG, id);
 	}
 }
