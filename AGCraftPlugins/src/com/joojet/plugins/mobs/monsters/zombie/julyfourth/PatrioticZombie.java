@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.PatrioticBlueBoots;
 import com.joojet.plugins.mobs.equipment.chest.PatrioticRedJacket;
@@ -21,7 +22,7 @@ public class PatrioticZombie extends MobEquipment
 		this.fwTypes = new FireworkTypes ();
 		this.name = this.americanizeText("Patriotic Zombie");
 		this.color = ChatColor.WHITE;
-		this.health = 4.0;
+		this.setStat(MonsterStat.HEALTH, 4.0);
 		
 		this.addBiomes(Biome.THE_VOID);
 		

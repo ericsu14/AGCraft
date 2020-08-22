@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.DesertSandals;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualFantasy;
@@ -17,6 +18,7 @@ public class BadlandsBandit extends MobEquipment
 		this.name = "Badlands Bandit";
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.addPotionEffect(CustomPotionEffect.SPEED);
+		this.setStat(MonsterStat.HEALTH, 30.0);
 		
 		this.addBiomes(Biome.BADLANDS, 
 				Biome.BADLANDS_PLATEAU, 
@@ -24,8 +26,6 @@ public class BadlandsBandit extends MobEquipment
 				Biome.SAVANNA_PLATEAU, 
 				Biome.SHATTERED_SAVANNA, 
 				Biome.SHATTERED_SAVANNA_PLATEAU);
-		
-		this.health = 30;
 		
 		this.boots = new DesertSandals (this.color);
 		this.weapon = new SpiritualFantasy (this.color);

@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MobFlag;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.DoomGuyFeet;
 import com.joojet.plugins.mobs.equipment.chest.DoomChest;
@@ -25,6 +26,8 @@ public class DoomGuy extends MobEquipment
 		this.name = "The Doom Slayer";
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.05f, 0.15f);
 		this.color = ChatColor.DARK_RED;
+		this.setStat(MonsterStat.HEALTH, 50.0);
+		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 125.0);
 		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
@@ -38,8 +41,6 @@ public class DoomGuy extends MobEquipment
 				EntityType.SPIDER, EntityType.CAVE_SPIDER, EntityType.PLAYER);
 		
 		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
-		this.huntRadius = 125;
-		this.health = 50;
 		
 		this.helmet = new DoomSlayerHead (this.color);
 		this.chestplate = new DoomChest (this.color);

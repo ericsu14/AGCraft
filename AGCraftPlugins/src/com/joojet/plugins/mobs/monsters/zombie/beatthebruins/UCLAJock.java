@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.BruinFootballBoots;
 import com.joojet.plugins.mobs.equipment.chest.BruinTunic;
@@ -24,7 +25,7 @@ public class UCLAJock extends UCLAFaction
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
-		this.health = 14;
+		this.setStat(MonsterStat.HEALTH, 14.0);
 		this.weapon = new BruinSword (this.color);
 		this.helmet = new BruinHead ();
 		this.chestplate = new BruinTunic (this.color);

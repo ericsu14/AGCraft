@@ -24,6 +24,7 @@ import org.bukkit.potion.PotionEffect;
 
 import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.MobFlag;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -137,17 +138,18 @@ public class EquipmentTools
 		}
 		
 		// Custom health
-		if (mobEquipment.getHealth() > 0)
+		if (mobEquipment.containsStat(MonsterStat.HEALTH))
 		{
+			double health = mobEquipment.getStat(MonsterStat.HEALTH);
 			Damageable dmg = (Damageable) entity;
-			entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(mobEquipment.getHealth());
-			dmg.setHealth(mobEquipment.getHealth());
+			entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(health);
+			dmg.setHealth(health);
 		}
 		
 		// Custom attack damage
-		if (mobEquipment.getBaseAttackDamage() > 0)
+		if (mobEquipment.containsStat(MonsterStat.BASE_ATTACK_DAMAGE))
 		{
-			entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(mobEquipment.getBaseAttackDamage());
+			entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(mobEquipment.getStat(MonsterStat.BASE_ATTACK_DAMAGE));
 		}
 		
 		// Potion effects
@@ -165,33 +167,37 @@ public class EquipmentTools
 			entity.setFireTicks(Integer.MAX_VALUE);
 		}
 		
-		// Spawns a lightning bolt on the mob's current location if enabled. This should scare the **** out of unsuspecting players
-		if (mobFlags.contains(MobFlag.SPAWN_LIGHTNING))
+		if (mobEquipment.containsStat(MonsterStat.HUNT_ON_SPAWN_RADIUS))
 		{
-			Location loc = entity.getLocation();
-			entity.getWorld().strikeLightningEffect(loc);
-			// Also alerts the player of the monster's presence
-			ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(entity, (int) (mobEquipment.getHuntOnSpawnRaduis() * 1.25));
-			
-			for (Player p : nearbyPlayers)
+			int huntRadius = mobEquipment.getStat(MonsterStat.HUNT_ON_SPAWN_RADIUS).intValue();
+			// Spawns a lightning bolt on the mob's current location if enabled. This should scare the **** out of unsuspecting players
+			if (mobFlags.contains(MobFlag.SPAWN_LIGHTNING))
 			{
-				p.sendMessage(ChatColor.GOLD + "You feel a great disturbance in the force...");
-			}
-		}
-		
-		// Automatically sets the mob's target to a random nearby player if huntOnSpawn is set to true
-		if (mobFlags.contains(MobFlag.HUNT_ON_SPAWN))
-		{
-			if (entity instanceof Monster)
-			{
-				ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(entity, mobEquipment.getHuntOnSpawnRaduis());
-				Monster mob = (Monster) entity;
-				int n = nearbyPlayers.size();
-				if (!nearbyPlayers.isEmpty())
+				Location loc = entity.getLocation();
+				entity.getWorld().strikeLightningEffect(loc);
+				// Also alerts the player of the monster's presence
+				ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(entity, (int) (huntRadius * 1.25));
+				
+				for (Player p : nearbyPlayers)
 				{
-					Player p = nearbyPlayers.get(rand.nextInt(n));
-					mob.setTarget(p);
-					p.sendMessage(ChatColor.DARK_RED + "You are being hunted...");
+					p.sendMessage(ChatColor.GOLD + "You feel a great disturbance in the force...");
+				}
+			}
+			
+			// Automatically sets the mob's target to a random nearby player if huntOnSpawn is set to true
+			if (mobFlags.contains(MobFlag.HUNT_ON_SPAWN))
+			{
+				if (entity instanceof Monster)
+				{
+					ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(entity, huntRadius);
+					Monster mob = (Monster) entity;
+					int n = nearbyPlayers.size();
+					if (!nearbyPlayers.isEmpty())
+					{
+						Player p = nearbyPlayers.get(rand.nextInt(n));
+						mob.setTarget(p);
+						p.sendMessage(ChatColor.DARK_RED + "You are being hunted...");
+					}
 				}
 			}
 		}

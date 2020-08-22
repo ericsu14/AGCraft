@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.weapons.SpiderTooth;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -13,7 +14,7 @@ public class AgressiveSpider extends MobEquipment
 	public AgressiveSpider ()
 	{
 		super (MonsterType.AGRESSIVE_SPIDER);
-		this.health = 20;
+		this.setStat(MonsterStat.HEALTH, 20.0);
 		this.name = "Agressive Spider";
 		this.color = ChatColor.GREEN;
 		

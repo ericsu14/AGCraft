@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.USCSpikedBoots;
 import com.joojet.plugins.mobs.equipment.chest.USCFootballTunic;
@@ -24,7 +25,7 @@ public class USCWarrior extends USCFaction
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED,
 				CustomPotionEffect.RESISTANCE);
-		this.health = 8;
+		this.setStat(MonsterStat.HEALTH, 8.0);
 		this.helmet = new USCTrojan (this.color);
 		this.chestplate = new USCFootballTunic (this.color);
 		this.leggings = new USCFootballTrousers (this.color);

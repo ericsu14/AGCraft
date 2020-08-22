@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.monsters;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import org.bukkit.ChatColor;
@@ -15,6 +16,7 @@ import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MobFlag;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
@@ -26,8 +28,6 @@ public abstract class MobEquipment
 	protected String name;
 	/** Color used to recolor the entity's display names */
 	protected ChatColor color;
-	/** Entity's health. A value of -1 uses the entity's default health */
-	protected double health;
 	/** The entity's helmet */
 	protected ItemStack helmet;
 	/** The entity's chestplate */
@@ -46,16 +46,10 @@ public abstract class MobEquipment
 	protected final String urlBase = "http://textures.minecraft.net/texture/";
 	/** An array storing the drop chances for each item the entity has. */
 	protected float dropRates[];
-	/** Number of words that can fit in a single line for an item's lore */
-	protected int wordsPerLine;
 	/** Biomes this monster can spawn in. Putting the constant, THE_VOID allows the mob to be spawned in all biomes. */
 	protected HashSet <Biome> biomes;
-	/** The spawn weight for this monster. Higher weights equates to higher chances of the mob spawning */
-	protected int spawnWeight;
-	/** Max radius in which the enemy will hunt their pray of huntOnSpawn is true */
-	protected int huntRadius;
-	/** Base attack damage of this mob */
-	protected double attackDamage;
+	/** Contains the monster's custom stats */
+	protected HashMap <MonsterStat, Double> mobStats;
 	/** Identifier for this custom mob type */
 	protected MonsterType mobType;
 	/** A list of factions this monster is apart of */
@@ -80,20 +74,12 @@ public abstract class MobEquipment
 		this.mobType = mobType;
 		this.name = "";
 		this.color = ChatColor.WHITE;
-		// -1 represents default health
-		this.health = -1.0;
 		this.effects = new ArrayList <PotionEffect> ();
 		// Set up default drop rates
 		this.dropRates = new float[6];
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.01f, 0.05f);
 		// Words per line defaults to 6
-		this.wordsPerLine = 5;
 		this.biomes = new HashSet <Biome> ();
-		// Spawn weight set to default
-		this.spawnWeight = 1;
-		this.huntRadius = 25;
-		// Use default (unmodified) attack damage if set to -1.0
-		this.attackDamage = -1.0;
 		// Factions
 		this.factions = new HashSet <Faction> ();
 		this.rivalFactions = new HashSet <Faction> ();
@@ -105,6 +91,8 @@ public abstract class MobEquipment
 		AmplifiedMobSpawner.mobTable.insertWord(this.toString(), this);
 		// Mob flags
 		this.mobFlags = new HashSet <MobFlag> ();
+		// Monster Stats
+		this.mobStats = new HashMap <MonsterStat, Double> ();
 	}
 	
 	/** Sets up drop rates for this entity.
@@ -139,6 +127,33 @@ public abstract class MobEquipment
 		itemList[5] = this.offhand;
 		
 		return itemList;
+	}
+	
+	/** Returns true if the monster contains the passed Monster Stat
+	 * 	@param stat - The Monster stat being checked */
+	public boolean containsStat (MonsterStat stat)
+	{
+		return this.mobStats.containsKey(stat);
+	}
+	
+	/** Sets a monster's stat value to a new value
+	 * 	@param stat - Monster stat we are changing
+	 *  @param value - Value we are setting the stat to */
+	public void setStat (MonsterStat stat, double value)
+	{
+		this.mobStats.put(stat, value);
+	}
+	
+	/** Returns a monster's stat value based on the passed MonsterStat type
+	 *  @param stat - Type of stat retrieved from this monster
+	 *  @return The stat itself or null if the stat does not exist.  */
+	public Double getStat (MonsterStat stat)
+	{
+		if (this.mobStats.containsKey(stat))
+		{
+			return this.mobStats.get(stat);
+		}
+		return null;
 	}
 	
 	/** Return the drop rates for each item in the mob's inventory */
@@ -195,40 +210,26 @@ public abstract class MobEquipment
 		return this.color;
 	}
 	
-	/** Returns the monster's custom health points */
-	public double getHealth ()
-	{
-		return this.health;
-	}
-	
 	/** Returns the monster's active potion effects as an ArrayList */
 	public ArrayList <PotionEffect> getEffects ()
 	{
 		return this.effects;
 	}
 	
-	/** Returns the monster's custom base attack damage */
-	public double getBaseAttackDamage ()
-	{
-		return this.attackDamage;
-	}
-	
-	/** Returns the monster's hunt on spawn radius */
-	public int getHuntOnSpawnRaduis ()
-	{
-		return this.huntRadius;
-	}
-	
 	/** Returns this monster's spawnweight */
 	public int getSpawnWeight ()
 	{
-		return this.spawnWeight;
+		if (this.mobStats.containsKey(MonsterStat.SPAWN_WEIGHT))
+		{
+			return this.mobStats.get(MonsterStat.SPAWN_WEIGHT).intValue();
+		}
+		return -1;
 	}
 	
 	/** Sets this monster's spawn weight to a new value */
 	public void setSpawnWeight (int spawnWeight)
 	{
-		this.spawnWeight = spawnWeight;
+		this.mobStats.put(MonsterStat.SPAWN_WEIGHT, (double) spawnWeight);
 	}
 	
 	/** Adds biomes to the list of biomes the monster can spawn in */

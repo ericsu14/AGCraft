@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.BruinFootballBoots;
 import com.joojet.plugins.mobs.equipment.chest.BruinTunic;
@@ -21,7 +22,7 @@ public class UCLAArcher extends UCLAFaction
 				+ ChatColor.AQUA + "L" + ChatColor.GOLD + "A" + ChatColor.AQUA + " Archer";
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
-		this.health = 16;
+		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.color = ChatColor.AQUA;
 		this.helmet = new BruinHead ();
 		this.chestplate = new BruinTunic (this.color);

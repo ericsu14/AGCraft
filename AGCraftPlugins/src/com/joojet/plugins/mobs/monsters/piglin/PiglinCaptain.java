@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.MobFlag;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.PiglinCaptainHead;
@@ -17,7 +18,7 @@ public class PiglinCaptain extends MobEquipment
 		super (MonsterType.PIGLIN_CAPTAIN);
 		this.name = "Piglin Captain";
 		this.color = ChatColor.GOLD;
-		this.health = 40;
+		this.setStat(MonsterStat.HEALTH, 40.0);
 		
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		

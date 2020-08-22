@@ -6,6 +6,7 @@ import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -18,7 +19,7 @@ public class AdvancedGolem extends MobEquipment
 		
 		this.name = "Advanced Golem";
 		this.color = ChatColor.LIGHT_PURPLE;
-		this.health = 200;
+		this.setStat(MonsterStat.HEALTH, 200.0);
 		this.addMobFlags(MobFlag.SHOW_NAME);
 		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.WOLF, EntityType.SNOWMAN);
 		

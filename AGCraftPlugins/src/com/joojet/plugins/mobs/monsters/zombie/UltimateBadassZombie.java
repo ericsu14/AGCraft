@@ -5,6 +5,7 @@ import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightNetheriteBoots;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
@@ -21,7 +22,7 @@ public class UltimateBadassZombie extends MobEquipment
 		this.name = "Shadow Clone joojetsu";
 		this.color = ChatColor.GOLD;
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
-		this.health = 14;
+		this.setStat(MonsterStat.HEALTH, 14.0);
 		
 		this.addBiomes(Biome.THE_VOID);
 		

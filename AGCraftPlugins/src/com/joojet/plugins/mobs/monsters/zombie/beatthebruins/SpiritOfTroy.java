@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.USCSpikedBoots;
 import com.joojet.plugins.mobs.equipment.chest.USCBandUniformTop;
@@ -22,7 +23,7 @@ public class SpiritOfTroy extends USCFaction
 		this.name = "The " + ChatColor.GOLD + "Spirit " + ChatColor.RED + "of " + ChatColor.GOLD + "Troy";
 		this.color = ChatColor.RED;
 		this.addPotionEffect(CustomPotionEffect.SPEED);
-		this.health = 12;
+		this.setStat(MonsterStat.HEALTH, 12.0);
 		this.helmet = new USCBandHead (this.color);
 		this.chestplate = new USCBandUniformTop (this.color);
 		this.leggings = new USCBandUniformBottom (this.color);

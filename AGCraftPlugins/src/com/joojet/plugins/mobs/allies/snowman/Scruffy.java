@@ -6,6 +6,7 @@ import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LetItGo;
 import com.joojet.plugins.mobs.equipment.head.ScruffyFace;
@@ -19,7 +20,7 @@ public class Scruffy extends MobEquipment
 		this.addBiomes(Biome.THE_VOID);
 		this.name = "Scruffy";
 		this.color = ChatColor.GOLD;
-		this.health = 40;
+		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.addMobFlags(MobFlag.SHOW_NAME);
 		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.WOLF, EntityType.SNOWMAN, EntityType.IRON_GOLEM);
 		

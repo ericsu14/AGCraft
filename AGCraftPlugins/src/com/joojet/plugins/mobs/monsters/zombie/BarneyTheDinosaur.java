@@ -5,6 +5,7 @@ import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.BarneyFeet;
 import com.joojet.plugins.mobs.equipment.chest.BarneyChest;
@@ -19,8 +20,8 @@ public class BarneyTheDinosaur extends MobEquipment
 	public BarneyTheDinosaur ()
 	{
 		super (MonsterType.BARNEY_THE_DINOSAUR);
-		this.huntRadius = 50;
-		this.health = 8;
+		this.setStat(MonsterStat.HEALTH, 8.0);
+		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 50.0);
 		
 		this.addBiomes(Biome.FLOWER_FOREST, Biome.DARK_FOREST, Biome.DARK_FOREST_HILLS,
 				Biome.SWAMP, Biome.SWAMP_HILLS, Biome.JUNGLE, Biome.JUNGLE_HILLS, Biome.JUNGLE_EDGE,
