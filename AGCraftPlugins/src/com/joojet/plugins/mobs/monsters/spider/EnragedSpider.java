@@ -5,6 +5,7 @@ import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.weapons.FireVenomFang;
@@ -31,5 +32,7 @@ public class EnragedSpider extends MobEquipment
 		this.weapon = new FireVenomFang (this.color);
 		// Chestplate
 		this.chestplate = new DarkNetheriteChestplate (this.color);
+		
+		this.setStat(MonsterStat.EXPERIENCE, 22.0);
 	}
 }

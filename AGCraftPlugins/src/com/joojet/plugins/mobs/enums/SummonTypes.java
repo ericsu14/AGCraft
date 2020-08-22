@@ -12,7 +12,8 @@ public enum SummonTypes
 	COOKIE,
 	SNOWBALL,
 	THE_DOOM_SLAYER,
-	BARNEY;
+	BARNEY,
+	SKULL_KID;
 	
 	public SummoningScroll getSummon ()
 	{
@@ -36,6 +37,8 @@ public enum SummonTypes
 				return new SummonDoomGuy();
 			case BARNEY:
 				return new SummonBarney();
+			case SKULL_KID:
+				return new SummonSkullKid();
 			default:
 				break;
 		}

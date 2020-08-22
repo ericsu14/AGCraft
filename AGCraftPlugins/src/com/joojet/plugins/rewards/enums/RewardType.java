@@ -18,6 +18,7 @@ import com.joojet.plugins.mobs.scrolls.SummonCookie;
 import com.joojet.plugins.mobs.scrolls.SummonDoomGuy;
 import com.joojet.plugins.mobs.scrolls.SummonFrolf;
 import com.joojet.plugins.mobs.scrolls.SummonJohnJae;
+import com.joojet.plugins.mobs.scrolls.SummonSkullKid;
 import com.joojet.plugins.mobs.scrolls.SummonSnowball;
 
 public enum RewardType 
@@ -40,7 +41,8 @@ public enum RewardType
 	BRUIN_SHIELD,
 	BRUIN_HEAD,
 	DOOM_GUY,
-	BARNEY;
+	BARNEY,
+	SKULL_KID;
 	
 	public ItemStack getReward ()
 	{
@@ -84,6 +86,8 @@ public enum RewardType
 				return new SummonDoomGuy ();
 			case BARNEY:
 				return new SummonBarney ();
+			case SKULL_KID:
+				return new SummonSkullKid ();
 			default:
 				break;
 		}

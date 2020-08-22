@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.monsters.zombie_pigmen;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.head.ZombiePigmenHead;
 import com.joojet.plugins.mobs.equipment.leggings.RoyalGoldLeggings;
@@ -24,6 +25,6 @@ public class VeteranZombiePigmen extends MobEquipment
 		this.helmet = new ZombiePigmenHead (this.color);
 		this.leggings = new RoyalGoldLeggings (this.color);
 		this.weapon = new PigmanSword (this.color);
-		
+		this.setStat(MonsterStat.EXPERIENCE, 25.0);
 	}
 }

@@ -34,5 +34,7 @@ public class UCLAJock extends UCLAFaction
 		this.leggings = new BruinLeggings (this.color);
 		this.boots = new BruinFootballBoots (this.color);
 		this.offhand = new BruinShield ();
+		
+		this.setStat(MonsterStat.EXPERIENCE, 24.0);
 	}
 }

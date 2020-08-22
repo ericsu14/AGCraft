@@ -347,6 +347,14 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			LivingEntity entity = (LivingEntity) event.getEntity();
 			BossBarAPI.removeBossBar(entity);
+			
+			// Modifies the entity's experience drops if it has any custom experience
+			MobEquipment entityEquipment = getMobEquipmentFromEntity(entity);
+			if (entityEquipment != null && entityEquipment.containsStat(MonsterStat.EXPERIENCE)
+					&& event.getDroppedExp() > 0.0)
+			{
+				event.setDroppedExp(entityEquipment.getStat(MonsterStat.EXPERIENCE).intValue());
+			}
 		}
 	}
 	

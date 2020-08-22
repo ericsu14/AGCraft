@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.monsters.husk;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.RoyalGoldBoots;
 import com.joojet.plugins.mobs.equipment.chest.RoyalGoldChestplate;
@@ -26,5 +27,7 @@ public class FallenPharaoh extends MobEquipment
 		this.leggings = new RoyalGoldLeggings (this.color);
 		this.boots = new RoyalGoldBoots (this.color);
 		this.weapon = new PharaohStaff (this.color);
+		
+		this.setStat(MonsterStat.EXPERIENCE, 27.0);
 	}
 }

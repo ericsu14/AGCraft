@@ -26,26 +26,22 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		
 		this.addBiomes(Biome.THE_VOID);
-		
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
 		// Weapon
 		this.weapon = new SpiritualFantasy (this.color);
-		
 		// Offhand
 		this.offhand = new ThanosArrow (this.color);
-		
 		// Helmet
 		this.helmet = new AGSpotted (this.color);
-		
 		// Chestplate
 		this.chestplate = new DarkNetheriteChestplate (this.color);
-		
 		// Leggings
 		this.leggings = new DarkNetheriteLeggings (this.color);
-		
 		// Boots
 		this.boots = new LightweightNetheriteBoots (this.color);
+		
+		this.setStat(MonsterStat.EXPERIENCE, 37.0);
 		
 	}
 }

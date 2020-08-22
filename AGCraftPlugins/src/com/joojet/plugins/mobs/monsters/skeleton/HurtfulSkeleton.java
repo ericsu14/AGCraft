@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightIronBoots;
 import com.joojet.plugins.mobs.equipment.chest.BulletproofIronChestplate;
@@ -37,5 +38,7 @@ public class HurtfulSkeleton extends MobEquipment
 		this.leggings = new ReinforcedIronLeggings (this.color);
 		// Boots
 		this.boots = new LightweightIronBoots (this.color);
+		
+		this.setStat(MonsterStat.EXPERIENCE, 18.0);
 	}
 }

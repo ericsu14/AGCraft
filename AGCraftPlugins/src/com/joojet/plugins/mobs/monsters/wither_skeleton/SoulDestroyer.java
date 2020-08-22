@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightNetheriteBoots;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
@@ -34,5 +35,7 @@ public class SoulDestroyer extends MobEquipment
 		this.chestplate = new DarkNetheriteChestplate (this.color);
 		this.boots = new LightweightNetheriteBoots (this.color);
 		this.weapon = new PerpetualTorment (this.color);
+		
+		this.setStat(MonsterStat.EXPERIENCE, 35.0);
 	}
 }

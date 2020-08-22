@@ -33,6 +33,5 @@ public class UncommonZombie extends MobEquipment
 		this.leggings = new ReinforcedChainmailLeggings (this.color);
 		// Boots
 		this.boots = new LightweightChainmailBoots (this.color);
-		
 	}
 }

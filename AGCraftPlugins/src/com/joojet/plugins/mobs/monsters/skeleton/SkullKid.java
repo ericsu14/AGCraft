@@ -33,7 +33,8 @@ public class SkullKid extends MobEquipment
 		this.setDropRates(0.25f, 0.10f, 0.10f, 0.10f, 0.05f, 0.10f);
 		
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE,
-				CustomPotionEffect.SPEED);
+				CustomPotionEffect.SPEED,
+				CustomPotionEffect.UNDEAD_HEAL);
 		
 		this.helmet = new SkullKidHelmet (this.color);
 		this.chestplate = new SkullKidChest (this.color);
@@ -41,5 +42,7 @@ public class SkullKid extends MobEquipment
 		this.boots = new SkullKidBoots (this.color);
 		this.weapon = new ATerribleFate (this.color);
 		this.offhand = new CursedArrow (this.color);
+		
+		this.setStat(MonsterStat.EXPERIENCE, 250.0);
 	}
 }

@@ -27,7 +27,8 @@ public class BarneyTheDinosaur extends MobEquipment
 				Biome.SWAMP, Biome.SWAMP_HILLS, Biome.JUNGLE, Biome.JUNGLE_HILLS, Biome.JUNGLE_EDGE,
 				Biome.GRAVELLY_MOUNTAINS, Biome.SUNFLOWER_PLAINS);
 		this.addPotionEffect(CustomPotionEffect.SPEED,
-				CustomPotionEffect.FIRE_RESISTANCE);
+				CustomPotionEffect.FIRE_RESISTANCE,
+				CustomPotionEffect.UNDEAD_HEAL);
 		this.addMobFlags(MobFlag.HUNT_ON_SPAWN, MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME,
 				MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER);
 		
@@ -40,5 +41,7 @@ public class BarneyTheDinosaur extends MobEquipment
 		this.boots = new BarneyFeet (this.color);
 		this.weapon = new BarneyDagger (this.color);
 		this.offhand = new BarneyTotem (this.color);
+		
+		this.setStat(MonsterStat.EXPERIENCE, 100.0);
 	}
 }

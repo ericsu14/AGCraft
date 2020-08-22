@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.DarkNetheriteHelmet;
@@ -33,6 +34,7 @@ public class SoulEater extends MobEquipment
 		this.helmet = new DarkNetheriteHelmet (this.color);
 		// Chestplate
 		this.chestplate = new DarkNetheriteChestplate (this.color);
+		this.setStat(MonsterStat.EXPERIENCE, 25.0);
 		
 	}
 }

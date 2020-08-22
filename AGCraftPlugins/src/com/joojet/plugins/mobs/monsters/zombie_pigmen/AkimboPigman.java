@@ -31,5 +31,7 @@ public class AkimboPigman extends MobEquipment
 		this.helmet = new DarkNetheriteHelmet (this.color);
 		this.weapon = new PigmanSword (this.color);
 		this.offhand = new PigmanDagger (this.color);
+		
+		this.setStat(MonsterStat.EXPERIENCE, 40.0);
 	}
 }

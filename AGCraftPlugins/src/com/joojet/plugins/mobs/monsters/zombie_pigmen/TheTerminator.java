@@ -39,5 +39,7 @@ public class TheTerminator extends MobEquipment
 		this.boots = new LightweightNetheriteBoots (this.color);
 		this.weapon = new PigmanSword (this.color);
 		this.offhand = new PigmanDagger (this.color);
+		
+		this.setStat(MonsterStat.EXPERIENCE, 60.0);
 	}
 }

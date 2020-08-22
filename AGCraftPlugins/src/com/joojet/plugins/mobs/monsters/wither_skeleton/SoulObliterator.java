@@ -41,5 +41,7 @@ public class SoulObliterator extends MobEquipment
 		this.boots = new LightweightDiamondBoots (this.color);
 		this.weapon = new AngelOfDeath (this.color);
 		this.offhand = new EnhancedWitheringArrow (this.color);
+		
+		this.setStat(MonsterStat.EXPERIENCE, 25.0);
 	}
 }

@@ -37,5 +37,7 @@ public class BadassZombie extends MobEquipment
 		this.leggings = new ReinforcedIronLeggings (this.color);
 		// Boots
 		this.boots = new LightweightIronBoots (this.color);
+		
+		this.setStat(MonsterStat.EXPERIENCE, 25.0);
 	}
 }

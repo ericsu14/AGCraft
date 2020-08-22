@@ -29,5 +29,7 @@ public class UCLAArcher extends UCLAFaction
 		this.leggings = new BruinLeggings (this.color);
 		this.boots = new BruinFootballBoots (this.color);
 		this.weapon = new SpiritualFantasy (ChatColor.GOLD);
+		
+		this.setStat(MonsterStat.EXPERIENCE, 20.0);
 	}
 }

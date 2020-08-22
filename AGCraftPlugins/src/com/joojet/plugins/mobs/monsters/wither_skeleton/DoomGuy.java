@@ -32,7 +32,8 @@ public class DoomGuy extends MobEquipment
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
 		
-		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
+		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE,
+				CustomPotionEffect.UNDEAD_HEAL);
 		
 		this.addFactions(Faction.DOOM_GUY);
 		this.addRivalFactions(Faction.NETHER, Faction.USC, Faction.UCLA);
@@ -49,5 +50,7 @@ public class DoomGuy extends MobEquipment
 		this.boots = new DoomGuyFeet (this.color);
 		this.weapon = new DoomBlade (this.color);
 		this.offhand = new ItemStack (Material.WITHER_SKELETON_SKULL, 1);
+		
+		this.setStat(MonsterStat.EXPERIENCE, 250.0);
 	}
 }
