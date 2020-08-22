@@ -163,7 +163,14 @@ public class AmplifiedMobSpawner implements Listener
 			Projectile projectile = (Projectile) event.getDamager();
 			if (projectile.getShooter() instanceof Player)
 			{
-				BossBarAPI.addPlayerToBossBar((Player) projectile.getShooter(), entity); 
+				Player shooter = (Player) projectile.getShooter();
+				BossBarAPI.addPlayerToBossBar(shooter, entity);
+				// Causes the entity to hunt him down if attacked by player arrow
+				if (entity instanceof Mob)
+				{
+					Mob mob = (Mob) entity;
+					mob.setTarget(shooter);
+				}
 			}
 		}
 	}
@@ -202,21 +209,12 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			// Check for persistent mob flags
 			MobEquipment hunterEquipment = getMobEquipmentFromEntity (hunter);
-			if (hunterEquipment != null && hunter instanceof Mob)
+			if (hunterEquipment.getMobFlags().contains(MobFlag.PERSISTENT_ATTACKER)
+					&& hunterEquipment.containsStat(MonsterStat.HUNT_ON_SPAWN_RADIUS))
 			{
-				Mob hunterMob = (Mob) hunter;
-				// In this case, make the mob hunt any nearby players based on its hunt on spawn radius
-				if (hunterEquipment.getMobFlags().contains(MobFlag.PERSISTENT_ATTACKER)
-						&& hunterEquipment.containsStat(MonsterStat.HUNT_ON_SPAWN_RADIUS))
-				{
-					ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(hunter, 
-							hunterEquipment.getStat(MonsterStat.HUNT_ON_SPAWN_RADIUS).intValue());
-					if (!nearbyPlayers.isEmpty())
-					{
-						hunterMob.setTarget(nearbyPlayers.get(0));
-					}
-				}
+				this.huntNearbyPlayer(hunter, hunterEquipment.getStat(MonsterStat.HUNT_ON_SPAWN_RADIUS).intValue());
 			}
+			
 			// Attempts to remove the player from the entity's
 			// boss bar if the reason is set to FORGOT_TARGET
 			if (hunted instanceof Player)
@@ -510,6 +508,21 @@ public class AmplifiedMobSpawner implements Listener
 			return true;
 		}
 		return false;
+	}
+	
+	/** Causes a custom mob to hunt a nearby player */
+	private void huntNearbyPlayer (LivingEntity hunter, int radius)
+	{
+		if (hunter instanceof Mob)
+		{
+			Mob hunterMob = (Mob) hunter;
+			// In this case, make the mob hunt any nearby players based on the passed radius
+			ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(hunter, radius);
+			if (!nearbyPlayers.isEmpty())
+			{
+				hunterMob.setTarget(nearbyPlayers.get(0));
+			}
+		}
 	}
 	
 	/** Forcefully causes a custom monster to retarget another eligible mob based on its properties */
