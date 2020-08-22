@@ -12,7 +12,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Mob;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.WanderingTrader;
@@ -166,9 +166,9 @@ public class AmplifiedMobSpawner implements Listener
 				Player shooter = (Player) projectile.getShooter();
 				BossBarAPI.addPlayerToBossBar(shooter, entity);
 				// Causes the entity to hunt him down if attacked by player arrow
-				if (entity instanceof Mob)
+				if (entity instanceof Monster)
 				{
-					Mob mob = (Mob) entity;
+					Monster mob = (Monster) entity;
 					mob.setTarget(shooter);
 				}
 			}
@@ -197,8 +197,10 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		// Do nothing if the targeting event is set by plugin
-		if (event.getReason() == TargetReason.CUSTOM)
+		if (event.getReason() == TargetReason.CUSTOM
+				|| event.getReason() == TargetReason.UNKNOWN)
 		{
+			event.setCancelled(false);
 			return;
 		}
 		
@@ -209,18 +211,13 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			// Check for persistent mob flags
 			MobEquipment hunterEquipment = getMobEquipmentFromEntity (hunter);
-			if (hunterEquipment.getMobFlags().contains(MobFlag.PERSISTENT_ATTACKER)
+			if (hunterEquipment != null
+					&& hunterEquipment.getMobFlags().contains(MobFlag.PERSISTENT_ATTACKER)
 					&& hunterEquipment.containsStat(MonsterStat.HUNT_ON_SPAWN_RADIUS))
 			{
 				this.huntNearbyPlayer(hunter, hunterEquipment.getStat(MonsterStat.HUNT_ON_SPAWN_RADIUS).intValue());
 			}
-			
-			// Attempts to remove the player from the entity's
-			// boss bar if the reason is set to FORGOT_TARGET
-			if (hunted instanceof Player)
-			{
-				BossBarAPI.removePlayerFromBossBar((Player) hunted, hunter);
-			}
+			return;
 		}
 		
 		boolean cancelEvent = this.checkTargetEvent(hunter, hunted);
@@ -261,10 +258,10 @@ public class AmplifiedMobSpawner implements Listener
 		
 		LivingEntity damager = (LivingEntity) event.getDamager();
 		
-		if (entity instanceof Mob && 
+		if (entity instanceof Monster && 
 				!entityEquipment.getIgnoreList().contains(damager.getType()))
 		{
-			Mob mob = (Mob) entity;
+			Monster mob = (Monster) entity;
 			mob.setTarget(damager);
 		}
 	}
@@ -487,9 +484,6 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			return false;
 		}
-		
-		// Return true if the hunter and hunted is in the same faction
-		
 				
 		// Lastly, check if the hunter has any rivaling factions and
 		// the hunted is in at least one faction
@@ -513,9 +507,9 @@ public class AmplifiedMobSpawner implements Listener
 	/** Causes a custom mob to hunt a nearby player */
 	private void huntNearbyPlayer (LivingEntity hunter, int radius)
 	{
-		if (hunter instanceof Mob)
+		if (hunter instanceof Monster)
 		{
-			Mob hunterMob = (Mob) hunter;
+			Monster hunterMob = (Monster) hunter;
 			// In this case, make the mob hunt any nearby players based on the passed radius
 			ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(hunter, radius);
 			if (!nearbyPlayers.isEmpty())
@@ -599,7 +593,7 @@ public class AmplifiedMobSpawner implements Listener
 		// Retargets the monster to another eligible mob, if it exists.
 		if (foundVictim && victim != null)
 		{
-			Mob hunterMob = (Mob) hunter;
+			Monster hunterMob = (Monster) hunter;
 			hunterMob.setTarget(victim);
 			
 			// If the entity is a player, attempt to add that player

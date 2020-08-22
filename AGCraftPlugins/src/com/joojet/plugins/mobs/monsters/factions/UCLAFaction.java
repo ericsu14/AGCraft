@@ -12,8 +12,8 @@ public class UCLAFaction extends MobEquipment
 	{
 		super (type);
 		this.addFactions(Faction.UCLA);
-		this.addRivalFactions(Faction.USC, Faction.DOOM_GUY, Faction.PHANTOM);
-		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.WITHER_SKELETON,
+		this.addRivalFactions(Faction.USC, Faction.PHANTOM);
+		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.SKELETON,
 				EntityType.PLAYER, EntityType.PHANTOM);
 		this.addEntitiesToIgnoreList(EntityType.CREEPER);
 	}
