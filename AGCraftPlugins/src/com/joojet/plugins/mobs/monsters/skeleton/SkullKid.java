@@ -27,7 +27,8 @@ public class SkullKid extends MobEquipment
 		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		this.color = ChatColor.DARK_RED;
-		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING, MobFlag.HUNT_ON_SPAWN, MobFlag.BOSS_BAR);
+		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING, 
+				MobFlag.HUNT_ON_SPAWN, MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER);
 		
 		this.setDropRates(0.25f, 0.10f, 0.10f, 0.10f, 0.05f, 0.10f);
 		

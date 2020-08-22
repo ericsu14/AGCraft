@@ -29,7 +29,7 @@ public class BarneyTheDinosaur extends MobEquipment
 		this.addPotionEffect(CustomPotionEffect.SPEED,
 				CustomPotionEffect.FIRE_RESISTANCE);
 		this.addMobFlags(MobFlag.HUNT_ON_SPAWN, MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME,
-				MobFlag.BOSS_BAR);
+				MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER);
 		
 		this.name = "Barney the Dinosaur";
 		this.color = ChatColor.DARK_PURPLE;

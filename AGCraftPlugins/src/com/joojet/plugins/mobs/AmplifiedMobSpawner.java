@@ -39,6 +39,7 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MobFlag;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -200,10 +201,27 @@ public class AmplifiedMobSpawner implements Listener
 		LivingEntity hunter = (LivingEntity) event.getEntity();
 		LivingEntity hunted = event.getTarget();
 		
-		// Attempts to remove the player from the entity's
-		// boss bar if the reason is set to FORGOT_TARGET
 		if (event.getReason() == TargetReason.FORGOT_TARGET)
 		{
+			// Check for persistent mob flags
+			MobEquipment hunterEquipment = getMobEquipmentFromEntity (hunter);
+			if (hunterEquipment != null && hunter instanceof Mob)
+			{
+				Mob hunterMob = (Mob) hunter;
+				// In this case, make the mob hunt any nearby players based on its hunt on spawn radius
+				if (hunterEquipment.getMobFlags().contains(MobFlag.PERSISTENT_ATTACKER)
+						&& hunterEquipment.containsStat(MonsterStat.HUNT_ON_SPAWN_RADIUS))
+				{
+					ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(hunter, 
+							hunterEquipment.getStat(MonsterStat.HUNT_ON_SPAWN_RADIUS).intValue());
+					if (!nearbyPlayers.isEmpty())
+					{
+						hunterMob.setTarget(nearbyPlayers.get(0));
+					}
+				}
+			}
+			// Attempts to remove the player from the entity's
+			// boss bar if the reason is set to FORGOT_TARGET
 			if (hunted instanceof Player)
 			{
 				BossBarAPI.removePlayerFromBossBar((Player) hunted, hunter);

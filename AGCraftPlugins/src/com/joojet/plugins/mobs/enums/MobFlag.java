@@ -11,5 +11,7 @@ public enum MobFlag
 	/** Determines if the monster should automatically hunt a random nearby player upon spawning */
 	HUNT_ON_SPAWN,
 	/** Displays a boss bar for this custom mob */
-	BOSS_BAR;
+	BOSS_BAR,
+	/** When enabled, the monster will never lose sight of its prey (meaning that it will never "forget" its enemy) */
+	PERSISTENT_ATTACKER;
 }

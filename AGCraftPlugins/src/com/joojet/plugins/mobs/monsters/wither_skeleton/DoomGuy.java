@@ -40,7 +40,8 @@ public class DoomGuy extends MobEquipment
 				EntityType.MAGMA_CUBE, EntityType.SKELETON, EntityType.ZOMBIE, EntityType.CREEPER,
 				EntityType.SPIDER, EntityType.CAVE_SPIDER, EntityType.PLAYER);
 		
-		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
+		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME, MobFlag.BOSS_BAR,
+				MobFlag.PERSISTENT_ATTACKER);
 		
 		this.helmet = new DoomSlayerHead (this.color);
 		this.chestplate = new DoomChest (this.color);
