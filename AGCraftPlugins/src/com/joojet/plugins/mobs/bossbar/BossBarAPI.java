@@ -98,7 +98,12 @@ public class BossBarAPI
 	/** Gets the Boss Bar UUID key from the Living Entity's metadata */
 	public static UUID getBossBarUUID (LivingEntity entity)
 	{
-		return UUID.fromString(new BossMetadata().getStringMetadata((PersistentDataHolder) entity));
+		String entityUUID = new BossMetadata().getStringMetadata((PersistentDataHolder) entity);
+		if (entityUUID != null)
+		{
+			return UUID.fromString(entityUUID);
+		}
+		return null;
 	}
 	
 	/** Attaches the entity's UUID as a new metadata for identifying custom boss bar events */

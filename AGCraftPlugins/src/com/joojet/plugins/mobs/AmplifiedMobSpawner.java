@@ -106,8 +106,8 @@ public class AmplifiedMobSpawner implements Listener
 			p.sendMessage("The enemy has " + (e.getHealth() - event.getFinalDamage()) + " health remaining");
 			
 			// Test metadata
-			String customName = new MonsterTypeMetadata ().getStringMetadata((PersistentDataHolder) e);
-			if (e != null && !e.isEmpty())
+			String customName = new MonsterTypeMetadata().getStringMetadata((PersistentDataHolder) e);
+			if (customName != null)
 			{
 				p.sendMessage("Custom name: " + customName);
 			}
