@@ -196,14 +196,6 @@ public class AmplifiedMobSpawner implements Listener
 			return;
 		}
 		
-		// Do nothing if the targeting event is set by plugin
-		if (event.getReason() == TargetReason.CUSTOM
-				|| event.getReason() == TargetReason.UNKNOWN)
-		{
-			event.setCancelled(false);
-			return;
-		}
-		
 		LivingEntity hunter = (LivingEntity) event.getEntity();
 		LivingEntity hunted = event.getTarget();
 		
