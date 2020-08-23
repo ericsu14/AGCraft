@@ -36,9 +36,10 @@ public class DoomGuy extends MobEquipment
 				CustomPotionEffect.UNDEAD_HEAL);
 		
 		this.addFactions(Faction.DOOM_GUY);
-		this.addRivalFactions(Faction.NETHER);
+		this.addRivalFactions(Faction.NETHER, Faction.USC, Faction.UCLA);
 		this.addTargetsToHitList(EntityType.ZOMBIFIED_PIGLIN,
-				EntityType.MAGMA_CUBE, EntityType.HOGLIN, EntityType.CREEPER, EntityType.ZOMBIE, EntityType.SKELETON);
+				EntityType.MAGMA_CUBE, EntityType.HOGLIN, EntityType.CREEPER, EntityType.ZOMBIE, EntityType.SKELETON,
+				EntityType.WITHER_SKELETON, EntityType.WITCH, EntityType.HOGLIN);
 		
 		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME, MobFlag.BOSS_BAR,
 				MobFlag.PERSISTENT_ATTACKER);

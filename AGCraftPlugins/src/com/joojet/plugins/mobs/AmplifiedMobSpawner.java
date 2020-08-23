@@ -209,13 +209,18 @@ public class AmplifiedMobSpawner implements Listener
 		
 		if (event.getReason() == TargetReason.FORGOT_TARGET)
 		{
-			// Check for persistent mob flags
+			// Check for persistent mob flags. If so, force the entity to hunt a nearby player
 			MobEquipment hunterEquipment = getMobEquipmentFromEntity (hunter);
 			if (hunterEquipment != null
 					&& hunterEquipment.getMobFlags().contains(MobFlag.PERSISTENT_ATTACKER)
 					&& hunterEquipment.containsStat(MonsterStat.HUNT_ON_SPAWN_RADIUS))
 			{
-				this.huntNearbyPlayer(hunter, hunterEquipment.getStat(MonsterStat.HUNT_ON_SPAWN_RADIUS).intValue());
+				Player p = this.getNearbyPlayer(hunter, hunterEquipment.getStat(MonsterStat.HUNT_ON_SPAWN_RADIUS).intValue());
+				if (p != null)
+				{
+					event.setTarget(p);
+					event.setCancelled(false);
+				}
 			}
 			return;
 		}
@@ -224,17 +229,21 @@ public class AmplifiedMobSpawner implements Listener
 		
 		if (cancelEvent)
 		{
-			event.setCancelled(true);
-			this.retargetCustomMob(hunter);
-		}
-		else
-		{
-			// If the entity is a player, attempt to add that player
-			// to the hunters's boss bar if it exists
-			if (hunted instanceof Player)
+			LivingEntity newTarget = this.retargetCustomMob(hunter);
+			
+			event.setCancelled(newTarget == null);
+			if (newTarget != null)
 			{
-				BossBarAPI.addPlayerToBossBar((Player) hunted, hunter);
+				event.setTarget(newTarget);
 			}
+			hunted = newTarget;
+		}
+		
+		// If the entity is a player, attempt to add that player
+		// to the hunters's boss bar if it exists
+		if (hunted != null && hunted instanceof Player)
+		{
+			BossBarAPI.addPlayerToBossBar((Player) hunted, hunter);
 		}
 	}
 	
@@ -504,23 +513,20 @@ public class AmplifiedMobSpawner implements Listener
 		return false;
 	}
 	
-	/** Causes a custom mob to hunt a nearby player */
-	private void huntNearbyPlayer (LivingEntity hunter, int radius)
+	/** Returns the player that is nearest to the passed entity if it exists. */
+	private Player getNearbyPlayer (LivingEntity hunter, int radius)
 	{
-		if (hunter instanceof Monster)
+		ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(hunter, radius);
+		if (!nearbyPlayers.isEmpty())
 		{
-			Monster hunterMob = (Monster) hunter;
-			// In this case, make the mob hunt any nearby players based on the passed radius
-			ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(hunter, radius);
-			if (!nearbyPlayers.isEmpty())
-			{
-				hunterMob.setTarget(nearbyPlayers.get(0));
-			}
+			return nearbyPlayers.get(0);
 		}
+		return null;
 	}
 	
-	/** Forcefully causes a custom monster to retarget another eligible mob based on its properties */
-	private void retargetCustomMob (LivingEntity hunter)
+	/** Returns an eligible entity (based on the living entity's hit, ignore, and faction list) that is near
+	 * the passed hunter. Returns null if no entity is found within a 20 block radius of the hunter. */
+	private LivingEntity retargetCustomMob (LivingEntity hunter)
 	{
 		double scanRadius = 20.0;
 		
@@ -531,7 +537,7 @@ public class AmplifiedMobSpawner implements Listener
 		
 		if (hunterEquipment == null)
 		{
-			return;
+			return null;
 		}
 		
 		LivingEntity victim = null;
@@ -590,18 +596,6 @@ public class AmplifiedMobSpawner implements Listener
 			}
 		}
 		
-		// Retargets the monster to another eligible mob, if it exists.
-		if (foundVictim && victim != null)
-		{
-			Monster hunterMob = (Monster) hunter;
-			hunterMob.setTarget(victim);
-			
-			// If the entity is a player, attempt to add that player
-			// to the hunters's boss bar if it exists
-			if (victim instanceof Player)
-			{
-				BossBarAPI.addPlayerToBossBar((Player) victim, hunter);
-			}
-		}
+		return victim;
 	}
 }
