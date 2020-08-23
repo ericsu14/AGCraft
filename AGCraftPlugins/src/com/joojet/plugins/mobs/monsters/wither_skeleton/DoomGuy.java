@@ -24,7 +24,7 @@ public class DoomGuy extends MobEquipment
 	{
 		super (MonsterType.DOOM_GUY);
 		this.name = "The Doom Slayer";
-		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.05f, 0.15f);
+		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.05f, 1.00f);
 		this.color = ChatColor.DARK_RED;
 		this.setStat(MonsterStat.HEALTH, 50.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 125.0);

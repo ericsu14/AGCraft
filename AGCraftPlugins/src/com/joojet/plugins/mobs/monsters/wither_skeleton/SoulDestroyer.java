@@ -23,6 +23,8 @@ public class SoulDestroyer extends MobEquipment
 		this.name = "Soul Destroyer";
 		this.color = ChatColor.LIGHT_PURPLE;
 		
+		this.setDropRates(0.15f, 0.03f, 0.03f, 0.03f, 0.05f, 0.15f);
+		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
 		

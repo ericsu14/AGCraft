@@ -28,6 +28,8 @@ public class SoulObliterator extends MobEquipment
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		
+		this.setDropRates(0.15f, 0.03f, 0.03f, 0.03f, 0.05f, 0.15f);
+		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
 		
