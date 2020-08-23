@@ -596,6 +596,6 @@ public class AmplifiedMobSpawner implements Listener
 			}
 		}
 		
-		return victim;
+		return foundVictim ? victim : null;
 	}
 }
