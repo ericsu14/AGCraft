@@ -169,7 +169,7 @@ public class AmplifiedMobSpawner implements Listener
 				if (entity instanceof Monster)
 				{
 					Monster mob = (Monster) entity;
-					MobEquipment mobEquipment = this.getMobEquipmentFromEntity(entity);
+					MobEquipment mobEquipment = getMobEquipmentFromEntity(entity);
 					if (mobEquipment == null || !mobEquipment.getIgnoreList().contains(shooter.getType()))
 					{
 						mob.setTarget(shooter);
