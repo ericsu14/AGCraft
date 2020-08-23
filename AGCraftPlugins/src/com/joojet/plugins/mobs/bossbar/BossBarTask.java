@@ -3,6 +3,8 @@ package com.joojet.plugins.mobs.bossbar;
 import java.util.UUID;
 
 import org.bukkit.attribute.Attribute;
+import org.bukkit.boss.BossBar;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class BossBarTask extends BukkitRunnable 
@@ -22,16 +24,20 @@ public class BossBarTask extends BukkitRunnable
 	@Override
 	public void run() 
 	{
-		if (this.bossBarNode.entity != null && !this.bossBarNode.entity.isDead())
+		BossBar bossBar = this.bossBarNode.bossBar;
+		LivingEntity entity = this.bossBarNode.entity;
+		
+		if (entity != null && !entity.isDead())
 		{
-			double entityHealth = (this.bossBarNode.entity.getHealth() + this.bossBarNode.entity.getAbsorptionAmount()) /
-					this.bossBarNode.entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-			this.bossBarNode.bossBar.setProgress(entityHealth);
+			// Scales boss bar's progress to the entity's currently health + any absorption bonuses
+			double entityHealth = (entity.getHealth() + entity.getAbsorptionAmount()) /
+					entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+			bossBar.setProgress(entityHealth);
 		}
 		else
 		{
-			this.bossBarNode.bossBar.removeAll();
-			this.bossBarNode.bossBar.setVisible(false);
+			bossBar.removeAll();
+			bossBar.setVisible(false);
 			BossBarAPI.activeBossBars.remove(bossUUID);
 			this.cancel();
 		}
