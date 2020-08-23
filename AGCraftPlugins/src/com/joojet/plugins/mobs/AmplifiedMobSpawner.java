@@ -483,8 +483,19 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			return true;
 		}
+		
 				
-		// Require both hunted and hunter equipment to be active
+		// Thirdly, check for the case where the hunter equipment is
+		// active, but the hunted equipment is not. In this case,
+		// the return result will be set to whatever or not the
+		// hunter has the flag IGNORE_NON_FACTION_ENTITIES enabled.
+		if (hunterEquipment != null && huntedEquipment == null
+				&& hunted.getType() != EntityType.PLAYER)
+		{
+			return hunterEquipment.getMobFlags().contains(MobFlag.IGNORE_NON_FACTION_ENTITIES);
+		}
+		
+		// Require both equipment types to be active at this point
 		if (hunterEquipment == null || huntedEquipment == null)
 		{
 			return false;
@@ -506,7 +517,7 @@ public class AmplifiedMobSpawner implements Listener
 			}
 			return true;
 		}
-		return false;
+		return hunterEquipment.getMobFlags().contains(MobFlag.IGNORE_NON_FACTION_ENTITIES);
 	}
 	
 	/** Returns the player that is nearest to the passed entity if it exists. */
@@ -587,7 +598,8 @@ public class AmplifiedMobSpawner implements Listener
 				}
 				else
 				{
-					foundVictim = true;
+					foundVictim = !(hunterEquipment.getMobFlags().contains(MobFlag.IGNORE_NON_FACTION_ENTITIES))
+							|| victim.getType() == EntityType.PLAYER;
 				}
 			}
 		}

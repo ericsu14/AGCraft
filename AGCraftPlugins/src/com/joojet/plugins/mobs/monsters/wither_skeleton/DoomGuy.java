@@ -39,7 +39,7 @@ public class DoomGuy extends MobEquipment
 		this.addRivalFactions(Faction.NETHER, Faction.USC, Faction.UCLA);
 		this.addTargetsToHitList(EntityType.ZOMBIFIED_PIGLIN,
 				EntityType.MAGMA_CUBE, EntityType.HOGLIN, EntityType.CREEPER, EntityType.ZOMBIE, EntityType.SKELETON,
-				EntityType.WITHER_SKELETON, EntityType.WITCH, EntityType.HOGLIN);
+				EntityType.WITHER_SKELETON, EntityType.WITCH, EntityType.HOGLIN, EntityType.HUSK, EntityType.STRAY);
 		
 		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME, MobFlag.BOSS_BAR,
 				MobFlag.PERSISTENT_ATTACKER);

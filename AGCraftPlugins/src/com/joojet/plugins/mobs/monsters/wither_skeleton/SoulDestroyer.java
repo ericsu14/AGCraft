@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightNetheriteBoots;
@@ -28,9 +29,12 @@ public class SoulDestroyer extends MobEquipment
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
 		
+		this.addMobFlags(MobFlag.IGNORE_NON_FACTION_ENTITIES);
+		
 		this.addFactions(Faction.NETHER);
 		this.addRivalFactions(Faction.DOOM_GUY, Faction.USC, Faction.UCLA);
-		this.addTargetsToHitList(EntityType.WITHER_SKELETON, EntityType.SKELETON, EntityType.ZOMBIE);
+		this.addTargetsToHitList(EntityType.WITHER_SKELETON, EntityType.SKELETON, EntityType.ZOMBIE,
+				EntityType.HUSK, EntityType.STRAY);
 		
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
 		this.helmet = new ItemStack (Material.WITHER_SKELETON_SKULL, 1);

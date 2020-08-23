@@ -26,7 +26,8 @@ public class SoulObliterator extends MobEquipment
 		this.name = "Soul Obliterator";
 		this.color = ChatColor.GOLD;
 		this.setStat(MonsterStat.HEALTH, 16.0);
-		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
+		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR,
+				MobFlag.IGNORE_NON_FACTION_ENTITIES);
 		
 		this.setDropRates(0.15f, 0.03f, 0.03f, 0.03f, 0.05f, 0.15f);
 		
@@ -35,7 +36,8 @@ public class SoulObliterator extends MobEquipment
 		
 		this.addFactions(Faction.NETHER);
 		this.addRivalFactions(Faction.DOOM_GUY, Faction.USC, Faction.UCLA);
-		this.addTargetsToHitList(EntityType.WITHER_SKELETON, EntityType.SKELETON, EntityType.ZOMBIE);
+		this.addTargetsToHitList(EntityType.WITHER_SKELETON, EntityType.SKELETON, EntityType.ZOMBIE,
+				EntityType.HUSK, EntityType.STRAY);
 		
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
 		this.helmet = new ItemStack (Material.WITHER_SKELETON_SKULL, 1);

@@ -13,7 +13,7 @@ public class USCSpikedBoots extends LeatherEquipment
 	{
 		super (Material.LEATHER_BOOTS, EquipmentSlot.FEET, color);
 		this.setDisplayName(ChatColor.RED + "U" + ChatColor.GOLD + "S" + ChatColor.RED + "C" 
-		+ ChatColor.GOLD + " Spikey" + ChatColor.RED + " Shoes");
+		+ ChatColor.GOLD + " Spiky" + ChatColor.RED + " Boots");
 		this.addDefenseAttributes(3.0, 1.0, 0.07);
 		this.addSpeedAttribute(0.20);
 		this.makeUnbreakable();

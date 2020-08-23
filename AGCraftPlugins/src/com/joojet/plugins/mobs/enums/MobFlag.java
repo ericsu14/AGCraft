@@ -13,5 +13,8 @@ public enum MobFlag
 	/** Displays a boss bar for this custom mob */
 	BOSS_BAR,
 	/** When enabled, the monster will never lose sight of its prey (meaning that it will never "forget" its enemy) */
-	PERSISTENT_ATTACKER;
+	PERSISTENT_ATTACKER,
+	/** When enabled, the monster will ignore entities that are not apart of any faction if they are in its hitlist.
+	 *  Does not apply to player */
+	IGNORE_NON_FACTION_ENTITIES;
 }
