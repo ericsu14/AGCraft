@@ -13,7 +13,8 @@ public enum SummonTypes
 	SNOWBALL,
 	THE_DOOM_SLAYER,
 	BARNEY,
-	SKULL_KID;
+	SKULL_KID,
+	SPIRIT_OF_TROY;
 	
 	public SummoningScroll getSummon ()
 	{
@@ -39,6 +40,8 @@ public enum SummonTypes
 				return new SummonBarney();
 			case SKULL_KID:
 				return new SummonSkullKid();
+			case SPIRIT_OF_TROY:
+				return new SummonSpiritOfTroy();
 			default:
 				break;
 		}
