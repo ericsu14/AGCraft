@@ -11,7 +11,7 @@
    - Custom monsters also carry a list of **rivaling factions**. Any mob that is not only in that mob's list of rivaling factions, but also in their hitlist will be hunted down by that monster.
    - Unless a custom monster has the `IGNORE_NON_FACTION_ENTITIES` flag enabled, that mob will also hunt down any monster that is in their hitlist but not in any faction.
       - The `IGNORE_NON_FACTION_ENTITIES` flag disables this behavior.
- - Monsters will now be **instantly aggravated** towards any entity who hit that mob with a projectile, unless that entity is in its `ignore list`.
+ - Monsters will now be **instantly aggravated** towards any player who hit that mob with a projectile, unless that player is in its `ignore list`.
  - Certain custom boss monsters now have a `PERSISTENT_ATTACKER` flag, which makes them less likely to forget their victim that moves outside of their natural hunting radius.
 
 ### Custom Mob Changes
