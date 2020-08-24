@@ -22,7 +22,7 @@ public class USCCreeperShield extends ShieldEquipment
 		
 		this.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ENCHANTS);
 		this.makeUnbreakable();
-		this.addAttackAttributes(2.0, 0.1);
+		this.addAttackAttributes(2.0, 0.0);
 		this.addDefenseAttributes(0.0, 3.0, 0.10);
 		this.addHealthAttributes(10.0);
 	}
