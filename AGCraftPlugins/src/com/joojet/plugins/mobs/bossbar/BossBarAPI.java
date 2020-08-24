@@ -23,7 +23,6 @@ public class BossBarAPI
 	 * 		@param entity - The Living entity we are creating the boss bar for */
 	public static void createBossBar (LivingEntity entity)
 	{
-		BossBar bossBar = AGCraftPlugin.plugin.getServer().createBossBar(entity.getCustomName(), BarColor.RED, BarStyle.SEGMENTED_6, BarFlag.PLAY_BOSS_MUSIC);
 		UUID uuidKey = getBossBarUUID (entity);
 		if (uuidKey == null)
 		{
@@ -32,6 +31,7 @@ public class BossBarAPI
 		}
 		if (!activeBossBars.containsKey(uuidKey))
 		{
+			BossBar bossBar = AGCraftPlugin.plugin.getServer().createBossBar(entity.getCustomName(), BarColor.RED, BarStyle.SEGMENTED_6, BarFlag.PLAY_BOSS_MUSIC);
 			activeBossBars.put(uuidKey, new BossBarNode (bossBar, entity, uuidKey));
 			activateBossBar (uuidKey);
 		}
@@ -110,5 +110,19 @@ public class BossBarAPI
 	public static void setBossMetadataOnEntity (LivingEntity entity)
 	{
 		new BossMetadata(entity.getUniqueId()).addStringMetadata((PersistentDataHolder) entity);
+	}
+	
+	/** Cleans up and disables all active boss bars */
+	public static void cleanup ()
+	{
+		LivingEntity ent;
+		for (BossBarNode node : activeBossBars.values())
+		{
+			ent = node.entity;
+			if (ent != null)
+			{
+				removeBossBar (ent);
+			}
+		}
 	}
 }

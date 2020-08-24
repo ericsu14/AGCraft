@@ -23,6 +23,7 @@ import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.SummoningScrollListener;
+import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.ThemedServerEvent;
 import com.joojet.plugins.mobs.interpreter.ThemedServerEventInterpreter;
 import com.joojet.plugins.rewards.RewardManager;
@@ -127,7 +128,8 @@ public class AGCraftPlugin extends JavaPlugin
 	@Override
 	public void onDisable ()
 	{
-
+		// Removes all active boss bars
+		BossBarAPI.cleanup();
 	}
 	
 	/** Loads in the server config file and initializes its variables to the plugin */
