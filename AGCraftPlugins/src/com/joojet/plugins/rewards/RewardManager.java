@@ -96,7 +96,8 @@ public class RewardManager implements Listener
 								RewardType.FROLF, 
 								RewardType.GOLDEN_CARROTS, 
 								RewardType.ENCHANTED_GOLDEN_APPLE,
-								RewardType.JOHN_JAE);
+								RewardType.ETERNAL_MOCKTAIL,
+								RewardType.USC_CREEPER_SHIELD);
 						break;
 					default:
 						break;

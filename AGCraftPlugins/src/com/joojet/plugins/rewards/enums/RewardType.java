@@ -8,6 +8,8 @@ import com.joojet.plugins.mobs.equipment.head.BruinHead;
 import com.joojet.plugins.mobs.equipment.offhand.BlueAndGold;
 import com.joojet.plugins.mobs.equipment.offhand.BruinShield;
 import com.joojet.plugins.mobs.equipment.offhand.CaptainAmericaShield;
+import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
+import com.joojet.plugins.mobs.equipment.potions.EternalRusheeMocktail;
 import com.joojet.plugins.mobs.equipment.potions.StrawberryMocktail;
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
@@ -44,7 +46,9 @@ public enum RewardType
 	DOOM_GUY,
 	BARNEY,
 	SKULL_KID,
-	SPIRIT_OF_TROY;
+	SPIRIT_OF_TROY,
+	ETERNAL_MOCKTAIL,
+	USC_CREEPER_SHIELD;
 	
 	public ItemStack getReward ()
 	{
@@ -92,6 +96,10 @@ public enum RewardType
 				return new SummonSkullKid ();
 			case SPIRIT_OF_TROY:
 				return new SummonSpiritOfTroy ();
+			case ETERNAL_MOCKTAIL:
+				return new EternalRusheeMocktail (ChatColor.YELLOW);
+			case USC_CREEPER_SHIELD:
+				return new USCCreeperShield ();
 			default:
 				break;
 		}

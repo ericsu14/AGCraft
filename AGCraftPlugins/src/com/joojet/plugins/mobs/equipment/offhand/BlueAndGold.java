@@ -18,10 +18,7 @@ public class BlueAndGold extends ShieldEquipment
 		this.wordsPerLine = 8;
 		this.loreColor = ChatColor.AQUA;
 		this.setDisplayName("The " + ChatColor.BLUE + "Blue " + this.chatColor + "and Gold");
-		this.addLoreToItemMeta("The LORD is my strength and my shield; "
-				+ "in him my heart trusts, and I am "
-				+ "helped; my heart exults, and with my song "
-				+ "I give thanks to him. -Psalm 28:7 ESV");
+		this.addLoreToItemMeta("A special one-off sheild that proudly carries the colors of AΓΩ.");
 		
 		this.addPatterns(new Pattern (DyeColor.YELLOW, PatternType.STRIPE_SMALL),
 				new Pattern (DyeColor.BLUE, PatternType.STRIPE_BOTTOM),
