@@ -86,9 +86,9 @@ public class BossBarAPI
 		if (uuidKey != null && activeBossBars.containsKey(uuidKey))
 		{
 			entry = activeBossBars.get(uuidKey);
-			entry.bossBar.removeAll();
 			if (entry.hasActiveTask())
 			{
+				entry.task.cleanup();
 				entry.task.cancel();
 			}
 			activeBossBars.remove(uuidKey);
