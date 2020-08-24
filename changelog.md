@@ -1,5 +1,3 @@
-
-
 # AGCraft Changelog History
 ## Version 1.7.8 - August 24, 2020
 ### Pathfinding AI Changes
@@ -18,8 +16,8 @@
 #### EXP Drops
    - Custom experience drops are now supported in this plugin. Almost all custom monsters drop significantly more experience now!
 #### Boss Bar
-   -  All boss mobs in this server now carries a custom boss bar similar to Wither or EnderDragon fights in Minecraft.
-   - These boss bars provide all players fighting that monster visual information of its total remaining health.
+   -  All boss mobs in this server now carries a custom boss bar similar to Wither and EnderDragon fights in Minecraft.
+   - These boss bars provide all players fighting that monster visual information about its total remaining health.
 #### Mob Changes
    - Shrek is now a boss mob. His health has been buffed from 20 -> 30 HP.
    - Both Soul Destroyer and Soul Obliterator (custom Wither Skeleton types) is no longer aggressive towards vanilla Wither Skeletons in the Nether. However, they are still aggressive towards Doom Guy.
@@ -34,8 +32,6 @@
 - For the first time ever, allied monsters (other than Golems and Wolves) have been added into the game! These allied monsters are themed after USC Trojans and will hunt down any hostile mob near them except Creepers.
 - However, the UCLA Bruins have invaded the server! They are here to cause chaos and destruction to our server! Help your fellow trojans and defend this server from these nasty Bruins!
 - More mobs and factions will be added in later to reflect this football season. Expect to see other Colleges battling each other in our server.
-
-
 
 ## Version 1.7.7 - July 31, 2020
 This release contains many internal codebase improvements and additions. Significant noteworthy changes are:
