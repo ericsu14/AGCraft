@@ -61,8 +61,12 @@ public class BossBarAPI
 	public static void addPlayerToBossBar (Player player, LivingEntity bossEntity)
 	{
 		UUID uuidKey = getBossBarUUID (bossEntity);
-		if (uuidKey != null && activeBossBars.containsKey(uuidKey))
+		if (uuidKey != null)
 		{
+			if (!activeBossBars.containsKey(uuidKey))
+			{
+				createBossBar (bossEntity);
+			}
 			activeBossBars.get(uuidKey).bossBar.addPlayer(player);
 		}
 	}
@@ -124,5 +128,6 @@ public class BossBarAPI
 				removeBossBar (ent);
 			}
 		}
+		activeBossBars.clear();
 	}
 }
