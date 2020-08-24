@@ -33,6 +33,7 @@ import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.plugin.Plugin;
 
+import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.Faction;
@@ -166,7 +167,7 @@ public class AmplifiedMobSpawner implements Listener
 				Player shooter = (Player) projectile.getShooter();
 				BossBarAPI.addPlayerToBossBar(shooter, entity);
 				// Causes the entity to hunt him down if attacked by player arrow
-				if (entity instanceof Monster)
+				if (entity instanceof Monster && AGCraftPlugin.plugin.serverMode == ServerMode.NORMAL)
 				{
 					Monster mob = (Monster) entity;
 					MobEquipment mobEquipment = getMobEquipmentFromEntity(entity);
@@ -248,7 +249,8 @@ public class AmplifiedMobSpawner implements Listener
 	public void onDamageEvent (EntityDamageByEntityEvent event)
 	{
 		if (!(event.getEntity() instanceof LivingEntity)
-				|| !(event.getDamager() instanceof LivingEntity))
+				|| !(event.getDamager() instanceof LivingEntity)
+				|| AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL)
 		{
 			return;
 		}
