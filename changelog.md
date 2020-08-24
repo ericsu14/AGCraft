@@ -1,7 +1,6 @@
 
 
 # AGCraft Changelog History
-
 ## Version 1.7.8 - August 24, 2020
 ### Pathfinding AI Changes
 - Custom monsters now carries a `hitlist`, allowing them to target any `EntityType` that is in its hitlist.
@@ -10,7 +9,7 @@
 - Custom monsters can now be apart of `factions`. `Factions` allows differing custom monsters to be able to form teams.
    - Custom monsters will **never** attack other monsters that are either in the same faction or not part of the custom monster's list of rivaling factions, even if they are in their `hitlist`.
    - Custom monsters also carry a list of **rivaling factions**. Any mob that is not only in that mob's list of rivaling factions, but also in their hitlist will be hunted down by that monster.
-   - Unless a custom monster has the `IGNORE_NON_FACTION_ENTITIES` enabled, that mob will also hunt down any monster that is in their hitlist but not in any faction.
+   - Unless a custom monster has the `IGNORE_NON_FACTION_ENTITIES` flag enabled, that mob will also hunt down any monster that is in their hitlist but not in any faction.
       - The `IGNORE_NON_FACTION_ENTITIES` flag disables this behavior.
  - Monsters will now be **instantly aggravated** towards any entity who hit that mob with a projectile, unless that entity is in its `ignore list`.
  - Certain custom boss monsters now have a `PERSISTENT_ATTACKER` flag, which makes them less likely to forget their victim that moves outside of their natural hunting radius.
@@ -35,6 +34,8 @@
 - For the first time ever, allied monsters (other than Golems and Wolves) have been added into the game! These allied monsters are themed after USC Trojans and will hunt down any hostile mob near them except Creepers.
 - However, the UCLA Bruins have invaded the server! They are here to cause chaos and destruction to our server! Help your fellow trojans and defend this server from these nasty Bruins!
 - More mobs and factions will be added in later to reflect this football season. Expect to see other Colleges battling each other in our server.
+
+
 
 ## Version 1.7.7 - July 31, 2020
 This release contains many internal codebase improvements and additions. Significant noteworthy changes are:
