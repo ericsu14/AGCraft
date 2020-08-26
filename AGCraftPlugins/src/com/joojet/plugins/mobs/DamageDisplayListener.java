@@ -46,6 +46,11 @@ public class DamageDisplayListener implements Listener
 	@EventHandler
 	public void onEntityDamageByEntityEvent (EntityDamageByEntityEvent event)
 	{
+		if (AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL)
+		{
+			return;
+		}
+		
 		DamageType damageType = DamageType.NORMAL;
 		
 		// Checks for mob hits dealt by player inflicted critical hits
