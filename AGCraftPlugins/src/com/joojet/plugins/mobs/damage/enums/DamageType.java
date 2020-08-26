@@ -15,7 +15,7 @@ public enum DamageType
 	WITHER ("☠", ChatColor.GRAY, ChatColor.DARK_RED),
 	EXPLOSION ("✸", ChatColor.YELLOW, ChatColor.RED),
 	PROJECTILE ("➶", ChatColor.GOLD, ChatColor.RED),
-	PLAYER ("", ChatColor.RED, ChatColor.GOLD),
+	PLAYER ("", ChatColor.RED, ChatColor.RED),
 	FALL_DAMAGE ("↯", ChatColor.RED, ChatColor.WHITE);
 	
 	/** Color applied on the symbol of the damage type */
