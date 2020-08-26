@@ -55,7 +55,8 @@ public class DamageDisplayListener implements Listener
 	@EventHandler
 	public void onEntityDamageByEntityEvent (EntityDamageByEntityEvent event)
 	{
-		if (AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL)
+		if (AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL
+				|| !(event.getEntity() instanceof LivingEntity))
 		{
 			return;
 		}
