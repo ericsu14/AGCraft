@@ -57,7 +57,8 @@ public class DamageDisplayManager
 		double xRandomOffset = rand.nextDouble() - 0.2;
 		double zRandomOffset = rand.nextDouble() - 0.2;
 		
-		if (damageType == DamageType.NORMAL || damageType == DamageType.CRITICAL)
+		if (damageType == DamageType.NORMAL || damageType == DamageType.CRITICAL
+				|| damageType == DamageType.PROJECTILE || damageType == DamageType.ALLIED)
 		{
 			entityLocation = new Location (entity.getWorld(), entityBox.getMinX(), entityBox.getMaxY(), entityBox.getMaxZ());
 		}

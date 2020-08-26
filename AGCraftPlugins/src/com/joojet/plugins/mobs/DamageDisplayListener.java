@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs;
 import java.util.HashSet;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -82,7 +83,7 @@ public class DamageDisplayListener implements Listener
 			}
 		}
 		// Checks for damage inflicted by projectiles
-		else if (event.getDamager() instanceof Projectile)
+		else if (event.getDamager() instanceof Arrow)
 		{
 			Projectile projectile = (Projectile) event.getDamager();
 			if (projectile.getShooter() != null && projectile.getShooter() instanceof LivingEntity)
