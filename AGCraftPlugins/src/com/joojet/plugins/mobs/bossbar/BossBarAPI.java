@@ -24,7 +24,7 @@ public class BossBarAPI
 	 * 		@param entity - The Living entity we are creating the boss bar for */
 	public static void createBossBar (LivingEntity entity)
 	{
-		if (entity.getType() == EntityType.PLAYER)
+		if (entity == null || entity.getType() == EntityType.PLAYER)
 		{
 			return;
 		}
@@ -67,7 +67,7 @@ public class BossBarAPI
 	public static void addPlayerToBossBar (Player player, LivingEntity bossEntity)
 	{
 		UUID uuidKey = getBossBarUUID (bossEntity);
-		if (uuidKey != null)
+		if (uuidKey != null && bossEntity.getType() != EntityType.PLAYER)
 		{
 			if (!activeBossBars.containsKey(uuidKey))
 			{

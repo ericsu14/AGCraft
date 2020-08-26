@@ -46,14 +46,17 @@ public abstract class AbstractMetadata <E>
 	/** Adds the value's toString data defined in this class into a PersistentDataHolder's data container */
 	public void addStringMetadata (PersistentDataHolder holder)
 	{
-		holder.getPersistentDataContainer().set(this.generateNamespacedKey(), PersistentDataType.STRING, this.asString());
+		if (holder != null)
+		{
+			holder.getPersistentDataContainer().set(this.generateNamespacedKey(), PersistentDataType.STRING, this.asString());
+		}
 	}
 	
 	/** Returns the value's metadata stored by this class's instance as a string */
 	public String getStringMetadata (PersistentDataHolder holder)
 	{
 		NamespacedKey key = this.generateNamespacedKey();
-		if (holder.getPersistentDataContainer().has(key, PersistentDataType.STRING))
+		if (holder != null && holder.getPersistentDataContainer().has(key, PersistentDataType.STRING))
 		{
 			return holder.getPersistentDataContainer().get(key, PersistentDataType.STRING);
 		}
