@@ -9,7 +9,7 @@ public enum DamageType
 	POISON ("☠", ChatColor.GREEN, ChatColor.WHITE),
 	MAGIC ("✴", ChatColor.LIGHT_PURPLE, ChatColor.GOLD),
 	HEALING ("❤", ChatColor.LIGHT_PURPLE, ChatColor.GREEN),
-	CRITICAL ("✰", ChatColor.GOLD, ChatColor.RED),
+	CRITICAL ("✧", ChatColor.GOLD, ChatColor.WHITE),
 	FIRE ("〄", ChatColor.RED, ChatColor.GOLD),
 	DROWNING ("◎", ChatColor.BLUE, ChatColor.RED),
 	WITHER ("☠", ChatColor.GRAY, ChatColor.DARK_RED),

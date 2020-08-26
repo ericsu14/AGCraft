@@ -9,7 +9,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BoundingBox;
@@ -54,21 +53,26 @@ public class DamageDisplayManager
 		BoundingBox entityBox = entity.getBoundingBox();
 		Location entityLocation;
 		// Spawns this damage information entity at an offset slightly outside of the entity's hitbox.
+		double offset = 0.1;
+		double xRandomOffset = rand.nextDouble() - 0.2;
+		double zRandomOffset = rand.nextDouble() - 0.2;
+		
 		if (damageType == DamageType.NORMAL || damageType == DamageType.CRITICAL)
 		{
 			entityLocation = new Location (entity.getWorld(), entityBox.getMinX(), entityBox.getMaxY(), entityBox.getMaxZ());
 		}
 		else
 		{
-			entityLocation = new Location (entity.getWorld(), entityBox.getMinX() + (rand.nextDouble() - 0.2) + 0.1, entityBox.getMaxY() + 0.1, 
-					entityBox.getMinZ() + (rand.nextDouble() - 0.2) + 0.1);
+			entityLocation = new Location (entity.getWorld(), entityBox.getMinX() + xRandomOffset + offset, entityBox.getMaxY() + offset, 
+					entityBox.getMinZ() + zRandomOffset + offset);
 		}
-		ArmorStand damageDisplayEntity = (ArmorStand) entity.getWorld().spawnEntity(entityLocation, EntityType.ARMOR_STAND);
+		ArmorStand damageDisplayEntity = (ArmorStand) entity.getWorld().spawn(entityLocation, ArmorStand.class, armorStand -> {
+			armorStand.setInvulnerable(true);
+			armorStand.setVisible(false);
+			armorStand.setMarker(true);
+			EquipmentTools.equipEntity(armorStand, new DamageDisplayEntity (health, damageType));
+		});
 		
-		damageDisplayEntity.setInvulnerable(true);
-		damageDisplayEntity.setVisible(false);
-		damageDisplayEntity.setMarker(true);
-		EquipmentTools.equipEntity(damageDisplayEntity, new DamageDisplayEntity (health, damageType));
 		this.activeDisplayEntities.put(damageDisplayEntity.getUniqueId(), damageDisplayEntity);
 		new DamageDisplayEntityTask (damageDisplayEntity, this).runTaskLaterAsynchronously(AGCraftPlugin.plugin, 20);
 	}

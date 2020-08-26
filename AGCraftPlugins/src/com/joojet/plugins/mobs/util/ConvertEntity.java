@@ -2,6 +2,7 @@ package com.joojet.plugins.mobs.util;
 
 import org.bukkit.entity.EntityType;
 
+import net.minecraft.server.v1_16_R2.EntityArmorStand;
 import net.minecraft.server.v1_16_R2.EntityBee;
 import net.minecraft.server.v1_16_R2.EntityBlaze;
 import net.minecraft.server.v1_16_R2.EntityCat;
@@ -151,6 +152,8 @@ public class ConvertEntity
 				return EntityPhantom.class;
 			case PIGLIN_BRUTE:
 				return EntityPiglinBrute.class;
+			case ARMOR_STAND:
+				return EntityArmorStand.class;
 			default:
 				break;
 		}
