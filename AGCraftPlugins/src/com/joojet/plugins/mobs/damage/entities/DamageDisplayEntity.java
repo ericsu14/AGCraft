@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.damage.entities;
 
+import java.text.DecimalFormat;
+
 import org.bukkit.ChatColor;
 
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -19,13 +21,14 @@ public class DamageDisplayEntity extends MobEquipment
 		if (critical)
 		{
 			this.color = ChatColor.GOLD;
-			displayName.append("✰");
+			displayName.append("✰ ");
 		}
 		else
 		{
-			this.color = ChatColor.YELLOW;
+			this.color = ChatColor.WHITE;
 		}
-		displayName.append(finalDamage);
+		DecimalFormat df = new DecimalFormat ("#.##");
+		displayName.append(df.format(finalDamage));
 		this.name = displayName.toString();
 	}
 }

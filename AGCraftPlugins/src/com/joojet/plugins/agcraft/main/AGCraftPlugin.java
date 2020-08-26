@@ -22,6 +22,7 @@ import com.joojet.plugins.consequences.commands.tabcompleter.PunishPlayerTabComp
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
+import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.ThemedServerEvent;
@@ -78,6 +79,9 @@ public class AGCraftPlugin extends JavaPlugin
 	// Stores type of minigame reward type currently active on minigame nights
 	public MinigameRewardType minigameEventType = MinigameRewardType.GIFT;
 	
+	/** Used to display entity damage information to the player */
+	public DamageDisplayListener damageListener;
+	
 	
 	public AGCraftPlugin ()
 	{
@@ -123,6 +127,10 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Player consequence handler
 		Bukkit.getPluginManager().registerEvents (new ConsequenceManager(), this);
+		
+		// Damage Display Listener
+		this.damageListener = new DamageDisplayListener ();
+		Bukkit.getPluginManager().registerEvents(this.damageListener, this);
 	}
 	
 	@Override
@@ -130,6 +138,9 @@ public class AGCraftPlugin extends JavaPlugin
 	{
 		// Removes all active boss bars
 		BossBarAPI.cleanup();
+		
+		// Cleans up all damage displays
+		this.damageListener.onDisable();
 	}
 	
 	/** Loads in the server config file and initializes its variables to the plugin */
