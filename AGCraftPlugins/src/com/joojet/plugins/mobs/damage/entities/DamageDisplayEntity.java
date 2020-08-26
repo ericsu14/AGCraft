@@ -13,7 +13,7 @@ public class DamageDisplayEntity extends MobEquipment
 {
 	/** Creates a new MobEquipment instance for a Damage Display entity.
 	 *  	@param finalDamage - Final damage captured by event listener
-	 *  	@param critical - Determines if the attack is a critical hit */
+	 *  	@param damageType - Type of damage this event is caused by */
 	public DamageDisplayEntity (double finalDamage, DamageType damageType)
 	{
 		super (MonsterType.DAMAGE_DISPLAY_ENTITY);
@@ -21,13 +21,19 @@ public class DamageDisplayEntity extends MobEquipment
 		this.color = ChatColor.RESET;
 		
 		StringBuilder displayName = new StringBuilder ();
-		displayName.append(damageType.toString());
-		displayName.append(" ");
+		if (damageType.hasSymbol())
+		{
+			displayName.append(damageType.toString());
+			displayName.append(" ");
+		}
 		DecimalFormat df = new DecimalFormat ("#.##");
 		displayName.append(damageType.getDamageColor());
 		displayName.append(df.format(finalDamage));
-		displayName.append(" ");
-		displayName.append(damageType.toString());
+		if (damageType.hasSymbol())
+		{
+			displayName.append(" ");
+			displayName.append(damageType.toString());
+		}
 		this.name = displayName.toString().trim();
 	}
 }

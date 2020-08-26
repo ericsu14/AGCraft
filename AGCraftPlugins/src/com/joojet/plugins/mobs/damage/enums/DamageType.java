@@ -14,7 +14,7 @@ public enum DamageType
 	DROWNING ("°ₒ৹", ChatColor.BLUE, ChatColor.RED),
 	WITHER ("☠", ChatColor.GRAY, ChatColor.DARK_RED),
 	EXPLOSION ("✸", ChatColor.YELLOW, ChatColor.RED),
-	PROJECTILE ("➶", ChatColor.GOLD, ChatColor.RED),
+	PROJECTILE ("◎", ChatColor.GOLD, ChatColor.RED),
 	PLAYER ("", ChatColor.RED, ChatColor.RED),
 	FALL_DAMAGE ("↯", ChatColor.RED, ChatColor.WHITE);
 	
@@ -41,5 +41,10 @@ public enum DamageType
 	public ChatColor getDamageColor ()
 	{
 		return this.damageColor;
+	}
+	
+	public boolean hasSymbol ()
+	{
+		return !this.symbol.isEmpty();
 	}
 }
