@@ -204,7 +204,8 @@ public class AmplifiedMobSpawner implements Listener
 		LivingEntity hunter = (LivingEntity) event.getEntity();
 		LivingEntity hunted = event.getTarget();
 		
-		if (event.getReason() == TargetReason.FORGOT_TARGET)
+		if (event.getReason() == TargetReason.FORGOT_TARGET
+				|| event.getReason() == TargetReason.RANDOM_TARGET)
 		{
 			// Check for persistent mob flags. If so, force the entity to hunt a nearby player
 			MobEquipment hunterEquipment = getMobEquipmentFromEntity (hunter);
