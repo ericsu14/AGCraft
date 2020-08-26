@@ -66,6 +66,10 @@ public class DamageDisplayListener implements Listener
 		{
 			damageType = DamageType.EXPLOSION;
 		}
+		else if (event.getCause() == DamageCause.MAGIC)
+		{
+			damageType = DamageType.MAGIC;
+		}
 		
 		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getFinalDamage());
 	}
