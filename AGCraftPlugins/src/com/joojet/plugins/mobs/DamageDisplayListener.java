@@ -63,7 +63,11 @@ public class DamageDisplayListener implements Listener
 		DamageType damageType = DamageType.NORMAL;
 		
 		// Checks for mob hits dealt by player inflicted critical hits
-		if (event.getDamager().getType() == EntityType.PLAYER)
+		if (event.getEntity().getType() == EntityType.PLAYER)
+		{
+			damageType = DamageType.PLAYER;
+		}
+		else if (event.getDamager().getType() == EntityType.PLAYER)
 		{
 			damageType = this.damageDisplayManager.checkCriticalHit((Player) event.getDamager()) ? DamageType.CRITICAL : DamageType.NORMAL;
 		}
@@ -93,10 +97,6 @@ public class DamageDisplayListener implements Listener
 		else if (event.getCause() == DamageCause.MAGIC)
 		{
 			damageType = DamageType.MAGIC;
-		}
-		else if (event.getEntity().getType() == EntityType.PLAYER)
-		{
-			damageType = DamageType.PLAYER;
 		}
 		
 		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getFinalDamage());
