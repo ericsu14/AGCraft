@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
@@ -61,6 +62,10 @@ public class DamageDisplayListener implements Listener
 				damageType = DamageType.ALLIED;
 			}
 		}
+		else if (event.getCause() == DamageCause.ENTITY_EXPLOSION)
+		{
+			damageType = DamageType.EXPLOSION;
+		}
 		
 		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getFinalDamage());
 	}
@@ -104,6 +109,8 @@ public class DamageDisplayListener implements Listener
 			case WITHER:
 				damageType = DamageType.WITHER;
 				break;
+			case BLOCK_EXPLOSION:
+				damageType = DamageType.EXPLOSION;
 			default:
 				break;
 		}
@@ -119,18 +126,7 @@ public class DamageDisplayListener implements Listener
 			return;
 		}
 		
-		DamageType damageType = DamageType.NORMAL;
-		switch (event.getRegainReason())
-		{
-			case MAGIC:
-				damageType = DamageType.HEALING;
-				break;
-			case MAGIC_REGEN:
-				damageType = DamageType.HEALING;
-				break;
-			default:
-				break;
-		}
+		DamageType damageType = DamageType.HEALING;
 		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getAmount());
 	}
 	

@@ -23,7 +23,7 @@ public class DamageDisplayEntity extends MobEquipment
 		StringBuilder displayName = new StringBuilder ();
 		displayName.append(damageType.toString());
 		DecimalFormat df = new DecimalFormat ("#.##");
-		displayName.append(ChatColor.WHITE);
+		displayName.append(damageType.getDamageColor());
 		displayName.append(df.format(finalDamage));
 		this.name = displayName.toString();
 	}
