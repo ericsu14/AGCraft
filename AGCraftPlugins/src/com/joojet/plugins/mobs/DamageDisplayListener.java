@@ -7,6 +7,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -75,13 +76,27 @@ public class DamageDisplayListener implements Listener
 				damageType = DamageType.ALLIED;
 			}
 		}
-		else if (event.getCause() == DamageCause.ENTITY_EXPLOSION)
+		// Checks for damage inflicted by projectiles
+		else if (event.getDamager() instanceof Projectile)
 		{
-			damageType = DamageType.EXPLOSION;
+			Projectile projectile = (Projectile) event.getDamager();
+			if (projectile.getShooter() != null && projectile.getShooter() instanceof LivingEntity)
+			{
+				MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity((LivingEntity) projectile.getShooter());
+				if (equipment != null && equipment.getIgnoreList().contains(EntityType.PLAYER))
+				{
+					damageType = DamageType.ALLIED;
+				}
+			}
+			damageType = (damageType == DamageType.NORMAL) ? DamageType.PROJECTILE : damageType;
 		}
 		else if (event.getCause() == DamageCause.MAGIC)
 		{
 			damageType = DamageType.MAGIC;
+		}
+		else if (event.getEntity().getType() == EntityType.PLAYER)
+		{
+			damageType = DamageType.PLAYER;
 		}
 		
 		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getFinalDamage());
@@ -128,6 +143,13 @@ public class DamageDisplayListener implements Listener
 				break;
 			case BLOCK_EXPLOSION:
 				damageType = DamageType.EXPLOSION;
+				break;
+			case ENTITY_EXPLOSION:
+				damageType = DamageType.EXPLOSION;
+				break;
+			case FALL:
+				damageType = DamageType.FALL_DAMAGE;
+				break;
 			default:
 				break;
 		}
