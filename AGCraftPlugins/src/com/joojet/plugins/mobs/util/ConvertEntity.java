@@ -43,6 +43,7 @@ import net.minecraft.server.v1_16_R2.EntityVillager;
 import net.minecraft.server.v1_16_R2.EntityVillagerTrader;
 import net.minecraft.server.v1_16_R2.EntityVindicator;
 import net.minecraft.server.v1_16_R2.EntityWitch;
+import net.minecraft.server.v1_16_R2.EntityWither;
 import net.minecraft.server.v1_16_R2.EntityWolf;
 import net.minecraft.server.v1_16_R2.EntityPigZombie;
 import net.minecraft.server.v1_16_R2.EntityIllagerIllusioner;
@@ -154,6 +155,8 @@ public class ConvertEntity
 				return EntityPiglinBrute.class;
 			case ARMOR_STAND:
 				return EntityArmorStand.class;
+			case WITHER:
+				return EntityWither.class;
 			default:
 				break;
 		}
