@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs;
 
+import java.util.HashSet;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -11,6 +13,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.plugin.Plugin;
@@ -25,10 +28,15 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 public class DamageDisplayListener implements Listener 
 {
 	protected DamageDisplayManager damageDisplayManager;
+	protected HashSet <RegainReason> allowedRegainReasons;
 	
 	public DamageDisplayListener ()
 	{
 		damageDisplayManager = new DamageDisplayManager ();
+		this.allowedRegainReasons = new HashSet <RegainReason> ();
+		this.allowedRegainReasons.add(RegainReason.CUSTOM);
+		this.allowedRegainReasons.add(RegainReason.MAGIC);
+		this.allowedRegainReasons.add(RegainReason.MAGIC_REGEN);
 	}
 	
 	public void onEnable ()
@@ -130,7 +138,8 @@ public class DamageDisplayListener implements Listener
 	public void onEntityHealEvent (EntityRegainHealthEvent event)
 	{
 		// Do not run if the amount is negative or the server mode is running in Minigame mode (as this might give people's positions away in UHC)
-		if (event.getAmount() < 0.0 || AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL)
+		if (event.getAmount() < 0.0 || AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL ||
+				!this.allowedRegainReasons.contains(event.getRegainReason()))
 		{
 			return;
 		}

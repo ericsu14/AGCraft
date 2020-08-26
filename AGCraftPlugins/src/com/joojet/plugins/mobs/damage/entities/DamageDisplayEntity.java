@@ -28,6 +28,6 @@ public class DamageDisplayEntity extends MobEquipment
 		displayName.append(df.format(finalDamage));
 		displayName.append(" ");
 		displayName.append(damageType.toString());
-		this.name = displayName.toString();
+		this.name = displayName.toString().trim();
 	}
 }
