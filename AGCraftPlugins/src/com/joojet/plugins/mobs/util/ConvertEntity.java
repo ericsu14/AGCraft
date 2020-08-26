@@ -21,6 +21,7 @@ import net.minecraft.server.v1_16_R2.EntityOcelot;
 import net.minecraft.server.v1_16_R2.EntityPhantom;
 import net.minecraft.server.v1_16_R2.EntityPig;
 import net.minecraft.server.v1_16_R2.EntityPiglin;
+import net.minecraft.server.v1_16_R2.EntityPiglinBrute;
 import net.minecraft.server.v1_16_R2.EntityPillager;
 import net.minecraft.server.v1_16_R2.EntityPlayer;
 import net.minecraft.server.v1_16_R2.EntityPolarBear;
@@ -148,6 +149,8 @@ public class ConvertEntity
 				return EntityZombieVillager.class;
 			case PHANTOM:
 				return EntityPhantom.class;
+			case PIGLIN_BRUTE:
+				return EntityPiglinBrute.class;
 			default:
 				break;
 		}

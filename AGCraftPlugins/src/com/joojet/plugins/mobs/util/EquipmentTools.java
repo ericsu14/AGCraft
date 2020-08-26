@@ -11,6 +11,7 @@ import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Piglin;
 import org.bukkit.entity.Player;
@@ -233,7 +234,7 @@ public class EquipmentTools
 	
 	/** Modifies an entity's pathfinding properties based on what is stored in
 	 *  its custom mob equipment instance. The Entity must be an instance of
-	 *  a monster in order for this to work.
+	 *  a mob in order for this to work.
 	 *   @param entity - The Living Entity we are modifying its pathfinding propetries for
 	 *   @param mobEquipment - Object containing custom mob equipment */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -246,7 +247,7 @@ public class EquipmentTools
 		}
 		
 		// If the entity is not a monster, do nothing.
-		if (!(entity instanceof Monster))
+		if (!(entity instanceof Mob))
 		{
 			return;
 		}

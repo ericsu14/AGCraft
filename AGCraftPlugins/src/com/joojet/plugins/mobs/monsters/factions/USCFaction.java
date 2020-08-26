@@ -19,7 +19,8 @@ public class USCFaction extends MobEquipment
 				EntityType.ENDERMAN, EntityType.ILLUSIONER, EntityType.POLAR_BEAR, EntityType.VINDICATOR,
 				EntityType.RAVAGER, EntityType.WITHER_SKELETON, EntityType.WITCH,
 				EntityType.GHAST, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN,
-				EntityType.SLIME, EntityType.MAGMA_CUBE, EntityType.ENDERMITE, EntityType.PHANTOM);
+				EntityType.SLIME, EntityType.MAGMA_CUBE, EntityType.ENDERMITE, EntityType.PHANTOM,
+				EntityType.ZOMBIFIED_PIGLIN);
 		
 		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.WOLF, EntityType.CAT,
 				EntityType.IRON_GOLEM, EntityType.SNOWMAN, EntityType.DOLPHIN, EntityType.VILLAGER,

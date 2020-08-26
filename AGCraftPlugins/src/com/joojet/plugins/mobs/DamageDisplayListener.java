@@ -4,14 +4,20 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.plugin.Plugin;
 
+import com.joojet.plugins.agcraft.enums.ServerMode;
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.damage.DamageDisplayManager;
+import com.joojet.plugins.mobs.damage.enums.DamageType;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -37,9 +43,95 @@ public class DamageDisplayListener implements Listener
 	/** Listens to entity damage events and creates a damage display entity on
 	 *  the event entity's location over a small offset. */
 	@EventHandler
-	public void onEntityDamageEvent (EntityDamageByEntityEvent event)
+	public void onEntityDamageByEntityEvent (EntityDamageByEntityEvent event)
 	{
-		this.damageDisplayManager.createDamageDisplayonEntity(event);
+		DamageType damageType = DamageType.NORMAL;
+		
+		// Checks for mob hits dealt by player inflicted critical hits
+		if (event.getDamager().getType() == EntityType.PLAYER)
+		{
+			damageType = this.damageDisplayManager.checkCriticalHit((Player) event.getDamager()) ? DamageType.CRITICAL : DamageType.NORMAL;
+		}
+		// Checks for mob hits dealt by allies
+		else if (event.getDamager() instanceof LivingEntity)
+		{
+			MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity((LivingEntity) event.getDamager());
+			if (equipment != null && equipment.getIgnoreList().contains(EntityType.PLAYER))
+			{
+				damageType = DamageType.ALLIED;
+			}
+		}
+		
+		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getFinalDamage());
+	}
+	
+	/** Listens to entity damage events that are not caused by other living entites
+	 *  and displays damage information on that entity */
+	@EventHandler
+	public void onEntityDamageEvent (EntityDamageEvent event)
+	{
+		// Prevent duplicate damage displays
+		if (event instanceof EntityDamageByEntityEvent || event.getEntity() == null || event.getFinalDamage() < 0.0
+				|| AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL)
+		{
+			return;
+		}
+		
+		DamageType damageType = DamageType.NORMAL;
+		switch (event.getCause())
+		{
+			case MAGIC:
+				damageType = DamageType.MAGIC;
+				break;
+			case LAVA:
+				damageType = DamageType.FIRE;
+				break;
+			case FIRE:
+				damageType = DamageType.FIRE;
+				break;
+			case HOT_FLOOR:
+				damageType = DamageType.FIRE;
+				break;
+			case FIRE_TICK:
+				damageType = DamageType.FIRE;
+				break;
+			case POISON:
+				damageType = DamageType.POISON;
+				break;
+			case DROWNING:
+				damageType = DamageType.DROWNING;
+				break;
+			case WITHER:
+				damageType = DamageType.WITHER;
+				break;
+			default:
+				break;
+		}
+		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getFinalDamage());
+	}
+	
+	@EventHandler
+	public void onEntityHealEvent (EntityRegainHealthEvent event)
+	{
+		// Do not run if the amount is negative or the server mode is running in Minigame mode (as this might give people's positions away in UHC)
+		if (event.getAmount() < 0.0 || AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL)
+		{
+			return;
+		}
+		
+		DamageType damageType = DamageType.NORMAL;
+		switch (event.getRegainReason())
+		{
+			case MAGIC:
+				damageType = DamageType.HEALING;
+				break;
+			case MAGIC_REGEN:
+				damageType = DamageType.HEALING;
+				break;
+			default:
+				break;
+		}
+		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getAmount());
 	}
 	
 	/** Removes any damage display entity still persistent upon chunk loads */

@@ -1,21 +1,22 @@
 package com.joojet.plugins.mobs.damage;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BoundingBox;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.damage.entities.DamageDisplayEntity;
+import com.joojet.plugins.mobs.damage.enums.DamageType;
 import com.joojet.plugins.mobs.damage.task.DamageDisplayEntityTask;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
@@ -25,6 +26,8 @@ public class DamageDisplayManager
 	protected ConcurrentHashMap <UUID, ArmorStand> activeDisplayEntities;
 	/** A set of Block Types a player cannot be on while detecting critical hits */
 	protected HashSet <Material> invalidBlocks;
+	/** Used to calculate a random offset */
+	protected Random rand;
 	
 	public DamageDisplayManager ()
 	{
@@ -35,33 +38,37 @@ public class DamageDisplayManager
 		this.invalidBlocks.add(Material.VINE);
 		this.invalidBlocks.add(Material.WATER);
 		this.invalidBlocks.add(Material.LAVA);
+		this.rand = new Random ();
 	}
 	
+	
+	
 	/** Creates an invisible armor stand displaying the final damage dealt to an entity after an attack */
-	public void createDamageDisplayonEntity (EntityDamageByEntityEvent event)
+	public void createDamageDisplayonEntity (Entity entity, DamageType damageType, double health)
 	{
-		if (event.getEntity() == null || !(event.getEntity() instanceof LivingEntity)
-				|| event.getFinalDamage() < 0.5)
+		if (entity == null || health <= 0.0)
 		{
 			return;
 		}
 		
-		LivingEntity entity = (LivingEntity) event.getEntity();
 		BoundingBox entityBox = entity.getBoundingBox();
+		Location entityLocation;
 		// Spawns this damage information entity at an offset slightly outside of the entity's hitbox.
-		Location entityLocation = new Location (entity.getWorld(), entityBox.getMaxX(), entityBox.getCenterY() * 1.2, entityBox.getMaxZ() * 1.2);
-		ArmorStand damageDisplayEntity = (ArmorStand) entity.getWorld().spawnEntity(entityLocation, EntityType.ARMOR_STAND);
-		
-		boolean criticalHit = false;
-		if (event.getDamager() instanceof Player)
+		if (damageType == DamageType.NORMAL || damageType == DamageType.CRITICAL)
 		{
-			criticalHit = this.checkCriticalHit((Player) event.getDamager());
+			entityLocation = new Location (entity.getWorld(), entityBox.getMinX(), entityBox.getMaxY(), entityBox.getMaxZ());
 		}
+		else
+		{
+			entityLocation = new Location (entity.getWorld(), entityBox.getMinX() + (rand.nextDouble() - 0.2) + 0.1, entityBox.getMaxY() + 0.1, 
+					entityBox.getMinZ() + (rand.nextDouble() - 0.2) + 0.1);
+		}
+		ArmorStand damageDisplayEntity = (ArmorStand) entity.getWorld().spawnEntity(entityLocation, EntityType.ARMOR_STAND);
 		
 		damageDisplayEntity.setInvulnerable(true);
 		damageDisplayEntity.setVisible(false);
 		damageDisplayEntity.setMarker(true);
-		EquipmentTools.equipEntity(damageDisplayEntity, new DamageDisplayEntity (event.getFinalDamage(), criticalHit));
+		EquipmentTools.equipEntity(damageDisplayEntity, new DamageDisplayEntity (health, damageType));
 		this.activeDisplayEntities.put(damageDisplayEntity.getUniqueId(), damageDisplayEntity);
 		new DamageDisplayEntityTask (damageDisplayEntity, this).runTaskLaterAsynchronously(AGCraftPlugin.plugin, 20);
 	}
@@ -103,7 +110,7 @@ public class DamageDisplayManager
 		result &= (currentBlockType == Material.AIR
 				|| !this.invalidBlocks.contains(currentBlockType));
 		// The player must not be affected by blindness
-		result &= player.hasPotionEffect(PotionEffectType.BLINDNESS);
+		result &= !player.hasPotionEffect(PotionEffectType.BLINDNESS);
 		// The player must not be riding an entity
 		result &= !player.isInsideVehicle();
 		// The player must not be sprinting
