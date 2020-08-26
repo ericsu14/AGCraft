@@ -14,15 +14,7 @@ import com.joojet.plugins.mobs.equipment.potions.StrawberryMocktail;
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
 import com.joojet.plugins.mobs.fireworks.PaintTheSky;
-import com.joojet.plugins.mobs.scrolls.SummonAdvancedGolem;
-import com.joojet.plugins.mobs.scrolls.SummonBarney;
-import com.joojet.plugins.mobs.scrolls.SummonCookie;
-import com.joojet.plugins.mobs.scrolls.SummonDoomGuy;
-import com.joojet.plugins.mobs.scrolls.SummonFrolf;
-import com.joojet.plugins.mobs.scrolls.SummonJohnJae;
-import com.joojet.plugins.mobs.scrolls.SummonSkullKid;
-import com.joojet.plugins.mobs.scrolls.SummonSnowball;
-import com.joojet.plugins.mobs.scrolls.SummonSpiritOfTroy;
+import com.joojet.plugins.mobs.scrolls.*;
 
 public enum RewardType 
 {
@@ -48,7 +40,9 @@ public enum RewardType
 	SKULL_KID,
 	SPIRIT_OF_TROY,
 	ETERNAL_MOCKTAIL,
-	USC_CREEPER_SHIELD;
+	USC_CREEPER_SHIELD,
+	USC_ARCHER,
+	AG_SPOTTED;
 	
 	public ItemStack getReward ()
 	{
@@ -100,6 +94,10 @@ public enum RewardType
 				return new EternalRusheeMocktail (ChatColor.YELLOW);
 			case USC_CREEPER_SHIELD:
 				return new USCCreeperShield ();
+			case USC_ARCHER:
+				return new SummonUSCArcher();
+			case AG_SPOTTED:
+				return new SummonAGSpotted();
 			default:
 				break;
 		}

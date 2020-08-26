@@ -14,7 +14,9 @@ public enum SummonTypes
 	THE_DOOM_SLAYER,
 	BARNEY,
 	SKULL_KID,
-	SPIRIT_OF_TROY;
+	SPIRIT_OF_TROY,
+	USC_ARCHER,
+	AG_SPOTTED;
 	
 	public SummoningScroll getSummon ()
 	{
@@ -42,6 +44,10 @@ public enum SummonTypes
 				return new SummonSkullKid();
 			case SPIRIT_OF_TROY:
 				return new SummonSpiritOfTroy();
+			case USC_ARCHER:
+				return new SummonUSCArcher();
+			case AG_SPOTTED:
+				return new SummonAGSpotted();
 			default:
 				break;
 		}
