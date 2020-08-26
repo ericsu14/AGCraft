@@ -11,7 +11,6 @@ import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Mob;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Piglin;
 import org.bukkit.entity.Player;
@@ -247,7 +246,7 @@ public class EquipmentTools
 		}
 		
 		// If the entity is not a monster, do nothing.
-		if (!(entity instanceof Mob))
+		if (!(entity instanceof Monster))
 		{
 			return;
 		}
