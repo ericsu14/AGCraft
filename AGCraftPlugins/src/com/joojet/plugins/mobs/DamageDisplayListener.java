@@ -110,6 +110,7 @@ public class DamageDisplayListener implements Listener
 	{
 		// Prevent duplicate damage displays
 		if (event instanceof EntityDamageByEntityEvent || event.getEntity() == null || event.getFinalDamage() < 0.0
+				|| !(event.getEntity() instanceof LivingEntity)
 				|| AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL)
 		{
 			return;
