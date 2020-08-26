@@ -7,6 +7,7 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataHolder;
@@ -23,6 +24,11 @@ public class BossBarAPI
 	 * 		@param entity - The Living entity we are creating the boss bar for */
 	public static void createBossBar (LivingEntity entity)
 	{
+		if (entity.getType() == EntityType.PLAYER)
+		{
+			return;
+		}
+		
 		UUID uuidKey = getBossBarUUID (entity);
 		if (uuidKey == null)
 		{
