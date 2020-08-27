@@ -11,34 +11,22 @@ import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class UHCHandler extends AmplifiedSpawnHandler
 {
-	private UHCGhastTypes uhcGhastTypes;
-	
 	public UHCHandler ()
 	{
-		this.uhcGhastTypes = new UHCGhastTypes();
+		this.addMonsterTypes(new UHCGhastTypes());
 		this.addSpawnReasons(SpawnReason.NATURAL);
 	}
 	
 	/** Handles UHC-specific Mob Spawns */
 	public void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll)
-	{
-		// Filter out mobs that does not satisfy our list of allowed spawn reasons
-		if (!reasonFilter (reason))
+	{		
+		if (this.reasonFilter(reason))
 		{
-			return;
+			MobEquipment mobEquipment = this.getRandomEqipment(type, biome);
+			if (mobEquipment != null)
+			{
+				EquipmentTools.equipEntity(entity, mobEquipment);
+			}
 		}
-		
-		MobEquipment mobEquipment;
-		switch (type)
-		{
-			case GHAST:
-				mobEquipment = this.uhcGhastTypes.getRandomEquipment(biome);
-				break;
-			default:
-				return;
-		}
-		
-		EquipmentTools.equipEntity(entity, mobEquipment);
-		
 	}
 }

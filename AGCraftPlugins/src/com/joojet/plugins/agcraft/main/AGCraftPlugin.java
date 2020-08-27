@@ -22,7 +22,9 @@ import com.joojet.plugins.consequences.commands.tabcompleter.PunishPlayerTabComp
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
+import com.joojet.plugins.mobs.BossBarEventListener;
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.PathfindTargetingEventListener;
 import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.ThemedServerEvent;
@@ -131,6 +133,12 @@ public class AGCraftPlugin extends JavaPlugin
 		// Damage Display Listener
 		this.damageListener = new DamageDisplayListener ();
 		Bukkit.getPluginManager().registerEvents(this.damageListener, this);
+		
+		// Boss Bar event listener
+		Bukkit.getPluginManager().registerEvents(new BossBarEventListener(), this);
+		
+		// Pathfind Targeting event listener
+		Bukkit.getPluginManager().registerEvents(new PathfindTargetingEventListener(), this);
 	}
 	
 	@Override
