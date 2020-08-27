@@ -55,7 +55,7 @@ public class PathfindTargetingEventListener implements Listener
 			// Check for persistent mob flags. If so, force the entity to hunt a nearby player
 			MobEquipment hunterEquipment = AmplifiedMobSpawner.getMobEquipmentFromEntity (hunter);
 			if (hunterEquipment != null
-					&& hunterEquipment.getMobFlags().contains(MobFlag.PERSISTENT_ATTACKER)
+					&& hunterEquipment.containsFlag(MobFlag.PERSISTENT_ATTACKER)
 					&& hunterEquipment.containsStat(MonsterStat.HUNT_ON_SPAWN_RADIUS))
 			{
 				Player p = this.getNearbyPlayer(hunter, hunterEquipment.getStat(MonsterStat.HUNT_ON_SPAWN_RADIUS).intValue());
@@ -157,7 +157,7 @@ public class PathfindTargetingEventListener implements Listener
 			LivingEntity drownedEntity = (LivingEntity) event.getTransformedEntity();
 			EquipmentTools.setCustomMetadata(drownedEntity, ogZombieEquipment);
 			EquipmentTools.modifyPathfindingTargets(drownedEntity, ogZombieEquipment);
-			if (ogZombieEquipment.getMobFlags().contains(MobFlag.BOSS_BAR))
+			if (ogZombieEquipment.containsFlag(MobFlag.BOSS_BAR))
 			{
 				BossBarAPI.createBossBar(drownedEntity);
 			}
@@ -200,7 +200,7 @@ public class PathfindTargetingEventListener implements Listener
 		if (hunterEquipment != null && huntedEquipment == null
 				&& hunted.getType() != EntityType.PLAYER)
 		{
-			return hunterEquipment.getMobFlags().contains(MobFlag.IGNORE_NON_FACTION_ENTITIES);
+			return hunterEquipment.containsFlag(MobFlag.IGNORE_NON_FACTION_ENTITIES);
 		}
 		
 		// Require both equipment types to be active at this point
@@ -221,7 +221,7 @@ public class PathfindTargetingEventListener implements Listener
 			}
 			return true;
 		}
-		return hunterEquipment.getMobFlags().contains(MobFlag.IGNORE_NON_FACTION_ENTITIES);
+		return hunterEquipment.containsFlag(MobFlag.IGNORE_NON_FACTION_ENTITIES);
 	}
 	
 	/** Returns the player that is nearest to the passed entity if it exists. */
@@ -298,7 +298,7 @@ public class PathfindTargetingEventListener implements Listener
 				}
 				else
 				{
-					foundVictim = !(hunterEquipment.getMobFlags().contains(MobFlag.IGNORE_NON_FACTION_ENTITIES))
+					foundVictim = !(hunterEquipment.containsFlag(MobFlag.IGNORE_NON_FACTION_ENTITIES))
 							|| victim.getType() == EntityType.PLAYER;
 				}
 			}

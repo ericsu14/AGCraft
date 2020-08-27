@@ -91,7 +91,7 @@ public class BossBarEventListener implements Listener
 			{
 				livingEntity = (LivingEntity) ent;
 				MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(livingEntity);
-				if (equipment != null && equipment.getMobFlags().contains(MobFlag.BOSS_BAR))
+				if (equipment != null && equipment.containsFlag(MobFlag.BOSS_BAR))
 				{
 					BossBarAPI.createBossBar(livingEntity);
 				}

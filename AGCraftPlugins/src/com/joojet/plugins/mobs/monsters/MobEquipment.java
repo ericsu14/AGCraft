@@ -424,6 +424,13 @@ public abstract class MobEquipment
 		return result;
 	}
 	
+	/** Returns true if this mob equipment instance contains
+	 *  the passed Monster Flag */
+	public boolean containsFlag (MobFlag flag)
+	{
+		return this.mobFlags.contains(flag);
+	}
+	
 	/** Checks if this monster is in the passed custom mob's list of rivaling factions
 	 *   @param mob - Monster's mob equipment being checked against this instance */
 	public boolean isRivalsOf (MobEquipment mob)
