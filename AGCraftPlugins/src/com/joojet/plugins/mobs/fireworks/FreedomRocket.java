@@ -8,8 +8,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
-import com.joojet.plugins.mobs.interfaces.Firework;
-
 /** Your classic red, white, and blue firework */
 public class FreedomRocket extends Firework 
 {

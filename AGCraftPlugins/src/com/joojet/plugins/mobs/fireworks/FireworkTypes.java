@@ -5,8 +5,6 @@ import java.util.Random;
 
 import org.bukkit.inventory.ItemStack;
 
-import com.joojet.plugins.mobs.interfaces.Firework;
-
 public class FireworkTypes 
 {
 	/** List of preset fireworks available to distribute */

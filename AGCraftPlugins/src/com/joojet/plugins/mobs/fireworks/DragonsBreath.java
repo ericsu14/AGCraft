@@ -8,8 +8,6 @@ import org.bukkit.FireworkEffect.Type;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
-import com.joojet.plugins.mobs.interfaces.Firework;
-
 public class DragonsBreath extends Firework
 {
 	@Override

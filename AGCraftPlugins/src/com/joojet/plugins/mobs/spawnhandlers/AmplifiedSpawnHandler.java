@@ -9,8 +9,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-import com.joojet.plugins.mobs.interfaces.MonsterTypes;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MonsterTypes;
 
 public abstract class AmplifiedSpawnHandler 
 {

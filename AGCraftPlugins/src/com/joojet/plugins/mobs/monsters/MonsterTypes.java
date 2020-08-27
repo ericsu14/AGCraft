@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.interfaces;
+package com.joojet.plugins.mobs.monsters;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -6,8 +6,6 @@ import java.util.Random;
 
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
-
-import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public abstract class MonsterTypes 
 {

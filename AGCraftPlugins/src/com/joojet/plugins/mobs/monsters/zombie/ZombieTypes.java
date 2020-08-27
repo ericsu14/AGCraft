@@ -2,7 +2,7 @@ package com.joojet.plugins.mobs.monsters.zombie;
 
 import org.bukkit.entity.EntityType;
 
-import com.joojet.plugins.mobs.interfaces.MonsterTypes;
+import com.joojet.plugins.mobs.monsters.MonsterTypes;
 
 public class ZombieTypes extends MonsterTypes
 {

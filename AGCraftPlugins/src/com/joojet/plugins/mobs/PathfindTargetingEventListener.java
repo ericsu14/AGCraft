@@ -1,7 +1,6 @@
 package com.joojet.plugins.mobs;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -23,7 +22,6 @@ import org.bukkit.plugin.Plugin;
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarAPI;
-import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -216,14 +214,10 @@ public class PathfindTargetingEventListener implements Listener
 		if (!hunterEquipment.getRivalFactions().isEmpty()
 				&& !huntedEquipment.getFactions().isEmpty())
 		{
-			// Cancel the target event if the hunted is not in the hunter's rivaling factions
-			HashSet <Faction> huntedFactions = huntedEquipment.getFactions();
-			for (Faction faction : huntedFactions)
+			// Check if the hunted is in the hunter's list of rivaling factions
+			if (huntedEquipment.isRivalsOf(hunterEquipment))
 			{
-				if (hunterEquipment.getRivalFactions().contains(faction))
-				{
-					return false;
-				}
+				return false;
 			}
 			return true;
 		}
@@ -296,14 +290,10 @@ public class PathfindTargetingEventListener implements Listener
 						&& !victimEquipment.getFactions().isEmpty())
 				{
 					// Check if the victim's faction is in the hunter's rivaling factions
-					HashSet <Faction> victimFactions = victimEquipment.getFactions();
-					for (Faction victimFaction : victimFactions)
+					if (victimEquipment.isRivalsOf(hunterEquipment))
 					{
-						if (hunterEquipment.getRivalFactions().contains(victimFaction))
-						{
-							foundVictim = true;
-							break;
-						}
+						foundVictim = true;
+						break;
 					}
 				}
 				else

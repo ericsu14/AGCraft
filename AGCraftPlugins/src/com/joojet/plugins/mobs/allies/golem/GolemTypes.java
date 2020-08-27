@@ -2,7 +2,7 @@ package com.joojet.plugins.mobs.allies.golem;
 
 import org.bukkit.entity.EntityType;
 
-import com.joojet.plugins.mobs.interfaces.MonsterTypes;
+import com.joojet.plugins.mobs.monsters.MonsterTypes;
 
 public class GolemTypes extends MonsterTypes 
 {

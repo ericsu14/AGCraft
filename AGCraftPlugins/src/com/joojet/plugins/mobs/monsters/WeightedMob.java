@@ -1,6 +1,4 @@
-package com.joojet.plugins.mobs.interfaces;
-
-import com.joojet.plugins.mobs.monsters.MobEquipment;
+package com.joojet.plugins.mobs.monsters;
 
 public class WeightedMob 
 {

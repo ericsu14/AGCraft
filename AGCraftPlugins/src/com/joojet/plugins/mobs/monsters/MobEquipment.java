@@ -424,6 +424,21 @@ public abstract class MobEquipment
 		return result;
 	}
 	
+	/** Checks if this monster is in the passed custom mob's list of rivaling factions
+	 *   @param mob - Monster's mob equipment being checked against this instance */
+	public boolean isRivalsOf (MobEquipment mob)
+	{
+		HashSet <Faction> rivalingFactions = mob.getRivalFactions();
+		for (Faction faction : rivalingFactions)
+		{
+			if (this.rivalFactions.contains(faction))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/** Return the equipment's monster type identifier as a string. */
 	@Override
 	public String toString ()
