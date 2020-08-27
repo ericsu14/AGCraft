@@ -15,6 +15,6 @@ public class UHCGhast extends MobEquipment
 		super (MonsterType.UHC_GHAST);
 		this.addBiomes(Biome.THE_VOID);
 		this.weapon = new ItemStack (Material.GOLD_INGOT, 1);
-		this.setDropRates(0.00f, 0.00f, 0.00f, 0.00f, 0.50f, 0.00f);
+		this.setDropRates(0.00f, 0.00f, 0.00f, 0.00f, 1.00f, 0.00f);
 	}
 }
