@@ -53,19 +53,20 @@ public class DamageDisplayManager
 		BoundingBox entityBox = entity.getBoundingBox();
 		Location entityLocation;
 		// Spawns this damage information entity at an offset slightly outside of the entity's hitbox.
-		double offset = 0.1;
-		double xRandomOffset = rand.nextDouble() - 0.2;
-		double zRandomOffset = rand.nextDouble() - 0.2;
+		double xRandomOffset = this.generateRandomNumber(-0.3, 0.3);
+		double yRandomOffset = this.generateRandomNumber(0.1, 0.3);
+		double zRandomOffset = this.generateRandomNumber(-0.3, 0.3);
 		
 		if (damageType == DamageType.NORMAL || damageType == DamageType.CRITICAL
 				|| damageType == DamageType.PROJECTILE || damageType == DamageType.ALLIED)
 		{
-			entityLocation = new Location (entity.getWorld(), entityBox.getMinX(), entityBox.getMaxY(), entityBox.getMaxZ());
+			entityLocation = new Location (entity.getWorld(), entityBox.getMinX() + xRandomOffset, entityBox.getMaxY() + this.generateRandomNumber(-0.1, 0.0), 
+					entityBox.getMaxZ() + zRandomOffset);
 		}
 		else
 		{
-			entityLocation = new Location (entity.getWorld(), entityBox.getMinX() + xRandomOffset + offset, entityBox.getMaxY() + offset, 
-					entityBox.getMinZ() + zRandomOffset + offset);
+			entityLocation = new Location (entity.getWorld(), entityBox.getMinX() + xRandomOffset, entityBox.getMaxY() + yRandomOffset, 
+					entityBox.getMinZ() + zRandomOffset);
 		}
 		ArmorStand damageDisplayEntity = (ArmorStand) entity.getWorld().spawn(entityLocation, ArmorStand.class, armorStand -> {
 			armorStand.setInvulnerable(true);
@@ -123,5 +124,13 @@ public class DamageDisplayManager
 		// The player's cooldown must be over 84.8% ready 
 		result &= player.getAttackCooldown() >= 0.848;
 		return result;
+	}
+	
+	/** Generates a random double between a certain range
+	 * 	@param min - Min. range of random number generation
+	 * 	@param max - Max. range of random number generation */
+	private double generateRandomNumber (double min, double max)
+	{
+		return min + (max - min) * this.rand.nextDouble();
 	}
 }

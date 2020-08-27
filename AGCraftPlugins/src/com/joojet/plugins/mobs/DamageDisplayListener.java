@@ -99,7 +99,7 @@ public class DamageDisplayListener implements Listener
 			damageType = (damageType == DamageType.NORMAL) ? DamageType.PROJECTILE : damageType;
 		}
 		// Otherwise, convert the event's damage cause to a damage type
-		else
+		if (damageType == DamageType.NORMAL)
 		{
 			damageType = this.getDamageTypeFromCause(event.getCause());
 		}
@@ -214,10 +214,20 @@ public class DamageDisplayListener implements Listener
 				damageType = DamageType.THORNS;
 				break;
 			case CONTACT:
-				damageType = DamageType.MAGIC;
+				damageType = DamageType.CONTACT;
 				break;
 			case LIGHTNING:
 				damageType = DamageType.LIGHTNING;
+				break;
+			case SUICIDE:
+				damageType = DamageType.SUICIDE;
+				break;
+			case VOID:
+				damageType = DamageType.SUICIDE;
+				break;
+			case STARVATION:
+				damageType = DamageType.HUNGER;
+				break;
 			default:
 				break;
 		}

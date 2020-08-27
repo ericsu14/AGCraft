@@ -6,19 +6,22 @@ public enum DamageType
 {
 	NORMAL ("", ChatColor.WHITE, ChatColor.WHITE),
 	ALLIED ("✪", ChatColor.AQUA, ChatColor.WHITE),
-	POISON ("☠", ChatColor.GREEN, ChatColor.WHITE),
+	POISON ("☠", ChatColor.GREEN, ChatColor.GOLD),
 	MAGIC ("✴", ChatColor.LIGHT_PURPLE, ChatColor.GOLD),
-	HEALING ("❤", ChatColor.LIGHT_PURPLE, ChatColor.GREEN),
+	HEALING ("❤", ChatColor.LIGHT_PURPLE, ChatColor.GOLD),
 	CRITICAL ("✧", ChatColor.GOLD, ChatColor.WHITE),
 	FIRE ("🔥", ChatColor.RED, ChatColor.GOLD),
 	DROWNING ("°ₒ৹", ChatColor.BLUE, ChatColor.RED),
 	WITHER ("☠", ChatColor.DARK_GRAY, ChatColor.DARK_RED),
 	EXPLOSION ("✸", ChatColor.YELLOW, ChatColor.GOLD),
-	PROJECTILE ("◎", ChatColor.RED, ChatColor.GRAY),
+	PROJECTILE ("◎", ChatColor.RED, ChatColor.GOLD),
 	PLAYER ("", ChatColor.RED, ChatColor.RED),
 	FALL_DAMAGE ("↯", ChatColor.RED, ChatColor.WHITE),
-	THORNS ("🛡️", ChatColor.LIGHT_PURPLE, ChatColor.GOLD),
-	LIGHTNING ("ϟ", ChatColor.GOLD, ChatColor.WHITE);
+	THORNS ("🛡", ChatColor.LIGHT_PURPLE, ChatColor.WHITE),
+	CONTACT ("✴", ChatColor.GREEN, ChatColor.WHITE),
+	LIGHTNING ("ϟ", ChatColor.GOLD, ChatColor.WHITE),
+	SUICIDE ("☠", ChatColor.RED, ChatColor.DARK_RED),
+	HUNGER ("☹ ", ChatColor.YELLOW, ChatColor.RED);
 	
 	/** Color applied on the symbol of the damage type */
 	private ChatColor color;

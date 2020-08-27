@@ -26,9 +26,17 @@ public class DamageDisplayEntity extends MobEquipment
 			displayName.append(damageType.toString());
 			displayName.append(" ");
 		}
-		DecimalFormat df = new DecimalFormat ("#.##");
-		displayName.append(damageType.getDamageColor());
-		displayName.append(df.format(finalDamage));
+		if (damageType != DamageType.SUICIDE)
+		{
+			DecimalFormat df = new DecimalFormat ("#.##");
+			displayName.append(damageType.getDamageColor());
+			displayName.append(df.format(finalDamage));
+		}
+		else
+		{
+			displayName.append(damageType.getDamageColor());
+			displayName.append("SUICIDE");
+		}
 		if (damageType.hasSymbol())
 		{
 			displayName.append(" ");
