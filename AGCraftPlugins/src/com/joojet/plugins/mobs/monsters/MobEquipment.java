@@ -377,7 +377,7 @@ public abstract class MobEquipment
 		HashSet <Faction> rivalingFactions = mob.getRivalFactions();
 		for (Faction faction : rivalingFactions)
 		{
-			if (this.rivalFactions.contains(faction))
+			if (this.factions.contains(faction))
 			{
 				return true;
 			}

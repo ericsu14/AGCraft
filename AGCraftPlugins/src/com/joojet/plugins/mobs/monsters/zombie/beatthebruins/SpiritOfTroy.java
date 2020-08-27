@@ -22,7 +22,7 @@ public class SpiritOfTroy extends USCFaction
 		this.addBiomes(Biome.THE_VOID);
 		this.name = "The " + ChatColor.GOLD + "Spirit " + ChatColor.RED + "of " + ChatColor.GOLD + "Troy";
 		this.color = ChatColor.RED;
-		this.addPotionEffect(CustomPotionEffect.SPEED, CustomPotionEffect.WEAKNESS);
+		this.addPotionEffect(CustomPotionEffect.SPEED);
 		this.setStat(MonsterStat.HEALTH, 12.0);
 		this.helmet = new USCBandHead (this.color);
 		this.chestplate = new USCBandUniformTop (this.color);
