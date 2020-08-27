@@ -129,6 +129,7 @@ public class DamageDisplayListener implements Listener
 			if (ent.hasPotionEffect(PotionEffectType.FIRE_RESISTANCE))
 			{
 				event.setCancelled(true);
+				return;
 			}
 		}
 		
