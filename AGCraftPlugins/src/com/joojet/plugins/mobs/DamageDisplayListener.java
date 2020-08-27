@@ -64,11 +64,13 @@ public class DamageDisplayListener implements Listener
 		
 		DamageType damageType = DamageType.NORMAL;
 		
-		// Checks for mob hits dealt by player inflicted critical hits
-		if (event.getEntity().getType() == EntityType.PLAYER)
+		// Checks for monster hits directed to players
+		if (event.getEntity().getType() == EntityType.PLAYER
+				&& event.getDamager().getType() != EntityType.PLAYER)
 		{
 			damageType = DamageType.PLAYER;
 		}
+		// Checks for mob hits dealt by player inflicted critical hits
 		else if (event.getDamager().getType() == EntityType.PLAYER)
 		{
 			damageType = this.damageDisplayManager.checkCriticalHit((Player) event.getDamager()) ? DamageType.CRITICAL : DamageType.NORMAL;
@@ -82,7 +84,7 @@ public class DamageDisplayListener implements Listener
 				damageType = DamageType.ALLIED;
 			}
 		}
-		// Checks for damage inflicted by projectiles
+		// Checks for damage inflicted by arrows
 		else if (event.getDamager() instanceof Arrow)
 		{
 			Projectile projectile = (Projectile) event.getDamager();
@@ -96,9 +98,10 @@ public class DamageDisplayListener implements Listener
 			}
 			damageType = (damageType == DamageType.NORMAL) ? DamageType.PROJECTILE : damageType;
 		}
-		else if (event.getCause() == DamageCause.MAGIC)
+		// Otherwise, convert the event's damage cause to a damage type
+		else
 		{
-			damageType = DamageType.MAGIC;
+			damageType = this.getDamageTypeFromCause(event.getCause());
 		}
 		
 		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getFinalDamage());
@@ -117,8 +120,62 @@ public class DamageDisplayListener implements Listener
 			return;
 		}
 		
+		DamageType damageType = this.getDamageTypeFromCause(event.getCause());
+		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getFinalDamage());
+	}
+	
+	@EventHandler
+	public void onEntityHealEvent (EntityRegainHealthEvent event)
+	{
+		// Do not run if the amount is negative or the server mode is running in Minigame mode (as this might give people's positions away in UHC)
+		if (event.getAmount() < 0.0 || AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL ||
+				!this.allowedRegainReasons.contains(event.getRegainReason()))
+		{
+			return;
+		}
+		
+		DamageType damageType = DamageType.HEALING;
+		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getAmount());
+	}
+	
+	/** Removes any damage display entity still persistent upon chunk loads */
+	@EventHandler
+	public void onChunkLoad (ChunkLoadEvent event)
+	{
+		this.removeDamageDisplayEntities(event.getChunk().getEntities());
+	}
+	
+	/** Removes any damage display entities still persistent upon chunk unloads */
+	@EventHandler
+	public void onChunkUnload (ChunkUnloadEvent event)
+	{
+		this.removeDamageDisplayEntities(event.getChunk().getEntities());
+	}
+	
+	/** Removes all unremoved damage display entities from the passed list of entities
+	 * 	@param entityList - List of entities captured by chunk data. */
+	private void removeDamageDisplayEntities (Entity[] entityList)
+	{
+		for (Entity entity : entityList)
+		{
+			if (entity.getType() == EntityType.ARMOR_STAND)
+			{
+				MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity((LivingEntity) entity);
+				if (equipment.getMonsterType() == MonsterType.DAMAGE_DISPLAY_ENTITY)
+				{
+					this.damageDisplayManager.removeDamageDisplayEntity(entity.getUniqueId());
+				}
+			}
+		}
+	}
+	
+	/** Takes in a Bukkit DamageCause enum and converts it into its
+	 *  equivant damage type enum in our Plugin.
+	 *  @param cause - Damage cause captured by current EntityDamage event */
+	private DamageType getDamageTypeFromCause (DamageCause cause)
+	{
 		DamageType damageType = DamageType.NORMAL;
-		switch (event.getCause())
+		switch (cause)
 		{
 			case MAGIC:
 				damageType = DamageType.MAGIC;
@@ -153,52 +210,17 @@ public class DamageDisplayListener implements Listener
 			case FALL:
 				damageType = DamageType.FALL_DAMAGE;
 				break;
+			case THORNS:
+				damageType = DamageType.THORNS;
+				break;
+			case CONTACT:
+				damageType = DamageType.MAGIC;
+				break;
+			case LIGHTNING:
+				damageType = DamageType.LIGHTNING;
 			default:
 				break;
 		}
-		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getFinalDamage());
-	}
-	
-	@EventHandler
-	public void onEntityHealEvent (EntityRegainHealthEvent event)
-	{
-		// Do not run if the amount is negative or the server mode is running in Minigame mode (as this might give people's positions away in UHC)
-		if (event.getAmount() < 0.0 || AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL ||
-				!this.allowedRegainReasons.contains(event.getRegainReason()))
-		{
-			return;
-		}
-		
-		DamageType damageType = DamageType.HEALING;
-		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getAmount());
-	}
-	
-	/** Removes any damage display entity still persistent upon chunk loads */
-	@EventHandler
-	public void onChunkLoad (ChunkLoadEvent event)
-	{
-		this.removeDamageDisplayEntities(event.getChunk().getEntities());
-	}
-	
-	/** Removes any damage display entities still persistent upon chunk unloads */
-	@EventHandler
-	public void onChunkUnload (ChunkUnloadEvent event)
-	{
-		this.removeDamageDisplayEntities(event.getChunk().getEntities());
-	}
-	
-	private void removeDamageDisplayEntities (Entity[] entityList)
-	{
-		for (Entity entity : entityList)
-		{
-			if (entity.getType() == EntityType.ARMOR_STAND)
-			{
-				MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity((LivingEntity) entity);
-				if (equipment.getMonsterType() == MonsterType.DAMAGE_DISPLAY_ENTITY)
-				{
-					this.damageDisplayManager.removeDamageDisplayEntity(entity.getUniqueId());
-				}
-			}
-		}
+		return damageType;
 	}
 }

@@ -9,14 +9,16 @@ public enum DamageType
 	POISON ("☠", ChatColor.GREEN, ChatColor.WHITE),
 	MAGIC ("✴", ChatColor.LIGHT_PURPLE, ChatColor.GOLD),
 	HEALING ("❤", ChatColor.LIGHT_PURPLE, ChatColor.GREEN),
-	CRITICAL ("✧", ChatColor.GOLD, ChatColor.RED),
+	CRITICAL ("✧", ChatColor.GOLD, ChatColor.WHITE),
 	FIRE ("🔥", ChatColor.RED, ChatColor.GOLD),
 	DROWNING ("°ₒ৹", ChatColor.BLUE, ChatColor.RED),
-	WITHER ("☠", ChatColor.GRAY, ChatColor.DARK_RED),
-	EXPLOSION ("✸", ChatColor.YELLOW, ChatColor.RED),
-	PROJECTILE ("◎", ChatColor.GOLD, ChatColor.RED),
+	WITHER ("☠", ChatColor.DARK_GRAY, ChatColor.DARK_RED),
+	EXPLOSION ("✸", ChatColor.YELLOW, ChatColor.GOLD),
+	PROJECTILE ("◎", ChatColor.RED, ChatColor.GRAY),
 	PLAYER ("", ChatColor.RED, ChatColor.RED),
-	FALL_DAMAGE ("↯", ChatColor.RED, ChatColor.WHITE);
+	FALL_DAMAGE ("↯", ChatColor.RED, ChatColor.WHITE),
+	THORNS ("🛡️", ChatColor.LIGHT_PURPLE, ChatColor.GOLD),
+	LIGHTNING ("ϟ", ChatColor.GOLD, ChatColor.WHITE);
 	
 	/** Color applied on the symbol of the damage type */
 	private ChatColor color;
