@@ -123,11 +123,19 @@ public class DamageDisplayListener implements Listener
 		
 		// Cancels damage event if the damage cause is MELTING and the entity has fire resistance
 		// This prevents snow golems from dying
-		if (event.getEntity() instanceof LivingEntity && event.getCause() == DamageCause.MELTING
-				|| event.getCause() == DamageCause.DRYOUT)
+		if (event.getEntity() instanceof LivingEntity)
 		{
 			LivingEntity ent = (LivingEntity) event.getEntity();
-			if (ent.hasPotionEffect(PotionEffectType.FIRE_RESISTANCE))
+			if (ent.hasPotionEffect(PotionEffectType.FIRE_RESISTANCE) 
+					&& (event.getCause() == DamageCause.MELTING))
+			{
+				event.setCancelled(true);
+				return;
+			}
+			
+			if (ent.hasPotionEffect(PotionEffectType.WATER_BREATHING)
+					&& (event.getCause() == DamageCause.DROWNING
+							|| event.getCause() == DamageCause.DRYOUT))
 			{
 				event.setCancelled(true);
 				return;
