@@ -27,7 +27,7 @@ public class LeftCrashSymbol extends ShieldEquipment
 				new Pattern (DyeColor.YELLOW, PatternType.STRIPE_LEFT),
 				new Pattern (DyeColor.YELLOW, PatternType.STRIPE_RIGHT));
 		
-		this.addAttackAttributes(6.0, 0.0);
+		this.addAttackAttributes(7.0, 0.0);
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
