@@ -61,6 +61,7 @@ public class AmplifiedMobSpawner implements Listener
 		this.julyFourthHandler = new JulyFourthHandler ();
 		this.amplifiedMobHandler = new AmplifiedMobHandler();
 		this.bruinHandler = new BeatTheBruinsHandler ();
+		this.uhcHandler = new UHCHandler();
 	}
 	
 	public void onEnable ()
