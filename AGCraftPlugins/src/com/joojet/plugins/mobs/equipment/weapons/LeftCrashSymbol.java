@@ -17,7 +17,7 @@ public class LeftCrashSymbol extends ShieldEquipment
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 5;
 		this.setDisplayName("Left Crash Symbol");
-		this.addLoreToItemMeta("Bash your enemies with this crash symbol!");
+		this.addLoreToItemMeta("Bash your enemies with this crash symbol! Not intended to be used as a shield, but more as a weapon!");
 		
 		this.addPatterns(new Pattern (DyeColor.BLACK, PatternType.FLOWER),
 				new Pattern (DyeColor.YELLOW, PatternType.STRIPE_BOTTOM),
@@ -28,7 +28,7 @@ public class LeftCrashSymbol extends ShieldEquipment
 				new Pattern (DyeColor.YELLOW, PatternType.STRIPE_RIGHT));
 		
 		this.addAttackAttributes(6.0, 0.0);
-		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 2);
+		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
 		this.addUnsafeEnchantment(Enchantment.SWEEPING_EDGE, 4);

@@ -17,7 +17,7 @@ public class RightCrashSymbol extends ShieldEquipment
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 5;
 		this.setDisplayName("Right Crash Symbol");
-		this.addLoreToItemMeta("Bash your enemies with this crash symbol!");
+		this.addLoreToItemMeta("Hold this crash symbol in your offhand to deal increased damage!");
 		
 		this.addPatterns(new Pattern (DyeColor.BLACK, PatternType.FLOWER),
 				new Pattern (DyeColor.YELLOW, PatternType.STRIPE_BOTTOM),
