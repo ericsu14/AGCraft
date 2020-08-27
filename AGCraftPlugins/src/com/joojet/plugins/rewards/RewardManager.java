@@ -70,6 +70,7 @@ public class RewardManager implements Listener
 		// For now, distribute generic UHC participation rewards
 		UUID playerUUID = player.getUniqueId();
 		MinigameRewardType type = AGCraftPlugin.plugin.minigameEventType;
+		System.out.println (type);
 		try 
 		{
 			// If the player does not already have a reward from this current event, give them the rewards
@@ -93,7 +94,8 @@ public class RewardManager implements Listener
 								RewardType.GOLDEN_CARROTS, 
 								RewardType.ENCHANTED_GOLDEN_APPLE,
 								RewardType.ETERNAL_MOCKTAIL,
-								RewardType.USC_CREEPER_SHIELD);
+								RewardType.USC_CREEPER_SHIELD,
+								RewardType.SNOWBALL);
 						break;
 					default:
 						break;
