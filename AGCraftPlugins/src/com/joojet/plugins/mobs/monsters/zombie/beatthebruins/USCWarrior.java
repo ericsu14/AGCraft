@@ -27,7 +27,7 @@ public class USCWarrior extends USCFaction
 		this.color = ChatColor.GOLD;
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED,
-				CustomPotionEffect.RESISTANCE);
+				CustomPotionEffect.RESISTANCE, CustomPotionEffect.WEAKNESS);
 		
 		this.helmet = new USCTrojan (this.color);
 		this.chestplate = new USCFootballTunic (this.color);

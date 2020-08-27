@@ -14,7 +14,8 @@ public enum CustomPotionEffect
 	RESISTANCE_II (PotionEffectType.DAMAGE_RESISTANCE, 1),
 	REGEN (PotionEffectType.REGENERATION, 0),
 	WATER_BREATHING (PotionEffectType.WATER_BREATHING, 0),
-	UNDEAD_HEAL (PotionEffectType.HARM, 10, true);
+	UNDEAD_HEAL (PotionEffectType.HARM, 10, true),
+	WEAKNESS (PotionEffectType.WEAKNESS, 0);
 	
 	private PotionEffect effect;
 	private boolean instant;
