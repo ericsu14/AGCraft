@@ -1,15 +1,12 @@
 package com.joojet.plugins.mobs.monsters;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -132,28 +129,6 @@ public abstract class MobEquipment
 		return itemList;
 	}
 	
-	/** Returns the total amount of bonus health added in to each custom equipment contained in this class */
-	public double getEquipmentBonusHealth ()
-	{
-		double health = 0.0;
-		ItemStack[] equipment = this.getEquipment();
-		for (ItemStack equip : equipment)
-		{
-			if (equip != null && equip.hasItemMeta())
-			{
-				Collection <AttributeModifier> mods = equip.getItemMeta().getAttributeModifiers(Attribute.GENERIC_MAX_HEALTH);
-				if (mods != null)
-				{
-					for (AttributeModifier attr : mods)
-					{
-						health += attr.getAmount();
-					}
-				}
-			}
-		}
-		return health;
-	}
-	
 	/** Returns true if the monster contains the passed Monster Stat
 	 * 	@param stat - The Monster stat being checked */
 	public boolean containsStat (MonsterStat stat)
@@ -185,42 +160,6 @@ public abstract class MobEquipment
 	public float[] getDropRates ()
 	{
 		return this.dropRates;
-	}
-	
-	/** Returns the monster's helmet */
-	public ItemStack getHelmet ()
-	{
-		return this.helmet;
-	}
-	
-	/** Returns the monster's chestplate */
-	public ItemStack getChestplate ()
-	{
-		return this.chestplate;
-	}
-	
-	/** Returns the monster's leggings */
-	public ItemStack getLeggings ()
-	{
-		return this.leggings;
-	}
-	
-	/** Returns the monster's boots */
-	public ItemStack getBoots ()
-	{
-		return this.boots;
-	}
-	
-	/** Returns the monster's weapon */
-	public ItemStack getWeapon ()
-	{
-		return this.weapon;
-	}
-	
-	/** Returns the monster's offhand item */
-	public ItemStack getOffhand ()
-	{
-		return this.offhand;
 	}
 	
 	/** Returns the monster's name */
