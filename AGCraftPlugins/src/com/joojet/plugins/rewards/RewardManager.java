@@ -88,7 +88,7 @@ public class RewardManager implements Listener
 								RewardType.STRAWBERRY_MOCKTAIL,
 								RewardType.GOLDEN_CARROTS);
 						break;
-					case UHC_RUSH:
+					case UHC_RUSH_REWARDS:
 						this.grantRewards(player, RewardType.DIAMONDS, 
 								RewardType.FROLF, 
 								RewardType.GOLDEN_CARROTS, 
