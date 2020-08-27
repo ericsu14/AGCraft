@@ -208,6 +208,12 @@ public class DamageDisplayListener implements Listener
 			case POISON:
 				damageType = DamageType.POISON;
 				break;
+			case MELTING:
+				damageType = DamageType.FIRE;
+				break;
+			case DRYOUT:
+				damageType = DamageType.DROWNING;
+				break;
 			case DROWNING:
 				damageType = DamageType.DROWNING;
 				break;
