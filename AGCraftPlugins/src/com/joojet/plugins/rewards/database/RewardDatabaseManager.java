@@ -150,8 +150,6 @@ public class RewardDatabaseManager
 		return entries;
 	}
 	
-	
-	
 	/** Fetches all unclaimed rewards from a player
 	 * 		@param uuid - Player we are fetching all unclaimed rewards for
 	 * 		@throws SQLException - Internal connection error */

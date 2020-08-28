@@ -6,7 +6,7 @@ import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
-public class USCFaction extends MobEquipment
+public abstract class USCFaction extends MobEquipment
 {
 	public USCFaction (MonsterType type)
 	{
