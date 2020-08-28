@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Piglin;
 import org.bukkit.entity.Player;
@@ -21,6 +24,8 @@ import org.bukkit.inventory.Merchant;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.potion.PotionEffect;
 
+import com.destroystokyo.paper.entity.ai.Goal;
+import com.destroystokyo.paper.entity.ai.GoalKey;
 import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
@@ -29,11 +34,6 @@ import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 import com.joojet.plugins.warp.scantools.ScanEntities;
-
-import net.minecraft.server.v1_16_R2.EntityMonster;
-import net.minecraft.server.v1_16_R2.PathfinderGoalNearestAttackableTarget;
-
-import org.bukkit.craftbukkit.v1_16_R2.entity.CraftMonster;
 
 public class EquipmentTools 
 {	
@@ -236,7 +236,7 @@ public class EquipmentTools
 	 *  a mob in order for this to work.
 	 *   @param entity - The Living Entity we are modifying its pathfinding propetries for
 	 *   @param mobEquipment - Object containing custom mob equipment */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked" })
 	public static void modifyPathfindingTargets (LivingEntity entity, MobEquipment mobEquipment)
 	{
 		// NULL check
@@ -246,11 +246,27 @@ public class EquipmentTools
 		}
 		
 		// If the entity is not a monster, do nothing.
-		if (!(entity instanceof Monster))
+		if (!(entity instanceof Mob))
 		{
 			return;
 		}
 		
+		Mob mob = (Mob) entity;
+		
+		// Retrieves the monster's hitlist
+		ArrayList <EntityType> hitlist = mobEquipment.getHitList();
+		
+		// Add target entity goals based on the values stored in the mob equipment's hitlist.
+		for (EntityType victim : hitlist)
+		{
+			Class <?> mobClass = ConvertEntity.getNMSEntity(victim);
+			if (mobClass != null)
+			{
+				Bukkit.getServer().getMobGoals().addGoal(mob, 5, (Goal<Mob>) GoalKey.of((Class<Mob>) mobClass, NamespacedKey.minecraft("nearest_attackable_target")));
+			}
+		}
+		
+		/** Monster mob = (Monster) entity;?
 		// Cast this into a NMS entity monster
 		EntityMonster nmsMob = ((CraftMonster) entity).getHandle();
 		
@@ -265,7 +281,7 @@ public class EquipmentTools
 			{
 				nmsMob.targetSelector.a (5, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
 			}
-		}
+		} */
 	}
 
 }

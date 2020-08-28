@@ -1,6 +1,5 @@
 package com.joojet.plugins.mobs.equipment;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -160,23 +159,12 @@ public abstract class Equipment extends ItemStack
 	{
 		SkullMeta localSkullMeta = (SkullMeta) this.getItemMeta();
 
-		MockProfile localGameProfile = new MockProfile(UUID.randomUUID());
+		MockProfile localGameProfile = new MockProfile();
 		StringBuilder fullURL = new StringBuilder (this.urlBase);
 		fullURL.append(head.getURL());
 		byte[] arrayOfByte = Base64.getEncoder().encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", new Object[] { fullURL.toString() }).getBytes());
-		localGameProfile.getProperties().put("textures", new ProfileProperty("textures", new String(arrayOfByte)));
-		Field localField = null;
-		try
-		{
-			localField = localSkullMeta.getClass().getDeclaredField("profile");
-			localField.setAccessible(true);
-			localField.set(localSkullMeta, localGameProfile);
-		}
-		catch (NoSuchFieldException|IllegalArgumentException|IllegalAccessException localNoSuchFieldException)
-		{
-			System.out.println("error: " + localNoSuchFieldException.getMessage());
-		}
-
+		localGameProfile.setProperty(new ProfileProperty("textures", new String(arrayOfByte)));
+		localSkullMeta.setPlayerProfile(localGameProfile);
 		this.setItemMeta((ItemMeta) localSkullMeta);
 	}
 	

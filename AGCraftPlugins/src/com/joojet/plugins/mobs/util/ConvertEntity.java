@@ -1,162 +1,113 @@
 package com.joojet.plugins.mobs.util;
 
 import org.bukkit.entity.EntityType;
-
-import net.minecraft.server.v1_16_R2.EntityArmorStand;
-import net.minecraft.server.v1_16_R2.EntityBee;
-import net.minecraft.server.v1_16_R2.EntityBlaze;
-import net.minecraft.server.v1_16_R2.EntityCat;
-import net.minecraft.server.v1_16_R2.EntityCaveSpider;
-import net.minecraft.server.v1_16_R2.EntityChicken;
-import net.minecraft.server.v1_16_R2.EntityCow;
-import net.minecraft.server.v1_16_R2.EntityCreeper;
-import net.minecraft.server.v1_16_R2.EntityDrowned;
-import net.minecraft.server.v1_16_R2.EntityEnderman;
-import net.minecraft.server.v1_16_R2.EntityEndermite;
-import net.minecraft.server.v1_16_R2.EntityEvoker;
-import net.minecraft.server.v1_16_R2.EntityFox;
-import net.minecraft.server.v1_16_R2.EntityGhast;
-import net.minecraft.server.v1_16_R2.EntityHoglin;
-import net.minecraft.server.v1_16_R2.EntityMagmaCube;
-import net.minecraft.server.v1_16_R2.EntityOcelot;
-import net.minecraft.server.v1_16_R2.EntityPhantom;
-import net.minecraft.server.v1_16_R2.EntityPig;
-import net.minecraft.server.v1_16_R2.EntityPiglin;
-import net.minecraft.server.v1_16_R2.EntityPiglinBrute;
-import net.minecraft.server.v1_16_R2.EntityPillager;
-import net.minecraft.server.v1_16_R2.EntityPlayer;
-import net.minecraft.server.v1_16_R2.EntityPolarBear;
-import net.minecraft.server.v1_16_R2.EntityRabbit;
-import net.minecraft.server.v1_16_R2.EntityRavager;
-import net.minecraft.server.v1_16_R2.EntitySilverfish;
-import net.minecraft.server.v1_16_R2.EntitySkeleton;
-import net.minecraft.server.v1_16_R2.EntitySkeletonStray;
-import net.minecraft.server.v1_16_R2.EntityZombie;
-import net.minecraft.server.v1_16_R2.EntityZombieHusk;
-import net.minecraft.server.v1_16_R2.EntityZombieVillager;
-import net.minecraft.server.v1_16_R2.EntitySkeletonWither;
-import net.minecraft.server.v1_16_R2.EntitySlime;
-import net.minecraft.server.v1_16_R2.EntitySnowman;
-import net.minecraft.server.v1_16_R2.EntitySpider;
-import net.minecraft.server.v1_16_R2.EntityVex;
-import net.minecraft.server.v1_16_R2.EntityVillager;
-import net.minecraft.server.v1_16_R2.EntityVillagerTrader;
-import net.minecraft.server.v1_16_R2.EntityVindicator;
-import net.minecraft.server.v1_16_R2.EntityWitch;
-import net.minecraft.server.v1_16_R2.EntityWither;
-import net.minecraft.server.v1_16_R2.EntityWolf;
-import net.minecraft.server.v1_16_R2.EntityPigZombie;
-import net.minecraft.server.v1_16_R2.EntityIllagerIllusioner;
-import net.minecraft.server.v1_16_R2.EntityIronGolem;
-import net.minecraft.server.v1_16_R2.EntityGiantZombie;
-import net.minecraft.server.v1_16_R2.EntityGuardian;
-import net.minecraft.server.v1_16_R2.EntityGuardianElder;
+import org.bukkit.entity.*;
 
 public class ConvertEntity 
 {
-	/** Converts an entity type enum to its equivalent NMS entity class type */
+	/** Converts an  type enum to its equivalent Bukkit Entity  class type */
 	public static Class<?> getNMSEntity (EntityType type)
 	{
 		switch (type)
 		{
 			case ZOMBIE:
-				return EntityZombie.class;
+				return Zombie.class;
 			case SKELETON:
-				return EntitySkeleton.class;
+				return Skeleton.class;
 			case WITHER_SKELETON:
-				return EntitySkeletonWither.class;
+				return WitherSkeleton.class;
 			case STRAY:
-				return EntitySkeletonStray.class;
+				return Stray.class;
 			case HUSK:
-				return EntityZombieHusk.class;
+				return Husk.class;
 			case ENDERMAN:
-				return EntityEnderman.class;
+				return Enderman.class;
 			case POLAR_BEAR:
-				return EntityPolarBear.class;
+				return PolarBear.class;
 			case PIGLIN:
-				return EntityPiglin.class;
+				return Piglin.class;
 			case ZOMBIFIED_PIGLIN:
-				return EntityPigZombie.class;
+				return PigZombie.class;
 			case SILVERFISH:
-				return EntitySilverfish.class;
+				return Silverfish.class;
 			case CHICKEN:
-				return EntityChicken.class;
+				return Chicken.class;
 			case CREEPER:
-				return EntityCreeper.class;
+				return Creeper.class;
 			case BLAZE:
-				return EntityBlaze.class;
+				return Blaze.class;
 			case BEE:
-				return EntityBee.class;
+				return Bee.class;
 			case EVOKER:
-				return EntityEvoker.class;
+				return Evoker.class;
 			case FOX:
-				return EntityFox.class;
+				return Fox.class;
 			case HOGLIN:
-				return EntityHoglin.class;
+				return Hoglin.class;
 			case GHAST:
-				return EntityGhast.class;
+				return Ghast.class;
 			case SLIME:
-				return EntitySlime.class;
+				return Slime.class;
 			case ILLUSIONER:
-				return EntityIllagerIllusioner.class;
+				return Illusioner.class;
 			case WITCH:
-				return EntityWitch.class;
+				return Witch.class;
 			case GIANT:
-				return EntityGiantZombie.class;
+				return Giant.class;
 			case GUARDIAN:
-				return EntityGuardian.class;
+				return Guardian.class;
 			case ELDER_GUARDIAN:
-				return EntityGuardianElder.class;
+				return ElderGuardian.class;
 			case PILLAGER:
-				return EntityPillager.class;
+				return Pillager.class;
 			case RAVAGER:
-				return EntityRavager.class;
+				return Ravager.class;
 			case IRON_GOLEM:
-				return EntityIronGolem.class;
+				return IronGolem.class;
 			case SNOWMAN:
-				return EntitySnowman.class;
+				return Snowman.class;
 			case WOLF:
-				return EntityWolf.class;
+				return Wolf.class;
 			case CAT:
-				return EntityCat.class;
+				return Cat.class;
 			case OCELOT:
-				return EntityOcelot.class;
+				return Ocelot.class;
 			case VILLAGER:
-				return EntityVillager.class;
+				return Villager.class;
 			case WANDERING_TRADER:
-				return EntityVillagerTrader.class;
+				return WanderingTrader.class;
 			case RABBIT:
-				return EntityRabbit.class;
+				return Rabbit.class;
 			case PIG:
-				return EntityPig.class;
+				return Pig.class;
 			case COW:
-				return EntityCow.class;
+				return Cow.class;
 			case SPIDER:
-				return EntitySpider.class;
+				return Spider.class;
 			case CAVE_SPIDER:
-				return EntityCaveSpider.class;
+				return CaveSpider.class;
 			case PLAYER:
-				return EntityPlayer.class;
+				return Player.class;
 			case MAGMA_CUBE:
-				return EntityMagmaCube.class;
+				return MagmaCube.class;
 			case DROWNED:
-				return EntityDrowned.class;
+				return Drowned.class;
 			case VEX:
-				return EntityVex.class;
+				return Vex.class;
 			case VINDICATOR:
-				return EntityVindicator.class;
+				return Vindicator.class;
 			case ENDERMITE:
-				return EntityEndermite.class;
+				return Endermite.class;
 			case ZOMBIE_VILLAGER:
-				return EntityZombieVillager.class;
+				return ZombieVillager.class;
 			case PHANTOM:
-				return EntityPhantom.class;
+				return Phantom.class;
 			case PIGLIN_BRUTE:
-				return EntityPiglinBrute.class;
+				return PiglinBrute.class;
 			case ARMOR_STAND:
-				return EntityArmorStand.class;
+				return ArmorStand.class;
 			case WITHER:
-				return EntityWither.class;
+				return Wither.class;
 			default:
 				break;
 		}
