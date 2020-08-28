@@ -43,7 +43,7 @@ public class EquipmentTools
 	public static void equipEntity (LivingEntity entity, MobEquipment mobEquipment)
 	{
 		Random rand = new Random ();
-		
+
 		// NULL check
 		if (entity == null || mobEquipment == null)
 		{

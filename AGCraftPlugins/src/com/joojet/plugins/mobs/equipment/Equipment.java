@@ -17,9 +17,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import com.joojet.plugins.agcraft.profile.MockProfile;
 import com.joojet.plugins.mobs.enums.PlayerHead;
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
+import com.destroystokyo.paper.profile.*;
 
 public abstract class Equipment extends ItemStack 
 {
@@ -68,6 +68,17 @@ public abstract class Equipment extends ItemStack
 		this.createHeadData(this.playerHead);
 		this.wordsPerLine = 4;
 		this.loreColor = chatColor;
+	}
+	
+	/** Adds a list of item flags to this equipment */
+	public void addItemFlags (ItemFlag... flags)
+	{
+		ItemMeta meta = this.getItemMeta();
+		for (ItemFlag flag : flags)
+		{
+			meta.addItemFlags(flag);
+		}
+		this.setItemMeta(meta);
 	}
 	
 	/** Adds an attack speed attribute to a piece of armor or weapon */
@@ -149,11 +160,11 @@ public abstract class Equipment extends ItemStack
 	{
 		SkullMeta localSkullMeta = (SkullMeta) this.getItemMeta();
 
-		GameProfile localGameProfile = new GameProfile(UUID.randomUUID(), null);
+		MockProfile localGameProfile = new MockProfile(UUID.randomUUID());
 		StringBuilder fullURL = new StringBuilder (this.urlBase);
 		fullURL.append(head.getURL());
 		byte[] arrayOfByte = Base64.getEncoder().encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", new Object[] { fullURL.toString() }).getBytes());
-		localGameProfile.getProperties().put("textures", new Property("textures", new String(arrayOfByte)));
+		localGameProfile.getProperties().put("textures", new ProfileProperty("textures", new String(arrayOfByte)));
 		Field localField = null;
 		try
 		{
@@ -256,17 +267,6 @@ public abstract class Equipment extends ItemStack
 	{
 		ItemMeta meta = this.getItemMeta();
 		meta.setLocalizedName(text);
-		this.setItemMeta(meta);
-	}
-	
-	/** Adds a list of item flags to this equipment */
-	protected void addItemFlags (ItemFlag... flags)
-	{
-		ItemMeta meta = this.getItemMeta();
-		for (ItemFlag flag : flags)
-		{
-			meta.addItemFlags(flag);
-		}
 		this.setItemMeta(meta);
 	}
 	
