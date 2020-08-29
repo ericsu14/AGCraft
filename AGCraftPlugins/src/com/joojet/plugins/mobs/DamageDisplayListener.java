@@ -164,7 +164,7 @@ public class DamageDisplayListener implements Listener
 	@EventHandler
 	public void onChunkLoad (ChunkLoadEvent event)
 	{
-		if (event.getChunk() != null)
+		if (event != null && event.getChunk() != null)
 		{
 			this.removeDamageDisplayEntities(event.getChunk().getEntities());
 		}
@@ -174,7 +174,10 @@ public class DamageDisplayListener implements Listener
 	@EventHandler
 	public void onChunkUnload (ChunkUnloadEvent event)
 	{
-		this.removeDamageDisplayEntities(event.getChunk().getEntities());
+		if (event != null && event.getChunk() != null)
+		{
+			this.removeDamageDisplayEntities(event.getChunk().getEntities());
+		}
 	}
 	
 	/** Removes all unremoved damage display entities from the passed list of entities
@@ -183,7 +186,7 @@ public class DamageDisplayListener implements Listener
 	{
 		for (Entity entity : entityList)
 		{
-			if (entity.getType() == EntityType.ARMOR_STAND)
+			if (entity != null && entity.getType() == EntityType.ARMOR_STAND)
 			{
 				MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity((LivingEntity) entity);
 				if (equipment.getMonsterType() == MonsterType.DAMAGE_DISPLAY_ENTITY)
