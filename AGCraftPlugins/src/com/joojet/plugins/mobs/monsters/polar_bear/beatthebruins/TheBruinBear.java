@@ -17,13 +17,14 @@ public class TheBruinBear extends UCLAFaction
 		super (MonsterType.BRUIN_BEAR);
 		this.color = ChatColor.AQUA;
 		this.name = "The" + ChatColor.GOLD + " Bruin" + this.color + " Bear";
-		this.setStat(MonsterStat.HEALTH, 50.0);
+		this.setStat(MonsterStat.HEALTH, 60.0);
 		this.addTargetsToHitList(EntityType.CREEPER, EntityType.IRON_GOLEM);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 20.0);
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.SHOW_NAME, MobFlag.PERSISTENT_ATTACKER);
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.STRENGTH_II, CustomPotionEffect.JUMP_BOOST,
-				CustomPotionEffect.SPEED, CustomPotionEffect.RESISTANCE_II, CustomPotionEffect.FIRE_RESISTANCE);
+				CustomPotionEffect.SPEED, CustomPotionEffect.RESISTANCE_II, CustomPotionEffect.FIRE_RESISTANCE,
+				CustomPotionEffect.REGEN);
 		this.setStat(MonsterStat.EXPERIENCE, 300.0);
 		this.ignoreList.clear();
 	}
