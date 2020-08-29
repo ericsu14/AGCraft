@@ -16,7 +16,8 @@ public enum SummonTypes
 	SKULL_KID,
 	SPIRIT_OF_TROY,
 	USC_ARCHER,
-	AG_SPOTTED;
+	AG_SPOTTED,
+	UCLA_BEAR_TAMER;
 	
 	public SummoningScroll getSummon ()
 	{
@@ -48,6 +49,8 @@ public enum SummonTypes
 				return new SummonUSCArcher();
 			case AG_SPOTTED:
 				return new SummonAGSpotted();
+			case UCLA_BEAR_TAMER:
+				return new SummonUCLABearTamer();
 			default:
 				break;
 		}

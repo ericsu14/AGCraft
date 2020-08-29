@@ -2,55 +2,7 @@ package com.joojet.plugins.mobs.util;
 
 import org.bukkit.entity.EntityType;
 
-import net.minecraft.server.v1_16_R2.EntityArmorStand;
-import net.minecraft.server.v1_16_R2.EntityBee;
-import net.minecraft.server.v1_16_R2.EntityBlaze;
-import net.minecraft.server.v1_16_R2.EntityCat;
-import net.minecraft.server.v1_16_R2.EntityCaveSpider;
-import net.minecraft.server.v1_16_R2.EntityChicken;
-import net.minecraft.server.v1_16_R2.EntityCow;
-import net.minecraft.server.v1_16_R2.EntityCreeper;
-import net.minecraft.server.v1_16_R2.EntityDrowned;
-import net.minecraft.server.v1_16_R2.EntityEnderman;
-import net.minecraft.server.v1_16_R2.EntityEndermite;
-import net.minecraft.server.v1_16_R2.EntityEvoker;
-import net.minecraft.server.v1_16_R2.EntityFox;
-import net.minecraft.server.v1_16_R2.EntityGhast;
-import net.minecraft.server.v1_16_R2.EntityHoglin;
-import net.minecraft.server.v1_16_R2.EntityMagmaCube;
-import net.minecraft.server.v1_16_R2.EntityOcelot;
-import net.minecraft.server.v1_16_R2.EntityPhantom;
-import net.minecraft.server.v1_16_R2.EntityPig;
-import net.minecraft.server.v1_16_R2.EntityPiglin;
-import net.minecraft.server.v1_16_R2.EntityPiglinBrute;
-import net.minecraft.server.v1_16_R2.EntityPillager;
-import net.minecraft.server.v1_16_R2.EntityPlayer;
-import net.minecraft.server.v1_16_R2.EntityPolarBear;
-import net.minecraft.server.v1_16_R2.EntityRabbit;
-import net.minecraft.server.v1_16_R2.EntityRavager;
-import net.minecraft.server.v1_16_R2.EntitySilverfish;
-import net.minecraft.server.v1_16_R2.EntitySkeleton;
-import net.minecraft.server.v1_16_R2.EntitySkeletonStray;
-import net.minecraft.server.v1_16_R2.EntityZombie;
-import net.minecraft.server.v1_16_R2.EntityZombieHusk;
-import net.minecraft.server.v1_16_R2.EntityZombieVillager;
-import net.minecraft.server.v1_16_R2.EntitySkeletonWither;
-import net.minecraft.server.v1_16_R2.EntitySlime;
-import net.minecraft.server.v1_16_R2.EntitySnowman;
-import net.minecraft.server.v1_16_R2.EntitySpider;
-import net.minecraft.server.v1_16_R2.EntityVex;
-import net.minecraft.server.v1_16_R2.EntityVillager;
-import net.minecraft.server.v1_16_R2.EntityVillagerTrader;
-import net.minecraft.server.v1_16_R2.EntityVindicator;
-import net.minecraft.server.v1_16_R2.EntityWitch;
-import net.minecraft.server.v1_16_R2.EntityWither;
-import net.minecraft.server.v1_16_R2.EntityWolf;
-import net.minecraft.server.v1_16_R2.EntityPigZombie;
-import net.minecraft.server.v1_16_R2.EntityIllagerIllusioner;
-import net.minecraft.server.v1_16_R2.EntityIronGolem;
-import net.minecraft.server.v1_16_R2.EntityGiantZombie;
-import net.minecraft.server.v1_16_R2.EntityGuardian;
-import net.minecraft.server.v1_16_R2.EntityGuardianElder;
+import net.minecraft.server.v1_16_R2.*;
 
 public class ConvertEntity 
 {

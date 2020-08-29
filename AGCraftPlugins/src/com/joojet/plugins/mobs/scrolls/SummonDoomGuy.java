@@ -4,7 +4,7 @@ import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.monsters.wither_skeleton.DoomGuy;
 
-public class SummonDoomGuy extends SummoningScroll 
+public class SummonDoomGuy extends BossScroll 
 {
 	public SummonDoomGuy ()
 	{

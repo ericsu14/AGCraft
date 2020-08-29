@@ -4,7 +4,7 @@ import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.monsters.skeleton.SkullKid;
 
-public class SummonSkullKid extends SummoningScroll 
+public class SummonSkullKid extends BossScroll 
 {
 	public SummonSkullKid ()
 	{

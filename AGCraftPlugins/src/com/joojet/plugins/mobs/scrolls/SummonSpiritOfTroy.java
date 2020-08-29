@@ -4,7 +4,7 @@ import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.monsters.zombie.beatthebruins.SpiritOfTroy;
 
-public class SummonSpiritOfTroy extends SummoningScroll 
+public class SummonSpiritOfTroy extends BossScroll 
 {
 	public SummonSpiritOfTroy ()
 	{

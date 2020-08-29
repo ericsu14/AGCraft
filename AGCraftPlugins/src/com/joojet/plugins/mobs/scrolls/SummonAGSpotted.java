@@ -4,7 +4,7 @@ import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.monsters.skeleton.UltimateBadassSkeleton;
 
-public class SummonAGSpotted extends SummoningScroll
+public class SummonAGSpotted extends BossScroll
 {
 	public SummonAGSpotted ()
 	{

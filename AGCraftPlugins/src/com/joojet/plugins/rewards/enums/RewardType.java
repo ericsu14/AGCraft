@@ -42,7 +42,8 @@ public enum RewardType
 	ETERNAL_MOCKTAIL,
 	USC_CREEPER_SHIELD,
 	USC_ARCHER,
-	AG_SPOTTED;
+	AG_SPOTTED,
+	UCLA_BEAR_TAMER;
 	
 	public ItemStack getReward ()
 	{
@@ -98,6 +99,8 @@ public enum RewardType
 				return new SummonUSCArcher();
 			case AG_SPOTTED:
 				return new SummonAGSpotted();
+			case UCLA_BEAR_TAMER:
+				return new SummonUCLABearTamer();
 			default:
 				break;
 		}
