@@ -30,8 +30,7 @@ public class UCLABearTamer extends UCLAFaction
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
-		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.HUNT_ON_SPAWN,
-				MobFlag.PERSISTENT_ATTACKER, MobFlag.SHOW_NAME);
+		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.PERSISTENT_ATTACKER, MobFlag.SHOW_NAME);
 		this.color = ChatColor.AQUA;
 		this.helmet = new BruinHead ();
 		this.chestplate = new BruinTunic (this.color);
