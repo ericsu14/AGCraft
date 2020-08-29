@@ -11,5 +11,6 @@ public class CollegeSkeletonTypes extends MonsterTypes
 		super (EntityType.SKELETON, EntityType.STRAY);
 		this.addEquipment(new UCLAArcher(), 60);
 		this.addEquipment(new USCArcher(), 40);
+		this.addEquipment(new UCLABearTamer(), 25);
 	}
 }

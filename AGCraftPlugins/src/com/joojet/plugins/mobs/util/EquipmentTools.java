@@ -9,8 +9,10 @@ import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Damageable;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Piglin;
 import org.bukkit.entity.Player;
@@ -27,13 +29,14 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
-import net.minecraft.server.v1_16_R2.EntityMonster;
+import net.minecraft.server.v1_16_R2.EntityInsentient;
 import net.minecraft.server.v1_16_R2.PathfinderGoalNearestAttackableTarget;
 
-import org.bukkit.craftbukkit.v1_16_R2.entity.CraftMonster;
+import org.bukkit.craftbukkit.v1_16_R2.entity.CraftMob;
 
 public class EquipmentTools 
 {	
@@ -209,6 +212,9 @@ public class EquipmentTools
 		
 		// Initialize custom pathfinding targets
 		modifyPathfindingTargets (entity, mobEquipment);
+		
+		// Equip monster mounts
+		mountMob (entity, mobEquipment);
 	}
 	
 	/** Sets custom metadata provided in mobEquipment onto the passed living entity.
@@ -234,7 +240,7 @@ public class EquipmentTools
 	/** Modifies an entity's pathfinding properties based on what is stored in
 	 *  its custom mob equipment instance. The Entity must be an instance of
 	 *  a mob in order for this to work.
-	 *   @param entity - The Living Entity we are modifying its pathfinding propetries for
+	 *   @param entity - The Living Entity we are modifying its pathfinding properties for
 	 *   @param mobEquipment - Object containing custom mob equipment */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void modifyPathfindingTargets (LivingEntity entity, MobEquipment mobEquipment)
@@ -246,13 +252,13 @@ public class EquipmentTools
 		}
 		
 		// If the entity is not a monster, do nothing.
-		if (!(entity instanceof Monster))
+		if (!(entity instanceof Mob))
 		{
 			return;
 		}
 		
 		// Cast this into a NMS entity monster
-		EntityMonster nmsMob = ((CraftMonster) entity).getHandle();
+		EntityInsentient nmsMob = ((CraftMob) entity).getHandle();
 		
 		// Retrieves the monster's hitlist
 		ArrayList <EntityType> hitlist = mobEquipment.getHitList();
@@ -265,6 +271,23 @@ public class EquipmentTools
 			{
 				nmsMob.targetSelector.a (5, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
 			}
+		}
+	}
+	
+	public static void mountMob (LivingEntity entity, MobEquipment mobEquipment)
+	{
+		// Equip the monster's mounted mob
+		if (mobEquipment.hasMountedMob())
+		{
+			MountedMob mount = mobEquipment.getMountedMob();
+			Location currentLocation = entity.getLocation();
+			Entity mountEnt = entity.getWorld().spawnEntity(currentLocation, mount.getEntityType());
+			
+			if (mountEnt instanceof LivingEntity)
+			{
+				equipEntity ((LivingEntity) mountEnt, mount.getMobEquipment());
+			}
+			mountEnt.addPassenger(entity);
 		}
 	}
 

@@ -68,6 +68,8 @@ public abstract class MobEquipment
 	protected HashSet <EntityType> ignoreList;
 	/** A set of flags that could be applied to the monster upon spawning */
 	protected HashSet <MobFlag> mobFlags;
+	/** Custom monster that this entity can ride upon spawning */
+	protected MountedMob mount;
 	
 	public MobEquipment (MonsterType mobType)
 	{
@@ -93,6 +95,8 @@ public abstract class MobEquipment
 		this.mobFlags = new HashSet <MobFlag> ();
 		// Monster Stats
 		this.mobStats = new HashMap <MonsterStat, Double> ();
+		// Mounted mob
+		this.mount = null;
 	}
 	
 	/** Sets up drop rates for this entity.
@@ -383,6 +387,18 @@ public abstract class MobEquipment
 			}
 		}
 		return false;
+	}
+	
+	/** Returns true if this monster has a mounted mob */
+	public boolean hasMountedMob ()
+	{
+		return this.mount != null;
+	}
+	
+	/** Returns this monster's mounted mob if it exists */
+	public MountedMob getMountedMob ()
+	{
+		return this.mount;
 	}
 	
 	/** Return the equipment's monster type identifier as a string. */
