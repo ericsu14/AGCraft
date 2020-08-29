@@ -1,24 +1,30 @@
 package com.joojet.plugins.mobs.util.customtargets;
 
+import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.entity.DragonFireball;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.util.Vector;
+
 import net.minecraft.server.v1_16_R2.EntityGiantZombie;
-import net.minecraft.server.v1_16_R2.EntityHuman;
-import net.minecraft.server.v1_16_R2.EntityLargeFireball;
 import net.minecraft.server.v1_16_R2.EntityLiving;
 import net.minecraft.server.v1_16_R2.PathfinderGoal;
 import net.minecraft.server.v1_16_R2.Vec3D;
-import net.minecraft.server.v1_16_R2.World;
 
 /** A copy and pasted implementation from minecraft source files
  *  of their own GhastFireball pathfinder goal modified to hopefully work
  *  for Giants. */
 public class PathfinderGoalGiantFireball extends PathfinderGoal 
 {
+	private LivingEntity giantBukkit;
 	private final EntityGiantZombie giant;
 		    
 	public int a;
 		    
-	public PathfinderGoalGiantFireball(EntityGiantZombie entitygiant) {
+	public PathfinderGoalGiantFireball(EntityGiantZombie entitygiant, LivingEntity entity) {
 		this.giant = entitygiant;
+		this.giantBukkit = entity;
 	}
 		    
 	public boolean a() 
@@ -33,7 +39,6 @@ public class PathfinderGoalGiantFireball extends PathfinderGoal
 		    
 	public void d() 
 	{
-		
 	}
 	
 	public void e() 
@@ -41,24 +46,26 @@ public class PathfinderGoalGiantFireball extends PathfinderGoal
 		EntityLiving entityliving = this.giant.getGoalTarget();
 		if (entityliving.h(this.giant) < 4096.0D && this.giant.hasLineOfSight(entityliving)) 
 		{
-			World world = this.giant.world;
+			// World world = this.giant.world;
 			this.a++;
+			// Plays the ghast sound on the 10th tick
 			if (this.a == 10 && !this.giant.isSilent())
 			{
-				world.a((EntityHuman)null, 1015, this.giant.getChunkCoordinates(), 0);
+				// world.a((EntityHuman)null, 1015, this.giant.getChunkCoordinates(), 0);
+				giantBukkit.getWorld().playSound(giantBukkit.getLocation(), Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1.0f, 1.0f);
 			}
 			if (this.a == 20) 
 			{
 				Vec3D vec3d = this.giant.f(1.0F);
-				double d2 = entityliving.locX() - this.giant.locX() + vec3d.x * 4.0D;
-				double d3 = entityliving.e(0.5D) - 0.5D + this.giant.e(0.5D);
-				double d4 = entityliving.locZ() - this.giant.locZ() + vec3d.z * 4.0D;
-				if (!this.giant.isSilent())
-					world.a((EntityHuman)null, 1016, this.giant.getChunkCoordinates(), 0); 
-				EntityLargeFireball entitylargefireball = new EntityLargeFireball(world, this.giant, d2, d3, d4);
-				entitylargefireball.bukkitYield = (entitylargefireball.yield = 2);
-				entitylargefireball.setPosition(this.giant.locX() + vec3d.x * 4.0D, this.giant.e(0.5D) + 0.5D, entitylargefireball.locZ() + vec3d.z * 4.0D);
-				world.addEntity(entitylargefireball);
+				
+				Vector fireballLocation = new Vector (this.giant.locX() + vec3d.x * 4.0D, this.giant.e(0.5D) + 0.5D, this.giant.locZ() + vec3d.z * 4.0D);
+				Vector targetLocation = new Vector (entityliving.locX(), entityliving.locY(), entityliving.locZ());
+				Vector fireballDirection = targetLocation.subtract(fireballLocation).normalize();
+				
+				DragonFireball fireball = (DragonFireball) this.giantBukkit.getWorld().spawnEntity(new Location (this.giantBukkit.getWorld(), fireballLocation.getX(),
+						fireballLocation.getY(), fireballLocation.getZ()), EntityType.DRAGON_FIREBALL);
+				fireball.setDirection(fireballDirection);
+				fireball.setYield(2.0f);
 				this.a = -40;
 			} 
 		} 

@@ -11,5 +11,7 @@ public enum MonsterStat
 	/** Modifies the entity's base attack damage */
 	BASE_ATTACK_DAMAGE,
 	/** Used internally by the MonsterTypes class to assign spawn weights to the entity */
-	SPAWN_WEIGHT
+	SPAWN_WEIGHT,
+	/** The minimum y value the original entity must be in order for this entity to spawn */
+	Y_LIMIT;
 }

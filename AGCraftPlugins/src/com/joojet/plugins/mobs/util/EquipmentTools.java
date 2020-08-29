@@ -30,6 +30,7 @@ import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MountedMob;
+import com.joojet.plugins.mobs.util.customtargets.PathfinderGoalGiantFireball;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
@@ -55,6 +56,16 @@ public class EquipmentTools
 		if (entity == null || mobEquipment == null)
 		{
 			return;
+		}
+		
+		// Prevents the custom mob from spawning if it doesn't exceed a certain y limit
+		// if it is enabled
+		if (mobEquipment.containsStat(MonsterStat.Y_LIMIT))
+		{
+			if (entity.getLocation().getBlockY() < mobEquipment.getStat(MonsterStat.Y_LIMIT))
+			{
+				return;
+			}
 		}
 		
 		// Prevents baby entities from spawning
@@ -173,36 +184,36 @@ public class EquipmentTools
 			entity.setFireTicks(Integer.MAX_VALUE);
 		}
 		
-		if (mobEquipment.containsStat(MonsterStat.HUNT_ON_SPAWN_RADIUS))
+		// Spawns a lightning bolt on the mob's current location if enabled. This should scare the **** out of unsuspecting players
+		if (mobFlags.contains(MobFlag.SPAWN_LIGHTNING))
 		{
-			int huntRadius = mobEquipment.getStat(MonsterStat.HUNT_ON_SPAWN_RADIUS).intValue();
-			// Spawns a lightning bolt on the mob's current location if enabled. This should scare the **** out of unsuspecting players
-			if (mobFlags.contains(MobFlag.SPAWN_LIGHTNING))
+			Location loc = entity.getLocation();
+			entity.getWorld().strikeLightningEffect(loc);
+		
+			if (mobEquipment.containsStat(MonsterStat.HUNT_ON_SPAWN_RADIUS))
 			{
-				Location loc = entity.getLocation();
-				entity.getWorld().strikeLightningEffect(loc);
-				// Also alerts the player of the monster's presence
+				int huntRadius = mobEquipment.getStat(MonsterStat.HUNT_ON_SPAWN_RADIUS).intValue();
 				ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(entity, (int) (huntRadius * 1.25));
-				
+					
 				for (Player p : nearbyPlayers)
 				{
 					p.sendMessage(ChatColor.GOLD + "You feel a great disturbance in the force...");
 				}
-			}
-			
-			// Automatically sets the mob's target to a random nearby player if huntOnSpawn is set to true
-			if (mobFlags.contains(MobFlag.HUNT_ON_SPAWN))
-			{
-				if (entity instanceof Monster)
+				
+				// Automatically sets the mob's target to a random nearby player if huntOnSpawn is set to true
+				if (mobFlags.contains(MobFlag.HUNT_ON_SPAWN))
 				{
-					ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(entity, huntRadius);
-					Monster mob = (Monster) entity;
-					int n = nearbyPlayers.size();
-					if (!nearbyPlayers.isEmpty())
+					if (entity instanceof Monster)
 					{
-						Player p = nearbyPlayers.get(rand.nextInt(n));
-						mob.setTarget(p);
-						p.sendMessage(ChatColor.DARK_RED + "You are being hunted...");
+						ArrayList <Player> nearbyPlayersHunt = ScanEntities.ScanNearbyPlayers(entity, huntRadius);
+						Monster mob = (Monster) entity;
+						int n = nearbyPlayersHunt.size();
+						if (!nearbyPlayersHunt.isEmpty())
+						{
+							Player p = nearbyPlayersHunt.get(rand.nextInt(n));
+							mob.setTarget(p);
+							p.sendMessage(ChatColor.DARK_RED + "You are being hunted...");
+						}
 					}
 				}
 			}
@@ -271,8 +282,9 @@ public class EquipmentTools
 		// Load special pathfinding goals for giants
 		if (nmsMob instanceof EntityGiantZombie)
 		{
-			nmsMob.goalSelector.a(1, new PathfinderGoalMeleeAttack((EntityCreature) nmsMob, 1.0D, true));
+			nmsMob.goalSelector.a(1, new PathfinderGoalGiantFireball((EntityGiantZombie) nmsMob, entity));
 			nmsMob.goalSelector.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
+			nmsMob.goalSelector.a(4, new PathfinderGoalMeleeAttack ((EntityCreature) nmsMob, 1.0D, true));
 		}
 		
 		// Add target entity goals based on the values stored in the mob equipment's hitlist.
