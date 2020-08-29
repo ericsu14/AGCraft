@@ -5,7 +5,9 @@ import java.util.HashSet;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
+import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Damageable;
@@ -22,6 +24,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.util.RayTraceResult;
+import org.bukkit.util.Vector;
 
 import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -62,7 +66,9 @@ public class EquipmentTools
 		// if it is enabled
 		if (mobEquipment.containsStat(MonsterStat.Y_LIMIT))
 		{
-			if (entity.getLocation().getBlockY() < mobEquipment.getStat(MonsterStat.Y_LIMIT))
+			Location entityLocation = entity.getLocation();
+			if (entityLocation.getBlockY() < mobEquipment.getStat(MonsterStat.Y_LIMIT)
+					|| !checkSpawnSpace (entity))
 			{
 				return;
 			}
@@ -313,6 +319,22 @@ public class EquipmentTools
 			}
 			mountEnt.addPassenger(entity);
 		}
+	}
+	
+	/** Checks if there is enough space for the monster to spawn.
+	 *  This does a raytrace cast to check if there is enough air blocks
+	 *  based on the variable, monsterHeight, available for the monster to spawn. */
+	public static boolean checkSpawnSpace (LivingEntity entity)
+	{
+		Location entityLocation = entity.getLocation();
+		Vector directionVector = new Vector (0.0, 1.0, 0.0);
+		RayTraceResult result = entity.getWorld().rayTraceBlocks(entityLocation, directionVector.normalize(), 36.0,
+				FluidCollisionMode.ALWAYS, true);
+		if (result != null && result.getHitBlock() != null && result.getHitBlock().getType() != Material.AIR)
+		{
+			return false;
+		}
+		return true;
 	}
 
 }
