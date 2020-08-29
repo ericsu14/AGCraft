@@ -271,7 +271,7 @@ public class EquipmentTools
 		// Load special pathfinding goals for giants
 		if (nmsMob instanceof EntityGiantZombie)
 		{
-			nmsMob.goalSelector.a(4, new PathfinderGoalMeleeAttack((EntityCreature) nmsMob, 1.0D, true));
+			nmsMob.goalSelector.a(1, new PathfinderGoalMeleeAttack((EntityCreature) nmsMob, 1.0D, true));
 			nmsMob.goalSelector.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
 		}
 		
