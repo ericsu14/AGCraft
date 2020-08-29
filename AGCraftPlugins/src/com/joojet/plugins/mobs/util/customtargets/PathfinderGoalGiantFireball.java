@@ -2,8 +2,8 @@ package com.joojet.plugins.mobs.util.customtargets;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
@@ -62,10 +62,10 @@ public class PathfinderGoalGiantFireball extends PathfinderGoal
 				Vector targetLocation = new Vector (entityliving.locX(), entityliving.locY(), entityliving.locZ());
 				Vector fireballDirection = targetLocation.subtract(fireballLocation).normalize();
 				
-				DragonFireball fireball = (DragonFireball) this.giantBukkit.getWorld().spawnEntity(new Location (this.giantBukkit.getWorld(), fireballLocation.getX(),
-						fireballLocation.getY(), fireballLocation.getZ()), EntityType.DRAGON_FIREBALL);
+				LargeFireball fireball = (LargeFireball) this.giantBukkit.getWorld().spawnEntity(new Location (this.giantBukkit.getWorld(), fireballLocation.getX(),
+						fireballLocation.getY(), fireballLocation.getZ()), EntityType.FIREBALL);
 				fireball.setDirection(fireballDirection);
-				fireball.setYield(2.0f);
+				fireball.setYield(3.0f);
 				this.a = -40;
 			} 
 		} 
