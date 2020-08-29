@@ -283,7 +283,7 @@ public class EquipmentTools
 			Location currentLocation = entity.getLocation();
 			Entity mountEnt = entity.getWorld().spawnEntity(currentLocation, mount.getEntityType());
 			
-			if (mountEnt instanceof LivingEntity)
+			if (mountEnt instanceof LivingEntity && !mount.getMobEquipment().hasMountedMob())
 			{
 				equipEntity ((LivingEntity) mountEnt, mount.getMobEquipment());
 			}
