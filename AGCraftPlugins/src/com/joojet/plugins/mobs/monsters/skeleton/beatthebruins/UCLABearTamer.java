@@ -27,6 +27,7 @@ public class UCLABearTamer extends UCLAFaction
 				+ ChatColor.AQUA + "L" + ChatColor.GOLD + "A" + ChatColor.AQUA + " Bear" + 
 				ChatColor.GOLD + " Tamer";
 		this.setStat(MonsterStat.EXPERIENCE, 50.0);
+		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.HUNT_ON_SPAWN,
