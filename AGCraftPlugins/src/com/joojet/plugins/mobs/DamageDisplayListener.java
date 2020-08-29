@@ -164,7 +164,10 @@ public class DamageDisplayListener implements Listener
 	@EventHandler
 	public void onChunkLoad (ChunkLoadEvent event)
 	{
-		this.removeDamageDisplayEntities(event.getChunk().getEntities());
+		if (event.getChunk() != null)
+		{
+			this.removeDamageDisplayEntities(event.getChunk().getEntities());
+		}
 	}
 	
 	/** Removes any damage display entities still persistent upon chunk unloads */

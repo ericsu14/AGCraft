@@ -41,7 +41,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		// Boots
 		this.boots = new LightweightNetheriteBoots (this.color);
 		
-		this.setStat(MonsterStat.EXPERIENCE, 37.0);
+		this.setStat(MonsterStat.EXPERIENCE, 50.0);
 		
 	}
 }

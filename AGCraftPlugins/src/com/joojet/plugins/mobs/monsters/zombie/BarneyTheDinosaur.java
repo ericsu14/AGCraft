@@ -42,6 +42,6 @@ public class BarneyTheDinosaur extends MobEquipment
 		this.weapon = new BarneyDagger (this.color);
 		this.offhand = new BarneyTotem (this.color);
 		
-		this.setStat(MonsterStat.EXPERIENCE, 100.0);
+		this.setStat(MonsterStat.EXPERIENCE, 200.0);
 	}
 }

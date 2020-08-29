@@ -33,8 +33,12 @@ import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
+import net.minecraft.server.v1_16_R2.EntityCreature;
+import net.minecraft.server.v1_16_R2.EntityGiantZombie;
 import net.minecraft.server.v1_16_R2.EntityInsentient;
+import net.minecraft.server.v1_16_R2.PathfinderGoalMeleeAttack;
 import net.minecraft.server.v1_16_R2.PathfinderGoalNearestAttackableTarget;
+import net.minecraft.server.v1_16_R2.PathfinderGoalRandomStrollLand;
 
 import org.bukkit.craftbukkit.v1_16_R2.entity.CraftMob;
 
@@ -257,11 +261,19 @@ public class EquipmentTools
 			return;
 		}
 		
+		entity.setAI(true);
 		// Cast this into a NMS entity monster
 		EntityInsentient nmsMob = ((CraftMob) entity).getHandle();
 		
 		// Retrieves the monster's hitlist
 		ArrayList <EntityType> hitlist = mobEquipment.getHitList();
+		
+		// Load special pathfinding goals for giants
+		if (nmsMob instanceof EntityGiantZombie)
+		{
+			nmsMob.goalSelector.a(4, new PathfinderGoalMeleeAttack((EntityCreature) nmsMob, 1.0D, true));
+			nmsMob.goalSelector.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
+		}
 		
 		// Add target entity goals based on the values stored in the mob equipment's hitlist.
 		for (EntityType victim : hitlist)

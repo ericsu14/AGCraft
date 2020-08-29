@@ -52,6 +52,6 @@ public class DoomGuy extends MobEquipment
 		this.weapon = new DoomBlade (this.color);
 		this.offhand = new ItemStack (Material.WITHER_SKELETON_SKULL, 1);
 		
-		this.setStat(MonsterStat.EXPERIENCE, 250.0);
+		this.setStat(MonsterStat.EXPERIENCE, 500.0);
 	}
 }

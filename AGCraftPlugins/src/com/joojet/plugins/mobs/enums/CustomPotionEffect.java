@@ -15,7 +15,10 @@ public enum CustomPotionEffect
 	REGEN (PotionEffectType.REGENERATION, 0),
 	WATER_BREATHING (PotionEffectType.WATER_BREATHING, 0),
 	UNDEAD_HEAL (PotionEffectType.HARM, 10, true),
-	WEAKNESS (PotionEffectType.WEAKNESS, 0);
+	FULL_HEALING (PotionEffectType.HEAL, 10, true),
+	WEAKNESS (PotionEffectType.WEAKNESS, 0),
+	SUPER_JUMP (PotionEffectType.JUMP, 3),
+	GIANT_SLOWNESS (PotionEffectType.SLOW, 2);
 	
 	private PotionEffect effect;
 	private boolean instant;

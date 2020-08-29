@@ -43,6 +43,6 @@ public class SkullKid extends MobEquipment
 		this.weapon = new ATerribleFate (this.color);
 		this.offhand = new CursedArrow (this.color);
 		
-		this.setStat(MonsterStat.EXPERIENCE, 250.0);
+		this.setStat(MonsterStat.EXPERIENCE, 500.0);
 	}
 }

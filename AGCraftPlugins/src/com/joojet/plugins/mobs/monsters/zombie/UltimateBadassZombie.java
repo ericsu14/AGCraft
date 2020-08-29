@@ -36,6 +36,6 @@ public class UltimateBadassZombie extends MobEquipment
 		this.leggings = new DarkNetheriteLeggings (this.color);
 		this.boots = new LightweightNetheriteBoots (this.color);
 		
-		this.setStat (MonsterStat.EXPERIENCE, 35.0);
+		this.setStat (MonsterStat.EXPERIENCE, 50.0);
 	}
 }
