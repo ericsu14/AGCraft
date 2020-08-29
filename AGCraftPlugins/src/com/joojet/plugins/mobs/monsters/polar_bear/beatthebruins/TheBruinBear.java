@@ -25,7 +25,7 @@ public class TheBruinBear extends UCLAFaction
 		this.addPotionEffect(CustomPotionEffect.STRENGTH_II, CustomPotionEffect.JUMP_BOOST,
 				CustomPotionEffect.SPEED, CustomPotionEffect.RESISTANCE_II, CustomPotionEffect.FIRE_RESISTANCE,
 				CustomPotionEffect.REGEN);
-		this.setStat(MonsterStat.EXPERIENCE, 300.0);
+		this.setStat(MonsterStat.EXPERIENCE, 200.0);
 		this.ignoreList.clear();
 	}
 }

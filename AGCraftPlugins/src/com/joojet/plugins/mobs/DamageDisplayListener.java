@@ -16,8 +16,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
-import org.bukkit.event.world.ChunkLoadEvent;
-import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 
@@ -160,29 +158,9 @@ public class DamageDisplayListener implements Listener
 		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getAmount());
 	}
 	
-	/** Removes any damage display entity still persistent upon chunk loads */
-	@EventHandler
-	public void onChunkLoad (ChunkLoadEvent event)
-	{
-		if (event != null && event.getChunk() != null)
-		{
-			this.removeDamageDisplayEntities(event.getChunk().getEntities());
-		}
-	}
-	
-	/** Removes any damage display entities still persistent upon chunk unloads */
-	@EventHandler
-	public void onChunkUnload (ChunkUnloadEvent event)
-	{
-		if (event != null && event.getChunk() != null)
-		{
-			this.removeDamageDisplayEntities(event.getChunk().getEntities());
-		}
-	}
-	
 	/** Removes all unremoved damage display entities from the passed list of entities
 	 * 	@param entityList - List of entities captured by chunk data. */
-	private void removeDamageDisplayEntities (Entity[] entityList)
+	public void removeDamageDisplayEntities (Entity[] entityList)
 	{
 		for (Entity entity : entityList)
 		{
