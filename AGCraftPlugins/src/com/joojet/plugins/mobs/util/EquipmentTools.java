@@ -41,6 +41,8 @@ import com.joojet.plugins.warp.scantools.ScanEntities;
 import net.minecraft.server.v1_16_R2.EntityCreature;
 import net.minecraft.server.v1_16_R2.EntityGiantZombie;
 import net.minecraft.server.v1_16_R2.EntityInsentient;
+import net.minecraft.server.v1_16_R2.PathfinderGoalFloat;
+import net.minecraft.server.v1_16_R2.PathfinderGoalLeapAtTarget;
 import net.minecraft.server.v1_16_R2.PathfinderGoalMeleeAttack;
 import net.minecraft.server.v1_16_R2.PathfinderGoalNearestAttackableTarget;
 import net.minecraft.server.v1_16_R2.PathfinderGoalRandomStrollLand;
@@ -288,8 +290,10 @@ public class EquipmentTools
 		// Load special pathfinding goals for giants
 		if (nmsMob instanceof EntityGiantZombie)
 		{
+			nmsMob.goalSelector.a(1, new PathfinderGoalFloat((EntityCreature) nmsMob));
 			nmsMob.goalSelector.a(1, new PathfinderGoalGiantFireball((EntityGiantZombie) nmsMob, entity));
 			nmsMob.goalSelector.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
+			nmsMob.goalSelector.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
 			nmsMob.goalSelector.a(4, new PathfinderGoalMeleeAttack ((EntityCreature) nmsMob, 1.0D, true));
 		}
 		

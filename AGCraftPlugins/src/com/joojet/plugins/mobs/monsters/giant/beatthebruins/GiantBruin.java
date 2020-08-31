@@ -25,7 +25,7 @@ public class GiantBruin extends UCLAFaction
 		this.setStat(MonsterStat.HEALTH, 200.0);
 		this.setStat(MonsterStat.EXPERIENCE, 1000.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 150.0);
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 12.0);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 4.0);
 		this.weapon = new BruinSword (this.color);
 		this.helmet = new BruinHead ();
 		this.chestplate = new BruinTunic (this.color);
