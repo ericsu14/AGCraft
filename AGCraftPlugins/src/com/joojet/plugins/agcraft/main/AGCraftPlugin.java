@@ -156,9 +156,6 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Cleans up all damage displays
 		this.damageListener.onDisable();
-		
-		// Tells the soul bound listener to serialize any data structures if necessary
-		this.soulBoundListener.onDisable();
 	}
 	
 	/** Loads in the server config file and initializes its variables to the plugin */

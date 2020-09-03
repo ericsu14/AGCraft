@@ -5,7 +5,10 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Giant;
+import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.WanderingTrader;
 import org.bukkit.event.EventHandler;
@@ -13,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.plugin.Plugin;
 
@@ -140,6 +144,23 @@ public class AmplifiedMobSpawner implements Listener
 					&& event.getDroppedExp() > 0.0)
 			{
 				event.setDroppedExp(entityEquipment.getStat(MonsterStat.EXPERIENCE).intValue());
+			}
+		}
+	}
+	
+	/** Prevents Giant-caused fireball explosions from griefing the world */
+	@EventHandler
+	public void cancelGiantGriefing (EntityExplodeEvent event)
+	{
+		Entity entity = event.getEntity();
+		
+		if (entity instanceof LargeFireball)
+		{
+			LargeFireball fireball = (LargeFireball) entity;
+			if (fireball.getShooter() != null
+					&& fireball.getShooter() instanceof Giant)
+			{
+				event.blockList().clear();
 			}
 		}
 	}

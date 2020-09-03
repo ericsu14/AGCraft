@@ -37,11 +37,6 @@ public class SoulBoundListener implements Listener
 		Bukkit.getPluginManager().registerEvents(this, (Plugin) this);
 	}
 	
-	public void onDisable ()
-	{
-		
-	}
-	
 	/** Scans a dead player's drops for any soulbounded items.
 	 *  If a soulbounded item is found, it will automatically be removed from the player drops
 	 *  and added back into their inventory. */
