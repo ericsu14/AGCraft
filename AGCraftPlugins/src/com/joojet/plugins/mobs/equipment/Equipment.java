@@ -17,8 +17,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.enums.PlayerHead;
+import com.joojet.plugins.mobs.metadata.EquipmentTypeMetadata;
 import com.joojet.plugins.mobs.metadata.SoulBoundMetadata;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
@@ -50,6 +52,7 @@ public abstract class Equipment extends ItemStack
 		this.playerHead = null;
 		this.wordsPerLine = 4;
 		this.loreColor = chatColor;
+		this.setEquipmentMetadata ();
 	}
 	
 	/** Constructs a item with a specified item count */
@@ -62,6 +65,7 @@ public abstract class Equipment extends ItemStack
 		this.playerHead = null;
 		this.wordsPerLine = 4;
 		this.loreColor = chatColor;
+		this.setEquipmentMetadata ();
 	}
 	
 	/** Constructs a basic playerhead item */
@@ -75,6 +79,7 @@ public abstract class Equipment extends ItemStack
 		this.createHeadData(this.playerHead);
 		this.wordsPerLine = 4;
 		this.loreColor = chatColor;
+		this.setEquipmentMetadata ();
 	}
 	
 	/** Adds an attack speed attribute to a piece of armor or weapon */
@@ -293,5 +298,21 @@ public abstract class Equipment extends ItemStack
 		new SoulBoundMetadata().addStringMetadata(meta);
 		this.setItemMeta(meta);
 		this.addLoreToItemMeta(ChatColor.GOLD + "Soulbound");
+	}
+	
+	/** Adds this equipment's identifier into the search tree
+	 *  and adds it into its own persistent data container */
+	protected void setEquipmentMetadata ()
+	{
+		AGCraftPlugin.equipmentInterpreter.insertWord(this.equipmentType.toString(), this);
+		ItemMeta itemMeta = this.getItemMeta();
+		new EquipmentTypeMetadata (this.equipmentType).addStringMetadata(itemMeta);
+		this.setItemMeta(itemMeta);
+	}
+	
+	/** Returns this equipment's equipment type identifier */
+	public EquipmentTypes getEquipmentType ()
+	{
+		return this.equipmentType;
 	}
 }

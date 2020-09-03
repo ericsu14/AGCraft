@@ -29,6 +29,7 @@ import com.joojet.plugins.mobs.SoulBoundListener;
 import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.ThemedServerEvent;
+import com.joojet.plugins.mobs.interpreter.EquipmentTypeInterpreter;
 import com.joojet.plugins.mobs.interpreter.ThemedServerEventInterpreter;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.commands.*;
@@ -69,6 +70,8 @@ public class AGCraftPlugin extends JavaPlugin
 	public static ServerModeInterpreter serverModeInterpreter;
 	// Stores the command interpreter used for the bible plugin
 	public static BibleCommandInterpreter bibleInterpreter;
+	// Allows custom equipment to be searchable by its equipment type name
+	public static EquipmentTypeInterpreter equipmentInterpreter;
 	
 	/** Config file values */
 	// Stores the server mode, which enables or disables commands and listeners depending on what mode the server is ran in
@@ -98,6 +101,7 @@ public class AGCraftPlugin extends JavaPlugin
 		minigameRewardTypeInterpreter = new MinigameRewardTypeInterpreter ();
 		serverEventInterpreter = new ThemedServerEventInterpreter ();
 		serverModeInterpreter = new ServerModeInterpreter ();
+		equipmentInterpreter = new EquipmentTypeInterpreter ();
 		this.serverConfigFile = new ServerConfigFile ();
 	}
 	
@@ -145,7 +149,6 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Soulbounded items event listener
 		this.soulBoundListener = new SoulBoundListener ();
-		Bukkit.getPluginManager().registerEvents(this.soulBoundListener, this);
 	}
 	
 	@Override

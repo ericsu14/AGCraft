@@ -124,5 +124,6 @@ public enum EquipmentTypes
 	SKULL_KID_BOOTS,
 	USC_SPIKED_BOOTS,
 	/** Scroll */
-	SUMMONING_SCROLL
+	SUMMONING_SCROLL,
+	NONE
 }
