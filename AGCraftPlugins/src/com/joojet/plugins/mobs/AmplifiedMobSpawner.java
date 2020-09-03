@@ -158,7 +158,7 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			LargeFireball fireball = (LargeFireball) entity;
 			if (fireball.getShooter() != null
-					&& fireball.getShooter() instanceof Giant)
+					&& fireball.getYield() > 1.0F)
 			{
 				event.blockList().clear();
 			}
