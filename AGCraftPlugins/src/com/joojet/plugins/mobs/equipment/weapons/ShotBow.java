@@ -5,13 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class ShotBow extends Equipment
 {
 	public ShotBow (ChatColor color)
 	{
-		super (Material.CROSSBOW, EquipmentSlot.HAND, color);
+		super (EquipmentTypes.SHOT_BOW, Material.CROSSBOW, EquipmentSlot.HAND, color);
 		this.setDisplayName("ShotBow");
 		this.addLoreToItemMeta("A quick firing crossbow that shoots multiple high penetrating arrows at quick succession. Mending cannot be applied to this weapon.");
 		this.addUnsafeEnchantment(Enchantment.QUICK_CHARGE, 5);

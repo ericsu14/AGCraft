@@ -4,12 +4,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
+
 public class EternalRusheeMocktail extends PotionEquipment 
 {
 	
 	public EternalRusheeMocktail(ChatColor color) 
 	{
-		super(color);
+		super(EquipmentTypes.ETERNAL_RUSHEE_POTION, color);
 	}
 
 	@Override
@@ -29,7 +31,7 @@ public class EternalRusheeMocktail extends PotionEquipment
 				+ "taste and an almost mysterious charm about it that makes ya want to "
 				+ "rush AΓΩ forever and ever hallelujah amen!");
 		this.setColor(Color.fromRGB(253, 236, 213));
-		
+		this.makeSoulbound();
 	}
 
 }

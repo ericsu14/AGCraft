@@ -5,13 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class ReinforcedChainmailHelmet extends Equipment
 {
 	public ReinforcedChainmailHelmet (ChatColor color)
 	{
-		super (Material.CHAINMAIL_HELMET, EquipmentSlot.HEAD, color);
+		super (EquipmentTypes.REINFOCED_CHAINMAIL_HELMET, Material.CHAINMAIL_HELMET, EquipmentSlot.HEAD, color);
 		this.setDisplayName("Reinforced Chainmail Helmet");
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 1);

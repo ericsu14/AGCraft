@@ -4,16 +4,18 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
+
 public class HurtfulArrow extends TippedArrow 
 {
 	public HurtfulArrow (ChatColor color)
 	{
-		super (color);
+		super (EquipmentTypes.HURTFUL_ARROW, color);
 	}
 	
 	public HurtfulArrow (ChatColor color, int count)
 	{
-		super (color, count);
+		super (EquipmentTypes.HURTFUL_ARROW, color, count);
 	}
 	
 	@Override

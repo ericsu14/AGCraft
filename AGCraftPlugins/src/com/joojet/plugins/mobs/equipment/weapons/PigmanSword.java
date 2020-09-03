@@ -5,13 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class PigmanSword extends Equipment 
 {
 	public PigmanSword (ChatColor color)
 	{
-		super (Material.GOLDEN_SWORD, EquipmentSlot.HAND, color);
+		super (EquipmentTypes.PIGMAN_SWORD, Material.GOLDEN_SWORD, EquipmentSlot.HAND, color);
 		this.setDisplayName("Pigmen Sword");
 		this.addLoreToItemMeta("Can only be weilded by the wisest of all Pigmen...");
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 4);

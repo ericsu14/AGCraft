@@ -8,13 +8,14 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.ShieldEquipment;
 
 public class CaptainAmericaShield extends ShieldEquipment
 {
 	public CaptainAmericaShield (ChatColor color)
 	{
-		super (DyeColor.WHITE, EquipmentSlot.OFF_HAND, color);
+		super (EquipmentTypes.CAPTAIN_AMERICA_SHIELD, DyeColor.WHITE, EquipmentSlot.OFF_HAND, color);
 		this.loreColor = ChatColor.AQUA;
 		this.setDisplayName("Captain America's Shield");
 		
@@ -32,5 +33,6 @@ public class CaptainAmericaShield extends ShieldEquipment
 		this.addHealthAttributes(14.0);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
 		this.addLoreToItemMeta("Crafted from Adamantium, this shield makes you feel like a complete superhero!");
+		this.makeSoulbound();
 	}
 }

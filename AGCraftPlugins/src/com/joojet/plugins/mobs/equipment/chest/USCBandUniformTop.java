@@ -5,13 +5,14 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.LeatherEquipment;
 
 public class USCBandUniformTop extends LeatherEquipment
 {
 	public USCBandUniformTop (ChatColor color)
 	{
-		super (Material.LEATHER_CHESTPLATE, EquipmentSlot.CHEST, color);
+		super (EquipmentTypes.USC_BAND_UNIFORM, Material.LEATHER_CHESTPLATE, EquipmentSlot.CHEST, color);
 		this.setDisplayName(ChatColor.RED + "U" + ChatColor.GOLD + "S" + ChatColor.RED + "C" 
 		+ ChatColor.GOLD + " Band" + ChatColor.RED + " Uniform");
 		this.setColor(Color.fromRGB(153, 27, 30));

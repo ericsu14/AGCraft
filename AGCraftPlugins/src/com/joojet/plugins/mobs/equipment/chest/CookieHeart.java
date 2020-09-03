@@ -5,13 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class CookieHeart extends Equipment
 {
 	public CookieHeart (ChatColor color)
 	{
-		super (Material.COOKIE, EquipmentSlot.CHEST, color);
+		super (EquipmentTypes.COOKIE_HEART, Material.COOKIE, EquipmentSlot.CHEST, color);
 		this.addDefenseAttributes(14.0, 8.0, 0.5);
 		this.addAttackAttributes(10.0, 0.0);
 		this.addSpeedAttribute(0.25);

@@ -4,10 +4,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
+
 public class EnhancedSpeedPotion extends PotionEquipment {
 	public EnhancedSpeedPotion (ChatColor color)
 	{
-		super (color);
+		super (EquipmentTypes.ENHANCED_SPEED_POTION, color);
 	}
 	
 	@Override

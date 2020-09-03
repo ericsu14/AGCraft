@@ -5,13 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class TrojanSword extends Equipment
 {
 	public TrojanSword (ChatColor color)
 	{
-		super (Material.IRON_SWORD, EquipmentSlot.HAND, color);
+		super (EquipmentTypes.TROJAN_SWORD, Material.IRON_SWORD, EquipmentSlot.HAND, color);
 		this.setDisplayName(ChatColor.RED + "U" + ChatColor.GOLD + "S" + ChatColor.RED + "C" 
 		+ ChatColor.GOLD + " Trojan" + ChatColor.RED + " Sword");
 		this.loreColor = ChatColor.GOLD;

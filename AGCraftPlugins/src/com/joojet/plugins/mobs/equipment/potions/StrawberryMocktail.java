@@ -4,11 +4,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
+
 public class StrawberryMocktail extends PotionEquipment
 {
 	public StrawberryMocktail (ChatColor color)
 	{
-		super (color);
+		super (EquipmentTypes.STRAWBERRY_MOCKTAIL, color);
 	}
 
 	@Override
@@ -22,6 +24,7 @@ public class StrawberryMocktail extends PotionEquipment
 		this.addPotionEffect(PotionEffectType.NIGHT_VISION, 36000, 0);
 		this.addLoreToItemMeta("A special mocktail created by frolf. Drink to enjoy some strawberry goodness and a whole variety of special buffs!");
 		this.setColor(Color.fromRGB(252, 90, 141));
+		this.makeSoulbound();
 	}
 	
 	

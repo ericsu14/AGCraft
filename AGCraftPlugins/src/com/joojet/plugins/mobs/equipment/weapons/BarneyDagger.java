@@ -5,13 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class BarneyDagger extends Equipment
 {
 	public BarneyDagger (ChatColor color)
 	{
-		super (Material.IRON_SWORD, EquipmentSlot.HAND, color);
+		super (EquipmentTypes.BARNEY_DAGGER, Material.IRON_SWORD, EquipmentSlot.HAND, color);
 		this.setDisplayName("Barney's Stupendously Sharp Dagger");
 		this.addLoreToItemMeta("Barney knows some pledges are gonna be clapped tonite...");
 		this.addAttackAttributes(9.0, 2.6);

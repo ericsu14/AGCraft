@@ -5,13 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class SpiritualTravesty extends Equipment 
 {
 	public SpiritualTravesty (ChatColor color)
 	{
-		super (Material.NETHERITE_AXE, EquipmentSlot.HAND, color);
+		super (EquipmentTypes.SPIRITUAL_TRAVESTY, Material.NETHERITE_AXE, EquipmentSlot.HAND, color);
 		this.addAttackAttributes(11.0, 3.0);
 		
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);

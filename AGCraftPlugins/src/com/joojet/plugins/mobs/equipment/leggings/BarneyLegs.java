@@ -6,13 +6,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.LeatherEquipment;
 
 public class BarneyLegs extends LeatherEquipment
 {
 	public BarneyLegs (ChatColor color)
 	{
-		super (Material.LEATHER_LEGGINGS, EquipmentSlot.LEGS, color);
+		super (EquipmentTypes.BARNEY_LEGS, Material.LEATHER_LEGGINGS, EquipmentSlot.LEGS, color);
 		this.setDisplayName("Barney's Meaty Legs");
 		this.addLoreToItemMeta("He never skips leg day.");
 		this.addDefenseAttributes(5.0, 2.5, 0.05);

@@ -7,13 +7,14 @@ import org.bukkit.block.banner.PatternType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.ShieldEquipment;
 
 public class RightCrashSymbol extends ShieldEquipment
 {
 	public RightCrashSymbol (ChatColor color)
 	{
-		super (DyeColor.YELLOW, EquipmentSlot.OFF_HAND, color);
+		super (EquipmentTypes.RIGHT_CRASH_SYMBOL, DyeColor.YELLOW, EquipmentSlot.OFF_HAND, color);
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 5;
 		this.setDisplayName("Right Crash Symbol");

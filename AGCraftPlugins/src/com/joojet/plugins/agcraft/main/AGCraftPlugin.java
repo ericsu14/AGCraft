@@ -84,6 +84,8 @@ public class AGCraftPlugin extends JavaPlugin
 	
 	/** Used to display entity damage information to the player */
 	public DamageDisplayListener damageListener;
+	/** Used to enforce soulbounded item-drop events */
+	public SoulBoundListener soulBoundListener;
 	
 	
 	public AGCraftPlugin ()
@@ -142,7 +144,8 @@ public class AGCraftPlugin extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new PathfindTargetingEventListener(), this);
 		
 		// Soulbounded items event listener
-		Bukkit.getPluginManager().registerEvents(new SoulBoundListener(), this);
+		this.soulBoundListener = new SoulBoundListener ();
+		Bukkit.getPluginManager().registerEvents(this.soulBoundListener, this);
 	}
 	
 	@Override
@@ -153,6 +156,9 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Cleans up all damage displays
 		this.damageListener.onDisable();
+		
+		// Tells the soul bound listener to serialize any data structures if necessary
+		this.soulBoundListener.onDisable();
 	}
 	
 	/** Loads in the server config file and initializes its variables to the plugin */

@@ -8,13 +8,14 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.ShieldEquipment;
 
 public class BlueAndGold extends ShieldEquipment 
 {
 	public BlueAndGold ()
 	{
-		super (DyeColor.BLUE, EquipmentSlot.OFF_HAND, ChatColor.GOLD);
+		super (EquipmentTypes.BLUE_AND_GOLD, DyeColor.BLUE, EquipmentSlot.OFF_HAND, ChatColor.GOLD);
 		this.wordsPerLine = 8;
 		this.loreColor = ChatColor.AQUA;
 		this.setDisplayName("The " + ChatColor.BLUE + "Blue " + this.chatColor + "and Gold");
@@ -35,5 +36,6 @@ public class BlueAndGold extends ShieldEquipment
 		this.addDefenseAttributes(4.0, 4.0, 0.10);
 		this.addHealthAttributes(20.0);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
+		this.makeSoulbound();
 	}
 }

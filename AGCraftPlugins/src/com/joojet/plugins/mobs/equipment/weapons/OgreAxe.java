@@ -5,13 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class OgreAxe extends Equipment
 {
 	public OgreAxe (ChatColor color)
 	{
-		super (Material.WOODEN_AXE, EquipmentSlot.HAND, color);
+		super (EquipmentTypes.OGRE_AXE, Material.WOODEN_AXE, EquipmentSlot.HAND, color);
 		this.setDisplayName("Its All Ogre Now");
 		this.addLoreToItemMeta("Shrek is love, shrek is life.");
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 2);

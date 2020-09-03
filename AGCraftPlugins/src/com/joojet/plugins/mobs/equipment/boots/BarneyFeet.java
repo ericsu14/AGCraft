@@ -6,13 +6,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.LeatherEquipment;
 
 public class BarneyFeet extends LeatherEquipment
 {
 	public BarneyFeet (ChatColor color)
 	{
-		super (Material.LEATHER_BOOTS, EquipmentSlot.FEET, color);
+		super (EquipmentTypes.BARNEY_FEET, Material.LEATHER_BOOTS, EquipmentSlot.FEET, color);
 		this.addSpeedAttribute(0.20);
 		this.addDefenseAttributes(4.0, 1.0, 0.05);
 		this.addAttackAttributes(1.0, 0.0);

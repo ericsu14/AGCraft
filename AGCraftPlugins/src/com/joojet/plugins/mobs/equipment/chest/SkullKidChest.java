@@ -5,13 +5,14 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.LeatherEquipment;
 
 public class SkullKidChest extends LeatherEquipment
 {
 	public SkullKidChest (ChatColor color)
 	{
-		super (Material.LEATHER_CHESTPLATE, EquipmentSlot.CHEST, color);
+		super (EquipmentTypes.SKULL_KID_CHEST, Material.LEATHER_CHESTPLATE, EquipmentSlot.CHEST, color);
 		this.setDisplayName("Skull Kid's Chestplate");
 		this.addLoreToItemMeta("You’ve met with a terrible fate, haven’t you?");
 		this.setColor(Color.fromRGB(177, 163, 38));

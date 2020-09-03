@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -28,7 +29,7 @@ public abstract class SummoningScroll extends Equipment
 	
 	public SummoningScroll (MobEquipment mob, EntityType type)
 	{
-		super (Material.PAPER, EquipmentSlot.HAND, ChatColor.GOLD);
+		super (EquipmentTypes.SUMMONING_SCROLL, Material.PAPER, EquipmentSlot.HAND, ChatColor.GOLD);
 		ItemMeta scrollMeta = this.getItemMeta();
 		scrollMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 		scrollMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);

@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.equipment.head;
 import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
@@ -10,7 +11,7 @@ public class DoomSlayerHead extends Equipment
 {
 	public DoomSlayerHead (ChatColor color)
 	{
-		super (PlayerHead.DOOM_SLAYER, color);
+		super (EquipmentTypes.DOOM_SLAYER_HEAD, PlayerHead.DOOM_SLAYER, color);
 		this.wordsPerLine = 8;
 		this.loreColor = ChatColor.RED;
 		this.setDisplayName("The Head of The Doom Slayer");

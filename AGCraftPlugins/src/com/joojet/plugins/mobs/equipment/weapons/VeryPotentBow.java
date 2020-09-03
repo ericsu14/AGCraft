@@ -5,13 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class VeryPotentBow extends Equipment
 {
 	public VeryPotentBow (ChatColor color)
 	{
-		super (Material.BOW, EquipmentSlot.HAND, color);
+		super (EquipmentTypes.VERY_POTENT_BOW, Material.BOW, EquipmentSlot.HAND, color);
 		this.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 4);
 		this.addUnsafeEnchantment(Enchantment.ARROW_FIRE, 1);
 		this.addUnsafeEnchantment(Enchantment.ARROW_KNOCKBACK, 1);

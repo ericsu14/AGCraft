@@ -5,13 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class LightweightNetheriteBoots extends Equipment
 {
 	public LightweightNetheriteBoots (ChatColor color)
 	{
-		super (Material.NETHERITE_BOOTS, EquipmentSlot.FEET, color);
+		super (EquipmentTypes.LIGHTWEIGHT_NETHERITE_BOOTS, Material.NETHERITE_BOOTS, EquipmentSlot.FEET, color);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 4);
 		this.setDisplayName("Lightweight Netherite Boots");

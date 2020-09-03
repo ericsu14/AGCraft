@@ -6,13 +6,14 @@ import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.ShieldEquipment;
 
 public class BruinShield extends ShieldEquipment
 {
 	public BruinShield ()
 	{
-		super (DyeColor.YELLOW, EquipmentSlot.OFF_HAND, ChatColor.AQUA);
+		super (EquipmentTypes.BRUIN_SHIELD, DyeColor.YELLOW, EquipmentSlot.OFF_HAND, ChatColor.AQUA);
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 5;
 		this.setDisplayName("Shield of the UCLA Bruin");

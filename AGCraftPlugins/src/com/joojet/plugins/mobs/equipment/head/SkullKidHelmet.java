@@ -6,6 +6,7 @@ import java.util.Map;
 import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
@@ -13,7 +14,7 @@ public class SkullKidHelmet extends Equipment
 {
 	public SkullKidHelmet (ChatColor color)
 	{
-		super (PlayerHead.MAJORAS_MASK, color);
+		super (EquipmentTypes.SKULL_KID_HELMET, PlayerHead.MAJORAS_MASK, color);
 		
 		this.addDefenseAttributes(3.0, 4.0, 0.25);
 		this.addAttackAttributes(0.0, 0.15);

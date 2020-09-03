@@ -5,13 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class ReinforcedDiamondChestplate extends Equipment
 {
 	public ReinforcedDiamondChestplate (ChatColor color)
 	{
-		super (Material.DIAMOND_CHESTPLATE, EquipmentSlot.CHEST, color);
+		super (EquipmentTypes.REINFORCED_DIAMOND_CHEST, Material.DIAMOND_CHESTPLATE, EquipmentSlot.CHEST, color);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
 		this.addUnsafeEnchantment(Enchantment.THORNS, 2);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 1);

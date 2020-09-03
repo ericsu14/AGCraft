@@ -5,13 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class PharaohStaff extends Equipment
 {
 	public PharaohStaff (ChatColor color)
 	{
-		super (Material.GOLDEN_HOE, EquipmentSlot.HAND, color);
+		super (EquipmentTypes.PHARAOH_STAFF, Material.GOLDEN_HOE, EquipmentSlot.HAND, color);
 		this.addAttackAttributes(6.0, 1.4);
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 4);
 		this.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 1);

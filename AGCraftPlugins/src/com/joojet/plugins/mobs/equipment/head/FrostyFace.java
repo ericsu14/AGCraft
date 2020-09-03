@@ -5,13 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class FrostyFace extends Equipment 
 {
 	public FrostyFace (ChatColor color)
 	{
-		super (Material.CARVED_PUMPKIN, EquipmentSlot.HEAD, color);
+		super (EquipmentTypes.FROSTY_FACE, Material.CARVED_PUMPKIN, EquipmentSlot.HEAD, color);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
 		this.addUnsafeEnchantment(Enchantment.THORNS, 5);
 		this.addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1);

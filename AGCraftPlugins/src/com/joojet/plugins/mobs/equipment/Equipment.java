@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.joojet.plugins.mobs.metadata.SoulBoundMetadata;
 import com.mojang.authlib.GameProfile;
@@ -36,11 +37,14 @@ public abstract class Equipment extends ItemStack
 	protected PlayerHead playerHead;
 	/** Chat color applied to the equipment's lore. Defalut color is set to chatColor */
 	protected ChatColor loreColor;
+	/** Identifies the type of equipment this is */
+	protected EquipmentTypes equipmentType;
 	
 	/** Constructs a basic item with a count of 1 */
-	public Equipment (Material material, EquipmentSlot equipmentSlot, ChatColor chatColor)
+	public Equipment (EquipmentTypes equipmentType, Material material, EquipmentSlot equipmentSlot, ChatColor chatColor)
 	{
 		super (material, 1);
+		this.equipmentType = equipmentType;
 		this.equipmentSlot = equipmentSlot;
 		this.chatColor = chatColor;
 		this.playerHead = null;
@@ -49,9 +53,10 @@ public abstract class Equipment extends ItemStack
 	}
 	
 	/** Constructs a item with a specified item count */
-	public Equipment (Material material, EquipmentSlot equipmentSlot, ChatColor chatColor, int count)
+	public Equipment (EquipmentTypes equipmentType, Material material, EquipmentSlot equipmentSlot, ChatColor chatColor, int count)
 	{		
 		super (material, (count > 64) ? 64 : count);
+		this.equipmentType = equipmentType;
 		this.equipmentSlot = equipmentSlot;
 		this.chatColor = chatColor;
 		this.playerHead = null;
@@ -60,9 +65,10 @@ public abstract class Equipment extends ItemStack
 	}
 	
 	/** Constructs a basic playerhead item */
-	public Equipment (PlayerHead head, ChatColor chatColor)
+	public Equipment (EquipmentTypes equipmentType, PlayerHead head, ChatColor chatColor)
 	{
 		super (Material.PLAYER_HEAD, 1);
+		this.equipmentType = equipmentType;
 		this.playerHead = head;
 		this.equipmentSlot = EquipmentSlot.HEAD;
 		this.chatColor = chatColor;
@@ -285,7 +291,7 @@ public abstract class Equipment extends ItemStack
 	{
 		ItemMeta meta = this.getItemMeta();
 		new SoulBoundMetadata().addStringMetadata(meta);
-		meta.getLore().add(ChatColor.GOLD + "Soulbound");
 		this.setItemMeta(meta);
+		this.addLoreToItemMeta(ChatColor.GOLD + "Soulbound");
 	}
 }

@@ -4,12 +4,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
+
 public class ThanosArrow extends TippedArrow 
 {
 
 	public ThanosArrow(ChatColor color) 
 	{
-		super(color);
+		super(EquipmentTypes.THANOS_ARROW, color);
 	}
 	
 	@Override

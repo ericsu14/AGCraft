@@ -6,13 +6,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.LeatherEquipment;
 
 public class DoomGuyFeet extends LeatherEquipment
 {
 	public DoomGuyFeet (ChatColor color)
 	{
-		super (Material.LEATHER_BOOTS, EquipmentSlot.FEET, color);
+		super (EquipmentTypes.DOOM_GUY_FEET, Material.LEATHER_BOOTS, EquipmentSlot.FEET, color);
 		this.wordsPerLine = 8;
 		this.loreColor = ChatColor.RED;
 		this.setDisplayName("Boots of the Doom Slayer");
