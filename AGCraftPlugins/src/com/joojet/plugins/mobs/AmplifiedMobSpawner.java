@@ -7,7 +7,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Giant;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.WanderingTrader;
@@ -158,7 +157,7 @@ public class AmplifiedMobSpawner implements Listener
 		{
 			LargeFireball fireball = (LargeFireball) entity;
 			if (fireball.getShooter() != null
-					&& fireball.getYield() > 1.0F)
+					&& fireball.getYield() > 1.5F)
 			{
 				event.blockList().clear();
 			}
