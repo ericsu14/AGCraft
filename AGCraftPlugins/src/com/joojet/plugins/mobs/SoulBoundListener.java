@@ -35,21 +35,11 @@ public class SoulBoundListener implements Listener
 	public void onEnable ()
 	{
 		Bukkit.getPluginManager().registerEvents(this, (Plugin) this);
-		/* HashMap <UUID, List <ItemStack>> serializedDrops = this.serializer.getSoulboundedMap();
-		
-		if (serializedDrops != null)
-		{
-			this.droppedItems = serializedDrops;
-			System.out.println ("Recovered serialized drops from stored file");
-		} */
 	}
 	
 	public void onDisable ()
 	{
-		if (!this.droppedItems.isEmpty())
-		{
-			// this.serializer.serializeSoulboundedMap(this.droppedItems);
-		}
+		
 	}
 	
 	/** Scans a dead player's drops for any soulbounded items.
