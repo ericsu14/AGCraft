@@ -25,6 +25,7 @@ import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.BossBarEventListener;
 import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.PathfindTargetingEventListener;
+import com.joojet.plugins.mobs.SoulBoundListener;
 import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.ThemedServerEvent;
@@ -139,6 +140,9 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Pathfind Targeting event listener
 		Bukkit.getPluginManager().registerEvents(new PathfindTargetingEventListener(), this);
+		
+		// Soulbounded items event listener
+		Bukkit.getPluginManager().registerEvents(new SoulBoundListener(), this);
 	}
 	
 	@Override

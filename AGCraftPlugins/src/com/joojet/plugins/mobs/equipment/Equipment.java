@@ -18,6 +18,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import com.joojet.plugins.mobs.enums.PlayerHead;
+import com.joojet.plugins.mobs.metadata.SoulBoundMetadata;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 
@@ -275,6 +276,16 @@ public abstract class Equipment extends ItemStack
 	{
 		ItemMeta meta = this.getItemMeta();
 		meta.setUnbreakable(true);
+		this.setItemMeta(meta);
+	}
+	
+	/** Allows this item to have the soulbound metadata tag, allowing this item to still remain in 
+	 *  the player's inventory upon death. */
+	protected void makeSoulbound ()
+	{
+		ItemMeta meta = this.getItemMeta();
+		new SoulBoundMetadata().addStringMetadata(meta);
+		meta.getLore().add(ChatColor.GOLD + "Soulbound");
 		this.setItemMeta(meta);
 	}
 }
