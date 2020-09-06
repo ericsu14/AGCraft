@@ -46,7 +46,7 @@ public class PathfinderGoalGiantFireball extends PathfinderGoal
 	public void e() 
 	{
 		EntityLiving entityliving = this.giant.getGoalTarget();
-		if (entityliving.h(this.giant) < 1024.0D && this.giant.hasLineOfSight(entityliving)) 
+		if (entityliving.h(this.giant) < 1524.0D && this.giant.hasLineOfSight(entityliving)) 
 		{
 			// World world = this.giant.world;
 			this.a++;
@@ -67,10 +67,10 @@ public class PathfinderGoalGiantFireball extends PathfinderGoal
 				LargeFireball fireball = (LargeFireball) this.giantBukkit.getWorld().spawnEntity(new Location (this.giantBukkit.getWorld(), fireballLocation.getX(),
 						fireballLocation.getY(), fireballLocation.getZ()), EntityType.FIREBALL);
 				fireball.setDirection(fireballDirection);
-				fireball.setYield(3.5f);
+				fireball.setYield(3.6f);
 				fireball.setIsIncendiary(false);
 				fireball.setShooter(this.giantBukkit);
-				this.a = -100;
+				this.a = -80;
 			} 
 		} 
 		else if (this.a > 0) 
