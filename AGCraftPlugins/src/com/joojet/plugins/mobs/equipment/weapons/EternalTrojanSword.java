@@ -15,11 +15,11 @@ public class EternalTrojanSword extends Equipment
 	{
 		super (EquipmentTypes.ETERNAL_TROJAN_SWORD, Material.IRON_SWORD, EquipmentSlot.HAND, ChatColor.RED);
 		this.setDisplayName("Eternal"
-				+ ChatColor.GOLD + " Golden"
+				+ ChatColor.GOLD + " Trojan"
 				+ ChatColor.RED + " Sword");
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 6;
-		this.addLoreToItemMeta("#fighton forever!");
+		this.addLoreToItemMeta("Tommy trojan once weilded this blade to defeat his sworn enemies. Now you will carry on his legacy and uphold the traditions of this university!");
 		this.addAttackAttributes(9.0, 1.6);
 		this.addSpeedAttribute(0.05);
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);
