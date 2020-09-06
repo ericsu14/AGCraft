@@ -244,6 +244,9 @@ public class EquipmentTools
 				horse.setStyle(Style.values()
 						[mobEquipment.getStat(MonsterStat.HORSE_STYLE).intValue()]);
 			}
+			
+			// Automatically tames the horse
+			horse.setTamed(true);
 		}
 		
 		// Activates a custom boss bar for the entity

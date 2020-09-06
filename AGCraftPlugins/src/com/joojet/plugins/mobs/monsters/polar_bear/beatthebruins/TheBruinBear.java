@@ -34,11 +34,11 @@ public class TheBruinBear extends UCLAFaction
 				CustomPotionEffect.REGEN);
 		// Drops
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.25, 1, 3),
-				new MonsterDrop (new USCCreeperShield (), 0.75),
-				new MonsterDrop (new BruinShield (), 0.75),
-				new MonsterDrop (new SummonUSCArcher(), 0.50),
-				new MonsterDrop (new SummonSpiritOfTroy(), 0.50),
-				new MonsterDrop (new SummonUSCWarrior(), 0.50));
+				new MonsterDrop (new USCCreeperShield (), 0.20),
+				new MonsterDrop (new BruinShield (), 1.00),
+				new MonsterDrop (new SummonUSCArcher(), 0.05),
+				new MonsterDrop (new SummonSpiritOfTroy(), 0.05),
+				new MonsterDrop (new SummonUSCWarrior(), 0.05));
 		this.setStat(MonsterStat.EXPERIENCE, 200.0);
 		this.ignoreList.clear();
 	}
