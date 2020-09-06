@@ -6,7 +6,6 @@ import org.bukkit.entity.Horse.Color;
 import org.bukkit.entity.Horse.Style;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
-import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
@@ -25,6 +24,7 @@ public class TheTraveler extends USCFaction
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
 		this.setStat(MonsterStat.HORSE_COLOR, Color.WHITE.ordinal());
 		this.setStat(MonsterStat.HORSE_STYLE, Style.WHITEFIELD.ordinal());
-		this.addMobFlags(MobFlag.SHOW_NAME);
+		this.setStat(MonsterStat.BASE_SPEED, 0.45);
+		this.setStat(MonsterStat.HORSE_JUMP_STRENGTH, 1.0);
 	}
 }

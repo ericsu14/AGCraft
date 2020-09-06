@@ -179,6 +179,12 @@ public class EquipmentTools
 			entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(mobEquipment.getStat(MonsterStat.BASE_ATTACK_DAMAGE));
 		}
 		
+		// Custom base speed
+		if (mobEquipment.containsStat(MonsterStat.BASE_SPEED))
+		{
+			entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(mobEquipment.getStat(MonsterStat.BASE_SPEED));
+		}
+		
 		// Potion effects
 		if (!mobEquipment.getEffects().isEmpty())
 		{
@@ -243,6 +249,11 @@ public class EquipmentTools
 			{
 				horse.setStyle(Style.values()
 						[mobEquipment.getStat(MonsterStat.HORSE_STYLE).intValue()]);
+			}
+			
+			if (mobEquipment.containsStat(MonsterStat.HORSE_JUMP_STRENGTH))
+			{
+				horse.getAttribute(Attribute.HORSE_JUMP_STRENGTH).setBaseValue(mobEquipment.getStat(MonsterStat.HORSE_JUMP_STRENGTH));
 			}
 			
 			// Automatically tames the horse

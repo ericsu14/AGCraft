@@ -17,5 +17,9 @@ public enum MonsterStat
 	/** Stores the enum ordinal relating to the monster's horse color */
 	HORSE_COLOR,
 	/** Stores the enum ordinal relating to the monster's horse style */
-	HORSE_STYLE;
+	HORSE_STYLE,
+	/** Modifies the jump strength if this custom mob is a horse */
+	HORSE_JUMP_STRENGTH,
+	/** Modifies the base speed of the mob */
+	BASE_SPEED;
 }
