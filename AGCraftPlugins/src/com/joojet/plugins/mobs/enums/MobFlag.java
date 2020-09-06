@@ -16,5 +16,7 @@ public enum MobFlag
 	PERSISTENT_ATTACKER,
 	/** When enabled, the monster will ignore entities that are not apart of any faction if they are in its hitlist.
 	 *  Does not apply to player */
-	IGNORE_NON_FACTION_ENTITIES;
+	IGNORE_NON_FACTION_ENTITIES,
+	/** When enabled, the mob will spawn a small fireworks show upon death */
+	FIREWORK_DEATH;
 }

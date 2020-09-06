@@ -63,7 +63,8 @@ public class GiantBruin extends UCLAFaction
 				new FireworkDrop (0.75, 64, 64));
 		
 		this.addPotionEffect(CustomPotionEffect.SUPER_JUMP, CustomPotionEffect.GIANT_SLOWNESS);
-		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING);
+		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING,
+				MobFlag.FIREWORK_DEATH);
 		this.addBiomes(Biome.THE_VOID);
 		
 	}

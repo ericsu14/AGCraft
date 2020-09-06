@@ -23,7 +23,9 @@ import org.bukkit.plugin.Plugin;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
+import com.joojet.plugins.mobs.fireworks.tasks.SpawnFireworksOnLocationTask;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -165,6 +167,13 @@ public class AmplifiedMobSpawner implements Listener
 						event.getDrops().add(droppedItem);
 					}
 				}
+			}
+			
+			// Spawns small fireworks show if this entity dies and
+			// has that flag enabled
+			if (entityEquipment.containsFlag(MobFlag.FIREWORK_DEATH))
+			{
+				new SpawnFireworksOnLocationTask(entity.getLocation(), 4).runTaskTimer(AGCraftPlugin.plugin, 30, 10);
 			}
 		}
 	}
