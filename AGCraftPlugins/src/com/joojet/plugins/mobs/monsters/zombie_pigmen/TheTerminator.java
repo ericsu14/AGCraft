@@ -42,7 +42,8 @@ public class TheTerminator extends MobEquipment
 		this.weapon = new TerminatorSword (this.color);
 		this.offhand = new PigmanDagger (this.color);
 		
-		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 1.00, 1, 3));
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 1.00, 1, 3),
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 2));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 60.0);
 	}

@@ -44,6 +44,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.boots = new LightweightNetheriteBoots (this.color);
 		
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.35, 1, 2),
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 1),
 				new MonsterDrop (Material.GOLDEN_CARROT, 0.50, 4, 16));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 50.0);

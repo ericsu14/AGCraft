@@ -46,7 +46,9 @@ public class BarneyTheDinosaur extends MobEquipment
 		this.offhand = new BarneyTotem (this.color);
 		
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.75, 1, 3),
-				new FireworkDrop (0.20, 16, 16));
+				new FireworkDrop (0.20, 16, 16),
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 1),
+				new MonsterDrop (new BarneyTotem (this.color), 0.05));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 200.0);
 	}

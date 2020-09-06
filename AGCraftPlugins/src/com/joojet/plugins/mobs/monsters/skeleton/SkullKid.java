@@ -50,7 +50,8 @@ public class SkullKid extends MobEquipment
 				new MonsterDrop (Material.NETHERITE_INGOT, 1.00, 1, 1),
 				new MonsterDrop (new SpiritualTravesty(ChatColor.GOLD), 0.15),
 				new MonsterDrop (Material.DIAMOND, 0.30, 1, 3),
-				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 1.00, 1, 3));
+				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 1.00, 1, 3),
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 2));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 500.0);
 	}
