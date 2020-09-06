@@ -1,8 +1,10 @@
 package com.joojet.plugins.mobs.monsters.skeleton;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
@@ -13,6 +15,7 @@ import com.joojet.plugins.mobs.equipment.head.SkullKidHelmet;
 import com.joojet.plugins.mobs.equipment.leggings.SkullKidPants;
 import com.joojet.plugins.mobs.equipment.offhand.CursedArrow;
 import com.joojet.plugins.mobs.equipment.weapons.ATerribleFate;
+import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class SkullKid extends MobEquipment 
@@ -42,6 +45,12 @@ public class SkullKid extends MobEquipment
 		this.boots = new SkullKidBoots (this.color);
 		this.weapon = new ATerribleFate (this.color);
 		this.offhand = new CursedArrow (this.color);
+		
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 1.00, 2, 3),
+				new MonsterDrop (Material.NETHERITE_INGOT, 1.00, 1, 1),
+				new MonsterDrop (new SpiritualTravesty(ChatColor.GOLD), 0.15),
+				new MonsterDrop (Material.DIAMOND, 0.30, 1, 3),
+				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 1.00, 1, 3));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 500.0);
 	}

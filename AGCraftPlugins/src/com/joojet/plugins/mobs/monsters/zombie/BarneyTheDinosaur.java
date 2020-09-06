@@ -1,8 +1,11 @@
 package com.joojet.plugins.mobs.monsters.zombie;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.drops.FireworkDrop;
+import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
@@ -41,6 +44,9 @@ public class BarneyTheDinosaur extends MobEquipment
 		this.boots = new BarneyFeet (this.color);
 		this.weapon = new BarneyDagger (this.color);
 		this.offhand = new BarneyTotem (this.color);
+		
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.75, 1, 3),
+				new FireworkDrop (0.20, 16, 16));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 200.0);
 	}

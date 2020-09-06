@@ -78,9 +78,11 @@ public class SummoningScrollListener implements Listener
 						wolf.setCollarColor(scroll.getMob().getDyeColor());
 					}
 					
+					EquipmentTools.equipEntity(entity, scroll.getMob());
+					
+					// Entities are always persistent when summoned VIA summoning scroll
 					entity.setPersistent(true);
 					
-					EquipmentTools.equipEntity(entity, scroll.getMob());
 					p.sendMessage(ChatColor.AQUA + "Sucessfully summoned " + scroll.getMob().getChatColor() + scroll.getName() + ChatColor.AQUA + "!");
 					p.playSound(spawnLocation, Sound.ENTITY_EVOKER_PREPARE_WOLOLO, 1.0f, 1.0f);
 					p.playSound(spawnLocation, Sound.ENTITY_EVOKER_CAST_SPELL, 1.0f, 1.0f);

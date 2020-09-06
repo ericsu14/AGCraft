@@ -22,5 +22,6 @@ public class DoomBlade extends Equipment
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
 		this.setDisplayName("Doom Blade");
 		this.addLoreToItemMeta("Rip... and tear!");
+		this.makeSoulbound();
 	}
 }

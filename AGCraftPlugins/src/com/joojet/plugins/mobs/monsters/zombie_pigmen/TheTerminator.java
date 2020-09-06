@@ -1,9 +1,11 @@
 package com.joojet.plugins.mobs.monsters.zombie_pigmen;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 
+import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
@@ -13,7 +15,7 @@ import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.CyborgPigmanHead;
 import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.PigmanDagger;
-import com.joojet.plugins.mobs.equipment.weapons.PigmanSword;
+import com.joojet.plugins.mobs.equipment.weapons.TerminatorSword;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class TheTerminator extends MobEquipment
@@ -37,8 +39,10 @@ public class TheTerminator extends MobEquipment
 		this.chestplate = new DarkNetheriteChestplate (this.color);
 		this.leggings = new DarkNetheriteLeggings (this.color);
 		this.boots = new LightweightNetheriteBoots (this.color);
-		this.weapon = new PigmanSword (this.color);
+		this.weapon = new TerminatorSword (this.color);
 		this.offhand = new PigmanDagger (this.color);
+		
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 1.00, 1, 3));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 60.0);
 	}

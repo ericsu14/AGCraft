@@ -6,6 +6,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 
+import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -51,6 +52,11 @@ public class DoomGuy extends MobEquipment
 		this.boots = new DoomGuyFeet (this.color);
 		this.weapon = new DoomBlade (this.color);
 		this.offhand = new ItemStack (Material.WITHER_SKELETON_SKULL, 1);
+		
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 1.00, 2, 3),
+				new MonsterDrop (Material.NETHERITE_INGOT, 1.00, 1, 1),
+				new MonsterDrop (Material.DIAMOND, 0.30, 1, 3),
+				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 1.00, 1, 3));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 500.0);
 	}

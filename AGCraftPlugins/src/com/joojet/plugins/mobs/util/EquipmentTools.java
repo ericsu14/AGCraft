@@ -1,7 +1,6 @@
 package com.joojet.plugins.mobs.util;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
@@ -113,7 +112,6 @@ public class EquipmentTools
 		EntityEquipment equipment = entity.getEquipment();
 		ItemStack[] items = mobEquipment.getEquipment();
 		float[] dropRates = mobEquipment.getDropRates();
-		HashSet <MobFlag> mobFlags = mobEquipment.getMobFlags();
 		
 		// Helmet
 		if (items[0] != null)
@@ -161,7 +159,7 @@ public class EquipmentTools
 		if (!mobEquipment.getName().equals(""))
 		{
 			entity.setCustomName(mobEquipment.getChatColor() + "" + mobEquipment.getName());
-			entity.setCustomNameVisible(mobFlags.contains(MobFlag.SHOW_NAME));
+			entity.setCustomNameVisible(mobEquipment.containsFlag(MobFlag.SHOW_NAME));
 		}
 		
 		// Custom health
@@ -185,6 +183,12 @@ public class EquipmentTools
 			entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(mobEquipment.getStat(MonsterStat.BASE_SPEED));
 		}
 		
+		// Disables entity persistence
+		if (mobEquipment.containsFlag(MobFlag.DISABLE_PERSISTENCE))
+		{
+			entity.setPersistent(false);
+		}
+		
 		// Potion effects
 		if (!mobEquipment.getEffects().isEmpty())
 		{
@@ -195,13 +199,13 @@ public class EquipmentTools
 		}
 		
 		// Forever ablaze
-		if (mobFlags.contains(MobFlag.ON_FIRE))
+		if (mobEquipment.containsFlag(MobFlag.ON_FIRE))
 		{
 			entity.setFireTicks(Integer.MAX_VALUE);
 		}
 		
 		// Spawns a lightning bolt on the mob's current location if enabled. This should scare the **** out of unsuspecting players
-		if (mobFlags.contains(MobFlag.SPAWN_LIGHTNING))
+		if (mobEquipment.containsFlag(MobFlag.SPAWN_LIGHTNING))
 		{
 			Location loc = entity.getLocation();
 			entity.getWorld().strikeLightningEffect(loc);
@@ -217,7 +221,7 @@ public class EquipmentTools
 				}
 				
 				// Automatically sets the mob's target to a random nearby player if huntOnSpawn is set to true
-				if (mobFlags.contains(MobFlag.HUNT_ON_SPAWN))
+				if (mobEquipment.containsFlag(MobFlag.HUNT_ON_SPAWN))
 				{
 					if (entity instanceof Monster)
 					{
@@ -261,7 +265,7 @@ public class EquipmentTools
 		}
 		
 		// Activates a custom boss bar for the entity
-		if (mobFlags.contains(MobFlag.BOSS_BAR))
+		if (mobEquipment.containsFlag(MobFlag.BOSS_BAR))
 		{
 			BossBarAPI.createBossBar(entity);
 		}

@@ -1,8 +1,10 @@
 package com.joojet.plugins.mobs.monsters.zombie;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
@@ -35,6 +37,8 @@ public class UltimateBadassZombie extends MobEquipment
 		this.chestplate = new DarkNetheriteChestplate (this.color);
 		this.leggings = new DarkNetheriteLeggings (this.color);
 		this.boots = new LightweightNetheriteBoots (this.color);
+		
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.35, 1, 2));
 		
 		this.setStat (MonsterStat.EXPERIENCE, 50.0);
 	}

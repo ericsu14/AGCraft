@@ -25,5 +25,6 @@ public class DoomChest extends LeatherEquipment
 		this.addLoreToItemMeta("For he alone was the Hell Walker, the Unchained Predator, who sought retribution...");
 		this.setColor(Color.fromRGB(134, 143, 50));
 		this.makeUnbreakable();
+		this.makeSoulbound();
 	}
 }

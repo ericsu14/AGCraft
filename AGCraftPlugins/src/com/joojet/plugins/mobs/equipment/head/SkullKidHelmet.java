@@ -29,5 +29,6 @@ public class SkullKidHelmet extends Equipment
 		
 		this.setDisplayName("Majora's Mask");
 		this.addLoreToItemMeta("You’ve met with a terrible fate, haven’t you?");
+		this.makeSoulbound();
  	}
 }

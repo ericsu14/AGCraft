@@ -18,5 +18,6 @@ public class SkullKidChest extends LeatherEquipment
 		this.setColor(Color.fromRGB(177, 163, 38));
 		this.addDefenseAttributes(8.0, 6.0, 0.20);
 		this.makeUnbreakable();
+		this.makeSoulbound();
 	}
 }

@@ -32,5 +32,6 @@ public class RightCrashSymbol extends ShieldEquipment
 		this.addHealthAttributes(10.0);
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
+		this.makeSoulbound();
 	}
 }

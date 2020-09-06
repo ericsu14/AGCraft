@@ -22,5 +22,6 @@ public class DoomSlayerHead extends Equipment
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
 		this.addUnsafeEnchantment(Enchantment.WATER_WORKER, 1);
 		this.addUnsafeEnchantment(Enchantment.OXYGEN, 3);
+		this.makeSoulbound();
 	}
 }

@@ -12,6 +12,6 @@ public class CollegeSkeletonTypes extends MonsterTypes
 		this.addEquipment(new UCLAArcher(), 60);
 		this.addEquipment(new USCArcher(), 40);
 		this.addEquipment(new UCLABearTamer(), 2);
-		this.addEquipment(new TrojanWarrior(), 3);
+		this.addEquipment(new TrojanWarrior(), 2);
 	}
 }

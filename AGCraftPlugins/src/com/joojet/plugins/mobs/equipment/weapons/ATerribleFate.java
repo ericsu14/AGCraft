@@ -19,5 +19,6 @@ public class ATerribleFate extends Equipment
 		this.addUnsafeEnchantment(Enchantment.ARROW_KNOCKBACK, 3);
 		
 		this.addLoreToItemMeta("You’ve met with a terrible fate, haven’t you?");
+		this.makeSoulbound();
 	}
 }
