@@ -23,16 +23,21 @@ public class SpawnFireworksOnLocationTask extends BukkitRunnable {
 	protected int fireworkCount;
 	
 	/** Constructs a new spawn fireworks task, which will continuously spawn random fireworks around
-	 *  as long as this task is still running. */
-	public SpawnFireworksOnLocationTask (Location spawnLocation, int radius)
+	 *  as long as this task is still running.
+	 *  @param spawnLocation - The location in the world where the fireworks should spawn
+	 *  @param radius - The max. radius in which the fireworks should spread out
+	 *  @param fireworkCount - The amount of fireworks that will be launched */
+	public SpawnFireworksOnLocationTask (Location spawnLocation, int radius, int fireworkCount)
 	{
 		this.spawnLocation = spawnLocation;
 		this.fireworkGenerator = new FireworkTypes();
 		this.radius = radius;
 		this.rand = new Random();
-		this.fireworkCount = 12;
+		this.fireworkCount = fireworkCount;
 	}
 	
+	/** Spawns a random firework around the spawn location point within a radius
+	 *  until the firework count reaches 0. */
 	@Override
 	public void run() 
 	{	
@@ -54,7 +59,7 @@ public class SpawnFireworksOnLocationTask extends BukkitRunnable {
 		}
 	}
 	
-	/** Invokes the RNG to generate a random double between 0 and the passed
+	/** Invokes the RNG to generate a random double between the passed
 	 *  radius */
 	protected double generateRandomOffset ()
 	{

@@ -20,7 +20,8 @@ public enum SummonTypes
 	UCLA_BEAR_TAMER,
 	GIANT_BRUIN_TAMER,
 	USC_WARRIOR,
-	TROJAN_WARRIOR;
+	TROJAN_WARRIOR,
+	ETERNAL_TROJAN_ARCHER;
 	
 	public SummoningScroll getSummon ()
 	{
@@ -60,6 +61,8 @@ public enum SummonTypes
 				return new SummonUSCWarrior();
 			case TROJAN_WARRIOR:
 				return new SummonTrojanWarrior();
+			case ETERNAL_TROJAN_ARCHER:
+				return new SummonEternalTrojanArcher();
 			default:
 				break;
 		}

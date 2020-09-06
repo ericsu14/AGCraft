@@ -22,6 +22,7 @@ import com.joojet.plugins.mobs.equipment.weapons.EternalSpiritOfTroy;
 import com.joojet.plugins.mobs.equipment.weapons.EternalTrojanSword;
 import com.joojet.plugins.mobs.equipment.weapons.LeftCrashSymbol;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
+import com.joojet.plugins.mobs.scrolls.SummonEternalTrojanArcher;
 import com.joojet.plugins.mobs.scrolls.SummonFrolf;
 import com.joojet.plugins.mobs.scrolls.SummonSpiritOfTroy;
 import com.joojet.plugins.mobs.scrolls.SummonTrojanWarrior;
@@ -57,6 +58,7 @@ public class GiantBruin extends UCLAFaction
 				new MonsterDrop (new SummonFrolf (), 0.07),
 				new MonsterDrop (new SummonUSCWarrior(), 0.15),
 				new MonsterDrop (new SummonTrojanWarrior(), 0.03),
+				new MonsterDrop (new SummonEternalTrojanArcher(), 0.03),
 				new MonsterDrop (new EternalSpiritOfTroy(), 0.03),
 				new MonsterDrop (new RightCrashSymbol (ChatColor.GOLD), 0.10),
 				new MonsterDrop (new LeftCrashSymbol (ChatColor.GOLD), 0.10),

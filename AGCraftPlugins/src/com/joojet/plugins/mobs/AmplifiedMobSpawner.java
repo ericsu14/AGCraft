@@ -173,7 +173,7 @@ public class AmplifiedMobSpawner implements Listener
 			// has that flag enabled
 			if (entityEquipment.containsFlag(MobFlag.FIREWORK_DEATH))
 			{
-				new SpawnFireworksOnLocationTask(entity.getLocation(), 4).runTaskTimer(AGCraftPlugin.plugin, 30, 10);
+				new SpawnFireworksOnLocationTask(entity.getLocation(), 4, 12).runTaskTimer(AGCraftPlugin.plugin, 30, 10);
 			}
 		}
 	}
