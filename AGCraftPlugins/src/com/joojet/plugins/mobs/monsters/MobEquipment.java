@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
+import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -68,6 +69,8 @@ public abstract class MobEquipment
 	protected HashSet <EntityType> ignoreList;
 	/** A set of flags that could be applied to the monster upon spawning */
 	protected HashSet <MobFlag> mobFlags;
+	/** Contains any custom loot this custom monster can have */
+	protected ArrayList <MonsterDrop> loot;
 	/** Custom monster that this entity can ride upon spawning */
 	protected MountedMob mount;
 	
@@ -97,6 +100,8 @@ public abstract class MobEquipment
 		this.mobStats = new HashMap <MonsterStat, Double> ();
 		// Mounted mob
 		this.mount = null;
+		// Custom loot
+		this.loot = new ArrayList <MonsterDrop> ();
 	}
 	
 	/** Sets up drop rates for this entity.
@@ -269,6 +274,15 @@ public abstract class MobEquipment
 		}
 	}
 	
+	/** Adds a list of monster drop instances to this custom monster's loot table */
+	public void addMonsterDrops (MonsterDrop... drops)
+	{
+		for (MonsterDrop drop : drops)
+		{
+			this.loot.add(drop);
+		}
+	}
+	
 	/** Americanizes a name by applying the USA colors to every character in a string
 	 *  in an alternating pattern */
 	public String americanizeText (String str)
@@ -348,6 +362,12 @@ public abstract class MobEquipment
 	public HashSet <MobFlag> getMobFlags ()
 	{
 		return this.mobFlags;
+	}
+	
+	/** Returns this entity's custom monster drops */
+	public ArrayList <MonsterDrop> getMonsterDrops ()
+	{
+		return this.loot;
 	}
 	
 	/** Generates monster type metadata based on the mob equipment's properties*/

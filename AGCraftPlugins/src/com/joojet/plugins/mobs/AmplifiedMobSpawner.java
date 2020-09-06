@@ -1,5 +1,6 @@
 package com.joojet.plugins.mobs;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
@@ -16,10 +17,12 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.plugin.Plugin;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
@@ -139,10 +142,29 @@ public class AmplifiedMobSpawner implements Listener
 			
 			// Modifies the entity's experience drops if it has any custom experience
 			MobEquipment entityEquipment = getMobEquipmentFromEntity(entity);
-			if (entityEquipment != null && entityEquipment.containsStat(MonsterStat.EXPERIENCE)
-					&& event.getDroppedExp() > 0.0)
+			if (entityEquipment == null)
+			{
+				return;
+			}
+			
+			if (entityEquipment.containsStat(MonsterStat.EXPERIENCE) && event.getDroppedExp() > 0.0)
 			{
 				event.setDroppedExp(entityEquipment.getStat(MonsterStat.EXPERIENCE).intValue());
+			}
+			
+			// Adds any custom loot the monster may have
+			if (!entityEquipment.getMonsterDrops().isEmpty())
+			{
+				ItemStack droppedItem;
+				ArrayList <MonsterDrop> drops = entityEquipment.getMonsterDrops();
+				for (MonsterDrop drop : drops)
+				{
+					droppedItem = drop.generateDrop(0.0);
+					if (droppedItem != null)
+					{
+						event.getDrops().add(droppedItem);
+					}
+				}
 			}
 		}
 	}

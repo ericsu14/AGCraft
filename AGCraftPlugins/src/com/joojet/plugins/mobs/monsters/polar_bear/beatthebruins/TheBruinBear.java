@@ -1,13 +1,17 @@
 package com.joojet.plugins.mobs.monsters.polar_bear.beatthebruins;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 
+import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.equipment.offhand.BruinShield;
+import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 
 public class TheBruinBear extends UCLAFaction
@@ -25,6 +29,10 @@ public class TheBruinBear extends UCLAFaction
 		this.addPotionEffect(CustomPotionEffect.STRENGTH_II, CustomPotionEffect.JUMP_BOOST,
 				CustomPotionEffect.SPEED, CustomPotionEffect.RESISTANCE_II, CustomPotionEffect.FIRE_RESISTANCE,
 				CustomPotionEffect.REGEN);
+		// Drops
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.25, 1, 3),
+				new MonsterDrop (new USCCreeperShield (), 0.75),
+				new MonsterDrop (new BruinShield (), 0.75));
 		this.setStat(MonsterStat.EXPERIENCE, 200.0);
 		this.ignoreList.clear();
 	}

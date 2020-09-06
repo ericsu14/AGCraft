@@ -26,5 +26,6 @@ public class USCCreeperShield extends ShieldEquipment
 		this.addAttackAttributes(2.0, 0.0);
 		this.addDefenseAttributes(0.0, 3.0, 0.10);
 		this.addHealthAttributes(10.0);
+		this.makeSoulbound();
 	}
 }

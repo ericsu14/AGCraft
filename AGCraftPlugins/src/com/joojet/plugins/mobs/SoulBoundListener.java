@@ -39,7 +39,7 @@ public class SoulBoundListener implements Listener
 	
 	/** Scans a dead player's drops for any soulbounded items.
 	 *  If a soulbounded item is found, it will automatically be removed from the player drops
-	 *  and added back into their inventory. */
+	 *  and added back into their inventory upon player respawn. */
 	@EventHandler
 	public void onPlayerDeath (PlayerDeathEvent event)
 	{
@@ -68,7 +68,8 @@ public class SoulBoundListener implements Listener
 		this.droppedItems.put(event.getEntity().getUniqueId(), soulBoundedItems);
 	}
 	
-	/** If the revived player has any soulbounded items cached onto memory, add them back into the inventory */
+	/** If the revived player has any soulbounded items cached onto the data structure
+	 *  add them back into the inventory */
 	@EventHandler
 	public void onPlayerRespawn (PlayerRespawnEvent event)
 	{
