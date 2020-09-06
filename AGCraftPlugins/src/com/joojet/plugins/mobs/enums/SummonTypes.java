@@ -18,7 +18,8 @@ public enum SummonTypes
 	USC_ARCHER,
 	AG_SPOTTED,
 	UCLA_BEAR_TAMER,
-	GIANT_BRUIN_TAMER;
+	GIANT_BRUIN_TAMER,
+	USC_WARRIOR;
 	
 	public SummoningScroll getSummon ()
 	{
@@ -54,6 +55,8 @@ public enum SummonTypes
 				return new SummonUCLABearTamer();
 			case GIANT_BRUIN_TAMER:
 				return new SummonGiantBruinTamer();
+			case USC_WARRIOR:
+				return new SummonUSCWarrior();
 			default:
 				break;
 		}

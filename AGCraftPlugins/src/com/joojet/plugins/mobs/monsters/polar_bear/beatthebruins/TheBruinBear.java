@@ -13,6 +13,9 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.offhand.BruinShield;
 import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
+import com.joojet.plugins.mobs.scrolls.SummonSpiritOfTroy;
+import com.joojet.plugins.mobs.scrolls.SummonUSCArcher;
+import com.joojet.plugins.mobs.scrolls.SummonUSCWarrior;
 
 public class TheBruinBear extends UCLAFaction
 {
@@ -32,7 +35,10 @@ public class TheBruinBear extends UCLAFaction
 		// Drops
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.25, 1, 3),
 				new MonsterDrop (new USCCreeperShield (), 0.75),
-				new MonsterDrop (new BruinShield (), 0.75));
+				new MonsterDrop (new BruinShield (), 0.75),
+				new MonsterDrop (new SummonUSCArcher(), 0.50),
+				new MonsterDrop (new SummonSpiritOfTroy(), 0.50),
+				new MonsterDrop (new SummonUSCWarrior(), 0.50));
 		this.setStat(MonsterStat.EXPERIENCE, 200.0);
 		this.ignoreList.clear();
 	}

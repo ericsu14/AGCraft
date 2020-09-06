@@ -21,6 +21,7 @@ import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 import com.joojet.plugins.mobs.scrolls.SummonFrolf;
 import com.joojet.plugins.mobs.scrolls.SummonSpiritOfTroy;
 import com.joojet.plugins.mobs.scrolls.SummonUSCArcher;
+import com.joojet.plugins.mobs.scrolls.SummonUSCWarrior;
 
 public class GiantBruin extends UCLAFaction
 {
@@ -49,6 +50,7 @@ public class GiantBruin extends UCLAFaction
 				new MonsterDrop (new SummonSpiritOfTroy(), 1.00),
 				new MonsterDrop (new TrojanSword(ChatColor.GOLD), 1.00),
 				new MonsterDrop (new SummonFrolf (), 0.10),
+				new MonsterDrop (new SummonUSCWarrior(), 1.00),
 				new MonsterDrop (Material.DIAMOND, 0.75, 1, 1),
 				new MonsterDrop (Material.DIAMOND, 1.00, 1, 1));
 		
