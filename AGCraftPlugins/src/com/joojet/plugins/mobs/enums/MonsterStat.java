@@ -13,5 +13,9 @@ public enum MonsterStat
 	/** Used internally by the MonsterTypes class to assign spawn weights to the entity */
 	SPAWN_WEIGHT,
 	/** The minimum y value the original entity must be in order for this entity to spawn */
-	Y_LIMIT;
+	Y_LIMIT,
+	/** Stores the enum ordinal relating to the monster's horse color */
+	HORSE_COLOR,
+	/** Stores the enum ordinal relating to the monster's horse style */
+	HORSE_STYLE;
 }

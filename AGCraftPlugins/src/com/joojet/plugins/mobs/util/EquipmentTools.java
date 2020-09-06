@@ -13,6 +13,8 @@ import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Horse;
+import org.bukkit.entity.Horse.*;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Monster;
@@ -224,6 +226,23 @@ public class EquipmentTools
 						}
 					}
 				}
+			}
+		}
+		
+		// Set horse styles and color
+		if (entity instanceof Horse)
+		{
+			Horse horse = (Horse) entity;
+			if (mobEquipment.containsStat(MonsterStat.HORSE_COLOR))
+			{
+				horse.setColor(Color.values()
+						[mobEquipment.getStat(MonsterStat.HORSE_COLOR).intValue()]);
+			}
+			
+			if (mobEquipment.containsStat(MonsterStat.HORSE_STYLE))
+			{
+				horse.setStyle(Style.values()
+						[mobEquipment.getStat(MonsterStat.HORSE_STYLE).intValue()]);
 			}
 		}
 		
