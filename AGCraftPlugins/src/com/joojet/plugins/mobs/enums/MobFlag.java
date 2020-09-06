@@ -20,5 +20,7 @@ public enum MobFlag
 	/** When enabled, the mob will spawn a small fireworks show upon death */
 	FIREWORK_DEATH,
 	/** When enabled, entities will naturally despawn upon chunk unloads reguardless if the monster is naturally non-hostile or not */
-	DISABLE_PERSISTENCE;
+	DISABLE_PERSISTENCE,
+	/** When enabled, entities will not naturally despawn upon chunk unloads */
+	ENABLE_PERSISTENCE;
 }

@@ -8,6 +8,7 @@ import org.bukkit.entity.Horse.Style;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.equipment.boots.LetItGo;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 
 public class TheTraveler extends USCFaction 
@@ -19,6 +20,8 @@ public class TheTraveler extends USCFaction
 		this.name = "The"
 				+ ChatColor.GOLD + " Traveler";
 		this.addBiomes(Biome.THE_VOID);
+		
+		this.boots = new LetItGo (this.color);
 		
 		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);

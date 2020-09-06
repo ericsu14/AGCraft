@@ -18,16 +18,16 @@ import com.joojet.plugins.mobs.equipment.weapons.EternalSpiritOfTroy;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 
-public class TrojanWarrior extends USCFaction 
+public class EternalTrojanArcher extends USCFaction 
 {
-	public TrojanWarrior ()
+	public EternalTrojanArcher ()
 	{
-		super (MonsterType.TROJAN_WARRIOR);
-		this.addBiomes(Biome.THE_VOID);
+		super (MonsterType.ETERNAL_TROJAN_ARCHER);
+this.addBiomes(Biome.THE_VOID);
 		
-		this.name = ChatColor.RED + "The"
+		this.name = ChatColor.RED + "Eternal"
 				+ ChatColor.GOLD + " Trojan"
-				+ ChatColor.RED + " Warrior";
+				+ ChatColor.RED + " Archer";
 		
 		this.color = ChatColor.GOLD;
 		this.mount = new MountedMob (EntityType.HORSE, new TheTraveler());
@@ -43,6 +43,6 @@ public class TrojanWarrior extends USCFaction
 		
 		this.setStat(MonsterStat.HEALTH, 40.0);
 		
-		this.addMobFlags(MobFlag.SHOW_NAME);
+		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.ENABLE_PERSISTENCE);
 	}
 }

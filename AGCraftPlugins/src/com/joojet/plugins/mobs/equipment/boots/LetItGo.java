@@ -14,6 +14,8 @@ public class LetItGo extends Equipment
 	{
 		super (EquipmentTypes.LET_IT_GO, Material.GOLDEN_BOOTS, EquipmentSlot.FEET, color);
 		this.addUnsafeEnchantment(Enchantment.FROST_WALKER, 3);
+		this.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, 3);
+		this.addUnsafeEnchantment(Enchantment.SOUL_SPEED, 1);
 		this.addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1);
 		this.setDisplayName("Let it go!");
 	}

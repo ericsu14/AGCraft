@@ -183,6 +183,12 @@ public class EquipmentTools
 			entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(mobEquipment.getStat(MonsterStat.BASE_SPEED));
 		}
 		
+		// Enables entity persistence
+		if (mobEquipment.containsFlag(MobFlag.ENABLE_PERSISTENCE))
+		{
+			entity.setPersistent(true);
+		}
+		
 		// Disables entity persistence
 		if (mobEquipment.containsFlag(MobFlag.DISABLE_PERSISTENCE))
 		{

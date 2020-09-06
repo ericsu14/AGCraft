@@ -13,5 +13,6 @@ public class CollegeZombieTypes extends MonsterTypes
 		this.addEquipment(new USCWarrior(), 25);
 		this.addEquipment(new SpiritOfTroy(), 15);
 		this.addEquipment(new GiantBruinTamer(), 1);
+		this.addEquipment(new TrojanWarrior(), 1);
 	}
 }

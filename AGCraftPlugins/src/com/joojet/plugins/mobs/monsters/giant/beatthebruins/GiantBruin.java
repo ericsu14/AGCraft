@@ -19,6 +19,7 @@ import com.joojet.plugins.mobs.equipment.offhand.RightCrashSymbol;
 import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.equipment.weapons.BruinSword;
 import com.joojet.plugins.mobs.equipment.weapons.EternalSpiritOfTroy;
+import com.joojet.plugins.mobs.equipment.weapons.EternalTrojanSword;
 import com.joojet.plugins.mobs.equipment.weapons.LeftCrashSymbol;
 import com.joojet.plugins.mobs.equipment.weapons.TrojanSword;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
@@ -53,21 +54,22 @@ public class GiantBruin extends UCLAFaction
 				new MonsterDrop (new USCCreeperShield(), 0.15),
 				new MonsterDrop (new SummonUSCArcher (), 0.07),
 				new MonsterDrop (new SummonSpiritOfTroy(), 0.07),
-				new MonsterDrop (new TrojanSword(ChatColor.GOLD), 0.10),
+				new MonsterDrop (new EternalTrojanSword(), 0.07),
 				new MonsterDrop (new SummonFrolf (), 0.07),
-				new MonsterDrop (new SummonUSCWarrior(), 0.20),
-				new MonsterDrop (new SummonTrojanWarrior(), 0.05),
-				new MonsterDrop (new EternalSpiritOfTroy(), 0.05),
-				new MonsterDrop (new RightCrashSymbol (ChatColor.GOLD), 0.15),
-				new MonsterDrop (new LeftCrashSymbol (ChatColor.GOLD), 0.15),
-				new MonsterDrop (Material.DIAMOND, 1.00, 1, 2),
+				new MonsterDrop (new SummonUSCWarrior(), 0.15),
+				new MonsterDrop (new SummonTrojanWarrior(), 0.03),
+				new MonsterDrop (new EternalSpiritOfTroy(), 0.03),
+				new MonsterDrop (new RightCrashSymbol (ChatColor.GOLD), 0.10),
+				new MonsterDrop (new LeftCrashSymbol (ChatColor.GOLD), 0.10),
+				new MonsterDrop (Material.DIAMOND, 0.75, 1, 2),
 				new MonsterDrop (Material.DIAMOND, 1.00, 1, 2),
 				new MonsterDrop (Material.EMERALD, 1.00, 4, 24),
+				new MonsterDrop (Material.GOLDEN_CARROT, 1.00, 16, 32),
 				new FireworkDrop (0.75, 64, 64),
 				new FireworkDrop (0.75, 64, 64),
 				new FireworkDrop (0.75, 64, 64),
 				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 0.75, 1, 2),
-				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 0.35, 2, 3));
+				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 0.15, 2, 3));
 		
 		this.addPotionEffect(CustomPotionEffect.SUPER_JUMP, CustomPotionEffect.GIANT_SLOWNESS);
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING,
