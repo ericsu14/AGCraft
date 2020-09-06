@@ -186,13 +186,13 @@ public class EquipmentTools
 		// Enables entity persistence
 		if (mobEquipment.containsFlag(MobFlag.ENABLE_PERSISTENCE))
 		{
-			entity.setPersistent(true);
+			entity.setRemoveWhenFarAway(false);
 		}
 		
 		// Disables entity persistence
 		if (mobEquipment.containsFlag(MobFlag.DISABLE_PERSISTENCE))
 		{
-			entity.setPersistent(false);
+			entity.setRemoveWhenFarAway(true);
 		}
 		
 		// Potion effects
