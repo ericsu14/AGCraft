@@ -16,5 +16,6 @@ public class GiantBruinTamer extends UCLAJock
 		this.addBiomes(Biome.THE_VOID);
 		this.mount = new MountedMob (EntityType.GIANT, new GiantBruin());
 		this.setStat(MonsterStat.Y_LIMIT, 55.0);
+		this.setStat(MonsterStat.HEALTH, 30.0);
 	}
 }
