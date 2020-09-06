@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.drops.FireworkDrop;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -47,7 +48,7 @@ public class GiantBruin extends UCLAFaction
 		
 		// Mob Drops
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.10 , 2, 3),
-				new MonsterDrop (new USCCreeperShield(), 1.00),
+				new MonsterDrop (new USCCreeperShield(), 0.15),
 				new MonsterDrop (new SummonUSCArcher (), 0.07),
 				new MonsterDrop (new SummonSpiritOfTroy(), 0.07),
 				new MonsterDrop (new TrojanSword(ChatColor.GOLD), 0.10),
@@ -56,7 +57,10 @@ public class GiantBruin extends UCLAFaction
 				new MonsterDrop (new SummonTrojanWarrior(), 0.05),
 				new MonsterDrop (new EternalSpiritOfTroy(), 0.05),
 				new MonsterDrop (Material.DIAMOND, 1.00, 1, 2),
-				new MonsterDrop (Material.DIAMOND, 1.00, 1, 2));
+				new MonsterDrop (Material.DIAMOND, 1.00, 1, 2),
+				new FireworkDrop (0.75, 64, 64),
+				new FireworkDrop (0.75, 64, 64),
+				new FireworkDrop (0.75, 64, 64));
 		
 		this.addPotionEffect(CustomPotionEffect.SUPER_JUMP, CustomPotionEffect.GIANT_SLOWNESS);
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING);

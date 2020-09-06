@@ -40,8 +40,6 @@ public class DamageDisplayManager
 		this.rand = new Random ();
 	}
 	
-	
-	
 	/** Creates an invisible armor stand displaying the final damage dealt to an entity after an attack */
 	public void createDamageDisplayonEntity (Entity entity, DamageType damageType, double health)
 	{
