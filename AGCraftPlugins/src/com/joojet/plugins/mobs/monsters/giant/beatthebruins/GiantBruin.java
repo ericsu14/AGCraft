@@ -21,7 +21,6 @@ import com.joojet.plugins.mobs.equipment.weapons.BruinSword;
 import com.joojet.plugins.mobs.equipment.weapons.EternalSpiritOfTroy;
 import com.joojet.plugins.mobs.equipment.weapons.EternalTrojanSword;
 import com.joojet.plugins.mobs.equipment.weapons.LeftCrashSymbol;
-import com.joojet.plugins.mobs.equipment.weapons.TrojanSword;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 import com.joojet.plugins.mobs.scrolls.SummonFrolf;
 import com.joojet.plugins.mobs.scrolls.SummonSpiritOfTroy;
