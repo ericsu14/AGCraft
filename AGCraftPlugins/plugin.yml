@@ -75,6 +75,10 @@ commands:
     description: Dynamically reloads the server's configuration variables by reloading the config file. Can only be ran by server admins
     usage: /reloadconfigfile
     permission: agcraft.admin
+  fireworks:
+    description: Launches a fireworks show around your location!
+    usage: /fireworks <radius> <power> <ammo-count>
+    permission: agcraft.player
 
 permissions:
   agcraft.*:

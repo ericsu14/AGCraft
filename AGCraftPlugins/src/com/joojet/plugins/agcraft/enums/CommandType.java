@@ -19,7 +19,8 @@ public enum CommandType
 	PUNISH_PLAYER (PermissionType.ADMIN),
 	FORGIVE_PLAYER (PermissionType.ADMIN),
 	CHANGE_SERVER_MODE (PermissionType.ADMIN),
-	RELOAD_CONFIG_FILE (PermissionType.ADMIN);
+	RELOAD_CONFIG_FILE (PermissionType.ADMIN),
+	FIREWORKS (PermissionType.PLAYER);
 	
 	private PermissionType permissionType;
 	

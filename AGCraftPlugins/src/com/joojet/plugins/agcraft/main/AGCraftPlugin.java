@@ -38,8 +38,7 @@ import com.joojet.plugins.rewards.enums.MinigameRewardType;
 import com.joojet.plugins.rewards.interpreter.MinigameRewardTypeInterpreter;
 import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
 import com.joojet.plugins.utility.commands.*;
-import com.joojet.plugins.utility.commands.tabcompleter.ChangeServerModeTabCompleter;
-import com.joojet.plugins.utility.commands.tabcompleter.ClearJunkTabCompleter;
+import com.joojet.plugins.utility.commands.tabcompleter.*;
 import com.joojet.plugins.utility.interpreter.ServerModeInterpreter;
 import com.joojet.plugins.warp.commands.*;
 import com.joojet.plugins.warp.commands.tabcompleter.*;
@@ -209,6 +208,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addPlayerCommand (new RemoveOldNetherLocations());
 		this.addPlayerCommand (new ChangeServerMode ());
 		this.addPlayerCommand (new ReloadConfigFile ());
+		this.addPlayerCommand (new FireworksCommand());
 		
 		// Tab Completer
 		this.addTabCompleter(new BibleTabCompleter ());
@@ -220,6 +220,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addTabCompleter(new ChangeServerModeTabCompleter ());
 		this.addTabCompleter(new RewardPlayerTabCompleter());
 		this.addTabCompleter(new PunishPlayerTabCompleter());
+		this.addTabCompleter(new FireworkCommandTabCompleter());
 	}
 	
 	/** Loads in all known commands into the plugin */

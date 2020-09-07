@@ -19,6 +19,8 @@ public class SpawnFireworksOnLocationTask extends BukkitRunnable {
 	protected Random rand;
 	/** Max radius in which the fireworks can spread out from the location*/
 	protected int radius;
+	/** The power put onto the launched fireworks */
+	protected int power;
 	/** Max amount of fireworks to be spawned */
 	protected int fireworkCount;
 	
@@ -26,12 +28,14 @@ public class SpawnFireworksOnLocationTask extends BukkitRunnable {
 	 *  as long as this task is still running.
 	 *  @param spawnLocation - The location in the world where the fireworks should spawn
 	 *  @param radius - The max. radius in which the fireworks should spread out
+	 *  @param power - The power applied onto the generated fireworks.
 	 *  @param fireworkCount - The amount of fireworks that will be launched */
-	public SpawnFireworksOnLocationTask (Location spawnLocation, int radius, int fireworkCount)
+	public SpawnFireworksOnLocationTask (Location spawnLocation, int radius, int power, int fireworkCount)
 	{
 		this.spawnLocation = spawnLocation;
 		this.fireworkGenerator = new FireworkTypes();
 		this.radius = radius;
+		this.power = power;
 		this.rand = new Random();
 		this.fireworkCount = fireworkCount;
 	}
@@ -50,7 +54,7 @@ public class SpawnFireworksOnLocationTask extends BukkitRunnable {
 			Location fireworkLocation = this.spawnLocation.add(xOffset, 0.0, zOffset);
 			fireworkLocation.setY(yCoord + 2.0);
 			Firework firework = (Firework) fireworkLocation.getWorld().spawnEntity(fireworkLocation, EntityType.FIREWORK);
-			firework.setFireworkMeta((FireworkMeta)fireworkGenerator.getRandomFirework(1, 2).getItemMeta());
+			firework.setFireworkMeta((FireworkMeta)fireworkGenerator.getRandomFirework(1, this.power).getItemMeta());
 			--this.fireworkCount;
 		}
 		else
