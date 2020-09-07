@@ -26,6 +26,10 @@ public class FireworkTypes
 		this.addFirework(new DragonsBreath());
 		this.addFirework(new PaintTheSky());
 		this.addFirework(new WorldofColors());
+		this.addFirework(new FightOn());
+		this.addFirework(new USCCreeper());
+		this.addFirework(new TheSpiritOfTroy());
+		this.addFirework(new TheTrojanSpirit());
 	}
 	
 	public void addFirework (Firework firework)

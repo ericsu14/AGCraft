@@ -18,13 +18,13 @@ import com.joojet.plugins.mobs.metadata.FireworkCommandMetadata;
 public class FireworksCommand extends AGCommandExecutor {
 	
 	/** Defines the cooldown timer before a player can launch the next fireworks show in miuntes */
-	public static int cooldownTimer = 2;
+	public static int cooldownTimer = 3;
 	
 	/** Adds a limit on how many fireworks can be launched */
 	public static int fireworkLimit = 150;
 	
 	/** Adds a limit on the firework spread radius */
-	public static int fireworkSpreadLimit = 12;
+	public static int fireworkSpreadLimit = 32;
 	
 	/** Adds a limit on the firework power limit */
 	public static int fireworkPowerLimit = 4;
@@ -78,7 +78,7 @@ public class FireworksCommand extends AGCommandExecutor {
 					return false;
 				}
 				
-				new SpawnFireworksOnLocationTask (player.getLocation(), radius, power, ammoCount).runTaskTimer(AGCraftPlugin.plugin, 30, 10);
+				new SpawnFireworksOnLocationTask (player.getLocation(), radius, power, ammoCount).runTaskTimer(AGCraftPlugin.plugin, 30, 15);
 				AGCraftPlugin.plugin.getServer().broadcastMessage(ChatColor.AQUA + "Player " + ChatColor.GOLD + sender.getName() + ChatColor.AQUA + " has started a fireworks show!");
 				Calendar cooldown = Calendar.getInstance();
 				cooldown.add(CalendarField.MINUTES.getField(), cooldownTimer);
