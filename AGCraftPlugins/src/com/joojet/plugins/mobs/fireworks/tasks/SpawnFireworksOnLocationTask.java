@@ -51,8 +51,9 @@ public class SpawnFireworksOnLocationTask extends BukkitRunnable {
 			double zOffset = generateRandomOffset();
 			int yCoord = spawnLocation.getWorld().getHighestBlockYAt((int) (xOffset + spawnLocation.getX()), (int)(zOffset + spawnLocation.getBlockZ()));
 			
-			Location fireworkLocation = this.spawnLocation.add(xOffset, 0.0, zOffset);
-			fireworkLocation.setY(yCoord + 2.0);
+			Location fireworkLocation = new Location (this.spawnLocation.getWorld(), this.spawnLocation.getX(), yCoord + 2.0, this.spawnLocation.getZ());
+			fireworkLocation.add(xOffset, 0.0, zOffset);
+			
 			Firework firework = (Firework) fireworkLocation.getWorld().spawnEntity(fireworkLocation, EntityType.FIREWORK);
 			firework.setFireworkMeta((FireworkMeta)fireworkGenerator.getRandomFirework(1, this.power).getItemMeta());
 			--this.fireworkCount;
