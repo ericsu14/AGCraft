@@ -54,6 +54,7 @@ public class FireworksCommand extends AGCommandExecutor {
 				if (n < 3)
 				{
 					player.sendMessage(ChatColor.RED + "Insuffient parameters!");
+					return false;
 				}
 				
 				Calendar lastUse = new FireworkCommandMetadata().getCalendarFromHolder(player);
