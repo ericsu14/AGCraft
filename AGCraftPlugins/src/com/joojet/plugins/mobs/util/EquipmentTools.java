@@ -31,6 +31,7 @@ import org.bukkit.util.Vector;
 import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
+import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -157,6 +158,13 @@ public class EquipmentTools
 		if (items[5] != null)
 		{
 			equipment.setItemInOffHand(items[5]);
+			equipment.setItemInOffHandDropChance(dropRates[5]);
+		}
+		
+		// Adds random firework on the entity's offhand if the flag is enabled
+		if (mobEquipment.containsFlag(MobFlag.RANDOM_FIREWORK_ON_OFFHAND))
+		{
+			equipment.setItemInOffHand(new FireworkTypes().getRandomFirework(32, 2));
 			equipment.setItemInOffHandDropChance(dropRates[5]);
 		}
 		

@@ -22,5 +22,7 @@ public enum MobFlag
 	/** When enabled, entities will naturally despawn upon chunk unloads reguardless if the monster is naturally non-hostile or not */
 	DISABLE_PERSISTENCE,
 	/** When enabled, entities will not naturally despawn upon chunk unloads */
-	ENABLE_PERSISTENCE;
+	ENABLE_PERSISTENCE,
+	/** When enabled, a random firework will be added into the entity's offhand upon spawning */
+	RANDOM_FIREWORK_ON_OFFHAND;
 }

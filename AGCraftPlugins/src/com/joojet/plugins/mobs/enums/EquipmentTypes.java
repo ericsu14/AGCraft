@@ -57,6 +57,7 @@ public enum EquipmentTypes
 	WEAKENING_ARROW,
 	WITHERING_ARROW,
 	TERMINATOR_DAGGER,
+	PROP_FIREWORK,
 	/** Leggings */
 	BARNEY_LEGS,
 	BRUIN_LEGS,

@@ -11,9 +11,9 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.phantom.julyfourth.FireworkPhantom;
-import com.joojet.plugins.mobs.monsters.pillager.julyfourth.PatrioticPillager;
-import com.joojet.plugins.mobs.monsters.skeleton.julyfourth.PatrioticSkeleton;
-import com.joojet.plugins.mobs.monsters.zombie.julyfourth.PatrioticZombie;
+import com.joojet.plugins.mobs.monsters.pillager.julyfourth.PatrioticPillagerTypes;
+import com.joojet.plugins.mobs.monsters.skeleton.julyfourth.PatrioticSkeletonTypes;
+import com.joojet.plugins.mobs.monsters.zombie.julyfourth.PatrioticZombieTypes;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class JulyFourthHandler extends AmplifiedSpawnHandler
@@ -24,6 +24,9 @@ public class JulyFourthHandler extends AmplifiedSpawnHandler
 	public JulyFourthHandler ()
 	{
 		this.fwTypes = new FireworkTypes ();
+		this.addMonsterTypes(new PatrioticZombieTypes(), 
+				new PatrioticSkeletonTypes(),
+				new PatrioticPillagerTypes());
 	}
 	
 	/** Handles 4th of july mob spawns */
@@ -39,25 +42,11 @@ public class JulyFourthHandler extends AmplifiedSpawnHandler
 		// Summon a new patriotic zombie when roll is between a certain range
 		if (!reason.equals(SpawnReason.RAID) && roll >= 0.30 && roll <= 0.50)
 		{
-			MobEquipment mobEquipment;
-			switch (type)
+			MobEquipment mobEquipment = this.getRandomEqipment(type, biome);
+			if (mobEquipment != null)
 			{
-				case ZOMBIE:
-					mobEquipment = new PatrioticZombie();
-					break;
-				case HUSK:
-					mobEquipment = new PatrioticZombie();
-					break;
-				case SKELETON:
-					mobEquipment = new PatrioticSkeleton();
-					break;
-				case PILLAGER:
-					mobEquipment = new PatrioticPillager();
-					break;
-				default:
-					return;
- 			}
-			EquipmentTools.equipEntity(entity, mobEquipment);
+				EquipmentTools.equipEntity(entity, mobEquipment);
+			}
 		}
 	}
 	
@@ -71,9 +60,4 @@ public class JulyFourthHandler extends AmplifiedSpawnHandler
 		firework.detonate();
 	}
 
-	@Override
-	public boolean reasonFilter(SpawnReason reason) 
-	{
-		return true;
-	}
 }
