@@ -20,6 +20,7 @@ import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.equipment.weapons.BruinSword;
 import com.joojet.plugins.mobs.equipment.weapons.EternalSpiritOfTroy;
 import com.joojet.plugins.mobs.equipment.weapons.EternalTrojanSword;
+import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.equipment.weapons.LeftCrashSymbol;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 import com.joojet.plugins.mobs.scrolls.SummonEternalTrojanArcher;
@@ -51,17 +52,18 @@ public class GiantBruin extends UCLAFaction
 		
 		// Mob Drops
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.10 , 2, 3),
-				new MonsterDrop (new USCCreeperShield(), 0.15),
+				new MonsterDrop (new USCCreeperShield(), 0.07),
 				new MonsterDrop (new SummonUSCArcher (), 0.07),
 				new MonsterDrop (new SummonSpiritOfTroy(), 0.07),
 				new MonsterDrop (new EternalTrojanSword(), 0.07),
 				new MonsterDrop (new SummonFrolf (), 0.07),
-				new MonsterDrop (new SummonUSCWarrior(), 0.15),
+				new MonsterDrop (new SummonUSCWarrior(), 0.07),
 				new MonsterDrop (new SummonTrojanWarrior(), 0.03),
 				new MonsterDrop (new SummonEternalTrojanArcher(), 0.03),
 				new MonsterDrop (new EternalSpiritOfTroy(), 0.03),
-				new MonsterDrop (new RightCrashSymbol (ChatColor.GOLD), 0.10),
-				new MonsterDrop (new LeftCrashSymbol (ChatColor.GOLD), 0.10),
+				new MonsterDrop (new RightCrashSymbol (ChatColor.GOLD), 0.05),
+				new MonsterDrop (new LeftCrashSymbol (ChatColor.GOLD), 0.05),
+				new MonsterDrop (new FireworkLauncher (ChatColor.GOLD), 0.07),
 				new MonsterDrop (Material.DIAMOND, 0.75, 1, 2),
 				new MonsterDrop (Material.DIAMOND, 1.00, 1, 2),
 				new MonsterDrop (Material.EMERALD, 1.00, 4, 24),
