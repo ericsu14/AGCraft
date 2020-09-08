@@ -22,7 +22,7 @@ public class FireworksCommand extends AGCommandExecutor {
 	public static int cooldownTimer = 3;
 	
 	/** Adds a limit on how many fireworks can be launched */
-	public static int fireworkLimit = 160;
+	public static int fireworkLimit = 200;
 	
 	/** Adds a limit on the firework spread radius */
 	public static int fireworkSpreadLimit = 48;
