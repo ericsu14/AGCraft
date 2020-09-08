@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.Calendar;
 
 import org.bukkit.ChatColor;
+import org.bukkit.World.Environment;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -21,10 +22,10 @@ public class FireworksCommand extends AGCommandExecutor {
 	public static int cooldownTimer = 3;
 	
 	/** Adds a limit on how many fireworks can be launched */
-	public static int fireworkLimit = 150;
+	public static int fireworkLimit = 160;
 	
 	/** Adds a limit on the firework spread radius */
-	public static int fireworkSpreadLimit = 32;
+	public static int fireworkSpreadLimit = 48;
 	
 	/** Adds a limit on the firework power limit */
 	public static int fireworkPowerLimit = 4;
@@ -57,6 +58,14 @@ public class FireworksCommand extends AGCommandExecutor {
 					return false;
 				}
 				
+				// Prevent the player from launching fireworks in the Nether
+				if (player.getWorld().getEnvironment() == Environment.NETHER)
+				{
+					player.sendMessage(ChatColor.RED + "Sorry, but we are unable to launch fireworks in this dimension.");
+					return false;
+				}
+				
+				// Checks if the player's cooldown timer has expired.
 				Calendar lastUse = new FireworkCommandMetadata().getCalendarFromHolder(player);
 				if (lastUse != null && !AGCraftPlugin.plugin.enableDebugMode)
 				{
@@ -80,7 +89,7 @@ public class FireworksCommand extends AGCommandExecutor {
 				}
 				
 				new SpawnFireworksOnLocationTask (player.getLocation(), radius, power, ammoCount).runTaskTimer(AGCraftPlugin.plugin, 30, 15);
-				AGCraftPlugin.plugin.getServer().broadcastMessage(ChatColor.AQUA + "Player " + ChatColor.GOLD + sender.getName() + ChatColor.AQUA + " has started a fireworks show!");
+				AGCraftPlugin.plugin.getServer().broadcastMessage(ChatColor.GOLD + sender.getName() + ChatColor.AQUA + " started a fireworks show!");
 				Calendar cooldown = Calendar.getInstance();
 				cooldown.add(CalendarField.MINUTES.getField(), cooldownTimer);
 				new FireworkCommandMetadata (cooldown).addStringMetadata(player);

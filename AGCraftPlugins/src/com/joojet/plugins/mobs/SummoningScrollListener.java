@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.SummonTypes;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
@@ -57,6 +58,18 @@ public class SummoningScrollListener implements Listener
 					
 					// Gets player's current location
 					Location spawnLocation = p.getEyeLocation();
+					
+					// Checks if the monster has a y-limit flag enabled.
+					// If so, cancel the summoning scroll event if the player does not
+					// have EquipmentTools.openAirRequirement blocks of clear space above him/her.
+					if (scroll.getMob().containsStat(MonsterStat.Y_LIMIT)
+							&& !EquipmentTools.checkSpawnSpace(p))
+					{
+						p.sendMessage(ChatColor.RED + "Error: Unable to summon the monster. Please check that there is at least "
+								+ EquipmentTools.openAirRequirement + " blocks of air above your current location.");
+						p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f);
+						return;
+					}
 		
 					// Spawns the entity into the world in front of the player
 					LivingEntity entity = (LivingEntity) p.getWorld().spawnEntity(spawnLocation, scroll.getMobType());

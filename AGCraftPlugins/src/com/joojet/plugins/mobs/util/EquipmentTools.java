@@ -52,6 +52,11 @@ import org.bukkit.craftbukkit.v1_16_R2.entity.CraftMob;
 
 public class EquipmentTools 
 {	
+	
+	/** Total number of AIR blocks that must be above the entity's position
+	 *  upon spawning any entity that has a Y_LIMIT stat. */
+	public static double openAirRequirement = 36.0;
+	
 	/** Equips a living entity with the items stored in a MobEquipment object
 	 * 	@param entity - Entity we are equipping custom armor to
 	 *  @param mobEquipment - Object containing custom mob equipment */
@@ -375,8 +380,8 @@ public class EquipmentTools
 	{
 		Location entityLocation = entity.getLocation();
 		Vector directionVector = new Vector (0.0, 1.0, 0.0);
-		RayTraceResult result = entity.getWorld().rayTraceBlocks(entityLocation, directionVector.normalize(), 36.0,
-				FluidCollisionMode.ALWAYS, true);
+		RayTraceResult result = entity.getWorld().rayTraceBlocks(entityLocation, directionVector.normalize(), 
+				openAirRequirement, FluidCollisionMode.ALWAYS, true);
 		if (result != null && result.getHitBlock() != null && result.getHitBlock().getType() != Material.AIR)
 		{
 			return false;

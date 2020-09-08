@@ -1,5 +1,6 @@
 package com.joojet.plugins.utility.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -24,6 +25,7 @@ public class ToggleDebugMode extends AGCommandExecutor
 		if (arg0 instanceof ConsoleCommandSender || arg0 instanceof Player)
 		{
 			AGCraftPlugin.plugin.toggleDebugMode();
+			arg0.sendMessage("Debug mode toggled to " + ChatColor.GOLD + AGCraftPlugin.plugin.enableDebugMode);
 			return true;
 		}
 		return false;
