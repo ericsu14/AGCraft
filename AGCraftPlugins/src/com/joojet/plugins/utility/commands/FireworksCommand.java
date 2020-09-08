@@ -82,12 +82,6 @@ public class FireworksCommand extends AGCommandExecutor {
 				int power = this.parseBetweenRange(args[1], 1, fireworkPowerLimit, "Power");
 				int ammoCount = this.parseBetweenRange(args[2], minFireworkCount, fireworkLimit, "Ammo Count");
 				
-				if (ammoCount > fireworkLimit)
-				{
-					player.sendMessage(ChatColor.RED + "Firework cout exceeds limit of " + fireworkLimit + " fireworks");
-					return false;
-				}
-				
 				new SpawnFireworksOnLocationTask (player.getLocation(), radius, power, ammoCount).runTaskTimer(AGCraftPlugin.plugin, 30, 15);
 				AGCraftPlugin.plugin.getServer().broadcastMessage(ChatColor.GOLD + sender.getName() + ChatColor.AQUA + " started a fireworks show!");
 				Calendar cooldown = Calendar.getInstance();
