@@ -7,5 +7,6 @@ public enum Faction
 	UCLA,
 	DOOM_GUY,
 	NETHER,
-	PHANTOM
+	PHANTOM,
+	ALLIES
 }
