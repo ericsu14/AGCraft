@@ -24,5 +24,8 @@ public enum MobFlag
 	/** When enabled, entities will not naturally despawn upon chunk unloads */
 	ENABLE_PERSISTENCE,
 	/** When enabled, a random firework will be added into the entity's offhand upon spawning */
-	RANDOM_FIREWORK_ON_OFFHAND;
+	RANDOM_FIREWORK_ON_OFFHAND,
+	/** When enabled, the entity will no longer be able to naturally despawn once any player rides this tameable custom mob.
+	 *  Otherwise, it will naturally despawn once out of sight. */
+	ENABLE_PERSISTENCE_UPON_RIDING;
 }

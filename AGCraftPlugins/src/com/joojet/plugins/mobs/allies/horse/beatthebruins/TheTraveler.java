@@ -6,6 +6,7 @@ import org.bukkit.entity.Horse.Color;
 import org.bukkit.entity.Horse.Style;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LetItGo;
@@ -16,6 +17,7 @@ public class TheTraveler extends USCFaction
 	public TheTraveler ()
 	{
 		super (MonsterType.THE_TRAVELER);
+		this.addMobFlags(MobFlag.ENABLE_PERSISTENCE_UPON_RIDING);
 		this.color = ChatColor.RED;
 		this.name = "The"
 				+ ChatColor.GOLD + " Traveler";

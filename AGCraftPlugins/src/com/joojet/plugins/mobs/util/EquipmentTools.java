@@ -203,7 +203,8 @@ public class EquipmentTools
 		}
 		
 		// Disables entity persistence
-		if (mobEquipment.containsFlag(MobFlag.DISABLE_PERSISTENCE))
+		if (mobEquipment.containsFlag(MobFlag.DISABLE_PERSISTENCE)
+				|| mobEquipment.containsFlag(MobFlag.ENABLE_PERSISTENCE_UPON_RIDING))
 		{
 			entity.setRemoveWhenFarAway(true);
 		}

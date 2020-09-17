@@ -43,6 +43,6 @@ public class TrojanWarrior extends USCFaction
 		
 		this.setStat(MonsterStat.HEALTH, 40.0);
 		
-		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.ENABLE_PERSISTENCE);
+		this.addMobFlags(MobFlag.SHOW_NAME);
 	}
 }

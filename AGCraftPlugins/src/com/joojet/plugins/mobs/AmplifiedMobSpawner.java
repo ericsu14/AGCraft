@@ -10,6 +10,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.WanderingTrader;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,6 +21,7 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.plugin.Plugin;
+import org.spigotmc.event.entity.EntityMountEvent;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
@@ -191,6 +193,29 @@ public class AmplifiedMobSpawner implements Listener
 					&& fireball.getYield() > 1.5F)
 			{
 				event.blockList().clear();
+			}
+		}
+	}
+	
+	/** Enforces the ENABLE_PERSISTENCE_UPON_RIDING flag, allowing any tameable mob who has this flag
+	 *  to have their naturally despawning properties permanently disabled when a player rides on that
+	 *  mob for the first time.  */
+	@EventHandler
+	public void enforcePersistenceUponRidingFlag (EntityMountEvent event)
+	{
+		if (!(event.getEntity() instanceof Player)
+				|| !(event.getMount() instanceof LivingEntity))
+		{
+			return;
+		}
+		
+		LivingEntity tamed = (LivingEntity) event.getMount();
+		if (tamed instanceof LivingEntity)
+		{
+			MobEquipment equipment = getMobEquipmentFromEntity(tamed);
+			if (equipment.containsFlag(MobFlag.ENABLE_PERSISTENCE_UPON_RIDING))
+			{
+				tamed.setRemoveWhenFarAway(false);
 			}
 		}
 	}
