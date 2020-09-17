@@ -26,7 +26,7 @@ public class TheTerminator extends MobEquipment
 		this.name = "The Terminator";
 		this.color = ChatColor.DARK_RED;
 		
-		this.setStat(MonsterStat.HEALTH, 12.0);
+		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING, MobFlag.HUNT_ON_SPAWN, MobFlag.BOSS_BAR);
@@ -42,8 +42,8 @@ public class TheTerminator extends MobEquipment
 		this.weapon = new TerminatorSword (this.color);
 		this.offhand = new PigmanDagger (this.color);
 		
-		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 1.00, 1, 3),
-				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 2));
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.15, 1, 3),
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.15, 1, 1));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 60.0);
 	}

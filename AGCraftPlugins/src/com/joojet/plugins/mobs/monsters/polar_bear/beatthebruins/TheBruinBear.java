@@ -13,6 +13,7 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.offhand.BruinShield;
 import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
+import com.joojet.plugins.mobs.scrolls.SummonEternalTrojanArcher;
 import com.joojet.plugins.mobs.scrolls.SummonSpiritOfTroy;
 import com.joojet.plugins.mobs.scrolls.SummonUSCArcher;
 import com.joojet.plugins.mobs.scrolls.SummonUSCWarrior;
@@ -33,13 +34,14 @@ public class TheBruinBear extends UCLAFaction
 				CustomPotionEffect.SPEED, CustomPotionEffect.RESISTANCE_II, CustomPotionEffect.FIRE_RESISTANCE,
 				CustomPotionEffect.REGEN);
 		// Drops
-		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.25, 1, 3),
-				new MonsterDrop (new USCCreeperShield (), 0.15),
-				new MonsterDrop (new BruinShield (), 0.20),
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.10, 1, 3),
+				new MonsterDrop (new USCCreeperShield (), 0.10),
+				new MonsterDrop (new BruinShield (), 0.10),
 				new MonsterDrop (new SummonUSCArcher(), 0.05),
 				new MonsterDrop (new SummonSpiritOfTroy(), 0.05),
 				new MonsterDrop (new SummonUSCWarrior(), 0.05),
-				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 1));
+				new MonsterDrop (new SummonEternalTrojanArcher(), 0.05),
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.15, 1, 1));
 		this.setStat(MonsterStat.EXPERIENCE, 200.0);
 		this.ignoreList.clear();
 	}

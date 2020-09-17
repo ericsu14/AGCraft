@@ -64,17 +64,17 @@ public class GiantBruin extends UCLAFaction
 				new MonsterDrop (new RightCrashSymbol (ChatColor.GOLD), 0.05),
 				new MonsterDrop (new LeftCrashSymbol (ChatColor.GOLD), 0.05),
 				new MonsterDrop (new FireworkLauncher (ChatColor.GOLD), 0.07),
-				new MonsterDrop (Material.DIAMOND, 0.75, 1, 2),
-				new MonsterDrop (Material.DIAMOND, 1.00, 1, 2),
-				new MonsterDrop (Material.EMERALD, 1.00, 4, 24),
-				new MonsterDrop (Material.GOLDEN_CARROT, 1.00, 16, 32),
+				new MonsterDrop (Material.DIAMOND, 0.15, 1, 2),
+				new MonsterDrop (Material.DIAMOND, 0.07, 1, 2),
+				new MonsterDrop (Material.EMERALD, 0.10, 4, 24),
+				new MonsterDrop (Material.GOLDEN_CARROT, 0.50, 16, 32),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 1),
-				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.30, 2, 3),
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.07, 2, 3),
 				new FireworkDrop (0.75, 64, 64),
-				new FireworkDrop (0.75, 64, 64),
-				new FireworkDrop (0.75, 64, 64),
-				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 0.75, 1, 2),
-				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 0.15, 2, 3));
+				new FireworkDrop (0.50, 64, 64),
+				new FireworkDrop (0.25, 64, 64),
+				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 0.25, 5, 7),
+				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 0.10, 2, 3));
 		
 		this.addPotionEffect(CustomPotionEffect.SUPER_JUMP, CustomPotionEffect.GIANT_SLOWNESS);
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING,

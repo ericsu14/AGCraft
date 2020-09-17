@@ -16,7 +16,7 @@ import com.joojet.plugins.mobs.monsters.skeleton.julyfourth.PatrioticSkeletonTyp
 import com.joojet.plugins.mobs.monsters.zombie.julyfourth.PatrioticZombieTypes;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
-public class JulyFourthHandler extends AmplifiedSpawnHandler
+public class JulyFourthHandler extends AbstractSpawnHandler
 {
 	/** Used to generate random fireworks */
 	private FireworkTypes fwTypes;

@@ -12,7 +12,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MonsterTypes;
 
-public abstract class AmplifiedSpawnHandler 
+public abstract class AbstractSpawnHandler 
 {
 	/** Used to control mob spawns based on the passed spawn reason.
 	 *  Thus, mobs can only be converted into custom mobs if its given spawn
@@ -22,8 +22,8 @@ public abstract class AmplifiedSpawnHandler
 	 *  that class supports. */
 	protected HashMap <EntityType, MonsterTypes> mobEquipmentTable;
 	
-	/** Creates a new instance of the Amplified Spawn Handler */
-	public AmplifiedSpawnHandler ()
+	/** Creates a new instance of an Abstract Spawn Handler */
+	public AbstractSpawnHandler ()
 	{
 		this.spawnReasonFilter = new HashSet <SpawnReason> ();
 		this.mobEquipmentTable = new HashMap <EntityType, MonsterTypes> ();

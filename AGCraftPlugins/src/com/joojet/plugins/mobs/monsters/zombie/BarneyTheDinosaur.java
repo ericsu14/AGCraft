@@ -23,7 +23,7 @@ public class BarneyTheDinosaur extends MobEquipment
 	public BarneyTheDinosaur ()
 	{
 		super (MonsterType.BARNEY_THE_DINOSAUR);
-		this.setStat(MonsterStat.HEALTH, 8.0);
+		this.setStat(MonsterStat.HEALTH, 10.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 50.0);
 		
 		this.addBiomes(Biome.FLOWER_FOREST, Biome.DARK_FOREST, Biome.DARK_FOREST_HILLS,
@@ -45,10 +45,10 @@ public class BarneyTheDinosaur extends MobEquipment
 		this.weapon = new BarneyDagger (this.color);
 		this.offhand = new BarneyTotem (this.color);
 		
-		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.75, 1, 3),
-				new FireworkDrop (0.20, 16, 16),
-				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 1),
-				new MonsterDrop (new BarneyTotem (this.color), 0.05));
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.10, 1, 3),
+				new FireworkDrop (0.15, 16, 16),
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.05, 1, 1),
+				new MonsterDrop (new BarneyTotem (this.color), 0.01));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 200.0);
 	}

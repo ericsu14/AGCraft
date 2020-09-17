@@ -9,7 +9,7 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.ghast.UHC.UHCGhastTypes;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
-public class UHCHandler extends AmplifiedSpawnHandler
+public class UHCHandler extends AbstractSpawnHandler
 {
 	public UHCHandler ()
 	{

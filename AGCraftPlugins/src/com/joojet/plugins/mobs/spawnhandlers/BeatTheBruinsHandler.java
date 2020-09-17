@@ -11,7 +11,7 @@ import com.joojet.plugins.mobs.monsters.skeleton.beatthebruins.CollegeSkeletonTy
 import com.joojet.plugins.mobs.monsters.zombie.beatthebruins.CollegeZombieTypes;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
-public class BeatTheBruinsHandler extends AmplifiedSpawnHandler
+public class BeatTheBruinsHandler extends AbstractSpawnHandler
 {	
 	public BeatTheBruinsHandler ()
 	{

@@ -29,6 +29,6 @@ public class PiglinCaptain extends MobEquipment
 		this.weapon = new PiglinAxe (this.color);
 		this.chestplate = new DarkNetheriteChestplate (this.color);
 		
-		this.setStat(MonsterStat.EXPERIENCE, 40.0);
+		this.setStat(MonsterStat.EXPERIENCE, 45.0);
 	}
 }

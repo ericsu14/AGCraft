@@ -19,7 +19,7 @@ import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
 import com.joojet.plugins.mobs.monsters.zombie_pigmen.ZombiePigmenTypes;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
-public class AmplifiedMobHandler extends AmplifiedSpawnHandler 
+public class AmplifiedMobHandler extends AbstractSpawnHandler 
 {
 	public AmplifiedMobHandler ()
 	{

@@ -24,7 +24,7 @@ public class UltimateBadassZombie extends MobEquipment
 		this.name = "Shadow Clone joojetsu";
 		this.color = ChatColor.GOLD;
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
-		this.setStat(MonsterStat.HEALTH, 14.0);
+		this.setStat(MonsterStat.HEALTH, 24.0);
 		
 		this.addBiomes(Biome.THE_VOID);
 		
@@ -38,9 +38,9 @@ public class UltimateBadassZombie extends MobEquipment
 		this.leggings = new DarkNetheriteLeggings (this.color);
 		this.boots = new LightweightNetheriteBoots (this.color);
 		
-		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.35, 1, 2),
-				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 1),
-				new MonsterDrop (Material.GOLDEN_CARROT, 0.50, 4, 16));
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.05, 1, 2),
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.10, 1, 1),
+				new MonsterDrop (Material.GOLDEN_CARROT, 0.15, 3, 16));
 		
 		this.setStat (MonsterStat.EXPERIENCE, 50.0);
 	}

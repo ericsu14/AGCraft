@@ -166,7 +166,7 @@ public class PathfindTargetingEventListener implements Listener
 	
 	/** Returns true if a monster should cancel their AI targeting event based on its hitlist, ignore list, and rivaling factions
 	 * 		@param hunter - The entity hunting the hunted
-	 * 		@param hunted - The entity being hu */
+	 * 		@param hunted - The entity being hunted */
 	private boolean checkTargetEvent (LivingEntity hunter, LivingEntity hunted)
 	{
 		// Null check
@@ -257,7 +257,7 @@ public class PathfindTargetingEventListener implements Listener
 		// Allow phantoms to have a larger scan radius
 		if (hunter.getType() == EntityType.PHANTOM)
 		{
-			scanRadius *= 7;
+			scanRadius *= 10;
 		}
 		
 		List <Entity> entities = hunter.getNearbyEntities(scanRadius, scanRadius / 4.0, scanRadius);
