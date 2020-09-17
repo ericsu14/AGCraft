@@ -37,10 +37,10 @@ public class GiantBruin extends UCLAFaction
 		super (MonsterType.GIANT_BRUIN);
 		this.color = ChatColor.AQUA;
 		this.name = "Giant" + ChatColor.GOLD + " Bruin";
-		this.setStat(MonsterStat.HEALTH, 250.0);
-		this.setStat(MonsterStat.EXPERIENCE, 1000.0);
+		this.setStat(MonsterStat.HEALTH, 300.0);
+		this.setStat(MonsterStat.EXPERIENCE, 1200.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 150.0);
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 2.0);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 4.0);
 		
 		// Equipment
 		this.weapon = new BruinSword (this.color);

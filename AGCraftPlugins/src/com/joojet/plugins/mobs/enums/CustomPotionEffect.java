@@ -17,7 +17,7 @@ public enum CustomPotionEffect
 	UNDEAD_HEAL (PotionEffectType.HARM, 10, true),
 	FULL_HEALING (PotionEffectType.HEAL, 10, true),
 	WEAKNESS (PotionEffectType.WEAKNESS, 0),
-	SUPER_JUMP (PotionEffectType.JUMP, 3),
+	SUPER_JUMP (PotionEffectType.JUMP, 4),
 	GIANT_SLOWNESS (PotionEffectType.SLOW, 2);
 	
 	private PotionEffect effect;
