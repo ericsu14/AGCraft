@@ -20,6 +20,7 @@ import org.bukkit.plugin.Plugin;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.SummonTypes;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
+import com.joojet.plugins.mobs.metadata.SummonedMetadata;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
@@ -73,6 +74,9 @@ public class SummoningScrollListener implements Listener
 		
 					// Spawns the entity into the world in front of the player
 					LivingEntity entity = (LivingEntity) p.getWorld().spawnEntity(spawnLocation, scroll.getMobType());
+					
+					// Attaches special metadata that identifies this entity as a summoned custom monster
+					new SummonedMetadata (scroll.getMob().getName()).addStringMetadata(entity);
 					
 					// If the spawned entity is a golem, make him player built
 					if (entity instanceof IronGolem)

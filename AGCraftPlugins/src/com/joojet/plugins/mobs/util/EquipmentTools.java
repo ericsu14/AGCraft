@@ -34,6 +34,7 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
+import com.joojet.plugins.mobs.metadata.SummonedMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.util.customtargets.PathfinderGoalGiantFireball;
@@ -379,6 +380,15 @@ public class EquipmentTools
 				equipEntity ((LivingEntity) mountEnt, mount.getMobEquipment());
 			}
 			mountEnt.addPassenger(entity);
+			
+			// If the entity is summoned by a summoning scroll, make the mounted mob persistent
+			// and add the summoned metadata to the mounted monster
+			boolean isSummon = new SummonedMetadata().getStringMetadata(entity) != null;
+			if (isSummon && mountEnt instanceof LivingEntity)
+			{
+				new SummonedMetadata (mount.getMobEquipment().getName()).addStringMetadata(mountEnt);
+				((LivingEntity) mountEnt).setRemoveWhenFarAway(false);
+			}
 		}
 	}
 	
