@@ -23,6 +23,7 @@ import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.damage.DamageDisplayManager;
 import com.joojet.plugins.mobs.damage.enums.DamageType;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -134,6 +135,16 @@ public class DamageDisplayListener implements Listener
 			if (ent.hasPotionEffect(PotionEffectType.WATER_BREATHING)
 					&& (event.getCause() == DamageCause.DROWNING
 							|| event.getCause() == DamageCause.DRYOUT))
+			{
+				event.setCancelled(true);
+				return;
+			}
+			
+			// Cancels any suffocation damage if the entity has that flag enabled
+			MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(ent);
+			if (equipment != null && 
+					equipment.containsFlag(MobFlag.DISABLE_SUFFOCATION_DAMAGE) &&
+					event.getCause() == DamageCause.SUFFOCATION)
 			{
 				event.setCancelled(true);
 				return;

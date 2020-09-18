@@ -23,9 +23,9 @@ public class Frolf extends VillagerEquipment
 		
 		/** Trade 1: Golden Carrots (bundles of 16)
 		 * 		- Price: 3 Emeralds
-		 * 		- Max stock: 4 */
+		 * 		- Max stock: 8 */
 		ItemStack goldCarrot = new ItemStack (Material.GOLDEN_CARROT, 16);
-		this.addRecipe(goldCarrot, Material.EMERALD, 3, 4);
+		this.addRecipe(goldCarrot, Material.EMERALD, 3, 8);
 		
 		/** Trade 2: Sponges (bundles of 4)
 		 * 		- Price: 12 Emeralds
@@ -34,9 +34,9 @@ public class Frolf extends VillagerEquipment
 		this.addRecipe(sponges, Material.EMERALD, 12, 2);
 		
 		/** Trade 3: Enchanted Golden Apple 
-		 *		- Price: 3 diamonds, max stock: 8 */
+		 *		- Price: 24 emeralds, max stock: 8 */
 		ItemStack goldApple = new ItemStack (Material.ENCHANTED_GOLDEN_APPLE, 1);
-		this.addRecipe(goldApple, Material.DIAMOND, 3, 8);
+		this.addRecipe(goldApple, Material.EMERALD, 24, 8);
 		
 		/** Trade 4: Netherite Ingot
 		 * 		- Price: 12 Diamonds
@@ -48,13 +48,13 @@ public class Frolf extends VillagerEquipment
 		 * 		- Price: 2 Diamonds
 		 * 		- Max stock: 3 */
 		HastePotion hastePotion = new HastePotion (this.color);
-		this.addRecipe(hastePotion, Material.DIAMOND, 2, 4);
+		this.addRecipe(hastePotion, Material.EMERALD, 16, 4);
 		
 		/** Trade 6: Potion of Luck
 		 * 		- Price: 2 Diamonds
 		 * 		- Max Stock: 4 */
 		LuckPotion luckPotion = new LuckPotion (this.color);
-		this.addRecipe(luckPotion, Material.DIAMOND, 2, 4);
+		this.addRecipe(luckPotion, Material.EMERALD, 16, 4);
 		
 		/** Trade 7: Enhanced Potion of Strength
 		 * 		- Price: 4 Diamonds
@@ -92,17 +92,30 @@ public class Frolf extends VillagerEquipment
 		SummoningScroll scruffyScroll = new SummonScruffy ();
 		this.addRecipe(scruffyScroll, Material.EMERALD, 32, 1);
 		
-		/** Trade 13: Summon Advanced Golem
-		 * 		- Price: 12 Diamonds
+		/** Trade 13: Summon Snowball
+		 * 		- Price: 64 Emeralds
+		 * 		- Max stock: 1 */
+		SummoningScroll snowballScroll = new SummonSnowball();
+		this.addRecipe(snowballScroll, Material.EMERALD, 64, 1);
+		
+		/** Trade 14: Summon Advanced Golem
+		 * 		- Price: 8 Diamonds
 		 * 		- Max stock: 1 */
 		SummoningScroll advGolemScroll = new SummonAdvancedGolem ();
-		this.addRecipe(advGolemScroll, Material.DIAMOND, 12, 1);
+		this.addRecipe(advGolemScroll, Material.DIAMOND, 8, 1);
 		
-		/** Trade 14: Summon John Jae
-		 * 		- Price: 24 Diamonds
+		/** Trade 15: Summon John Jae
+		 * 		- Price: 16 Diamonds
 		 * 		- Max stock: 1 */
 		SummoningScroll johnJaeScroll = new SummonJohnJae ();
-		this.addRecipe(johnJaeScroll, Material.DIAMOND, 24, 1);
+		this.addRecipe(johnJaeScroll, Material.DIAMOND, 16, 1);
+		
+		/** Trade 16: Summon Cookie
+		 * 		- Price: 24 Diamonds
+		 * 		- Max stock: 1 */
+		SummoningScroll cookieScroll = new SummonCookie ();
+		this.addRecipe(cookieScroll, Material.COOKIE, 24, 1);
+		
 	}
 	
 	

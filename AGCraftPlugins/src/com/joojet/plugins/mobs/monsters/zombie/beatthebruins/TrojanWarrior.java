@@ -44,6 +44,7 @@ public class TrojanWarrior extends USCFaction
 		
 		this.setStat(MonsterStat.HEALTH, 40.0);
 		
-		this.addMobFlags(MobFlag.SHOW_NAME);
+		this.addMobFlags(MobFlag.SHOW_NAME,
+				MobFlag.DISABLE_SUFFOCATION_DAMAGE);
 	}
 }

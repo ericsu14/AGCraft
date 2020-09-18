@@ -14,7 +14,7 @@ import com.joojet.plugins.mobs.equipment.boots.LightweightNetheriteBoots;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.CyborgPigmanHead;
 import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
-import com.joojet.plugins.mobs.equipment.offhand.PigmanDagger;
+import com.joojet.plugins.mobs.equipment.offhand.TerminatorDagger;
 import com.joojet.plugins.mobs.equipment.weapons.TerminatorSword;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -40,7 +40,7 @@ public class TheTerminator extends MobEquipment
 		this.leggings = new DarkNetheriteLeggings (this.color);
 		this.boots = new LightweightNetheriteBoots (this.color);
 		this.weapon = new TerminatorSword (this.color);
-		this.offhand = new PigmanDagger (this.color);
+		this.offhand = new TerminatorDagger (this.color);
 		
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.15, 1, 3),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.15, 1, 1));

@@ -6,7 +6,7 @@ import org.bukkit.block.Biome;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.head.ZombiePigmenHead;
-import com.joojet.plugins.mobs.equipment.leggings.RoyalGoldLeggings;
+import com.joojet.plugins.mobs.equipment.leggings.PigminTrousers;
 import com.joojet.plugins.mobs.equipment.weapons.PigmanSword;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -23,7 +23,7 @@ public class VeteranZombiePigmen extends MobEquipment
 				Biome.BASALT_DELTAS);
 		
 		this.helmet = new ZombiePigmenHead (this.color);
-		this.leggings = new RoyalGoldLeggings (this.color);
+		this.leggings = new PigminTrousers (this.color);
 		this.weapon = new PigmanSword (this.color);
 		this.setStat(MonsterStat.EXPERIENCE, 25.0);
 	}

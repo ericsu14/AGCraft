@@ -81,13 +81,13 @@ public abstract class Equipment extends ItemStack
 	protected void addAttackAttributes (double attackDamage, double attackSpeed)
 	{
 		ItemMeta meta = this.getItemMeta();
-		if (attackDamage > 0.0)
+		if (attackDamage != 0.0)
 		{
 			AttributeModifier attackMod = new AttributeModifier (UUID.randomUUID(), "generic.attack_damage", attackDamage, Operation.ADD_NUMBER, this.equipmentSlot);
 			meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, attackMod);
 		}
 		
-		if (attackSpeed > 0.0)
+		if (attackSpeed != 0.0)
 		{
 			AttributeModifier attackSpeedMod = new AttributeModifier (UUID.randomUUID(), "generic.attack_speed", -attackSpeed, Operation.ADD_NUMBER, this.equipmentSlot);
 			meta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, attackSpeedMod);
@@ -99,7 +99,7 @@ public abstract class Equipment extends ItemStack
 	protected void addSpeedAttribute (double speed)
 	{
 		ItemMeta meta = this.getItemMeta();
-		if (speed > 0.0)
+		if (speed != 0.0)
 		{
 			AttributeModifier speedMod = new AttributeModifier (UUID.randomUUID(), "generic.movement_speed", speed, Operation.MULTIPLY_SCALAR_1, this.equipmentSlot);
 			meta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, speedMod);
@@ -116,17 +116,17 @@ public abstract class Equipment extends ItemStack
 	protected void addDefenseAttributes (double armor, double armorToughness, double knockbackResistance)
 	{
 		ItemMeta meta = this.getItemMeta();
-		if (armor > 0.0)
+		if (armor != 0.0)
 		{
 			AttributeModifier armorMod = new AttributeModifier (UUID.randomUUID(), "generic.armor", armor, Operation.ADD_NUMBER, this.equipmentSlot);
 			meta.addAttributeModifier(Attribute.GENERIC_ARMOR, armorMod);
 		}
-		if (armorToughness > 0.0)
+		if (armorToughness != 0.0)
 		{
 			AttributeModifier armorToughnessMod = new AttributeModifier (UUID.randomUUID(), "generic.armor_toughness", armorToughness, Operation.ADD_NUMBER, this.equipmentSlot);
 			meta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, armorToughnessMod);
 		}
-		if (knockbackResistance > 0.0)
+		if (knockbackResistance != 0.0)
 		{
 			AttributeModifier knockbackResistanceMod = new AttributeModifier (UUID.randomUUID(), "generic.knockback_resistance", knockbackResistance, Operation.MULTIPLY_SCALAR_1, this.equipmentSlot);
 			meta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, knockbackResistanceMod);

@@ -4,16 +4,17 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 
+import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.BruinFootballBoots;
 import com.joojet.plugins.mobs.equipment.chest.BruinTunic;
-import com.joojet.plugins.mobs.equipment.head.BruinHead;
+import com.joojet.plugins.mobs.equipment.head.BruinBanditHead;
 import com.joojet.plugins.mobs.equipment.leggings.BruinLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.PoisonousArrow;
-import com.joojet.plugins.mobs.equipment.weapons.SpiritualFantasy;
+import com.joojet.plugins.mobs.equipment.weapons.TheTrojanDestroyer;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 import com.joojet.plugins.mobs.monsters.polar_bear.beatthebruins.TheBruinBear;
@@ -29,14 +30,17 @@ public class UCLABearTamer extends UCLAFaction
 		this.setStat(MonsterStat.Y_LIMIT, 55);
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
-		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.PERSISTENT_ATTACKER, MobFlag.SHOW_NAME);
+		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.PERSISTENT_ATTACKER, MobFlag.SHOW_NAME,
+				MobFlag.BOSS_BAR);
 		this.color = ChatColor.AQUA;
-		this.helmet = new BruinHead ();
+		this.helmet = new BruinBanditHead ();
 		this.chestplate = new BruinTunic (this.color);
 		this.leggings = new BruinLeggings (this.color);
 		this.boots = new BruinFootballBoots (this.color);
-		this.weapon = new SpiritualFantasy (ChatColor.GOLD);
+		this.weapon = new TheTrojanDestroyer ();
 		this.offhand = new PoisonousArrow (ChatColor.GREEN);
 		this.mount = new MountedMob (EntityType.POLAR_BEAR, new TheBruinBear());
+		
+		this.addMonsterDrops(new MonsterDrop (new TheTrojanDestroyer(), 0.05));
 	}
 }

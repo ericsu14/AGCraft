@@ -37,7 +37,7 @@ import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.metadata.SummonedMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MountedMob;
-import com.joojet.plugins.mobs.util.customtargets.PathfinderGoalGiantFireball;
+import com.joojet.plugins.mobs.pathfinding.PathfinderGoalGiantFireball;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 

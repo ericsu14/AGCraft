@@ -6,7 +6,9 @@ public enum MobFlag
 	ON_FIRE,
 	/** The entity will have its nametag visible to everyone */
 	SHOW_NAME,
-	/** A lightning bolt is summoned upon spawning the monster */
+	/** A lightning bolt is summoned upon spawning the monster. In addition,
+	 *  if the monster has a hunt radius propetry, all nearby players within
+	 *  the monster's set radius will be alerted of his presence in chat. */
 	SPAWN_LIGHTNING,
 	/** Determines if the monster should automatically hunt a random nearby player upon spawning */
 	HUNT_ON_SPAWN,
@@ -27,5 +29,7 @@ public enum MobFlag
 	RANDOM_FIREWORK_ON_OFFHAND,
 	/** When enabled, the entity will no longer be able to naturally despawn once any player rides this tameable custom mob.
 	 *  Otherwise, it will naturally despawn once out of sight. */
-	ENABLE_PERSISTENCE_UPON_RIDING;
+	ENABLE_PERSISTENCE_UPON_RIDING,
+	/** When enabled, the mob will be immune to suffocation damage */
+	DISABLE_SUFFOCATION_DAMAGE;
 }

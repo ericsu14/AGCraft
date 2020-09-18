@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.util.customtargets;
+package com.joojet.plugins.mobs.pathfinding;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
