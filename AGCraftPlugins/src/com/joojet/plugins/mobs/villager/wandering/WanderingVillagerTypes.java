@@ -9,6 +9,7 @@ public class WanderingVillagerTypes extends MonsterTypes
 	public WanderingVillagerTypes ()
 	{
 		super(EntityType.WANDERING_TRADER);
-		this.addEquipment(new Frolf(), 1);
+		this.addEquipment(new Frolf(), 85);
+		this.addEquipment(new JohnnyRusnak(), 15);
 	}
 }

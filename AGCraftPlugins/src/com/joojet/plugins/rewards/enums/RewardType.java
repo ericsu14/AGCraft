@@ -46,7 +46,8 @@ public enum RewardType
 	UCLA_BEAR_TAMER,
 	GIANT_BRUIN_TAMER,
 	TROJAN_WARRIOR,
-	ETERNAL_TROJAN_ARCHER;
+	ETERNAL_TROJAN_ARCHER,
+	JOHNNY_RUSNAK;
 	
 	public ItemStack getReward ()
 	{
@@ -110,6 +111,8 @@ public enum RewardType
 				return new SummonTrojanWarrior();
 			case ETERNAL_TROJAN_ARCHER:
 				return new SummonEternalTrojanArcher();
+			case JOHNNY_RUSNAK:
+				return new SummonJohnnyRusnak();
 			default:
 				break;
 		}

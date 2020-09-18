@@ -58,7 +58,7 @@ public class Frolf extends VillagerEquipment
 		
 		/** Trade 7: Enhanced Potion of Strength
 		 * 		- Price: 4 Diamonds
-		 * 		- Max stock: 4 */
+		 * 		- Max stock: 3 */
 		EnhancedStrengthPotion enhancedStrengthPotion = new EnhancedStrengthPotion (this.color);
 		this.addRecipe(enhancedStrengthPotion, Material.DIAMOND, 4, 3);
 		

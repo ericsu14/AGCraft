@@ -108,8 +108,6 @@ public abstract class Equipment extends ItemStack
 	}
 	
 	/** Adds defense attributes to a piece of armor or weapon
-	 * 	@param meta - The item's itemmeta
-	 * 	@param slot - The equipmentslot we are applying these mods into
 	 * 	@param armor - Armor points the equipment carries
 	 * 	@param armorToughness - Armor toughness points the equipment carries
 	 * 	@param knockbackResistance - Knockback resistance points the equipment carries */

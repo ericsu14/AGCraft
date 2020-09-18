@@ -21,7 +21,10 @@ public enum SummonTypes
 	GIANT_BRUIN_TAMER,
 	USC_WARRIOR,
 	TROJAN_WARRIOR,
-	ETERNAL_TROJAN_ARCHER;
+	ETERNAL_TROJAN_ARCHER,
+	SHADOW_CLONE_JOOJETSU,
+	THE_TERMINATOR,
+	JOHNNY_RUSNAK;
 	
 	public SummoningScroll getSummon ()
 	{
@@ -63,6 +66,12 @@ public enum SummonTypes
 				return new SummonTrojanWarrior();
 			case ETERNAL_TROJAN_ARCHER:
 				return new SummonEternalTrojanArcher();
+			case SHADOW_CLONE_JOOJETSU:
+				return new SummonShadowClonejoojetsu();
+			case THE_TERMINATOR:
+				return new SummonTheTerminator();
+			case JOHNNY_RUSNAK:
+				return new SummonJohnnyRusnak();
 			default:
 				break;
 		}
