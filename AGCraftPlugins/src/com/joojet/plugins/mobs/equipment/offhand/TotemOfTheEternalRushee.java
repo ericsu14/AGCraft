@@ -17,7 +17,7 @@ public class TotemOfTheEternalRushee extends Equipment {
 		
 		this.setDisplayName("The Totem of Thy Eternal Rushee");
 		this.loreColor = ChatColor.YELLOW;
-		this.wordsPerLine = 6;
+		this.wordsPerLine = 7;
 		this.addLoreToItemMeta("Legend says that this contains the spirit of a legend who rushed AΓΩ multiple times"
 				+ " for the sake of rushing AΓΩ. Holding onto this totem will grant you his powers.");
 		this.addSpeedAttribute(0.15);

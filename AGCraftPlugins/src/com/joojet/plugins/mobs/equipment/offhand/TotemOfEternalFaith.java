@@ -17,7 +17,7 @@ public class TotemOfEternalFaith extends Equipment
 				EquipmentSlot.OFF_HAND, ChatColor.GOLD);
 		this.setDisplayName("The Totem of Eternal Faith");
 		this.loreColor = ChatColor.YELLOW;
-		this.wordsPerLine = 6;
+		this.wordsPerLine = 7;
 		this.addLoreToItemMeta("Holding onto this totem will grant you eternal hope and faith, which will"
 				+ " shield you from the everlasting trials that will be thrown against you."
 				+ " However, you will be weaker in strength and power as a result.");
