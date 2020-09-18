@@ -20,7 +20,7 @@ public class BruinShield extends ShieldEquipment
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 5;
 		this.setDisplayName(StringUtil.alternateTextColors("Shield of the", TextPattern.WORD, ChatColor.AQUA, ChatColor.GOLD)
-				+ UCLAFaction.UCLA_TEXT + " " +ChatColor.AQUA + "Bruin");
+				+ " " + UCLAFaction.UCLA_TEXT + " " +ChatColor.AQUA + "Bruin");
 		this.addLoreToItemMeta("Consider this a war trophy. #beatthebruins");
 		
 		this.addPatterns(new Pattern (DyeColor.LIGHT_GRAY, PatternType.BRICKS),
