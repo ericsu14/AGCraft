@@ -26,5 +26,6 @@ public class TotemOfEternalFaith extends Equipment
 		this.addAttackAttributes(-3.0, 0.0);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
 		this.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		this.makeSoulbound();
 	}
 }

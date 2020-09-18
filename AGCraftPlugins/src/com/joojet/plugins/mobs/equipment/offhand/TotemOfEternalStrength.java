@@ -24,5 +24,6 @@ public class TotemOfEternalStrength extends Equipment
 				+ " However, holding such great power also makes you less resilient towards attacks.");
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
 		this.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		this.makeSoulbound();
 	}
 }
