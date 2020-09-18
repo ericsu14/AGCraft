@@ -27,14 +27,15 @@ public class DoomGuy extends MobEquipment
 		this.name = "The Doom Slayer";
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.05f, 1.00f);
 		this.color = ChatColor.DARK_RED;
-		this.setStat(MonsterStat.HEALTH, 50.0);
+		this.setStat(MonsterStat.HEALTH, 140.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 125.0);
 		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
 		
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE,
-				CustomPotionEffect.UNDEAD_HEAL);
+				CustomPotionEffect.UNDEAD_HEAL, CustomPotionEffect.SPEED,
+				CustomPotionEffect.STRENGTH);
 		
 		this.addFactions(Faction.DOOM_GUY);
 		this.addRivalFactions(Faction.NETHER, Faction.USC, Faction.UCLA);
@@ -53,10 +54,10 @@ public class DoomGuy extends MobEquipment
 		this.weapon = new DoomBlade (this.color);
 		this.offhand = new ItemStack (Material.WITHER_SKELETON_SKULL, 1);
 		
-		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 1.00, 2, 3),
-				new MonsterDrop (Material.NETHERITE_INGOT, 1.00, 1, 1),
-				new MonsterDrop (Material.DIAMOND, 0.30, 1, 3),
-				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 1.00, 1, 3),
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 1.00, 2, 5),
+				new MonsterDrop (Material.NETHERITE_INGOT, 0.75, 1, 1),
+				new MonsterDrop (Material.DIAMOND, 0.10, 1, 3),
+				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 1.00, 5, 7),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 2));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 500.0);

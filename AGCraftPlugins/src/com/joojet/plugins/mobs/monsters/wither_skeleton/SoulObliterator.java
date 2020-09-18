@@ -25,7 +25,7 @@ public class SoulObliterator extends MobEquipment
 		super (MonsterType.SOUL_OBLITERATOR);
 		this.name = "Soul Obliterator";
 		this.color = ChatColor.GOLD;
-		this.setStat(MonsterStat.HEALTH, 16.0);
+		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR,
 				MobFlag.IGNORE_NON_FACTION_ENTITIES);
 		
@@ -46,6 +46,6 @@ public class SoulObliterator extends MobEquipment
 		this.weapon = new AngelOfDeath (this.color);
 		this.offhand = new EnhancedWitheringArrow (this.color);
 		
-		this.setStat(MonsterStat.EXPERIENCE, 25.0);
+		this.setStat(MonsterStat.EXPERIENCE, 45.0);
 	}
 }
