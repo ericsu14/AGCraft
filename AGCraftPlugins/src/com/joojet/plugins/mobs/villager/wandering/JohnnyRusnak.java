@@ -54,9 +54,9 @@ public class JohnnyRusnak extends VillagerEquipment
 		this.addRecipe(enhancedStrengthPotion, Material.DIAMOND, 2, 2);
 		
 		/** Totems */
-		this.addRecipe(new TotemOfEternalStrength(), Material.DIAMOND, 8, 1);
-		this.addRecipe(new TotemOfEternalFaith(), Material.DIAMOND, 8, 1);
-		this.addRecipe(new TotemOfTheEternalRushee(), Material.DIAMOND, 8, 1);
+		this.addRecipe(new TotemOfEternalStrength(), Material.DIAMOND, 6, 1);
+		this.addRecipe(new TotemOfEternalFaith(), Material.DIAMOND, 6, 1);
+		this.addRecipe(new TotemOfTheEternalRushee(), Material.DIAMOND, 6, 1);
 		
 		/** Boss scrolls */
 		this.addRecipe(new SummonAGSpotted(), Material.EMERALD, 24, 1);
