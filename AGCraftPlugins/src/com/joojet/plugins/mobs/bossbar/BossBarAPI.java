@@ -57,7 +57,7 @@ public class BossBarAPI
 		BossBarNode bossNode = activeBossBars.get(uuidKey);
 		if (bossNode != null && !bossNode.hasActiveTask())
 		{
-			new BossBarTask (bossNode).runTaskTimerAsynchronously(AGCraftPlugin.plugin, 0, 1);
+			new BossBarTask (bossNode).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
 		}
 	}
 	
