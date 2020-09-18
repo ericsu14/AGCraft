@@ -7,6 +7,8 @@ import org.bukkit.block.banner.PatternType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.ShieldEquipment;
 
@@ -18,6 +20,8 @@ public class RightCrashSymbol extends ShieldEquipment
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 5;
 		this.setDisplayName("Right Crash Symbol");
+		this.setDisplayName(StringUtil.alternateTextColors("Right Crash Symbol", TextPattern.WORD,
+				ChatColor.RED, ChatColor.GOLD));
 		this.addLoreToItemMeta("Hold this crash symbol in your offhand to deal increased damage!");
 		
 		this.addPatterns(new Pattern (DyeColor.BLACK, PatternType.FLOWER),

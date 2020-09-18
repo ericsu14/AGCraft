@@ -8,6 +8,8 @@ import org.bukkit.FireworkEffect.Type;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
+import com.joojet.plugins.mobs.monsters.factions.USCFaction;
+
 public class USCCreeper extends Firework 
 {
 
@@ -34,11 +36,7 @@ public class USCCreeper extends Firework
 				.withTrail()
 				.with(Type.CREEPER)
 				.build());
-		firework.setDisplayName(ChatColor.RED + "U"
-				+ ChatColor.GOLD + "S"
-				+ ChatColor.RED + "C"
-				+ ChatColor.GOLD + " Creeper"
-				+ ChatColor.RED + " Rocket");
+		firework.setDisplayName(USCFaction.generateUSCDisplayName("Creeper Rocket"));
 		firework.setPower(power);
 		fw.setItemMeta(firework);
 		

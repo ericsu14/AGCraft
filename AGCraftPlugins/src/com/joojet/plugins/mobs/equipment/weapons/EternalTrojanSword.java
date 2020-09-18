@@ -5,6 +5,8 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
@@ -14,9 +16,8 @@ public class EternalTrojanSword extends Equipment
 	public EternalTrojanSword ()
 	{
 		super (EquipmentTypes.ETERNAL_TROJAN_SWORD, Material.IRON_SWORD, EquipmentSlot.HAND, ChatColor.RED);
-		this.setDisplayName("Eternal"
-				+ ChatColor.GOLD + " Trojan"
-				+ ChatColor.RED + " Sword");
+		this.setDisplayName(StringUtil.alternateTextColors("Eternal Trojan Sword", TextPattern.WORD, 
+				ChatColor.RED, ChatColor.GOLD));
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 6;
 		this.addLoreToItemMeta("Tommy trojan once weilded this blade to defeat his sworn enemies. Now you will carry on his legacy and uphold the traditions of this university!");

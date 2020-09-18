@@ -3,6 +3,8 @@ package com.joojet.plugins.mobs.monsters.zombie.beatthebruins;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -20,7 +22,8 @@ public class SpiritOfTroy extends USCFaction
 	{
 		super (MonsterType.SPIRIT_OF_TROY);
 		this.addBiomes(Biome.THE_VOID);
-		this.name = "The " + ChatColor.GOLD + "Spirit " + ChatColor.RED + "of " + ChatColor.GOLD + "Troy";
+		this.name = StringUtil.alternateTextColors("The Spirit of Troy", TextPattern.WORD, 
+				ChatColor.RED, ChatColor.GOLD);
 		this.color = ChatColor.RED;
 		this.addPotionEffect(CustomPotionEffect.SPEED, CustomPotionEffect.WEAKNESS);
 		this.setStat(MonsterStat.HEALTH, 12.0);

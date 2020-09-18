@@ -7,6 +7,8 @@ import org.bukkit.block.banner.PatternType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.ShieldEquipment;
 
@@ -17,7 +19,8 @@ public class LeftCrashSymbol extends ShieldEquipment
 		super (EquipmentTypes.LEFT_CRASH_SYMBOL, DyeColor.YELLOW, EquipmentSlot.HAND, color);
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 5;
-		this.setDisplayName("Left Crash Symbol");
+		this.setDisplayName(StringUtil.alternateTextColors("Left Crash Symbol", TextPattern.WORD, 
+				ChatColor.RED, ChatColor.GOLD));
 		this.addLoreToItemMeta("Bash your enemies with this crash symbol! Not intended to be used as a shield, but more as a weapon!");
 		
 		this.addPatterns(new Pattern (DyeColor.BLACK, PatternType.FLOWER),

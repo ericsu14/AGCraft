@@ -6,6 +6,7 @@ import org.bukkit.enchantments.Enchantment;
 import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.joojet.plugins.mobs.equipment.Equipment;
+import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 
 public class BruinBanditHead extends Equipment 
 {
@@ -14,7 +15,7 @@ public class BruinBanditHead extends Equipment
 		super (EquipmentTypes.BRUIN_BANDIT_HEAD, PlayerHead.UCLA_BANDIT, ChatColor.AQUA);
 		this.wordsPerLine = 6;
 		this.loreColor = ChatColor.GOLD;
-		this.setDisplayName("Head of the UCLA Jock");
+		this.setDisplayName(UCLAFaction.generateUCLADisplayName("Bandit"));
 		this.addLoreToItemMeta("At least he is practicing social distancing...");
 		this.addDefenseAttributes(2.0, 2.0, 0.05);
 		this.addAttackAttributes(1.0, 0.0);

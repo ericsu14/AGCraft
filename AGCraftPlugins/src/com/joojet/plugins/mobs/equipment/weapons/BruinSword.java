@@ -7,13 +7,14 @@ import org.bukkit.inventory.EquipmentSlot;
 
 import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
+import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 
 public class BruinSword extends Equipment
 {
 	public BruinSword (ChatColor color)
 	{
 		super (EquipmentTypes.BRUIN_SWORD, Material.IRON_SWORD, EquipmentSlot.HAND, color);
-		this.setDisplayName("Bruin Sword");
+		this.setDisplayName(UCLAFaction.generateUCLADisplayName("Bruin Sword"));
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 3);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
 		this.addAttackAttributes(6.0, 1.6);

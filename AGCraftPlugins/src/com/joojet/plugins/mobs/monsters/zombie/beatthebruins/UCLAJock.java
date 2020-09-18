@@ -21,8 +21,7 @@ public class UCLAJock extends UCLAFaction
 		super (MonsterType.UCLA_JOCK);
 		this.setStat(MonsterStat.HEALTH, 14.0);
 		
-		this.name = "The " + ChatColor.AQUA + "U" + ChatColor.GOLD + "C"
-				+ ChatColor.AQUA + "L" + ChatColor.GOLD + "A" + ChatColor.AQUA + " Jock";
+		this.name = "The " + generateUCLADisplayName("Jock");
 		this.color = ChatColor.AQUA;
 		
 		this.addBiomes(Biome.THE_VOID);

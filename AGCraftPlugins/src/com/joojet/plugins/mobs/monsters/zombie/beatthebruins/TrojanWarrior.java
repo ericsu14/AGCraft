@@ -4,6 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.allies.horse.beatthebruins.TheTraveler;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -25,9 +27,8 @@ public class TrojanWarrior extends USCFaction
 		super (MonsterType.TROJAN_WARRIOR);
 		this.addBiomes(Biome.THE_VOID);
 		
-		this.name = ChatColor.RED + "The"
-				+ ChatColor.GOLD + " Trojan"
-				+ ChatColor.RED + " Warrior";
+		this.name = StringUtil.alternateTextColors("The Trojan Warrior", TextPattern.WORD, 
+				ChatColor.RED, ChatColor.GOLD);
 		
 		this.color = ChatColor.GOLD;
 		this.mount = new MountedMob (EntityType.HORSE, new TheTraveler());

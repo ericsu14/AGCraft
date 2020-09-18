@@ -1,8 +1,11 @@
 package com.joojet.plugins.mobs.monsters.zombie.beatthebruins;
 
+import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.monsters.giant.beatthebruins.GiantBruin;
@@ -12,7 +15,8 @@ public class GiantBruinTamer extends UCLAJock
 	public GiantBruinTamer ()
 	{
 		super();
-		this.name = "Giant Bruin Tamer";
+		this.name = StringUtil.alternateTextColors("Giant Bruin Tamer", TextPattern.WORD, 
+				ChatColor.AQUA, ChatColor.GOLD);
 		this.addBiomes(Biome.PLAINS, Biome.DESERT, Biome.DESERT_HILLS, Biome.DESERT_LAKES,
 				Biome.BADLANDS, Biome.BADLANDS_PLATEAU, Biome.ERODED_BADLANDS, Biome.SAVANNA_PLATEAU,
 				Biome.SNOWY_TUNDRA, Biome.FROZEN_RIVER, Biome.SNOWY_BEACH,

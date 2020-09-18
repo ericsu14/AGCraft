@@ -6,14 +6,14 @@ import org.bukkit.enchantments.Enchantment;
 import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.joojet.plugins.mobs.equipment.Equipment;
+import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 
 public class USCBandHead extends Equipment
 {
 	public USCBandHead (ChatColor color)
 	{
 		super (EquipmentTypes.USC_BAND_HEAD, PlayerHead.USC_BAND, color);
-		this.setDisplayName(ChatColor.RED + "U" + ChatColor.GOLD + "S" + ChatColor.RED + "C" 
-		+ ChatColor.GOLD + " Marching" + ChatColor.RED + " Band");
+		this.setDisplayName(USCFaction.generateUSCDisplayName("Marching Band Helmet"));
 		this.addDefenseAttributes(3.0, 2.5, 0.15);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
 		this.addUnsafeEnchantment(Enchantment.OXYGEN, 3);

@@ -17,8 +17,7 @@ public class USCArcher extends USCFaction
 	public USCArcher ()
 	{
 		super (MonsterType.USC_ARCHER);
-		this.name = ChatColor.RED + "U" + ChatColor.GOLD + "S" + ChatColor.RED + "C" 
-				+ ChatColor.GOLD + " Bowman";
+		this.name = generateUSCDisplayName("Bowman");
 		this.addBiomes(Biome.THE_VOID);
 		this.color = ChatColor.GOLD;
 		this.setStat(MonsterStat.HEALTH, 16.0);

@@ -7,14 +7,14 @@ import org.bukkit.inventory.EquipmentSlot;
 
 import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.LeatherEquipment;
+import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 
 public class USCFootballTunic extends LeatherEquipment
 {
 	public USCFootballTunic (ChatColor color)
 	{
 		super (EquipmentTypes.USC_FOOTBALL_TUNIC, Material.LEATHER_CHESTPLATE, EquipmentSlot.CHEST, color);
-		this.setDisplayName(ChatColor.RED + "U" + ChatColor.GOLD + "S" + ChatColor.RED + "C" 
-		+ ChatColor.GOLD + " Football" + ChatColor.RED + " Jersey");
+		this.setDisplayName(USCFaction.generateUSCDisplayName("Football Jersey"));
 		this.addDefenseAttributes(6.0, 3.0, 0.15);
 		this.addAttackAttributes(2.0, 0.10);
 		this.setColor(Color.WHITE);

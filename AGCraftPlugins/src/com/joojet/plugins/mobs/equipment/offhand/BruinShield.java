@@ -6,8 +6,11 @@ import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.inventory.EquipmentSlot;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.ShieldEquipment;
+import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 
 public class BruinShield extends ShieldEquipment
 {
@@ -16,7 +19,8 @@ public class BruinShield extends ShieldEquipment
 		super (EquipmentTypes.BRUIN_SHIELD, DyeColor.YELLOW, EquipmentSlot.OFF_HAND, ChatColor.AQUA);
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 5;
-		this.setDisplayName("Shield of the UCLA Bruin");
+		this.setDisplayName(StringUtil.alternateTextColors("Shield of the", TextPattern.WORD, ChatColor.AQUA, ChatColor.GOLD)
+				+ UCLAFaction.UCLA_TEXT + " " +ChatColor.AQUA + "Bruin");
 		this.addLoreToItemMeta("Consider this a war trophy. #beatthebruins");
 		
 		this.addPatterns(new Pattern (DyeColor.LIGHT_GRAY, PatternType.BRICKS),

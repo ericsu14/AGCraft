@@ -1,13 +1,19 @@
 package com.joojet.plugins.mobs.monsters.factions;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public abstract class USCFaction extends MobEquipment
 {
+	public static String USC_TEXT = StringUtil.alternateTextColors("USC", TextPattern.CHARACTER, ChatColor.RED,
+			ChatColor.GOLD);
+	
 	public USCFaction (MonsterType type)
 	{
 		super (type);
@@ -25,5 +31,17 @@ public abstract class USCFaction extends MobEquipment
 		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.WOLF, EntityType.CAT,
 				EntityType.IRON_GOLEM, EntityType.SNOWMAN, EntityType.DOLPHIN, EntityType.VILLAGER,
 				EntityType.WANDERING_TRADER, EntityType.CREEPER, EntityType.PANDA);
+	}
+	
+	/** A util function that generates a USC themed display name
+	 *  that appends the USC text defined above at the beginning 
+	 *  of the String */
+	public static String generateUSCDisplayName (String str)
+	{
+		StringBuilder result = new StringBuilder (USC_TEXT);
+		result.append(" ");
+		result.append(StringUtil.alternateTextColors(str, TextPattern.WORD, 
+				ChatColor.RED, ChatColor.GOLD));
+		return result.toString();
 	}
 }

@@ -23,9 +23,7 @@ public class UCLABearTamer extends UCLAFaction
 	public UCLABearTamer ()
 	{
 		super (MonsterType.UCLA_BEAR_TAMER);
-		this.name = "The " + ChatColor.AQUA + "U" + ChatColor.GOLD + "C"
-				+ ChatColor.AQUA + "L" + ChatColor.GOLD + "A" + ChatColor.AQUA + " Bear" + 
-				ChatColor.GOLD + " Tamer";
+		this.name = "The " + generateUCLADisplayName("Bear Tamer");
 		this.setStat(MonsterStat.EXPERIENCE, 50.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		this.setStat(MonsterStat.Y_LIMIT, 55);

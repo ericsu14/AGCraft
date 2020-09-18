@@ -7,14 +7,14 @@ import org.bukkit.inventory.EquipmentSlot;
 
 import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.Equipment;
+import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 
 public class TrojanSword extends Equipment
 {
 	public TrojanSword (ChatColor color)
 	{
 		super (EquipmentTypes.TROJAN_SWORD, Material.IRON_SWORD, EquipmentSlot.HAND, color);
-		this.setDisplayName(ChatColor.RED + "U" + ChatColor.GOLD + "S" + ChatColor.RED + "C" 
-		+ ChatColor.GOLD + " Trojan" + ChatColor.RED + " Sword");
+		this.setDisplayName(USCFaction.generateUSCDisplayName("Trojan Sword"));
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 7;
 		this.addLoreToItemMeta("Tommy trojan once weilded this blade to defeat his sworn enemies. Now you will carry on his legacy and uphold the traditions of this university!");

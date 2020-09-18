@@ -176,39 +176,6 @@ public abstract class Equipment extends ItemStack
 		this.setItemMeta((ItemMeta) localSkullMeta);
 	}
 	
-	/** Americanizes a name by applying the USA colors to every character in a string
-	 *  in an alternating pattern */
-	protected String americanizeText (String str)
-	{
-		StringBuilder result = new StringBuilder ();
-		
-		int pattern = 0;
-		for (char c : str.toCharArray())
-		{
-			switch (pattern)
-			{
-				case 0:
-					result.append(ChatColor.RED);
-					break;
-				case 1:
-					result.append(ChatColor.WHITE);
-					break;
-				default:
-					result.append(ChatColor.BLUE);
-					break;
-			}
-			result.append(c);
-			++pattern;
-			
-			if (pattern > 2)
-			{
-				pattern = 0;
-			}
-				
-		}
-		return result.toString();
-	}
-	
 	/** Adds a new lore string into the equipment. The String will be split into multiple tokens depending on how many
 	 *  words can fit in a single line.
 	 * 		@param meta - ItemMeta we are adding the lore info into */

@@ -21,8 +21,7 @@ public class USCWarrior extends USCFaction
 		super (MonsterType.USC_WARRIOR);
 		this.setStat(MonsterStat.HEALTH, 8.0);
 		
-		this.name = ChatColor.RED + "U" + ChatColor.GOLD + "S" + ChatColor.RED + "C" 
-				+ ChatColor.GOLD + " Trojan";
+		this.name = generateUSCDisplayName("Trojan");
 		
 		this.color = ChatColor.GOLD;
 		this.addBiomes(Biome.THE_VOID);

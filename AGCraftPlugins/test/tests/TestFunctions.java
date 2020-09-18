@@ -3,11 +3,14 @@ package tests;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
 import org.junit.jupiter.api.Test;
 
 import com.joojet.biblefetcher.constants.BibleID;
 import com.joojet.biblefetcher.constants.BookID;
 import com.joojet.biblefetcher.fetcher.BibleFetcher;
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.biblefetcher.string.ContentParser;
 
 class TestFunctions {
@@ -70,6 +73,31 @@ class TestFunctions {
 			fail (e.getMessage());
 		}
 	}
+	
+	/** Tests to see if alternating character and word colors work correctly on the alternateTextColors function*/
+	@Test
+	void testAlternateTextColorsCharacter ()
+	{
+		String attempt = StringUtil.alternateTextColors("USC", TextPattern.CHARACTER, ChatColor.RED, ChatColor.GOLD);
+		String expected = ChatColor.RED + "U" + ChatColor.GOLD + "S" + ChatColor.RED + "C";
+		
+		assertEquals (attempt, expected);
+		
+		attempt = StringUtil.alternateTextColors("American Flag", TextPattern.CHARACTER, ChatColor.RED, ChatColor.WHITE, ChatColor.BLUE);
+		expected = ChatColor.RED + "A" + ChatColor.WHITE + "m" + ChatColor.BLUE + "e" + ChatColor.RED + "r"
+				+ ChatColor.WHITE + "i" + ChatColor.BLUE + "c" + ChatColor.RED + "a" + ChatColor.WHITE + "n" + " "
+				+ ChatColor.BLUE + "F" + ChatColor.RED + "l" + ChatColor.WHITE + "a" + ChatColor.BLUE + "g";
+		assertEquals (attempt, expected);
+		
+		attempt = StringUtil.alternateTextColors("American Flag Thing", TextPattern.WORD, ChatColor.RED, ChatColor.WHITE, ChatColor.BLUE);
+		expected = ChatColor.RED + "American" + " " + ChatColor.WHITE + "Flag" + " " + ChatColor.BLUE + "Thing";
+		assertEquals (attempt, expected);
+		
+		attempt = StringUtil.alternateTextColors("USC IS BEST", TextPattern.WORD, ChatColor.RED, ChatColor.GOLD);
+		expected = ChatColor.RED + "USC" + " " + ChatColor.GOLD + "IS" + " " + ChatColor.RED + "BEST";
+		assertEquals (attempt, expected);
+	}
+	
 	
 	/** Checks if each item in the array is below 255 characters */
 	void vertifyCharacterLimits (ArrayList <String> list)

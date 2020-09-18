@@ -9,14 +9,14 @@ import org.bukkit.inventory.ItemFlag;
 
 import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.ShieldEquipment;
+import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 
 public class USCCreeperShield extends ShieldEquipment 
 {
 	public USCCreeperShield ()
 	{
 		super (EquipmentTypes.USC_CREEPER_SHIELD, DyeColor.RED, EquipmentSlot.OFF_HAND, ChatColor.GOLD);
-		this.setDisplayName(ChatColor.RED + "U" + ChatColor.GOLD + "S" + ChatColor.RED + "C" 
-		+ ChatColor.GOLD + " Creeper" + ChatColor.RED + " Shield");
+		this.setDisplayName(USCFaction.generateUSCDisplayName("Creeper Shield"));
 		this.addLoreToItemMeta("Even the USC Trojans are huge fans of Minecraft! #fighton");
 		this.addPatterns(new Pattern (DyeColor.YELLOW, PatternType.CREEPER),
 				new Pattern (DyeColor.YELLOW, PatternType.CREEPER));

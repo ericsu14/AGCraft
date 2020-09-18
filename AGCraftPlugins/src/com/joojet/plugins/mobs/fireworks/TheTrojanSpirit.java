@@ -8,6 +8,9 @@ import org.bukkit.FireworkEffect.Type;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
+
 public class TheTrojanSpirit extends Firework {
 
 	@Override
@@ -34,7 +37,8 @@ public class TheTrojanSpirit extends Firework {
 				.withTrail()
 				.with(Type.BALL_LARGE)
 				.build());
-		firework.setDisplayName(ChatColor.RED + "The" + ChatColor.GOLD + " Trojan" + ChatColor.GOLD + " Spirit");
+		firework.setDisplayName(StringUtil.alternateTextColors("The Trojan Spirit", TextPattern.WORD, 
+				ChatColor.RED, ChatColor.GOLD));
 		firework.setPower(power);
 		fw.setItemMeta(firework);
 		

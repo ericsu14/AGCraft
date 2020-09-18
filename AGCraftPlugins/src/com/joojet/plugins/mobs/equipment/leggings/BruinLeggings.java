@@ -7,6 +7,7 @@ import org.bukkit.inventory.EquipmentSlot;
 
 import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.equipment.LeatherEquipment;
+import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 
 public class BruinLeggings extends LeatherEquipment
 {
@@ -15,7 +16,7 @@ public class BruinLeggings extends LeatherEquipment
 		super (EquipmentTypes.BRUIN_LEGS, Material.LEATHER_LEGGINGS, EquipmentSlot.LEGS, color);
 		this.wordsPerLine = 6;
 		this.loreColor = ChatColor.GOLD;
-		this.setDisplayName("UCLA Bulky Leggings");
+		this.setDisplayName(UCLAFaction.generateUCLADisplayName("Bulky Leggings"));
 		this.setColor(Color.fromRGB(255, 209, 0));
 		this.addLoreToItemMeta("These people never skip leg day...");
 		this.addDefenseAttributes(5.0, 1.0, 0.10);

@@ -6,14 +6,14 @@ import org.bukkit.enchantments.Enchantment;
 import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.joojet.plugins.mobs.equipment.Equipment;
+import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 
 public class USCTrojan extends Equipment
 {
 	public USCTrojan (ChatColor color)
 	{
 		super (EquipmentTypes.USC_TROJAN, PlayerHead.USC_TROJAN, color);
-		this.setDisplayName(ChatColor.RED + "U" + ChatColor.GOLD + "S" + ChatColor.RED + "C" 
-		+ ChatColor.GOLD + " Football" + ChatColor.RED + " Helmet");
+		this.setDisplayName(USCFaction.generateUSCDisplayName("Football Helmet"));
 		this.addDefenseAttributes(3.0, 2.5, 0.15);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
 		this.addUnsafeEnchantment(Enchantment.OXYGEN, 3);

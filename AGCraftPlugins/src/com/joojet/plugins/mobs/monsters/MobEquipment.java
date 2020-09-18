@@ -12,6 +12,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
@@ -286,34 +288,9 @@ public abstract class MobEquipment
 	/** Americanizes a name by applying the USA colors to every character in a string
 	 *  in an alternating pattern */
 	public String americanizeText (String str)
-	{
-		StringBuilder result = new StringBuilder ();
-		
-		int pattern = 0;
-		for (char c : str.toCharArray())
-		{
-			switch (pattern)
-			{
-				case 0:
-					result.append(ChatColor.RED);
-					break;
-				case 1:
-					result.append(ChatColor.WHITE);
-					break;
-				default:
-					result.append(ChatColor.BLUE);
-					break;
-			}
-			result.append(c);
-			++pattern;
-			
-			if (pattern > 2)
-			{
-				pattern = 0;
-			}
-				
-		}
-		return result.toString();
+	{	
+		return StringUtil.alternateTextColors(str, TextPattern.CHARACTER, 
+				ChatColor.RED, ChatColor.WHITE, ChatColor.BLUE);
 	}
 	
 	/** Returns the monster's chat color as a color enum type */
