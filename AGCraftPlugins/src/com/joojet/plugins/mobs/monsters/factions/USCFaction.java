@@ -41,7 +41,7 @@ public abstract class USCFaction extends MobEquipment
 		StringBuilder result = new StringBuilder (USC_TEXT);
 		result.append(" ");
 		result.append(StringUtil.alternateTextColors(str, TextPattern.WORD, 
-				ChatColor.RED, ChatColor.GOLD));
+				ChatColor.GOLD, ChatColor.RED));
 		return result.toString();
 	}
 }

@@ -70,9 +70,9 @@ public class GiantBruin extends UCLAFaction
 				new MonsterDrop (Material.GOLDEN_CARROT, 0.50, 16, 32),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 1),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.07, 2, 3),
-				new FireworkDrop (0.75, 64, 64),
-				new FireworkDrop (0.50, 64, 64),
-				new FireworkDrop (0.25, 64, 64),
+				new FireworkDrop (0.75, 8, 32),
+				new FireworkDrop (0.50, 16, 32),
+				new FireworkDrop (0.25, 32, 32),
 				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 0.25, 5, 7),
 				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 0.10, 2, 3));
 		
