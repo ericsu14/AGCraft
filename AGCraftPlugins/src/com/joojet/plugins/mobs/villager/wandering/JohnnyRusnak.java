@@ -13,6 +13,7 @@ import com.joojet.plugins.mobs.equipment.boots.USCSpikedBoots;
 import com.joojet.plugins.mobs.equipment.chest.USCBandUniformTop;
 import com.joojet.plugins.mobs.equipment.chest.USCFootballTunic;
 import com.joojet.plugins.mobs.equipment.head.USCBandHead;
+import com.joojet.plugins.mobs.equipment.head.USCTrojan;
 import com.joojet.plugins.mobs.equipment.leggings.USCBandUniformBottom;
 import com.joojet.plugins.mobs.equipment.leggings.USCFootballTrousers;
 import com.joojet.plugins.mobs.equipment.offhand.TotemOfEternalFaith;
