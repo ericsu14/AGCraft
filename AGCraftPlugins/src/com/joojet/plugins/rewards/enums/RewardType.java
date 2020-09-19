@@ -13,6 +13,7 @@ import com.joojet.plugins.mobs.equipment.potions.EternalRusheeMocktail;
 import com.joojet.plugins.mobs.equipment.potions.StrawberryMocktail;
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
+import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
 import com.joojet.plugins.mobs.fireworks.PaintTheSky;
 import com.joojet.plugins.mobs.scrolls.*;
 
@@ -47,7 +48,8 @@ public enum RewardType
 	GIANT_BRUIN_TAMER,
 	TROJAN_WARRIOR,
 	ETERNAL_TROJAN_ARCHER,
-	JOHNNY_RUSNAK;
+	JOHNNY_RUSNAK,
+	SPIRITUAL_TRAVESTY;
 	
 	public ItemStack getReward ()
 	{
@@ -113,6 +115,8 @@ public enum RewardType
 				return new SummonEternalTrojanArcher();
 			case JOHNNY_RUSNAK:
 				return new SummonJohnnyRusnak();
+			case SPIRITUAL_TRAVESTY:
+				return new SpiritualTravesty(ChatColor.GOLD);
 			default:
 				break;
 		}
