@@ -14,11 +14,11 @@ public class DoomBlade extends Equipment
 	{
 		super (EquipmentTypes.DOOM_BLADE, Material.NETHERITE_SWORD, EquipmentSlot.HAND, color);
 		this.addAttackAttributes(13.0, 3.0);
-		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);
+		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 6);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
 		this.addUnsafeEnchantment(Enchantment.KNOCKBACK, 3);
 		this.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 3);
-		this.addUnsafeEnchantment(Enchantment.SWEEPING_EDGE, 4);
+		this.addUnsafeEnchantment(Enchantment.SWEEPING_EDGE, 5);
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
 		this.setDisplayName("Doom Blade");
 		this.addLoreToItemMeta("Rip... and tear!");
