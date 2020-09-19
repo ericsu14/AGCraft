@@ -90,11 +90,11 @@ public class JohnnyRusnak extends VillagerEquipment
 		this.addRecipe(new SummonAGSpotted(), Material.EMERALD, 24, 1);
 		this.addRecipe(new SummonShadowClonejoojetsu(), Material.EMERALD, 32, 1);
 		this.addRecipe(new SummonBarney(), Material.EMERALD, 48 , 1);
-		this.addRecipe(new SummonUCLABearTamer(), Material.DIAMOND, 8, 1);
-		this.addRecipe(new SummonSkullKid(), Material.NETHERITE_INGOT, 1, 1);
-		this.addRecipe(new SummonTheTerminator(), Material.NETHERITE_INGOT, 1, 1);
-		this.addRecipe(new SummonDoomGuy(), Material.NETHERITE_INGOT, 2, 1);
-		this.addRecipe(new SummonGiantBruinTamer(), Material.NETHERITE_INGOT, 3, 1);
+		this.addRecipe(new SummonUCLABearTamer(), Material.EMERALD, 64, 1);
+		this.addRecipe(new SummonTheTerminator(), Material.DIAMOND, 4, 1);
+		this.addRecipe(new SummonSkullKid(), Material.DIAMOND, 6, 1);
+		this.addRecipe(new SummonDoomGuy(), Material.DIAMOND, 8, 1);
+		this.addRecipe(new SummonGiantBruinTamer(), Material.DIAMOND, 16, 1);
 		
 	}
 }
