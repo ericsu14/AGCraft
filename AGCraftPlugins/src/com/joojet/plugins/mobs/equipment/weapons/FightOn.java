@@ -15,6 +15,7 @@ public class FightOn extends Equipment
 		super (EquipmentTypes.FIGHT_ON, Material.BOW, EquipmentSlot.HAND, color);
 		this.setDisplayName(ChatColor.RED + "Fight" 
 				+ ChatColor.GOLD + " On!");
+		this.addLoreToItemMeta("Show off your trojan spirit!");
 		this.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 5);
 		this.addUnsafeEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
 		this.addUnsafeEnchantment(Enchantment.ARROW_FIRE, 1);

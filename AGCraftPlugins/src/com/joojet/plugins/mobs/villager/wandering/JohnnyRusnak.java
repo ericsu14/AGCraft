@@ -9,10 +9,21 @@ import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.equipment.boots.USCSpikedBoots;
+import com.joojet.plugins.mobs.equipment.chest.USCBandUniformTop;
+import com.joojet.plugins.mobs.equipment.chest.USCFootballTunic;
+import com.joojet.plugins.mobs.equipment.head.USCBandHead;
+import com.joojet.plugins.mobs.equipment.leggings.USCBandUniformBottom;
+import com.joojet.plugins.mobs.equipment.leggings.USCFootballTrousers;
 import com.joojet.plugins.mobs.equipment.offhand.TotemOfEternalFaith;
 import com.joojet.plugins.mobs.equipment.offhand.TotemOfEternalStrength;
 import com.joojet.plugins.mobs.equipment.offhand.TotemOfTheEternalRushee;
+import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.equipment.potions.EnhancedStrengthPotion;
+import com.joojet.plugins.mobs.equipment.weapons.FightOn;
+import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
+import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
+import com.joojet.plugins.mobs.equipment.weapons.TrojanSword;
 import com.joojet.plugins.mobs.scrolls.*;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 
@@ -52,6 +63,22 @@ public class JohnnyRusnak extends VillagerEquipment
 		 * 		- Max stock: 2 */
 		EnhancedStrengthPotion enhancedStrengthPotion = new EnhancedStrengthPotion (this.color);
 		this.addRecipe(enhancedStrengthPotion, Material.DIAMOND, 2, 2);
+		
+		/** Rare weapons */
+		this.addRecipe(new USCCreeperShield (), Material.EMERALD, 36, 1);
+		this.addRecipe(new FightOn (ChatColor.GOLD), Material.EMERALD, 48, 1);
+		this.addRecipe(new TrojanSword (ChatColor.GOLD), Material.EMERALD, 48, 1);
+		this.addRecipe(new ShotBow (ChatColor.GOLD), Material.DIAMOND, 5, 1);
+		this.addRecipe(new SpiritualTravesty(ChatColor.GOLD), Material.NETHERITE_INGOT, 3, 1);
+		
+		/** Rare armor */
+		this.addRecipe(new USCFootballTunic (ChatColor.GOLD), Material.EMERALD, 32, 1);
+		this.addRecipe(new USCBandUniformTop (ChatColor.GOLD), Material.EMERALD, 32, 1);
+		this.addRecipe(new USCFootballTrousers (ChatColor.GOLD), Material.EMERALD, 32, 1);
+		this.addRecipe(new USCBandUniformBottom (ChatColor.GOLD), Material.EMERALD, 32, 1);
+		this.addRecipe(new USCSpikedBoots (ChatColor.GOLD), Material.EMERALD, 48, 1);
+		this.addRecipe(new USCBandHead (ChatColor.GOLD), Material.EMERALD, 48, 1);
+		this.addRecipe(new USCTrojan (ChatColor.GOLD), Material.EMERALD, 48, 1);
 		
 		/** Totems */
 		this.addRecipe(new TotemOfEternalStrength(), Material.DIAMOND, 6, 1);

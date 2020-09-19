@@ -20,7 +20,7 @@ public class USCBandUniformTop extends LeatherEquipment
 		this.addAttackAttributes(2.0, 0.10);
 		this.wordsPerLine = 6;
 		this.loreColor = ChatColor.GOLD;
-		this.addLoreToItemMeta("Beat the bruins!");
+		this.addLoreToItemMeta("March your way to victory!");
 		this.makeUnbreakable();
 	}
 }
