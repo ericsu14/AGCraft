@@ -46,7 +46,9 @@ public class PathfinderGoalGiantFireball extends PathfinderGoal
 	public void e() 
 	{
 		EntityLiving entityliving = this.giant.getGoalTarget();
-		if (entityliving.h(this.giant) < 1524.0D && this.giant.hasLineOfSight(entityliving)) 
+		if (entityliving != null &&
+				entityliving.h(this.giant) < 1524.0D &&
+				this.giant.hasLineOfSight(entityliving)) 
 		{
 			// World world = this.giant.world;
 			this.a++;
