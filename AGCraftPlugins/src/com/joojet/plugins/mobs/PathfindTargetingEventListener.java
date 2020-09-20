@@ -135,6 +135,7 @@ public class PathfindTargetingEventListener implements Listener
 				entityEquipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(livingEntity);
 				if (entityEquipment != null)
 				{
+					EquipmentTools.modifyBaseStats(livingEntity, entityEquipment);
 					EquipmentTools.modifyPathfindingTargets(livingEntity, entityEquipment);
 				}
 			}

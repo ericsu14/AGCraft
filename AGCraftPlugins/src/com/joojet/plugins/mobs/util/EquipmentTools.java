@@ -1,6 +1,8 @@
 package com.joojet.plugins.mobs.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
@@ -185,17 +187,8 @@ public class EquipmentTools
 			dmg.setHealth(health);
 		}
 		
-		// Custom attack damage
-		if (mobEquipment.containsStat(MonsterStat.BASE_ATTACK_DAMAGE))
-		{
-			entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(mobEquipment.getStat(MonsterStat.BASE_ATTACK_DAMAGE));
-		}
-		
-		// Custom base speed
-		if (mobEquipment.containsStat(MonsterStat.BASE_SPEED))
-		{
-			entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(mobEquipment.getStat(MonsterStat.BASE_SPEED));
-		}
+		// Modifies base stats of the custom mob
+		modifyBaseStats (entity, mobEquipment);
 		
 		// Enables entity persistence
 		if (mobEquipment.containsFlag(MobFlag.ENABLE_PERSISTENCE))
@@ -276,11 +269,6 @@ public class EquipmentTools
 						[mobEquipment.getStat(MonsterStat.HORSE_STYLE).intValue()]);
 			}
 			
-			if (mobEquipment.containsStat(MonsterStat.HORSE_JUMP_STRENGTH))
-			{
-				horse.getAttribute(Attribute.HORSE_JUMP_STRENGTH).setBaseValue(mobEquipment.getStat(MonsterStat.HORSE_JUMP_STRENGTH));
-			}
-			
 			// Automatically tames the horse
 			horse.setTamed(true);
 		}
@@ -296,6 +284,24 @@ public class EquipmentTools
 		
 		// Equip monster mounts
 		mountMob (entity, mobEquipment);
+	}
+	
+	/** Modifies base stats of the entity based on the values set in its MobEquipment container
+	 * 	@param entity - The Living entity whose stats we are modifying
+	 *  @param mobEquipment - Class containing custom mob stat data */
+	public static void modifyBaseStats (LivingEntity entity, MobEquipment mobEquipment)
+	{
+		HashMap <MonsterStat, Double> mobStats = mobEquipment.getStatContainer();
+		
+		Attribute attribute;
+		for (Entry<MonsterStat, Double> stat : mobStats.entrySet())
+		{
+			if (stat.getKey().containsAttribute() && stat.getKey() != MonsterStat.HEALTH)
+			{
+				attribute = stat.getKey().getAttribute();
+				entity.getAttribute(attribute).setBaseValue(stat.getValue());
+			}
+		}
 	}
 	
 	/** Sets custom metadata provided in mobEquipment onto the passed living entity.

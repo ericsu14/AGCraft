@@ -167,6 +167,12 @@ public abstract class MobEquipment
 		return null;
 	}
 	
+	/** Returns the mob's stat container */
+	public HashMap <MonsterStat, Double> getStatContainer ()
+	{
+		return this.mobStats;
+	}
+	
 	/** Return the drop rates for each item in the mob's inventory */
 	public float[] getDropRates ()
 	{
