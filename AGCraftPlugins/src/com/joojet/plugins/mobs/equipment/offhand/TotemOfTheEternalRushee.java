@@ -21,7 +21,9 @@ public class TotemOfTheEternalRushee extends Equipment {
 		this.addLoreToItemMeta("Legend says that this contains the spirit of a legend who rushed AΓΩ multiple times"
 				+ " for the sake of rushing AΓΩ. Holding onto this totem will grant you his powers.");
 		this.addSpeedAttribute(0.15);
-		this.addAttackAttributes(2.0, 0.0);
+		this.addAttackAttributes(3.0, -0.15);
+		this.addUnsafeEnchantment(Enchantment.SOUL_SPEED, 1);
+		this.addUnsafeEnchantment(Enchantment.LOOT_BONUS_MOBS, 1);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
 		this.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		this.makeSoulbound();

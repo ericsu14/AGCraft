@@ -137,7 +137,7 @@ public abstract class Equipment extends ItemStack
 	protected void addHealthAttributes (double health)
 	{
 		ItemMeta meta = this.getItemMeta();
-		if (health > 0.0)
+		if (health != 0.0)
 		{
 			AttributeModifier healthMod = new AttributeModifier (UUID.randomUUID(), "generic.max_health", health, Operation.ADD_NUMBER, this.equipmentSlot);
 			meta.addAttributeModifier(Attribute.GENERIC_MAX_HEALTH, healthMod);
