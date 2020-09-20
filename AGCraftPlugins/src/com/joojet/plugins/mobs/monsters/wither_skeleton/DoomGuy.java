@@ -34,8 +34,7 @@ public class DoomGuy extends MobEquipment
 				Biome.BASALT_DELTAS);
 		
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE,
-				CustomPotionEffect.UNDEAD_HEAL, CustomPotionEffect.SPEED,
-				CustomPotionEffect.STRENGTH);
+				CustomPotionEffect.UNDEAD_HEAL, CustomPotionEffect.STRENGTH);
 		
 		this.addFactions(Faction.DOOM_GUY);
 		this.addRivalFactions(Faction.NETHER, Faction.USC, Faction.UCLA);
