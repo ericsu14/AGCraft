@@ -178,15 +178,6 @@ public class EquipmentTools
 			entity.setCustomNameVisible(mobEquipment.containsFlag(MobFlag.SHOW_NAME));
 		}
 		
-		// Custom health
-		if (mobEquipment.containsStat(MonsterStat.HEALTH))
-		{
-			double health = mobEquipment.getStat(MonsterStat.HEALTH);
-			Damageable dmg = (Damageable) entity;
-			entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(health);
-			dmg.setHealth(health);
-		}
-		
 		// Modifies base stats of the custom mob
 		modifyBaseStats (entity, mobEquipment);
 		
@@ -296,10 +287,20 @@ public class EquipmentTools
 		Attribute attribute;
 		for (Entry<MonsterStat, Double> stat : mobStats.entrySet())
 		{
-			if (stat.getKey().containsAttribute() && stat.getKey() != MonsterStat.HEALTH)
+			if (stat.getKey().containsAttribute())
 			{
-				attribute = stat.getKey().getAttribute();
-				entity.getAttribute(attribute).setBaseValue(stat.getValue());
+				if (stat.getKey() != MonsterStat.HEALTH)
+				{
+					attribute = stat.getKey().getAttribute();
+					entity.getAttribute(attribute).setBaseValue(stat.getValue());
+				}
+				else
+				{
+					double health = mobEquipment.getStat(stat.getKey());
+					Damageable dmg = (Damageable) entity;
+					entity.getAttribute(stat.getKey().getAttribute()).setBaseValue(health);
+					dmg.setHealth(health);
+				}
 			}
 		}
 	}

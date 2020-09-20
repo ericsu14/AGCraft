@@ -29,7 +29,7 @@ public class TheTraveler extends USCFaction
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
 		this.setStat(MonsterStat.HORSE_COLOR, Color.WHITE.ordinal());
 		this.setStat(MonsterStat.HORSE_STYLE, Style.WHITEFIELD.ordinal());
-		this.setStat(MonsterStat.BASE_SPEED, 0.40);
+		this.setStat(MonsterStat.BASE_SPEED, 0.35);
 		this.setStat(MonsterStat.HORSE_JUMP_STRENGTH, 1.0);
 	}
 }
