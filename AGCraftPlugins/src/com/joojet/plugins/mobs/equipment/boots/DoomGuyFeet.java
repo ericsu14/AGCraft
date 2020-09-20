@@ -22,7 +22,7 @@ public class DoomGuyFeet extends LeatherEquipment
 		this.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, 4);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 7);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 5);
-		this.addUnsafeEnchantment(Enchantment.SOUL_SPEED, 3);
+		this.addUnsafeEnchantment(Enchantment.SOUL_SPEED, 1);
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
 		this.addDefenseAttributes(3.0, 5.0, 0.0);
 		this.addSpeedAttribute(0.30);
