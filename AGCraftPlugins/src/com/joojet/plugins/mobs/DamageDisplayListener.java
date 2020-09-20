@@ -71,7 +71,8 @@ public class DamageDisplayListener implements Listener
 			damageType = DamageType.PLAYER;
 		}
 		// Checks for mob hits dealt by player inflicted critical hits
-		else if (event.getDamager().getType() == EntityType.PLAYER)
+		else if (event.getDamager().getType() == EntityType.PLAYER
+					&& event.getCause() != DamageCause.THORNS)
 		{
 			damageType = this.damageDisplayManager.checkCriticalHit((Player) event.getDamager()) ? DamageType.CRITICAL : DamageType.NORMAL;
 		}
