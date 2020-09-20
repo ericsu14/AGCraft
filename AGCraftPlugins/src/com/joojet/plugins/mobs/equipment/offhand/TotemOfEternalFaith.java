@@ -21,10 +21,11 @@ public class TotemOfEternalFaith extends Equipment
 		this.addLoreToItemMeta("Holding onto this totem will grant you eternal hope and faith, which will"
 				+ " shield you from the everlasting trials that will be thrown against you."
 				+ " However, you will be weaker in strength and power as a result.");
-		this.addHealthAttributes(14.0);
-		this.addDefenseAttributes(4.0, 6.0, 0.15);
+		this.addHealthAttributes(20.0);
+		this.addDefenseAttributes(6.0, 8.0, 0.15);
 		this.addAttackAttributes(-3.0, 0.0);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 		this.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		this.makeSoulbound();
 	}
