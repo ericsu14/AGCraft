@@ -22,7 +22,7 @@ public abstract class UCLAFaction extends MobEquipment
 		this.addRivalFactions(Faction.USC, Faction.PHANTOM, Faction.DOOM_GUY);
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.SKELETON,
 				EntityType.PLAYER, EntityType.PHANTOM, EntityType.WITHER_SKELETON, 
-				EntityType.SPIDER, EntityType.IRON_GOLEM);
+				EntityType.SPIDER, EntityType.IRON_GOLEM, EntityType.HOGLIN);
 		this.addEntitiesToIgnoreList(EntityType.CREEPER);
 	}
 	

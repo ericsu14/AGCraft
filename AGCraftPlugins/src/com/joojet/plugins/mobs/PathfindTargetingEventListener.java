@@ -157,6 +157,7 @@ public class PathfindTargetingEventListener implements Listener
 		{
 			LivingEntity drownedEntity = (LivingEntity) event.getTransformedEntity();
 			EquipmentTools.setCustomMetadata(drownedEntity, ogZombieEquipment);
+			EquipmentTools.modifyBaseStats(drownedEntity, ogZombieEquipment);
 			EquipmentTools.modifyPathfindingTargets(drownedEntity, ogZombieEquipment);
 			if (ogZombieEquipment.containsFlag(MobFlag.BOSS_BAR))
 			{
