@@ -35,6 +35,6 @@ public class SoulEater extends MobEquipment
 		// Chestplate
 		this.chestplate = new DarkNetheriteChestplate (this.color);
 		this.setStat(MonsterStat.EXPERIENCE, 25.0);
-		
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 12.0);
 	}
 }

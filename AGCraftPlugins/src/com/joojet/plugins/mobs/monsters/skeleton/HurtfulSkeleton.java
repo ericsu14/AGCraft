@@ -26,19 +26,14 @@ public class HurtfulSkeleton extends MobEquipment
 		
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
-		// Weapon
 		this.weapon = new VeryPotentBow (this.color);
-		// Offhand
 		this.offhand = new HurtfulArrow (this.color);
-		// Helmet
 		this.helmet = new ReinforcedIronHelmet (this.color);
-		// Chestplate
 		this.chestplate = new BulletproofIronChestplate (this.color);
-		// Leggings
 		this.leggings = new ReinforcedIronLeggings (this.color);
-		// Boots
 		this.boots = new LightweightIronBoots (this.color);
 		
 		this.setStat(MonsterStat.EXPERIENCE, 18.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 8.0);
 	}
 }

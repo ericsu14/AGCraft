@@ -40,6 +40,7 @@ public class UCLABearTamer extends UCLAFaction
 		this.weapon = new TheTrojanDestroyer ();
 		this.offhand = new PoisonousArrow (ChatColor.GREEN);
 		this.mount = new MountedMob (EntityType.POLAR_BEAR, new TheBruinBear());
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 15.0);
 		
 		this.addMonsterDrops(new MonsterDrop (new TheTrojanDestroyer(), 0.05));
 	}

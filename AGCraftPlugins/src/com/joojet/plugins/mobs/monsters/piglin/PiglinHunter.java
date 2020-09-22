@@ -26,5 +26,6 @@ public class PiglinHunter extends MobEquipment
 		this.weapon = new ShotBow (ChatColor.GOLD);
 		
 		this.setStat(MonsterStat.EXPERIENCE, 18.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 8.0);
 	}
 }

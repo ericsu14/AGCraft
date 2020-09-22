@@ -47,5 +47,6 @@ public class SoulObliterator extends MobEquipment
 		this.offhand = new EnhancedWitheringArrow (this.color);
 		
 		this.setStat(MonsterStat.EXPERIENCE, 45.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 8.0);
 	}
 }

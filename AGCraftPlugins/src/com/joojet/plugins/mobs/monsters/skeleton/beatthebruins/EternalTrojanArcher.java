@@ -24,6 +24,7 @@ public class EternalTrojanArcher extends USCFaction
 	{
 		super (MonsterType.ETERNAL_TROJAN_ARCHER);
 		this.addBiomes(Biome.THE_VOID);
+		this.setStat(MonsterStat.HEALTH, 40.0);
 		
 		this.name = ChatColor.RED + "Eternal"
 				+ ChatColor.GOLD + " Trojan"
@@ -41,7 +42,7 @@ public class EternalTrojanArcher extends USCFaction
 		
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
-		this.setStat(MonsterStat.HEALTH, 40.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 12.0);
 		
 		this.addMobFlags(MobFlag.SHOW_NAME,
 				MobFlag.DISABLE_SUFFOCATION_DAMAGE);
