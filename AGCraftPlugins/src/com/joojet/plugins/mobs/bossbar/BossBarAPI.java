@@ -96,12 +96,15 @@ public class BossBarAPI
 		if (uuidKey != null && activeBossBars.containsKey(uuidKey))
 		{
 			entry = activeBossBars.get(uuidKey);
-			if (entry.hasActiveTask())
+			if (entry != null)
 			{
-				entry.task.cleanup();
-				entry.task.cancel();
+				if (entry.hasActiveTask())
+				{
+					entry.task.cleanup();
+					entry.task.cancel();
+				}
+				activeBossBars.remove(uuidKey);
 			}
-			activeBossBars.remove(uuidKey);
 		}
 	}
 	
@@ -128,10 +131,13 @@ public class BossBarAPI
 		LivingEntity ent;
 		for (BossBarNode node : activeBossBars.values())
 		{
-			ent = node.entity;
-			if (ent != null)
+			if (node != null)
 			{
-				removeBossBar (ent);
+				ent = node.entity;
+				if (ent != null)
+				{
+					removeBossBar (ent);
+				}
 			}
 		}
 		activeBossBars.clear();

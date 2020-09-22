@@ -121,7 +121,7 @@ public class RewardGUI implements Listener
         		// Checks if we should launch a small fireworks show based on the retrieved item
         		if (clickedItem.getType() == Material.CAKE)
         		{
-        			new SpawnFireworksOnLocationTask (this.player.getLocation(), 48, 2, 250).runTaskTimer(AGCraftPlugin.plugin, 30, 15);
+        			new SpawnFireworksOnLocationTask (this.player.getLocation(), 48, 3, 250).runTaskTimer(AGCraftPlugin.plugin, 30, 15);
         			this.player.sendMessage(ChatColor.GOLD + "Yay! Happy birthday " + ChatColor.AQUA + this.player.getDisplayName() +
         					ChatColor.GOLD + "!!");
         			this.player.playSound(this.player.getLocation(), Sound.MUSIC_DISC_CAT, SoundCategory.RECORDS, 1.0f, 1.0f);
