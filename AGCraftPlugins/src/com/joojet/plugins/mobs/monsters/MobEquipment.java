@@ -21,6 +21,7 @@ import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.equipment.offhand.TippedArrow;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.util.ConvertColors;
@@ -75,6 +76,8 @@ public abstract class MobEquipment
 	protected ArrayList <MonsterDrop> loot;
 	/** Custom monster that this entity can ride upon spawning */
 	protected MountedMob mount;
+	/** Custom tipped arrow the monster is set to shoot with */
+	protected TippedArrow tippedArrow;
 	
 	public MobEquipment (MonsterType mobType)
 	{
@@ -104,6 +107,7 @@ public abstract class MobEquipment
 		this.mount = null;
 		// Custom loot
 		this.loot = new ArrayList <MonsterDrop> ();
+		this.tippedArrow = null;
 	}
 	
 	/** Sets up drop rates for this entity.
@@ -402,6 +406,18 @@ public abstract class MobEquipment
 	public MountedMob getMountedMob ()
 	{
 		return this.mount;
+	}
+	
+	/** Returns true if this monster contains a custom tipped arrow to shoot with */
+	public boolean hasTippedArrow ()
+	{
+		return this.tippedArrow != null;
+	}
+	
+	/** Returns the monster's custom tipped arrow */
+	public TippedArrow getTippedArrow ()
+	{
+		return this.tippedArrow;
 	}
 	
 	/** Return the equipment's monster type identifier as a string. */

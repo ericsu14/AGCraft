@@ -6,6 +6,7 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LargeFireball;
@@ -18,6 +19,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.plugin.Plugin;
@@ -216,6 +218,41 @@ public class AmplifiedMobSpawner implements Listener
 			if (equipment.containsFlag(MobFlag.ENABLE_PERSISTENCE_UPON_RIDING))
 			{
 				tamed.setRemoveWhenFarAway(false);
+			}
+		}
+	}
+	
+	/** Captures entity-launched arrows and changes the arrow to its custom tipped arrow if
+	 *  it has one defined for it. This also modifies the base damage of the shot arrow
+	 *  if it belongs to a custom monster that has that custom attribute for arrows. */
+	@EventHandler
+	public void modifyCustomArrows (EntityShootBowEvent event)
+	{
+		if (event.getProjectile() == null 
+				|| !(event.getEntity() instanceof LivingEntity))
+		{
+			return;
+		}
+		
+		LivingEntity entity = (LivingEntity) event.getEntity();
+		MobEquipment equipment = getMobEquipmentFromEntity (entity);
+		
+		if (equipment != null)
+		{
+			if (event.getProjectile() instanceof Arrow)
+			{
+				Arrow arrow = (Arrow) event.getProjectile();
+				/* Transforms arrow to a tipped arrow if its shooter has custom data 
+				 * specified for their arrows */
+				if (equipment.hasTippedArrow())
+				{
+					equipment.getTippedArrow().applyPotionDataToArrow(arrow);
+				}
+				
+				if (equipment.containsStat(MonsterStat.BASE_ARROW_DAMAGE))
+				{
+					arrow.setDamage(equipment.getStat(MonsterStat.BASE_ARROW_DAMAGE));
+				}
 			}
 		}
 	}

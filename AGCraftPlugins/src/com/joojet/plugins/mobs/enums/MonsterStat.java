@@ -23,7 +23,9 @@ public enum MonsterStat
 	/** Modifies the jump strength if this custom mob is a horse */
 	HORSE_JUMP_STRENGTH (Attribute.HORSE_JUMP_STRENGTH),
 	/** Modifies the base speed of the mob */
-	BASE_SPEED (Attribute.GENERIC_MOVEMENT_SPEED);
+	BASE_SPEED (Attribute.GENERIC_MOVEMENT_SPEED),
+	/** Modifies the base damage of shot arrows */
+	BASE_ARROW_DAMAGE;
 	
 	/** The Minecraft entity attribute this monsterstat is tied to */
 	private Attribute attribute;

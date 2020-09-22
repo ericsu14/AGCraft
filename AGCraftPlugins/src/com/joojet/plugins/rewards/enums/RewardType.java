@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import com.joojet.plugins.mobs.equipment.cake.SprinklesCake;
 import com.joojet.plugins.mobs.equipment.head.BruinHead;
 import com.joojet.plugins.mobs.equipment.offhand.BlueAndGold;
 import com.joojet.plugins.mobs.equipment.offhand.BruinShield;
@@ -49,7 +50,8 @@ public enum RewardType
 	TROJAN_WARRIOR,
 	ETERNAL_TROJAN_ARCHER,
 	JOHNNY_RUSNAK,
-	SPIRITUAL_TRAVESTY;
+	SPIRITUAL_TRAVESTY,
+	SPRINKLES_CAKE;
 	
 	public ItemStack getReward ()
 	{
@@ -117,6 +119,8 @@ public enum RewardType
 				return new SummonJohnnyRusnak();
 			case SPIRITUAL_TRAVESTY:
 				return new SpiritualTravesty(ChatColor.GOLD);
+			case SPRINKLES_CAKE:
+				return new SprinklesCake ();
 			default:
 				break;
 		}
