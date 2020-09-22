@@ -7,6 +7,7 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -123,7 +124,8 @@ public class RewardGUI implements Listener
         			new SpawnFireworksOnLocationTask (this.player.getLocation(), 48, 2, 250).runTaskTimer(AGCraftPlugin.plugin, 30, 15);
         			this.player.sendMessage(ChatColor.GOLD + "Yay! Happy birthday " + ChatColor.AQUA + this.player.getDisplayName() +
         					ChatColor.GOLD + "!!");
-        			this.player.playSound(this.player.getLocation(), Sound.MUSIC_DISC_CAT, 1.0f, 1.0f);
+        			this.player.playSound(this.player.getLocation(), Sound.MUSIC_DISC_CAT, SoundCategory.RECORDS, 1.0f, 1.0f);
+        			this.player.getWorld().setTime(14000);
         		}
         		
         		this.inv.remove(clickedItem);
