@@ -2,7 +2,6 @@ package com.joojet.plugins.rewards.gui;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -21,12 +20,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.agcraft.util.StringUtil;
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.fireworks.tasks.SpawnFireworksOnLocationTask;
-import com.joojet.plugins.mobs.metadata.EquipmentTypeMetadata;
 import com.joojet.plugins.rewards.database.RewardDatabaseManager;
 import com.joojet.plugins.rewards.interfaces.RewardEntry;
-import com.joojet.plugins.rewards.interpreter.EquipmentTypeInterpreter;
 
 import org.bukkit.ChatColor;
 
@@ -43,21 +39,12 @@ public class RewardGUI implements Listener
     private int wordsPerLine;
     /** The total amount of reward items that will be displayed in the rewards menu at a time */
     private int maxInvSize = 36;
-    /** A hashset containing a set of items that will spawn a small fireworks show upon
-     *  obtaining the rewards. */
-    private HashSet <EquipmentTypes> fireworkShowItems;
-    /** Internal interpreter used to lookup Equipment Types by string */
-    private EquipmentTypeInterpreter equipmentTypeInterpreter;
 
     public RewardGUI(Player player) 
     {
         this.player = player;
         this.entries = new ArrayList <RewardEntry> ();
         this.wordsPerLine = 6;
-        this.fireworkShowItems = new HashSet <EquipmentTypes> ();
-        this.equipmentTypeInterpreter = new EquipmentTypeInterpreter ();
-        
-        this.fireworkShowItems.add(EquipmentTypes.SPRINKLES_CAKE);
     }
     
 	public void onEnable ()
@@ -131,14 +118,12 @@ public class RewardGUI implements Listener
         		this.player.sendMessage (ChatColor.AQUA + "Acquired " + clickedItem.getItemMeta().getDisplayName() + ChatColor.AQUA +"!");
         		this.player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
         		// Checks if we should launch a small fireworks show based on the retrieved item
-        		String identifier = new EquipmentTypeMetadata().getStringMetadata(clickedItem.getItemMeta());
-        		if (identifier != null)
+        		if (clickedItem.getType() == Material.CAKE)
         		{
-        			EquipmentTypes identifierType = this.equipmentTypeInterpreter.searchTrie(identifier);
-        			if (identifierType != null)
-        			{
-        				new SpawnFireworksOnLocationTask (this.player.getLocation(), 48, 2, 200).runTaskTimer(AGCraftPlugin.plugin, 30, 15);
-        			}
+        			new SpawnFireworksOnLocationTask (this.player.getLocation(), 48, 2, 250).runTaskTimer(AGCraftPlugin.plugin, 30, 15);
+        			this.player.sendMessage(ChatColor.GOLD + "Yay! Happy birthday " + ChatColor.AQUA + this.player.getDisplayName() +
+        					ChatColor.GOLD + "!!");
+        			this.player.playSound(this.player.getLocation(), Sound.MUSIC_DISC_CAT, 1.0f, 1.0f);
         		}
         		
         		this.inv.remove(clickedItem);

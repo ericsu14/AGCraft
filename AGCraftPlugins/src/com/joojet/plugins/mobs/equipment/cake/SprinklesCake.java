@@ -20,8 +20,10 @@ public class SprinklesCake extends Equipment
 		this.setDisplayName(StringUtil.alternateTextColors("sprinkle's Birthday Cake", TextPattern.WORD, 
 				ChatColor.RED, ChatColor.GOLD));
 		
-		this.loreColor = ChatColor.GOLD;
-		this.addLoreToItemMeta("A cake created by jooj to celebrate someone's special day!");
+		this.loreColor = ChatColor.LIGHT_PURPLE;
+		this.wordsPerLine = 6;
+		this.addLoreToItemMeta(StringUtil.alternateTextColors("A cake baked by jooj to celebrate someone's special day!", TextPattern.WORD,
+				ChatColor.RED, ChatColor.GOLD, ChatColor.YELLOW, ChatColor.GREEN, ChatColor.BLUE, ChatColor.DARK_PURPLE, ChatColor.LIGHT_PURPLE));
 		this.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 		this.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		this.makeSoulbound();
