@@ -19,6 +19,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import com.joojet.plugins.mobs.enums.EquipmentTypes;
 import com.joojet.plugins.mobs.enums.PlayerHead;
+import com.joojet.plugins.mobs.metadata.EquipmentTypeMetadata;
 import com.joojet.plugins.mobs.metadata.SoulBoundMetadata;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
@@ -50,6 +51,7 @@ public abstract class Equipment extends ItemStack
 		this.playerHead = null;
 		this.wordsPerLine = 4;
 		this.loreColor = chatColor;
+		new EquipmentTypeMetadata (this).addStringMetadata(this.getItemMeta());
 	}
 	
 	/** Constructs a item with a specified item count */
@@ -62,6 +64,7 @@ public abstract class Equipment extends ItemStack
 		this.playerHead = null;
 		this.wordsPerLine = 4;
 		this.loreColor = chatColor;
+		new EquipmentTypeMetadata (this).addStringMetadata(this.getItemMeta());
 	}
 	
 	/** Constructs a basic playerhead item */
@@ -75,6 +78,7 @@ public abstract class Equipment extends ItemStack
 		this.createHeadData(this.playerHead);
 		this.wordsPerLine = 4;
 		this.loreColor = chatColor;
+		new EquipmentTypeMetadata (this).addStringMetadata(this.getItemMeta());
 	}
 	
 	/** Adds an attack speed attribute to a piece of armor or weapon */
@@ -258,5 +262,12 @@ public abstract class Equipment extends ItemStack
 		new SoulBoundMetadata().addStringMetadata(meta);
 		this.setItemMeta(meta);
 		this.addLoreToItemMeta(ChatColor.GOLD + "Soulbound");
+	}
+	
+	/** Returns the equipment's EquipmentType identifier as a string */
+	@Override
+	public String toString ()
+	{
+		return this.equipmentType.toString();
 	}
 }
