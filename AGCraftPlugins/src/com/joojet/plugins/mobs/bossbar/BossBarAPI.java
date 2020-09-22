@@ -1,7 +1,7 @@
 package com.joojet.plugins.mobs.bossbar;
 
-import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
@@ -18,7 +18,7 @@ import com.joojet.plugins.mobs.metadata.BossMetadata;
 public class BossBarAPI 
 {
 	/** Stores a static table of all active custom boss bars in this server */
-	public static HashMap <UUID, BossBarNode> activeBossBars = new HashMap <UUID, BossBarNode> ();
+	public static ConcurrentHashMap <UUID, BossBarNode> activeBossBars = new ConcurrentHashMap <UUID, BossBarNode> ();
 	
 	/** Attempts to create a new Boss Bar for the passed living entity
 	 * 		@param entity - The Living entity we are creating the boss bar for */
@@ -129,6 +129,11 @@ public class BossBarAPI
 	public static void cleanup ()
 	{
 		LivingEntity ent;
+		if (activeBossBars == null)
+		{
+			return;
+		}
+		
 		for (BossBarNode node : activeBossBars.values())
 		{
 			if (node != null)
