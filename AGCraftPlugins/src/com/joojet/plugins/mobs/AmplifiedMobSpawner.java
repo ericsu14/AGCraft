@@ -5,7 +5,9 @@ import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -15,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.WanderingTrader;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -29,9 +32,11 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
+import com.joojet.plugins.mobs.equipment.Equipment;
 import com.joojet.plugins.mobs.equipment.EquipmentLoader;
 import com.joojet.plugins.mobs.fireworks.tasks.SpawnFireworksOnLocationTask;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.metadata.EquipmentTypeMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.spawnhandlers.AmplifiedMobHandler;
@@ -262,6 +267,34 @@ public class AmplifiedMobSpawner implements Listener
 		}
 	}
 	
+	/** If the player places a custom player head (defined in equipments) down into the world,
+	 *  transfer the head's equipment data to that block so it can be retrieved once the player
+	 *  breaks the custom head block. */
+	@EventHandler
+	public void transferCustomHeadDatatoBlock (BlockPlaceEvent event)
+	{
+		ItemStack item = event.getItemInHand();
+		Block block = event.getBlock();
+		
+		// If the placed item / block is not a player head, do nothing
+		if (item.getType() != Material.PLAYER_HEAD
+				|| item.getType() != Material.PLAYER_WALL_HEAD
+				|| block.getType() != Material.PLAYER_HEAD
+				|| block.getType() != Material.PLAYER_WALL_HEAD)
+		{
+			return;
+		}
+		
+		for (ItemStack drop : block.getDrops())
+		{
+			if (drop.getType() == Material.PLAYER_HEAD)
+			{
+				drop = item;
+				break;
+			}
+		}
+	}
+	
 	/** Makes the names of raider mobs visible */
 	public void makeRaiderNameVisible (LivingEntity entity, EntityType type)
 	{
@@ -302,6 +335,18 @@ public class AmplifiedMobSpawner implements Listener
 		MobEquipment entityEquipment = mobTable.searchTrie(entityMeta);
 		
 		return entityEquipment;
+	}
+	
+	/** Retrieves equipment data from an equipment or block's persistent data container. */
+	public static Equipment getEquipmentData (PersistentDataHolder holder)
+	{
+		String idenfitier = new EquipmentTypeMetadata ().getStringMetadata(holder);
+		if (idenfitier != null)
+		{
+			Equipment equipment = equipmentLoader.getInterpreter().searchTrie(idenfitier);
+			return equipment;
+		}
+		return null;
 	}
 	
 }
