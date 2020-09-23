@@ -302,7 +302,6 @@ public class AmplifiedMobSpawner implements Listener
 	public void transferCustomHeadDataOnBlockBreak (BlockDropItemEvent event)
 	{
 		BlockState blockState = event.getBlockState();
-		event.getPlayer().sendMessage(blockState.getType().toString());
 		if ((blockState.getType() != Material.PLAYER_HEAD && 
 				blockState.getType() != Material.PLAYER_WALL_HEAD) || event.getItems().isEmpty())
 		{
