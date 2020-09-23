@@ -51,7 +51,7 @@ public abstract class Equipment extends ItemStack
 		this.playerHead = null;
 		this.wordsPerLine = 4;
 		this.loreColor = chatColor;
-		new EquipmentTypeMetadata (this).addStringMetadata(this.getItemMeta());
+		this.addEquipmentIdentifierIntoMetadataContainer();
 	}
 	
 	/** Constructs a item with a specified item count */
@@ -64,7 +64,7 @@ public abstract class Equipment extends ItemStack
 		this.playerHead = null;
 		this.wordsPerLine = 4;
 		this.loreColor = chatColor;
-		new EquipmentTypeMetadata (this).addStringMetadata(this.getItemMeta());
+		this.addEquipmentIdentifierIntoMetadataContainer();
 	}
 	
 	/** Constructs a basic playerhead item */
@@ -78,7 +78,7 @@ public abstract class Equipment extends ItemStack
 		this.createHeadData(this.playerHead);
 		this.wordsPerLine = 4;
 		this.loreColor = chatColor;
-		new EquipmentTypeMetadata (this).addStringMetadata(this.getItemMeta());
+		this.addEquipmentIdentifierIntoMetadataContainer();
 	}
 	
 	/** Adds an attack speed attribute to a piece of armor or weapon */
@@ -262,6 +262,15 @@ public abstract class Equipment extends ItemStack
 		new SoulBoundMetadata().addStringMetadata(meta);
 		this.setItemMeta(meta);
 		this.addLoreToItemMeta(ChatColor.GOLD + "Soulbound");
+	}
+	
+	/** Adds the equipment's EquipmentType identifier into its own persistent data container,
+	 *  allowing equipment to be searchable by its identifier name in the future */
+	protected void addEquipmentIdentifierIntoMetadataContainer ()
+	{
+		ItemMeta meta = this.getItemMeta();
+		new EquipmentTypeMetadata(this).addStringMetadata(meta);
+		this.setItemMeta(meta);
 	}
 	
 	/** Returns the equipment's EquipmentType identifier as a string */

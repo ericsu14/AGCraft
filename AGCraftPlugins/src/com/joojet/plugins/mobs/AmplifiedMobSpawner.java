@@ -29,6 +29,7 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
+import com.joojet.plugins.mobs.equipment.EquipmentLoader;
 import com.joojet.plugins.mobs.fireworks.tasks.SpawnFireworksOnLocationTask;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
@@ -51,6 +52,10 @@ public class AmplifiedMobSpawner implements Listener
 	
 	/** Search trie used to lookup custom monsters by name */
 	public static MonsterTypeInterpreter mobTable = new MonsterTypeInterpreter ();
+	
+	/** Contains an internal search trie allowing custom equipment to be able to be looked up by its
+	 *  Equipment Type identifier. */
+	public static EquipmentLoader equipmentLoader = new EquipmentLoader ();
 	
 	/** Used to generate random numbers */
 	private Random rand = new Random ();
