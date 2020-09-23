@@ -117,6 +117,7 @@ public class RewardGUI implements Listener
     		{
     			this.player.sendMessage(ChatColor.RED + "I am sorry " + ChatColor.GOLD + player.getDisplayName() + ChatColor.RED +
     					", but I cannot let you do that. Please go back to the " + ChatColor.GOLD + "overworld" + ChatColor.RED + " to claim this reward.");
+    			this.player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f);
     			return;
     		}
     		
