@@ -7,7 +7,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.AbstractPotionEquipment;
 
 public abstract class TippedArrow extends AbstractPotionEquipment 
@@ -15,7 +15,7 @@ public abstract class TippedArrow extends AbstractPotionEquipment
 	/** Constructs a tipped arrow with a count of 1
 	 * 		@param equipmentType - Type of equipment this is
 	 * 		@param color - ChatColor applied to the lore and name of the tipped arrow */
-	public TippedArrow (EquipmentTypes equipmentType, ChatColor color)
+	public TippedArrow (EquipmentType equipmentType, ChatColor color)
 	{
 		super (equipmentType, Material.TIPPED_ARROW, EquipmentSlot.OFF_HAND, color);
 	}
@@ -24,7 +24,7 @@ public abstract class TippedArrow extends AbstractPotionEquipment
 	 * 		@param equipmentType - Type of equipment this is
 	 * 		@param color - ChatColor applied to the lore and name of the tipped arrow
 	 * 		@param count - Number of arrows in this stack */
-	public TippedArrow (EquipmentTypes equipmentType, ChatColor color, int count)
+	public TippedArrow (EquipmentType equipmentType, ChatColor color, int count)
 	{
 		super (equipmentType, Material.TIPPED_ARROW, EquipmentSlot.OFF_HAND, color, count);
 	}

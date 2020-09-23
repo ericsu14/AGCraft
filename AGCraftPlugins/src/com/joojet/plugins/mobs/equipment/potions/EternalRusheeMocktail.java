@@ -4,14 +4,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 
 public class EternalRusheeMocktail extends PotionEquipment 
 {
 	
 	public EternalRusheeMocktail(ChatColor color) 
 	{
-		super(EquipmentTypes.ETERNAL_RUSHEE_POTION, color);
+		super(EquipmentType.ETERNAL_RUSHEE_POTION, color);
 	}
 
 	@Override

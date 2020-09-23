@@ -9,14 +9,14 @@ import org.bukkit.inventory.EquipmentSlot;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.ShieldEquipment;
 
 public class LeftCrashSymbol extends ShieldEquipment
 {
 	public LeftCrashSymbol (ChatColor color)
 	{
-		super (EquipmentTypes.LEFT_CRASH_SYMBOL, DyeColor.YELLOW, EquipmentSlot.HAND, color);
+		super (EquipmentType.LEFT_CRASH_SYMBOL, DyeColor.YELLOW, EquipmentSlot.HAND, color);
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 5;
 		this.setDisplayName(StringUtil.alternateTextColors("Left Crash Symbol", TextPattern.WORD, 

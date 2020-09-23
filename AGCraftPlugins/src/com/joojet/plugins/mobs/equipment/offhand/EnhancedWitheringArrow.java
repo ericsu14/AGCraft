@@ -4,13 +4,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 
 public class EnhancedWitheringArrow extends TippedArrow
 {
 	public EnhancedWitheringArrow (ChatColor color)
 	{
-		super (EquipmentTypes.ENHANCED_WITHERING_ARROW, color);
+		super (EquipmentType.ENHANCED_WITHERING_ARROW, color);
 	}
 	
 	@Override

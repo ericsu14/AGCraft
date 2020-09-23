@@ -5,7 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 
@@ -13,7 +13,7 @@ public class TrojanSword extends Equipment
 {
 	public TrojanSword (ChatColor color)
 	{
-		super (EquipmentTypes.TROJAN_SWORD, Material.IRON_SWORD, EquipmentSlot.HAND, color);
+		super (EquipmentType.TROJAN_SWORD, Material.IRON_SWORD, EquipmentSlot.HAND, color);
 		this.setDisplayName(USCFaction.generateUSCDisplayName("Trojan Sword"));
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 7;

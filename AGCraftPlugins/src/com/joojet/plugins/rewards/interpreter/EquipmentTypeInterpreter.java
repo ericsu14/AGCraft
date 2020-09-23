@@ -1,12 +1,12 @@
 package com.joojet.plugins.rewards.interpreter;
 
 import com.joojet.plugins.agcraft.interfaces.AbstractInterpreter;
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 
-public class EquipmentTypeInterpreter extends AbstractInterpreter <EquipmentTypes>
+public class EquipmentTypeInterpreter extends AbstractInterpreter <EquipmentType>
 {
 	public EquipmentTypeInterpreter ()
 	{
-		super (EquipmentTypes.values());
+		super (EquipmentType.values());
 	}
 }

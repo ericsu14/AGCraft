@@ -5,14 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class PerpetualTorment extends Equipment
 {
 	public PerpetualTorment (ChatColor color)
 	{
-		super (EquipmentTypes.PERPETUAL_TORMENT, Material.DIAMOND_SWORD, EquipmentSlot.OFF_HAND, color);
+		super (EquipmentType.PERPETUAL_TORMENT, Material.DIAMOND_SWORD, EquipmentSlot.OFF_HAND, color);
 		this.setDisplayName("Perpetual Torment");
 		this.addLoreToItemMeta("With boiling blood, he scoured the Umbral Plains seeking vengeance against the dark lords who had wronged him. ");
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);

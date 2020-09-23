@@ -17,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.joojet.plugins.mobs.metadata.EquipmentTypeMetadata;
 import com.joojet.plugins.mobs.metadata.SoulBoundMetadata;
@@ -39,10 +39,10 @@ public abstract class Equipment extends ItemStack
 	/** Chat color applied to the equipment's lore. Defalut color is set to chatColor */
 	protected ChatColor loreColor;
 	/** Identifies the type of equipment this is */
-	protected EquipmentTypes equipmentType;
+	protected EquipmentType equipmentType;
 	
 	/** Constructs a basic item with a count of 1 */
-	public Equipment (EquipmentTypes equipmentType, Material material, EquipmentSlot equipmentSlot, ChatColor chatColor)
+	public Equipment (EquipmentType equipmentType, Material material, EquipmentSlot equipmentSlot, ChatColor chatColor)
 	{
 		super (material, 1);
 		this.equipmentType = equipmentType;
@@ -55,7 +55,7 @@ public abstract class Equipment extends ItemStack
 	}
 	
 	/** Constructs a item with a specified item count */
-	public Equipment (EquipmentTypes equipmentType, Material material, EquipmentSlot equipmentSlot, ChatColor chatColor, int count)
+	public Equipment (EquipmentType equipmentType, Material material, EquipmentSlot equipmentSlot, ChatColor chatColor, int count)
 	{		
 		super (material, (count > 64) ? 64 : count);
 		this.equipmentType = equipmentType;
@@ -68,7 +68,7 @@ public abstract class Equipment extends ItemStack
 	}
 	
 	/** Constructs a basic playerhead item */
-	public Equipment (EquipmentTypes equipmentType, PlayerHead head, ChatColor chatColor)
+	public Equipment (EquipmentType equipmentType, PlayerHead head, ChatColor chatColor)
 	{
 		super (Material.PLAYER_HEAD, 1);
 		this.equipmentType = equipmentType;

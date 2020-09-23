@@ -7,14 +7,14 @@ import org.bukkit.inventory.EquipmentSlot;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class BruinSword extends Equipment
 {
 	public BruinSword (ChatColor color)
 	{
-		super (EquipmentTypes.BRUIN_SWORD, Material.IRON_SWORD, EquipmentSlot.HAND, color);
+		super (EquipmentType.BRUIN_SWORD, Material.IRON_SWORD, EquipmentSlot.HAND, color);
 		this.setDisplayName(StringUtil.alternateTextColors("The Bruin Sword", TextPattern.WORD, 
 				ChatColor.AQUA, ChatColor.GOLD));
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 3);

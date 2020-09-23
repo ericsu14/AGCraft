@@ -8,14 +8,14 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.ShieldEquipment;
 
 public class BlueAndGold extends ShieldEquipment 
 {
 	public BlueAndGold ()
 	{
-		super (EquipmentTypes.BLUE_AND_GOLD, DyeColor.BLUE, EquipmentSlot.OFF_HAND, ChatColor.GOLD);
+		super (EquipmentType.BLUE_AND_GOLD, DyeColor.BLUE, EquipmentSlot.OFF_HAND, ChatColor.GOLD);
 		this.wordsPerLine = 8;
 		this.loreColor = ChatColor.AQUA;
 		this.setDisplayName("The " + ChatColor.BLUE + "Blue " + this.chatColor + "and Gold");

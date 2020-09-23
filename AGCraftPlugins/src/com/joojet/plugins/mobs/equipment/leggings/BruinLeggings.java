@@ -5,7 +5,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.LeatherEquipment;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 
@@ -13,7 +13,7 @@ public class BruinLeggings extends LeatherEquipment
 {
 	public BruinLeggings (ChatColor color)
 	{
-		super (EquipmentTypes.BRUIN_LEGS, Material.LEATHER_LEGGINGS, EquipmentSlot.LEGS, color);
+		super (EquipmentType.BRUIN_LEGS, Material.LEATHER_LEGGINGS, EquipmentSlot.LEGS, color);
 		this.wordsPerLine = 6;
 		this.loreColor = ChatColor.GOLD;
 		this.setDisplayName(UCLAFaction.generateUCLADisplayName("Bulky Leggings"));

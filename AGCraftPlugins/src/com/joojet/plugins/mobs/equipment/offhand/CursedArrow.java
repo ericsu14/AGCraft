@@ -4,13 +4,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 
 public class CursedArrow extends TippedArrow
 {
 	public CursedArrow (ChatColor color)
 	{
-		super (EquipmentTypes.CURSED_ARROW, color);
+		super (EquipmentType.CURSED_ARROW, color);
 	}
 	
 	@Override

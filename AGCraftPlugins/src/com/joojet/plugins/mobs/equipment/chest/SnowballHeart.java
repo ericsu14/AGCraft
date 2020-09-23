@@ -5,14 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class SnowballHeart extends Equipment
 {
 	public SnowballHeart (ChatColor color)
 	{
-		super (EquipmentTypes.SNOWBALL_HEART, Material.SNOWBALL, EquipmentSlot.CHEST, color);
+		super (EquipmentType.SNOWBALL_HEART, Material.SNOWBALL, EquipmentSlot.CHEST, color);
 		this.setDisplayName("Snowball's Heart");
 		this.addLoreToItemMeta("His fur is as white as snow.");
 		this.addDefenseAttributes(8.0, 6.0, 0.75);

@@ -8,7 +8,7 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 
 public abstract class AbstractPotionEquipment extends Equipment 
 {
@@ -17,7 +17,7 @@ public abstract class AbstractPotionEquipment extends Equipment
 	 * 		@param material - Type of material this item is made out of
 	 * 		@param equipment - The equipment slot in which this item's stats are applied to
 	 * 		@param color - ChatColor applied to this equipment's name and lore */
-	public AbstractPotionEquipment (EquipmentTypes equipmentType, Material material, EquipmentSlot equipment, ChatColor color)
+	public AbstractPotionEquipment (EquipmentType equipmentType, Material material, EquipmentSlot equipment, ChatColor color)
 	{
 		super (equipmentType, material, equipment, color);
 		this.addPotionData();
@@ -29,7 +29,7 @@ public abstract class AbstractPotionEquipment extends Equipment
 	 * 		@param equipment - The equipment slot in which this item's stats are applied to
 	 * 		@param color - ChatColor applied to this equipment's name and lore
 	 * 		@param count - Number of items that comes with this itemstack */
-	public AbstractPotionEquipment (EquipmentTypes equipmentType, Material material, EquipmentSlot equipment, ChatColor color, int count)
+	public AbstractPotionEquipment (EquipmentType equipmentType, Material material, EquipmentSlot equipment, ChatColor color, int count)
 	{
 		super (equipmentType, material, equipment, color, count);
 		this.addPotionData();

@@ -5,14 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class PotentBow extends Equipment
 {
 	public PotentBow (ChatColor color)
 	{
-		super (EquipmentTypes.POTENT_BOW, Material.BOW, EquipmentSlot.HAND, color);
+		super (EquipmentType.POTENT_BOW, Material.BOW, EquipmentSlot.HAND, color);
 		this.setDisplayName("Potent Bow");
 		this.addLoreToItemMeta("Guaranteed to ruin your day.");
 		this.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 3);

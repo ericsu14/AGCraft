@@ -5,14 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class RoyalGoldBoots extends Equipment
 {
 	public RoyalGoldBoots (ChatColor color)
 	{
-		super (EquipmentTypes.ROYAL_GOLD_BOOTS, Material.GOLDEN_BOOTS, EquipmentSlot.FEET, color);
+		super (EquipmentType.ROYAL_GOLD_BOOTS, Material.GOLDEN_BOOTS, EquipmentSlot.FEET, color);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 4);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 2);

@@ -7,14 +7,14 @@ import org.bukkit.inventory.EquipmentSlot;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class TheTrojanDestroyer extends Equipment 
 {
 	public TheTrojanDestroyer ()
 	{
-		super (EquipmentTypes.THE_TROJAN_DESTROYER, Material.BOW, EquipmentSlot.HAND, ChatColor.AQUA);
+		super (EquipmentType.THE_TROJAN_DESTROYER, Material.BOW, EquipmentSlot.HAND, ChatColor.AQUA);
 		this.setDisplayName(StringUtil.alternateTextColors("The Trojan Destroyer", TextPattern.WORD, 
 				ChatColor.AQUA, ChatColor.GOLD));
 		this.wordsPerLine = 6;

@@ -5,14 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class ReinforcedDiamondHelmet extends Equipment 
 {
 	public ReinforcedDiamondHelmet (ChatColor color)
 	{
-		super (EquipmentTypes.REINFORCED_DIAMOND_HELMET, Material.DIAMOND_HELMET, EquipmentSlot.HEAD, color);
+		super (EquipmentType.REINFORCED_DIAMOND_HELMET, Material.DIAMOND_HELMET, EquipmentSlot.HEAD, color);
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 6;
 		this.setDisplayName("Reinforced Diamond Helmet");

@@ -5,14 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class ReinforcedIronHelmet extends Equipment
 {
 	public ReinforcedIronHelmet (ChatColor color)
 	{
-		super (EquipmentTypes.REINFORCED_IRON_HELMET, Material.IRON_HELMET, EquipmentSlot.HEAD, color);
+		super (EquipmentType.REINFORCED_IRON_HELMET, Material.IRON_HELMET, EquipmentSlot.HEAD, color);
 		this.setDisplayName("Reinforced Iron Helmet");
 		this.addLoreToItemMeta("Reinforced with titanium to have better resistance towards high damaging attacks.");
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);

@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemFlag;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 
@@ -16,7 +16,7 @@ public class SprinklesCake extends Equipment
 {
 	public SprinklesCake ()
 	{
-		super (EquipmentTypes.SPRINKLES_CAKE, Material.CAKE, EquipmentSlot.OFF_HAND, ChatColor.GOLD);
+		super (EquipmentType.SPRINKLES_CAKE, Material.CAKE, EquipmentSlot.OFF_HAND, ChatColor.GOLD);
 		this.setDisplayName(StringUtil.alternateTextColors("sprinkle's Birthday Cake", TextPattern.WORD, 
 				ChatColor.RED, ChatColor.GOLD));
 		

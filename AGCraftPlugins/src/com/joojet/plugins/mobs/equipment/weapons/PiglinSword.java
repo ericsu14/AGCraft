@@ -5,14 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class PiglinSword extends Equipment 
 {
 	public PiglinSword (ChatColor color)
 	{
-		super (EquipmentTypes.PIGLIN_SWORD, Material.GOLDEN_SWORD, EquipmentSlot.HAND, color);
+		super (EquipmentType.PIGLIN_SWORD, Material.GOLDEN_SWORD, EquipmentSlot.HAND, color);
 		this.setDisplayName("Piglin Sword");
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 4);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);

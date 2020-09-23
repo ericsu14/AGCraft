@@ -13,7 +13,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.BlockStateMeta;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 
 public abstract class ShieldEquipment extends Equipment 
 {
@@ -22,7 +22,7 @@ public abstract class ShieldEquipment extends Equipment
 	 *  @param baseColor - DyeColor applied on this shield as its base color
 	 *  @param equipmentSlot - Equipment Slot in which this shield's attributes are applied to
 	 *  @param chatColor - Chat color applied to this Equipment's name and lore */
-	public ShieldEquipment(EquipmentTypes equipmentType, DyeColor baseColor, EquipmentSlot equipmentSlot, ChatColor chatColor) 
+	public ShieldEquipment(EquipmentType equipmentType, DyeColor baseColor, EquipmentSlot equipmentSlot, ChatColor chatColor) 
 	{
 		super(equipmentType, Material.SHIELD, equipmentSlot, chatColor);
 		this.setBaseColor(baseColor);

@@ -1,6 +1,6 @@
 package com.joojet.plugins.mobs.enums;
 
-public enum EquipmentTypes 
+public enum EquipmentType 
 {
 	/** Weapons */
 	ANGEL_OF_DEATH,

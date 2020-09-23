@@ -5,14 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class PigmanDagger extends Equipment
 {
 	public PigmanDagger (ChatColor color)
 	{
-		super (EquipmentTypes.PIGMAN_DAGGER, Material.GOLDEN_SWORD, EquipmentSlot.OFF_HAND, color);
+		super (EquipmentType.PIGMAN_DAGGER, Material.GOLDEN_SWORD, EquipmentSlot.OFF_HAND, color);
 		this.setDisplayName("Pigman Dagger");
 		this.addLoreToItemMeta("Held by those who mastered the art of Akimbo. Hold this in your offhand to deal increased damage.");
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);

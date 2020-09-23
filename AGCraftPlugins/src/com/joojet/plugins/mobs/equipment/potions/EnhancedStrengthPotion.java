@@ -4,13 +4,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 
 public class EnhancedStrengthPotion extends PotionEquipment
 {
 	public EnhancedStrengthPotion (ChatColor color)
 	{
-		super (EquipmentTypes.EHNAHCNED_STRENGTH_POTION, color);
+		super (EquipmentType.EHNAHCNED_STRENGTH_POTION, color);
 	}
 	
 	@Override

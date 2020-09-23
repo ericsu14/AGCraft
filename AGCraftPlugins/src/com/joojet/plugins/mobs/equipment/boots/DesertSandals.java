@@ -5,14 +5,14 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.LeatherEquipment;
 
 public class DesertSandals extends LeatherEquipment
 {
 	public DesertSandals (ChatColor color)
 	{
-		super (EquipmentTypes.DESERT_SANDALS, Material.LEATHER_BOOTS, EquipmentSlot.FEET, color);
+		super (EquipmentType.DESERT_SANDALS, Material.LEATHER_BOOTS, EquipmentSlot.FEET, color);
 		this.addSpeedAttribute(0.10);
 		this.addDefenseAttributes(6.0, 1.0, 0.1);
 		this.setDisplayName("Desert Sandals");

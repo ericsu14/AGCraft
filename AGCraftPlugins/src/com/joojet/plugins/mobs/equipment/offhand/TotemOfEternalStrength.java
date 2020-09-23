@@ -6,14 +6,14 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class TotemOfEternalStrength extends Equipment 
 {
 	public TotemOfEternalStrength ()
 	{
-		super (EquipmentTypes.TOTEM_OF_ETERNAL_STRENGTH, Material.TOTEM_OF_UNDYING, EquipmentSlot.OFF_HAND, 
+		super (EquipmentType.TOTEM_OF_ETERNAL_STRENGTH, Material.TOTEM_OF_UNDYING, EquipmentSlot.OFF_HAND, 
 				ChatColor.RED);
 		this.setDisplayName("Totem of Eternal Strength");
 		this.addAttackAttributes(12.0, 0.1);

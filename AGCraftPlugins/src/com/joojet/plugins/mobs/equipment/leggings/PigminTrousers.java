@@ -5,7 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 
@@ -13,7 +13,7 @@ public class PigminTrousers extends Equipment
 {
 	public PigminTrousers (ChatColor color)
 	{
-		super (EquipmentTypes.PIGMAN_TROUSERS, Material.GOLDEN_LEGGINGS, EquipmentSlot.LEGS, color);
+		super (EquipmentType.PIGMAN_TROUSERS, Material.GOLDEN_LEGGINGS, EquipmentSlot.LEGS, color);
 		this.setDisplayName("Pigmen Trousers");
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 6;

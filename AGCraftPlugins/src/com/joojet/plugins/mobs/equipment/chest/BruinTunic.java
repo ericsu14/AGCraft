@@ -5,7 +5,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.LeatherEquipment;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 
@@ -14,7 +14,7 @@ public class BruinTunic extends LeatherEquipment
 {
 	public BruinTunic (ChatColor color)
 	{
-		super (EquipmentTypes.BRUIN_TUNIC, Material.LEATHER_CHESTPLATE, EquipmentSlot.CHEST, color);
+		super (EquipmentType.BRUIN_TUNIC, Material.LEATHER_CHESTPLATE, EquipmentSlot.CHEST, color);
 		this.wordsPerLine = 6;
 		this.loreColor = ChatColor.GOLD;
 		this.setDisplayName(UCLAFaction.generateUCLADisplayName("Football Jersey"));

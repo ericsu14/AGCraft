@@ -6,14 +6,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.LeatherEquipment;
 
 public class DoomChest extends LeatherEquipment
 {
 	public DoomChest (ChatColor color)
 	{
-		super (EquipmentTypes.DOOM_CHEST, Material.LEATHER_CHESTPLATE, EquipmentSlot.CHEST, color);
+		super (EquipmentType.DOOM_CHEST, Material.LEATHER_CHESTPLATE, EquipmentSlot.CHEST, color);
 		this.wordsPerLine = 8;
 		this.loreColor = ChatColor.RED;
 		this.addDefenseAttributes(8.0, 6.0, 0.0);

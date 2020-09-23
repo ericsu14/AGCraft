@@ -3,7 +3,7 @@ package com.joojet.plugins.mobs.equipment.head;
 import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
@@ -11,7 +11,7 @@ public class CyborgPigmanHead extends Equipment
 {
 	public CyborgPigmanHead (ChatColor color)
 	{
-		super (EquipmentTypes.CYBORG_PIGMAN_HEAD, PlayerHead.CYBORG_PIGMEN, color);
+		super (EquipmentType.CYBORG_PIGMAN_HEAD, PlayerHead.CYBORG_PIGMEN, color);
 		this.setDisplayName("Head of the Terminator");
 		this.addLoreToItemMeta("I will be back...");
 		

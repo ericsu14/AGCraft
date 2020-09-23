@@ -4,13 +4,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 
 public class HastePotion extends PotionEquipment 
 {
 	public HastePotion (ChatColor color)
 	{
-		super (EquipmentTypes.HASTE_POTION, color);
+		super (EquipmentType.HASTE_POTION, color);
 	}
 	
 	@Override

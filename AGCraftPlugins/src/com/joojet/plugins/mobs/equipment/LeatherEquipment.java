@@ -7,11 +7,11 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 
 public abstract class LeatherEquipment extends Equipment 
 {
-	public LeatherEquipment(EquipmentTypes equipmentType, Material material, EquipmentSlot equipmentSlot, ChatColor chatColor) 
+	public LeatherEquipment(EquipmentType equipmentType, Material material, EquipmentSlot equipmentSlot, ChatColor chatColor) 
 	{
 		super(equipmentType, material, equipmentSlot, chatColor);
 	}

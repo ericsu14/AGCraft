@@ -3,7 +3,7 @@ package com.joojet.plugins.mobs.equipment.head;
 import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.joojet.plugins.mobs.equipment.Equipment;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
@@ -12,7 +12,7 @@ public class BruinHead extends Equipment
 {
 	public BruinHead ()
 	{
-		super (EquipmentTypes.BRUIN_HEAD, PlayerHead.UCLA_BRUIN, ChatColor.AQUA);
+		super (EquipmentType.BRUIN_HEAD, PlayerHead.UCLA_BRUIN, ChatColor.AQUA);
 		this.wordsPerLine = 6;
 		this.loreColor = ChatColor.GOLD;
 		this.setDisplayName(UCLAFaction.generateUCLADisplayName("Football Helmet"));

@@ -5,14 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class LightweightIronBoots extends Equipment
 {
 	public LightweightIronBoots (ChatColor color)
 	{
-		super (EquipmentTypes.LIGHTWEIGHT_IRON_BOOTS, Material.IRON_BOOTS, EquipmentSlot.FEET, color);
+		super (EquipmentType.LIGHTWEIGHT_IRON_BOOTS, Material.IRON_BOOTS, EquipmentSlot.FEET, color);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 4);
 		this.addLoreToItemMeta("Lightweight iron allows for improved mobility.");

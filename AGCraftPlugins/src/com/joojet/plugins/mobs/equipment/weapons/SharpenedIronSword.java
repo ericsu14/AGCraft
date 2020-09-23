@@ -5,14 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class SharpenedIronSword extends Equipment
 {
 	public SharpenedIronSword (ChatColor color)
 	{
-		super (EquipmentTypes.SHARPENED_IRON_SWORD, Material.IRON_SWORD, EquipmentSlot.HAND, color);
+		super (EquipmentType.SHARPENED_IRON_SWORD, Material.IRON_SWORD, EquipmentSlot.HAND, color);
 		this.addAttackAttributes(7.0, 2.0);
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 3);
 		this.addUnsafeEnchantment(Enchantment.SWEEPING_EDGE, 2);

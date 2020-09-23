@@ -5,7 +5,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.LeatherEquipment;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 
@@ -13,7 +13,7 @@ public class USCBandUniformTop extends LeatherEquipment
 {
 	public USCBandUniformTop (ChatColor color)
 	{
-		super (EquipmentTypes.USC_BAND_UNIFORM, Material.LEATHER_CHESTPLATE, EquipmentSlot.CHEST, color);
+		super (EquipmentType.USC_BAND_UNIFORM, Material.LEATHER_CHESTPLATE, EquipmentSlot.CHEST, color);
 		this.setDisplayName(USCFaction.generateUSCDisplayName("Band Uniform"));
 		this.setColor(Color.fromRGB(153, 27, 30));
 		this.addDefenseAttributes(6.0, 3.0, 0.15);

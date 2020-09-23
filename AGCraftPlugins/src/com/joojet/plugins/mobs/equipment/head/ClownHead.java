@@ -7,7 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.enums.PlayerHead;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
@@ -16,7 +16,7 @@ public class ClownHead extends Equipment
 	public static final String clownString = "clown";
 	public ClownHead (ChatColor color, Calendar expirationTimestamp)
 	{
-		super (EquipmentTypes.CLOWN_HEAD, PlayerHead.CLOWN, color);
+		super (EquipmentType.CLOWN_HEAD, PlayerHead.CLOWN, color);
 		this.setDisplayName("#AGClown");
 		StringBuilder lore = new StringBuilder ();
 		lore.append("- - - - ");

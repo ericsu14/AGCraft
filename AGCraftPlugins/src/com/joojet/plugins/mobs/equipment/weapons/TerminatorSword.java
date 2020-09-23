@@ -5,14 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class TerminatorSword extends Equipment
 {
 	public TerminatorSword (ChatColor color)
 	{
-		super (EquipmentTypes.TERMINATOR_SWORD, Material.GOLDEN_SWORD, EquipmentSlot.HAND, color);
+		super (EquipmentType.TERMINATOR_SWORD, Material.GOLDEN_SWORD, EquipmentSlot.HAND, color);
 		this.setDisplayName("The Sword of the Terminator");
 		this.loreColor = ChatColor.DARK_RED;
 		this.wordsPerLine = 6;

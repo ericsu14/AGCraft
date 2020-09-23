@@ -7,7 +7,7 @@ import org.bukkit.inventory.EquipmentSlot;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 
@@ -15,7 +15,7 @@ public class EternalTrojanSword extends Equipment
 {
 	public EternalTrojanSword ()
 	{
-		super (EquipmentTypes.ETERNAL_TROJAN_SWORD, Material.IRON_SWORD, EquipmentSlot.HAND, ChatColor.RED);
+		super (EquipmentType.ETERNAL_TROJAN_SWORD, Material.IRON_SWORD, EquipmentSlot.HAND, ChatColor.RED);
 		this.setDisplayName(StringUtil.alternateTextColors("Eternal Trojan Sword", TextPattern.WORD, 
 				ChatColor.RED, ChatColor.GOLD));
 		this.loreColor = ChatColor.GOLD;

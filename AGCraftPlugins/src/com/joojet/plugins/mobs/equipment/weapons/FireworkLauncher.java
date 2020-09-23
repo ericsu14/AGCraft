@@ -7,14 +7,14 @@ import org.bukkit.inventory.EquipmentSlot;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class FireworkLauncher extends Equipment 
 {
 	public FireworkLauncher (ChatColor color)
 	{
-		super (EquipmentTypes.FIREWORK_LAUNCHER, Material.CROSSBOW, EquipmentSlot.HAND, color);
+		super (EquipmentType.FIREWORK_LAUNCHER, Material.CROSSBOW, EquipmentSlot.HAND, color);
 		this.addUnsafeEnchantment(Enchantment.MULTISHOT, 1);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
 		this.addUnsafeEnchantment(Enchantment.QUICK_CHARGE, 3);

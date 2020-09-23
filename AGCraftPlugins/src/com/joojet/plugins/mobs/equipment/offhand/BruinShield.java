@@ -8,7 +8,7 @@ import org.bukkit.inventory.EquipmentSlot;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.ShieldEquipment;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 
@@ -16,7 +16,7 @@ public class BruinShield extends ShieldEquipment
 {
 	public BruinShield ()
 	{
-		super (EquipmentTypes.BRUIN_SHIELD, DyeColor.YELLOW, EquipmentSlot.OFF_HAND, ChatColor.AQUA);
+		super (EquipmentType.BRUIN_SHIELD, DyeColor.YELLOW, EquipmentSlot.OFF_HAND, ChatColor.AQUA);
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 5;
 		this.setDisplayName(StringUtil.alternateTextColors("Shield of the", TextPattern.WORD, ChatColor.AQUA, ChatColor.GOLD)

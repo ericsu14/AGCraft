@@ -6,13 +6,13 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
 
 public class TotemOfTheEternalRushee extends Equipment {
 	public TotemOfTheEternalRushee ()
 	{
-		super (EquipmentTypes.TOTEM_OF_THY_ETERNAL_RUSHEE, Material.TOTEM_OF_UNDYING,
+		super (EquipmentType.TOTEM_OF_THY_ETERNAL_RUSHEE, Material.TOTEM_OF_UNDYING,
 				EquipmentSlot.OFF_HAND, ChatColor.GOLD);
 		
 		this.setDisplayName("The Totem of Thy Eternal Rushee");

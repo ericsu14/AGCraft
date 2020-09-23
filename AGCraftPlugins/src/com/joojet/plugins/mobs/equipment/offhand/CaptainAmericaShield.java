@@ -10,14 +10,14 @@ import org.bukkit.inventory.ItemFlag;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
-import com.joojet.plugins.mobs.enums.EquipmentTypes;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.ShieldEquipment;
 
 public class CaptainAmericaShield extends ShieldEquipment
 {
 	public CaptainAmericaShield (ChatColor color)
 	{
-		super (EquipmentTypes.CAPTAIN_AMERICA_SHIELD, DyeColor.WHITE, EquipmentSlot.OFF_HAND, color);
+		super (EquipmentType.CAPTAIN_AMERICA_SHIELD, DyeColor.WHITE, EquipmentSlot.OFF_HAND, color);
 		this.loreColor = ChatColor.AQUA;
 		this.setDisplayName(StringUtil.alternateTextColors("Captain America's Shield", TextPattern.WORD, 
 				ChatColor.RED, ChatColor.WHITE, ChatColor.BLUE));
