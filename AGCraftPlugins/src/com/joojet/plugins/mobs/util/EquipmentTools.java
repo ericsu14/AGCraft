@@ -194,6 +194,12 @@ public class EquipmentTools
 			entity.setRemoveWhenFarAway(true);
 		}
 		
+		// Makes the mob silent
+		if (mobEquipment.containsFlag(MobFlag.MAKE_SILENT))
+		{
+			entity.setSilent(true);
+		}
+		
 		// Potion effects
 		if (!mobEquipment.getEffects().isEmpty())
 		{

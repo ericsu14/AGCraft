@@ -31,5 +31,7 @@ public enum MobFlag
 	 *  Otherwise, it will naturally despawn once out of sight. */
 	ENABLE_PERSISTENCE_UPON_RIDING,
 	/** When enabled, the mob will be immune to suffocation damage */
-	DISABLE_SUFFOCATION_DAMAGE;
+	DISABLE_SUFFOCATION_DAMAGE,
+	/** When enabled, the mob will finally shut up. */
+	MAKE_SILENT;
 }

@@ -8,15 +8,19 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Skull;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WanderingTrader;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
@@ -274,23 +278,48 @@ public class AmplifiedMobSpawner implements Listener
 	public void transferCustomHeadDatatoBlock (BlockPlaceEvent event)
 	{
 		ItemStack item = event.getItemInHand();
-		Block block = event.getBlock();
+		Block block = event.getBlockPlaced();
 		
-		// If the placed item / block is not a player head, do nothing
 		if (item.getType() != Material.PLAYER_HEAD
-				|| item.getType() != Material.PLAYER_WALL_HEAD
-				|| block.getType() != Material.PLAYER_HEAD
-				|| block.getType() != Material.PLAYER_WALL_HEAD)
+				&& block.getType() != Material.PLAYER_HEAD)
 		{
 			return;
 		}
 		
-		for (ItemStack drop : block.getDrops())
+		Equipment equipmentData = getEquipmentData (item.getItemMeta());
+		if (equipmentData != null)
 		{
-			if (drop.getType() == Material.PLAYER_HEAD)
+			Skull skull = (Skull) block.getState();
+			new EquipmentTypeMetadata (equipmentData).addStringMetadata(skull);
+			skull.update(true);
+		}
+		
+	}
+	
+	/** If the player breaks a player head block and the block has a custom equipment identifier
+	 *  stored in its metadata container, transfer it to the player head drop. */
+	@EventHandler
+	public void transferCustomHeadDataOnBlockBreak (BlockDropItemEvent event)
+	{
+		BlockState blockState = event.getBlockState();
+		event.getPlayer().sendMessage(blockState.getType().toString());
+		if ((blockState.getType() != Material.PLAYER_HEAD && 
+				blockState.getType() != Material.PLAYER_WALL_HEAD) || event.getItems().isEmpty())
+		{
+			return;
+		}
+		
+		Skull skull = (Skull) blockState;
+		Equipment equipmentData = getEquipmentData (skull);
+		if (equipmentData != null)
+		{
+			for (Item drop : event.getItems())
 			{
-				drop = item;
-				break;
+				if (drop.getItemStack().getType() == Material.PLAYER_HEAD)
+				{
+					drop.setItemStack(equipmentData);
+					break;
+				}
 			}
 		}
 	}
@@ -340,7 +369,7 @@ public class AmplifiedMobSpawner implements Listener
 	/** Retrieves equipment data from an equipment or block's persistent data container. */
 	public static Equipment getEquipmentData (PersistentDataHolder holder)
 	{
-		String idenfitier = new EquipmentTypeMetadata ().getStringMetadata(holder);
+		String idenfitier = new EquipmentTypeMetadata().getStringMetadata(holder);
 		if (idenfitier != null)
 		{
 			Equipment equipment = equipmentLoader.getInterpreter().searchTrie(idenfitier);

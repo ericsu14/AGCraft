@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -19,6 +20,7 @@ public abstract class VillagerEquipment extends MobEquipment
 	public VillagerEquipment (MonsterType type)
 	{
 		super(type);
+		this.addMobFlags(MobFlag.MAKE_SILENT);
 		this.recipes = new ArrayList <MerchantRecipe> ();
 	}
 	
