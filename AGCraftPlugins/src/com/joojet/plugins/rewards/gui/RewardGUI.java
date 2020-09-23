@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
+import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -107,6 +108,15 @@ public class RewardGUI implements Listener
     		{
     			this.player.sendMessage (ChatColor.RED + "Your inventory is full. Please clear at least one spot in your inventory before trying again.");
     			this.player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f);
+    			return;
+    		}
+    		
+    		// If the player is trying to click on a cake and is currently in the nether, cancel that
+    		if (player.getWorld().getEnvironment() == Environment.NETHER
+    				&& clickedItem.getType() == Material.CAKE)
+    		{
+    			this.player.sendMessage(ChatColor.RED + "I am sorry " + ChatColor.GOLD + player.getDisplayName() + ChatColor.RED +
+    					", but I cannot let you do that. Please go back to the " + ChatColor.GOLD + "overworld" + ChatColor.RED + " to claim this reward.");
     			return;
     		}
     		

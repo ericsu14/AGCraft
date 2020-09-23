@@ -70,6 +70,7 @@ public class JohnnyRusnak extends VillagerEquipment
 		this.addRecipe(new FightOn (ChatColor.GOLD), Material.EMERALD, 48, 1);
 		this.addRecipe(new TrojanSword (ChatColor.GOLD), Material.EMERALD, 48, 1);
 		this.addRecipe(new ShotBow (ChatColor.GOLD), Material.DIAMOND, 5, 1);
+		this.addRecipe(new ItemStack (Material.TRIDENT), Material.DIAMOND, 7, 1);
 		this.addRecipe(new SpiritualTravesty(ChatColor.GOLD), Material.NETHERITE_INGOT, 3, 1);
 		
 		/** Rare armor */
