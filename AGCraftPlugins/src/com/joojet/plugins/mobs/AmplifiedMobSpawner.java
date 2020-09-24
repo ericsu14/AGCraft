@@ -287,7 +287,7 @@ public class AmplifiedMobSpawner implements Listener
 							entity.getWorld().playSound(entityLocation, Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0f, 1.0f);
 							for (int i = 0; i < 30; ++i)
 							{
-								entity.getWorld().spawnParticle(Particle.SPELL_INSTANT, LocationOffset.addRandomOffsetOnLocation(entityLocation, 1),
+								entity.getWorld().spawnParticle(Particle.SPELL_MOB, LocationOffset.addRandomOffsetOnLocation(entityLocation, 1),
 										0, (128 / 256D), 0, 0, 1, null);
 							}
 						}
