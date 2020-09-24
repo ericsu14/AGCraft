@@ -64,7 +64,8 @@ public class SummoningScrollListener implements Listener
 					// If so, cancel the summoning scroll event if the player does not
 					// have EquipmentTools.openAirRequirement blocks of clear space above him/her.
 					if (scroll.getMob().containsStat(MonsterStat.Y_LIMIT)
-							&& !EquipmentTools.checkSpawnSpace(p))
+							&& (!EquipmentTools.checkSpawnSpace(p)
+									|| spawnLocation.getBlockY() < scroll.getMob().getStat(MonsterStat.Y_LIMIT)))
 					{
 						p.sendMessage(ChatColor.RED + "Error: Unable to summon the monster. Please check that there is at least "
 								+ EquipmentTools.openAirRequirement + " blocks of air above your current location.");

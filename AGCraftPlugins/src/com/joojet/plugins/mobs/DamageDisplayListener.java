@@ -3,12 +3,11 @@ package com.joojet.plugins.mobs;
 import java.util.HashSet;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Arrow;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -86,9 +85,9 @@ public class DamageDisplayListener implements Listener
 			}
 		}
 		// Checks for damage inflicted by arrows
-		else if (event.getDamager() instanceof Arrow)
+		else if (event.getDamager() instanceof AbstractArrow)
 		{
-			Projectile projectile = (Projectile) event.getDamager();
+			AbstractArrow projectile = (AbstractArrow) event.getDamager();
 			if (projectile.getShooter() != null && projectile.getShooter() instanceof LivingEntity)
 			{
 				MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity((LivingEntity) projectile.getShooter());
