@@ -17,6 +17,7 @@ public class WeaponTypes extends EquipmentTypes
 			new ATerribleFate (ChatColor.DARK_RED),
 			new BarneyDagger (ChatColor.DARK_PURPLE),
 			new BruinSword (ChatColor.AQUA),
+			new BruinBow(),
 			new DoomBlade (ChatColor.DARK_RED),
 			new EnhancedStoneSword (ChatColor.GREEN),
 			new EternalSpiritOfTroy (),
