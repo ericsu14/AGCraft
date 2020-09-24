@@ -274,7 +274,7 @@ public class AmplifiedMobSpawner implements Listener
 					boolean isCritical = (this.rand.nextDouble() <= equipment.getStat(MonsterStat.ARROW_CRITICAL_CHANCE));
 					arrow.setCritical(isCritical);
 					
-					if (isCritical)
+					if (isCritical && equipment.containsStat(MonsterStat.ARROW_PIERCING_CHANCE))
 					{
 						boolean isPiercing = (this.rand.nextDouble() <= equipment.getStat(MonsterStat.ARROW_PIERCING_CHANCE));
 						if (isPiercing)
