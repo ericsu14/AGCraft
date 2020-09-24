@@ -55,7 +55,6 @@ public class PathfinderGoalGiantFireball extends PathfinderGoal
 			// Plays the ghast sound on the 10th tick
 			if (this.a == 10 && !this.giant.isSilent())
 			{
-				// world.a((EntityHuman)null, 1015, this.giant.getChunkCoordinates(), 0);
 				giantBukkit.getWorld().playSound(giantBukkit.getLocation(), Sound.ENTITY_WITHER_SHOOT, 1.0f, 1.0f);
 			}
 			if (this.a == 20) 

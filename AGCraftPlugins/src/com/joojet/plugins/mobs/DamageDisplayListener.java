@@ -8,6 +8,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -96,7 +97,10 @@ public class DamageDisplayListener implements Listener
 					damageType = DamageType.ALLIED;
 				}
 			}
-			damageType = (damageType == DamageType.NORMAL) ? DamageType.PROJECTILE : damageType;
+			if (damageType == DamageType.NORMAL)
+			{
+				damageType = (projectile instanceof Trident) ? DamageType.TRIDENT : DamageType.PROJECTILE;
+			}
 		}
 		// Otherwise, convert the event's damage cause to a damage type
 		if (damageType == DamageType.NORMAL)

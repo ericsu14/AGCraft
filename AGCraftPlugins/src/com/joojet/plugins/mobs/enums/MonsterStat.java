@@ -25,7 +25,15 @@ public enum MonsterStat
 	/** Modifies the base speed of the mob */
 	BASE_SPEED (Attribute.GENERIC_MOVEMENT_SPEED),
 	/** Modifies the base damage of shot arrows */
-	BASE_ARROW_DAMAGE;
+	BASE_ARROW_DAMAGE,
+	/** Random chance (from 0.00-1.00) of entity-shot arrows from becoming a critical hit arrow */
+	ARROW_CRITICAL_CHANCE,
+	/** Modifies the base armor value of custom mobs */
+	BASE_ARMOR (Attribute.GENERIC_ARMOR),
+	/** Modifies the base armor toughness value of custom mobs */
+	BASE_ARMOR_TOUGHNESS (Attribute.GENERIC_ARMOR_TOUGHNESS),
+	/** Modifies the knockback resistance stat of custom mobs */
+	KNOCKBACK_RESISTANCE (Attribute.GENERIC_KNOCKBACK_RESISTANCE);
 	
 	/** The Minecraft entity attribute this monsterstat is tied to */
 	private Attribute attribute;

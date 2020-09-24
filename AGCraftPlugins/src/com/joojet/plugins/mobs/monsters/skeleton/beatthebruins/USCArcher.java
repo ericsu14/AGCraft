@@ -21,6 +21,8 @@ public class USCArcher extends USCFaction
 		this.addBiomes(Biome.THE_VOID);
 		this.color = ChatColor.GOLD;
 		this.setStat(MonsterStat.HEALTH, 16.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 6.0);
+		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.20);
 		this.helmet = new USCTrojan (this.color);
 		this.chestplate = new USCFootballTunic (this.color);
 		this.leggings = new USCFootballTrousers (this.color);

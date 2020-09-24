@@ -26,8 +26,10 @@ public class TheBruinBear extends UCLAFaction
 		this.color = ChatColor.AQUA;
 		this.name = "The" + ChatColor.GOLD + " Bruin" + this.color + " Bear";
 		this.setStat(MonsterStat.HEALTH, 60.0);
-		this.addTargetsToHitList(EntityType.CREEPER, EntityType.IRON_GOLEM);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 20.0);
+		this.setStat(MonsterStat.BASE_ARMOR, 14.0);
+		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 8.0);
+		this.addTargetsToHitList(EntityType.CREEPER, EntityType.IRON_GOLEM);
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.SHOW_NAME, MobFlag.PERSISTENT_ATTACKER, MobFlag.DISABLE_PERSISTENCE);
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.STRENGTH_II, CustomPotionEffect.JUMP_BOOST,

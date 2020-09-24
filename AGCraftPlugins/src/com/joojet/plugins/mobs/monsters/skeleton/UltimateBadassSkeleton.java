@@ -26,6 +26,8 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.color = ChatColor.GOLD;
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		this.setStat(MonsterStat.HEALTH, 16.0);
+		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.35);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 10.0);
 		
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
@@ -43,8 +45,8 @@ public class UltimateBadassSkeleton extends MobEquipment
 		// Boots
 		this.boots = new LightweightNetheriteBoots (this.color);
 		
-		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.05, 1, 2),
-				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.10, 1, 1),
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.10, 1, 2),
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.30, 1, 1),
 				new MonsterDrop (Material.GOLDEN_CARROT, 0.15, 3, 16));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 50.0);

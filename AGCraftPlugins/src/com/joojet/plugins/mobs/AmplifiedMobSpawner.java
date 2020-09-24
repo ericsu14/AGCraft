@@ -264,6 +264,12 @@ public class AmplifiedMobSpawner implements Listener
 				{
 					arrow.setDamage(equipment.getStat(MonsterStat.BASE_ARROW_DAMAGE));
 				}
+				
+				/** Converts this arrow into a critical arrow if the mob has a crit chance stat set */
+				if (equipment.containsStat(MonsterStat.ARROW_CRITICAL_CHANCE))
+				{
+					arrow.setCritical(this.rand.nextDouble() <= equipment.getStat(MonsterStat.ARROW_CRITICAL_CHANCE));
+				}
 			}
 		}
 	}

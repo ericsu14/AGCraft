@@ -28,6 +28,9 @@ public class UCLABearTamer extends UCLAFaction
 		this.setStat(MonsterStat.EXPERIENCE, 50.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		this.setStat(MonsterStat.Y_LIMIT, 55);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 12.0);
+		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.30);
+		
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.PERSISTENT_ATTACKER, MobFlag.SHOW_NAME,
@@ -40,7 +43,6 @@ public class UCLABearTamer extends UCLAFaction
 		this.weapon = new TheTrojanDestroyer ();
 		this.offhand = new PoisonousArrow (ChatColor.GREEN);
 		this.mount = new MountedMob (EntityType.POLAR_BEAR, new TheBruinBear());
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 15.0);
 		
 		this.addMonsterDrops(new MonsterDrop (new TheTrojanDestroyer(), 0.05));
 	}

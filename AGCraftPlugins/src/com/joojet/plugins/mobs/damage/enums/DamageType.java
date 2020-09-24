@@ -21,7 +21,8 @@ public enum DamageType
 	CONTACT ("✴", ChatColor.GREEN, ChatColor.WHITE),
 	LIGHTNING ("ϟ", ChatColor.GOLD, ChatColor.WHITE),
 	SUICIDE ("☠", ChatColor.RED, ChatColor.DARK_RED),
-	HUNGER ("☹ ", ChatColor.YELLOW, ChatColor.RED);
+	HUNGER ("☹ ", ChatColor.YELLOW, ChatColor.RED),
+	TRIDENT ("⋔", ChatColor.AQUA, ChatColor.GOLD);
 	
 	/** Color applied on the symbol of the damage type */
 	private ChatColor color;
