@@ -28,6 +28,9 @@ public enum MonsterStat
 	BASE_ARROW_DAMAGE,
 	/** Random chance (from 0.00-1.00) of entity-shot arrows from becoming a critical hit arrow */
 	ARROW_CRITICAL_CHANCE,
+	/** Random chance (from 0.00-1.00) of entity-shot critical arrows from having a piercing effect, being able to rip
+	 *  through shields. */
+	ARROW_PIERCING_CHANCE,
 	/** Modifies the base armor value of custom mobs */
 	BASE_ARMOR (Attribute.GENERIC_ARMOR),
 	/** Modifies the base armor toughness value of custom mobs */

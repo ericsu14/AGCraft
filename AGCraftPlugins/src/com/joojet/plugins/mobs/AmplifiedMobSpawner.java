@@ -5,7 +5,10 @@ import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -268,7 +271,23 @@ public class AmplifiedMobSpawner implements Listener
 				/** Converts this arrow into a critical arrow if the mob has a crit chance stat set */
 				if (equipment.containsStat(MonsterStat.ARROW_CRITICAL_CHANCE))
 				{
-					arrow.setCritical(this.rand.nextDouble() <= equipment.getStat(MonsterStat.ARROW_CRITICAL_CHANCE));
+					boolean isCritical = (this.rand.nextDouble() <= equipment.getStat(MonsterStat.ARROW_CRITICAL_CHANCE));
+					arrow.setCritical(isCritical);
+					
+					if (isCritical)
+					{
+						boolean isPiercing = (this.rand.nextDouble() <= equipment.getStat(MonsterStat.ARROW_PIERCING_CHANCE));
+						if (isPiercing)
+						{
+							arrow.setPierceLevel(1);
+							
+							// Give an audio and visual cue that the mob is using a piercing arrow
+							Location entityLocation = entity.getLocation();
+							entity.getWorld().playSound(entityLocation, Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0f, 1.0f);
+							entity.getWorld().spawnParticle(Particle.SPELL_MOB, entityLocation, 10, 1.0, 1.0, 0.0, 0.1, null);
+							entity.getWorld().spawnParticle(Particle.SPELL_MOB, entityLocation, 10, 1.0, 1.0, 0.0, 0.1, null);
+						}
+					}
 				}
 			}
 		}

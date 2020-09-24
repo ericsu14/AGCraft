@@ -27,6 +27,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.35);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 10.0);
 		
 		this.addBiomes(Biome.THE_VOID);
