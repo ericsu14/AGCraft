@@ -17,8 +17,9 @@ public class ReinforcedDiamondHelmet extends Equipment
 		this.wordsPerLine = 6;
 		this.setDisplayName("Reinforced Diamond Helmet");
 		this.addLoreToItemMeta("Forged from a higher-grade cut of Diamond, this Helmet offers improved resistance towards high damaging attacks.");
-		this.addDefenseAttributes(3.0, 1.5, 0.10);
-		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+		this.addDefenseAttributes(3.0, 2.5, 0.10);
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 2);
 	}
 }

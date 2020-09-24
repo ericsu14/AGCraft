@@ -33,7 +33,7 @@ public class TheBruinBear extends UCLAFaction
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.SHOW_NAME, MobFlag.PERSISTENT_ATTACKER, MobFlag.DISABLE_PERSISTENCE);
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.STRENGTH_II, CustomPotionEffect.JUMP_BOOST,
-				CustomPotionEffect.SPEED, CustomPotionEffect.RESISTANCE_II, CustomPotionEffect.FIRE_RESISTANCE,
+				CustomPotionEffect.SPEED, CustomPotionEffect.RESISTANCE, CustomPotionEffect.FIRE_RESISTANCE,
 				CustomPotionEffect.REGEN);
 		// Drops
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.10, 1, 3),

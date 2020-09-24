@@ -6,6 +6,7 @@ import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -24,5 +25,6 @@ public class PhantomMenace extends MobEquipment
 				EntityType.HUSK, EntityType.STRAY, EntityType.ENDERMAN);
 		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.WOLF, EntityType.VILLAGER, EntityType.IRON_GOLEM, EntityType.SNOWMAN);
 		this.addPotionEffect(CustomPotionEffect.STRENGTH_II);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 20.0);
 	}
 }
