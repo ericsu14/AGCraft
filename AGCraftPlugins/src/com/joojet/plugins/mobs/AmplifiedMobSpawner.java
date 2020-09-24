@@ -226,13 +226,10 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		LivingEntity tamed = (LivingEntity) event.getMount();
-		if (tamed instanceof LivingEntity)
+		MobEquipment equipment = getMobEquipmentFromEntity(tamed);
+		if (equipment.containsFlag(MobFlag.ENABLE_PERSISTENCE_UPON_RIDING))
 		{
-			MobEquipment equipment = getMobEquipmentFromEntity(tamed);
-			if (equipment.containsFlag(MobFlag.ENABLE_PERSISTENCE_UPON_RIDING))
-			{
-				tamed.setRemoveWhenFarAway(false);
-			}
+			tamed.setRemoveWhenFarAway(false);
 		}
 	}
 	

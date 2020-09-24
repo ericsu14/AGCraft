@@ -351,7 +351,6 @@ public class EquipmentTools
 			return;
 		}
 		
-		entity.setAI(true);
 		// Cast this into a NMS entity monster
 		EntityInsentient nmsMob = ((CraftMob) entity).getHandle();
 		
