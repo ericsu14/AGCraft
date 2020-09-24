@@ -17,11 +17,12 @@ public class LocationOffset
 	public static Location addRandomOffsetOnLocation (Location location, int offset)
 	{
 		double xOffset = generateRandomOffset (offset);
+		double yOffset = generateRandomOffset (offset);
 		double zOffset = generateRandomOffset (offset);
 		
 		Location transformed = new Location (location.getWorld(), location.getX(), location.getY(),
 				location.getZ());
-		transformed.add(xOffset, 0, zOffset);
+		transformed.add(xOffset, yOffset, zOffset);
 		return transformed;
 	}
 	
