@@ -51,6 +51,7 @@ import com.joojet.plugins.mobs.spawnhandlers.BeatTheBruinsHandler;
 import com.joojet.plugins.mobs.spawnhandlers.JulyFourthHandler;
 import com.joojet.plugins.mobs.spawnhandlers.UHCHandler;
 import com.joojet.plugins.mobs.util.EquipmentTools;
+import com.joojet.plugins.mobs.util.LocationOffset;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 import com.joojet.plugins.mobs.villager.wandering.WanderingVillagerTypes;
 
@@ -284,8 +285,11 @@ public class AmplifiedMobSpawner implements Listener
 							// Give an audio and visual cue that the mob is using a piercing arrow
 							Location entityLocation = entity.getLocation();
 							entity.getWorld().playSound(entityLocation, Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0f, 1.0f);
-							entity.getWorld().spawnParticle(Particle.SPELL_MOB, entityLocation, 10, 1.0, 1.0, 0.0, 0.1, null);
-							entity.getWorld().spawnParticle(Particle.SPELL_MOB, entityLocation, 10, 1.0, 1.0, 0.0, 0.1, null);
+							for (int i = 0; i < 30; ++i)
+							{
+								entity.getWorld().spawnParticle(Particle.SPELL_INSTANT, LocationOffset.addRandomOffsetOnLocation(entityLocation, 1),
+										0, 1, 1, 0, 1, null);
+							}
 						}
 					}
 				}
