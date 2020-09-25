@@ -281,6 +281,7 @@ public class AmplifiedMobSpawner implements Listener
 						if (isPiercing)
 						{
 							arrow.setPierceLevel(1);
+							arrow.setKnockbackStrength(arrow.getKnockbackStrength() + 1);
 							
 							// Give an audio and visual cue that the mob is using a piercing arrow
 							Location entityLocation = entity.getEyeLocation();

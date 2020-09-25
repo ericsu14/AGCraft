@@ -37,6 +37,6 @@ public class SoulEater extends MobEquipment
 		this.setStat(MonsterStat.EXPERIENCE, 25.0);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 12.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.25);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.25);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 1.00);
 	}
 }
