@@ -35,7 +35,7 @@ public class HurtfulSkeleton extends MobEquipment
 		
 		this.setStat(MonsterStat.EXPERIENCE, 18.0);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 8.0);
-		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.25);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.50);
+		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.20);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.45);
 	}
 }

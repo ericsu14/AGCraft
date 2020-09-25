@@ -23,7 +23,7 @@ public class UncommonSkeleton extends MobEquipment
 		this.color = ChatColor.GREEN;
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.10);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 1.00);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.30);
 		
 		this.addBiomes(Biome.THE_VOID);
 		

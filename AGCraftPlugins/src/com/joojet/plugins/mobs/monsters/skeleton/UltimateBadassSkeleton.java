@@ -26,7 +26,7 @@ public class UltimateBadassSkeleton extends MobEquipment
 		this.color = ChatColor.GOLD;
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		this.setStat(MonsterStat.HEALTH, 16.0);
-		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.25);
+		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.40);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.75);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 10.0);
 		

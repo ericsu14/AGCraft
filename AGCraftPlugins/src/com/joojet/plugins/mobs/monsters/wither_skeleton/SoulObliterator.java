@@ -48,7 +48,7 @@ public class SoulObliterator extends MobEquipment
 		
 		this.setStat(MonsterStat.EXPERIENCE, 45.0);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 8.0);
-		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.45);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.75);
+		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.50);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.90);
 	}
 }
