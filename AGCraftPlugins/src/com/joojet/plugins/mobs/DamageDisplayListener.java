@@ -8,7 +8,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -99,7 +98,17 @@ public class DamageDisplayListener implements Listener
 			}
 			if (damageType == DamageType.NORMAL)
 			{
-				damageType = (projectile instanceof Trident) ? DamageType.TRIDENT : DamageType.PROJECTILE;
+				switch (projectile.getType())
+				{
+					case TRIDENT:
+						damageType = DamageType.TRIDENT;
+						break;
+					case ARROW:
+						damageType = (projectile.isCritical()) ? DamageType.PROJECTILE_CRITICAL : DamageType.PROJECTILE;
+						break;
+					default:
+						break;
+				}
 			}
 		}
 		// Otherwise, convert the event's damage cause to a damage type

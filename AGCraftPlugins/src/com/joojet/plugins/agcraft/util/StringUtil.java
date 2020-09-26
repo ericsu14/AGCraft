@@ -36,6 +36,13 @@ public class StringUtil
     	return string.toString();
     }
     
+    /** Reverses a string
+     * 	@param str - String to be reversed */
+    public static String reverseString (String str)
+    {
+    	return new StringBuilder(str).reverse().toString();
+    }
+    
     /** Applies an alternating color on each word or character
      *  on the passed String.
      *  	@param str - String to be colored

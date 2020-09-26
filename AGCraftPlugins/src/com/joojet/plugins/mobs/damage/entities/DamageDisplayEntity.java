@@ -40,7 +40,7 @@ public class DamageDisplayEntity extends MobEquipment
 		if (damageType.hasSymbol())
 		{
 			displayName.append(" ");
-			displayName.append(damageType.toString());
+			displayName.append(damageType.getReversedSymbols());
 		}
 		this.name = displayName.toString().trim();
 	}

@@ -58,7 +58,7 @@ public class DamageDisplayManager
 		if (damageType == DamageType.NORMAL || damageType == DamageType.CRITICAL
 				|| damageType == DamageType.PROJECTILE || damageType == DamageType.ALLIED)
 		{
-			entityLocation = new Location (entity.getWorld(), entityBox.getMinX() + xRandomOffset, entityBox.getMaxY() + this.generateRandomNumber(-0.1, 0.0), 
+			entityLocation = new Location (entity.getWorld(), entityBox.getMinX() + xRandomOffset, entityBox.getMaxY() + this.generateRandomNumber(-0.1, 0.1), 
 					entityBox.getMaxZ() + zRandomOffset);
 		}
 		else

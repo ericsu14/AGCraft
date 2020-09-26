@@ -4,6 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.allies.horse.beatthebruins.TheTraveler;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -26,9 +28,8 @@ public class EternalTrojanArcher extends USCFaction
 		this.addBiomes(Biome.THE_VOID);
 		this.setStat(MonsterStat.HEALTH, 40.0);
 		
-		this.name = ChatColor.RED + "Eternal"
-				+ ChatColor.GOLD + " Trojan"
-				+ ChatColor.RED + " Archer";
+		this.name = StringUtil.alternateTextColors("The Eternal Spirit of Troy", TextPattern.WORD, 
+				ChatColor.RED, ChatColor.GOLD);
 		
 		this.color = ChatColor.GOLD;
 		this.mount = new MountedMob (EntityType.HORSE, new TheTraveler());

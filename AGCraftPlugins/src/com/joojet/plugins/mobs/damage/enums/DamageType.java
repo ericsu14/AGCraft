@@ -2,6 +2,8 @@ package com.joojet.plugins.mobs.damage.enums;
 
 import org.bukkit.ChatColor;
 
+import com.joojet.plugins.agcraft.util.StringUtil;
+
 public enum DamageType 
 {
 	NORMAL ("", ChatColor.WHITE, ChatColor.WHITE),
@@ -15,6 +17,7 @@ public enum DamageType
 	WITHER ("☠", ChatColor.DARK_GRAY, ChatColor.DARK_RED),
 	EXPLOSION ("✸", ChatColor.YELLOW, ChatColor.GOLD),
 	PROJECTILE ("◎", ChatColor.RED, ChatColor.GOLD),
+	PROJECTILE_CRITICAL ("◎", ChatColor.LIGHT_PURPLE, ChatColor.GOLD),
 	PLAYER ("", ChatColor.RED, ChatColor.RED),
 	FALL_DAMAGE ("↯", ChatColor.RED, ChatColor.WHITE),
 	THORNS ("🛡", ChatColor.LIGHT_PURPLE, ChatColor.WHITE),
@@ -25,23 +28,28 @@ public enum DamageType
 	TRIDENT ("⋔", ChatColor.AQUA, ChatColor.GOLD);
 	
 	/** Color applied on the symbol of the damage type */
-	private ChatColor color;
+	private ChatColor symbolColor;
 	/** Symbol appended in the beginning of the damage display */
 	private String symbol;
 	/** Color applied to the damage number */
 	private ChatColor damageColor;
 	
-	private DamageType (String symbol, ChatColor color, ChatColor damageColor)
+	private DamageType (String symbol, ChatColor symbolColor, ChatColor damageColor)
 	{
 		this.symbol = symbol;
-		this.color = color;
+		this.symbolColor = symbolColor;
 		this.damageColor = damageColor;
 	}
 	
 	@Override
 	public String toString ()
 	{
-		return this.color + this.symbol;
+		return this.symbolColor + this.symbol;
+	}
+	
+	public String getReversedSymbols ()
+	{
+		return this.symbolColor + StringUtil.reverseString(this.symbol);
 	}
 	
 	public ChatColor getDamageColor ()
