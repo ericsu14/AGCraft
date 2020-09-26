@@ -1,4 +1,90 @@
+
+
 # AGCraft Changelog History
+## Version 1.7.9 - September 25, 2020
+
+### New Commands
+#### `/fireworks <radius> <power-level> <ammo-count>`
+- Launches a small fireworks show at your location, which can double as your antidepressants!
+- `radius` is the maximum radius in which your fireworks will spread around your location. This value must be between 1 and 48.
+- `power-level` determines the maximum height in which your fireworks will fly before exploding. The value must be between 1 and 4, where 1 is stupid low and 4 is stupidly high.
+- `ammo-count` determines the total number of fireworks that will be launched for the duration of your fireworks show. To prevent huge server lag, the value must be between 30 and 200.
+**Note: There is a *three-minute* cooldown between usage for this command. This is to once again prevent potential lag issues.**
+
+### New Features
+#### Damage Display System
+- The amount of damage dealt, taken, and recovered is now displayed visually in the form of floating nametags.
+- This applies towards damage dealt by melee attacks (including critical hits), projectiles, environmental damage and status effects.
+
+#### Soulbounded Items
+- All mythic and special event items and equipment now have a `soulbounded` property attached to them.
+- Soulbounded items will still persist in your inventory even after death. In other words, it works like the gamerule `keepInventory`, but it is applied on those select items only.
+- All `soulbounded` items have a `Soulbound` string appended at the bottom of the item's lore for easy identification of these items.
+
+### Amplified Mob Changes
+- Amplified monsters can now be mounted onto other custom monsters (shares the same idea with Spider Jockeys, but it can work with any monster pairing).
+- **All amplified skeletons now carry two new exclusive skills:**
+    1. **Critical Shot** - All amplified skeletons now have a set chance of inflicting a **critical hit**, making their arrows deal increased damage compared to before.
+       - The chance of an amplified skeleton inflicting a critical hit scales with the skeleton's rarity. Mythic mobs like Skull Kid are set to always deal critical hits.
+    2. **Piercing Blow** - In addition to critical hits, all amplified skeletons now have a set chance to deal a piercing blow attack. Piercing blow attacks are a subform of critical shots **that can pierce through shields** and has **increased knockback power**.
+       - Audio and visual cues will be played when an amplified skeleton performs a piercing blow attack.
+ - All amplified boss mobs now have a chance of dropping various forms of loot, ranging from Enchanted Golden Apples to diamonds to event exclusive Summoning Scrolls and weapons!
+ - Any mob that has Fire Resistance will no longer melt in high-temperature environments.
+ - Any mob that has Water Breathing will no longer suffer from dryout when either out of or in water.
+    - Both of these changes are necessary for both Scruffy and Frosty the Snowman to not die in certain biomes / environments.
+### New Bosses
+For the ongoing `#beatthebruins` event, two new bosses have been introduced:
+#### Giant Bruin / Giant Bruin Tamer
+- A new boss mob that brings the unused `Giant` mob back to its former glory!
+- Drops the most amount of loot in the game. Kill him to have the chance of gaining some of his stolen treasures!
+- However, he is not easy to beat, as he possesses a large amount of health (250 HP) and has very powerful ranged and melee attacks.
+    - Every four seconds, the Giant shoots a Fireball with an explosion power of 3.5, which is somewhere in the middle between a TNT Explosion and a Creeper blast.
+       - **While his fireballs do a lot of splash damage, they are modified to not grief blocks and structures.**
+    - He also inflicts large amounts of continuous damage when you get close to him, as the hitbox used for his melee attacks is huge.
+- When not chasing the player, the Giant Bruin behaves like any other UCLA themed mob, where he will start hunting any non-UCLA monster within its vicinity. Use this as an opportunity to fight him, as he gets distracted often.
+- A **Giant Bruin Tamer** also rides on top of the Giant, which will drop down from the Giant once killed. He possesses the same armor and weapons compared to the UCLA jock, but has significantly more health (30 HP) compared to the latter.
+- The Giant Bruin only spawns in mostly flat areas with little-to-no trees. Deserts, Savannas, and Plains are the best biomes to find him.
+- The Giant Bruin will never spawn below Y = 55, as his hitbox will go through walls and unfairly kill people caving in the mines.
+   - He also requires at least 36 blocks of air above him in order to spawn.
+
+#### The Bruin Bear / UCLA Bear Tamer
+- A new boss mob that takes the form of a highly aggressive `Polar Bear`, with a powerful **UCLA Bear Tamer** riding it. 
+- The **UCLA Bear Tamer** is a Skeleton that shoots highly poisonous and high damaging arrows to its victims.
+   - His arrows inflict Poison II and Hunger II for 10 seconds when hit.
+   - He carries a Power VI bow and has a higher base damage of 10 for his arrows. Expect him to kill an unarmored player in 1-2 shots.
+   - He also has a 30% chance of inflicting a critical hit. 50% of his critical shots are piercing blows.
+- When the **UCLA Bear Tamer** skeleton is killed, the **Bruin Bear** will regain its extremely fast speed and come after you. He deals 27 HP / hit, so be careful engaging him.
+- The Bruin Bear will also naturally hunt creepers when not chasing after players.
+
+### New Allies
+Two new allies have joined the USC Faction for the ongoing `#beatthebruins` event.
+#### The Trojan Warrior
+- A powerful zombie variant that deals significantly more damage and has significantly more health compared to its USC Trojan mob counterpart.
+- Always spawns riding a new mount, **The Traveler**, which is a horse based on our actual mascot horse in this University.
+   - The traveler possess the best movement speed and jump strength that can be found on any horse in this server. It also spawns with 40 HP and permanent Fire Resistance.
+   -  The traveler also carries the special Frost Walker ability, allowing the horse to walk on water.
+   - Naturally spawned Travelers are set to despawn once out of sight from the player unless the player rides on it for the first time. This is to prevent these custom horses from littering the server.
+
+#### The Eternal Spirit of Troy
+   - A powerful skeleton variant that carries a special power VI bow, possess great health (40 HP), and deals significantly more damage compared to its USC Archer mob counterpart.
+   - Like **The Trojan Warrior**, the **Eternal Spirit of Troy** also rides on the same Traveler mount as the latter.
+   - He also has a 40% chance of inflicting a critical hit, but 100% of his critical shots are all Piercing Blows.
+
+**Both The Eternal Spirit of Troy and The Trojan Warrior will never suffer from suffocation damage**.
+
+### New Wandering Traders
+In addition, a new **wandering trader** has joined the chat!
+
+#### Johnny Rusnak
+- A new **wandering trader** that sells rare equipment, consumables, and certain boss scrolls for a price.
+   - Some of the items Johnny Rusnak sells are the same as **frolf**, but sells for a slightly cheaper price. However, Johnny Rusnak spawns less often than **frolf** (15% chance per random wandering trader spawn).
+   - The Giant Bruin however has a 5% chance of dropping his summoning scroll, so be on the lookout for them!
+
+### Other Changes
+- Many of our amplified monsters have their stats readjusted. They are mostly buffed, as many of them are a little too easy to kill.
+- UCLA Bruin Bowmen no longer carry Punch II bows. However, they are still capable of inflicting a Piercing Blow attack, which gives them the same effects as Punch II.
+- Added special birthday cake items for someone's special day!
+
 ## Version 1.7.8 - August 24, 2020
 ### Pathfinding AI Changes
 - Custom monsters now carries a `hitlist`, allowing them to target any `EntityType` that is in its hitlist.
@@ -9,15 +95,15 @@
    - Custom monsters also carry a list of **rivaling factions**. Any mob that is not only in that mob's list of rivaling factions, but also in their hitlist will be hunted down by that monster.
    - Unless a custom monster has the `IGNORE_NON_FACTION_ENTITIES` flag enabled, that mob will also hunt down any monster that is in their hitlist but not in any faction.
       - The `IGNORE_NON_FACTION_ENTITIES` flag disables this behavior.
- - Monsters will now be **instantly aggravated** towards any player who hit that mob with a projectile, unless that player is in its `ignore list`.
+ - Monsters will now be **instantly aggravated** towards any entity who hit that mob with a projectile, unless that entity is in its `ignore list`.
  - Certain custom boss monsters now have a `PERSISTENT_ATTACKER` flag, which makes them less likely to forget their victim that moves outside of their natural hunting radius.
 
 ### Custom Mob Changes
 #### EXP Drops
    - Custom experience drops are now supported in this plugin. Almost all custom monsters drop significantly more experience now!
 #### Boss Bar
-   -  All boss mobs in this server now carries a custom boss bar similar to Wither and EnderDragon fights in Minecraft.
-   - These boss bars provide all players fighting that monster visual information about its total remaining health.
+   -  All boss mobs in this server now carries a custom boss bar similar to Wither or EnderDragon fights in Minecraft.
+   - These boss bars provide all players fighting that monster visual information of its total remaining health.
 #### Mob Changes
    - Shrek is now a boss mob. His health has been buffed from 20 -> 30 HP.
    - Both Soul Destroyer and Soul Obliterator (custom Wither Skeleton types) is no longer aggressive towards vanilla Wither Skeletons in the Nether. However, they are still aggressive towards Doom Guy.
@@ -32,6 +118,8 @@
 - For the first time ever, allied monsters (other than Golems and Wolves) have been added into the game! These allied monsters are themed after USC Trojans and will hunt down any hostile mob near them except Creepers.
 - However, the UCLA Bruins have invaded the server! They are here to cause chaos and destruction to our server! Help your fellow trojans and defend this server from these nasty Bruins!
 - More mobs and factions will be added in later to reflect this football season. Expect to see other Colleges battling each other in our server.
+
+
 
 ## Version 1.7.7 - July 31, 2020
 This release contains many internal codebase improvements and additions. Significant noteworthy changes are:

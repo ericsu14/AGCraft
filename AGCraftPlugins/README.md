@@ -108,6 +108,23 @@ If you want to remove <b>all of the items</b> listed above in your inventory, yo
 ``/clearjunk armor common brewing stone`` removes all listed leather, chainmail, and gold armor, common mob drops, spider eyes, and stone variants from your inventory.\
 ``/clearjunk`` without any parameters automatically defaults to ``/clearjunk common``, which removes all common mob drops from your inventory.
 
+## Fireworks
+<b>Usage: </b>
+`/fireworks <radius> <power-level> <ammo-count>`
+
+<b>Parameters</b>
+- `radius` is the maximum radius in which your fireworks will spread around your location. This value must be between 1 and 48.
+- `power-level` determines the maximum height in which your fireworks will fly before exploding. The value must be between 1 and 4, where 1 is stupid low and 4 is stupidly high.
+- `ammo-count` determines the total number of fireworks that will be launched for the duration of your fireworks show. To prevent huge server lag, the value must be between 30 and 200.
+
+<b>Description</b>
+Launches a small fireworks show at your location, which can double as your antidepressants!
+
+<b>Usage Example</b>
+`/fireworks 48 3 200` - Run it on the server and find out! ;)
+
+**Note: There is a *three-minute* cooldown between usage for this command. This is to once again prevent potential lag issues.**
+
 ## Get Coordinates
 <b> Usage: </b>
 ``/getcoordinates <player>``
