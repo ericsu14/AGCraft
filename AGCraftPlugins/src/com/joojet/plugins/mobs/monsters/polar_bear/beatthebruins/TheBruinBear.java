@@ -5,18 +5,15 @@ import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 
-import com.joojet.plugins.mobs.drops.MonsterDrop;
+import com.joojet.plugins.mobs.drops.*;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.enums.SummonTypes;
 import com.joojet.plugins.mobs.equipment.offhand.BruinShield;
 import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
-import com.joojet.plugins.mobs.scrolls.SummonEternalTrojanArcher;
-import com.joojet.plugins.mobs.scrolls.SummonSpiritOfTroy;
-import com.joojet.plugins.mobs.scrolls.SummonUSCArcher;
-import com.joojet.plugins.mobs.scrolls.SummonUSCWarrior;
 
 public class TheBruinBear extends UCLAFaction
 {
@@ -39,10 +36,11 @@ public class TheBruinBear extends UCLAFaction
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.10, 1, 3),
 				new MonsterDrop (new USCCreeperShield (), 0.10),
 				new MonsterDrop (new BruinShield (), 0.10),
-				new MonsterDrop (new SummonUSCArcher(), 0.05),
-				new MonsterDrop (new SummonSpiritOfTroy(), 0.05),
-				new MonsterDrop (new SummonUSCWarrior(), 0.05),
-				new MonsterDrop (new SummonEternalTrojanArcher(), 0.05),
+				new SummoningScrollDrop (SummonTypes.USC_ARCHER, 0.05),
+				new SummoningScrollDrop (SummonTypes.SPIRIT_OF_TROY, 0.05),
+				new SummoningScrollDrop (SummonTypes.USC_WARRIOR, 0.05),
+				new SummoningScrollDrop (SummonTypes.TROJAN_WARRIOR, 0.05),
+				new SummoningScrollDrop (SummonTypes.ETERNAL_TROJAN_ARCHER, 0.05),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.15, 1, 1));
 		this.setStat(MonsterStat.EXPERIENCE, 200.0);
 		this.ignoreList.clear();

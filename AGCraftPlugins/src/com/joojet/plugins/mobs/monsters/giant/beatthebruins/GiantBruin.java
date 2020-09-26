@@ -4,12 +4,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
 
-import com.joojet.plugins.mobs.drops.FireworkDrop;
-import com.joojet.plugins.mobs.drops.MonsterDrop;
+import com.joojet.plugins.mobs.drops.*;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.enums.SummonTypes;
 import com.joojet.plugins.mobs.equipment.boots.BruinFootballBoots;
 import com.joojet.plugins.mobs.equipment.chest.BruinTunic;
 import com.joojet.plugins.mobs.equipment.head.ReinforcedDiamondHelmet;
@@ -23,12 +23,6 @@ import com.joojet.plugins.mobs.equipment.weapons.EternalTrojanSword;
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.equipment.weapons.LeftCrashSymbol;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
-import com.joojet.plugins.mobs.scrolls.SummonEternalTrojanArcher;
-import com.joojet.plugins.mobs.scrolls.SummonFrolf;
-import com.joojet.plugins.mobs.scrolls.SummonSpiritOfTroy;
-import com.joojet.plugins.mobs.scrolls.SummonTrojanWarrior;
-import com.joojet.plugins.mobs.scrolls.SummonUSCArcher;
-import com.joojet.plugins.mobs.scrolls.SummonUSCWarrior;
 
 public class GiantBruin extends UCLAFaction
 {
@@ -54,13 +48,15 @@ public class GiantBruin extends UCLAFaction
 		// Mob Drops
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.10 , 2, 3),
 				new MonsterDrop (new USCCreeperShield(), 0.07),
-				new MonsterDrop (new SummonUSCArcher (), 0.07),
-				new MonsterDrop (new SummonSpiritOfTroy(), 0.07),
+				new SummoningScrollDrop (SummonTypes.USC_ARCHER, 0.07),
+				new SummoningScrollDrop (SummonTypes.SPIRIT_OF_TROY, 0.07),
+				new SummoningScrollDrop (SummonTypes.ETERNAL_TROJAN_ARCHER, 0.03),
+				new SummoningScrollDrop (SummonTypes.FROLF, 0.07),
+				new SummoningScrollDrop (SummonTypes.JOHNNY_RUSNAK, 0.07),
+				new SummoningScrollDrop (SummonTypes.SPIRIT_OF_TROY, 0.07),
+				new SummoningScrollDrop (SummonTypes.USC_WARRIOR, 0.07),
+				new SummoningScrollDrop (SummonTypes.TROJAN_WARRIOR, 0.03),
 				new MonsterDrop (new EternalTrojanSword(), 0.07),
-				new MonsterDrop (new SummonFrolf (), 0.07),
-				new MonsterDrop (new SummonUSCWarrior(), 0.07),
-				new MonsterDrop (new SummonTrojanWarrior(), 0.03),
-				new MonsterDrop (new SummonEternalTrojanArcher(), 0.03),
 				new MonsterDrop (new EternalSpiritOfTroy(), 0.03),
 				new MonsterDrop (new RightCrashSymbol (ChatColor.GOLD), 0.05),
 				new MonsterDrop (new LeftCrashSymbol (ChatColor.GOLD), 0.05),

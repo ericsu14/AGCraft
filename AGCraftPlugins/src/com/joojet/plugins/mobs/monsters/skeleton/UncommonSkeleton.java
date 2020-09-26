@@ -2,7 +2,6 @@ package com.joojet.plugins.mobs.monsters.skeleton;
 
 
 import org.bukkit.ChatColor;
-import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -12,9 +11,9 @@ import com.joojet.plugins.mobs.equipment.head.ReinforcedChainmailHelmet;
 import com.joojet.plugins.mobs.equipment.leggings.ReinforcedChainmailLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.WeakeningArrow;
 import com.joojet.plugins.mobs.equipment.weapons.PotentBow;
-import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.factions.OverworldMob;
 
-public class UncommonSkeleton extends MobEquipment
+public class UncommonSkeleton extends OverworldMob
 {
 	public UncommonSkeleton ()
 	{
@@ -24,8 +23,6 @@ public class UncommonSkeleton extends MobEquipment
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.10);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.30);
-		
-		this.addBiomes(Biome.THE_VOID);
 		
 		this.weapon = new PotentBow (this.color);
 		this.offhand = new WeakeningArrow (this.color);
