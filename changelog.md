@@ -78,11 +78,13 @@ In addition, a new **wandering trader** has joined the chat!
 #### Johnny Rusnak
 - A new **wandering trader** that sells rare equipment, consumables, and certain boss scrolls for a price.
    - Some of the items Johnny Rusnak sells are the same as **frolf**, but sells for a slightly cheaper price. However, Johnny Rusnak spawns less often than **frolf** (15% chance per random wandering trader spawn).
-   - The Giant Bruin however has a 5% chance of dropping his summoning scroll, so be on the lookout for them!
+   - The Giant Bruin however has a 7% chance of dropping his summoning scroll, so be on the lookout for them!
 
 ### Other Changes
 - Many of our amplified monsters have their stats readjusted. They are mostly buffed, as many of them are a little too easy to kill.
 - UCLA Bruin Bowmen no longer carry Punch II bows. However, they are still capable of inflicting a Piercing Blow attack, which gives them the same effects as Punch II.
+- Uncommon Skeletons (also known as "Annoying Skeleton") no longer spawn in the Nether. Soul Eaters now take their place as a commonly spawning Skeleton.
+- Custom player heads obtained from this point on will now retain their stats and modifications even when placed into this world as a block.
 - Added special birthday cake items for someone's special day!
 
 ## Version 1.7.8 - August 24, 2020
