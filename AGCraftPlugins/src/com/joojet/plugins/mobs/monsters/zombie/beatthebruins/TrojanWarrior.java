@@ -27,6 +27,10 @@ public class TrojanWarrior extends USCFaction
 		super (MonsterType.TROJAN_WARRIOR);
 		this.addBiomes(Biome.THE_VOID);
 		
+		// Allows the Trojan Warrior to hunt creepers
+		this.ignoreList.remove(EntityType.CREEPER);
+		this.addTargetsToHitList(EntityType.CREEPER);
+		
 		this.name = StringUtil.alternateTextColors("The Trojan Warrior", TextPattern.WORD, 
 				ChatColor.RED, ChatColor.GOLD);
 		
