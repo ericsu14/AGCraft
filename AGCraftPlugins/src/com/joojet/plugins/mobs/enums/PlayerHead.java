@@ -19,7 +19,8 @@ public enum PlayerHead {
 	UCLA_BRUIN ("6c760d04ba3a988aa1464c07b919425719f3ec72553f37ce2c0cc3353664eda"),
 	UCLA_BANDIT ("9dcff46588f394987979b7dd770adea94d8ee1fb1f7b8704e1baf91227f6a4d"),
 	USC_BAND ("bd38a3fb85c30d0a7b6e32a5debdf9063528c73c7ed09392cfa708e62e9d43d7"),
-	USC_TROJAN ("e70a242a64fccf528aa2610386f521b537e021ea951fd26175a7f0c94bad51db");
+	USC_TROJAN ("e70a242a64fccf528aa2610386f521b537e021ea951fd26175a7f0c94bad51db"),
+	ETERNAL_SHADOW_CLONE_JOOJETSU ("243fadf439f09f3e10d95ee0330eb6a461a6cc3c435f0b2da04af50f1adeda6c");
 	
 	// URL code of playerhead stored in minecraft's skin server
 	private String url;

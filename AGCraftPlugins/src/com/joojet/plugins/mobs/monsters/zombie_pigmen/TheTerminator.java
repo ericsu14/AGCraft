@@ -45,6 +45,6 @@ public class TheTerminator extends MobEquipment
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.35, 1, 3),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 1));
 		
-		this.setStat(MonsterStat.EXPERIENCE, 60.0);
+		this.setStat(MonsterStat.EXPERIENCE, 250.0);
 	}
 }
