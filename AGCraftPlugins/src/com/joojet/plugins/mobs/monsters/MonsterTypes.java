@@ -1,7 +1,7 @@
 package com.joojet.plugins.mobs.monsters;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.EnumSet;
 import java.util.Random;
 
 import org.bukkit.block.Biome;
@@ -47,7 +47,7 @@ public abstract class MonsterTypes
 	{
 		int minWeight = 0;
 		int maxWeight = 0;
-		HashSet <Biome> spawnBiomes;
+		EnumSet <Biome> spawnBiomes;
 		ArrayList <WeightedMob> mobList = new ArrayList <WeightedMob> ();
 		
 		for (MobEquipment mob : equipmentList)

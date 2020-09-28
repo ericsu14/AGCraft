@@ -1,6 +1,6 @@
 package com.joojet.plugins.mobs;
 
-import java.util.HashSet;
+import java.util.EnumSet;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.AbstractArrow;
@@ -29,12 +29,12 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 public class DamageDisplayListener implements Listener 
 {
 	protected DamageDisplayManager damageDisplayManager;
-	protected HashSet <RegainReason> allowedRegainReasons;
+	protected EnumSet <RegainReason> allowedRegainReasons;
 	
 	public DamageDisplayListener ()
 	{
 		damageDisplayManager = new DamageDisplayManager ();
-		this.allowedRegainReasons = new HashSet <RegainReason> ();
+		this.allowedRegainReasons = EnumSet.noneOf(RegainReason.class);
 		this.allowedRegainReasons.add(RegainReason.CUSTOM);
 		this.allowedRegainReasons.add(RegainReason.MAGIC);
 		this.allowedRegainReasons.add(RegainReason.MAGIC_REGEN);

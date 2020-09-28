@@ -59,7 +59,7 @@ public class StringUtil
     	
     	for (String word : tokens)
     	{
-    		for (int i = 0; i < word.toCharArray().length; ++i)
+    		for (int i = 0; i < word.length(); ++i)
     		{
     			currentChar = word.charAt(i);
     			// If we are at the first index of the word

@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.util;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -356,6 +357,7 @@ public class EquipmentTools
 		
 		// Retrieves the monster's hitlist
 		ArrayList <EntityType> hitlist = mobEquipment.getHitList();
+		EnumSet <EntityType> ignoreList = mobEquipment.getIgnoreList();
 		
 		// Load special pathfinding goals for giants
 		if (nmsMob instanceof EntityGiantZombie)
@@ -374,6 +376,16 @@ public class EquipmentTools
 			if (mobClass != null)
 			{
 				nmsMob.targetSelector.a (5, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
+			}
+		}
+		
+		// Attempt to remove target entity goals that are in the mob's ignore list
+		for (EntityType ignored : ignoreList)
+		{
+			Class <?> mobClass = ConvertEntity.getNMSEntity(ignored);
+			if (mobClass != null)
+			{
+				nmsMob.targetSelector.a(new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
 			}
 		}
 	}

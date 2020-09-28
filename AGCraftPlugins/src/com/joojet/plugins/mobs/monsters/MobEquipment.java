@@ -1,8 +1,8 @@
 package com.joojet.plugins.mobs.monsters;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -51,27 +51,27 @@ public abstract class MobEquipment
 	/** An array storing the drop chances for each item the entity has. */
 	protected float dropRates[];
 	/** Biomes this monster can spawn in. Putting the constant, THE_VOID allows the mob to be spawned in all biomes. */
-	protected HashSet <Biome> biomes;
+	protected EnumSet <Biome> biomes;
 	/** Contains the monster's custom stats */
 	protected HashMap <MonsterStat, Double> mobStats;
 	/** Identifier for this custom mob type */
 	protected MonsterType mobType;
 	/** A list of factions this monster is apart of */
-	protected HashSet <Faction> factions;
+	protected EnumSet <Faction> factions;
 	/** A list of factions that this monster is set to target.
 	 *  If this set has at least one value inserted, the monster only attack
 	 *  entities that are either in this list and the monster's hit list or monsters
 	 *  that are in its hit list but does not carry a faction tag. */
-	protected HashSet <Faction> rivalFactions;
+	protected EnumSet <Faction> rivalFactions;
 	/** A list of entities this monster should hunt either in addition not including
 	 *  the entities the monster naturally hunts in vanilla MineCraft. This behavior can
 	 *  be controlled by the variable, huntFromCustomListOnly. */
 	protected ArrayList <EntityType> hitlist;
 	/** A list of entities that this monster should ignore, meaning that they will never
 	 *  become hostile to that entity. */
-	protected HashSet <EntityType> ignoreList;
+	protected EnumSet <EntityType> ignoreList;
 	/** A set of flags that could be applied to the monster upon spawning */
-	protected HashSet <MobFlag> mobFlags;
+	protected EnumSet <MobFlag> mobFlags;
 	/** Contains any custom loot this custom monster can have */
 	protected ArrayList <MonsterDrop> loot;
 	/** Custom monster that this entity can ride upon spawning */
@@ -89,18 +89,18 @@ public abstract class MobEquipment
 		this.dropRates = new float[6];
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.01f, 0.05f);
 		// Words per line defaults to 6
-		this.biomes = new HashSet <Biome> ();
+		this.biomes = EnumSet.noneOf(Biome.class);
 		// Factions
-		this.factions = new HashSet <Faction> ();
-		this.rivalFactions = new HashSet <Faction> ();
+		this.factions = EnumSet.noneOf(Faction.class);
+		this.rivalFactions = EnumSet.noneOf(Faction.class);
 		// Hitlist
 		this.hitlist = new ArrayList <EntityType> ();
 		// Ignore List
-		this.ignoreList = new HashSet <EntityType> ();
+		this.ignoreList = EnumSet.noneOf(EntityType.class);
 		// Adds the mob-equipment into the custom monster search trie
 		AmplifiedMobSpawner.mobTable.insertWord(this.toString(), this);
 		// Mob flags
-		this.mobFlags = new HashSet <MobFlag> ();
+		this.mobFlags = EnumSet.noneOf(MobFlag.class);
 		// Monster Stats
 		this.mobStats = new HashMap <MonsterStat, Double> ();
 		// Mounted mob
@@ -227,7 +227,7 @@ public abstract class MobEquipment
 	}
 	
 	/** Returns the biomes this monster can spawn in as an arraylist */
-	public HashSet <Biome> getSpawnBiomes ()
+	public EnumSet <Biome> getSpawnBiomes ()
 	{
 		return this.biomes;
 	}
@@ -322,13 +322,13 @@ public abstract class MobEquipment
 	}
 	
 	/** Returns the list of factions this monster is apart of */
-	public HashSet <Faction> getFactions ()
+	public EnumSet <Faction> getFactions ()
 	{
 		return this.factions;
 	}
 	
 	/** Returns the list of factions this entity should hunt */
-	public HashSet <Faction> getRivalFactions ()
+	public EnumSet <Faction> getRivalFactions ()
 	{
 		return this.rivalFactions;
 	}
@@ -340,13 +340,13 @@ public abstract class MobEquipment
 	}
 	
 	/** Returns the hashset of entities this monster should ignore */
-	public HashSet <EntityType> getIgnoreList ()
+	public EnumSet <EntityType> getIgnoreList ()
 	{
 		return this.ignoreList;
 	}
 	
 	/** Returns this entity's set of mob flags */
-	public HashSet <MobFlag> getMobFlags ()
+	public EnumSet <MobFlag> getMobFlags ()
 	{
 		return this.mobFlags;
 	}
@@ -385,7 +385,7 @@ public abstract class MobEquipment
 	 *   @param mob - Monster's mob equipment being checked against this instance */
 	public boolean isRivalsOf (MobEquipment mob)
 	{
-		HashSet <Faction> rivalingFactions = mob.getRivalFactions();
+		EnumSet <Faction> rivalingFactions = mob.getRivalFactions();
 		for (Faction faction : rivalingFactions)
 		{
 			if (this.factions.contains(faction))
