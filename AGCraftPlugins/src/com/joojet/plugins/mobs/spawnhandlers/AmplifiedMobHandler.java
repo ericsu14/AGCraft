@@ -1,8 +1,10 @@
 package com.joojet.plugins.mobs.spawnhandlers;
 
+import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.WanderingTrader;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
@@ -18,11 +20,18 @@ import com.joojet.plugins.mobs.monsters.wither_skeleton.WitherSkeletonTypes;
 import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
 import com.joojet.plugins.mobs.monsters.zombie_pigmen.ZombiePigmenTypes;
 import com.joojet.plugins.mobs.util.EquipmentTools;
+import com.joojet.plugins.mobs.villager.VillagerEquipment;
+import com.joojet.plugins.mobs.villager.wandering.WanderingVillagerTypes;
 
 public class AmplifiedMobHandler extends AbstractSpawnHandler 
 {
+	/** Stores custom wandering villager instances */
+	private WanderingVillagerTypes wanderingTypes;
+	
 	public AmplifiedMobHandler ()
 	{
+		this.wanderingTypes = new WanderingVillagerTypes ();
+		
 		this.addMonsterTypes(new ZombieTypes(),
 				new SkeletonTypes(),
 				new SpiderTypes(),
@@ -41,6 +50,21 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 	@Override
 	public void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll) 
 	{
+		// If the entity is a wandering trader, transform him
+		if ((reason == SpawnReason.NATURAL || reason == SpawnReason.SPAWNER_EGG) 
+				&& type == EntityType.WANDERING_TRADER)
+		{
+			this.transformWanderingTrader(entity, biome);
+			return;
+		}
+		
+		// Switch to raider handler if the spawn reason is RAID
+		if (reason == SpawnReason.RAID)
+		{
+			this.makeRaiderNameVisible(entity, type);
+			return;
+		}
+		
 		// Do not alter any mob that isn't spawned into the world naturally or dice roll fails
 		if ((!reasonFilter(reason) || roll > AGCraftPlugin.plugin.customMobSpawnChance) && !AGCraftPlugin.plugin.enableDebugMode)
 		{
@@ -53,6 +77,24 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 			EquipmentTools.equipEntity(entity, mobEquipment);
 		}
 		
+	}
+	
+	/** Makes the names of raider mobs visible */
+	public void makeRaiderNameVisible (LivingEntity entity, EntityType type)
+	{
+		StringBuilder name = new StringBuilder (type.name().toLowerCase());
+		name.replace(0, 1, type.name().toUpperCase().substring(0,1));
+		name.append(" Raider");
+		entity.setCustomName(ChatColor.RED + name.toString());
+		entity.setCustomNameVisible(true);
+	}
+	
+	/** Transforms a wandering trader into Frolf */
+	public void transformWanderingTrader (LivingEntity entity, Biome biome)
+	{
+		WanderingTrader trader = (WanderingTrader) entity;
+		VillagerEquipment equipment = (VillagerEquipment) wanderingTypes.getRandomEquipment(biome);
+		EquipmentTools.equipEntity(trader, (MobEquipment) equipment);
 	}
 
 }

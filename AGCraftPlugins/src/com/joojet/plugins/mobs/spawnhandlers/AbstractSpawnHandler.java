@@ -9,8 +9,10 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MonsterTypes;
+import com.joojet.plugins.mobs.spawnhandlers.task.HandleSpawnEventTask;
 
 public abstract class AbstractSpawnHandler 
 {
@@ -29,12 +31,24 @@ public abstract class AbstractSpawnHandler
 		this.mobEquipmentTable = new HashMap <EntityType, MonsterTypes> ();
 	}
 	
-	/** Handles a mob spawn event caught in the Amplified Mob Spawn listener.
+	/** Offloads the handleSpawnEvent task to Bukkit's scheduler. This ensures that our custom entity modification code 
+	 *  runs on the next tick, which should decrease the chances of the server throwing a ConcurrentModification exception.
 	 *  @param entity - The entity potentially being transformed into a custom mob
-	 *  @param type - The entity'EntityType
+	 *  @param type - The entity's EntityType
 	 *  @param reason - The reason on why this entity is spawned
 	 *  @param biome - The biome in which this entity is spawned in
-	 *  @param roll - The random number determining if this entity should spawn */
+	 *  @param roll - A random number determining if this entity should spawn */
+	public void createSpawnEventHandlerTask (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll)
+	{
+		new HandleSpawnEventTask(this, entity, type, reason, biome, roll).runTask(AGCraftPlugin.plugin);
+	}
+	
+	/** Handles a mob spawn event caught in the Amplified Mob Spawn listener.
+	 *  @param entity - The entity potentially being transformed into a custom mob
+	 *  @param type - The entity's EntityType
+	 *  @param reason - The reason on why this entity is spawned
+	 *  @param biome - The biome in which this entity is spawned in
+	 *  @param roll - A random number determining if this entity should spawn */
 	public abstract void handleSpawnEvent (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll);
 	
 	

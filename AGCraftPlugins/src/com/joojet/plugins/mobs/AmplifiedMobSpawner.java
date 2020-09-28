@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -20,7 +19,6 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.WanderingTrader;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDropItemEvent;
@@ -50,10 +48,7 @@ import com.joojet.plugins.mobs.spawnhandlers.AmplifiedMobHandler;
 import com.joojet.plugins.mobs.spawnhandlers.BeatTheBruinsHandler;
 import com.joojet.plugins.mobs.spawnhandlers.JulyFourthHandler;
 import com.joojet.plugins.mobs.spawnhandlers.UHCHandler;
-import com.joojet.plugins.mobs.util.EquipmentTools;
 import com.joojet.plugins.mobs.util.LocationOffset;
-import com.joojet.plugins.mobs.villager.VillagerEquipment;
-import com.joojet.plugins.mobs.villager.wandering.WanderingVillagerTypes;
 
 public class AmplifiedMobSpawner implements Listener 
 {	
@@ -73,9 +68,6 @@ public class AmplifiedMobSpawner implements Listener
 	/** Used to generate random numbers */
 	private Random rand = new Random ();
 	
-	/** Mob equipment factories */
-	private WanderingVillagerTypes wanderingTypes;
-	
 	/** A list of spawn handlers for custom events */
 	private JulyFourthHandler julyFourthHandler;
 	private UHCHandler uhcHandler;
@@ -87,7 +79,6 @@ public class AmplifiedMobSpawner implements Listener
 	 *  having a certain chance of equipping them with custom armor, buffs, and weapons. */
 	public AmplifiedMobSpawner ()
 	{
-		this.wanderingTypes = new WanderingVillagerTypes();
 		this.julyFourthHandler = new JulyFourthHandler ();
 		this.amplifiedMobHandler = new AmplifiedMobHandler();
 		this.bruinHandler = new BeatTheBruinsHandler ();
@@ -115,7 +106,7 @@ public class AmplifiedMobSpawner implements Listener
 		switch (AGCraftPlugin.plugin.serverMode)
 		{
 			case UHC:
-				this.uhcHandler.handleSpawnEvent(entity, type, reason, biome, roll);
+				this.uhcHandler.createSpawnEventHandlerTask(entity, type, reason, biome, roll);
 				return;
 			case MINIGAME:
 				return;
@@ -127,28 +118,13 @@ public class AmplifiedMobSpawner implements Listener
 		switch (AGCraftPlugin.plugin.serverEventMode)
 		{
 			case JULY_FOURTH:
-				this.julyFourthHandler.handleSpawnEvent(entity, type, reason, biome, roll);
+				this.julyFourthHandler.createSpawnEventHandlerTask(entity, type, reason, biome, roll);
 				break;
 			case BEAT_THE_BRUINS:
-				this.bruinHandler.handleSpawnEvent(entity, type, reason, biome, roll);
+				this.bruinHandler.createSpawnEventHandlerTask(entity, type, reason, biome, roll);
 				break;
 			default:
 				break;
-		}
-		
-		// If the entity is a wandering trader, transform him
-		if ((reason == SpawnReason.NATURAL || reason == SpawnReason.SPAWNER_EGG) 
-				&& type == EntityType.WANDERING_TRADER)
-		{
-			this.transformWanderingTrader(entity, biome);
-			return;
-		}
-		
-		// Switch to raider handler if the spawn reason is RAID
-		if (reason == SpawnReason.RAID)
-		{
-			this.makeRaiderNameVisible(entity, type);
-			return;
 		}
 		
 		// Handles normal spawn events
@@ -348,24 +324,6 @@ public class AmplifiedMobSpawner implements Listener
 				}
 			}
 		}
-	}
-	
-	/** Makes the names of raider mobs visible */
-	public void makeRaiderNameVisible (LivingEntity entity, EntityType type)
-	{
-		StringBuilder name = new StringBuilder (type.name().toLowerCase());
-		name.replace(0, 1, type.name().toUpperCase().substring(0,1));
-		name.append(" Raider");
-		entity.setCustomName(ChatColor.RED + name.toString());
-		entity.setCustomNameVisible(true);
-	}
-	
-	/** Transforms a wandering trader into Frolf */
-	public void transformWanderingTrader (LivingEntity entity, Biome biome)
-	{
-		WanderingTrader trader = (WanderingTrader) entity;
-		VillagerEquipment equipment = (VillagerEquipment) wanderingTypes.getRandomEquipment(biome);
-		EquipmentTools.equipEntity(trader, (MobEquipment) equipment);
 	}
 	
 	/** Finds and returns a LivingEntity's custom mob equipment object.
