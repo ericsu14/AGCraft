@@ -28,9 +28,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
@@ -352,42 +354,49 @@ public class EquipmentTools
 			return;
 		}
 		
-		// Cast this into a NMS entity monster
-		EntityInsentient nmsMob = ((CraftMob) entity).getHandle();
-		
-		// Retrieves the monster's hitlist
-		ArrayList <EntityType> hitlist = mobEquipment.getHitList();
-		EnumSet <EntityType> ignoreList = mobEquipment.getIgnoreList();
-		
-		// Load special pathfinding goals for giants
-		if (nmsMob instanceof EntityGiantZombie)
-		{
-			nmsMob.goalSelector.a(1, new PathfinderGoalFloat((EntityCreature) nmsMob));
-			nmsMob.goalSelector.a(1, new PathfinderGoalGiantFireball((EntityGiantZombie) nmsMob, entity));
-			nmsMob.goalSelector.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
-			nmsMob.goalSelector.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
-			nmsMob.goalSelector.a(4, new PathfinderGoalMeleeAttack ((EntityCreature) nmsMob, 1.0D, true));
-		}
-		
-		// Add target entity goals based on the values stored in the mob equipment's hitlist.
-		for (EntityType victim : hitlist)
-		{
-			Class <?> mobClass = ConvertEntity.getNMSEntity(victim);
-			if (mobClass != null)
+		// Offloads custom pathfinding target initialization code into the next game tick
+		new BukkitRunnable () {
+			@Override
+			public void run ()
 			{
-				nmsMob.targetSelector.a (5, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
+				// Cast this into a NMS entity monster
+				EntityInsentient nmsMob = ((CraftMob) entity).getHandle();
+				
+				// Retrieves the monster's hitlist
+				ArrayList <EntityType> hitlist = mobEquipment.getHitList();
+				EnumSet <EntityType> ignoreList = mobEquipment.getIgnoreList();
+				
+				// Load special pathfinding goals for giants
+				if (nmsMob instanceof EntityGiantZombie)
+				{
+					nmsMob.goalSelector.a(1, new PathfinderGoalFloat((EntityCreature) nmsMob));
+					nmsMob.goalSelector.a(1, new PathfinderGoalGiantFireball((EntityGiantZombie) nmsMob, entity));
+					nmsMob.goalSelector.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
+					nmsMob.goalSelector.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
+					nmsMob.goalSelector.a(4, new PathfinderGoalMeleeAttack ((EntityCreature) nmsMob, 1.0D, true));
+				}
+				
+				// Add target entity goals based on the values stored in the mob equipment's hitlist.
+				for (EntityType victim : hitlist)
+				{
+					Class <?> mobClass = ConvertEntity.getNMSEntity(victim);
+					if (mobClass != null)
+					{
+						nmsMob.targetSelector.a (5, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
+					}
+				}
+				
+				// Attempt to remove target entity goals that are in the mob's ignore list
+				for (EntityType ignored : ignoreList)
+				{
+					Class <?> mobClass = ConvertEntity.getNMSEntity(ignored);
+					if (mobClass != null)
+					{
+						nmsMob.targetSelector.a(new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
+					}
+				}
 			}
-		}
-		
-		// Attempt to remove target entity goals that are in the mob's ignore list
-		for (EntityType ignored : ignoreList)
-		{
-			Class <?> mobClass = ConvertEntity.getNMSEntity(ignored);
-			if (mobClass != null)
-			{
-				nmsMob.targetSelector.a(new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
-			}
-		}
+		}.runTask(AGCraftPlugin.plugin);
 	}
 	
 	public static void mountMob (LivingEntity entity, MobEquipment mobEquipment)
