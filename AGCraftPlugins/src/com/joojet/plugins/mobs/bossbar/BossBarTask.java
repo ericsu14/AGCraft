@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.music.MusicListener;
+import com.joojet.plugins.music.enums.MusicType;
 
 public class BossBarTask extends BukkitRunnable 
 {
@@ -54,7 +55,7 @@ public class BossBarTask extends BukkitRunnable
 		{
 			if (p != null)
 			{
-				MusicListener.soundPlayer.stopAllSoundsNearPlayer(p);
+				MusicListener.soundPlayer.stopSpecificSoundTypeNearPlayer(MusicType.GORO_THEME, p);
 			}
 		}
 		bossBar.removeAll();

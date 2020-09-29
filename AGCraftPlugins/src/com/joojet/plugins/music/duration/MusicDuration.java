@@ -25,8 +25,8 @@ public class MusicDuration
 		// All else will fail silently
 		if (tokens.length == 2)
 		{
-			this.minutes = Integer.parseInt(tokens[1]);
-			this.seconds = Integer.parseInt(tokens[0]);
+			this.minutes = Integer.parseInt(tokens[0]);
+			this.seconds = Integer.parseInt(tokens[1]);
 		}
 		else
 		{

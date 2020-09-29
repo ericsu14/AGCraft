@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.music.enums.MusicType;
@@ -18,7 +19,7 @@ public class SoundPlayer
 	
 	public SoundPlayer ()
 	{
-		this.volume = 0.75F;
+		this.volume = 0.60F;
 		this.activePlayerSoundTable = new HashMap <UUID, PlayCustomSoundTask> ();
 	}
 	
@@ -51,6 +52,9 @@ public class SoundPlayer
 	
 	/** Stops a specific sound currently being played to a player and removes it from the internal 
 	 *  active song table so that a new song can be played to that player again.
+	 *  
+	 *  When a song is successfully stopped, an ending theme is also played for that song
+	 *  to add a nice transition.
 	 *  @param type - Type of music being stopped
 	 *  @param player - The player the song is being stopped */
 	public void stopSpecificSoundTypeNearPlayer (MusicType type, Player player)
@@ -60,7 +64,22 @@ public class SoundPlayer
 				&& this.activePlayerSoundTable.get(playerUUID).getMusicType() == type)
 		{
 			player.stopSound(type.getNamespace());
-			this.removeSoundTaskFromTable(playerUUID);
+			// Attempts to play the music type's ending theme if one exists
+			if (type.hasEndingTheme())
+			{
+				player.playSound(player.getLocation(), type.getEndTheme().getNamespace(), volume, 1.0F);
+				new BukkitRunnable () {
+					@Override
+					public void run ()
+					{
+						removeSoundTaskFromTable (playerUUID);
+					}
+				}.runTaskLater(AGCraftPlugin.plugin, type.getEndTheme().duration().getTicks());
+			}
+			else
+			{
+				this.removeSoundTaskFromTable(playerUUID);
+			}
 		}
 	}
 	
