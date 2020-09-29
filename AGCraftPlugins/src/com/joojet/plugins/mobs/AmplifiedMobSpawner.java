@@ -128,7 +128,7 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		// Handles normal spawn events
-		this.amplifiedMobHandler.handleSpawnEvent(entity, type, reason, biome, roll);
+		this.amplifiedMobHandler.createSpawnEventHandlerTask(entity, type, reason, biome, roll);
 	}
 	
 	/** Modifies entity experience drops on entity death events */
