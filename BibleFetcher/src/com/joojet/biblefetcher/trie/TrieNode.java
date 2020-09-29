@@ -1,13 +1,13 @@
 package com.joojet.biblefetcher.trie;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map.Entry;
 
 public class TrieNode <T> 
 {
 	// Defines the max. amount of children this node could store
 	public final int kChildSize = 255;
-	private Hashtable <T, Integer> linkedIDs;
+	private HashMap <T, Integer> linkedIDs;
 	// Stores the node's children
 	private TrieNode<T> children[];
 	// Amount of active children this node carries
@@ -21,7 +21,7 @@ public class TrieNode <T>
 		this.letter = letter;
 		this.size = 0;
 		this.children = (TrieNode<T>[]) new TrieNode [this.kChildSize];
-		this.linkedIDs = new Hashtable <T, Integer> ();
+		this.linkedIDs = new HashMap <T, Integer> ();
 		this.updateFrequency(linkedID);
 	}
 	

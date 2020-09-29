@@ -1,8 +1,8 @@
 package com.joojet.plugins.mobs.monsters;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.EnumSet;
-import java.util.HashMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -53,7 +53,7 @@ public abstract class MobEquipment
 	/** Biomes this monster can spawn in. Putting the constant, THE_VOID allows the mob to be spawned in all biomes. */
 	protected EnumSet <Biome> biomes;
 	/** Contains the monster's custom stats */
-	protected HashMap <MonsterStat, Double> mobStats;
+	protected EnumMap <MonsterStat, Double> mobStats;
 	/** Identifier for this custom mob type */
 	protected MonsterType mobType;
 	/** A list of factions this monster is apart of */
@@ -102,7 +102,7 @@ public abstract class MobEquipment
 		// Mob flags
 		this.mobFlags = EnumSet.noneOf(MobFlag.class);
 		// Monster Stats
-		this.mobStats = new HashMap <MonsterStat, Double> ();
+		this.mobStats = new EnumMap <MonsterStat, Double> (MonsterStat.class);
 		// Mounted mob
 		this.mount = null;
 		// Custom loot
@@ -172,7 +172,7 @@ public abstract class MobEquipment
 	}
 	
 	/** Returns the mob's stat container */
-	public HashMap <MonsterStat, Double> getStatContainer ()
+	public EnumMap <MonsterStat, Double> getStatContainer ()
 	{
 		return this.mobStats;
 	}

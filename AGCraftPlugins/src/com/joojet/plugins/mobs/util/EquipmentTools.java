@@ -1,8 +1,8 @@
 package com.joojet.plugins.mobs.util;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Random;
 
@@ -291,7 +291,7 @@ public class EquipmentTools
 	 *  @param mobEquipment - Class containing custom mob stat data */
 	public static void modifyBaseStats (LivingEntity entity, MobEquipment mobEquipment)
 	{
-		HashMap <MonsterStat, Double> mobStats = mobEquipment.getStatContainer();
+		EnumMap <MonsterStat, Double> mobStats = mobEquipment.getStatContainer();
 		
 		Attribute attribute;
 		for (Entry<MonsterStat, Double> stat : mobStats.entrySet())
