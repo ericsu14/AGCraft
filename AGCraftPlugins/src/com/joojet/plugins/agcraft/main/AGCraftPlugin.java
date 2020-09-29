@@ -185,7 +185,7 @@ public class AGCraftPlugin extends JavaPlugin
 		System.out.println ("Debug Mode: " + this.enableDebugMode);
 		
 		// Music volume
-		MusicListener.setMusicVolume((float) this.serverConfigFile.getValue(MusicListener.musicVolumeTag));
+		MusicListener.setMusicVolume((double) this.serverConfigFile.getValue(MusicListener.musicVolumeTag));
 		
 		// Reloads the clearjunk file
 		this.clearJunk.reloadConfigFile();

@@ -30,8 +30,8 @@ public class MusicListener implements Listener
 	
 	/** Sets the played music's volume to a new value
 	 * 	@param volume - New volume used for played music */
-	public static void setMusicVolume (float volume)
+	public static void setMusicVolume (Double volume)
 	{
-		musicVolume = volume;
+		musicVolume = volume.floatValue();
 	}
 }
