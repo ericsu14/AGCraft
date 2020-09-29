@@ -87,7 +87,7 @@ public class BossBarAPI
 		if (uuidKey != null && activeBossBars.containsKey(uuidKey))
 		{
 			activeBossBars.get(uuidKey).bossBar.removePlayer(player);
-			MusicListener.soundPlayer.stopSpecificSoundTypeNearPlayer(MusicType.GORO_THEME, player);
+			MusicListener.soundPlayer.stopCurrentlyPlayingSoundOnPlayer(player);
 		}
 	}
 	
