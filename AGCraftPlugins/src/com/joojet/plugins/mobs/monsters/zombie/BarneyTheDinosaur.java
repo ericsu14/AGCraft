@@ -17,6 +17,7 @@ import com.joojet.plugins.mobs.equipment.leggings.BarneyLegs;
 import com.joojet.plugins.mobs.equipment.offhand.BarneyTotem;
 import com.joojet.plugins.mobs.equipment.weapons.BarneyDagger;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.music.enums.MusicType;
 
 public class BarneyTheDinosaur extends MobEquipment
 {
@@ -51,5 +52,6 @@ public class BarneyTheDinosaur extends MobEquipment
 				new MonsterDrop (new BarneyTotem (this.color), 0.01));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 200.0);
+		this.bossTheme = MusicType.BARNEY;
 	}
 }

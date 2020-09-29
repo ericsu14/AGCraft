@@ -6,7 +6,9 @@ public enum MusicType {
 	GORO_THEME ("boss.goro_theme", "2:40", MusicEndingType.GORO_THEME_END),
 	KUZE_THEME ("boss.kuze_theme", "3:56", MusicEndingType.KUZE_THEME_END),
 	DOOM_GUY ("boss.doom_guy", "1:41", MusicEndingType.DOOM_GUY_END),
-	HAIKYUU ("boss.haikyuu", "4:01", MusicEndingType.HAIKYUU_END);
+	HAIKYUU ("boss.haikyuu", "4:01", MusicEndingType.HAIKYUU_END),
+	BARNEY ("boss.barney", "2:30", MusicEndingType.BARNEY_END),
+	SHREK ("boss.shrek", "3:20", MusicEndingType.SHREK_END);
 	
 	/** Name of the custom sound event specified in the resource pack */
 	private String namespace;

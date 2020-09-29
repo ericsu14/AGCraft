@@ -59,6 +59,6 @@ public class SkullKid extends MobEquipment
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.20, 1, 1));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 500.0);
-		this.bossTheme = MusicType.GORO_THEME;
+		this.bossTheme = MusicType.KUZE_THEME;
 	}
 }

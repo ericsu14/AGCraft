@@ -6,7 +6,9 @@ public enum MusicEndingType {
 	GORO_THEME_END ("boss_ending.goro_theme_end", "0:10"), 
 	KUZE_THEME_END ("boss_ending.kuze_theme_end", "0:10"), 
 	DOOM_GUY_END ("boss_ending.doom_guy_end", "0:03"),
-	HAIKYUU_END ("boss_ending.haikyuu_end", "0:17");
+	HAIKYUU_END ("boss_ending.haikyuu_end", "0:17"),
+	BARNEY_END ("boss_ending.barney_end", "0:08"),
+	SHREK_END ("boss_ending.shrek_end", "0:14");
 	
 	protected String namespace;
 	

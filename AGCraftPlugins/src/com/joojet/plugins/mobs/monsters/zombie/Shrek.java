@@ -13,6 +13,7 @@ import com.joojet.plugins.mobs.equipment.head.ShrekHat;
 import com.joojet.plugins.mobs.equipment.leggings.OgreLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.OgreAxe;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.music.enums.MusicType;
 
 public class Shrek extends MobEquipment
 {
@@ -32,5 +33,6 @@ public class Shrek extends MobEquipment
 		this.weapon = new OgreAxe (this.color);
 		
 		this.setStat(MonsterStat.EXPERIENCE, 40.0);
+		this.bossTheme = MusicType.SHREK;
 	}
 }
