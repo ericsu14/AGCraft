@@ -56,7 +56,7 @@ public class BossBarTask extends BukkitRunnable
 			{
 				if (player != null)
 				{
-					MusicListener.soundPlayer.stopCurrentlyPlayingSoundOnPlayer(player);
+					MusicListener.soundPlayer.stopCurrentlyPlayingSoundOnPlayer(this.bossBarNode.bossTheme, player);
 				}
 			}
 		}

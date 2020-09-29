@@ -55,13 +55,14 @@ public class SoundPlayer
 	 *  
 	 *  When a song is successfully stopped, an ending theme is also played for that song
 	 *  to add a nice transition.
+	 *  @param type - Song being stopped
 	 *  @param player - The player the song is being stopped */
-	public void stopCurrentlyPlayingSoundOnPlayer (Player player)
+	public void stopCurrentlyPlayingSoundOnPlayer (MusicType type, Player player)
 	{
 		UUID playerUUID = player.getUniqueId();
-		if (this.activePlayerSoundTable.containsKey(playerUUID))
+		if (this.activePlayerSoundTable.containsKey(playerUUID)
+				&& this.activePlayerSoundTable.get(playerUUID).getMusicType() == type)
 		{
-			MusicType type = this.activePlayerSoundTable.get(playerUUID).getMusicType();
 			player.stopSound(type.getNamespace());
 			// Attempts to play the music type's ending theme if one exists
 			if (type.hasEndingTheme())

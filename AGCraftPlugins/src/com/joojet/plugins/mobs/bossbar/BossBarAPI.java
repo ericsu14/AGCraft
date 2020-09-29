@@ -101,7 +101,7 @@ public class BossBarAPI
 		if (uuidKey != null && activeBossBars.containsKey(uuidKey))
 		{
 			activeBossBars.get(uuidKey).bossBar.removePlayer(player);
-			MusicListener.soundPlayer.stopCurrentlyPlayingSoundOnPlayer(player);
+			MusicListener.soundPlayer.stopAllSoundsNearPlayer(player);
 		}
 	}
 	
