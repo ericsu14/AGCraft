@@ -15,6 +15,7 @@ import com.joojet.plugins.mobs.equipment.head.DarkNetheriteHelmet;
 import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.music.enums.MusicType;
 
 public class UltimateBadassZombie extends MobEquipment
 {
@@ -43,5 +44,6 @@ public class UltimateBadassZombie extends MobEquipment
 				new MonsterDrop (Material.GOLDEN_CARROT, 0.15, 3, 16));
 		
 		this.setStat (MonsterStat.EXPERIENCE, 50.0);
+		this.bossTheme = MusicType.GORO_THEME;
 	}
 }

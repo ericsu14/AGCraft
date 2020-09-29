@@ -17,6 +17,7 @@ import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.TerminatorDagger;
 import com.joojet.plugins.mobs.equipment.weapons.TerminatorSword;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.music.enums.MusicType;
 
 public class TheTerminator extends MobEquipment
 {
@@ -46,5 +47,6 @@ public class TheTerminator extends MobEquipment
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 1));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 250.0);
+		this.bossTheme = MusicType.KUZE_THEME;
 	}
 }

@@ -18,6 +18,7 @@ import com.joojet.plugins.mobs.equipment.head.DoomSlayerHead;
 import com.joojet.plugins.mobs.equipment.leggings.DoomGuyLegs;
 import com.joojet.plugins.mobs.equipment.weapons.DoomBlade;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.music.enums.MusicType;
 
 public class DoomGuy extends MobEquipment
 {
@@ -59,6 +60,7 @@ public class DoomGuy extends MobEquipment
 				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 1.00, 5, 7),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 2));
 		
+		this.bossTheme = MusicType.DOOM_GUY;
 		this.setStat(MonsterStat.EXPERIENCE, 500.0);
 	}
 }

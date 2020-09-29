@@ -23,6 +23,7 @@ import com.joojet.plugins.mobs.equipment.weapons.EternalTrojanSword;
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.equipment.weapons.LeftCrashSymbol;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
+import com.joojet.plugins.music.enums.MusicType;
 
 public class GiantBruin extends UCLAFaction
 {
@@ -77,6 +78,7 @@ public class GiantBruin extends UCLAFaction
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING,
 				MobFlag.FIREWORK_DEATH);
 		this.addBiomes(Biome.THE_VOID);
+		this.bossTheme = MusicType.GORO_THEME;
 		
 	}
 }

@@ -13,7 +13,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataHolder;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.metadata.BossMetadata;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.music.enums.MusicType;
 
@@ -76,7 +78,13 @@ public class BossBarAPI
 				createBossBar (bossEntity);
 			}
 			activeBossBars.get(uuidKey).bossBar.addPlayer(player);
-			MusicListener.soundPlayer.playCustomMusicNearPlayer(MusicType.GORO_THEME, player);
+			
+			// Attempts to play the entity's boss music if it exists
+			MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(bossEntity);
+			if (equipment != null && equipment.containsBossTheme())
+			{
+				MusicListener.soundPlayer.playCustomMusicNearPlayer(equipment.getBossTheme(), player);
+			}
 		}
 	}
 	

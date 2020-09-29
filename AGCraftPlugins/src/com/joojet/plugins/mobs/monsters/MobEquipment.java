@@ -25,6 +25,7 @@ import com.joojet.plugins.mobs.equipment.offhand.TippedArrow;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.util.ConvertColors;
+import com.joojet.plugins.music.enums.MusicType;
 
 public abstract class MobEquipment 
 {
@@ -78,6 +79,8 @@ public abstract class MobEquipment
 	protected MountedMob mount;
 	/** Custom tipped arrow the monster is set to shoot with */
 	protected TippedArrow tippedArrow;
+	/** Boss theme that plays when any player engages this mob */
+	protected MusicType bossTheme;
 	
 	public MobEquipment (MonsterType mobType)
 	{
@@ -107,7 +110,10 @@ public abstract class MobEquipment
 		this.mount = null;
 		// Custom loot
 		this.loot = new ArrayList <MonsterDrop> ();
+		// Tipped arrow
 		this.tippedArrow = null;
+		// Boss theme
+		this.bossTheme = null;
 	}
 	
 	/** Sets up drop rates for this entity.
@@ -418,6 +424,18 @@ public abstract class MobEquipment
 	public TippedArrow getTippedArrow ()
 	{
 		return this.tippedArrow;
+	}
+	
+	/** Returns the monster's boss theme */
+	public MusicType getBossTheme ()
+	{
+		return this.bossTheme;
+	}
+	
+	/** Returns true if this mob contains a boss theme */
+	public boolean containsBossTheme()
+	{
+		return this.bossTheme != null;
 	}
 	
 	/** Return the equipment's monster type identifier as a string. */

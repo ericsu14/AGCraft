@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.music.MusicListener;
-import com.joojet.plugins.music.enums.MusicType;
 
 public class BossBarTask extends BukkitRunnable 
 {

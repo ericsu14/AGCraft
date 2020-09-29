@@ -14,6 +14,7 @@ import com.joojet.plugins.mobs.enums.SummonTypes;
 import com.joojet.plugins.mobs.equipment.offhand.BruinShield;
 import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
+import com.joojet.plugins.music.enums.MusicType;
 
 public class TheBruinBear extends UCLAFaction
 {
@@ -44,5 +45,6 @@ public class TheBruinBear extends UCLAFaction
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.15, 1, 1));
 		this.setStat(MonsterStat.EXPERIENCE, 200.0);
 		this.ignoreList.clear();
+		this.bossTheme = MusicType.HAIKYUU;
 	}
 }

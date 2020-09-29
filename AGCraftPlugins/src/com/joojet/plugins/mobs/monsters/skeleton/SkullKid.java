@@ -17,6 +17,7 @@ import com.joojet.plugins.mobs.equipment.offhand.CursedArrow;
 import com.joojet.plugins.mobs.equipment.weapons.ATerribleFate;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.music.enums.MusicType;
 
 public class SkullKid extends MobEquipment 
 {
@@ -58,5 +59,6 @@ public class SkullKid extends MobEquipment
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.20, 1, 1));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 500.0);
+		this.bossTheme = MusicType.GORO_THEME;
 	}
 }
