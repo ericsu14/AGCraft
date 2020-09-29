@@ -17,7 +17,6 @@ import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.metadata.BossMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.music.MusicListener;
-import com.joojet.plugins.music.enums.MusicType;
 
 public class BossBarAPI 
 {
