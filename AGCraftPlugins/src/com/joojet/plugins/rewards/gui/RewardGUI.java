@@ -135,7 +135,7 @@ public class RewardGUI implements Listener
         			new SpawnFireworksOnLocationTask (this.player.getLocation(), 48, 3, 250).runTaskTimer(AGCraftPlugin.plugin, 30, 15);
         			this.player.sendMessage(ChatColor.GOLD + "Yay! Happy birthday " + ChatColor.AQUA + this.player.getDisplayName() +
         					ChatColor.GOLD + "!!");
-        			this.player.playSound(this.player.getLocation(), Sound.MUSIC_DISC_CAT, SoundCategory.RECORDS, 1.0f, 1.0f);
+        			this.player.getLocation().getWorld().playSound(this.player.getLocation(), Sound.MUSIC_DISC_CAT, SoundCategory.RECORDS, 10.0f, 1.0f);
         			this.player.getWorld().setTime(14000);
         		}
         		

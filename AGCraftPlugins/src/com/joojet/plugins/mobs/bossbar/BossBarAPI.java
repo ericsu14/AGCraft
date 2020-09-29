@@ -14,11 +14,16 @@ import org.bukkit.persistence.PersistentDataHolder;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.metadata.BossMetadata;
+import com.joojet.plugins.music.enums.MusicType;
+import com.joojet.plugins.music.player.SoundPlayer;
 
 public class BossBarAPI 
 {
 	/** Stores a static table of all active custom boss bars in this server */
 	public static ConcurrentHashMap <UUID, BossBarNode> activeBossBars = new ConcurrentHashMap <UUID, BossBarNode> ();
+	
+	/** Sound player used by the Boss Bar API */
+	public static SoundPlayer soundPlayer = new SoundPlayer ();
 	
 	/** Attempts to create a new Boss Bar for the passed living entity
 	 * 		@param entity - The Living entity we are creating the boss bar for */
@@ -74,6 +79,7 @@ public class BossBarAPI
 				createBossBar (bossEntity);
 			}
 			activeBossBars.get(uuidKey).bossBar.addPlayer(player);
+			soundPlayer.playCustomMusicNearPlayer(MusicType.KUZE_THEME, player);
 		}
 	}
 	
