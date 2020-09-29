@@ -12,35 +12,87 @@ import com.joojet.plugins.music.task.PlayCustomSoundTask;
 
 public class SoundPlayer 
 {
-	protected float range;
+	protected float volume;
 	
 	protected HashMap <UUID, PlayCustomSoundTask> activePlayerSoundTable;
 	
 	public SoundPlayer ()
 	{
-		this.range = 5.0F;
+		this.volume = 0.75F;
 		this.activePlayerSoundTable = new HashMap <UUID, PlayCustomSoundTask> ();
 	}
 	
+	/** Attempts to play custom music referenced by MusicType to the player.
+	 *  This will not overwrite any music already playing by previous calls to this command.
+	 *  No music will be played when the player does not have the listed resource pack.
+	 *  @param type - Type of custom music to be played that is specified in the server resource pack
+	 *  @param player - Player we are playing the music to.
+	 *  */
 	public void playCustomMusicNearPlayer(MusicType type, Player player)
 	{
 		if (!this.activePlayerSoundTable.containsKey(player.getUniqueId()))
 		{
-			player.playSound(player.getLocation(), type.getNamespace(), range, 1.0F);
+			player.playSound(player.getLocation(), type.getNamespace(), volume, 1.0F);
 			PlayCustomSoundTask soundTask = new PlayCustomSoundTask (player.getUniqueId(), type, this);
 			this.activePlayerSoundTable.put(player.getUniqueId(), soundTask);
 			soundTask.runTaskLater(AGCraftPlugin.plugin, type.duration().getTicks());
 		}
 	}
 	
-	public void stopSoundNearPlayer (MusicType type, Player player)
+	/** Plays custom music to all players near a location.
+	 *  @param type - Type of custom music to be played that is specified in the server resource pack
+	 *  @param location - Location in the world we are playing the music at
+	 *  @param radius - Total radius (in blocks) the music will project before fading out  */
+	public void playCustomMusicAtLocation (MusicType type, Location location, int radius)
 	{
-		player.stopSound(type.getNamespace());
+		float convertedRadius = Math.max(1.0f, radius / 15.0f);
+		location.getWorld().playSound(location, type.getNamespace(), convertedRadius, 1.0F);
 	}
 	
-	public void playCustomMusicAtLocation (MusicType type, Location location)
+	/** Stops a specific sound currently being played to a player and removes it from the internal 
+	 *  active song table so that a new song can be played to that player again.
+	 *  @param type - Type of music being stopped
+	 *  @param player - The player the song is being stopped */
+	public void stopSpecificSoundTypeNearPlayer (MusicType type, Player player)
 	{
-		location.getWorld().playSound(location, type.getNamespace(), range, 1.0F);
+		UUID playerUUID = player.getUniqueId();
+		if (this.activePlayerSoundTable.containsKey(playerUUID)
+				&& this.activePlayerSoundTable.get(playerUUID).getMusicType() == type)
+		{
+			player.stopSound(type.getNamespace());
+			this.removeSoundTaskFromTable(playerUUID);
+		}
+	}
+	
+	/** Stops all sounds currently being played to a player and removes it from the internal
+	 *  active song table.
+	 *  @param - player - The player whose songs are being stopped */
+	public void stopAllSoundsNearPlayer (Player player)
+	{
+		UUID playerUUID = player.getUniqueId();
+		if (this.activePlayerSoundTable.containsKey(playerUUID))
+		{
+			for (MusicType type : MusicType.values())
+			{
+				player.stopSound(type.getNamespace());
+			}
+			this.removeSoundTaskFromTable(playerUUID);
+		}
+	}
+	
+	/** Removes the sound task entry from the sound player table
+	 *  and cancels the task.
+	 *  @param uuid - UUID associated with the player who we are removing the active sound from */
+	public void removeSoundTaskFromTable (UUID uuid)
+	{
+		if (this.activePlayerSoundTable != null && this.activePlayerSoundTable.containsKey(uuid))
+		{
+			PlayCustomSoundTask removedTask = this.activePlayerSoundTable.remove(uuid);
+			if (removedTask != null && !removedTask.isCancelled())
+			{
+				removedTask.cancel();
+			}
+		}
 	}
 	
 }

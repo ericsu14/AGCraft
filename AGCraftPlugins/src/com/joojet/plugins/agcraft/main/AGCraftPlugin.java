@@ -30,6 +30,7 @@ import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.bossbar.BossBarAPI;
 import com.joojet.plugins.mobs.enums.ThemedServerEvent;
 import com.joojet.plugins.mobs.interpreter.ThemedServerEventInterpreter;
+import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.commands.*;
 import com.joojet.plugins.rewards.commands.tabcompleter.RewardPlayerTabCompleter;
@@ -145,6 +146,9 @@ public class AGCraftPlugin extends JavaPlugin
 		// Soulbounded items event listener
 		this.soulBoundListener = new SoulBoundListener ();
 		Bukkit.getPluginManager().registerEvents(this.soulBoundListener, this);
+		
+		// Music controller event listener
+		Bukkit.getPluginManager().registerEvents(new MusicListener(), this);
 	}
 	
 	@Override

@@ -28,8 +28,12 @@ public class PlayCustomSoundTask extends BukkitRunnable
 	@Override
 	public void run() 
 	{
-		
-
+		this.musicPlayer.removeSoundTaskFromTable(this.playerUUID);
+	}
+	
+	public MusicType getMusicType ()
+	{
+		return this.musicType;
 	}
 
 }

@@ -5,7 +5,10 @@ import java.util.UUID;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import com.joojet.plugins.music.MusicListener;
 
 public class BossBarTask extends BukkitRunnable 
 {
@@ -46,6 +49,14 @@ public class BossBarTask extends BukkitRunnable
 	public void cleanup ()
 	{
 		BossBar bossBar = this.bossBarNode.bossBar;
+		// Removes all active boss sounds from each player registered in the boss bar.
+		for (Player p : bossBar.getPlayers())
+		{
+			if (p != null)
+			{
+				MusicListener.soundPlayer.stopAllSoundsNearPlayer(p);
+			}
+		}
 		bossBar.removeAll();
 		bossBar.setVisible(false);
 	}
