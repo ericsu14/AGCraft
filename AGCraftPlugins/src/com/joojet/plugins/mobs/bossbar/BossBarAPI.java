@@ -17,6 +17,7 @@ import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.metadata.BossMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.music.MusicListener;
+import com.joojet.plugins.music.enums.MusicType;
 
 public class BossBarAPI 
 {
@@ -41,7 +42,13 @@ public class BossBarAPI
 		if (!activeBossBars.containsKey(uuidKey))
 		{
 			BossBar bossBar = AGCraftPlugin.plugin.getServer().createBossBar(entity.getCustomName(), BarColor.RED, BarStyle.SEGMENTED_6, BarFlag.PLAY_BOSS_MUSIC);
-			activeBossBars.put(uuidKey, new BossBarNode (bossBar, entity, uuidKey));
+			MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(entity);
+			MusicType bossTheme = null;
+			if (equipment != null && equipment.containsBossTheme())
+			{
+				bossTheme = equipment.getBossTheme();
+			}
+			activeBossBars.put(uuidKey, new BossBarNode (bossBar, entity, uuidKey, bossTheme));
 			activateBossBar (uuidKey);
 		}
 		else

@@ -16,6 +16,7 @@ import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.ThanosArrow;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualFantasy;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.music.enums.MusicType;
 
 public class UltimateBadassSkeleton extends MobEquipment
 {
@@ -51,6 +52,6 @@ public class UltimateBadassSkeleton extends MobEquipment
 				new MonsterDrop (Material.GOLDEN_CARROT, 0.15, 3, 16));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 50.0);
-		
+		this.bossTheme = MusicType.HAIKYUU;
 	}
 }

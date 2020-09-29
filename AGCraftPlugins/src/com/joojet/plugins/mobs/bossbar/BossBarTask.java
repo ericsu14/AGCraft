@@ -50,11 +50,14 @@ public class BossBarTask extends BukkitRunnable
 	{
 		BossBar bossBar = this.bossBarNode.bossBar;
 		// Removes all active boss sounds from each player registered in the boss bar.
-		for (Player player : bossBar.getPlayers())
+		if (this.bossBarNode.bossTheme != null)
 		{
-			if (player != null)
+			for (Player player : bossBar.getPlayers())
 			{
-				MusicListener.soundPlayer.stopCurrentlyPlayingSoundOnPlayer(player);
+				if (player != null)
+				{
+					MusicListener.soundPlayer.stopCurrentlyPlayingSoundOnPlayer(player);
+				}
 			}
 		}
 		bossBar.removeAll();
