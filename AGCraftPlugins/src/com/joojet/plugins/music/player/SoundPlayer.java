@@ -8,18 +8,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.music.enums.MusicType;
 import com.joojet.plugins.music.task.PlayCustomSoundTask;
 
 public class SoundPlayer 
 {
-	protected float volume;
 	
 	protected HashMap <UUID, PlayCustomSoundTask> activePlayerSoundTable;
 	
 	public SoundPlayer ()
 	{
-		this.volume = 0.60F;
 		this.activePlayerSoundTable = new HashMap <UUID, PlayCustomSoundTask> ();
 	}
 	
@@ -33,7 +32,7 @@ public class SoundPlayer
 	{
 		if (!this.activePlayerSoundTable.containsKey(player.getUniqueId()))
 		{
-			player.playSound(player.getLocation(), type.getNamespace(), volume, 1.0F);
+			player.playSound(player.getLocation(), type.getNamespace(), MusicListener.musicVolume, 1.0F);
 			PlayCustomSoundTask soundTask = new PlayCustomSoundTask (player.getUniqueId(), type, this);
 			this.activePlayerSoundTable.put(player.getUniqueId(), soundTask);
 			soundTask.runTaskLater(AGCraftPlugin.plugin, type.duration().getTicks());
@@ -67,7 +66,7 @@ public class SoundPlayer
 			// Attempts to play the music type's ending theme if one exists
 			if (type.hasEndingTheme())
 			{
-				player.playSound(player.getLocation(), type.getEndTheme().getNamespace(), volume, 1.0F);
+				player.playSound(player.getLocation(), type.getEndTheme().getNamespace(), MusicListener.musicVolume, 1.0F);
 				new BukkitRunnable () {
 					@Override
 					public void run ()
