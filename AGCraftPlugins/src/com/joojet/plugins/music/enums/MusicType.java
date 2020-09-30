@@ -15,7 +15,7 @@ public enum MusicType {
 	MAPLESTORY ("fireworks.maplestory", "3:03"),
 	MOONDANCE ("fireworks.moondance", "4:14"),
 	FAREWELL ("fireworks.farewell", "4:27"),
-	WORLD_OF_COLORS ("fireworks.world_of_colors", "3:07"),
+	WORLD_OF_COLORS ("fireworks.world_of_colors", "3:11"),
 	YOU_ARE_GOOD ("fireworks.you_are_good", "5:23")
 	;
 	

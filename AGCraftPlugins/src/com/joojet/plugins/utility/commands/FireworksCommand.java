@@ -1,6 +1,7 @@
 package com.joojet.plugins.utility.commands;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.bukkit.ChatColor;
@@ -18,6 +19,7 @@ import com.joojet.plugins.mobs.metadata.FireworkCommandMetadata;
 import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.music.enums.MusicType;
 import com.joojet.plugins.music.interpreter.MusicTypeInterpreter;
+import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public class FireworksCommand extends AGCommandExecutor {
 	
@@ -94,7 +96,14 @@ public class FireworksCommand extends AGCommandExecutor {
 					MusicType music = this.musicInterpreter.searchTrie(args[3]);
 					if (music != null)
 					{
-						MusicListener.soundPlayer.playCustomMusicAtLocation(music, player.getLocation(), 48);
+						// Plays the custom firework music for all players within range of the player launching the
+						// firework show. This should also prevent sound overlapping issues.
+						ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(player, radius);
+						for (Player nearbyPlayer : nearbyPlayers)
+						{
+							MusicListener.soundPlayer.stopAllSoundsNearPlayer(player);
+							MusicListener.soundPlayer.playCustomMusicNearPlayer(music, nearbyPlayer);
+						}
 					}
 				}
 				
