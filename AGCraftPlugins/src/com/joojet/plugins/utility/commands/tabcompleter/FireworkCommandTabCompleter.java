@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGTabCompleter;
+import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.utility.commands.FireworksCommand;
 
 public class FireworkCommandTabCompleter extends AGTabCompleter
@@ -43,6 +44,10 @@ public class FireworkCommandTabCompleter extends AGTabCompleter
 				result = this.filterArrayByInput(
 						this.generateBetweenRange(FireworksCommand.minFireworkCount, FireworksCommand.fireworkLimit).toArray(), 
 						input);
+				break;
+			// Firework music type
+			case 3:
+				result = this.filterArrayByInput(MusicListener.getFireworkMusicTypes(), input);
 				break;
 			default:
 				break;

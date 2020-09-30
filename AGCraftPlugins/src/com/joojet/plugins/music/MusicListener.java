@@ -1,9 +1,12 @@
 package com.joojet.plugins.music;
 
+import java.util.ArrayList;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import com.joojet.plugins.music.enums.MusicType;
 import com.joojet.plugins.music.player.SoundPlayer;
 
 public class MusicListener implements Listener
@@ -33,5 +36,19 @@ public class MusicListener implements Listener
 	public static void setMusicVolume (Double volume)
 	{
 		musicVolume = volume.floatValue();
+	}
+	
+	public static Object[] getFireworkMusicTypes ()
+	{
+		ArrayList <MusicType> types = new ArrayList <MusicType> ();
+		for (MusicType type : MusicType.values())
+		{
+			if (!type.hasEndingTheme())
+			{
+				types.add(type);
+			}
+		}
+		
+		return types.toArray();
 	}
 }

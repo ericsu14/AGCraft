@@ -3,7 +3,7 @@ package com.joojet.plugins.music.enums;
 import com.joojet.plugins.music.duration.MusicDuration;
 
 public enum MusicEndingType {
-	GORO_THEME_END ("boss_ending.goro_theme_end", "0:10"), 
+	GORO_THEME_END ("boss_ending.goro_theme_end", "0:23"), 
 	KUZE_THEME_END ("boss_ending.kuze_theme_end", "0:10"), 
 	DOOM_GUY_END ("boss_ending.doom_guy_end", "0:03"),
 	HAIKYUU_END ("boss_ending.haikyuu_end", "0:17"),

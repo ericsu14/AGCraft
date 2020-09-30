@@ -15,6 +15,9 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.consequences.enums.CalendarField;
 import com.joojet.plugins.mobs.fireworks.tasks.SpawnFireworksOnLocationTask;
 import com.joojet.plugins.mobs.metadata.FireworkCommandMetadata;
+import com.joojet.plugins.music.MusicListener;
+import com.joojet.plugins.music.enums.MusicType;
+import com.joojet.plugins.music.interpreter.MusicTypeInterpreter;
 
 public class FireworksCommand extends AGCommandExecutor {
 	
@@ -22,7 +25,7 @@ public class FireworksCommand extends AGCommandExecutor {
 	public static int cooldownTimer = 3;
 	
 	/** Adds a limit on how many fireworks can be launched */
-	public static int fireworkLimit = 200;
+	public static int fireworkLimit = 300;
 	
 	/** Adds a limit on the firework spread radius */
 	public static int fireworkSpreadLimit = 48;
@@ -33,14 +36,18 @@ public class FireworksCommand extends AGCommandExecutor {
 	/** Min amount of fireworks needed to be spawned upon starting a show */
 	public static int minFireworkCount = 30;
 	
+	/** Used to interpret strings into music types */
+	protected MusicTypeInterpreter musicInterpreter;
+	
 	public FireworksCommand ()
 	{
 		super (CommandType.FIREWORKS);
+		this.musicInterpreter = new MusicTypeInterpreter();
 	}
 	
 	/** Launches a fireworks show!
 	 *  Command Usage:
-	 *     /fireworks <radius> <power> <ammo-count> */
+	 *     /fireworks <radius> <power> <ammo-count> <music-type> */
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String type, String[] args) 
 	{
@@ -82,7 +89,16 @@ public class FireworksCommand extends AGCommandExecutor {
 				int power = this.parseBetweenRange(args[1], 1, fireworkPowerLimit, "Power");
 				int ammoCount = this.parseBetweenRange(args[2], minFireworkCount, fireworkLimit, "Ammo Count");
 				
-				new SpawnFireworksOnLocationTask (player.getLocation(), radius, power, ammoCount).runTaskTimer(AGCraftPlugin.plugin, 30, 15);
+				if (n >= 4 && !args[3].isEmpty())
+				{
+					MusicType music = this.musicInterpreter.searchTrie(args[3]);
+					if (music != null)
+					{
+						MusicListener.soundPlayer.playCustomMusicAtLocation(music, player.getLocation(), 48);
+					}
+				}
+				
+				new SpawnFireworksOnLocationTask (player.getLocation(), radius, power, ammoCount).runTaskTimer(AGCraftPlugin.plugin, 30, 12);
 				AGCraftPlugin.plugin.getServer().broadcastMessage(ChatColor.GOLD + sender.getName() + ChatColor.AQUA + " started a fireworks show!");
 				Calendar cooldown = Calendar.getInstance();
 				cooldown.add(CalendarField.MINUTES.getField(), cooldownTimer);
