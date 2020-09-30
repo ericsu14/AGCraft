@@ -78,7 +78,7 @@ public class GiantBruin extends UCLAFaction
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING,
 				MobFlag.FIREWORK_DEATH);
 		this.addBiomes(Biome.THE_VOID);
-		this.bossTheme = MusicType.GORO_THEME;
+		this.bossTheme = MusicType.HAIKYUU;
 		
 	}
 }
