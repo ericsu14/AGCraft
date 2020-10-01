@@ -1,7 +1,6 @@
 package com.joojet.plugins.mobs;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,28 +12,31 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.plugin.Plugin;
 
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.metadata.SoulBoundMetadata;
 import com.joojet.plugins.mobs.util.serializer.SoulboundItemSerializer;
 
 public class SoulBoundListener implements Listener 
 {
-	/** Caches any soulbounded items found in player death events */
-	protected HashMap <UUID, List <ItemStack>> droppedItems;
 	/** Used to serialize / deserialized the dropped items hashmap into a file
 	 *  in the case of any server shutdowns */
 	protected SoulboundItemSerializer serializer;
 	
 	public SoulBoundListener ()
 	{
-		this.droppedItems = new HashMap <UUID, List <ItemStack>> ();
 		this.serializer = new SoulboundItemSerializer ();
 	}
 	
 	public void onEnable ()
 	{
-		Bukkit.getPluginManager().registerEvents(this, (Plugin) this);
+		Bukkit.getPluginManager().registerEvents(this, AGCraftPlugin.plugin);
+		this.serializer.recoverSerializedItems();
+	}
+	
+	public void onDisable ()
+	{
+		this.serializer.serialize();
 	}
 	
 	/** Scans a dead player's drops for any soulbounded items.
@@ -65,7 +67,7 @@ public class SoulBoundListener implements Listener
 		
 		// Adds the player's soulbounded items into a temporary cache
 		// so it can be loaded back into the player's inventory upon respawning
-		this.droppedItems.put(event.getEntity().getUniqueId(), soulBoundedItems);
+		this.serializer.addSoulboundedItems(event.getEntity().getUniqueId(), soulBoundedItems);
 	}
 	
 	/** If the revived player has any soulbounded items cached onto the data structure
@@ -76,13 +78,9 @@ public class SoulBoundListener implements Listener
 		Player p = event.getPlayer();
 		
 		UUID playerUUID = p.getUniqueId();
-		if (!this.droppedItems.containsKey(playerUUID))
-		{
-			return;
-		}
 		
 		PlayerInventory playerInventory = p.getInventory();
-		List <ItemStack> soulBoundedItems = this.droppedItems.get(playerUUID);
+		List <ItemStack> soulBoundedItems = this.serializer.recoverSoulboundedItems(playerUUID);
 		
 		for (ItemStack drop : soulBoundedItems)
 		{
@@ -92,7 +90,6 @@ public class SoulBoundListener implements Listener
 			}
 		}
 		
-		this.droppedItems.remove(playerUUID);
 	}
 	
 }

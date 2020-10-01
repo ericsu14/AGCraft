@@ -145,7 +145,7 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Soulbounded items event listener
 		this.soulBoundListener = new SoulBoundListener ();
-		Bukkit.getPluginManager().registerEvents(this.soulBoundListener, this);
+		this.soulBoundListener.onEnable();
 		
 		// Music controller event listener
 		Bukkit.getPluginManager().registerEvents(new MusicListener(), this);
@@ -159,6 +159,9 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Cleans up all damage displays
 		this.damageListener.onDisable();
+		
+		// Attempts to serialized unrecovered soulbounded items into a file
+		this.soulBoundListener.onDisable();
 	}
 	
 	/** Loads in the server config file and initializes its variables to the plugin */
