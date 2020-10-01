@@ -51,7 +51,8 @@ public enum RewardType
 	ETERNAL_TROJAN_ARCHER,
 	JOHNNY_RUSNAK,
 	SPIRITUAL_TRAVESTY,
-	SPRINKLES_CAKE;
+	SPRINKLES_CAKE,
+	THE_TERMINATOR;
 	
 	public ItemStack getReward ()
 	{
@@ -121,6 +122,8 @@ public enum RewardType
 				return new SpiritualTravesty(ChatColor.GOLD);
 			case SPRINKLES_CAKE:
 				return new SprinklesCake ();
+			case THE_TERMINATOR:
+				return new SummonTheTerminator();
 			default:
 				break;
 		}
