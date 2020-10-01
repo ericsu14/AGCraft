@@ -24,10 +24,10 @@ import com.joojet.plugins.warp.scantools.ScanEntities;
 public class FireworksCommand extends AGCommandExecutor {
 	
 	/** Defines the cooldown timer before a player can launch the next fireworks show in miuntes */
-	public static int cooldownTimer = 5;
+	public static int cooldownTimer = 3;
 	
 	/** Adds a limit on how many fireworks can be launched */
-	public static int fireworkLimit = 400;
+	public static int fireworkLimit = 300;
 	
 	/** Adds a limit on the firework spread radius */
 	public static int fireworkSpreadLimit = 48;
