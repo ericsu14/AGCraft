@@ -1,8 +1,8 @@
 package com.joojet.plugins.mobs.spawnhandlers;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
@@ -19,7 +19,7 @@ public abstract class AbstractSpawnHandler
 	/** Used to control mob spawns based on the passed spawn reason.
 	 *  Thus, mobs can only be converted into custom mobs if its given spawn
 	 *  reason exists in this set */
-	protected HashSet <SpawnReason> spawnReasonFilter;
+	protected EnumSet <SpawnReason> spawnReasonFilter;
 	/** Stores a hash table of custom Monster type instances, where its key is the entity type
 	 *  that class supports. */
 	protected HashMap <EntityType, MonsterTypes> mobEquipmentTable;
@@ -27,7 +27,7 @@ public abstract class AbstractSpawnHandler
 	/** Creates a new instance of an Abstract Spawn Handler */
 	public AbstractSpawnHandler ()
 	{
-		this.spawnReasonFilter = new HashSet <SpawnReason> ();
+		this.spawnReasonFilter = EnumSet.noneOf(SpawnReason.class);
 		this.mobEquipmentTable = new HashMap <EntityType, MonsterTypes> ();
 	}
 	
