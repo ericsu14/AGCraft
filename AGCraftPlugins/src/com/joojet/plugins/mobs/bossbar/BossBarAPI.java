@@ -89,7 +89,7 @@ public class BossBarAPI
 			MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(bossEntity);
 			if (equipment != null && equipment.containsBossTheme())
 			{
-				MusicListener.soundPlayer.playCustomMusicNearPlayer(equipment.getBossTheme(), player);
+				MusicListener.soundPlayer.playCustomMusicNearPlayer(equipment.getBossTheme(), player, MusicListener.musicVolume);
 			}
 		}
 	}

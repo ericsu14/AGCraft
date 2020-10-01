@@ -13,10 +13,14 @@ public class MusicListener implements Listener
 {
 	/** Key used to identify the music volume controller listed in the config file */
 	public static final String musicVolumeTag = "music-volume";
+	/** Key used to identify the fireworks music volume listed in the config file */
+	public static final String fireworksMusicVolumeTag = "fireworks-music-volume";
 	/** Stores an instance to the sound player managed by the Music Listener */
 	public static SoundPlayer soundPlayer;
 	/** Stores the music volume used for the soundPlayer */
-	public static float musicVolume = 0.60f;
+	public static float musicVolume = 0.50f;
+	/** Stores the firework music volume used for fireworks shows*/
+	public static float fireworkMusicVolume = 0.60f;
 	
 	public MusicListener ()
 	{
@@ -31,11 +35,18 @@ public class MusicListener implements Listener
 		soundPlayer.removeSoundTaskFromTable(event.getPlayer().getUniqueId());
 	}
 	
-	/** Sets the played music's volume to a new value
+	/** Sets the boss music's volume to a new value
 	 * 	@param volume - New volume used for played music */
 	public static void setMusicVolume (Double volume)
 	{
 		musicVolume = volume.floatValue();
+	}
+	
+	/** Sets the firework show's music volume to a new value
+	 * 	@param volume - New volume used for played music */
+	public static void setFireworkMusicVolume (Double volume)
+	{
+		fireworkMusicVolume = volume.floatValue();
 	}
 	
 	public static Object[] getFireworkMusicTypes ()

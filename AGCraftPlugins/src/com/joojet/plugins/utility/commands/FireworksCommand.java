@@ -104,7 +104,7 @@ public class FireworksCommand extends AGCommandExecutor {
 						for (Player nearbyPlayer : nearbyPlayers)
 						{
 							MusicListener.soundPlayer.stopAllSoundsNearPlayer(nearbyPlayer);
-							MusicListener.soundPlayer.playCustomMusicNearPlayer(music, nearbyPlayer);
+							MusicListener.soundPlayer.playCustomMusicNearPlayer(music, nearbyPlayer, MusicListener.fireworkMusicVolume);
 						}
 					}
 				}

@@ -74,7 +74,35 @@ public abstract class AbstractConfigFile
 	 *  @return The key's value if it exists */
 	public Object getValue (String key)
 	{
-		return this.configFileValues.get(key);
+		if (this.configFileValues.containsKey(key))
+		{
+			return this.configFileValues.get(key);
+		}
+		return null;
+	}
+	
+	/** Safely returns the value referenced by its key as a double.
+	 *  @param - Key associated to the requested value  */
+	public Double getValueAsDouble (String key)
+	{
+		Object value = this.getValue(key);
+		if (value != null && value instanceof Double)
+		{
+			return (Double) value;
+		}
+		return 0.0;
+	}
+	
+	/** Safely returns the value referenced by its key as a boolean.
+	 *  @param - key associated to the requested value */
+	public Boolean getValueAsBoolean (String key)
+	{
+		Object value = this.getValue(key);
+		if (value != null && value instanceof Boolean)
+		{
+			return (Boolean) value;
+		}
+		return false;
 	}
 	
 	/** Returns the value of a key as a list of Strings

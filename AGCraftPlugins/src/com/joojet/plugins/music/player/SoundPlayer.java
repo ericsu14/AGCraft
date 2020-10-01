@@ -28,11 +28,11 @@ public class SoundPlayer
 	 *  @param type - Type of custom music to be played that is specified in the server resource pack
 	 *  @param player - Player we are playing the music to.
 	 *  */
-	public void playCustomMusicNearPlayer(MusicType type, Player player)
+	public void playCustomMusicNearPlayer(MusicType type, Player player, float musicVolume)
 	{
 		if (!this.activePlayerSoundTable.containsKey(player.getUniqueId()))
 		{
-			player.playSound(player.getLocation(), type.getNamespace(), MusicListener.musicVolume, 1.0F);
+			player.playSound(player.getLocation(), type.getNamespace(), musicVolume, 1.0F);
 			PlayCustomSoundTask soundTask = new PlayCustomSoundTask (player.getUniqueId(), type, this);
 			this.activePlayerSoundTable.put(player.getUniqueId(), soundTask);
 			soundTask.runTaskLater(AGCraftPlugin.plugin, type.duration().getTicks());

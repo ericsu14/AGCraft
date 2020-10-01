@@ -24,8 +24,10 @@ public class ServerConfigFile extends AbstractConfigFile
 		data.put(ThemedServerEvent.getKey(), ThemedServerEvent.DEFAULT.toString());
 		data.put(MinigameRewardType.getKey(), MinigameRewardType.GIFT.toString());
 		data.put(MusicListener.musicVolumeTag, 0.60f);
+		data.put(MusicListener.fireworksMusicVolumeTag, 0.50f);
 		data.put(AmplifiedMobSpawner.spawnChanceKey, 0.15);
 		data.put(AmplifiedMobSpawner.debugModeKey, false);
 		return data;
 	}
+	
 }

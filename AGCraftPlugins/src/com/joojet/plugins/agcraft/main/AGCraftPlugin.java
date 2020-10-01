@@ -171,9 +171,9 @@ public class AGCraftPlugin extends JavaPlugin
 		this.serverConfigFile.reload();
 		
 		// Spawn chance
-		this.customMobSpawnChance = (double) this.serverConfigFile.getValue(AmplifiedMobSpawner.spawnChanceKey);
+		this.customMobSpawnChance = this.serverConfigFile.getValueAsDouble(AmplifiedMobSpawner.spawnChanceKey);
 		// Debug mode
-		this.enableDebugMode = (boolean) this.serverConfigFile.getValue(AmplifiedMobSpawner.debugModeKey);
+		this.enableDebugMode = this.serverConfigFile.getValueAsBoolean(AmplifiedMobSpawner.debugModeKey);
 		// Minigame event type
 		this.minigameEventType = this.searchElementFromInterpreter(minigameRewardTypeInterpreter,
 				MinigameRewardType.getKey(), MinigameRewardType.GIFT);
@@ -188,7 +188,10 @@ public class AGCraftPlugin extends JavaPlugin
 		System.out.println ("Debug Mode: " + this.enableDebugMode);
 		
 		// Music volume
-		MusicListener.setMusicVolume((double) this.serverConfigFile.getValue(MusicListener.musicVolumeTag));
+		MusicListener.setMusicVolume(this.serverConfigFile.getValueAsDouble(MusicListener.musicVolumeTag));
+		
+		// Firework music volume
+		MusicListener.setFireworkMusicVolume(this.serverConfigFile.getValueAsDouble(MusicListener.fireworksMusicVolumeTag));
 		
 		// Reloads the clearjunk file
 		this.clearJunk.reloadConfigFile();
