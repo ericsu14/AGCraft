@@ -11,6 +11,7 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.allies.golem.GolemTypes;
 import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
 import com.joojet.plugins.mobs.allies.wolf.WolfTypes;
+import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
 import com.joojet.plugins.mobs.monsters.piglin.PiglinTypes;
@@ -50,6 +51,12 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 	@Override
 	public void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll) 
 	{
+		// If the entity already contains custom mob metadata, do nothing
+		if (new MonsterTypeMetadata().getStringMetadata(entity) != null)
+		{
+			return;
+		}
+		
 		// If the entity is a wandering trader, transform him
 		if ((reason == SpawnReason.NATURAL || reason == SpawnReason.SPAWNER_EGG) 
 				&& type == EntityType.WANDERING_TRADER)
