@@ -1,5 +1,6 @@
 package com.joojet.plugins.mobs.util.serializer;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -65,6 +66,20 @@ public class AbstractDataSerializer <E>
 		}
 		
 		return object;
+	}
+	
+	/** Attempts to delete a serialized file */
+	public void deleteSerializedFile ()
+	{
+		try
+		{
+			File deletedFile = new File (this.fileName);
+			deletedFile.delete();
+		}
+		catch (SecurityException se)
+		{
+			System.out.println (se.getMessage());
+		}
 	}
 	
 	/** Returns the serialized object's file name */

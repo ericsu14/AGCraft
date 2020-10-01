@@ -98,6 +98,7 @@ public class SoulboundItemSerializer extends AbstractDataSerializer<HashMap <UUI
 		}
 		
 		this.droppedItemsSerializable = recoveredItems;
+		
 		List <ItemStack> items = null;
 		ItemStack current = null;
 		for (Entry<UUID, List<String>> value : recoveredItems.entrySet())
@@ -112,6 +113,11 @@ public class SoulboundItemSerializer extends AbstractDataSerializer<HashMap <UUI
 				}
 			}
 			this.droppedItems.put(value.getKey(), items);
+		}
+		
+		if (!this.droppedItems.isEmpty())
+		{
+			this.deleteSerializedFile();
 		}
 	}
 }
