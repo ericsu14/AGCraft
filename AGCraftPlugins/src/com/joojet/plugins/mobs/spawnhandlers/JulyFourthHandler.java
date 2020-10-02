@@ -13,6 +13,7 @@ import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.phantom.julyfourth.FireworkPhantom;
+import com.joojet.plugins.mobs.monsters.phantom.julyfourth.JulyFourthPhantomTypes;
 import com.joojet.plugins.mobs.monsters.pillager.julyfourth.PatrioticPillagerTypes;
 import com.joojet.plugins.mobs.monsters.skeleton.julyfourth.PatrioticSkeletonTypes;
 import com.joojet.plugins.mobs.monsters.zombie.julyfourth.PatrioticZombieTypes;
@@ -29,7 +30,8 @@ public class JulyFourthHandler extends AbstractSpawnHandler
 		this.fwTypes = new FireworkTypes ();
 		this.addMonsterTypes(new PatrioticZombieTypes(this.monsterTypeInterpreter), 
 				new PatrioticSkeletonTypes(this.monsterTypeInterpreter),
-				new PatrioticPillagerTypes(this.monsterTypeInterpreter));
+				new PatrioticPillagerTypes(this.monsterTypeInterpreter),
+				new JulyFourthPhantomTypes (this.monsterTypeInterpreter));
 	}
 	
 	/** Handles 4th of july mob spawns */

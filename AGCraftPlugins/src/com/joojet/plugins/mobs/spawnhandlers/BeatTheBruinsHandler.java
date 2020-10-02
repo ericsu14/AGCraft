@@ -10,6 +10,7 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.giant.beatthebruins.BruinGiantTypes;
+import com.joojet.plugins.mobs.monsters.phantom.beatthebruins.BeatTheBruinPhantomTypes;
 import com.joojet.plugins.mobs.monsters.phantom.beatthebruins.PhantomMenace;
 import com.joojet.plugins.mobs.monsters.polar_bear.beatthebruins.BruinPolarBearTypes;
 import com.joojet.plugins.mobs.monsters.skeleton.beatthebruins.CollegeSkeletonTypes;
@@ -25,7 +26,8 @@ public class BeatTheBruinsHandler extends AbstractSpawnHandler
 				new CollegeSkeletonTypes(this.monsterTypeInterpreter),
 				new BruinPolarBearTypes (this.monsterTypeInterpreter),
 				new BruinGiantTypes (this.monsterTypeInterpreter),
-				new USCHorseTypes (this.monsterTypeInterpreter));
+				new USCHorseTypes (this.monsterTypeInterpreter),
+				new BeatTheBruinPhantomTypes (this.monsterTypeInterpreter));
 		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.SPAWNER_EGG, SpawnReason.REINFORCEMENTS);
 	}
 	
