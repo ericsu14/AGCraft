@@ -14,11 +14,14 @@ import com.joojet.plugins.music.task.PlayCustomSoundTask;
 
 public class SoundPlayer 
 {
-	
+	/** Stores a reference to the music listener class */
+	protected MusicListener musicListener;
+	/** Keeps track of all active sounds being played to each player in the server. */
 	protected HashMap <UUID, PlayCustomSoundTask> activePlayerSoundTable;
 	
-	public SoundPlayer ()
+	public SoundPlayer (MusicListener musicListener)
 	{
+		this.musicListener = musicListener;
 		this.activePlayerSoundTable = new HashMap <UUID, PlayCustomSoundTask> ();
 	}
 	
@@ -66,7 +69,7 @@ public class SoundPlayer
 			// Attempts to play the music type's ending theme if one exists
 			if (type.hasEndingTheme())
 			{
-				player.playSound(player.getLocation(), type.getEndTheme().getNamespace(), MusicListener.musicVolume, 1.0F);
+				player.playSound(player.getLocation(), type.getEndTheme().getNamespace(), this.musicListener.musicVolume, 1.0F);
 				new BukkitRunnable () {
 					@Override
 					public void run ()

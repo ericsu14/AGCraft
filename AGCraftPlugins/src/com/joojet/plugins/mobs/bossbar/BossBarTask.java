@@ -18,13 +18,17 @@ public class BossBarTask extends BukkitRunnable
 	protected BossBarNode bossBarNode;
 	/** An instance to the boss bar controller */
 	protected BossBarController bossBarController;
+	/** Stores a reference to the music listener used to enable and disable
+	 *  music cues for different boss fight events */
+	protected MusicListener musicListener;
 	
-	public BossBarTask (BossBarNode bossBarNode, BossBarController bossBarController)
+	public BossBarTask (BossBarNode bossBarNode, BossBarController bossBarController, MusicListener musicListener)
 	{
 		this.bossBarNode = bossBarNode;
 		this.bossUUID = this.bossBarNode.uuid;
 		this.bossBarNode.setTask(this);
 		this.bossBarController = bossBarController;
+		this.musicListener = musicListener;
 	}
 	
 	@Override
@@ -59,7 +63,7 @@ public class BossBarTask extends BukkitRunnable
 			{
 				if (player != null)
 				{
-					MusicListener.soundPlayer.stopCurrentlyPlayingSoundOnPlayer(this.bossBarNode.bossTheme, player);
+					this.musicListener.soundPlayer.stopCurrentlyPlayingSoundOnPlayer(this.bossBarNode.bossTheme, player);
 				}
 			}
 		}

@@ -25,26 +25,24 @@ public class FireworksCommand extends AGCommandExecutor {
 	
 	/** Defines the cooldown timer before a player can launch the next fireworks show in miuntes */
 	public static int cooldownTimer = 3;
-	
 	/** Adds a limit on how many fireworks can be launched */
 	public static int fireworkLimit = 300;
-	
 	/** Adds a limit on the firework spread radius */
 	public static int fireworkSpreadLimit = 48;
-	
 	/** Adds a limit on the firework power limit */
 	public static int fireworkPowerLimit = 4;
-	
 	/** Min amount of fireworks needed to be spawned upon starting a show */
 	public static int minFireworkCount = 30;
-	
 	/** Used to interpret strings into music types */
 	protected MusicTypeInterpreter musicInterpreter;
+	/** Used to launch play music events when a player specifies a song in this command */
+	protected MusicListener musicListener;
 	
-	public FireworksCommand ()
+	public FireworksCommand (MusicListener musicListener)
 	{
 		super (CommandType.FIREWORKS);
 		this.musicInterpreter = new MusicTypeInterpreter();
+		this.musicListener = musicListener;
 	}
 	
 	/** Launches a fireworks show!
@@ -103,8 +101,8 @@ public class FireworksCommand extends AGCommandExecutor {
 						
 						for (Player nearbyPlayer : nearbyPlayers)
 						{
-							MusicListener.soundPlayer.stopAllSoundsNearPlayer(nearbyPlayer);
-							MusicListener.soundPlayer.playCustomMusicNearPlayer(music, nearbyPlayer, MusicListener.fireworkMusicVolume);
+							this.musicListener.soundPlayer.stopAllSoundsNearPlayer(nearbyPlayer);
+							this.musicListener.soundPlayer.playCustomMusicNearPlayer(music, nearbyPlayer, this.musicListener.fireworkMusicVolume);
 						}
 					}
 				}

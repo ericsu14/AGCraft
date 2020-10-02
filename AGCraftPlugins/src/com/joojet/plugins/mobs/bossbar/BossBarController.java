@@ -25,10 +25,14 @@ public class BossBarController
 	public ConcurrentHashMap <UUID, BossBarNode> activeBossBars;
 	/** Search trie used to lookup custom monsters by name */
 	protected MonsterTypeInterpreter monsterTypeInterpreter;
+	/** Stores a reference to the music listener used to enable and disable
+	 *  music cues for different boss fight events */
+	protected MusicListener musicListener;
 	
-	public BossBarController (MonsterTypeInterpreter monsterTypeInterpreter)
+	public BossBarController (MonsterTypeInterpreter monsterTypeInterpreter, MusicListener musicListener)
 	{
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
+		this.musicListener = musicListener;
 		this.activeBossBars = new ConcurrentHashMap <UUID, BossBarNode> ();
 	}
 	
@@ -75,7 +79,7 @@ public class BossBarController
 		BossBarNode bossNode = activeBossBars.get(uuidKey);
 		if (bossNode != null && !bossNode.hasActiveTask())
 		{
-			new BossBarTask (bossNode, this).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
+			new BossBarTask (bossNode, this, this.musicListener).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
 		}
 	}
 	
@@ -97,7 +101,7 @@ public class BossBarController
 			MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(bossEntity);
 			if (equipment != null && equipment.containsBossTheme())
 			{
-				MusicListener.soundPlayer.playCustomMusicNearPlayer(equipment.getBossTheme(), player, MusicListener.musicVolume);
+				this.musicListener.soundPlayer.playCustomMusicNearPlayer(equipment.getBossTheme(), player, this.musicListener.musicVolume);
 			}
 		}
 	}
@@ -109,7 +113,7 @@ public class BossBarController
 		if (uuidKey != null && activeBossBars.containsKey(uuidKey))
 		{
 			activeBossBars.get(uuidKey).bossBar.removePlayer(player);
-			MusicListener.soundPlayer.stopAllSoundsNearPlayer(player);
+			this.musicListener.soundPlayer.stopAllSoundsNearPlayer(player);
 		}
 	}
 	

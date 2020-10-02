@@ -50,14 +50,26 @@ public class AGCraftPlugin extends JavaPlugin
 {
 	// Stores an instance of the plugin itself
 	public static AGCraftPlugin plugin;
-	// Stores a reference to the death counter object
-	public DeathCounter deathCounter;
 	// Config file manager
-	public ServerConfigFile serverConfigFile;
+	protected ServerConfigFile serverConfigFile;
+	/** Config file values */
+	// Stores the server mode, which enables or disables commands and listeners depending on what mode the server is ran in
+	public ServerMode serverMode = ServerMode.NORMAL;
+	// Stores the server-wide event mode, which may add custom themed mobs or events into the normal game world
+	public ThemedServerEvent serverEventMode = ThemedServerEvent.DEFAULT;
+	// Stores the chance of custom mobs spawning into the game
+	public double customMobSpawnChance = 0.15;
+	// Determines if debug mode is enabled for the amplified mob spawner plugin
+	public boolean enableDebugMode = false;
+	// Stores type of minigame reward type currently active on minigame nights
+	public MinigameRewardType minigameEventType = MinigameRewardType.GIFT;
+	
+	// Stores a reference to the death counter object
+	protected DeathCounter deathCounter;
 	// A list containing all known commands
-	private HashMap <CommandType, PlayerCommand> playerCommands;
+	protected HashMap <CommandType, PlayerCommand> playerCommands;
 	// Stores a reference to the junk command since that command manages its own config files
-	private ClearJunk clearJunk;
+	protected ClearJunk clearJunk;
 	// Stores an instance to the BossBar controller
 	protected BossBarController bossBarController;
 	
@@ -73,26 +85,16 @@ public class AGCraftPlugin extends JavaPlugin
 	// Stores the command interpreter used for the bible plugin
 	protected BibleCommandInterpreter bibleInterpreter;
 	/** Search trie used to lookup custom monsters by name */
-	public MonsterTypeInterpreter monsterTypeInterpreter;
-	
-	/** Config file values */
-	// Stores the server mode, which enables or disables commands and listeners depending on what mode the server is ran in
-	public ServerMode serverMode = ServerMode.NORMAL;
-	// Stores the server-wide event mode, which may add custom themed mobs or events into the normal game world
-	public ThemedServerEvent serverEventMode = ThemedServerEvent.DEFAULT;
-	// Stores the chance of custom mobs spawning into the game
-	public double customMobSpawnChance = 0.15;
-	// Determines if debug mode is enabled for the amplified mob spawner plugin
-	public boolean enableDebugMode = false;
-	// Stores type of minigame reward type currently active on minigame nights
-	public MinigameRewardType minigameEventType = MinigameRewardType.GIFT;
+	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	
 	/** Used to display entity damage information to the player */
-	public DamageDisplayListener damageListener;
+	protected DamageDisplayListener damageListener;
 	/** Used to enforce soulbounded item-drop events */
-	public SoulBoundListener soulBoundListener;
+	protected SoulBoundListener soulBoundListener;
 	/** Reward manager */
 	protected RewardManager rewardManager;
+	/** Music listener */
+	protected MusicListener musicListener;
 	
 	public AGCraftPlugin ()
 	{
@@ -106,7 +108,6 @@ public class AGCraftPlugin extends JavaPlugin
 		this.serverModeInterpreter = new ServerModeInterpreter ();
 		this.serverConfigFile = new ServerConfigFile ();
 		this.monsterTypeInterpreter = new MonsterTypeInterpreter ();
-		this.bossBarController = new BossBarController(this.monsterTypeInterpreter);
 	}
 	
 	@Override
@@ -144,6 +145,7 @@ public class AGCraftPlugin extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(this.damageListener, this);
 		
 		// Boss Bar event listener
+		this.bossBarController = new BossBarController(this.monsterTypeInterpreter, this.musicListener);
 		Bukkit.getPluginManager().registerEvents(new BossBarEventListener(this.monsterTypeInterpreter, this.bossBarController), this);
 		
 		// Pathfind Targeting event listener
@@ -154,7 +156,8 @@ public class AGCraftPlugin extends JavaPlugin
 		this.soulBoundListener.onEnable();
 		
 		// Music controller event listener
-		Bukkit.getPluginManager().registerEvents(new MusicListener(), this);
+		this.musicListener = new MusicListener();
+		Bukkit.getPluginManager().registerEvents(this.musicListener, this);
 		
 		// Loads in the server config file and initializes its values
 		this.loadServerConfigFile();
@@ -199,10 +202,10 @@ public class AGCraftPlugin extends JavaPlugin
 		System.out.println ("Debug Mode: " + this.enableDebugMode);
 		
 		// Music volume
-		MusicListener.setMusicVolume(this.serverConfigFile.getValueAsDouble(MusicListener.musicVolumeTag));
+		this.musicListener.setMusicVolume(this.serverConfigFile.getValueAsDouble(MusicListener.musicVolumeTag));
 		
 		// Firework music volume
-		MusicListener.setFireworkMusicVolume(this.serverConfigFile.getValueAsDouble(MusicListener.fireworksMusicVolumeTag));
+		this.musicListener.setFireworkMusicVolume(this.serverConfigFile.getValueAsDouble(MusicListener.fireworksMusicVolumeTag));
 		
 		// Reloads the clearjunk file
 		this.clearJunk.reloadConfigFile();
@@ -232,7 +235,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addPlayerCommand (new RemoveOldNetherLocations());
 		this.addPlayerCommand (new ChangeServerMode (this.serverModeInterpreter));
 		this.addPlayerCommand (new ReloadConfigFile ());
-		this.addPlayerCommand (new FireworksCommand());
+		this.addPlayerCommand (new FireworksCommand(this.musicListener));
 		
 		// Tab Completer
 		this.addTabCompleter(new BibleTabCompleter (this.bibleInterpreter));
