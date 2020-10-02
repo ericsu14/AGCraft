@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BoundingBox;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.damage.entities.DamageDisplayEntity;
 import com.joojet.plugins.mobs.damage.enums.DamageType;
 import com.joojet.plugins.mobs.damage.task.DamageDisplayEntityTask;
@@ -27,8 +28,10 @@ public class DamageDisplayManager
 	protected HashSet <Material> invalidBlocks;
 	/** Used to calculate a random offset */
 	protected Random rand;
+	/** A reference to the boss bar controller defined in main */
+	protected BossBarController bossBarController;
 	
-	public DamageDisplayManager ()
+	public DamageDisplayManager (BossBarController bossBarController)
 	{
 		this.activeDisplayEntities = new ConcurrentHashMap <UUID, ArmorStand> ();
 		
@@ -38,6 +41,7 @@ public class DamageDisplayManager
 		this.invalidBlocks.add(Material.WATER);
 		this.invalidBlocks.add(Material.LAVA);
 		this.rand = new Random ();
+		this.bossBarController = bossBarController;
 	}
 	
 	/** Creates an invisible armor stand displaying the final damage dealt to an entity after an attack */
@@ -70,7 +74,7 @@ public class DamageDisplayManager
 			armorStand.setInvulnerable(true);
 			armorStand.setVisible(false);
 			armorStand.setMarker(true);
-			EquipmentTools.equipEntity(armorStand, new DamageDisplayEntity (health, damageType));
+			EquipmentTools.equipEntity(armorStand, new DamageDisplayEntity (health, damageType), this.bossBarController);
 		});
 		
 		this.activeDisplayEntities.put(damageDisplayEntity.getUniqueId(), damageDisplayEntity);

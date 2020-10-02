@@ -8,6 +8,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.phantom.julyfourth.FireworkPhantom;
@@ -21,8 +22,9 @@ public class JulyFourthHandler extends AbstractSpawnHandler
 	/** Used to generate random fireworks */
 	private FireworkTypes fwTypes;
 	
-	public JulyFourthHandler ()
+	public JulyFourthHandler (BossBarController bossBarController)
 	{
+		super (bossBarController);
 		this.fwTypes = new FireworkTypes ();
 		this.addMonsterTypes(new PatrioticZombieTypes(), 
 				new PatrioticSkeletonTypes(),
@@ -45,7 +47,7 @@ public class JulyFourthHandler extends AbstractSpawnHandler
 			MobEquipment mobEquipment = this.getRandomEqipment(type, biome);
 			if (mobEquipment != null)
 			{
-				EquipmentTools.equipEntity(entity, mobEquipment);
+				EquipmentTools.equipEntity(entity, mobEquipment, this.bossBarController);
 			}
 		}
 	}
@@ -53,7 +55,7 @@ public class JulyFourthHandler extends AbstractSpawnHandler
 	/** Transforms the phantom into a firework phantom */
 	public void transformFireworkPhantom (LivingEntity entity)
 	{
-		EquipmentTools.equipEntity(entity, new FireworkPhantom());
+		EquipmentTools.equipEntity(entity, new FireworkPhantom(), this.bossBarController);
 		Firework firework = (Firework) entity.getWorld().spawnEntity(entity.getLocation(), EntityType.FIREWORK);
 		ItemStack fwItem = fwTypes.getRandomFirework(1, 0);
 		firework.setFireworkMeta((FireworkMeta)fwItem.getItemMeta());

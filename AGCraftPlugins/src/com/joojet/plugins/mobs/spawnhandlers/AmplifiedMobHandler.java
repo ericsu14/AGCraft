@@ -11,6 +11,7 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.allies.golem.GolemTypes;
 import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
 import com.joojet.plugins.mobs.allies.wolf.WolfTypes;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
@@ -29,8 +30,9 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 	/** Stores custom wandering villager instances */
 	private WanderingVillagerTypes wanderingTypes;
 	
-	public AmplifiedMobHandler ()
+	public AmplifiedMobHandler (BossBarController bossBarController)
 	{
+		super (bossBarController);
 		this.wanderingTypes = new WanderingVillagerTypes ();
 		
 		this.addMonsterTypes(new ZombieTypes(),
@@ -81,7 +83,7 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 		MobEquipment mobEquipment = this.getRandomEqipment(type, biome);
 		if (mobEquipment != null)
 		{
-			EquipmentTools.equipEntity(entity, mobEquipment);
+			EquipmentTools.equipEntity(entity, mobEquipment, this.bossBarController);
 		}
 		
 	}
@@ -101,7 +103,7 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 	{
 		WanderingTrader trader = (WanderingTrader) entity;
 		VillagerEquipment equipment = (VillagerEquipment) wanderingTypes.getRandomEquipment(biome);
-		EquipmentTools.equipEntity(trader, (MobEquipment) equipment);
+		EquipmentTools.equipEntity(trader, (MobEquipment) equipment, this.bossBarController);
 	}
 
 }

@@ -5,14 +5,16 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.ghast.UHC.UHCGhastTypes;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class UHCHandler extends AbstractSpawnHandler
 {
-	public UHCHandler ()
+	public UHCHandler (BossBarController bossBarController)
 	{
+		super (bossBarController);
 		this.addMonsterTypes(new UHCGhastTypes());
 		this.addSpawnReasons(SpawnReason.NATURAL);
 	}
@@ -25,7 +27,7 @@ public class UHCHandler extends AbstractSpawnHandler
 			MobEquipment mobEquipment = this.getRandomEqipment(type, biome);
 			if (mobEquipment != null)
 			{
-				EquipmentTools.equipEntity(entity, mobEquipment);
+				EquipmentTools.equipEntity(entity, mobEquipment, this.bossBarController);
 			}
 		}
 	}

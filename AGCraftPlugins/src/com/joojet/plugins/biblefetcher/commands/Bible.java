@@ -4,15 +4,20 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.joojet.biblefetcher.interpreter.BibleCommandInterpreter;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.biblefetcher.task.FetchBibleTask;
 
 public class Bible extends AGCommandExecutor
 {
-	public Bible ()
+	/** A reference to the bible command interpreter defined in the main driver */
+	protected BibleCommandInterpreter bibleCommandInterpreter;
+	
+	public Bible (BibleCommandInterpreter bibleCommandInterpreter)
 	{
 		super (CommandType.BIBLE);
+		this.bibleCommandInterpreter = bibleCommandInterpreter;
 	}
 	
 	/** Represents the /bible command.
@@ -24,7 +29,7 @@ public class Bible extends AGCommandExecutor
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			FetchBibleTask bibleTask = new FetchBibleTask (player, args);
+			FetchBibleTask bibleTask = new FetchBibleTask (player, args, this.bibleCommandInterpreter);
 			bibleTask.start();
 			return true;
 		}

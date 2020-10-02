@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.SummonTypes;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
@@ -30,8 +31,12 @@ public class SummoningScrollListener implements Listener
 	// Interpreter to search for used summoning scrolls
 	private SummoningScrollInterpreter summonInterpreter;
 	
-	public SummoningScrollListener ()
+	/** Stores a reference to the boss bar controller defined in main */
+	protected BossBarController bossBarController;
+	
+	public SummoningScrollListener (BossBarController bossBarController)
 	{
+		this.bossBarController = bossBarController;
 		this.summonInterpreter = new SummoningScrollInterpreter();
 	}
 	
@@ -96,7 +101,7 @@ public class SummoningScrollListener implements Listener
 						wolf.setCollarColor(scroll.getMob().getDyeColor());
 					}
 					
-					EquipmentTools.equipEntity(entity, scroll.getMob());
+					EquipmentTools.equipEntity(entity, scroll.getMob(), this.bossBarController);
 					
 					// Entities are always persistent when summoned VIA summoning scroll
 					entity.setRemoveWhenFarAway(false);

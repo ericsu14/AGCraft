@@ -9,15 +9,19 @@ import org.bukkit.command.CommandSender;
 
 import com.joojet.biblefetcher.constants.BibleID;
 import com.joojet.biblefetcher.constants.BookID;
+import com.joojet.biblefetcher.interpreter.BibleCommandInterpreter;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGTabCompleter;
-import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 
 public class BibleTabCompleter extends AGTabCompleter 
 {
-	public BibleTabCompleter ()
+	/** Stores a reference to the bible command interpreter initialized in the main driver class */
+	protected BibleCommandInterpreter bibleCommandInterpreter;
+	
+	public BibleTabCompleter (BibleCommandInterpreter bibleCommandInterpreter)
 	{
 		super (CommandType.BIBLE);
+		this.bibleCommandInterpreter = bibleCommandInterpreter;
 	}
 	
 	@Override
@@ -51,7 +55,7 @@ public class BibleTabCompleter extends AGTabCompleter
 					
 				// List all the chapters in the book.
 				case 3:
-					BookID book = AGCraftPlugin.bibleInterpreter.searchBookTrie(args[1]);
+					BookID book = this.bibleCommandInterpreter.searchBookTrie(args[1]);
 					
 					// If the book is not found, return an empty array
 					if (book == null)

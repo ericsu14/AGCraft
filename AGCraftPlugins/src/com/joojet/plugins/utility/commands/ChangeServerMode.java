@@ -9,13 +9,17 @@ import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.utility.interpreter.ServerModeInterpreter;
 
 public class ChangeServerMode extends AGCommandExecutor 
 {
+	/** A reference to the Server Mode Interpreter defined in main */
+	protected ServerModeInterpreter serverModeInterpreter;
 	
-	public ChangeServerMode ()
+	public ChangeServerMode (ServerModeInterpreter serverModeInterpreter)
 	{
 		super (CommandType.CHANGE_SERVER_MODE);
+		this.serverModeInterpreter = serverModeInterpreter;
 	}
 	
 	@Override
@@ -30,7 +34,7 @@ public class ChangeServerMode extends AGCommandExecutor
 				return false;
 			}
 			
-			ServerMode mode = AGCraftPlugin.serverModeInterpreter.searchTrie(arg3[0]);
+			ServerMode mode = this.serverModeInterpreter.searchTrie(arg3[0]);
 			if (mode == null)
 			{
 				return false;

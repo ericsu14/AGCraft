@@ -10,6 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MonsterTypes;
 import com.joojet.plugins.mobs.spawnhandlers.task.HandleSpawnEventTask;
@@ -23,12 +24,15 @@ public abstract class AbstractSpawnHandler
 	/** Stores a hash table of custom Monster type instances, where its key is the entity type
 	 *  that class supports. */
 	protected HashMap <EntityType, MonsterTypes> mobEquipmentTable;
+	/** A reference to the boss bar controller defined in main */
+	protected BossBarController bossBarController;
 	
 	/** Creates a new instance of an Abstract Spawn Handler */
-	public AbstractSpawnHandler ()
+	public AbstractSpawnHandler (BossBarController bossBarController)
 	{
 		this.spawnReasonFilter = EnumSet.noneOf(SpawnReason.class);
 		this.mobEquipmentTable = new HashMap <EntityType, MonsterTypes> ();
+		this.bossBarController = bossBarController;
 	}
 	
 	/** Offloads the handleSpawnEvent task to Bukkit's scheduler. This ensures that our custom entity modification code 

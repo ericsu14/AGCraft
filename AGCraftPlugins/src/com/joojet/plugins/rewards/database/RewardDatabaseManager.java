@@ -9,6 +9,8 @@ import java.util.UUID;
 import com.joojet.plugins.rewards.enums.MinigameRewardType;
 import com.joojet.plugins.rewards.enums.RewardType;
 import com.joojet.plugins.rewards.interfaces.RewardEntry;
+import com.joojet.plugins.rewards.interpreter.MinigameRewardTypeInterpreter;
+import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -77,6 +79,9 @@ public class RewardDatabaseManager
 		Connection c = null;
 		ResultSet result = null;
 		RewardEntry entry = null;
+
+		RewardTypeInterpreter rewardInterpreter = new RewardTypeInterpreter();
+		MinigameRewardTypeInterpreter minigameRewardTypeInterpreter = new MinigameRewardTypeInterpreter();
 		
 		ArrayList <RewardEntry> entries = new ArrayList <RewardEntry> ();
 		
@@ -101,7 +106,9 @@ public class RewardDatabaseManager
 					result.getString("UUID"), 
 					result.getString ("REWARD"), 
 					result.getString("EVENT"), 
-					result.getBoolean("CLAIMED")
+					result.getBoolean("CLAIMED"),
+					rewardInterpreter,
+					minigameRewardTypeInterpreter
 				);
 				entries.add(entry);
 			} while (result.next());
@@ -120,6 +127,9 @@ public class RewardDatabaseManager
 		RewardEntry entry = null;
 		
 		ArrayList <RewardEntry> entries = new ArrayList <RewardEntry> ();
+		
+		RewardTypeInterpreter rewardInterpreter = new RewardTypeInterpreter();
+		MinigameRewardTypeInterpreter minigameRewardTypeInterpreter = new MinigameRewardTypeInterpreter();
 		
 		c = DriverManager.getConnection(CreateRewardsDatabase.kDatabasePath);
 		
@@ -141,7 +151,9 @@ public class RewardDatabaseManager
 					result.getString("UUID"), 
 					result.getString ("REWARD"), 
 					result.getString("EVENT"), 
-					result.getBoolean("CLAIMED")
+					result.getBoolean("CLAIMED"),
+					rewardInterpreter,
+					minigameRewardTypeInterpreter
 				);
 				entries.add(entry);
 			} while (result.next());

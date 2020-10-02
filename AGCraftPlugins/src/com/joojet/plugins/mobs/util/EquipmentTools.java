@@ -33,7 +33,7 @@ import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
-import com.joojet.plugins.mobs.bossbar.BossBarAPI;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
@@ -66,8 +66,10 @@ public class EquipmentTools
 	
 	/** Equips a living entity with the items stored in a MobEquipment object
 	 * 	@param entity - Entity we are equipping custom armor to
-	 *  @param mobEquipment - Object containing custom mob equipment */
-	public static void equipEntity (LivingEntity entity, MobEquipment mobEquipment)
+	 *  @param mobEquipment - Object containing custom mob equipment
+	 *  @param bossBarController - A reference to an active boss bar controller instance, which is used to manage
+	 *  all custom boss bars */
+	public static void equipEntity (LivingEntity entity, MobEquipment mobEquipment, BossBarController bossBarController)
 	{
 		Random rand = new Random ();
 		
@@ -276,14 +278,14 @@ public class EquipmentTools
 		// Activates a custom boss bar for the entity
 		if (mobEquipment.containsFlag(MobFlag.BOSS_BAR))
 		{
-			BossBarAPI.createBossBar(entity);
+			bossBarController.createBossBar(entity);
 		}
 		
 		// Initialize custom pathfinding targets
 		modifyPathfindingTargets (entity, mobEquipment);
 		
 		// Equip monster mounts
-		mountMob (entity, mobEquipment);
+		mountMob (entity, mobEquipment, bossBarController);
 	}
 	
 	/** Modifies base stats of the entity based on the values set in its MobEquipment container
@@ -399,7 +401,7 @@ public class EquipmentTools
 		}.runTask(AGCraftPlugin.plugin);
 	}
 	
-	public static void mountMob (LivingEntity entity, MobEquipment mobEquipment)
+	public static void mountMob (LivingEntity entity, MobEquipment mobEquipment, BossBarController bossBarController)
 	{
 		// Equip the monster's mounted mob
 		if (mobEquipment.hasMountedMob())
@@ -410,7 +412,7 @@ public class EquipmentTools
 			
 			if (mountEnt instanceof LivingEntity && !mount.getMobEquipment().hasMountedMob())
 			{
-				equipEntity ((LivingEntity) mountEnt, mount.getMobEquipment());
+				equipEntity ((LivingEntity) mountEnt, mount.getMobEquipment(), bossBarController);
 			}
 			mountEnt.addPassenger(entity);
 			

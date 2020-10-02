@@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.BookMeta;
 import com.joojet.biblefetcher.constants.BibleID;
 import com.joojet.biblefetcher.constants.BookID;
 import com.joojet.biblefetcher.fetcher.BibleFetcher;
-import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.biblefetcher.interpreter.BibleCommandInterpreter;
 import com.joojet.plugins.biblefetcher.string.ContentParser;
 
 public class FetchBibleTask extends Thread
@@ -37,13 +37,16 @@ public class FetchBibleTask extends Thread
 	private int n;
 	/** Number of verses in the fetched book */
 	private int verseSize;
+	/** A reference to the bible command interpreter defined in the main driver class */
+	protected BibleCommandInterpreter bibleCommandInterpreter;
 	
 	/** Runs a new thread to call the BibleFetcher API to
 	 *  fetch the requested chapter / set of verses from
 	 *  our API.
 	 * 	@param player - The player that is receiving the bible
-	 *  @param args - Command's arguments*/
-	public FetchBibleTask (Player player, String[] args)
+	 *  @param args - Command's arguments
+	 *  @param bibleCommandInterpreter - A reference to the bible command interpreter instance defined in main */
+	public FetchBibleTask (Player player, String[] args, BibleCommandInterpreter bibleCommandInterpreter)
 	{
 		this.player = player;
 		this.args = args;
@@ -54,6 +57,7 @@ public class FetchBibleTask extends Thread
 		this.end = 1;
 		this.n = 3;
 		this.verseSize = 0;
+		this.bibleCommandInterpreter = bibleCommandInterpreter;
 	}
 	
 	/** Runs a new instance of the BibleFetcher command on another thread, which calls the 
@@ -116,8 +120,8 @@ public class FetchBibleTask extends Thread
 			throw new RuntimeException ("Insufficient parameters.\nUsage: /bible <translation> <book> <chapter> <start> <end>");
 		}
 		
-		this.bibleID = AGCraftPlugin.bibleInterpreter.searchBibleTrie(args[0]);
-		this.bookID = AGCraftPlugin.bibleInterpreter.searchBookTrie(args[1]);
+		this.bibleID = this.bibleCommandInterpreter.searchBibleTrie(args[0]);
+		this.bookID = this.bibleCommandInterpreter.searchBookTrie(args[1]);
 		this.chapter = Integer.parseInt(args[2]);
 		
 		if (this.bibleID == null)

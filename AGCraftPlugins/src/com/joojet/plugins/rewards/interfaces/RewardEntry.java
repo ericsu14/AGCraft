@@ -2,9 +2,10 @@ package com.joojet.plugins.rewards.interfaces;
 
 import java.util.UUID;
 
-import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.rewards.enums.MinigameRewardType;
 import com.joojet.plugins.rewards.enums.RewardType;
+import com.joojet.plugins.rewards.interpreter.MinigameRewardTypeInterpreter;
+import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
 
 public class RewardEntry 
 {
@@ -19,12 +20,24 @@ public class RewardEntry
 	/** True if the prize is already claimed by the user */
 	private boolean claimed;
 	
-	public RewardEntry (int rewardID, String uuid, String reward, String event, boolean claimed)
+	/** Creates a new reward entry that uses the passed reward type and minigame reward interprers to convert
+	 *  the reward and event Strings into known enums.
+	 *  @param rewardID - ID of the player's reward
+	 *  @param uuid - UUID of the player in which this reward belongs to
+	 *  @param reward - The String identifier for the reward's reward type
+	 *  @param event - The String identifier for the reward's event type
+	 *  @param claimed - A boolean value determining if this reward is claimed or not
+	 *  @param rewardInterpreter - A reference to a RewardTypeInterpreter, which is used to convert the 
+	 *         reward String into a RewardType enum
+	 *  @param minigameRewardTypeInterpreter - A reference to a MinigameTypeInterpreter, used to convert
+	 *         the event String into a MinigameRewardType enum.*/
+	public RewardEntry (int rewardID, String uuid, String reward, String event, boolean claimed,
+			RewardTypeInterpreter rewardInterpreter, MinigameRewardTypeInterpreter minigameRewardTypeInterpreter)
 	{
 		this.rewardID = rewardID;
 		this.uuid = UUID.fromString(uuid);
-		this.reward = AGCraftPlugin.rewardInterpreter.searchTrie(reward);
-		this.event = AGCraftPlugin.minigameRewardTypeInterpreter.searchTrie(event);
+		this.reward = rewardInterpreter.searchTrie(reward);
+		this.event = minigameRewardTypeInterpreter.searchTrie(event);
 		this.claimed = claimed;
 		
 		if (this.reward == null)

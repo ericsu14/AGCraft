@@ -9,16 +9,20 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.ItemStack;
+
+import com.joojet.biblefetcher.interpreter.BibleCommandInterpreter;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
-import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 
 public class ClearBibles extends AGCommandExecutor
 {
+	/** Stores a reference to the bible command interpreter initialized in the main driver class */
+	protected BibleCommandInterpreter bibleCommandInterpreter;
 	
-	public ClearBibles ()
+	public ClearBibles (BibleCommandInterpreter bibleCommandInterpreter)
 	{
 		super (CommandType.CLEAR_BIBLES);
+		this.bibleCommandInterpreter = bibleCommandInterpreter;
 	}
 	
 	/** Clears all generated Bibles from the player's inventory */
@@ -57,7 +61,7 @@ public class ClearBibles extends AGCommandExecutor
 	/** Returns true if the book's author matches one of the BibleIDs supported in this plugin */
 	private boolean checkAuthor (String author)
 	{
-		return AGCraftPlugin.bibleInterpreter.searchBibleTrie(author) != null;
+		return this.bibleCommandInterpreter.searchBibleTrie(author) != null;
 	}
 
 }

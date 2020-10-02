@@ -19,14 +19,18 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.music.enums.MusicType;
 
-public class BossBarAPI 
+public class BossBarController 
 {
 	/** Stores a static table of all active custom boss bars in this server */
-	public static ConcurrentHashMap <UUID, BossBarNode> activeBossBars = new ConcurrentHashMap <UUID, BossBarNode> ();
+	public ConcurrentHashMap <UUID, BossBarNode> activeBossBars;
 	
+	public BossBarController ()
+	{
+		this.activeBossBars = new ConcurrentHashMap <UUID, BossBarNode> ();
+	}
 	/** Attempts to create a new Boss Bar for the passed living entity
 	 * 		@param entity - The Living entity we are creating the boss bar for */
-	public static void createBossBar (LivingEntity entity)
+	public void createBossBar (LivingEntity entity)
 	{
 		if (entity == null || entity.getType() == EntityType.PLAYER)
 		{
@@ -62,19 +66,19 @@ public class BossBarAPI
 	/** Makes the entity's boss bar referenced by its passed UUID functional by creating a new
 	 *  BossBarTask runnable in this plugin. This task dynamically scales the boss bar's
 	 *  health to the attached entity's current health points. */
-	public static void activateBossBar (UUID uuidKey)
+	public void activateBossBar (UUID uuidKey)
 	{
 		BossBarNode bossNode = activeBossBars.get(uuidKey);
 		if (bossNode != null && !bossNode.hasActiveTask())
 		{
-			new BossBarTask (bossNode).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
+			new BossBarTask (bossNode, this).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
 		}
 	}
 	
 	/** Adds a player to the boss entity's boss bar
 	 * 		@param player - Player being attached to the entity's boss bar
 	 * 		@param bossEntity - The Living Entity we are attaching the player to */
-	public static void addPlayerToBossBar (Player player, LivingEntity bossEntity)
+	public void addPlayerToBossBar (Player player, LivingEntity bossEntity)
 	{
 		UUID uuidKey = getBossBarUUID (bossEntity);
 		if (uuidKey != null && bossEntity.getType() != EntityType.PLAYER)
@@ -95,7 +99,7 @@ public class BossBarAPI
 	}
 	
 	/** Removes a player from the boss entity's boss bar */
-	public static void removePlayerFromBossBar (Player player, LivingEntity bossEntity)
+	public void removePlayerFromBossBar (Player player, LivingEntity bossEntity)
 	{
 		UUID uuidKey = getBossBarUUID (bossEntity);
 		if (uuidKey != null && activeBossBars.containsKey(uuidKey))
@@ -107,7 +111,7 @@ public class BossBarAPI
 	
 	/** Removes an active boss bar from the server.
 	 * 		@param entity - Entity we are removing the boss bar from */
-	public static void removeBossBar (LivingEntity entity)
+	public void removeBossBar (LivingEntity entity)
 	{
 		UUID uuidKey = getBossBarUUID (entity);
 		BossBarNode entry;
@@ -127,7 +131,7 @@ public class BossBarAPI
 	}
 	
 	/** Gets the Boss Bar UUID key from the Living Entity's metadata */
-	public static UUID getBossBarUUID (LivingEntity entity)
+	public UUID getBossBarUUID (LivingEntity entity)
 	{
 		String entityUUID = new BossMetadata().getStringMetadata((PersistentDataHolder) entity);
 		if (entityUUID != null)
@@ -138,13 +142,13 @@ public class BossBarAPI
 	}
 	
 	/** Attaches the entity's UUID as a new metadata for identifying custom boss bar events */
-	public static void setBossMetadataOnEntity (LivingEntity entity)
+	public void setBossMetadataOnEntity (LivingEntity entity)
 	{
 		new BossMetadata(entity.getUniqueId()).addStringMetadata((PersistentDataHolder) entity);
 	}
 	
 	/** Cleans up and disables all active boss bars */
-	public static void cleanup ()
+	public void cleanup ()
 	{
 		LivingEntity ent;
 		if (activeBossBars == null)

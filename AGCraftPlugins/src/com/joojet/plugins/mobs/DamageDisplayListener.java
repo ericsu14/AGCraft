@@ -20,6 +20,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.damage.DamageDisplayManager;
 import com.joojet.plugins.mobs.damage.enums.DamageType;
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -31,9 +32,13 @@ public class DamageDisplayListener implements Listener
 	protected DamageDisplayManager damageDisplayManager;
 	protected EnumSet <RegainReason> allowedRegainReasons;
 	
-	public DamageDisplayListener ()
+	/** A reference to the boss bar controller defined in main */
+	protected BossBarController bossBarController;
+	
+	public DamageDisplayListener (BossBarController bossBarController)
 	{
-		damageDisplayManager = new DamageDisplayManager ();
+		this.bossBarController = bossBarController;
+		damageDisplayManager = new DamageDisplayManager (this.bossBarController);
 		this.allowedRegainReasons = EnumSet.noneOf(RegainReason.class);
 		this.allowedRegainReasons.add(RegainReason.CUSTOM);
 		this.allowedRegainReasons.add(RegainReason.MAGIC);

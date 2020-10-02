@@ -16,12 +16,15 @@ public class BossBarTask extends BukkitRunnable
 	protected UUID bossUUID;
 	/** Instance of the Boss Bar entry attached to this task */
 	protected BossBarNode bossBarNode;
+	/** An instance to the boss bar controller */
+	protected BossBarController bossBarController;
 	
-	public BossBarTask (BossBarNode bossBarNode)
+	public BossBarTask (BossBarNode bossBarNode, BossBarController bossBarController)
 	{
 		this.bossBarNode = bossBarNode;
 		this.bossUUID = this.bossBarNode.uuid;
 		this.bossBarNode.setTask(this);
+		this.bossBarController = bossBarController;
 	}
 	
 	@Override
@@ -40,7 +43,7 @@ public class BossBarTask extends BukkitRunnable
 		else
 		{
 			this.cleanup();
-			BossBarAPI.activeBossBars.remove(bossUUID);
+			this.bossBarController.activeBossBars.remove(bossUUID);
 			this.cancel();
 		}
 	}

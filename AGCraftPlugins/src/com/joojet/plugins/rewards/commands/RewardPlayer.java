@@ -12,17 +12,27 @@ import org.bukkit.entity.Player;
 
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
-import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.rewards.database.RewardDatabaseManager;
 import com.joojet.plugins.rewards.enums.MinigameRewardType;
 import com.joojet.plugins.rewards.enums.RewardType;
+import com.joojet.plugins.rewards.interpreter.MinigameRewardTypeInterpreter;
+import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
 
 public class RewardPlayer extends AGCommandExecutor
 {
+	/** A reference to the minigame type interpreter defined in main */
+	protected MinigameRewardTypeInterpreter minigameRewardTypeInterpreter;
+	/** A reference to the reward type interpreter defined in main */
+	protected RewardTypeInterpreter rewardTypeInterpreter;
 	
-	public RewardPlayer() 
+	/** Creates a new instance of the reward players command
+	 *  @param rewardTypeInterpreter - A reference to the reward type interpreter defined in main
+	 * 	@param minigameRewardTypeInterpreter - A reference to the minigame type interpreter defined in main */
+	public RewardPlayer(RewardTypeInterpreter rewardTypeInterpreter, MinigameRewardTypeInterpreter minigameRewardTypeInterpreter) 
 	{
 		super(CommandType.GRANT_REWARD);
+		this.rewardTypeInterpreter = rewardTypeInterpreter;
+		this.minigameRewardTypeInterpreter = minigameRewardTypeInterpreter;
 	}
 
 	/** Usage:
@@ -41,8 +51,8 @@ public class RewardPlayer extends AGCommandExecutor
 				return false;
 			}
 			
-			RewardType rewardType = AGCraftPlugin.rewardInterpreter.searchTrie(args[0]);
-			MinigameRewardType eventType = AGCraftPlugin.minigameRewardTypeInterpreter.searchTrie(args[1]);
+			RewardType rewardType = this.rewardTypeInterpreter.searchTrie(args[0]);
+			MinigameRewardType eventType = this.minigameRewardTypeInterpreter.searchTrie(args[1]);
 			
 			if (rewardType == null)
 			{

@@ -34,6 +34,7 @@ import org.bukkit.plugin.Plugin;
 import org.spigotmc.event.entity.EntityMountEvent;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
@@ -74,15 +75,19 @@ public class AmplifiedMobSpawner implements Listener
 	private AmplifiedMobHandler amplifiedMobHandler;
 	private BeatTheBruinsHandler bruinHandler;
 	
+	/** A reference to the boss bar controller defined in main */
+	protected BossBarController bossBarController;
+	
 	/** Creates a new instance of this mob spawner class,
 	 *  which adds listeners to Minecraft's mob spawn events for
 	 *  having a certain chance of equipping them with custom armor, buffs, and weapons. */
-	public AmplifiedMobSpawner ()
+	public AmplifiedMobSpawner (BossBarController bossBarController)
 	{
-		this.julyFourthHandler = new JulyFourthHandler ();
-		this.amplifiedMobHandler = new AmplifiedMobHandler();
-		this.bruinHandler = new BeatTheBruinsHandler ();
-		this.uhcHandler = new UHCHandler();
+		this.bossBarController = bossBarController;
+		this.julyFourthHandler = new JulyFourthHandler (this.bossBarController);
+		this.amplifiedMobHandler = new AmplifiedMobHandler(this.bossBarController);
+		this.bruinHandler = new BeatTheBruinsHandler (this.bossBarController);
+		this.uhcHandler = new UHCHandler(this.bossBarController);
 	}
 	
 	public void onEnable ()

@@ -18,12 +18,20 @@ import org.bukkit.plugin.Plugin;
 
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
-import com.joojet.plugins.mobs.bossbar.BossBarAPI;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class BossBarEventListener implements Listener 
 {
+	/** A reference to the boss bar controller defined in main */
+	protected BossBarController bossBarController;
+	
+	public BossBarEventListener (BossBarController bossBarController)
+	{
+		this.bossBarController = bossBarController;
+	}
+	
 	public void onEnable ()
 	{
 		Bukkit.getPluginManager().registerEvents(this, (Plugin) this);
@@ -42,7 +50,7 @@ public class BossBarEventListener implements Listener
 		// Adds a player to an entity's boss bar if it has boss metadata
 		if (event.getDamager() instanceof Player)
 		{
-			BossBarAPI.addPlayerToBossBar((Player)event.getDamager(), entity); 
+			this.bossBarController.addPlayerToBossBar((Player)event.getDamager(), entity); 
 		}
 		
 		// Do the same as above for player projectiles as well
@@ -52,7 +60,7 @@ public class BossBarEventListener implements Listener
 			if (projectile.getShooter() instanceof Player)
 			{
 				Player shooter = (Player) projectile.getShooter();
-				BossBarAPI.addPlayerToBossBar(shooter, entity);
+				this.bossBarController.addPlayerToBossBar(shooter, entity);
 				// Causes the entity to hunt him down if attacked by player arrow
 				if (entity instanceof Monster && AGCraftPlugin.plugin.serverMode == ServerMode.NORMAL)
 				{
@@ -74,7 +82,7 @@ public class BossBarEventListener implements Listener
 	{
 		if (event.getEntity() instanceof LivingEntity && !event.isCancelled())
 		{
-			BossBarAPI.createBossBar((LivingEntity) event.getEntity());
+			this.bossBarController.createBossBar((LivingEntity) event.getEntity());
 		}
 	}
 	
@@ -93,7 +101,7 @@ public class BossBarEventListener implements Listener
 				MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(livingEntity);
 				if (equipment != null && equipment.containsFlag(MobFlag.BOSS_BAR))
 				{
-					BossBarAPI.createBossBar(livingEntity);
+					this.bossBarController.createBossBar(livingEntity);
 				}
 			}
 		}
@@ -112,7 +120,7 @@ public class BossBarEventListener implements Listener
 			if (ent instanceof LivingEntity)
 			{
 				livingEntity = (LivingEntity) ent;
-				BossBarAPI.removeBossBar(livingEntity);
+				this.bossBarController.removeBossBar(livingEntity);
 			}
 		}
 	}
@@ -124,7 +132,7 @@ public class BossBarEventListener implements Listener
 		if (event.getEntity() instanceof LivingEntity)
 		{
 			LivingEntity entity = (LivingEntity) event.getEntity();
-			BossBarAPI.removeBossBar(entity);
+			this.bossBarController.removeBossBar(entity);
 		}
 	}
 }

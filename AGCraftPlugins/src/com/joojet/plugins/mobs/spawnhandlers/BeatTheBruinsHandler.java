@@ -5,6 +5,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.phantom.beatthebruins.PhantomMenace;
 import com.joojet.plugins.mobs.monsters.skeleton.beatthebruins.CollegeSkeletonTypes;
@@ -13,8 +14,9 @@ import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class BeatTheBruinsHandler extends AbstractSpawnHandler
 {	
-	public BeatTheBruinsHandler ()
+	public BeatTheBruinsHandler (BossBarController bossBarController)
 	{
+		super (bossBarController);
 		this.addMonsterTypes(new CollegeZombieTypes(),
 				new CollegeSkeletonTypes());
 		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.SPAWNER_EGG, SpawnReason.REINFORCEMENTS);
@@ -27,7 +29,7 @@ public class BeatTheBruinsHandler extends AbstractSpawnHandler
 		if (type == EntityType.PHANTOM)
 		{
 			MobEquipment mobEquipment = new PhantomMenace ();
-			EquipmentTools.equipEntity(entity, mobEquipment);
+			EquipmentTools.equipEntity(entity, mobEquipment, this.bossBarController);
 			return;
 		}
 		
@@ -36,7 +38,7 @@ public class BeatTheBruinsHandler extends AbstractSpawnHandler
 			MobEquipment mobEquipment = this.getRandomEqipment(type, biome);
 			if (mobEquipment != null)
 			{
-				EquipmentTools.equipEntity(entity, mobEquipment);
+				EquipmentTools.equipEntity(entity, mobEquipment, this.bossBarController);
 			}
 		}
 	}

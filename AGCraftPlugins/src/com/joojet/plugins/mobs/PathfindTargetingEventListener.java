@@ -21,7 +21,7 @@ import org.bukkit.plugin.Plugin;
 
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
-import com.joojet.plugins.mobs.bossbar.BossBarAPI;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -30,6 +30,14 @@ import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public class PathfindTargetingEventListener implements Listener
 {
+	/** Stores a reference to the boss bar controller defined in main */
+	protected BossBarController bossBarController;
+	
+	public PathfindTargetingEventListener (BossBarController bossBarController)
+	{
+		this.bossBarController = bossBarController;
+	}
+	
 	public void onEnable ()
 	{
 		Bukkit.getPluginManager().registerEvents(this, (Plugin) this);
@@ -86,7 +94,7 @@ public class PathfindTargetingEventListener implements Listener
 		// to the hunters's boss bar if it exists
 		if (hunted != null && hunted instanceof Player)
 		{
-			BossBarAPI.addPlayerToBossBar((Player) hunted, hunter);
+			this.bossBarController.addPlayerToBossBar((Player) hunted, hunter);
 		}
 	}
 	
@@ -161,7 +169,7 @@ public class PathfindTargetingEventListener implements Listener
 			EquipmentTools.modifyPathfindingTargets(drownedEntity, ogZombieEquipment);
 			if (ogZombieEquipment.containsFlag(MobFlag.BOSS_BAR))
 			{
-				BossBarAPI.createBossBar(drownedEntity);
+				this.bossBarController.createBossBar(drownedEntity);
 			}
 		}
 	}

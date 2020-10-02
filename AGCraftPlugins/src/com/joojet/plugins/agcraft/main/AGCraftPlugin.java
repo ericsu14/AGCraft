@@ -27,7 +27,7 @@ import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.PathfindTargetingEventListener;
 import com.joojet.plugins.mobs.SoulBoundListener;
 import com.joojet.plugins.mobs.SummoningScrollListener;
-import com.joojet.plugins.mobs.bossbar.BossBarAPI;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.ThemedServerEvent;
 import com.joojet.plugins.mobs.interpreter.ThemedServerEventInterpreter;
 import com.joojet.plugins.music.MusicListener;
@@ -50,25 +50,27 @@ public class AGCraftPlugin extends JavaPlugin
 	// Stores an instance of the plugin itself
 	public static AGCraftPlugin plugin;
 	// Stores a reference to the death counter object
-	public static DeathCounter deathCounter;
+	public DeathCounter deathCounter;
 	// Config file manager
 	public ServerConfigFile serverConfigFile;
 	// A list containing all known commands
 	private HashMap <CommandType, PlayerCommand> playerCommands;
 	// Stores a reference to the junk command since that command manages its own config files
 	private ClearJunk clearJunk;
+	// Stores an instance to the BossBar controller
+	protected BossBarController bossBarController;
 	
 	/** Search term interpreters */
 	// Stores the command interpreter used for reward types
-	public static RewardTypeInterpreter rewardInterpreter;
+	protected RewardTypeInterpreter rewardInterpreter;
 	// Stores the command interpreter used for minigame reward types
-	public static MinigameRewardTypeInterpreter minigameRewardTypeInterpreter;
+	protected MinigameRewardTypeInterpreter minigameRewardTypeInterpreter;
 	// Stores the command interpreter used for server event types
-	public static ThemedServerEventInterpreter serverEventInterpreter;
+	protected ThemedServerEventInterpreter serverEventInterpreter;
 	// Stores the command interpreter used for server mode types
-	public static ServerModeInterpreter serverModeInterpreter;
+	protected ServerModeInterpreter serverModeInterpreter;
 	// Stores the command interpreter used for the bible plugin
-	public static BibleCommandInterpreter bibleInterpreter;
+	protected BibleCommandInterpreter bibleInterpreter;
 	
 	/** Config file values */
 	// Stores the server mode, which enables or disables commands and listeners depending on what mode the server is ran in
@@ -93,12 +95,13 @@ public class AGCraftPlugin extends JavaPlugin
 		super ();
 		this.playerCommands = new HashMap <CommandType, PlayerCommand> ();
 		this.serverConfigFile = null;
-		bibleInterpreter = new BibleCommandInterpreter();
-		rewardInterpreter = new RewardTypeInterpreter ();
-		minigameRewardTypeInterpreter = new MinigameRewardTypeInterpreter ();
-		serverEventInterpreter = new ThemedServerEventInterpreter ();
-		serverModeInterpreter = new ServerModeInterpreter ();
+		this.bibleInterpreter = new BibleCommandInterpreter();
+		this.rewardInterpreter = new RewardTypeInterpreter ();
+		this.minigameRewardTypeInterpreter = new MinigameRewardTypeInterpreter ();
+		this.serverEventInterpreter = new ThemedServerEventInterpreter ();
+		this.serverModeInterpreter = new ServerModeInterpreter ();
 		this.serverConfigFile = new ServerConfigFile ();
+		this.bossBarController = new BossBarController();
 	}
 	
 	@Override
@@ -122,10 +125,10 @@ public class AGCraftPlugin extends JavaPlugin
 		deathCounter = new DeathCounter();
 		
 		// Amplified mob spawner
-		Bukkit.getPluginManager().registerEvents(new AmplifiedMobSpawner(), this);
+		Bukkit.getPluginManager().registerEvents(new AmplifiedMobSpawner(this.bossBarController), this);
 		
 		// Summoning Scroll listener
-		Bukkit.getPluginManager().registerEvents (new SummoningScrollListener(), this);
+		Bukkit.getPluginManager().registerEvents (new SummoningScrollListener(this.bossBarController), this);
 		
 		// Player login handler
 		Bukkit.getPluginManager().registerEvents(new RewardManager(), this);
@@ -134,14 +137,14 @@ public class AGCraftPlugin extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents (new ConsequenceManager(), this);
 		
 		// Damage Display Listener
-		this.damageListener = new DamageDisplayListener ();
+		this.damageListener = new DamageDisplayListener (this.bossBarController);
 		Bukkit.getPluginManager().registerEvents(this.damageListener, this);
 		
 		// Boss Bar event listener
-		Bukkit.getPluginManager().registerEvents(new BossBarEventListener(), this);
+		Bukkit.getPluginManager().registerEvents(new BossBarEventListener(this.bossBarController), this);
 		
 		// Pathfind Targeting event listener
-		Bukkit.getPluginManager().registerEvents(new PathfindTargetingEventListener(), this);
+		Bukkit.getPluginManager().registerEvents(new PathfindTargetingEventListener(this.bossBarController), this);
 		
 		// Soulbounded items event listener
 		this.soulBoundListener = new SoulBoundListener ();
@@ -155,7 +158,7 @@ public class AGCraftPlugin extends JavaPlugin
 	public void onDisable ()
 	{
 		// Removes all active boss bars
-		BossBarAPI.cleanup();
+		this.bossBarController.cleanup();
 		
 		// Cleans up all damage displays
 		this.damageListener.onDisable();
@@ -203,13 +206,13 @@ public class AGCraftPlugin extends JavaPlugin
 		// Commands
 		this.clearJunk = new ClearJunk();
 		
-		this.addPlayerCommand (new Bible ());
-		this.addPlayerCommand (new ClearBibles ());
+		this.addPlayerCommand (new Bible (this.bibleInterpreter));
+		this.addPlayerCommand (new ClearBibles (this.bibleInterpreter));
 		this.addPlayerCommand (new ForgivePlayer ());
 		this.addPlayerCommand (new PunishPlayer ());
 		this.addPlayerCommand (new GetCoordinates ());
 		this.addPlayerCommand (new OpenRewards ());
-		this.addPlayerCommand (new RewardPlayer ());
+		this.addPlayerCommand (new RewardPlayer (this.rewardInterpreter, this.minigameRewardTypeInterpreter));
 		this.addPlayerCommand (new AutoSmelt ());
 		this.addPlayerCommand (this.clearJunk);
 		this.addPlayerCommand (new ToggleDebugMode ());
@@ -219,12 +222,12 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addPlayerCommand (new SetLocation ());
 		this.addPlayerCommand (new Warp ());
 		this.addPlayerCommand (new RemoveOldNetherLocations());
-		this.addPlayerCommand (new ChangeServerMode ());
+		this.addPlayerCommand (new ChangeServerMode (this.serverModeInterpreter));
 		this.addPlayerCommand (new ReloadConfigFile ());
 		this.addPlayerCommand (new FireworksCommand());
 		
 		// Tab Completer
-		this.addTabCompleter(new BibleTabCompleter ());
+		this.addTabCompleter(new BibleTabCompleter (this.bibleInterpreter));
 		this.addTabCompleter(new ClearJunkTabCompleter());
 		this.addTabCompleter(new GetLocationsTabCompleter ());
 		this.addTabCompleter(new RemoveLocationTabCompleter ());
