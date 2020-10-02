@@ -263,7 +263,7 @@ public class PathfindTargetingEventListener implements Listener
 		if (entity instanceof Player)
 		{
 			Player player = (Player) entity;
-			return new IgnorePlayerMetadata().ignorePlayer(player);
+			return new IgnorePlayerMetadata().canIgnorePlayer(player);
 		}
 		return false;
 	}

@@ -28,7 +28,7 @@ public class SkullKid extends MobEquipment
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
 		
-		this.setStat(MonsterStat.HEALTH, 40.0);
+		this.setStat(MonsterStat.HEALTH, 50.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 8.0);

@@ -11,11 +11,20 @@ public class IgnorePlayerMetadata extends CalendarMetadata
 {
 	public static final String IGNORE_PLAYER_TAG = "ignore-player";
 	
+	/** Creates an empty ignore player metadata instance which can be
+	 *  used to quickly extract values from a player's metadata container
+	 *  without specifying any data. */
 	public IgnorePlayerMetadata ()
 	{
 		super (IGNORE_PLAYER_TAG);
 	}
 	
+	/** Registers a grace period for a set amount of seconds where most non-boss mobs
+	 *  cannot target the player for a short period of time.
+	 *  This is to allow logged in players to safely load resource packs
+	 *  without getting attacked mid-loading.
+	 *  @param ignoreTime - Total amount of time where monsters ignore the player
+	 *  in seconds. */
 	public IgnorePlayerMetadata (int ignoreTime)
 	{
 		super (IGNORE_PLAYER_TAG);
@@ -24,7 +33,10 @@ public class IgnorePlayerMetadata extends CalendarMetadata
 		this.value = calendar.getTime();
 	}
 	
-	public boolean ignorePlayer (Player player)
+	/** Returns true if the player is still under an active grace period,
+	 *  telling the mob to cancel their target selecting events againt him/her.
+	 *  @param player - Player object being checked.*/
+	public boolean canIgnorePlayer (Player player)
 	{
 		try
 		{

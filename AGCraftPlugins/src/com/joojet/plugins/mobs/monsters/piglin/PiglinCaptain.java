@@ -10,6 +10,7 @@ import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.PiglinCaptainHead;
 import com.joojet.plugins.mobs.equipment.weapons.PiglinAxe;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.music.enums.MusicType;
 
 public class PiglinCaptain extends MobEquipment 
 {
@@ -30,5 +31,6 @@ public class PiglinCaptain extends MobEquipment
 		this.chestplate = new DarkNetheriteChestplate (this.color);
 		
 		this.setStat(MonsterStat.EXPERIENCE, 45.0);
+		this.bossTheme = MusicType.KUZE_THEME;
 	}
 }
