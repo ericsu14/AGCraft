@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.agcraft.util.StringUtil;
+import com.joojet.plugins.mobs.metadata.IgnorePlayerMetadata;
 import com.joojet.plugins.rewards.database.RewardDatabaseManager;
 import com.joojet.plugins.rewards.enums.MinigameRewardType;
 import com.joojet.plugins.rewards.enums.RewardType;
@@ -19,6 +20,12 @@ import org.bukkit.ChatColor;
 
 public class RewardManager implements Listener
 {	
+	
+	public static final String MOB_IGNORES_PLAYERS_KEY = "ignore-player-when-login-time";
+	/** When a player logs in, tell all monsters to ignore the player for a set amount of seconds.
+	 *  This gives him/her time to download the resource pack without dying unknowingly */
+	protected int ignorePlayerUponLoginTime = 15;
+	
 	/** Creates a new instance of a reward manager with a set minigame type
 	 * 		@param minigameType - Type of minigame being played, which is used to determine types of participation rewards */
 	public RewardManager ()
@@ -51,6 +58,7 @@ public class RewardManager implements Listener
 		try 
 		{
 			size = RewardDatabaseManager.fetchUnclaimedRewards(player.getUniqueId()).size();
+			new IgnorePlayerMetadata (this.ignorePlayerUponLoginTime).addStringMetadata(player);
 		}
 		catch (SQLException e)
 		{
@@ -108,6 +116,12 @@ public class RewardManager implements Listener
 			e.printStackTrace();
 			player.sendMessage(ChatColor.RED + "There seems to be an error automatically distributing your participation rewards. Please contact jooj about this immediately.");
 		}
+	}
+	
+	/** Sets the player ignore time value to a new value */
+	public void setPlayerIgnoreTime (int time)
+	{
+		this.ignorePlayerUponLoginTime = time;
 	}
 	
 	/** Grants a list of rewards to the player */

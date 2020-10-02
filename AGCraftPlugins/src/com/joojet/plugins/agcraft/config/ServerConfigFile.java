@@ -6,6 +6,7 @@ import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.enums.ThemedServerEvent;
 import com.joojet.plugins.music.MusicListener;
+import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.enums.MinigameRewardType;
 
 public class ServerConfigFile extends AbstractConfigFile
@@ -26,6 +27,7 @@ public class ServerConfigFile extends AbstractConfigFile
 		data.put(MusicListener.musicVolumeTag, 0.60f);
 		data.put(MusicListener.fireworksMusicVolumeTag, 0.50f);
 		data.put(AmplifiedMobSpawner.spawnChanceKey, 0.15);
+		data.put(RewardManager.MOB_IGNORES_PLAYERS_KEY, 15);
 		data.put(AmplifiedMobSpawner.debugModeKey, false);
 		return data;
 	}

@@ -25,6 +25,7 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.metadata.IgnorePlayerMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 import com.joojet.plugins.warp.scantools.ScanEntities;
@@ -188,6 +189,12 @@ public class PathfindTargetingEventListener implements Listener
 		{
 			return false;
 		}
+		
+		// Check ignore player with metadata condition
+		if (ignorePlayerWithMetadata (hunted))
+		{
+			return true;
+		}
 				
 		MobEquipment hunterEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(hunter);
 		MobEquipment huntedEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(hunted);
@@ -249,6 +256,18 @@ public class PathfindTargetingEventListener implements Listener
 		return null;
 	}
 	
+	/** Returns true if the living entity is a player with an active
+	 *  mob ignore player metadata. */
+	private boolean ignorePlayerWithMetadata (LivingEntity entity)
+	{
+		if (entity instanceof Player)
+		{
+			Player player = (Player) entity;
+			return new IgnorePlayerMetadata().ignorePlayer(player);
+		}
+		return false;
+	}
+	
 	/** Returns an eligible entity (based on the living entity's hit, ignore, and faction list) that is near
 	 * the passed hunter. Returns null if no entity is found within a 20 block radius of the hunter. */
 	private LivingEntity retargetCustomMob (LivingEntity hunter)
@@ -293,6 +312,12 @@ public class PathfindTargetingEventListener implements Listener
 			}
 						
 			victim = (LivingEntity) target;
+			
+			if (this.ignorePlayerWithMetadata(victim))
+			{
+				continue;
+			}
+			
 			// Check if the victim is in its hitlist
 			if (hunterEquipment.getHitList().contains(victim.getType()) &&
 				!hunterEquipment.getIgnoreList().contains(victim.getType()))

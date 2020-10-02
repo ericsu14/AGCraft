@@ -105,6 +105,17 @@ public abstract class AbstractConfigFile
 		return false;
 	}
 	
+	/** Safely returns the value referenced by its key as an integer */
+	public Integer getValueAsInteger (String key)
+	{
+		Object value = this.getValue(key);
+		if (value != null && value instanceof Integer)
+		{
+			return (Integer) value;
+		}
+		return 0;
+	}
+	
 	/** Returns the value of a key as a list of Strings
 	 * 	@param key - Value's key to be looked up
 	 *  @return The key's value as a list of strings, if it is originally written in that format.

@@ -91,7 +91,8 @@ public class AGCraftPlugin extends JavaPlugin
 	public DamageDisplayListener damageListener;
 	/** Used to enforce soulbounded item-drop events */
 	public SoulBoundListener soulBoundListener;
-	
+	/** Reward manager */
+	protected RewardManager rewardManager;
 	
 	public AGCraftPlugin ()
 	{
@@ -122,9 +123,6 @@ public class AGCraftPlugin extends JavaPlugin
 		this.initCommands();
 		this.loadCommands();
 		
-		// Loads in the server config file and initializes its values
-		this.loadServerConfigFile();
-		
 		// Death counter
 		deathCounter = new DeathCounter();
 		
@@ -135,7 +133,8 @@ public class AGCraftPlugin extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents (new SummoningScrollListener(this.bossBarController), this);
 		
 		// Player login handler
-		Bukkit.getPluginManager().registerEvents(new RewardManager(), this);
+		this.rewardManager = new RewardManager ();
+		Bukkit.getPluginManager().registerEvents(this.rewardManager, this);
 		
 		// Player consequence handler
 		Bukkit.getPluginManager().registerEvents (new ConsequenceManager(), this);
@@ -156,6 +155,9 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Music controller event listener
 		Bukkit.getPluginManager().registerEvents(new MusicListener(), this);
+		
+		// Loads in the server config file and initializes its values
+		this.loadServerConfigFile();
 	}
 	
 	@Override
@@ -190,6 +192,8 @@ public class AGCraftPlugin extends JavaPlugin
 		// Server mode
 		this.switchServerMode(this.searchElementFromInterpreter (serverModeInterpreter,
 				ServerMode.getKey(), ServerMode.NORMAL));
+		// Ignore player time
+		this.rewardManager.setPlayerIgnoreTime(this.serverConfigFile.getValueAsInteger(RewardManager.MOB_IGNORES_PLAYERS_KEY));
 		// Prints out other values
 		System.out.println ("Set amplified mob spawn chance to " + this.customMobSpawnChance);
 		System.out.println ("Debug Mode: " + this.enableDebugMode);
