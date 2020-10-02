@@ -2,13 +2,14 @@ package com.joojet.plugins.mobs.monsters.pillager.julyfourth;
 
 import org.bukkit.entity.EntityType;
 
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MonsterTypes;
 
 public class PatrioticPillagerTypes extends MonsterTypes 
 {
-	public PatrioticPillagerTypes ()
+	public PatrioticPillagerTypes (MonsterTypeInterpreter monsterTypeInterpreter)
 	{
-		super (EntityType.PILLAGER);
+		super (monsterTypeInterpreter, EntityType.PILLAGER);
 		this.addEquipment(new PatrioticPillager(), 100);
 	}
 }

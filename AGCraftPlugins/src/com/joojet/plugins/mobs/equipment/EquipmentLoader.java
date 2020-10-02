@@ -2,6 +2,8 @@ package com.joojet.plugins.mobs.equipment;
 
 import java.util.HashMap;
 
+import org.bukkit.persistence.PersistentDataHolder;
+
 import com.joojet.plugins.mobs.enums.EquipmentClassifier;
 import com.joojet.plugins.mobs.equipment.boots.BootTypes;
 import com.joojet.plugins.mobs.equipment.cake.CakeTypes;
@@ -11,6 +13,7 @@ import com.joojet.plugins.mobs.equipment.offhand.OffhandTypes;
 import com.joojet.plugins.mobs.equipment.potions.PotionTypes;
 import com.joojet.plugins.mobs.equipment.weapons.WeaponTypes;
 import com.joojet.plugins.mobs.interpreter.EquipmentTypeInterpreter;
+import com.joojet.plugins.mobs.metadata.EquipmentTypeMetadata;
 
 /** This class ensures all custom equipments are loaded into an internal search trie, allowing
  *  every custom equipment instance to be searchable by its name */
@@ -46,6 +49,18 @@ public class EquipmentLoader
 		{
 			this.instances.put(equipmentType.getClassifier(), equipmentType);
 		}
+	}
+	
+	/** Retrieves equipment data from an equipment or block's persistent data container. */
+	public Equipment getEquipmentData (PersistentDataHolder holder)
+	{
+		String idenfitier = new EquipmentTypeMetadata().getStringMetadata(holder);
+		if (idenfitier != null)
+		{
+			Equipment equipment = this.interpreter.searchTrie(idenfitier);
+			return equipment;
+		}
+		return null;
 	}
 	
 	/** Fetches a specific equipment type based on the passed classifier */

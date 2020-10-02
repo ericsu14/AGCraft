@@ -6,16 +6,17 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import com.joojet.plugins.mobs.bossbar.BossBarController;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.ghast.UHC.UHCGhastTypes;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class UHCHandler extends AbstractSpawnHandler
 {
-	public UHCHandler (BossBarController bossBarController)
+	public UHCHandler (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
-		super (bossBarController);
-		this.addMonsterTypes(new UHCGhastTypes());
+		super (monsterTypeInterpreter, bossBarController);
+		this.addMonsterTypes(new UHCGhastTypes(this.monsterTypeInterpreter));
 		this.addSpawnReasons(SpawnReason.NATURAL);
 	}
 	

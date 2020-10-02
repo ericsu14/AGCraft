@@ -29,6 +29,7 @@ import com.joojet.plugins.mobs.SoulBoundListener;
 import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.ThemedServerEvent;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.interpreter.ThemedServerEventInterpreter;
 import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.rewards.RewardManager;
@@ -71,6 +72,8 @@ public class AGCraftPlugin extends JavaPlugin
 	protected ServerModeInterpreter serverModeInterpreter;
 	// Stores the command interpreter used for the bible plugin
 	protected BibleCommandInterpreter bibleInterpreter;
+	/** Search trie used to lookup custom monsters by name */
+	public MonsterTypeInterpreter monsterTypeInterpreter;
 	
 	/** Config file values */
 	// Stores the server mode, which enables or disables commands and listeners depending on what mode the server is ran in
@@ -101,7 +104,8 @@ public class AGCraftPlugin extends JavaPlugin
 		this.serverEventInterpreter = new ThemedServerEventInterpreter ();
 		this.serverModeInterpreter = new ServerModeInterpreter ();
 		this.serverConfigFile = new ServerConfigFile ();
-		this.bossBarController = new BossBarController();
+		this.monsterTypeInterpreter = new MonsterTypeInterpreter ();
+		this.bossBarController = new BossBarController(this.monsterTypeInterpreter);
 	}
 	
 	@Override
@@ -125,7 +129,7 @@ public class AGCraftPlugin extends JavaPlugin
 		deathCounter = new DeathCounter();
 		
 		// Amplified mob spawner
-		Bukkit.getPluginManager().registerEvents(new AmplifiedMobSpawner(this.bossBarController), this);
+		Bukkit.getPluginManager().registerEvents(new AmplifiedMobSpawner(this.monsterTypeInterpreter, this.bossBarController), this);
 		
 		// Summoning Scroll listener
 		Bukkit.getPluginManager().registerEvents (new SummoningScrollListener(this.bossBarController), this);
@@ -137,14 +141,14 @@ public class AGCraftPlugin extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents (new ConsequenceManager(), this);
 		
 		// Damage Display Listener
-		this.damageListener = new DamageDisplayListener (this.bossBarController);
+		this.damageListener = new DamageDisplayListener (this.monsterTypeInterpreter, this.bossBarController);
 		Bukkit.getPluginManager().registerEvents(this.damageListener, this);
 		
 		// Boss Bar event listener
-		Bukkit.getPluginManager().registerEvents(new BossBarEventListener(this.bossBarController), this);
+		Bukkit.getPluginManager().registerEvents(new BossBarEventListener(this.monsterTypeInterpreter, this.bossBarController), this);
 		
 		// Pathfind Targeting event listener
-		Bukkit.getPluginManager().registerEvents(new PathfindTargetingEventListener(this.bossBarController), this);
+		Bukkit.getPluginManager().registerEvents(new PathfindTargetingEventListener(this.monsterTypeInterpreter, this.bossBarController), this);
 		
 		// Soulbounded items event listener
 		this.soulBoundListener = new SoulBoundListener ();
@@ -220,7 +224,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addPlayerCommand (new GiveRespawnTicket ());
 		this.addPlayerCommand (new RemoveLocation ());
 		this.addPlayerCommand (new SetLocation ());
-		this.addPlayerCommand (new Warp ());
+		this.addPlayerCommand (new Warp (this.monsterTypeInterpreter));
 		this.addPlayerCommand (new RemoveOldNetherLocations());
 		this.addPlayerCommand (new ChangeServerMode (this.serverModeInterpreter));
 		this.addPlayerCommand (new ReloadConfigFile ());

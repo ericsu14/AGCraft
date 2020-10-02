@@ -10,6 +10,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
 
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.phantom.julyfourth.FireworkPhantom;
 import com.joojet.plugins.mobs.monsters.pillager.julyfourth.PatrioticPillagerTypes;
@@ -22,13 +23,13 @@ public class JulyFourthHandler extends AbstractSpawnHandler
 	/** Used to generate random fireworks */
 	private FireworkTypes fwTypes;
 	
-	public JulyFourthHandler (BossBarController bossBarController)
+	public JulyFourthHandler (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
-		super (bossBarController);
+		super (monsterTypeInterpreter, bossBarController);
 		this.fwTypes = new FireworkTypes ();
-		this.addMonsterTypes(new PatrioticZombieTypes(), 
-				new PatrioticSkeletonTypes(),
-				new PatrioticPillagerTypes());
+		this.addMonsterTypes(new PatrioticZombieTypes(this.monsterTypeInterpreter), 
+				new PatrioticSkeletonTypes(this.monsterTypeInterpreter),
+				new PatrioticPillagerTypes(this.monsterTypeInterpreter));
 	}
 	
 	/** Handles 4th of july mob spawns */

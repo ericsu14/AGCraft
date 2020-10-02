@@ -11,6 +11,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MonsterTypes;
 import com.joojet.plugins.mobs.spawnhandlers.task.HandleSpawnEventTask;
@@ -26,12 +27,15 @@ public abstract class AbstractSpawnHandler
 	protected HashMap <EntityType, MonsterTypes> mobEquipmentTable;
 	/** A reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
+	/** Search trie used to lookup custom monsters by name */
+	public MonsterTypeInterpreter monsterTypeInterpreter;
 	
 	/** Creates a new instance of an Abstract Spawn Handler */
-	public AbstractSpawnHandler (BossBarController bossBarController)
+	public AbstractSpawnHandler (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
 		this.spawnReasonFilter = EnumSet.noneOf(SpawnReason.class);
 		this.mobEquipmentTable = new HashMap <EntityType, MonsterTypes> ();
+		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
 	}
 	

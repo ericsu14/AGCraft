@@ -14,21 +14,26 @@ import org.bukkit.ChatColor;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.warp.database.EWarpDatabaseManager;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public class Warp extends AGCommandExecutor
 {
+	/** A hardcoded warp location used to define a warp back to the player's bed spawn */
 	public final static String home = "home";
-	// Max. search radius of nearby enemies check
+	/** Max. search radius of nearby enemies check */
 	private int maxMobRadius = 6;
-	// Min. player health needs to exceed before warping
+	/** Min. player health needs to exceed before warping */
 	private double healthThreshold = 20 * 0.29;
+	/** Search trie used to lookup custom monsters by name */
+	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	
-	public Warp ()
+	public Warp (MonsterTypeInterpreter monsterTypeInterpreter)
 	{
 		super (CommandType.WARP);
+		this.monsterTypeInterpreter = monsterTypeInterpreter;
 	}
 	
 	/** Warps a player to either a designated location or their bed spawn.
@@ -51,7 +56,7 @@ public class Warp extends AGCommandExecutor
 			}
 			
 			// Check for player conditions
-			if (ScanEntities.ScanNearbyEnemies(p, maxMobRadius))
+			if (ScanEntities.ScanNearbyEnemies(p, maxMobRadius, this.monsterTypeInterpreter))
 			{
 				p.sendMessage(ChatColor.RED + "You cannot warp now! There are enemies nearby.");
 				return false;

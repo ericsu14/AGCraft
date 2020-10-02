@@ -7,6 +7,8 @@ import java.util.Random;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+
 public abstract class MonsterTypes 
 {
 	/** Stores a list of monsters the Mob Equipment tied to this class can equip */
@@ -17,13 +19,16 @@ public abstract class MonsterTypes
 	protected Random random;
 	/** Total number of custom mob equipment tied to this class */
 	protected int size;
+	/** Search trie used to lookup custom monsters by name */
+	public MonsterTypeInterpreter monsterTypeInterpreter;
 	
-	public MonsterTypes (EntityType... entities)
+	public MonsterTypes (MonsterTypeInterpreter monsterTypeInterpreter, EntityType... entities)
 	{
 		this.equipmentList = new ArrayList <MobEquipment> ();
 		this.supportedEntities = new ArrayList <EntityType> ();
 		this.random = new Random ();
 		this.size = 0;
+		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		
 		for (EntityType entity : entities)
 		{
@@ -38,6 +43,7 @@ public abstract class MonsterTypes
 	{
 		equipment.setSpawnWeight(weight);
 		equipmentList.add(equipment);
+		this.monsterTypeInterpreter.insertWord(equipment.toString(), equipment);
 		++this.size;
 	}
 	

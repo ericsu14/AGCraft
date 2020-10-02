@@ -2,13 +2,14 @@ package com.joojet.plugins.mobs.allies.wolf;
 
 import org.bukkit.entity.EntityType;
 
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MonsterTypes;
 
 public class WolfTypes extends MonsterTypes
 {
-	public WolfTypes ()
+	public WolfTypes (MonsterTypeInterpreter monsterTypeInterpreter)
 	{
-		super (EntityType.WOLF);
+		super (monsterTypeInterpreter, EntityType.WOLF);
 		this.addEquipment(new Snowball(), 90);
 		this.addEquipment(new Cookie(), 10);
 	}

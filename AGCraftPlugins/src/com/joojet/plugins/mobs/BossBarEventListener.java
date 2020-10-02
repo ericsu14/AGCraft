@@ -20,15 +20,19 @@ import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MobFlag;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class BossBarEventListener implements Listener 
 {
 	/** A reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
+	/** Search trie used to lookup custom monsters by name */
+	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	
-	public BossBarEventListener (BossBarController bossBarController)
+	public BossBarEventListener (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
+		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
 	}
 	
@@ -65,7 +69,7 @@ public class BossBarEventListener implements Listener
 				if (entity instanceof Monster && AGCraftPlugin.plugin.serverMode == ServerMode.NORMAL)
 				{
 					Monster mob = (Monster) entity;
-					MobEquipment mobEquipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(entity);
+					MobEquipment mobEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(entity);
 					if (mobEquipment == null || !mobEquipment.getIgnoreList().contains(shooter.getType()))
 					{
 						mob.setTarget(shooter);
@@ -98,7 +102,7 @@ public class BossBarEventListener implements Listener
 			if (ent instanceof LivingEntity && ent.getType() != EntityType.PLAYER)
 			{
 				livingEntity = (LivingEntity) ent;
-				MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(livingEntity);
+				MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(livingEntity);
 				if (equipment != null && equipment.containsFlag(MobFlag.BOSS_BAR))
 				{
 					this.bossBarController.createBossBar(livingEntity);

@@ -24,17 +24,21 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public class PathfindTargetingEventListener implements Listener
 {
+	/** Search trie used to lookup custom monsters by name */
+	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	/** Stores a reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
 	
-	public PathfindTargetingEventListener (BossBarController bossBarController)
+	public PathfindTargetingEventListener (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
+		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
 	}
 	
@@ -61,7 +65,7 @@ public class PathfindTargetingEventListener implements Listener
 				|| event.getReason() == TargetReason.RANDOM_TARGET)
 		{
 			// Check for persistent mob flags. If so, force the entity to hunt a nearby player
-			MobEquipment hunterEquipment = AmplifiedMobSpawner.getMobEquipmentFromEntity (hunter);
+			MobEquipment hunterEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity (hunter);
 			if (hunterEquipment != null
 					&& hunterEquipment.containsFlag(MobFlag.PERSISTENT_ATTACKER)
 					&& hunterEquipment.containsStat(MonsterStat.HUNT_ON_SPAWN_RADIUS))
@@ -110,7 +114,7 @@ public class PathfindTargetingEventListener implements Listener
 		}
 		
 		LivingEntity entity = (LivingEntity) event.getEntity();
-		MobEquipment entityEquipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(entity);
+		MobEquipment entityEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(entity);
 		
 		if (entityEquipment == null)
 		{
@@ -140,7 +144,7 @@ public class PathfindTargetingEventListener implements Listener
 			if (entity != null && entity instanceof LivingEntity)
 			{
 				livingEntity = (LivingEntity) entity;
-				entityEquipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(livingEntity);
+				entityEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(livingEntity);
 				if (entityEquipment != null)
 				{
 					EquipmentTools.modifyBaseStats(livingEntity, entityEquipment);
@@ -160,7 +164,7 @@ public class PathfindTargetingEventListener implements Listener
 			return;
 		}
 		LivingEntity originalZombie = (LivingEntity) event.getEntity();
-		MobEquipment ogZombieEquipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(originalZombie);
+		MobEquipment ogZombieEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(originalZombie);
 		if (ogZombieEquipment != null)
 		{
 			LivingEntity drownedEntity = (LivingEntity) event.getTransformedEntity();
@@ -185,8 +189,8 @@ public class PathfindTargetingEventListener implements Listener
 			return false;
 		}
 				
-		MobEquipment hunterEquipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(hunter);
-		MobEquipment huntedEquipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(hunted);
+		MobEquipment hunterEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(hunter);
+		MobEquipment huntedEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(hunted);
 				
 		// First, check if the hunter is in the huntee's ignore list
 		// This is used to avoid iron golems, snowman, and wolves from aggro allied monsters
@@ -254,7 +258,7 @@ public class PathfindTargetingEventListener implements Listener
 		// If the event is canceled, tell the hunter to scan for
 		// any nearby entities and hunt a nearby entity that
 		// are in its hitlist and satisfies its properties.
-		MobEquipment hunterEquipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(hunter);
+		MobEquipment hunterEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(hunter);
 		
 		if (hunterEquipment == null)
 		{
@@ -294,7 +298,7 @@ public class PathfindTargetingEventListener implements Listener
 				!hunterEquipment.getIgnoreList().contains(victim.getType()))
 			{
 				// If so, attempt to get the victim's mob equipment
-				victimEquipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(victim);
+				victimEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(victim);
 				if (victimEquipment != null
 						&& !hunterEquipment.getRivalFactions().isEmpty()
 						&& !victimEquipment.getFactions().isEmpty())

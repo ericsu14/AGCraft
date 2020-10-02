@@ -29,7 +29,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.plugin.Plugin;
 import org.spigotmc.event.entity.EntityMountEvent;
 
@@ -43,7 +42,6 @@ import com.joojet.plugins.mobs.equipment.EquipmentLoader;
 import com.joojet.plugins.mobs.fireworks.tasks.SpawnFireworksOnLocationTask;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.EquipmentTypeMetadata;
-import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.spawnhandlers.AmplifiedMobHandler;
 import com.joojet.plugins.mobs.spawnhandlers.BeatTheBruinsHandler;
@@ -60,11 +58,11 @@ public class AmplifiedMobSpawner implements Listener
 	public final static String debugModeKey = "amplified-debug-mode";
 	
 	/** Search trie used to lookup custom monsters by name */
-	public static MonsterTypeInterpreter mobTable = new MonsterTypeInterpreter ();
+	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	
 	/** Contains an internal search trie allowing custom equipment to be able to be looked up by its
 	 *  Equipment Type identifier. */
-	public static EquipmentLoader equipmentLoader = new EquipmentLoader ();
+	public EquipmentLoader equipmentLoader;
 	
 	/** Used to generate random numbers */
 	private Random rand = new Random ();
@@ -81,13 +79,15 @@ public class AmplifiedMobSpawner implements Listener
 	/** Creates a new instance of this mob spawner class,
 	 *  which adds listeners to Minecraft's mob spawn events for
 	 *  having a certain chance of equipping them with custom armor, buffs, and weapons. */
-	public AmplifiedMobSpawner (BossBarController bossBarController)
+	public AmplifiedMobSpawner (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
+		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
-		this.julyFourthHandler = new JulyFourthHandler (this.bossBarController);
-		this.amplifiedMobHandler = new AmplifiedMobHandler(this.bossBarController);
-		this.bruinHandler = new BeatTheBruinsHandler (this.bossBarController);
-		this.uhcHandler = new UHCHandler(this.bossBarController);
+		this.equipmentLoader = new EquipmentLoader();
+		this.julyFourthHandler = new JulyFourthHandler (this.monsterTypeInterpreter, this.bossBarController);
+		this.amplifiedMobHandler = new AmplifiedMobHandler(this.monsterTypeInterpreter, this.bossBarController);
+		this.bruinHandler = new BeatTheBruinsHandler (this.monsterTypeInterpreter, this.bossBarController);
+		this.uhcHandler = new UHCHandler(this.monsterTypeInterpreter, this.bossBarController);
 	}
 	
 	public void onEnable ()
@@ -146,7 +146,7 @@ public class AmplifiedMobSpawner implements Listener
 			LivingEntity entity = (LivingEntity) event.getEntity();
 			
 			// Modifies the entity's experience drops if it has any custom experience
-			MobEquipment entityEquipment = getMobEquipmentFromEntity(entity);
+			MobEquipment entityEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(entity);
 			if (entityEquipment == null)
 			{
 				return;
@@ -211,7 +211,7 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		LivingEntity tamed = (LivingEntity) event.getMount();
-		MobEquipment equipment = getMobEquipmentFromEntity(tamed);
+		MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(tamed);
 		if (equipment.containsFlag(MobFlag.ENABLE_PERSISTENCE_UPON_RIDING))
 		{
 			tamed.setRemoveWhenFarAway(false);
@@ -231,7 +231,7 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		LivingEntity entity = (LivingEntity) event.getEntity();
-		MobEquipment equipment = getMobEquipmentFromEntity (entity);
+		MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity (entity);
 		
 		if (equipment != null)
 		{
@@ -294,7 +294,7 @@ public class AmplifiedMobSpawner implements Listener
 			return;
 		}
 		
-		Equipment equipmentData = getEquipmentData (item.getItemMeta());
+		Equipment equipmentData = this.equipmentLoader.getEquipmentData (item.getItemMeta());
 		if (equipmentData != null)
 		{
 			Skull skull = (Skull) block.getState();
@@ -317,7 +317,7 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		Skull skull = (Skull) blockState;
-		Equipment equipmentData = getEquipmentData (skull);
+		Equipment equipmentData = this.equipmentLoader.getEquipmentData (skull);
 		if (equipmentData != null)
 		{
 			for (Item drop : event.getItems())
@@ -329,42 +329,6 @@ public class AmplifiedMobSpawner implements Listener
 				}
 			}
 		}
-	}
-	
-	/** Finds and returns a LivingEntity's custom mob equipment object.
-	 *  Returns null if the entity does not have custom mob metadata.
-	 *  @param entity - The living entity where we are extracting its custom mob equipment from */
-	public static MobEquipment getMobEquipmentFromEntity (LivingEntity entity)
-	{
-		// First check if the entity has custom mob metadata
-		if (entity == null)
-		{
-			return null;
-		}
-		
-		PersistentDataHolder holder = (PersistentDataHolder) entity;
-		String entityMeta = new MonsterTypeMetadata ().getStringMetadata(holder);
-		if (entityMeta == null || entityMeta.isEmpty())
-		{
-			return null;
-		}
-		
-		// Extract custom metadata from the entity and use its string to lookup its own mob equipment
-		MobEquipment entityEquipment = mobTable.searchTrie(entityMeta);
-		
-		return entityEquipment;
-	}
-	
-	/** Retrieves equipment data from an equipment or block's persistent data container. */
-	public static Equipment getEquipmentData (PersistentDataHolder holder)
-	{
-		String idenfitier = new EquipmentTypeMetadata().getStringMetadata(holder);
-		if (idenfitier != null)
-		{
-			Equipment equipment = equipmentLoader.getInterpreter().searchTrie(idenfitier);
-			return equipment;
-		}
-		return null;
 	}
 	
 }

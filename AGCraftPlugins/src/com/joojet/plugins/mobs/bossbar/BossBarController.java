@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataHolder;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
-import com.joojet.plugins.mobs.AmplifiedMobSpawner;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.BossMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.music.MusicListener;
@@ -23,11 +23,15 @@ public class BossBarController
 {
 	/** Stores a static table of all active custom boss bars in this server */
 	public ConcurrentHashMap <UUID, BossBarNode> activeBossBars;
+	/** Search trie used to lookup custom monsters by name */
+	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	
-	public BossBarController ()
+	public BossBarController (MonsterTypeInterpreter monsterTypeInterpreter)
 	{
+		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.activeBossBars = new ConcurrentHashMap <UUID, BossBarNode> ();
 	}
+	
 	/** Attempts to create a new Boss Bar for the passed living entity
 	 * 		@param entity - The Living entity we are creating the boss bar for */
 	public void createBossBar (LivingEntity entity)
@@ -46,7 +50,7 @@ public class BossBarController
 		if (!activeBossBars.containsKey(uuidKey))
 		{
 			BossBar bossBar = AGCraftPlugin.plugin.getServer().createBossBar(entity.getCustomName(), BarColor.RED, BarStyle.SEGMENTED_6, BarFlag.PLAY_BOSS_MUSIC);
-			MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(entity);
+			MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(entity);
 			MusicType bossTheme = null;
 			if (equipment != null && equipment.containsBossTheme())
 			{
@@ -90,7 +94,7 @@ public class BossBarController
 			activeBossBars.get(uuidKey).bossBar.addPlayer(player);
 			
 			// Attempts to play the entity's boss music if it exists
-			MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(bossEntity);
+			MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(bossEntity);
 			if (equipment != null && equipment.containsBossTheme())
 			{
 				MusicListener.soundPlayer.playCustomMusicNearPlayer(equipment.getBossTheme(), player, MusicListener.musicVolume);

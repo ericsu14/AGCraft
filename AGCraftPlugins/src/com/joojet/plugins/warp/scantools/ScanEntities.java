@@ -10,13 +10,13 @@ import org.bukkit.entity.Sittable;
 import org.bukkit.entity.Tameable;
 import org.bukkit.entity.Vehicle;
 
-import com.joojet.plugins.mobs.AmplifiedMobSpawner;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class ScanEntities 
 {
 	/** Returns true if there are enemies within an r-block radius of the current player */
-	public static boolean ScanNearbyEnemies (Player p, int radius)
+	public static boolean ScanNearbyEnemies (Player p, int radius, MonsterTypeInterpreter monsterTypeInterpreter)
 	{
 		int halfRadius = (int) (radius / 2.0);
 		ArrayList <Entity> entities = (ArrayList<Entity>) p.getNearbyEntities(radius, halfRadius, radius);
@@ -28,7 +28,7 @@ public class ScanEntities
 				// Check if the monster is a custom mob and not hostile
 				// the player. If so, continue searching
 				LivingEntity ent = (LivingEntity) e;
-				MobEquipment entEquipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(ent);
+				MobEquipment entEquipment = monsterTypeInterpreter.getMobEquipmentFromEntity(ent);
 				if (entEquipment != null 
 						&& entEquipment.getIgnoreList().contains(p.getType()))
 				{

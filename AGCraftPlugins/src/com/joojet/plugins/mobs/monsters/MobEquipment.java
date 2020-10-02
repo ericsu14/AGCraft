@@ -14,7 +14,6 @@ import org.bukkit.potion.PotionEffect;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
-import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
@@ -100,8 +99,6 @@ public abstract class MobEquipment
 		this.hitlist = new ArrayList <EntityType> ();
 		// Ignore List
 		this.ignoreList = EnumSet.noneOf(EntityType.class);
-		// Adds the mob-equipment into the custom monster search trie
-		AmplifiedMobSpawner.mobTable.insertWord(this.toString(), this);
 		// Mob flags
 		this.mobFlags = EnumSet.noneOf(MobFlag.class);
 		// Monster Stats

@@ -2,13 +2,14 @@ package com.joojet.plugins.mobs.monsters.zombie.beatthebruins;
 
 import org.bukkit.entity.EntityType;
 
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MonsterTypes;
 
 public class CollegeZombieTypes extends MonsterTypes
 {
-	public CollegeZombieTypes ()
+	public CollegeZombieTypes (MonsterTypeInterpreter monsterTypeInterpreter)
 	{
-		super (EntityType.ZOMBIE, EntityType.HUSK);
+		super (monsterTypeInterpreter, EntityType.ZOMBIE, EntityType.HUSK);
 		this.addEquipment(new UCLAJock(), 115);
 		this.addEquipment(new USCWarrior(), 43);
 		this.addEquipment(new SpiritOfTroy(), 28);

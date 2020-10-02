@@ -12,6 +12,7 @@ import com.joojet.plugins.mobs.allies.golem.GolemTypes;
 import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
 import com.joojet.plugins.mobs.allies.wolf.WolfTypes;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
@@ -30,21 +31,21 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 	/** Stores custom wandering villager instances */
 	private WanderingVillagerTypes wanderingTypes;
 	
-	public AmplifiedMobHandler (BossBarController bossBarController)
+	public AmplifiedMobHandler (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
-		super (bossBarController);
-		this.wanderingTypes = new WanderingVillagerTypes ();
+		super (monsterTypeInterpreter, bossBarController);
+		this.wanderingTypes = new WanderingVillagerTypes (this.monsterTypeInterpreter);
 		
-		this.addMonsterTypes(new ZombieTypes(),
-				new SkeletonTypes(),
-				new SpiderTypes(),
-				new GolemTypes(),
-				new SnowmanTypes(),
-				new HuskTypes(),
-				new WolfTypes(),
-				new WitherSkeletonTypes(),
-				new ZombiePigmenTypes(),
-				new PiglinTypes());
+		this.addMonsterTypes(new ZombieTypes(this.monsterTypeInterpreter),
+				new SkeletonTypes(this.monsterTypeInterpreter),
+				new SpiderTypes(this.monsterTypeInterpreter),
+				new GolemTypes(this.monsterTypeInterpreter),
+				new SnowmanTypes(this.monsterTypeInterpreter),
+				new HuskTypes(this.monsterTypeInterpreter),
+				new WolfTypes(this.monsterTypeInterpreter),
+				new WitherSkeletonTypes(this.monsterTypeInterpreter),
+				new ZombiePigmenTypes(this.monsterTypeInterpreter),
+				new PiglinTypes(this.monsterTypeInterpreter));
 		
 		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.BUILD_IRONGOLEM,
 				SpawnReason.BUILD_SNOWMAN, SpawnReason.VILLAGE_DEFENSE, SpawnReason.BREEDING);

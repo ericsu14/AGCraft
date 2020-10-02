@@ -25,20 +25,25 @@ import com.joojet.plugins.mobs.damage.DamageDisplayManager;
 import com.joojet.plugins.mobs.damage.enums.DamageType;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class DamageDisplayListener implements Listener 
 {
+	/** Stores a reference to the damage display manager used to spawn in armorstand entities */
 	protected DamageDisplayManager damageDisplayManager;
+	/** A set of allowed regain reasons for displaying healing-based damage displays. */
 	protected EnumSet <RegainReason> allowedRegainReasons;
-	
+	/** Search trie used to lookup custom monsters by name */
+	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	/** A reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
 	
-	public DamageDisplayListener (BossBarController bossBarController)
+	public DamageDisplayListener (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
+		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
-		damageDisplayManager = new DamageDisplayManager (this.bossBarController);
+		this.damageDisplayManager = new DamageDisplayManager (this.bossBarController);
 		this.allowedRegainReasons = EnumSet.noneOf(RegainReason.class);
 		this.allowedRegainReasons.add(RegainReason.CUSTOM);
 		this.allowedRegainReasons.add(RegainReason.MAGIC);
@@ -83,7 +88,7 @@ public class DamageDisplayListener implements Listener
 		// Checks for mob hits dealt by allies
 		else if (event.getDamager() instanceof LivingEntity)
 		{
-			MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity((LivingEntity) event.getDamager());
+			MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) event.getDamager());
 			if (equipment != null && equipment.getIgnoreList().contains(EntityType.PLAYER))
 			{
 				damageType = DamageType.ALLIED;
@@ -95,7 +100,7 @@ public class DamageDisplayListener implements Listener
 			AbstractArrow projectile = (AbstractArrow) event.getDamager();
 			if (projectile.getShooter() != null && projectile.getShooter() instanceof LivingEntity)
 			{
-				MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity((LivingEntity) projectile.getShooter());
+				MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) projectile.getShooter());
 				if (equipment != null && equipment.getIgnoreList().contains(EntityType.PLAYER))
 				{
 					damageType = DamageType.ALLIED;
@@ -159,7 +164,7 @@ public class DamageDisplayListener implements Listener
 			}
 			
 			// Cancels any suffocation damage if the entity has that flag enabled
-			MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity(ent);
+			MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(ent);
 			if (equipment != null && 
 					equipment.containsFlag(MobFlag.DISABLE_SUFFOCATION_DAMAGE) &&
 					event.getCause() == DamageCause.SUFFOCATION)
@@ -195,7 +200,7 @@ public class DamageDisplayListener implements Listener
 		{
 			if (entity != null && entity.getType() == EntityType.ARMOR_STAND)
 			{
-				MobEquipment equipment = AmplifiedMobSpawner.getMobEquipmentFromEntity((LivingEntity) entity);
+				MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) entity);
 				if (equipment.getMonsterType() == MonsterType.DAMAGE_DISPLAY_ENTITY)
 				{
 					this.damageDisplayManager.removeDamageDisplayEntity(entity.getUniqueId());
