@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>AGCraftPlugins</groupId>
   <artifactId>AGCraftPlugins</artifactId>
-  <version>1.7.9</version>
+  <version>1.7.9.1</version>
   <name>AGCraftPlugins</name>
   <description>A suite of plugins used for the AGCraft Minecraft server!</description>
   <build>

@@ -197,9 +197,6 @@ public class AGCraftPlugin extends JavaPlugin
 				ServerMode.getKey(), ServerMode.NORMAL));
 		// Ignore player time
 		this.rewardManager.setPlayerIgnoreTime(this.serverConfigFile.getValueAsInteger(RewardManager.MOB_IGNORES_PLAYERS_KEY));
-		// Prints out other values
-		System.out.println ("Set amplified mob spawn chance to " + this.customMobSpawnChance);
-		System.out.println ("Debug Mode: " + this.enableDebugMode);
 		
 		// Music volume
 		this.musicListener.setMusicVolume(this.serverConfigFile.getValueAsDouble(MusicListener.musicVolumeTag));
