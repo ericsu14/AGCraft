@@ -76,9 +76,7 @@ public abstract class AbstractConfigFile
 	{
 		if (this.configFileValues.containsKey(key))
 		{
-			Object result = this.configFileValues.get(key);
-			System.out.println ("Set value referenced by " + key + " to " + result.toString());
-			return result;
+			return this.configFileValues.get(key);
 		}
 		return null;
 	}
