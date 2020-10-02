@@ -24,7 +24,7 @@ public class MusicListener implements Listener
 	
 	public MusicListener ()
 	{
-		soundPlayer = new SoundPlayer (this);
+		this.soundPlayer = new SoundPlayer (this);
 	}
 	
 	
@@ -32,7 +32,7 @@ public class MusicListener implements Listener
 	@EventHandler
 	public void onPlayerLeave (PlayerQuitEvent event)
 	{
-		soundPlayer.removeSoundTaskFromTable(event.getPlayer().getUniqueId());
+		this.soundPlayer.removeSoundTaskFromTable(event.getPlayer().getUniqueId());
 	}
 	
 	/** Sets the boss music's volume to a new value

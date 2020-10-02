@@ -11,7 +11,6 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
-import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.phantom.julyfourth.FireworkPhantom;
 import com.joojet.plugins.mobs.monsters.phantom.julyfourth.JulyFourthPhantomTypes;
 import com.joojet.plugins.mobs.monsters.pillager.julyfourth.PatrioticPillagerTypes;
@@ -47,11 +46,7 @@ public class JulyFourthHandler extends AbstractSpawnHandler
 		// Summon a new patriotic zombie when roll is between a certain range
 		if (!reason.equals(SpawnReason.RAID) && roll >= 0.30 && roll <= 0.50)
 		{
-			MobEquipment mobEquipment = this.getRandomEqipment(type, biome);
-			if (mobEquipment != null)
-			{
-				EquipmentTools.equipEntity(entity, mobEquipment, this.bossBarController);
-			}
+			this.transformLivingEntityIntoAmplifiedMob (entity, type, reason, biome);
 		}
 	}
 	

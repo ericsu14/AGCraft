@@ -7,9 +7,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
-import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.ghast.UHC.UHCGhastTypes;
-import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class UHCHandler extends AbstractSpawnHandler
 {
@@ -25,11 +23,7 @@ public class UHCHandler extends AbstractSpawnHandler
 	{		
 		if (this.reasonFilter(reason))
 		{
-			MobEquipment mobEquipment = this.getRandomEqipment(type, biome);
-			if (mobEquipment != null)
-			{
-				EquipmentTools.equipEntity(entity, mobEquipment, this.bossBarController);
-			}
+			this.transformLivingEntityIntoAmplifiedMob (entity, type, reason, biome);
 		}
 	}
 }

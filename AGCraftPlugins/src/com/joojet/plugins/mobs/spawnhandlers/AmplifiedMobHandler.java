@@ -81,12 +81,7 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 			return;
 		}
 		
-		MobEquipment mobEquipment = this.getRandomEqipment(type, biome);
-		if (mobEquipment != null)
-		{
-			EquipmentTools.equipEntity(entity, mobEquipment, this.bossBarController);
-		}
-		
+		this.transformLivingEntityIntoAmplifiedMob (entity, type, reason, biome);
 	}
 	
 	/** Makes the names of raider mobs visible */

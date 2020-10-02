@@ -15,6 +15,7 @@ import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MonsterTypes;
 import com.joojet.plugins.mobs.spawnhandlers.task.HandleSpawnEventTask;
+import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public abstract class AbstractSpawnHandler 
 {
@@ -58,6 +59,20 @@ public abstract class AbstractSpawnHandler
 	 *  @param biome - The biome in which this entity is spawned in
 	 *  @param roll - A random number determining if this entity should spawn */
 	public abstract void handleSpawnEvent (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll);
+	
+	/** Converts a living entity into a random amplified monster based on its EntityType
+	 * 	@param entity - The entity potentially being transformed into a custom mob
+	 *  @param type - The entity's EntityType
+	 *  @param reason - The reason on why this entity is spawned
+	 *  @param biome - The biome in which this entity is spawned in */
+	public void transformLivingEntityIntoAmplifiedMob (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome)
+	{
+		MobEquipment equipment = this.getRandomEqipment(type, biome);
+		if (equipment != null)
+		{
+			EquipmentTools.equipEntity(entity, equipment, this.bossBarController);
+		}
+	}
 	
 	
 	/** Adds a list of spawn reasons into the internal spawn reason filter */

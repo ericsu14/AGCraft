@@ -44,11 +44,7 @@ public class BeatTheBruinsHandler extends AbstractSpawnHandler
 		
 		if (this.reasonFilter(reason) && roll >= 0.30 && roll <= 0.60)
 		{
-			MobEquipment mobEquipment = this.getRandomEqipment(type, biome);
-			if (mobEquipment != null)
-			{
-				EquipmentTools.equipEntity(entity, mobEquipment, this.bossBarController);
-			}
+			this.transformLivingEntityIntoAmplifiedMob (entity, type, reason, biome);
 		}
 	}
 	
