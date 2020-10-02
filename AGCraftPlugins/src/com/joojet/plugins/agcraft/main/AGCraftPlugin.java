@@ -108,6 +108,8 @@ public class AGCraftPlugin extends JavaPlugin
 		this.serverModeInterpreter = new ServerModeInterpreter ();
 		this.serverConfigFile = new ServerConfigFile ();
 		this.monsterTypeInterpreter = new MonsterTypeInterpreter ();
+		this.musicListener = new MusicListener();
+		this.bossBarController = new BossBarController(this.monsterTypeInterpreter, this.musicListener);
 	}
 	
 	@Override
@@ -145,7 +147,6 @@ public class AGCraftPlugin extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(this.damageListener, this);
 		
 		// Boss Bar event listener
-		this.bossBarController = new BossBarController(this.monsterTypeInterpreter, this.musicListener);
 		Bukkit.getPluginManager().registerEvents(new BossBarEventListener(this.monsterTypeInterpreter, this.bossBarController), this);
 		
 		// Pathfind Targeting event listener
@@ -156,7 +157,6 @@ public class AGCraftPlugin extends JavaPlugin
 		this.soulBoundListener.onEnable();
 		
 		// Music controller event listener
-		this.musicListener = new MusicListener();
 		Bukkit.getPluginManager().registerEvents(this.musicListener, this);
 		
 		// Loads in the server config file and initializes its values
