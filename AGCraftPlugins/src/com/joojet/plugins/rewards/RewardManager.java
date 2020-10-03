@@ -174,4 +174,16 @@ public class RewardManager extends AGListener
 		// Ignore player time
 		this.setPlayerIgnoreTime(config.getValueAsInteger(MOB_IGNORES_PLAYERS_KEY));
 	}
+
+	@Override
+	public void onEnable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDisable() {
+		// TODO Auto-generated method stub
+		
+	}
 }

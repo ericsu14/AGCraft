@@ -73,4 +73,18 @@ public class MusicListener extends AGListener
 		this.setFireworkMusicVolume(config.getValueAsDouble(FIREWORKS_MUSIC_VOLUME_TAG));
 		
 	}
+
+
+	@Override
+	public void onEnable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onDisable() {
+		// TODO Auto-generated method stub
+		
+	}
 }

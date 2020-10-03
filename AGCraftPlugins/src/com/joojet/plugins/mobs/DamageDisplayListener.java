@@ -2,7 +2,6 @@ package com.joojet.plugins.mobs;
 
 import java.util.EnumSet;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -14,7 +13,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
@@ -51,11 +49,13 @@ public class DamageDisplayListener extends AGListener
 		this.allowedRegainReasons.add(RegainReason.MAGIC_REGEN);
 	}
 	
+	@Override
 	public void onEnable ()
 	{
-		Bukkit.getPluginManager().registerEvents(this, (Plugin) this);
+
 	}
 	
+	@Override
 	public void onDisable ()
 	{
 		this.damageDisplayManager.cleanup();

@@ -60,8 +60,6 @@ public class AGCraftPlugin extends JavaPlugin
 	protected DeathCounter deathCounter;
 	// A list containing all known commands
 	protected HashMap <CommandType, PlayerCommand> playerCommands;
-	// Stores a reference to the junk command since that command manages its own config files
-	protected ClearJunk clearJunk;
 	// Stores an instance to the BossBar controller
 	protected BossBarController bossBarController;
 	
@@ -75,13 +73,6 @@ public class AGCraftPlugin extends JavaPlugin
 	
 	/** Stores a set of active listener instances */
 	protected ArrayList <AGListener> activeEventListeners;
-	
-	/** Used to display entity damage information to the player */
-	protected DamageDisplayListener damageListener;
-	/** Used to enforce soulbounded item-drop events */
-	protected SoulBoundListener soulBoundListener;
-	/** Reward manager */
-	protected RewardManager rewardManager;
 	/** Music listener */
 	protected MusicListener musicListener;
 	
@@ -123,15 +114,13 @@ public class AGCraftPlugin extends JavaPlugin
 		this.registerEventListener (new SummoningScrollListener(this.bossBarController));
 		
 		// Player login handler
-		this.rewardManager = new RewardManager ();
-		this.registerEventListener(this.rewardManager);
+		this.registerEventListener(new RewardManager());
 		
 		// Player consequence handler
 		this.registerEventListener (new ConsequenceManager());
 		
 		// Damage Display Listener
-		this.damageListener = new DamageDisplayListener (this.monsterTypeInterpreter, this.bossBarController);
-		this.registerEventListener(this.damageListener);
+		this.registerEventListener(new DamageDisplayListener (this.monsterTypeInterpreter, this.bossBarController));
 		
 		// Boss Bar event listener
 		this.registerEventListener(new BossBarEventListener(this.monsterTypeInterpreter, this.bossBarController));
@@ -140,9 +129,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.registerEventListener(new PathfindTargetingEventListener(this.monsterTypeInterpreter, this.bossBarController));
 		
 		// Soulbounded items event listener
-		this.soulBoundListener = new SoulBoundListener ();
-		this.registerEventListener(this.soulBoundListener);
-		this.soulBoundListener.onEnable();
+		this.registerEventListener(new SoulBoundListener ());
 		
 		// Music controller event listener
 		this.registerEventListener(this.musicListener);
@@ -157,11 +144,11 @@ public class AGCraftPlugin extends JavaPlugin
 		// Removes all active boss bars
 		this.bossBarController.cleanup();
 		
-		// Cleans up all damage displays
-		this.damageListener.onDisable();
-		
-		// Attempts to serialized unrecovered soulbounded items into a file
-		this.soulBoundListener.onDisable();
+		// Invokes the onDisable routine for all event listeners
+		for (AGListener listener: this.activeEventListeners)
+		{
+			listener.onDisable();
+		}
 	}
 	
 	/** Loads in the server config file and initializes its variables to the plugin */
@@ -182,16 +169,16 @@ public class AGCraftPlugin extends JavaPlugin
 			listener.loadConfigVariables(this.serverConfigFile);
 		}
 		
-		// Reloads the clearjunk file
-		this.clearJunk.reloadConfigFile();
+		// Invokes config file loader function for all player commands
+		for (PlayerCommand command : this.playerCommands.values())
+		{
+			command.getExecutor().loadConfigVariables(this.serverConfigFile);
+		}
 	}
 
 	/** Initializes all commands */
 	public void initCommands ()
-	{
-		// Commands
-		this.clearJunk = new ClearJunk();
-		
+	{		
 		this.addPlayerCommand (new Bible (this.bibleInterpreter));
 		this.addPlayerCommand (new ClearBibles (this.bibleInterpreter));
 		this.addPlayerCommand (new ForgivePlayer ());
@@ -200,7 +187,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addPlayerCommand (new OpenRewards ());
 		this.addPlayerCommand (new RewardPlayer ());
 		this.addPlayerCommand (new AutoSmelt ());
-		this.addPlayerCommand (this.clearJunk);
+		this.addPlayerCommand (new ClearJunk());
 		this.addPlayerCommand (new ToggleDebugMode ());
 		this.addPlayerCommand (new GetLocations ());
 		this.addPlayerCommand (new GiveRespawnTicket ());
@@ -293,6 +280,7 @@ public class AGCraftPlugin extends JavaPlugin
 	{
 		this.activeEventListeners.add(listener);
 		Bukkit.getPluginManager().registerEvents(listener, this);
+		listener.onEnable();
 	}
 	
 }

@@ -3,7 +3,6 @@ package com.joojet.plugins.mobs;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -28,7 +27,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 import org.spigotmc.event.entity.EntityMountEvent;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
@@ -85,17 +83,17 @@ public class AmplifiedMobSpawner extends AGListener
 	{
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
-		this.equipmentLoader = new EquipmentLoader();
-		this.serverEventInterpreter = new ThemedServerEventInterpreter();
 		this.julyFourthHandler = new JulyFourthHandler (this.monsterTypeInterpreter, this.bossBarController);
 		this.amplifiedMobHandler = new AmplifiedMobHandler(this.monsterTypeInterpreter, this.bossBarController);
 		this.bruinHandler = new BeatTheBruinsHandler (this.monsterTypeInterpreter, this.bossBarController);
 		this.uhcHandler = new UHCHandler(this.monsterTypeInterpreter, this.bossBarController);
 	}
 	
+	@Override
 	public void onEnable ()
 	{
-		Bukkit.getPluginManager().registerEvents(this, (Plugin) this);
+		this.equipmentLoader = new EquipmentLoader();
+		this.serverEventInterpreter = new ThemedServerEventInterpreter();
 	}
 	
 	/** Amplifies mob spawns */
@@ -342,6 +340,12 @@ public class AmplifiedMobSpawner extends AGListener
 		this.julyFourthHandler.getSpawnChanceFromConfigFile(config);
 		this.bruinHandler.getSpawnChanceFromConfigFile(config);
 		this.uhcHandler.getSpawnChanceFromConfigFile(config);
+	}
+
+	@Override
+	public void onDisable() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

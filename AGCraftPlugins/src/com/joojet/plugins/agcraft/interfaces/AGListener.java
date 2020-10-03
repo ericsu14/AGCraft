@@ -10,4 +10,10 @@ public abstract class AGListener implements Listener
 	 *  server's configuration file.
 	 *  @param config - A reference to the main server configuration file */
 	public abstract void loadConfigVariables (ServerConfigFile config);
+	
+	/** Allows the listener to implement their own setup routines upon enabling */
+	public abstract void onEnable ();
+	
+	/** Allows the listener to implement their own cleanup code upon disabling */
+	public abstract void onDisable ();
 }

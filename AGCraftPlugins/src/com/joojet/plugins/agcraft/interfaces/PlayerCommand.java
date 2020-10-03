@@ -1,8 +1,5 @@
 package com.joojet.plugins.agcraft.interfaces;
 
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.TabCompleter;
-
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.enums.PermissionType;
 
@@ -10,15 +7,15 @@ import com.joojet.plugins.agcraft.enums.PermissionType;
 public class PlayerCommand 
 {
 	protected CommandType commandType;
-	protected CommandExecutor command;
-	protected TabCompleter commandTabCompleter;
+	protected AGCommandExecutor command;
+	protected AGTabCompleter commandTabCompleter;
 	protected PermissionType permissionType;
 	
 	/** Represents a player command without a tab completer
 	 * 		@param commandName - Name of the command
 	 * 		@param command - A reference to the command's executor instance
 	 * 		@param commandType - Permissions for the command  */
-	public PlayerCommand (CommandType commandType, CommandExecutor command)
+	public PlayerCommand (CommandType commandType, AGCommandExecutor command)
 	{
 		this.commandTabCompleter = null;
 		this.commandType = commandType;
@@ -31,7 +28,7 @@ public class PlayerCommand
 	 * 		@param command - A reference to the command's executor instance
 	 * 		@param tabCompleter - A reference to the command's tab completer instance
 	 * 		@param commandType - Permissions for the command  */
-	public PlayerCommand (CommandType commandType, CommandExecutor command, TabCompleter tabCompleter)
+	public PlayerCommand (CommandType commandType, AGCommandExecutor command, AGTabCompleter tabCompleter)
 	{
 		this.commandTabCompleter = tabCompleter;
 		this.commandType = commandType;
@@ -46,13 +43,13 @@ public class PlayerCommand
 	}
 	
 	/** Returns the command's executor instance */
-	public CommandExecutor getExecutor ()
+	public AGCommandExecutor getExecutor ()
 	{
 		return this.command;
 	}
 	
 	/** Returns the command's tab completer instance */
-	public TabCompleter getTabCompleter ()
+	public AGTabCompleter getTabCompleter ()
 	{
 		return this.commandTabCompleter;
 	}
@@ -64,8 +61,9 @@ public class PlayerCommand
 	}
 	
 	/** Sets this command's tabcompleter to a new instance */
-	public void setTabCompleter (TabCompleter tabCompleter)
+	public void setTabCompleter (AGTabCompleter tabCompleter)
 	{
 		this.commandTabCompleter = tabCompleter;
+		tabCompleter.setCommandExecutor(this.command);
 	}
 }

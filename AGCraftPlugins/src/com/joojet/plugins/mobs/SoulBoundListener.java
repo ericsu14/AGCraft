@@ -27,11 +27,13 @@ public class SoulBoundListener extends AGListener
 		this.serializer = new SoulboundItemSerializer ();
 	}
 	
+	@Override
 	public void onEnable ()
 	{
 		this.serializer.recoverSerializedItems();
 	}
 	
+	@Override
 	public void onDisable ()
 	{
 		this.serializer.serialize();

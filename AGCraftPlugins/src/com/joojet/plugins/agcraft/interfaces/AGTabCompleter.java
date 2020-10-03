@@ -9,11 +9,22 @@ import com.joojet.plugins.agcraft.enums.CommandType;
 
 public abstract class AGTabCompleter implements TabCompleter
 {
+	/** Stores the type of command this tab completer is part of */
 	protected CommandType commandType;
+	/** Stores a reference to the tab completer's command executor */
+	protected AGCommandExecutor commandExecutor;
 	
 	public AGTabCompleter (CommandType commandType)
 	{
 		this.commandType = commandType;
+		this.commandExecutor = null;
+	}
+	
+	/** Sets the tab completer's parenting command executor to a new instance
+	 *  @param - commandExecutor - The new command executor instance */
+	public void setCommandExecutor (AGCommandExecutor commandExecutor)
+	{
+		this.commandExecutor = commandExecutor;
 	}
 	
 	/** Returns the command type associated with this tab completer instance */

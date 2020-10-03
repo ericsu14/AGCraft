@@ -17,13 +17,10 @@ import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.consequences.database.ConsequenceDatabaseManager;
-import com.joojet.plugins.consequences.interpreter.CalendarFieldInterpreter;
 import com.joojet.plugins.mobs.equipment.head.ClownHead;
 
 public class ConsequenceManager extends AGListener 
 {
-	public static CalendarFieldInterpreter interpreter = new CalendarFieldInterpreter();
-	
 	@EventHandler
 	public void handleConsequenceLoginEvent (PlayerJoinEvent event)
 	{
@@ -113,5 +110,17 @@ public class ConsequenceManager extends AGListener
 	public void loadConfigVariables(ServerConfigFile config) 
 	{
 		// No varibles to load
+	}
+
+	@Override
+	public void onEnable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDisable() {
+		// TODO Auto-generated method stub
+		
 	}
 }

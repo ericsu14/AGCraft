@@ -1,6 +1,5 @@
 package com.joojet.plugins.mobs;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -14,7 +13,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
@@ -41,9 +39,10 @@ public class SummoningScrollListener extends AGListener
 		this.summonInterpreter = new SummoningScrollInterpreter();
 	}
 	
+	@Override
 	public void onEnable ()
 	{
-		Bukkit.getPluginManager().registerEvents(this, (Plugin) this);
+		
 	}
 	
 	/** Checks for use of a summoning scroll */
@@ -133,5 +132,11 @@ public class SummoningScrollListener extends AGListener
 	public void loadConfigVariables(ServerConfigFile config) 
 	{
 
+	}
+
+	@Override
+	public void onDisable() {
+		// TODO Auto-generated method stub
+		
 	}
 }

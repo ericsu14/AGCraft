@@ -1,6 +1,5 @@
 package com.joojet.plugins.mobs;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -13,7 +12,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
-import org.bukkit.plugin.Plugin;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
@@ -37,9 +35,10 @@ public class BossBarEventListener extends AGListener
 		this.bossBarController = bossBarController;
 	}
 	
+	@Override
 	public void onEnable ()
 	{
-		Bukkit.getPluginManager().registerEvents(this, (Plugin) this);
+		
 	}
 	
 	/** Captures entity damage events and adds the Player to the enemy's boss bar if it has one */
@@ -143,6 +142,12 @@ public class BossBarEventListener extends AGListener
 
 	@Override
 	public void loadConfigVariables(ServerConfigFile config) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDisable() {
 		// TODO Auto-generated method stub
 		
 	}

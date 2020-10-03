@@ -13,15 +13,19 @@ import org.bukkit.entity.Player;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
-import com.joojet.plugins.consequences.ConsequenceManager;
 import com.joojet.plugins.consequences.database.ConsequenceDatabaseManager;
 import com.joojet.plugins.consequences.enums.CalendarField;
+import com.joojet.plugins.consequences.interpreter.CalendarFieldInterpreter;
 
 public class PunishPlayer extends AGCommandExecutor
 {
+	/** Used to interpret calendar field parameters */
+	protected CalendarFieldInterpreter interpreter;
+	
 	public PunishPlayer ()
 	{
 		super (CommandType.PUNISH_PLAYER);
+		this.interpreter = new CalendarFieldInterpreter();
 	}
 	
 	/** Punishes a specific player for a certain period of time, forcing him to wear a clown mask the
@@ -71,7 +75,7 @@ public class PunishPlayer extends AGCommandExecutor
 					
 					// Extracts time modifier and field from arguments
 					modifier = Integer.parseInt(args[i]);
-					field = ConsequenceManager.interpreter.searchTrie(args[i + 1]);
+					field = this.interpreter.searchTrie(args[i + 1]);
 					
 					if (field == null)
 					{

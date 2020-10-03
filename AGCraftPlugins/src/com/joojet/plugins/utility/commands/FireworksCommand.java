@@ -22,18 +22,25 @@ import com.joojet.plugins.music.enums.MusicType;
 import com.joojet.plugins.music.interpreter.MusicTypeInterpreter;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
-public class FireworksCommand extends AGCommandExecutor {
+public class FireworksCommand extends AGCommandExecutor 
+{
+	/** A list of tags used to reference various variables from the config file */
+	public static final String COOLDOWN_TIMER_TAG = "firework-cooldown-timer";
+	public static final String FIREWORK_LIMIT = "firework-ammo-limit";
+	public static final String FIREWORK_SPREAD_LIMIT = "firework-spread-limit";
+	public static final String FIREWORK_POWER_LIMIT = "firework-power-limit";
+	public static final String MIN_FIREWORK_COUNT = "min-firework-ammo-count";
 	
 	/** Defines the cooldown timer before a player can launch the next fireworks show in miuntes */
-	public static int cooldownTimer = 3;
+	public int cooldownTimer = 3;
 	/** Adds a limit on how many fireworks can be launched */
-	public static int fireworkLimit = 300;
+	public int fireworkLimit = 300;
 	/** Adds a limit on the firework spread radius */
-	public static int fireworkSpreadLimit = 48;
+	public int fireworkSpreadLimit = 48;
 	/** Adds a limit on the firework power limit */
-	public static int fireworkPowerLimit = 4;
+	public int fireworkPowerLimit = 4;
 	/** Min amount of fireworks needed to be spawned upon starting a show */
-	public static int minFireworkCount = 30;
+	public int minFireworkCount = 30;
 	/** Used to interpret strings into music types */
 	protected MusicTypeInterpreter musicInterpreter;
 	/** Used to launch play music events when a player specifies a song in this command */
@@ -146,7 +153,11 @@ public class FireworksCommand extends AGCommandExecutor {
 	@Override
 	public void loadConfigVariables(ServerConfigFile config) 
 	{
-		
+		this.cooldownTimer = config.getValueAsInteger(COOLDOWN_TIMER_TAG);
+		this.fireworkLimit = config.getValueAsInteger(FIREWORK_LIMIT);
+		this.fireworkPowerLimit = config.getValueAsInteger(FIREWORK_POWER_LIMIT);
+		this.fireworkSpreadLimit = config.getValueAsInteger(FIREWORK_SPREAD_LIMIT);
+		this.minFireworkCount = config.getValueAsInteger(MIN_FIREWORK_COUNT);
 	}
 
 }

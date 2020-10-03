@@ -13,6 +13,7 @@ import com.joojet.plugins.utility.commands.FireworksCommand;
 
 public class FireworkCommandTabCompleter extends AGTabCompleter
 {
+	
 	public FireworkCommandTabCompleter ()
 	{
 		super (CommandType.FIREWORKS);
@@ -24,25 +25,27 @@ public class FireworkCommandTabCompleter extends AGTabCompleter
 		int n = args.length - 1;
 		String input = args[n];
 		
+		FireworksCommand fireworksCommand = (FireworksCommand) this.commandExecutor;
+		
 		List <String> result = new ArrayList <String> (); 
 		switch (n)
 		{
 			//radius
 			case 0:
 				result = this.filterArrayByInput(
-						this.generateBetweenRange(1, FireworksCommand.fireworkSpreadLimit).toArray(), 
+						this.generateBetweenRange(1, fireworksCommand.fireworkSpreadLimit).toArray(), 
 						input);
 				break;
 			// power
 			case 1:
 				result = this.filterArrayByInput(
-						this.generateBetweenRange(1, FireworksCommand.fireworkPowerLimit).toArray(), 
+						this.generateBetweenRange(1, fireworksCommand.fireworkPowerLimit).toArray(), 
 						input);
 				break;
 			// ammo count
 			case 2:
 				result = this.filterArrayByInput(
-						this.generateBetweenRange(FireworksCommand.minFireworkCount, FireworksCommand.fireworkLimit).toArray(), 
+						this.generateBetweenRange(fireworksCommand.minFireworkCount, fireworksCommand.fireworkLimit).toArray(), 
 						input);
 				break;
 			// Firework music type

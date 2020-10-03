@@ -12,6 +12,7 @@ import com.joojet.plugins.mobs.spawnhandlers.UHCHandler;
 import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.enums.MinigameRewardType;
+import com.joojet.plugins.utility.commands.FireworksCommand;
 
 public class ServerConfigFile extends AbstractConfigFile
 {
@@ -36,6 +37,11 @@ public class ServerConfigFile extends AbstractConfigFile
 		data.put(UHCHandler.UHC_HANDLER_KEY, 1.00);
 		data.put(RewardManager.MOB_IGNORES_PLAYERS_KEY, 15);
 		data.put(AGCraftPlugin.DEBUG_MODE_KEY, false);
+		data.put(FireworksCommand.COOLDOWN_TIMER_TAG, 3);
+		data.put(FireworksCommand.FIREWORK_LIMIT, 300);
+		data.put(FireworksCommand.FIREWORK_POWER_LIMIT, 4);
+		data.put(FireworksCommand.FIREWORK_SPREAD_LIMIT, 48);
+		data.put(FireworksCommand.MIN_FIREWORK_COUNT, 30);
 		return data;
 	}
 	

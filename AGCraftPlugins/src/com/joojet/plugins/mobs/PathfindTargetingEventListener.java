@@ -3,7 +3,6 @@ package com.joojet.plugins.mobs;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -16,7 +15,6 @@ import org.bukkit.event.entity.EntityTransformEvent;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 import org.bukkit.event.entity.EntityTransformEvent.TransformReason;
 import org.bukkit.event.world.ChunkLoadEvent;
-import org.bukkit.plugin.Plugin;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
@@ -44,9 +42,10 @@ public class PathfindTargetingEventListener extends AGListener
 		this.bossBarController = bossBarController;
 	}
 	
+	@Override
 	public void onEnable ()
 	{
-		Bukkit.getPluginManager().registerEvents(this, (Plugin) this);
+
 	}
 	
 	/** Listens to AI target events and cancels targeting events if the custom mob is called
@@ -350,6 +349,12 @@ public class PathfindTargetingEventListener extends AGListener
 	@Override
 	public void loadConfigVariables(ServerConfigFile config) 
 	{
+		
+	}
+
+	@Override
+	public void onDisable() {
+		// TODO Auto-generated method stub
 		
 	}
 }
