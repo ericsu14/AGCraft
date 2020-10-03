@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.music.MusicListener;
@@ -74,11 +75,14 @@ public class SoundPlayer
 				{
 					task.setSoundPlayerState(SoundPlayerState.ENDING);
 					player.playSound(player.getLocation(), type.getEndTheme().getNamespace(), this.musicListener.musicVolume, 1.0F);
-					if (!task.isCancelled())
-					{
-						task.cancel();
-						task.runTaskLater(AGCraftPlugin.plugin, type.getEndTheme().duration().getTicks());
-					}
+					task.cancel();
+					new BukkitRunnable () {
+						@Override
+						public void run ()
+						{
+							removeSoundTaskFromTable (playerUUID);
+						}
+					}.runTaskLater(AGCraftPlugin.plugin, type.getEndTheme().duration().getTicks());
 				}
 			}
 			else
