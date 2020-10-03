@@ -70,23 +70,11 @@ public abstract class AbstractConfigFile
 		yaml.dump(this.createConfigFileContents(), writer);
 	}
 	
-	/** Returns the value of a key written in the config file
-	 *  @param key - Value's key to be searched
-	 *  @return The key's value if it exists */
-	public Object getValue (String key)
-	{
-		if (this.configFileValues.containsKey(key))
-		{
-			return this.configFileValues.get(key);
-		}
-		return null;
-	}
-	
 	/** Safely returns the value referenced by its key as a double.
 	 *  @param - Key associated to the requested value  */
 	public Double getValueAsDouble (String key)
 	{
-		Object value = this.getValue(key);
+		Object value = this.getValue(key, true);
 		if (value != null && value instanceof Double)
 		{
 			return (Double) value;
@@ -98,7 +86,7 @@ public abstract class AbstractConfigFile
 	 *  @param - key associated to the requested value */
 	public Boolean getValueAsBoolean (String key)
 	{
-		Object value = this.getValue(key);
+		Object value = this.getValue(key, true);
 		if (value != null && value instanceof Boolean)
 		{
 			return (Boolean) value;
@@ -109,12 +97,30 @@ public abstract class AbstractConfigFile
 	/** Safely returns the value referenced by its key as an integer */
 	public Integer getValueAsInteger (String key)
 	{
-		Object value = this.getValue(key);
+		Object value = this.getValue(key, true);
 		if (value != null && value instanceof Integer)
 		{
 			return (Integer) value;
 		}
 		return 0;
+	}
+	
+	/** Returns the value of a key written in the config file
+	 *  @param key - Value's key to be searched
+	 *  @param outputInformation - Output true if debug information is logged to the console
+	 *  @return The key's value if it exists */
+	protected Object getValue (String key, boolean outputInformation)
+	{
+		if (this.configFileValues.containsKey(key))
+		{
+			Object value = this.configFileValues.get(key);
+			if (outputInformation)
+			{
+				System.out.println ("Retrieved " + value.toString() + " for the key " + key);
+			}
+			return value;
+		}
+		return null;
 	}
 	
 	/** Returns the value of a key as a list of Strings
@@ -176,7 +182,7 @@ public abstract class AbstractConfigFile
 	 *  @param defaultValue - Default value to be used in the event of failure */
 	public <E> E searchElementFromInterpreter (AbstractInterpreter<E> interpreter, String key, E defaultValue)
 	{
-		E result = interpreter.searchTrie(this.getValue(key).toString());
+		E result = interpreter.searchTrie(this.getValue(key, false).toString());
 		if (result == null)
 		{
 			System.err.println ("Error: Cannot find value for " + key + ". Using default value " + defaultValue.toString() + " instead...");
