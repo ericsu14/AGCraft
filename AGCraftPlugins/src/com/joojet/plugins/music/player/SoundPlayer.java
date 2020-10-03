@@ -26,18 +26,35 @@ public class SoundPlayer
 		this.activePlayerSoundTable = new HashMap <UUID, PlayCustomSoundTask> ();
 	}
 	
+	/** A wrapper for our custom music playing function that registers a boss entity to the task's internal list of
+	 *  attached boss entities if the type is the same as the active music task.
+	 *  
+	 *  This ensures that any active boss music does not prematurely stop if there are multiple boss entities with the same
+	 *  boss theme.*/
+	public void playBossMusicNearPlayer (MusicType type, Player player, UUID bossEntityUUID, float musicVolume)
+	{
+		this.playCustomMusicNearPlayer(type, player, SoundPlayerState.RUNNING, musicVolume);
+		
+		PlayCustomSoundTask task = this.activePlayerSoundTable.get(player.getUniqueId());
+		if (task.getMusicType() == type)
+		{
+			task.attachBossEntity(bossEntityUUID);
+		}
+	}
+	
 	/** Attempts to play custom music referenced by MusicType to the player.
 	 *  This will not overwrite any music already playing by previous calls to this command.
 	 *  No music will be played when the player does not have the listed resource pack.
 	 *  @param type - Type of custom music to be played that is specified in the server resource pack
 	 *  @param player - Player we are playing the music to.
-	 *  */
-	public void playCustomMusicNearPlayer(MusicType type, Player player, float musicVolume)
+	 *  @param state - Initial state the sound task should be in
+	 *  @param musicVolume - Controls how loud the music should be played to the player */
+	public void playCustomMusicNearPlayer(MusicType type, Player player, SoundPlayerState state, float musicVolume)
 	{
 		if (!this.activePlayerSoundTable.containsKey(player.getUniqueId()))
 		{
 			player.playSound(player.getLocation(), type.getNamespace(), musicVolume, 1.0F);
-			PlayCustomSoundTask soundTask = new PlayCustomSoundTask (player.getUniqueId(), type, this);
+			PlayCustomSoundTask soundTask = new PlayCustomSoundTask (player.getUniqueId(), type, this, state);
 			this.activePlayerSoundTable.put(player.getUniqueId(), soundTask);
 			soundTask.runTaskLater(AGCraftPlugin.plugin, type.duration().getTicks());
 		}
@@ -51,6 +68,49 @@ public class SoundPlayer
 	{
 		float convertedRadius = Math.max(1.0f, radius / 15.0f);
 		location.getWorld().playSound(location, type.getNamespace(), convertedRadius, 1.0F);
+	}
+	
+	
+	/** Attempts to stop the currently playing boss music on player if there are no active boss entities remaining
+	 *  that are tied to the activly playing boss music. If so, the boss music's ending theme will be played.
+	 *  @param type - Song being stopped
+	 *  @param player - The player the song is being stopped
+	 *  @param bossUUID - Boss we are removing from the music task */
+	public void stopCurrentlyPlayingBossMusicOnPlayer (MusicType type, Player player, UUID bossUUID)
+	{
+		UUID playerUUID = player.getUniqueId();
+		
+		if (this.activePlayerSoundTable.containsKey(playerUUID))
+		{
+			PlayCustomSoundTask task = this.activePlayerSoundTable.get(playerUUID);
+			
+			if (task.getMusicType() != type || task.getSoundPlayerState() != SoundPlayerState.RUNNING)
+			{
+				return;
+			}
+			
+			// Removes the boss entity from the task's internal list of attached boss entities
+			task.removeAttachedBossEntity(bossUUID);
+			
+			// If there are no more boss entities attached to this task, play the boss theme's ending music
+			if (task.getAttachedBossEntityCount() == 0)
+			{
+				player.stopSound(type.getNamespace());
+				if (type.hasEndingTheme())
+				{
+					task.setSoundPlayerState(SoundPlayerState.ENDING);
+					player.playSound(player.getLocation(), type.getEndTheme().getNamespace(), this.musicListener.musicVolume, 1.0F);
+					task.cancel();
+					new BukkitRunnable () {
+						@Override
+						public void run ()
+						{
+							removeSoundTaskFromTable (playerUUID);
+						}
+					}.runTaskLater(AGCraftPlugin.plugin, type.getEndTheme().duration().getTicks());
+				}
+			}
+		}
 	}
 	
 	/** Stops the sound currently being played to a player and removes it from the internal 
@@ -67,28 +127,7 @@ public class SoundPlayer
 				&& this.activePlayerSoundTable.get(playerUUID).getMusicType() == type)
 		{
 			player.stopSound(type.getNamespace());
-			// Attempts to play the music type's ending theme if one exists
-			if (type.hasEndingTheme())
-			{
-				PlayCustomSoundTask task = this.activePlayerSoundTable.get(playerUUID);
-				if (task.getSoundPlayerState() == SoundPlayerState.RUNNING)
-				{
-					task.setSoundPlayerState(SoundPlayerState.ENDING);
-					player.playSound(player.getLocation(), type.getEndTheme().getNamespace(), this.musicListener.musicVolume, 1.0F);
-					task.cancel();
-					new BukkitRunnable () {
-						@Override
-						public void run ()
-						{
-							removeSoundTaskFromTable (playerUUID);
-						}
-					}.runTaskLater(AGCraftPlugin.plugin, type.getEndTheme().duration().getTicks());
-				}
-			}
-			else
-			{
-				this.removeSoundTaskFromTable(playerUUID);
-			}
+			this.removeSoundTaskFromTable(playerUUID);
 		}
 	}
 	

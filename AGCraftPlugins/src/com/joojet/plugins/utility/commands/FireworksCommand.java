@@ -19,6 +19,7 @@ import com.joojet.plugins.mobs.fireworks.tasks.SpawnFireworksOnLocationTask;
 import com.joojet.plugins.mobs.metadata.FireworkCommandMetadata;
 import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.music.enums.MusicType;
+import com.joojet.plugins.music.enums.SoundPlayerState;
 import com.joojet.plugins.music.interpreter.MusicTypeInterpreter;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
@@ -110,7 +111,7 @@ public class FireworksCommand extends AGCommandExecutor
 						for (Player nearbyPlayer : nearbyPlayers)
 						{
 							this.musicListener.soundPlayer.stopAllSoundsNearPlayer(nearbyPlayer);
-							this.musicListener.soundPlayer.playCustomMusicNearPlayer(music, nearbyPlayer, this.musicListener.fireworkMusicVolume);
+							this.musicListener.soundPlayer.playCustomMusicNearPlayer(music, nearbyPlayer, SoundPlayerState.FIREWORK, this.musicListener.fireworkMusicVolume);
 						}
 					}
 				}

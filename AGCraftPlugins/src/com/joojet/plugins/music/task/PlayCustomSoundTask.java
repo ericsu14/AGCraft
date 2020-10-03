@@ -1,5 +1,6 @@
 package com.joojet.plugins.music.task;
 
+import java.util.HashSet;
 import java.util.UUID;
 
 import org.bukkit.scheduler.BukkitRunnable;
@@ -18,13 +19,16 @@ public class PlayCustomSoundTask extends BukkitRunnable
 	protected SoundPlayer musicPlayer;
 	/** Current state of the sound player */
 	protected SoundPlayerState state;
+	/** Set of entities attached to the currently playing boss music */
+	protected HashSet <UUID> attachedBossEntities;
 	
-	public PlayCustomSoundTask (UUID playerUUID, MusicType musicType, SoundPlayer musicPlayer)
+	public PlayCustomSoundTask (UUID playerUUID, MusicType musicType, SoundPlayer musicPlayer, SoundPlayerState state)
 	{
 		this.playerUUID = playerUUID;
 		this.musicType = musicType;
 		this.musicPlayer = musicPlayer;
-		this.state = SoundPlayerState.RUNNING;
+		this.state = state;
+		this.attachedBossEntities = new HashSet <UUID> ();
 	}
 	
 	/** This task will run after a set delay which spans for the entire duration of the music.
@@ -51,5 +55,20 @@ public class PlayCustomSoundTask extends BukkitRunnable
 	public void setSoundPlayerState (SoundPlayerState state)
 	{
 		this.state = state;
+	}
+	
+	public void attachBossEntity (UUID bossUUID)
+	{
+		this.attachedBossEntities.add(bossUUID);
+	}
+	
+	public void removeAttachedBossEntity (UUID bossUUID)
+	{
+		this.attachedBossEntities.remove(bossUUID);
+	}
+	
+	public int getAttachedBossEntityCount()
+	{
+		return this.attachedBossEntities.size();
 	}
 }

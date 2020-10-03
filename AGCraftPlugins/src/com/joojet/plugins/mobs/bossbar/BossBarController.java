@@ -101,7 +101,7 @@ public class BossBarController
 			MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(bossEntity);
 			if (equipment != null && equipment.containsBossTheme())
 			{
-				this.musicListener.soundPlayer.playCustomMusicNearPlayer(equipment.getBossTheme(), player, this.musicListener.musicVolume);
+				this.musicListener.soundPlayer.playBossMusicNearPlayer(equipment.getBossTheme(), player, bossEntity.getUniqueId(), musicListener.musicVolume);
 			}
 		}
 	}
