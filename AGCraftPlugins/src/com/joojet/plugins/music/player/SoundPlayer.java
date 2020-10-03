@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.music.enums.MusicType;
+import com.joojet.plugins.music.enums.SoundPlayerState;
 import com.joojet.plugins.music.task.PlayCustomSoundTask;
 
 public class SoundPlayer 
@@ -69,14 +70,17 @@ public class SoundPlayer
 			// Attempts to play the music type's ending theme if one exists
 			if (type.hasEndingTheme())
 			{
-				player.playSound(player.getLocation(), type.getEndTheme().getNamespace(), this.musicListener.musicVolume, 1.0F);
-				new BukkitRunnable () {
-					@Override
-					public void run ()
+				PlayCustomSoundTask task = this.activePlayerSoundTable.get(playerUUID);
+				if (task.getSoundPlayerState() == SoundPlayerState.RUNNING)
+				{
+					task.setSoundPlayerState(SoundPlayerState.ENDING);
+					player.playSound(player.getLocation(), type.getEndTheme().getNamespace(), this.musicListener.musicVolume, 1.0F);
+					if (!task.isCancelled())
 					{
-						removeSoundTaskFromTable (playerUUID);
+						task.cancel();
+						task.runTaskLater(AGCraftPlugin.plugin, type.getEndTheme().duration().getTicks());
 					}
-				}.runTaskLater(AGCraftPlugin.plugin, type.getEndTheme().duration().getTicks());
+				}
 			}
 			else
 			{
