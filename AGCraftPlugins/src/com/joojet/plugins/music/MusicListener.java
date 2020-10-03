@@ -13,9 +13,9 @@ import com.joojet.plugins.music.player.SoundPlayer;
 public class MusicListener extends AGListener
 {
 	/** Key used to identify the music volume controller listed in the config file */
-	public static final String musicVolumeTag = "music-volume";
+	public static final String MUSIC_VOLUME_TAG = "music-volume";
 	/** Key used to identify the fireworks music volume listed in the config file */
-	public static final String fireworksMusicVolumeTag = "fireworks-music-volume";
+	public static final String FIREWORKS_MUSIC_VOLUME_TAG = "fireworks-music-volume";
 	/** Stores an instance to the sound player managed by the Music Listener */
 	public SoundPlayer soundPlayer;
 	/** Stores the music volume used for the soundPlayer */
@@ -68,9 +68,9 @@ public class MusicListener extends AGListener
 	@Override
 	public void loadConfigVarialbes(ServerConfigFile config) {
 		// Music volume
-		this.setMusicVolume(config.getValueAsDouble(musicVolumeTag));
+		this.setMusicVolume(config.getValueAsDouble(MUSIC_VOLUME_TAG));
 		// Firework music volume
-		this.setFireworkMusicVolume(config.getValueAsDouble(fireworksMusicVolumeTag));
+		this.setFireworkMusicVolume(config.getValueAsDouble(FIREWORKS_MUSIC_VOLUME_TAG));
 		
 	}
 }

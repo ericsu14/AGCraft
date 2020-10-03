@@ -171,7 +171,6 @@ public abstract class AbstractConfigFile
 	
 	/** Searches a search trie for a value based on a key. If not found, throw an error and use a
 	 *  default.
-	 * @param <E>
 	 *  @param interpreter - Instance of a search term interpreter to be searched
 	 *  @param key - Key used in the interpreter to search for the value
 	 *  @param defaultValue - Default value to be used in the event of failure */

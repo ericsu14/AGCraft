@@ -28,8 +28,8 @@ public class ServerConfigFile extends AbstractConfigFile
 		data.put(ServerMode.getKey(), ServerMode.NORMAL.toString());
 		data.put(ThemedServerEvent.getKey(), ThemedServerEvent.DEFAULT.toString());
 		data.put(MinigameRewardType.getKey(), MinigameRewardType.GIFT.toString());
-		data.put(MusicListener.musicVolumeTag, 0.60f);
-		data.put(MusicListener.fireworksMusicVolumeTag, 0.50f);
+		data.put(MusicListener.MUSIC_VOLUME_TAG, 0.60f);
+		data.put(MusicListener.FIREWORKS_MUSIC_VOLUME_TAG, 0.50f);
 		data.put(AmplifiedMobHandler.AMPLIFIED_MOB_HANDLER_KEY, 0.15);
 		data.put(BeatTheBruinsHandler.BEAT_THE_BRUINS_HANDLER_KEY, 0.20);
 		data.put(JulyFourthHandler.JULY_FOURTH_HANDLER_KEY, 0.20);

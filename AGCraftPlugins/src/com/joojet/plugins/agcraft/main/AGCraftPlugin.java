@@ -89,6 +89,7 @@ public class AGCraftPlugin extends JavaPlugin
 	{
 		super ();
 		this.playerCommands = new HashMap <CommandType, PlayerCommand> ();
+		this.activeEventListeners = new ArrayList <AGListener> ();
 		this.serverConfigFile = null;
 		this.bibleInterpreter = new BibleCommandInterpreter();
 		this.serverModeInterpreter = new ServerModeInterpreter ();

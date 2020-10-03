@@ -172,6 +172,6 @@ public class RewardManager extends AGListener
 		this.minigameEventType = config.searchElementFromInterpreter(this.minigameRewardTypeInterpreter,
 				MinigameRewardType.getKey(), MinigameRewardType.GIFT);
 		// Ignore player time
-		this.setPlayerIgnoreTime(config.getValueAsInteger(RewardManager.MOB_IGNORES_PLAYERS_KEY));
+		this.setPlayerIgnoreTime(config.getValueAsInteger(MOB_IGNORES_PLAYERS_KEY));
 	}
 }
