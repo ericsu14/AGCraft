@@ -18,6 +18,7 @@ import com.joojet.plugins.mobs.equipment.weapons.TheTrojanDestroyer;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 import com.joojet.plugins.mobs.monsters.polar_bear.beatthebruins.TheBruinBear;
+import com.joojet.plugins.music.enums.MusicType;
 
 public class UCLABearTamer extends UCLAFaction 
 {
@@ -46,5 +47,6 @@ public class UCLABearTamer extends UCLAFaction
 		this.mount = new MountedMob (EntityType.POLAR_BEAR, new TheBruinBear());
 		
 		this.addMonsterDrops(new MonsterDrop (new TheTrojanDestroyer(), 0.05));
+		this.bossTheme = MusicType.HAIKYUU;
 	}
 }
