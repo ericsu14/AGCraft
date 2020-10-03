@@ -33,7 +33,7 @@ public abstract class AbstractSpawnHandler
 	/** Search trie used to lookup custom monsters by name */
 	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	/** Mob conversion chance */
-	protected double spawnChance;
+	protected Double spawnChance;
 	/** A key used to look up this handler's specific spawn chance from the main server config file */
 	protected String spawnChanceKey;
 	/** A random number generator used to spawn mobs */
@@ -141,7 +141,7 @@ public abstract class AbstractSpawnHandler
 	 *  @param reason - The entity's spawn reason*/
 	public boolean canSpawn (SpawnReason reason)
 	{
-		return (this.rand.nextDouble() <= this.spawnChance && spawnReasonFilter.contains(reason));
+		return (this.rand.nextDouble() < this.spawnChance && spawnReasonFilter.contains(reason));
 	}
 	
 	/** Invokes the server's configuration file loader to retrieve its 
