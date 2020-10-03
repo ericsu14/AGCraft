@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.consequences.database.ConsequenceDatabaseManager;
@@ -60,6 +61,13 @@ public class ForgivePlayer extends AGCommandExecutor
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void loadConfigVariables(ServerConfigFile config) 
+	{
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

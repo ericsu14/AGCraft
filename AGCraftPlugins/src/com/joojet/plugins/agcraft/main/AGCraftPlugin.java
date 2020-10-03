@@ -179,7 +179,7 @@ public class AGCraftPlugin extends JavaPlugin
 		// Invokes config file loader function for all event listeners
 		for (AGListener listener : this.activeEventListeners)
 		{
-			listener.loadConfigVarialbes(this.serverConfigFile);
+			listener.loadConfigVariables(this.serverConfigFile);
 		}
 		
 		// Reloads the clearjunk file

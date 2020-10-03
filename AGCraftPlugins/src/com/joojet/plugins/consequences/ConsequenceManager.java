@@ -110,7 +110,7 @@ public class ConsequenceManager extends AGListener
 	}
 
 	@Override
-	public void loadConfigVarialbes(ServerConfigFile config) 
+	public void loadConfigVariables(ServerConfigFile config) 
 	{
 		// No varibles to load
 	}

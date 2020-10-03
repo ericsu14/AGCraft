@@ -5,6 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
 
+import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.warp.constants.WarpAccessLevel;
@@ -63,5 +64,11 @@ public class SetLocation extends AGCommandExecutor
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void loadConfigVariables(ServerConfigFile config) 
+	{
+		
 	}
 }

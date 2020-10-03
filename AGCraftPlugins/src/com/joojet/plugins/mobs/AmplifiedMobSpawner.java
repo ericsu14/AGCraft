@@ -333,7 +333,7 @@ public class AmplifiedMobSpawner extends AGListener
 	}
 
 	@Override
-	public void loadConfigVarialbes(ServerConfigFile config) 
+	public void loadConfigVariables(ServerConfigFile config) 
 	{
 		// Themed server event mode
 		this.serverEventMode = config.searchElementFromInterpreter(this.serverEventInterpreter,

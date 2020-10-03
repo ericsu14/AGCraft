@@ -142,7 +142,7 @@ public class BossBarEventListener extends AGListener
 	}
 
 	@Override
-	public void loadConfigVarialbes(ServerConfigFile config) {
+	public void loadConfigVariables(ServerConfigFile config) {
 		// TODO Auto-generated method stub
 		
 	}

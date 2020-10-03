@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 
@@ -241,6 +242,13 @@ public class AutoSmelt extends AGCommandExecutor
 		this.numCoalBlocks = 0;
 		this.numIronOres = 0;
 		this.numGoldOres = 0;
+	}
+
+	@Override
+	public void loadConfigVariables(ServerConfigFile config) 
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 }

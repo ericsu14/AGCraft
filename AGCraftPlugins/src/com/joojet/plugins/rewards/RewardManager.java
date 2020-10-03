@@ -166,7 +166,7 @@ public class RewardManager extends AGListener
 	}
 
 	@Override
-	public void loadConfigVarialbes(ServerConfigFile config) 
+	public void loadConfigVariables(ServerConfigFile config) 
 	{
 		// Minigame event type
 		this.minigameEventType = config.searchElementFromInterpreter(this.minigameRewardTypeInterpreter,

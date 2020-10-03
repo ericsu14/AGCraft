@@ -66,7 +66,7 @@ public class MusicListener extends AGListener
 
 
 	@Override
-	public void loadConfigVarialbes(ServerConfigFile config) {
+	public void loadConfigVariables(ServerConfigFile config) {
 		// Music volume
 		this.setMusicVolume(config.getValueAsDouble(MUSIC_VOLUME_TAG));
 		// Firework music volume

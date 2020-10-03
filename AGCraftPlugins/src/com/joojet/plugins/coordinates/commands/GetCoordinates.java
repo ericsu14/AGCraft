@@ -8,6 +8,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 
@@ -100,5 +101,11 @@ public class GetCoordinates extends AGCommandExecutor
 			default:
 				return "the overworld";
 		}
+	}
+
+	@Override
+	public void loadConfigVariables(ServerConfigFile config) 
+	{
+		
 	}
 }

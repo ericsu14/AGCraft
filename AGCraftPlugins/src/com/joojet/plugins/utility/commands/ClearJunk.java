@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.ChatColor;
 
+import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
@@ -29,7 +30,6 @@ public class ClearJunk extends AGCommandExecutor
 	private HashMap <Material, JunkClassifier> junkItems;
 	/** Stores the config file instance used to load in junk items from file */
 	private JunkItemConfig config;
-	
 	
 	public ClearJunk ()
 	{
@@ -167,6 +167,12 @@ public class ClearJunk extends AGCommandExecutor
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public void loadConfigVariables(ServerConfigFile config) 
+	{
+		this.reloadConfigFile();
 	}
 	
 }

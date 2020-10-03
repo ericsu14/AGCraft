@@ -130,7 +130,7 @@ public class SummoningScrollListener extends AGListener
 	}
 
 	@Override
-	public void loadConfigVarialbes(ServerConfigFile config) 
+	public void loadConfigVariables(ServerConfigFile config) 
 	{
 
 	}
