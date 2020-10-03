@@ -3,12 +3,14 @@ package com.joojet.plugins.mobs.spawnhandlers;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.Random;
 
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
+import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
@@ -29,15 +31,30 @@ public abstract class AbstractSpawnHandler
 	/** A reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
 	/** Search trie used to lookup custom monsters by name */
-	public MonsterTypeInterpreter monsterTypeInterpreter;
+	protected MonsterTypeInterpreter monsterTypeInterpreter;
+	/** Mob conversion chance */
+	protected double spawnChance;
+	/** A key used to look up this handler's specific spawn chance from the main server config file */
+	protected String spawnChanceKey;
+	/** A random number generator used to spawn mobs */
+	protected Random rand;
 	
-	/** Creates a new instance of an Abstract Spawn Handler */
-	public AbstractSpawnHandler (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
+	/** Creates a new instance of an Abstract Spawn Handler
+	 * 	@param monsterTypeInterpreter - A reference to the monster type interpreter, which is used to register
+	 *         all custom mob instances into a searchable trie.
+	 *  @param bossBarController - A reference to the boss bar controller instance used to handle boss bar events
+	 *  @param spawnChance - Controls the chance in which custom mobs will spawn
+	 *  @param spawnChanceKey - A key used to look up this handler's specific spawn chance variable
+	 *         from the config file */
+	public AbstractSpawnHandler (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController, String spawnChanceKey)
 	{
 		this.spawnReasonFilter = EnumSet.noneOf(SpawnReason.class);
 		this.mobEquipmentTable = new HashMap <EntityType, MonsterTypes> ();
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
+		this.spawnChance = 0.15;
+		this.spawnChanceKey = spawnChanceKey;
+		this.rand = new Random ();
 	}
 	
 	/** Offloads the handleSpawnEvent task to Bukkit's scheduler. This ensures that our custom entity modification code 
@@ -47,9 +64,9 @@ public abstract class AbstractSpawnHandler
 	 *  @param reason - The reason on why this entity is spawned
 	 *  @param biome - The biome in which this entity is spawned in
 	 *  @param roll - A random number determining if this entity should spawn */
-	public void createSpawnEventHandlerTask (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll)
+	public void createSpawnEventHandlerTask (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome)
 	{
-		new HandleSpawnEventTask(this, entity, type, reason, biome, roll).runTask(AGCraftPlugin.plugin);
+		new HandleSpawnEventTask(this, entity, type, reason, biome).runTask(AGCraftPlugin.plugin);
 	}
 	
 	/** Handles a mob spawn event caught in the Amplified Mob Spawn listener.
@@ -58,7 +75,7 @@ public abstract class AbstractSpawnHandler
 	 *  @param reason - The reason on why this entity is spawned
 	 *  @param biome - The biome in which this entity is spawned in
 	 *  @param roll - A random number determining if this entity should spawn */
-	public abstract void handleSpawnEvent (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll);
+	public abstract void handleSpawnEvent (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome);
 	
 	/** Converts a living entity into a random amplified monster based on its EntityType
 	 * 	@param entity - The entity potentially being transformed into a custom mob
@@ -116,5 +133,22 @@ public abstract class AbstractSpawnHandler
 	public boolean reasonFilter (SpawnReason reason)
 	{
 		return spawnReasonFilter.contains(reason);
+	}
+	
+	/** Does a canSpawn check, which returns true if the generated random number is
+	 *  less or equal than the spawn chance and the passed spawn reason satifies the
+	 *  spawn reason filter.
+	 *  @param reason - The entity's spawn reason*/
+	public boolean canSpawn (SpawnReason reason)
+	{
+		return (this.rand.nextDouble() <= this.spawnChance && spawnReasonFilter.contains(reason));
+	}
+	
+	/** Invokes the server's configuration file loader to retrieve its 
+	 *  specified spawn chance
+	 *  @param config - A reference to the server's config file loader */
+	public void getSpawnChanceFromConfigFile (ServerConfigFile config)
+	{
+		this.spawnChance = config.getValueAsDouble(this.spawnChanceKey);
 	}
 }

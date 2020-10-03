@@ -28,11 +28,11 @@ public class RewardPlayer extends AGCommandExecutor
 	/** Creates a new instance of the reward players command
 	 *  @param rewardTypeInterpreter - A reference to the reward type interpreter defined in main
 	 * 	@param minigameRewardTypeInterpreter - A reference to the minigame type interpreter defined in main */
-	public RewardPlayer(RewardTypeInterpreter rewardTypeInterpreter, MinigameRewardTypeInterpreter minigameRewardTypeInterpreter) 
+	public RewardPlayer() 
 	{
 		super(CommandType.GRANT_REWARD);
-		this.rewardTypeInterpreter = rewardTypeInterpreter;
-		this.minigameRewardTypeInterpreter = minigameRewardTypeInterpreter;
+		this.rewardTypeInterpreter = new RewardTypeInterpreter();
+		this.minigameRewardTypeInterpreter = new MinigameRewardTypeInterpreter();
 	}
 
 	/** Usage:

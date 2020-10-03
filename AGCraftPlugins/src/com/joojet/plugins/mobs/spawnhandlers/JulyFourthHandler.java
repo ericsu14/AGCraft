@@ -20,21 +20,26 @@ import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class JulyFourthHandler extends AbstractSpawnHandler
 {
+	/** The key used to reference this handler's spawn chance variable from the config file*/
+	public static final String JULY_FOURTH_HANDLER_KEY = "july-fourth-spawn-chance";
 	/** Used to generate random fireworks */
 	private FireworkTypes fwTypes;
 	
 	public JulyFourthHandler (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
-		super (monsterTypeInterpreter, bossBarController);
+		super (monsterTypeInterpreter, bossBarController, JULY_FOURTH_HANDLER_KEY);
 		this.fwTypes = new FireworkTypes ();
 		this.addMonsterTypes(new PatrioticZombieTypes(this.monsterTypeInterpreter), 
 				new PatrioticSkeletonTypes(this.monsterTypeInterpreter),
 				new PatrioticPillagerTypes(this.monsterTypeInterpreter),
 				new JulyFourthPhantomTypes (this.monsterTypeInterpreter));
+		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.SPAWNER_EGG, SpawnReason.REINFORCEMENTS,
+				SpawnReason.DEFAULT, SpawnReason.DISPENSE_EGG, SpawnReason.LIGHTNING, SpawnReason.PATROL,
+				SpawnReason.TRAP);
 	}
 	
 	/** Handles 4th of july mob spawns */
-	public void handleSpawnEvent (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll)
+	public void handleSpawnEvent (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome)
 	{
 		// Insta kill phantoms and let them explode
 		if (type == EntityType.PHANTOM)
@@ -44,7 +49,7 @@ public class JulyFourthHandler extends AbstractSpawnHandler
 		}
 		
 		// Summon a new patriotic zombie when roll is between a certain range
-		if (!reason.equals(SpawnReason.RAID) && roll >= 0.30 && roll <= 0.50)
+		if (this.canSpawn(reason))
 		{
 			this.transformLivingEntityIntoAmplifiedMob (entity, type, reason, biome);
 		}

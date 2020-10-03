@@ -20,8 +20,6 @@ public class HandleSpawnEventTask extends BukkitRunnable {
 	SpawnReason reason;
 	/** The biome in which this entity is spawned in */
 	Biome biome;
-	/** A random number determining if this entity should spawn */
-	double roll;
 	
 	/** Creates a new Spawn Event handler task, which calls the passed spawnhandler's handleSpawnEvent function
 	 *  on the entity in the next tick.
@@ -31,21 +29,20 @@ public class HandleSpawnEventTask extends BukkitRunnable {
 	 *  @param reason - The reason on why this entity is spawned
 	 *  @param biome - The biome in which this entity is spawned in
 	 *  @param roll - A random number determining if this entity should spawn */
-	public HandleSpawnEventTask (AbstractSpawnHandler handler, LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll)
+	public HandleSpawnEventTask (AbstractSpawnHandler handler, LivingEntity entity, EntityType type, SpawnReason reason, Biome biome)
 	{
 		this.handler = handler;
 		this.entity = entity;
 		this.type = type;
 		this.reason = reason;
 		this.biome = biome;
-		this.roll = roll;
 	}
 	
 	/** Calls the spawn handler's handleSpawnEvent function to transform the monster into a custom mob. */
 	@Override
 	public void run() 
 	{
-		this.handler.handleSpawnEvent(entity, type, reason, biome, roll);
+		this.handler.handleSpawnEvent(entity, type, reason, biome);
 		cancel();
 	}
 

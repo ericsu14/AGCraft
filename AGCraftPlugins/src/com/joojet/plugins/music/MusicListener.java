@@ -3,13 +3,14 @@ package com.joojet.plugins.music;
 import java.util.ArrayList;
 
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import com.joojet.plugins.agcraft.config.ServerConfigFile;
+import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.music.enums.MusicType;
 import com.joojet.plugins.music.player.SoundPlayer;
 
-public class MusicListener implements Listener
+public class MusicListener extends AGListener
 {
 	/** Key used to identify the music volume controller listed in the config file */
 	public static final String musicVolumeTag = "music-volume";
@@ -61,5 +62,15 @@ public class MusicListener implements Listener
 		}
 		
 		return types.toArray();
+	}
+
+
+	@Override
+	public void loadConfigVarialbes(ServerConfigFile config) {
+		// Music volume
+		this.setMusicVolume(config.getValueAsDouble(musicVolumeTag));
+		// Firework music volume
+		this.setFireworkMusicVolume(config.getValueAsDouble(fireworksMusicVolumeTag));
+		
 	}
 }

@@ -8,7 +8,6 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityResurrectEvent;
@@ -16,14 +15,16 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.plugin.Plugin;
 
+import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
+import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
-public class BossBarEventListener implements Listener 
+public class BossBarEventListener extends AGListener 
 {
 	/** A reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
@@ -138,5 +139,11 @@ public class BossBarEventListener implements Listener
 			LivingEntity entity = (LivingEntity) event.getEntity();
 			this.bossBarController.removeBossBar(entity);
 		}
+	}
+
+	@Override
+	public void loadConfigVarialbes(ServerConfigFile config) {
+		// TODO Auto-generated method stub
+		
 	}
 }

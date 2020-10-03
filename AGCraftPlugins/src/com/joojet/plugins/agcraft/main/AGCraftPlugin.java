@@ -1,5 +1,6 @@
 package com.joojet.plugins.agcraft.main;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
@@ -11,8 +12,8 @@ import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.enums.PermissionType;
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
+import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.interfaces.AGTabCompleter;
-import com.joojet.plugins.agcraft.interfaces.AbstractInterpreter;
 import com.joojet.plugins.agcraft.interfaces.PlayerCommand;
 import com.joojet.plugins.biblefetcher.commands.*;
 import com.joojet.plugins.biblefetcher.commands.tabcompleter.BibleTabCompleter;
@@ -28,17 +29,12 @@ import com.joojet.plugins.mobs.PathfindTargetingEventListener;
 import com.joojet.plugins.mobs.SoulBoundListener;
 import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
-import com.joojet.plugins.mobs.enums.ThemedServerEvent;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
-import com.joojet.plugins.mobs.interpreter.ThemedServerEventInterpreter;
 import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.commands.*;
 import com.joojet.plugins.rewards.commands.tabcompleter.RewardPlayerTabCompleter;
 import com.joojet.plugins.rewards.database.CreateRewardsDatabase;
-import com.joojet.plugins.rewards.enums.MinigameRewardType;
-import com.joojet.plugins.rewards.interpreter.MinigameRewardTypeInterpreter;
-import com.joojet.plugins.rewards.interpreter.RewardTypeInterpreter;
 import com.joojet.plugins.utility.commands.*;
 import com.joojet.plugins.utility.commands.tabcompleter.*;
 import com.joojet.plugins.utility.interpreter.ServerModeInterpreter;
@@ -48,6 +44,8 @@ import com.joojet.plugins.warp.database.CreateLocationDatabase;
 
 public class AGCraftPlugin extends JavaPlugin 
 {
+	/** Key used to reference the amplified mob spawner's debug mode */
+	public final static String DEBUG_MODE_KEY = "debug-mode";
 	// Stores an instance of the plugin itself
 	public static AGCraftPlugin plugin;
 	// Config file manager
@@ -55,14 +53,8 @@ public class AGCraftPlugin extends JavaPlugin
 	/** Config file values */
 	// Stores the server mode, which enables or disables commands and listeners depending on what mode the server is ran in
 	public ServerMode serverMode = ServerMode.NORMAL;
-	// Stores the server-wide event mode, which may add custom themed mobs or events into the normal game world
-	public ThemedServerEvent serverEventMode = ThemedServerEvent.DEFAULT;
-	// Stores the chance of custom mobs spawning into the game
-	public double customMobSpawnChance = 0.15;
 	// Determines if debug mode is enabled for the amplified mob spawner plugin
 	public boolean enableDebugMode = false;
-	// Stores type of minigame reward type currently active on minigame nights
-	public MinigameRewardType minigameEventType = MinigameRewardType.GIFT;
 	
 	// Stores a reference to the death counter object
 	protected DeathCounter deathCounter;
@@ -74,18 +66,15 @@ public class AGCraftPlugin extends JavaPlugin
 	protected BossBarController bossBarController;
 	
 	/** Search term interpreters */
-	// Stores the command interpreter used for reward types
-	protected RewardTypeInterpreter rewardInterpreter;
-	// Stores the command interpreter used for minigame reward types
-	protected MinigameRewardTypeInterpreter minigameRewardTypeInterpreter;
-	// Stores the command interpreter used for server event types
-	protected ThemedServerEventInterpreter serverEventInterpreter;
 	// Stores the command interpreter used for server mode types
 	protected ServerModeInterpreter serverModeInterpreter;
 	// Stores the command interpreter used for the bible plugin
 	protected BibleCommandInterpreter bibleInterpreter;
 	/** Search trie used to lookup custom monsters by name */
 	protected MonsterTypeInterpreter monsterTypeInterpreter;
+	
+	/** Stores a set of active listener instances */
+	protected ArrayList <AGListener> activeEventListeners;
 	
 	/** Used to display entity damage information to the player */
 	protected DamageDisplayListener damageListener;
@@ -102,9 +91,6 @@ public class AGCraftPlugin extends JavaPlugin
 		this.playerCommands = new HashMap <CommandType, PlayerCommand> ();
 		this.serverConfigFile = null;
 		this.bibleInterpreter = new BibleCommandInterpreter();
-		this.rewardInterpreter = new RewardTypeInterpreter ();
-		this.minigameRewardTypeInterpreter = new MinigameRewardTypeInterpreter ();
-		this.serverEventInterpreter = new ThemedServerEventInterpreter ();
 		this.serverModeInterpreter = new ServerModeInterpreter ();
 		this.serverConfigFile = new ServerConfigFile ();
 		this.monsterTypeInterpreter = new MonsterTypeInterpreter ();
@@ -130,34 +116,35 @@ public class AGCraftPlugin extends JavaPlugin
 		deathCounter = new DeathCounter();
 		
 		// Amplified mob spawner
-		Bukkit.getPluginManager().registerEvents(new AmplifiedMobSpawner(this.monsterTypeInterpreter, this.bossBarController), this);
+		this.registerEventListener(new AmplifiedMobSpawner (this.monsterTypeInterpreter, this.bossBarController));
 		
 		// Summoning Scroll listener
-		Bukkit.getPluginManager().registerEvents (new SummoningScrollListener(this.bossBarController), this);
+		this.registerEventListener (new SummoningScrollListener(this.bossBarController));
 		
 		// Player login handler
 		this.rewardManager = new RewardManager ();
-		Bukkit.getPluginManager().registerEvents(this.rewardManager, this);
+		this.registerEventListener(this.rewardManager);
 		
 		// Player consequence handler
-		Bukkit.getPluginManager().registerEvents (new ConsequenceManager(), this);
+		this.registerEventListener (new ConsequenceManager());
 		
 		// Damage Display Listener
 		this.damageListener = new DamageDisplayListener (this.monsterTypeInterpreter, this.bossBarController);
-		Bukkit.getPluginManager().registerEvents(this.damageListener, this);
+		this.registerEventListener(this.damageListener);
 		
 		// Boss Bar event listener
-		Bukkit.getPluginManager().registerEvents(new BossBarEventListener(this.monsterTypeInterpreter, this.bossBarController), this);
+		this.registerEventListener(new BossBarEventListener(this.monsterTypeInterpreter, this.bossBarController));
 		
 		// Pathfind Targeting event listener
-		Bukkit.getPluginManager().registerEvents(new PathfindTargetingEventListener(this.monsterTypeInterpreter, this.bossBarController), this);
+		this.registerEventListener(new PathfindTargetingEventListener(this.monsterTypeInterpreter, this.bossBarController));
 		
 		// Soulbounded items event listener
 		this.soulBoundListener = new SoulBoundListener ();
+		this.registerEventListener(this.soulBoundListener);
 		this.soulBoundListener.onEnable();
 		
 		// Music controller event listener
-		Bukkit.getPluginManager().registerEvents(this.musicListener, this);
+		this.registerEventListener(this.musicListener);
 		
 		// Loads in the server config file and initializes its values
 		this.loadServerConfigFile();
@@ -182,27 +169,17 @@ public class AGCraftPlugin extends JavaPlugin
 		// Loads in the config file's contents
 		this.serverConfigFile.reload();
 		
-		// Spawn chance
-		this.customMobSpawnChance = this.serverConfigFile.getValueAsDouble(AmplifiedMobSpawner.spawnChanceKey);
 		// Debug mode
-		this.enableDebugMode = this.serverConfigFile.getValueAsBoolean(AmplifiedMobSpawner.debugModeKey);
-		// Minigame event type
-		this.minigameEventType = this.searchElementFromInterpreter(minigameRewardTypeInterpreter,
-				MinigameRewardType.getKey(), MinigameRewardType.GIFT);
-		// Server event mode
-		this.serverEventMode = this.searchElementFromInterpreter(serverEventInterpreter,
-				ThemedServerEvent.getKey(), ThemedServerEvent.DEFAULT);
+		this.enableDebugMode = this.serverConfigFile.getValueAsBoolean(DEBUG_MODE_KEY);
 		// Server mode
-		this.switchServerMode(this.searchElementFromInterpreter (serverModeInterpreter,
+		switchServerMode(this.serverConfigFile.searchElementFromInterpreter (this.serverModeInterpreter,
 				ServerMode.getKey(), ServerMode.NORMAL));
-		// Ignore player time
-		this.rewardManager.setPlayerIgnoreTime(this.serverConfigFile.getValueAsInteger(RewardManager.MOB_IGNORES_PLAYERS_KEY));
 		
-		// Music volume
-		this.musicListener.setMusicVolume(this.serverConfigFile.getValueAsDouble(MusicListener.musicVolumeTag));
-		
-		// Firework music volume
-		this.musicListener.setFireworkMusicVolume(this.serverConfigFile.getValueAsDouble(MusicListener.fireworksMusicVolumeTag));
+		// Invokes config file loader function for all event listeners
+		for (AGListener listener : this.activeEventListeners)
+		{
+			listener.loadConfigVarialbes(this.serverConfigFile);
+		}
 		
 		// Reloads the clearjunk file
 		this.clearJunk.reloadConfigFile();
@@ -220,7 +197,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addPlayerCommand (new PunishPlayer ());
 		this.addPlayerCommand (new GetCoordinates ());
 		this.addPlayerCommand (new OpenRewards ());
-		this.addPlayerCommand (new RewardPlayer (this.rewardInterpreter, this.minigameRewardTypeInterpreter));
+		this.addPlayerCommand (new RewardPlayer ());
 		this.addPlayerCommand (new AutoSmelt ());
 		this.addPlayerCommand (this.clearJunk);
 		this.addPlayerCommand (new ToggleDebugMode ());
@@ -309,25 +286,12 @@ public class AGCraftPlugin extends JavaPlugin
 		playerCommands.get(tabCompleter.getCommandType()).setTabCompleter(tabCompleter);
 	}
 	
-	/** Searches a search trie for a value based on a key. If not found, throw an error and use a
-	 *  default.
-	 * @param <E>
-	 *  @param interpreter - Instance of a search term interpreter to be searched
-	 *  @param key - Key used in the interpreter to search for the value
-	 *  @param defaultValue - Default value to be used in the event of failure */
-	private <E> E searchElementFromInterpreter (AbstractInterpreter<E> interpreter, String key, E defaultValue)
+	/** Registers an event listener into Bukkit
+	 *  @param listener - A reference to the listener itself */
+	private void registerEventListener (AGListener listener)
 	{
-		E result = interpreter.searchTrie(this.serverConfigFile.getValue(key).toString());
-		if (result == null)
-		{
-			System.err.println ("Error: Cannot find value for " + key + ". Using default value " + defaultValue.toString() + " instead...");
-			result = defaultValue;
-		}
-		else
-		{
-			System.out.println ("Loaded variable " + result.toString() + " for " + key + "!");
-		}
-		return result;
+		this.activeEventListeners.add(listener);
+		Bukkit.getPluginManager().registerEvents(listener, this);
 	}
 	
 }

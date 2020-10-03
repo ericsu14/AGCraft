@@ -18,10 +18,13 @@ import com.joojet.plugins.mobs.monsters.zombie.beatthebruins.CollegeZombieTypes;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class BeatTheBruinsHandler extends AbstractSpawnHandler
-{	
+{
+	/** The key used to reference this handler's spawn chance variable from the config file*/
+	public static final String BEAT_THE_BRUINS_HANDLER_KEY = "beat-the-bruins-spawn-chance";
+	
 	public BeatTheBruinsHandler (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
-		super (monsterTypeInterpreter, bossBarController);
+		super (monsterTypeInterpreter, bossBarController, BEAT_THE_BRUINS_HANDLER_KEY);
 		this.addMonsterTypes(new CollegeZombieTypes(this.monsterTypeInterpreter),
 				new CollegeSkeletonTypes(this.monsterTypeInterpreter),
 				new BruinPolarBearTypes (this.monsterTypeInterpreter),
@@ -32,7 +35,7 @@ public class BeatTheBruinsHandler extends AbstractSpawnHandler
 	}
 	
 	@Override
-	public void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll) 
+	public void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome) 
 	{
 		// Transforms phantoms into a helpful mob
 		if (type == EntityType.PHANTOM)
@@ -42,7 +45,7 @@ public class BeatTheBruinsHandler extends AbstractSpawnHandler
 			return;
 		}
 		
-		if (this.reasonFilter(reason) && roll >= 0.30 && roll <= 0.60)
+		if (this.canSpawn(reason))
 		{
 			this.transformLivingEntityIntoAmplifiedMob (entity, type, reason, biome);
 		}

@@ -28,12 +28,14 @@ import com.joojet.plugins.mobs.villager.wandering.WanderingVillagerTypes;
 
 public class AmplifiedMobHandler extends AbstractSpawnHandler 
 {
+	/** The key used to reference this handler's spawn chance variable from the config file*/
+	public static final String AMPLIFIED_MOB_HANDLER_KEY = "amplified-spawn-chance";
 	/** Stores custom wandering villager instances */
 	private WanderingVillagerTypes wanderingTypes;
 	
 	public AmplifiedMobHandler (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
-		super (monsterTypeInterpreter, bossBarController);
+		super (monsterTypeInterpreter, bossBarController, AMPLIFIED_MOB_HANDLER_KEY);
 		this.wanderingTypes = new WanderingVillagerTypes (this.monsterTypeInterpreter);
 		
 		this.addMonsterTypes(new ZombieTypes(this.monsterTypeInterpreter),
@@ -52,7 +54,7 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 	}
 	
 	@Override
-	public void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome, double roll) 
+	public void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome) 
 	{
 		// If the entity already contains custom mob metadata, do nothing
 		if (new MonsterTypeMetadata().getStringMetadata(entity) != null)
@@ -76,12 +78,11 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 		}
 		
 		// Do not alter any mob that isn't spawned into the world naturally or dice roll fails
-		if ((!reasonFilter(reason) || roll > AGCraftPlugin.plugin.customMobSpawnChance) && !AGCraftPlugin.plugin.enableDebugMode)
+		if (this.canSpawn(reason) || AGCraftPlugin.plugin.enableDebugMode)
 		{
-			return;
+			this.transformLivingEntityIntoAmplifiedMob (entity, type, reason, biome);
 		}
 		
-		this.transformLivingEntityIntoAmplifiedMob (entity, type, reason, biome);
 	}
 	
 	/** Makes the names of raider mobs visible */

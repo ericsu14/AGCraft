@@ -9,7 +9,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -18,7 +17,9 @@ import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 
+import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
+import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.damage.DamageDisplayManager;
@@ -28,7 +29,7 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
-public class DamageDisplayListener implements Listener 
+public class DamageDisplayListener extends AGListener 
 {
 	/** Stores a reference to the damage display manager used to spawn in armorstand entities */
 	protected DamageDisplayManager damageDisplayManager;
@@ -278,5 +279,11 @@ public class DamageDisplayListener implements Listener
 				break;
 		}
 		return damageType;
+	}
+
+	@Override
+	public void loadConfigVarialbes(ServerConfigFile config) 
+	{
+		
 	}
 }

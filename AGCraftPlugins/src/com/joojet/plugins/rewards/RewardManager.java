@@ -5,32 +5,39 @@ import java.util.UUID;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.joojet.plugins.agcraft.config.ServerConfigFile;
+import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.metadata.IgnorePlayerMetadata;
 import com.joojet.plugins.rewards.database.RewardDatabaseManager;
 import com.joojet.plugins.rewards.enums.MinigameRewardType;
 import com.joojet.plugins.rewards.enums.RewardType;
+import com.joojet.plugins.rewards.interpreter.MinigameRewardTypeInterpreter;
 
 import org.bukkit.ChatColor;
 
-public class RewardManager implements Listener
+public class RewardManager extends AGListener
 {	
 	
 	public static final String MOB_IGNORES_PLAYERS_KEY = "ignore-player-when-login-time";
 	/** When a player logs in, tell all monsters to ignore the player for a set amount of seconds.
 	 *  This gives him/her time to download the resource pack without dying unknowingly */
 	protected int ignorePlayerUponLoginTime = 15;
+	/** Stores type of minigame reward type currently active on minigame nights */
+	protected MinigameRewardType minigameEventType = MinigameRewardType.GIFT;
+	/** Stores the command interpreter used for minigame reward types */
+	protected MinigameRewardTypeInterpreter minigameRewardTypeInterpreter;
 	
 	/** Creates a new instance of a reward manager with a set minigame type
 	 * 		@param minigameType - Type of minigame being played, which is used to determine types of participation rewards */
 	public RewardManager ()
 	{
 		super ();
+		this.minigameRewardTypeInterpreter = new MinigameRewardTypeInterpreter ();
 	}
 	
 	/** Alerts the player of any unclaimed items if he has some */
@@ -77,7 +84,7 @@ public class RewardManager implements Listener
 	{
 		// For now, distribute generic UHC participation rewards
 		UUID playerUUID = player.getUniqueId();
-		MinigameRewardType type = AGCraftPlugin.plugin.minigameEventType;
+		MinigameRewardType type = this.minigameEventType;
 		try 
 		{
 			// If the player does not already have a reward from this current event, give them the rewards
@@ -140,7 +147,7 @@ public class RewardManager implements Listener
 	private void grantReward (Player player, RewardType reward) throws SQLException
 	{
 		UUID playerUUID = player.getUniqueId();
-		RewardDatabaseManager.grantReward(playerUUID, reward , AGCraftPlugin.plugin.minigameEventType);
+		RewardDatabaseManager.grantReward(playerUUID, reward , this.minigameEventType);
 		
 		String displayName;
 		ItemMeta meta = reward.getReward().getItemMeta();
@@ -156,5 +163,15 @@ public class RewardManager implements Listener
 		}
 		
 		player.sendMessage(ChatColor.AQUA + "Acquired " + ChatColor.GOLD + displayName + " ( x" + reward.getReward().getAmount() + ")");
+	}
+
+	@Override
+	public void loadConfigVarialbes(ServerConfigFile config) 
+	{
+		// Minigame event type
+		this.minigameEventType = config.searchElementFromInterpreter(this.minigameRewardTypeInterpreter,
+				MinigameRewardType.getKey(), MinigameRewardType.GIFT);
+		// Ignore player time
+		this.setPlayerIgnoreTime(config.getValueAsInteger(RewardManager.MOB_IGNORES_PLAYERS_KEY));
 	}
 }

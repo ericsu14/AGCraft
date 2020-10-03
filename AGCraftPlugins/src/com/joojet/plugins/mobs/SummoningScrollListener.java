@@ -10,13 +10,14 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
+import com.joojet.plugins.agcraft.config.ServerConfigFile;
+import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.SummonTypes;
@@ -26,7 +27,7 @@ import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
 
-public class SummoningScrollListener implements Listener
+public class SummoningScrollListener extends AGListener
 {
 	// Interpreter to search for used summoning scrolls
 	private SummoningScrollInterpreter summonInterpreter;
@@ -126,5 +127,11 @@ public class SummoningScrollListener implements Listener
 				}
 			}
 		}
+	}
+
+	@Override
+	public void loadConfigVarialbes(ServerConfigFile config) 
+	{
+
 	}
 }

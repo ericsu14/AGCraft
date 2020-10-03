@@ -20,7 +20,6 @@ import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -32,15 +31,19 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.spigotmc.event.entity.EntityMountEvent;
 
+import com.joojet.plugins.agcraft.config.ServerConfigFile;
+import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
+import com.joojet.plugins.mobs.enums.ThemedServerEvent;
 import com.joojet.plugins.mobs.equipment.Equipment;
 import com.joojet.plugins.mobs.equipment.EquipmentLoader;
 import com.joojet.plugins.mobs.fireworks.tasks.SpawnFireworksOnLocationTask;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.interpreter.ThemedServerEventInterpreter;
 import com.joojet.plugins.mobs.metadata.EquipmentTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.spawnhandlers.AmplifiedMobHandler;
@@ -49,16 +52,15 @@ import com.joojet.plugins.mobs.spawnhandlers.JulyFourthHandler;
 import com.joojet.plugins.mobs.spawnhandlers.UHCHandler;
 import com.joojet.plugins.mobs.util.LocationOffset;
 
-public class AmplifiedMobSpawner implements Listener 
-{	
-	/** Key used to reference the Amplified mob spawner's spawn chance */
-	public final static String spawnChanceKey = "amplified-spawn-chance";
-	
-	/** Key used to reference the amplified mob spawner's debug mode */
-	public final static String debugModeKey = "amplified-debug-mode";
+public class AmplifiedMobSpawner extends AGListener 
+{			
+	// Stores the server-wide event mode, which may add custom themed mobs or events into the normal game world
+	protected ThemedServerEvent serverEventMode = ThemedServerEvent.DEFAULT;
 	
 	/** Search trie used to lookup custom monsters by name */
 	protected MonsterTypeInterpreter monsterTypeInterpreter;
+	/** Stores the command interpreter used for server event types */
+	protected ThemedServerEventInterpreter serverEventInterpreter;
 	
 	/** Contains an internal search trie allowing custom equipment to be able to be looked up by its
 	 *  Equipment Type identifier. */
@@ -84,6 +86,7 @@ public class AmplifiedMobSpawner implements Listener
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
 		this.equipmentLoader = new EquipmentLoader();
+		this.serverEventInterpreter = new ThemedServerEventInterpreter();
 		this.julyFourthHandler = new JulyFourthHandler (this.monsterTypeInterpreter, this.bossBarController);
 		this.amplifiedMobHandler = new AmplifiedMobHandler(this.monsterTypeInterpreter, this.bossBarController);
 		this.bruinHandler = new BeatTheBruinsHandler (this.monsterTypeInterpreter, this.bossBarController);
@@ -105,13 +108,11 @@ public class AmplifiedMobSpawner implements Listener
 		LivingEntity entity = event.getEntity();
 		Biome biome = entity.getLocation().getBlock().getBiome();
 		
-		double roll = rand.nextDouble();
-		
 		// Handles Server Mode mob spawns
 		switch (AGCraftPlugin.plugin.serverMode)
 		{
 			case UHC:
-				this.uhcHandler.createSpawnEventHandlerTask(entity, type, reason, biome, roll);
+				this.uhcHandler.createSpawnEventHandlerTask(entity, type, reason, biome);
 				return;
 			case MINIGAME:
 				return;
@@ -120,20 +121,20 @@ public class AmplifiedMobSpawner implements Listener
 		}
 		
 		// Handles server wide event mob spawns
-		switch (AGCraftPlugin.plugin.serverEventMode)
+		switch (this.serverEventMode)
 		{
 			case JULY_FOURTH:
-				this.julyFourthHandler.createSpawnEventHandlerTask(entity, type, reason, biome, roll);
+				this.julyFourthHandler.createSpawnEventHandlerTask(entity, type, reason, biome);
 				break;
 			case BEAT_THE_BRUINS:
-				this.bruinHandler.createSpawnEventHandlerTask(entity, type, reason, biome, roll);
+				this.bruinHandler.createSpawnEventHandlerTask(entity, type, reason, biome);
 				break;
 			default:
 				break;
 		}
 		
 		// Handles normal spawn events
-		this.amplifiedMobHandler.createSpawnEventHandlerTask(entity, type, reason, biome, roll);
+		this.amplifiedMobHandler.createSpawnEventHandlerTask(entity, type, reason, biome);
 	}
 	
 	/** Modifies entity experience drops on entity death events */
@@ -329,6 +330,18 @@ public class AmplifiedMobSpawner implements Listener
 				}
 			}
 		}
+	}
+
+	@Override
+	public void loadConfigVarialbes(ServerConfigFile config) 
+	{
+		// Themed server event mode
+		this.serverEventMode = config.searchElementFromInterpreter(this.serverEventInterpreter,
+				ThemedServerEvent.getKey(), ThemedServerEvent.DEFAULT);
+		this.amplifiedMobHandler.getSpawnChanceFromConfigFile(config);
+		this.julyFourthHandler.getSpawnChanceFromConfigFile(config);
+		this.bruinHandler.getSpawnChanceFromConfigFile(config);
+		this.uhcHandler.getSpawnChanceFromConfigFile(config);
 	}
 	
 }

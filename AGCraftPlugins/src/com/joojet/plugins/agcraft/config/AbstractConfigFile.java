@@ -13,6 +13,7 @@ import org.yaml.snakeyaml.Yaml;
 
 import com.joojet.biblefetcher.api.APIKeyReader;
 import com.joojet.biblefetcher.database.CreateDatabase;
+import com.joojet.plugins.agcraft.interfaces.AbstractInterpreter;
 
 public abstract class AbstractConfigFile
 {
@@ -166,6 +167,27 @@ public abstract class AbstractConfigFile
 		}
 		
 		return list;
+	}
+	
+	/** Searches a search trie for a value based on a key. If not found, throw an error and use a
+	 *  default.
+	 * @param <E>
+	 *  @param interpreter - Instance of a search term interpreter to be searched
+	 *  @param key - Key used in the interpreter to search for the value
+	 *  @param defaultValue - Default value to be used in the event of failure */
+	public <E> E searchElementFromInterpreter (AbstractInterpreter<E> interpreter, String key, E defaultValue)
+	{
+		E result = interpreter.searchTrie(this.getValue(key).toString());
+		if (result == null)
+		{
+			System.err.println ("Error: Cannot find value for " + key + ". Using default value " + defaultValue.toString() + " instead...");
+			result = defaultValue;
+		}
+		else
+		{
+			System.out.println ("Loaded variable " + result.toString() + " for " + key + "!");
+		}
+		return result;
 	}
 	
 	
