@@ -82,14 +82,16 @@ public class SoulBoundListener implements Listener
 		PlayerInventory playerInventory = p.getInventory();
 		List <ItemStack> soulBoundedItems = this.serializer.recoverSoulboundedItems(playerUUID);
 		
-		for (ItemStack drop : soulBoundedItems)
+		if (soulBoundedItems != null)
 		{
-			if (playerInventory.firstEmpty() != -1)
+			for (ItemStack drop : soulBoundedItems)
 			{
-				playerInventory.addItem(drop);
+				if (playerInventory.firstEmpty() != -1)
+				{
+					playerInventory.addItem(drop);
+				}
 			}
 		}
-		
 	}
 	
 }
