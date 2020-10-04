@@ -27,7 +27,7 @@ public class TheTerminator extends MobEquipment
 		this.name = "The Terminator";
 		this.color = ChatColor.DARK_RED;
 		
-		this.setStat(MonsterStat.HEALTH, 16.0);
+		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING, MobFlag.HUNT_ON_SPAWN, MobFlag.BOSS_BAR);
