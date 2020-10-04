@@ -17,6 +17,6 @@ public class ReinforcedIronHelmet extends Equipment
 		this.addLoreToItemMeta("Reinforced with titanium to have better resistance towards high damaging attacks.");
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 2);
-		this.addDefenseAttributes(2.0, 1.0, 0.0);
+		this.addDefenseAttributes(2.0, 2.0, 0.0);
 	}
 }

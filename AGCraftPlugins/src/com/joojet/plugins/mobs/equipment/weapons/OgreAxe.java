@@ -15,7 +15,7 @@ public class OgreAxe extends Equipment
 		super (EquipmentType.OGRE_AXE, Material.WOODEN_AXE, EquipmentSlot.HAND, color);
 		this.setDisplayName("Its All Ogre Now");
 		this.addLoreToItemMeta("Shrek is love, shrek is life.");
-		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 2);
+		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
 		this.addUnsafeEnchantment(Enchantment.DIG_SPEED, 2);

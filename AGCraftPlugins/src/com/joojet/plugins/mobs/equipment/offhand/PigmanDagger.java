@@ -16,6 +16,6 @@ public class PigmanDagger extends Equipment
 		this.setDisplayName("Pigman Dagger");
 		this.addLoreToItemMeta("Held by those who mastered the art of Akimbo. Hold this in your offhand to deal increased damage.");
 		this.addUnsafeEnchantment(Enchantment.MENDING, 1);
-		this.addAttackAttributes(4.0, 0.5);
+		this.addAttackAttributes(4.0, 0.2);
 	}
 }

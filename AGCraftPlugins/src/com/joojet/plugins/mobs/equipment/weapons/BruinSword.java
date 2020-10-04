@@ -19,7 +19,7 @@ public class BruinSword extends Equipment
 				ChatColor.AQUA, ChatColor.GOLD));
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 3);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
-		this.addAttackAttributes(6.0, 1.6);
+		this.addAttackAttributes(6.0, 1.8);
 		this.loreColor = ChatColor.GOLD;
 		this.addLoreToItemMeta("The Bruins are up to no good. This weapons just proves it.");
 	}

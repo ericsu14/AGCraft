@@ -13,7 +13,7 @@ public class SpiritualTravesty extends Equipment
 	public SpiritualTravesty (ChatColor color)
 	{
 		super (EquipmentType.SPIRITUAL_TRAVESTY, Material.NETHERITE_AXE, EquipmentSlot.HAND, color);
-		this.addAttackAttributes(11.0, 2.8);
+		this.addAttackAttributes(11.0, 2.6);
 		
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 6);
 		this.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 1);

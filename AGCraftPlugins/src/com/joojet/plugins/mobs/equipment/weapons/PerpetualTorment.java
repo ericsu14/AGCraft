@@ -18,5 +18,6 @@ public class PerpetualTorment extends Equipment
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);
 		this.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 2);
 		this.addUnsafeEnchantment(Enchantment.KNOCKBACK, 3);
+		this.addAttackAttributes(9.0, 1.8);
 	}
 }

@@ -18,6 +18,6 @@ public class LightweightIronBoots extends Equipment
 		this.addLoreToItemMeta("Lightweight iron allows for improved mobility.");
 		this.setDisplayName("Lightweight Iron Boots");
 		this.addSpeedAttribute(0.15);
-		this.addDefenseAttributes(2.0, 0.0, 0.0);
+		this.addDefenseAttributes(2.0, 1.0, 0.0);
 	}
 }

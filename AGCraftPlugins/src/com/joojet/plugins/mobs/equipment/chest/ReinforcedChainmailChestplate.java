@@ -16,7 +16,7 @@ public class ReinforcedChainmailChestplate extends Equipment
 		this.setDisplayName("Reinforced Chainmail Helmet");
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
-		this.addDefenseAttributes(5.0, 1.0, 0.0);
+		this.addDefenseAttributes(5.0, 1.5, 0.0);
 		this.addLoreToItemMeta("Reinforced with steel to have better resistance towards high damaging attacks.");
 	}
 }

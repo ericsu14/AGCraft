@@ -15,7 +15,7 @@ public class PiglinAxe extends Equipment
 		super (EquipmentType.PIGLIN_AXE, Material.GOLDEN_AXE, EquipmentSlot.HAND, color);
 		this.setDisplayName("Piglin Axe");
 		this.addLoreToItemMeta("Weilded only by the strongest of all Piglins...");
-		this.addAttackAttributes(10.0, 3.0);
+		this.addAttackAttributes(10.0, 1.9);
 		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 4);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
 		this.addUnsafeEnchantment(Enchantment.KNOCKBACK, 3);
