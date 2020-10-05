@@ -17,6 +17,7 @@ import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MonsterTypes;
 import com.joojet.plugins.mobs.spawnhandlers.task.HandleSpawnEventTask;
+import com.joojet.plugins.mobs.spawning.FairSpawnController;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public abstract class AbstractSpawnHandler 
@@ -38,6 +39,8 @@ public abstract class AbstractSpawnHandler
 	protected String spawnChanceKey;
 	/** A random number generator used to spawn mobs */
 	protected Random rand;
+	/** Used to make spawns fairer by controlling which mobs spawn based on nearby player's current equipment */
+	protected FairSpawnController fairSpawnController;
 	
 	/** Creates a new instance of an Abstract Spawn Handler
 	 * 	@param monsterTypeInterpreter - A reference to the monster type interpreter, which is used to register
@@ -54,6 +57,7 @@ public abstract class AbstractSpawnHandler
 		this.bossBarController = bossBarController;
 		this.spawnChance = 0.15;
 		this.spawnChanceKey = spawnChanceKey;
+		this.fairSpawnController = new FairSpawnController (128);
 		this.rand = new Random ();
 	}
 	
@@ -85,7 +89,8 @@ public abstract class AbstractSpawnHandler
 	public void transformLivingEntityIntoAmplifiedMob (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome)
 	{
 		MobEquipment equipment = this.getRandomEqipment(type, biome);
-		if (equipment != null)
+		if (equipment != null &&
+				this.fairSpawnController.getAverageThreatScore(entity) >= equipment.getFairSpawnThreshold())
 		{
 			EquipmentTools.equipEntity(entity, equipment, this.bossBarController);
 		}

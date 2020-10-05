@@ -20,7 +20,7 @@ public abstract class MonsterTypes
 	/** Total number of custom mob equipment tied to this class */
 	protected int size;
 	/** Search trie used to lookup custom monsters by name */
-	public MonsterTypeInterpreter monsterTypeInterpreter;
+	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	
 	public MonsterTypes (MonsterTypeInterpreter monsterTypeInterpreter, EntityType... entities)
 	{

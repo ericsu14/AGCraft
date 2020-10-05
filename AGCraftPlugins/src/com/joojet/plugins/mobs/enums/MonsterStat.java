@@ -36,7 +36,9 @@ public enum MonsterStat
 	/** Modifies the base armor toughness value of custom mobs */
 	BASE_ARMOR_TOUGHNESS (Attribute.GENERIC_ARMOR_TOUGHNESS),
 	/** Modifies the knockback resistance stat of custom mobs */
-	KNOCKBACK_RESISTANCE (Attribute.GENERIC_KNOCKBACK_RESISTANCE);
+	KNOCKBACK_RESISTANCE (Attribute.GENERIC_KNOCKBACK_RESISTANCE),
+	/** Sets the custom monster's classifier */
+	MONSTER_CLASSIFIER;
 	
 	/** The Minecraft entity attribute this monsterstat is tied to */
 	private Attribute attribute;

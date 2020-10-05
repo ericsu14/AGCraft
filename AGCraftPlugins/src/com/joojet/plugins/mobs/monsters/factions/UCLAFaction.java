@@ -6,6 +6,8 @@ import org.bukkit.entity.EntityType;
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.enums.Faction;
+import com.joojet.plugins.mobs.enums.MonsterClassifier;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -24,6 +26,7 @@ public abstract class UCLAFaction extends MobEquipment
 				EntityType.PLAYER, EntityType.PHANTOM, EntityType.WITHER_SKELETON, 
 				EntityType.SPIDER, EntityType.IRON_GOLEM, EntityType.HOGLIN);
 		this.addEntitiesToIgnoreList(EntityType.CREEPER);
+		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.EPIC);
 	}
 	
 	/** A util function that generates a UCLA themed display name

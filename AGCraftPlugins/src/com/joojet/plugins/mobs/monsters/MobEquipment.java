@@ -18,6 +18,7 @@ import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MobFlag;
+import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.offhand.TippedArrow;
@@ -111,6 +112,8 @@ public abstract class MobEquipment
 		this.tippedArrow = null;
 		// Boss theme
 		this.bossTheme = null;
+		// Generic monster classifier
+		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.COMMON);
 	}
 	
 	/** Sets up drop rates for this entity.
@@ -160,6 +163,14 @@ public abstract class MobEquipment
 	public void setStat (MonsterStat stat, double value)
 	{
 		this.mobStats.put(stat, value);
+	}
+	
+	/** Sets a monster's stat value to a new value as an enum
+	 * 	@param stat - Monster stat we are changing
+	 *  @param value - Value we are setting the stat to */
+	public void setStat (MonsterStat stat, Enum<?> value)
+	{
+		this.mobStats.put(stat, (double) value.ordinal());
 	}
 	
 	/** Returns a monster's stat value based on the passed MonsterStat type
@@ -433,6 +444,12 @@ public abstract class MobEquipment
 	public boolean containsBossTheme()
 	{
 		return this.bossTheme != null;
+	}
+	
+	/** Returns the fair spawn threshold for this monster */
+	public Double getFairSpawnThreshold ()
+	{
+		return MonsterClassifier.values()[this.getStat(MonsterStat.MONSTER_CLASSIFIER).intValue()].getThreshold();
 	}
 	
 	/** Return the equipment's monster type identifier as a string. */

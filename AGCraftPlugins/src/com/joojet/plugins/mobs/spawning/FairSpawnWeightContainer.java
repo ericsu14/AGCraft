@@ -2,6 +2,8 @@ package com.joojet.plugins.mobs.spawning;
 
 import java.util.ArrayList;
 
+import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
@@ -39,14 +41,15 @@ public class FairSpawnWeightContainer
 			for (int i = 0; i < equipmentContent.length; ++i)
 			{
 				ItemStack equipment = equipmentContent[i];
-				if (equipment != null)
+				if (equipment != null && equipment.getType() != Material.AIR)
 				{
 					if (weight instanceof EPFWeight && 
 							equipment.containsEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL))
 					{
 						rawModifierSum += equipment.getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL);
 					}
-					else if (!(weight instanceof EPFWeight))
+					// Generic max health can only be increased by equipment
+					else if (!(weight instanceof EPFWeight) && weight.getAttribute() == Attribute.GENERIC_MAX_HEALTH)
 					{
 						rawModifierSum += equipment.getItemMeta().
 							getAttributeModifiers(EquipmentSlot.values()[i]).get(weight.getAttribute()).stream().
@@ -54,6 +57,13 @@ public class FairSpawnWeightContainer
 					}
 				}
 			}
+			
+			if (weight.getAttribute() != Attribute.GENERIC_MAX_HEALTH
+					&& player.getAttribute(weight.getAttribute()) != null)
+			{
+				rawModifierSum += player.getAttribute(weight.getAttribute()).getValue();
+			}
+			
 			score += weight.calculateRawThreatScore(rawModifierSum);
 		}
 		
