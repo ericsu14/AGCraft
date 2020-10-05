@@ -17,10 +17,13 @@ public class FairSpawnController
 	protected Integer maxScanRadius;
 	/** Used to calculate a threat score for the player */
 	protected FairSpawnWeightContainer fairSpawnWeightContainer;
+	/** Bias used to amplify game difficulity if there are multiple players around nearby enemy spawns */
+	protected Double bias;
 	
 	public FairSpawnController (Integer maxScanRadius)
 	{
 		this.maxScanRadius = maxScanRadius;
+		this.bias = 0.0625;
 		this.fairSpawnWeightContainer = new FairSpawnWeightContainer (
 			new EPFWeight(16.0, 4),
 			new FairSpawnWeight (Attribute.GENERIC_ARMOR_TOUGHNESS, 12.0, 2),
@@ -43,7 +46,7 @@ public class FairSpawnController
 				sumOfScores += this.fairSpawnWeightContainer.calculateThreatScore(player);
 			}
 		}
-		return numPlayers > 0 ? sumOfScores / numPlayers : 0.0;
+		return numPlayers > 0 ? (sumOfScores / numPlayers) + (bias * (numPlayers - 1)) : 0.0;
 	}
 	
 	protected boolean checkIfMobIsWithinRangeOfPlayer (Player player, LivingEntity monster)
