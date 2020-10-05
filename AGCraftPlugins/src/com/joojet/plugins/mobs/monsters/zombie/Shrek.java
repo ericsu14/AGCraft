@@ -12,10 +12,10 @@ import com.joojet.plugins.mobs.equipment.chest.OgreTunic;
 import com.joojet.plugins.mobs.equipment.head.ShrekHat;
 import com.joojet.plugins.mobs.equipment.leggings.OgreLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.OgreAxe;
-import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.factions.LegendaryMob;
 import com.joojet.plugins.music.enums.MusicType;
 
-public class Shrek extends MobEquipment
+public class Shrek extends LegendaryMob
 {
 	public Shrek ()
 	{

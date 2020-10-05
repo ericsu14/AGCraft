@@ -14,10 +14,10 @@ import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.DarkNetheriteHelmet;
 import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
-import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.factions.LegendaryMob;
 import com.joojet.plugins.music.enums.MusicType;
 
-public class UltimateBadassZombie extends MobEquipment
+public class UltimateBadassZombie extends LegendaryMob
 {
 	public UltimateBadassZombie ()
 	{

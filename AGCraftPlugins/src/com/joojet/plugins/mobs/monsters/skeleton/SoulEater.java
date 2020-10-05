@@ -10,9 +10,9 @@ import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.DarkNetheriteHelmet;
 import com.joojet.plugins.mobs.equipment.offhand.WitheringArrow;
 import com.joojet.plugins.mobs.equipment.weapons.AngelOfDeath;
-import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.factions.EpicMob;
 
-public class SoulEater extends MobEquipment 
+public class SoulEater extends EpicMob 
 {
 	public SoulEater ()
 	{

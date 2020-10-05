@@ -8,9 +8,9 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.DesertSandals;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualFantasy;
-import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.factions.EpicMob;
 
-public class BadlandsBandit extends MobEquipment
+public class BadlandsBandit extends EpicMob
 {
 	public BadlandsBandit ()
 	{

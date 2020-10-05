@@ -10,9 +10,9 @@ import com.joojet.plugins.mobs.equipment.chest.ReinforcedChainmailChestplate;
 import com.joojet.plugins.mobs.equipment.head.ReinforcedChainmailHelmet;
 import com.joojet.plugins.mobs.equipment.leggings.ReinforcedChainmailLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.EnhancedStoneSword;
-import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.factions.UncommonMob;
 
-public class UncommonZombie extends MobEquipment 
+public class UncommonZombie extends UncommonMob 
 {
 	public UncommonZombie ()
 	{

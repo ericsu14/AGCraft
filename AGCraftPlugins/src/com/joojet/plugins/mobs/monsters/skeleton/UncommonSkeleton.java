@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.monsters.skeleton;
 
 import org.bukkit.ChatColor;
 
+import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightChainmailBoots;
@@ -23,6 +24,7 @@ public class UncommonSkeleton extends OverworldMob
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.10);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.30);
+		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.UNCOMMON);
 		
 		this.weapon = new PotentBow (this.color);
 		this.offhand = new WeakeningArrow (this.color);

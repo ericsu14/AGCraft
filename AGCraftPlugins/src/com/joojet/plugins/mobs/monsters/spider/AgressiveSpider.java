@@ -7,9 +7,9 @@ import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.weapons.SpiderTooth;
-import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.factions.UncommonMob;
 
-public class AgressiveSpider extends MobEquipment
+public class AgressiveSpider extends UncommonMob
 {
 	public AgressiveSpider ()
 	{

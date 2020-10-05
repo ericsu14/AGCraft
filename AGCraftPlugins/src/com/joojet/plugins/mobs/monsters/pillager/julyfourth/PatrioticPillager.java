@@ -7,9 +7,9 @@ import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
-import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.factions.UncommonMob;
 
-public class PatrioticPillager extends MobEquipment
+public class PatrioticPillager extends UncommonMob
 {
 	public PatrioticPillager ()
 	{

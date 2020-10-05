@@ -8,10 +8,10 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.head.ZombiePigmenHead;
 import com.joojet.plugins.mobs.equipment.leggings.PigminTrousers;
 import com.joojet.plugins.mobs.equipment.weapons.PigmanSword;
-import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.factions.EpicMob;
 
 
-public class VeteranZombiePigmen extends MobEquipment
+public class VeteranZombiePigmen extends EpicMob
 {
 	public VeteranZombiePigmen ()
 	{

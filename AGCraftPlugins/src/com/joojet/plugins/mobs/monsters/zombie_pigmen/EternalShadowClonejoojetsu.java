@@ -9,10 +9,10 @@ import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.head.EternalJoojHead;
-import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.factions.MythicMob;
 
 
-public class EternalShadowClonejoojetsu extends MobEquipment 
+public class EternalShadowClonejoojetsu extends MythicMob 
 {
 	public EternalShadowClonejoojetsu ()
 	{

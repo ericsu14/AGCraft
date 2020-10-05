@@ -11,9 +11,9 @@ import com.joojet.plugins.mobs.equipment.chest.ReinforcedDiamondChestplate;
 import com.joojet.plugins.mobs.equipment.head.ReinforcedIronHelmet;
 import com.joojet.plugins.mobs.equipment.leggings.ReinforcedIronLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.SharpenedIronSword;
-import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.factions.EpicMob;
 
-public class BadassZombie extends MobEquipment
+public class BadassZombie extends EpicMob
 {
 	public BadassZombie ()
 	{
