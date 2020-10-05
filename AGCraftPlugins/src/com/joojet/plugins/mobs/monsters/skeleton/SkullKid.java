@@ -16,7 +16,7 @@ import com.joojet.plugins.mobs.equipment.leggings.SkullKidPants;
 import com.joojet.plugins.mobs.equipment.offhand.CursedArrow;
 import com.joojet.plugins.mobs.equipment.weapons.ATerribleFate;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
-import com.joojet.plugins.mobs.monsters.factions.MythicMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class SkullKid extends MythicMob 

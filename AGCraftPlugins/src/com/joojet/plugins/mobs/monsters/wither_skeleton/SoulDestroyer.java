@@ -14,7 +14,7 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightNetheriteBoots;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.weapons.PerpetualTorment;
-import com.joojet.plugins.mobs.monsters.factions.EpicMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.EpicMob;
 
 public class SoulDestroyer extends EpicMob 
 {

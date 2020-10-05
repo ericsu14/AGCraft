@@ -12,7 +12,7 @@ import com.joojet.plugins.mobs.equipment.chest.OgreTunic;
 import com.joojet.plugins.mobs.equipment.head.ShrekHat;
 import com.joojet.plugins.mobs.equipment.leggings.OgreLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.OgreAxe;
-import com.joojet.plugins.mobs.monsters.factions.LegendaryMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class Shrek extends LegendaryMob

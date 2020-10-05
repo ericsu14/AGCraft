@@ -7,7 +7,6 @@ import org.bukkit.block.Biome;
 import com.joojet.plugins.mobs.drops.*;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
-import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.enums.SummonTypes;
@@ -38,7 +37,6 @@ public class GiantBruin extends UCLAFaction
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 150.0);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 4.0);
 		this.setStat(MonsterStat.KNOCKBACK_RESISTANCE, 4.50);
-		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.LEGENDARY);
 		
 		// Equipment
 		this.weapon = new BruinSword (this.color);

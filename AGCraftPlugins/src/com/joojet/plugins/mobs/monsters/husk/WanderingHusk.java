@@ -6,7 +6,7 @@ import org.bukkit.block.Biome;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.DesertSandals;
-import com.joojet.plugins.mobs.monsters.factions.UncommonMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.UncommonMob;
 
 public class WanderingHusk extends UncommonMob
 {

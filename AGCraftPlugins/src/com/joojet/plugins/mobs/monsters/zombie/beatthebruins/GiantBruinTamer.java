@@ -6,6 +6,7 @@ import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
+import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.monsters.giant.beatthebruins.GiantBruin;
@@ -27,5 +28,6 @@ public class GiantBruinTamer extends UCLAJock
 		this.mount = new MountedMob (EntityType.GIANT, new GiantBruin());
 		this.setStat(MonsterStat.Y_LIMIT, 55.0);
 		this.setStat(MonsterStat.HEALTH, 30.0);
+		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.LEGENDARY);
 	}
 }

@@ -12,7 +12,7 @@ import com.joojet.plugins.mobs.equipment.chest.PatrioticRedJacket;
 import com.joojet.plugins.mobs.equipment.head.USAHat;
 import com.joojet.plugins.mobs.equipment.leggings.PatrioticWhiteLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.PropFirework;
-import com.joojet.plugins.mobs.monsters.factions.UncommonMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.UncommonMob;
 
 public class PatrioticZombie extends UncommonMob
 {	

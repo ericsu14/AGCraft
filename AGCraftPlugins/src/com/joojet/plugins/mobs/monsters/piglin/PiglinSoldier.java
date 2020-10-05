@@ -9,7 +9,7 @@ import com.joojet.plugins.mobs.equipment.chest.RoyalGoldChestplate;
 import com.joojet.plugins.mobs.equipment.head.PiglinSoldierHat;
 import com.joojet.plugins.mobs.equipment.leggings.RoyalGoldLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.PiglinSword;
-import com.joojet.plugins.mobs.monsters.factions.EpicMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.EpicMob;
 
 public class PiglinSoldier extends EpicMob 
 {

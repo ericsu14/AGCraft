@@ -17,7 +17,7 @@ import com.joojet.plugins.mobs.equipment.chest.DoomChest;
 import com.joojet.plugins.mobs.equipment.head.DoomSlayerHead;
 import com.joojet.plugins.mobs.equipment.leggings.DoomGuyLegs;
 import com.joojet.plugins.mobs.equipment.weapons.DoomBlade;
-import com.joojet.plugins.mobs.monsters.factions.MythicMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class DoomGuy extends MythicMob

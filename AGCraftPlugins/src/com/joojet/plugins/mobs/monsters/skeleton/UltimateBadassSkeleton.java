@@ -15,7 +15,7 @@ import com.joojet.plugins.mobs.equipment.head.AGSpotted;
 import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.ThanosArrow;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualFantasy;
-import com.joojet.plugins.mobs.monsters.factions.LegendaryMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class UltimateBadassSkeleton extends LegendaryMob

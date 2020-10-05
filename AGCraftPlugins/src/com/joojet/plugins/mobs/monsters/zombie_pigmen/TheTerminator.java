@@ -16,7 +16,7 @@ import com.joojet.plugins.mobs.equipment.head.CyborgPigmanHead;
 import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.TerminatorDagger;
 import com.joojet.plugins.mobs.equipment.weapons.TerminatorSword;
-import com.joojet.plugins.mobs.monsters.factions.MythicMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class TheTerminator extends MythicMob

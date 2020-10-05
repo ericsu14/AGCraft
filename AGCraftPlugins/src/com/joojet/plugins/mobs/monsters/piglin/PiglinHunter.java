@@ -8,7 +8,7 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.RoyalGoldBoots;
 import com.joojet.plugins.mobs.equipment.head.PiglinHunterHelmet;
 import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
-import com.joojet.plugins.mobs.monsters.factions.RareMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.RareMob;
 
 public class PiglinHunter extends RareMob 
 {

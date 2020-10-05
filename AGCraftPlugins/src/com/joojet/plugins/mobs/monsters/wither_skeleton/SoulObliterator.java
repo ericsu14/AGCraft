@@ -15,7 +15,7 @@ import com.joojet.plugins.mobs.equipment.boots.LightweightDiamondBoots;
 import com.joojet.plugins.mobs.equipment.chest.ReinforcedDiamondChestplate;
 import com.joojet.plugins.mobs.equipment.offhand.EnhancedWitheringArrow;
 import com.joojet.plugins.mobs.equipment.weapons.AngelOfDeath;
-import com.joojet.plugins.mobs.monsters.factions.LegendaryMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
 import com.joojet.plugins.music.enums.MusicType;
 
 

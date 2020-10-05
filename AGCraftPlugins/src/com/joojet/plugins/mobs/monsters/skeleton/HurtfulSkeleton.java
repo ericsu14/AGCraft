@@ -12,7 +12,7 @@ import com.joojet.plugins.mobs.equipment.head.ReinforcedIronHelmet;
 import com.joojet.plugins.mobs.equipment.leggings.ReinforcedIronLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.HurtfulArrow;
 import com.joojet.plugins.mobs.equipment.weapons.VeryPotentBow;
-import com.joojet.plugins.mobs.monsters.factions.RareMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.RareMob;
 
 public class HurtfulSkeleton extends RareMob  
 {

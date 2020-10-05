@@ -9,7 +9,7 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.PiglinCaptainHead;
 import com.joojet.plugins.mobs.equipment.weapons.PiglinAxe;
-import com.joojet.plugins.mobs.monsters.factions.LegendaryMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class PiglinCaptain extends LegendaryMob 

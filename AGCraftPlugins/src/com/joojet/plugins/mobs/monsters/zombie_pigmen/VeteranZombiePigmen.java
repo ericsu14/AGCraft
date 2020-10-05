@@ -8,7 +8,7 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.head.ZombiePigmenHead;
 import com.joojet.plugins.mobs.equipment.leggings.PigminTrousers;
 import com.joojet.plugins.mobs.equipment.weapons.PigmanSword;
-import com.joojet.plugins.mobs.monsters.factions.EpicMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.EpicMob;
 
 
 public class VeteranZombiePigmen extends EpicMob

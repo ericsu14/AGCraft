@@ -10,7 +10,7 @@ import com.joojet.plugins.mobs.equipment.chest.RoyalGoldChestplate;
 import com.joojet.plugins.mobs.equipment.head.PharaohHead;
 import com.joojet.plugins.mobs.equipment.leggings.RoyalGoldLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.PharaohStaff;
-import com.joojet.plugins.mobs.monsters.factions.RareMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.RareMob;
 
 public class FallenPharaoh extends RareMob
 {

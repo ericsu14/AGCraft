@@ -10,7 +10,7 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.head.DarkNetheriteHelmet;
 import com.joojet.plugins.mobs.equipment.offhand.PigmanDagger;
 import com.joojet.plugins.mobs.equipment.weapons.PigmanSword;
-import com.joojet.plugins.mobs.monsters.factions.LegendaryMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
 
 
 public class AkimboPigman extends LegendaryMob 

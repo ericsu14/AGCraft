@@ -16,7 +16,7 @@ import com.joojet.plugins.mobs.equipment.head.BarneyHead;
 import com.joojet.plugins.mobs.equipment.leggings.BarneyLegs;
 import com.joojet.plugins.mobs.equipment.offhand.BarneyTotem;
 import com.joojet.plugins.mobs.equipment.weapons.BarneyDagger;
-import com.joojet.plugins.mobs.monsters.factions.LegendaryMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class BarneyTheDinosaur extends LegendaryMob

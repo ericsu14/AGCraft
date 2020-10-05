@@ -7,6 +7,7 @@ import org.bukkit.entity.EntityType;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
+import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.BruinFootballBoots;
@@ -45,6 +46,7 @@ public class UCLABearTamer extends UCLAFaction
 		this.weapon = new TheTrojanDestroyer ();
 		this.offhand = new PoisonousArrow (ChatColor.GREEN);
 		this.mount = new MountedMob (EntityType.POLAR_BEAR, new TheBruinBear());
+		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.LEGENDARY);
 		
 		this.addMonsterDrops(new MonsterDrop (new TheTrojanDestroyer(), 0.05));
 		this.bossTheme = MusicType.HAIKYUU;
