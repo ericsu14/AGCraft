@@ -10,7 +10,8 @@ public class ZombieTypes extends MonsterTypes
 	public ZombieTypes (MonsterTypeInterpreter monsterTypeInterpreter)
 	{
 		super(monsterTypeInterpreter, EntityType.ZOMBIE);
-		this.addEquipment(new UncommonZombie(), 85);
+		this.addEquipment(new UncommonZombie(), 45);
+		this.addEquipment(new StrongZombie(), 40);
 		this.addEquipment(new BadassZombie(), 13);
 		this.addEquipment(new UltimateBadassZombie(), 2);
 		this.addEquipment(new Shrek(), 30);

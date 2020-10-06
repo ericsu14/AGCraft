@@ -34,7 +34,7 @@ public abstract class USCFaction extends MobEquipment
 		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.WOLF, EntityType.CAT,
 				EntityType.IRON_GOLEM, EntityType.SNOWMAN, EntityType.DOLPHIN, EntityType.VILLAGER,
 				EntityType.WANDERING_TRADER, EntityType.CREEPER, EntityType.PANDA);
-		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.RARE);
+		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.EPIC);
 	}
 	
 	/** A util function that generates a USC themed display name
