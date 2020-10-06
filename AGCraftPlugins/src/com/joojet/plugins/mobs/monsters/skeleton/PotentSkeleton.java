@@ -1,21 +1,21 @@
 package com.joojet.plugins.mobs.monsters.skeleton;
 
 import org.bukkit.ChatColor;
-import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightIronBoots;
 import com.joojet.plugins.mobs.equipment.chest.BulletproofIronChestplate;
 import com.joojet.plugins.mobs.equipment.weapons.PotentBow;
-import com.joojet.plugins.mobs.monsters.factions.classifications.UncommonMob;
+import com.joojet.plugins.mobs.monsters.factions.OverworldMob;
 
-public class PotentSkeleton extends UncommonMob 
+public class PotentSkeleton extends OverworldMob 
 {
 	public PotentSkeleton ()
 	{
 		super (MonsterType.POTENT_SKELETON);
-		this.addBiomes(Biome.THE_VOID);
+		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.UNCOMMON);
 		this.name = "Potent Skeleton";
 		this.color = ChatColor.GREEN;
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.10);
