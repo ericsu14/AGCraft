@@ -21,9 +21,10 @@ public class UncommonSkeleton extends OverworldMob
 		super (MonsterType.UNCOMMON_SKELETON);
 		this.name = "Annoying Skeleton";
 		this.color = ChatColor.GREEN;
-		this.setStat(MonsterStat.HEALTH, 16.0);
+		this.setStat(MonsterStat.HEALTH, 12.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.10);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.30);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 2.0);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.UNCOMMON);
 		
 		this.weapon = new PotentBow (this.color);

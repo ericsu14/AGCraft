@@ -9,7 +9,8 @@ public class SkeletonTypes extends MonsterTypes {
 	public SkeletonTypes (MonsterTypeInterpreter monsterTypeInterpreter)
 	{
 		super (monsterTypeInterpreter, EntityType.SKELETON);
-		this.addEquipment(new UncommonSkeleton(), 80);
+		this.addEquipment(new UncommonSkeleton(), 30);
+		this.addEquipment(new PotentSkeleton(), 50);
 		this.addEquipment(new HurtfulSkeleton(), 18);
 		this.addEquipment(new UltimateBadassSkeleton(), 2);
 		this.addEquipment(new SoulEater(), 70);
