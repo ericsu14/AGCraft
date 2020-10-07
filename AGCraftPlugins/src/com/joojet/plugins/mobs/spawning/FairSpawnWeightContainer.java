@@ -10,6 +10,9 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import com.joojet.plugins.mobs.spawning.weights.EPFWeight;
+import com.joojet.plugins.mobs.spawning.weights.FairSpawnWeight;
+
 public class FairSpawnWeightContainer 
 {
 	/** Stores a list of fair spawn weights */

@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.spawning;
+package com.joojet.plugins.mobs.spawning.weights;
 
 import org.bukkit.attribute.Attribute;
 

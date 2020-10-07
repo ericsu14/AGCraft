@@ -17,7 +17,7 @@ import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MonsterTypes;
 import com.joojet.plugins.mobs.spawnhandlers.task.HandleSpawnEventTask;
-import com.joojet.plugins.mobs.spawning.FairSpawnController;
+import com.joojet.plugins.mobs.spawning.containers.FairSpawnController;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public abstract class AbstractSpawnHandler 
