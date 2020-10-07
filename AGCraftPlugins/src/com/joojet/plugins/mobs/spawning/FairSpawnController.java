@@ -28,7 +28,7 @@ public class FairSpawnController
 			new EPFWeight(16.0, 4),
 			new FairSpawnWeight (Attribute.GENERIC_ARMOR_TOUGHNESS, 12.0, 2),
 			new FairSpawnWeight (Attribute.GENERIC_ARMOR, 20.0, 1),
-			new FairSpawnWeight (Attribute.GENERIC_MAX_HEALTH, 20.0, 1)
+			new FairSpawnWeight (Attribute.GENERIC_MAX_HEALTH, 40.0, 1)
 		);
 	}
 	
