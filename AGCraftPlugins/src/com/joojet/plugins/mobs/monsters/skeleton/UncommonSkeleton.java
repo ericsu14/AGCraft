@@ -24,7 +24,7 @@ public class UncommonSkeleton extends OverworldMob
 		this.setStat(MonsterStat.HEALTH, 12.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.10);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.30);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 2.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 3.0);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.UNCOMMON);
 		
 		this.weapon = new PotentBow (this.color);

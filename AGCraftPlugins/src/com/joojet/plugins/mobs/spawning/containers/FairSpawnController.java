@@ -13,7 +13,6 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.spawning.FairSpawnWeightContainer;
 import com.joojet.plugins.mobs.spawning.weights.EPFWeight;
 import com.joojet.plugins.mobs.spawning.weights.FairSpawnWeight;
-import com.joojet.plugins.mobs.spawning.weights.MaxHealthWeight;
 
 public class FairSpawnController 
 {	
@@ -32,7 +31,7 @@ public class FairSpawnController
 			new EPFWeight(16.0, 4),
 			new FairSpawnWeight (Attribute.GENERIC_ARMOR_TOUGHNESS, 12.0, 2),
 			new FairSpawnWeight (Attribute.GENERIC_ARMOR, 20.0, 1),
-			new MaxHealthWeight (40.0, 1)
+			new FairSpawnWeight (Attribute.GENERIC_MAX_HEALTH, 20.0, 1)
 		);
 	}
 	
@@ -40,7 +39,6 @@ public class FairSpawnController
 	{
 		Integer numPlayers = 0;
 		Double sumOfScores = 0.0;
-		Double currentScore = 0.0;
 		
 		List<Player> onlinePlayers = Arrays.asList(AGCraftPlugin.plugin.getServer().getOnlinePlayers().toArray(new Player[0]));
 		for (Player player : onlinePlayers)
@@ -48,9 +46,7 @@ public class FairSpawnController
 			if (this.checkIfMobIsWithinRangeOfPlayer(player, monster))
 			{
 				++numPlayers;
-				currentScore = this.fairSpawnWeightContainer.calculateThreatScore(player);
-				currentScore = currentScore > 0.0 ? currentScore : 0.0;
-				sumOfScores += currentScore;
+				sumOfScores += this.fairSpawnWeightContainer.calculateThreatScore(player);
 			}
 		}
 		return numPlayers > 0 ? (sumOfScores / numPlayers) + (bias * (numPlayers - 1)) : 0.0;

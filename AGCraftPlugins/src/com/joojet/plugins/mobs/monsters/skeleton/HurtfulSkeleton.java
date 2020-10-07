@@ -33,7 +33,7 @@ public class HurtfulSkeleton extends EpicMob
 		this.leggings = new ReinforcedIronLeggings (this.color);
 		this.boots = new LightweightIronBoots (this.color);
 		
-		this.setStat(MonsterStat.EXPERIENCE, 18.0);
+		this.setStat(MonsterStat.EXPERIENCE, 24.0);
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 6.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.20);

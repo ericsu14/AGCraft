@@ -32,7 +32,7 @@ public class Shrek extends LegendaryMob
 		this.boots = new OgreBoots (this.color);
 		this.weapon = new OgreAxe (this.color);
 		
-		this.setStat(MonsterStat.EXPERIENCE, 50.0);
+		this.setStat(MonsterStat.EXPERIENCE, 60.0);
 		this.bossTheme = MusicType.SHREK;
 	}
 }
