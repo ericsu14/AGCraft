@@ -24,10 +24,14 @@ public class Warp extends AGCommandExecutor
 {
 	/** A hardcoded warp location used to define a warp back to the player's bed spawn */
 	public final static String home = "home";
+	/** A tag used to identify the scanning radius variable in the config file */
+	public final static String WARP_RADIUS_TAG = "warp-scan-radius";
+	/** A tag used to identify the health threshold variable in the config file */
+	public final static String WARP_HEALTH_THRESHOLD_TAG = "warp-min-health-threshold";
 	/** Max. search radius of nearby enemies check */
-	private int maxMobRadius = 6;
+	private int maxMobRadius;
 	/** Min. player health needs to exceed before warping */
-	private double healthThreshold = 20 * 0.29;
+	private double healthThreshold;
 	/** Search trie used to lookup custom monsters by name */
 	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	
@@ -35,6 +39,8 @@ public class Warp extends AGCommandExecutor
 	{
 		super (CommandType.WARP);
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
+		this.healthThreshold = 6.0;
+		this.maxMobRadius = 6;
 	}
 	
 	/** Warps a player to either a designated location or their bed spawn.
@@ -186,6 +192,7 @@ public class Warp extends AGCommandExecutor
 	@Override
 	public void loadConfigVariables(ServerConfigFile config) 
 	{
-		
+		this.maxMobRadius = config.getValueAsInteger(WARP_RADIUS_TAG);
+		this.healthThreshold = config.getValueAsDouble(WARP_HEALTH_THRESHOLD_TAG);
 	}
 }

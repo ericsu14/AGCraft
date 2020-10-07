@@ -13,6 +13,7 @@ import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.enums.MinigameRewardType;
 import com.joojet.plugins.utility.commands.FireworksCommand;
+import com.joojet.plugins.warp.commands.Warp;
 
 public class ServerConfigFile extends AbstractConfigFile
 {
@@ -42,6 +43,8 @@ public class ServerConfigFile extends AbstractConfigFile
 		data.put(FireworksCommand.FIREWORK_POWER_LIMIT, 4);
 		data.put(FireworksCommand.FIREWORK_SPREAD_LIMIT, 48);
 		data.put(FireworksCommand.MIN_FIREWORK_COUNT, 30);
+		data.put(Warp.WARP_RADIUS_TAG, 6);
+		data.put (Warp.WARP_HEALTH_THRESHOLD_TAG, 6);
 		return data;
 	}
 	
