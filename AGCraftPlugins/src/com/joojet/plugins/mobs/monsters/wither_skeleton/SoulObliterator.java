@@ -16,7 +16,6 @@ import com.joojet.plugins.mobs.equipment.chest.ReinforcedDiamondChestplate;
 import com.joojet.plugins.mobs.equipment.offhand.EnhancedWitheringArrow;
 import com.joojet.plugins.mobs.equipment.weapons.AngelOfDeath;
 import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
-import com.joojet.plugins.music.enums.MusicType;
 
 
 public class SoulObliterator extends LegendaryMob
@@ -48,10 +47,8 @@ public class SoulObliterator extends LegendaryMob
 		this.offhand = new EnhancedWitheringArrow (this.color);
 		
 		this.setStat(MonsterStat.EXPERIENCE, 45.0);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 8.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 12.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.50);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.90);
-		
-		this.bossTheme = MusicType.KUZE_THEME;
 	}
 }

@@ -6,6 +6,8 @@ import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
@@ -25,10 +27,12 @@ public class DoomGuy extends MythicMob
 	public DoomGuy ()
 	{
 		super (MonsterType.DOOM_GUY);
-		this.name = "The Doom Slayer";
+		this.name = StringUtil.alternateTextColors("The Doom Slayer", TextPattern.WORD, 
+				ChatColor.DARK_GRAY, ChatColor.DARK_RED);
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.05f, 1.00f);
 		this.color = ChatColor.DARK_RED;
-		this.setStat(MonsterStat.HEALTH, 90.0);
+		this.setStat(MonsterStat.HEALTH, 50.0);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 20.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 125.0);
 		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
