@@ -7,6 +7,7 @@ import java.util.List;
 import org.bukkit.Material;
 
 import com.joojet.plugins.agcraft.config.AbstractConfigFile;
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.utility.enums.JunkClassifier;
 import com.joojet.plugins.utility.interpreter.MaterialInterpreter;
 
@@ -38,7 +39,7 @@ public class JunkItemConfig extends AbstractConfigFile
 				for (Material material : materials)
 				{
 					mapping.put(material, classifier);
-					System.out.println ("Added " + material.toString() + " to the junk item classifier, " + currKey);
+					AGCraftPlugin.logger.info ("Added " + material.toString() + " to the junk item classifier, " + currKey);
 				}
 			}
 		}

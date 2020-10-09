@@ -21,12 +21,12 @@ public class ToggleDebugMode extends AGCommandExecutor
 	/** A command that toggles debug mode on or off.
 	 *  Can only be used by the command sender in the terminal */
 	@Override
-	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) 
+	public boolean onCommand(CommandSender sender, Command arg1, String arg2, String[] arg3) 
 	{
-		if (arg0 instanceof ConsoleCommandSender || arg0 instanceof Player)
+		if (sender instanceof ConsoleCommandSender || sender instanceof Player)
 		{
 			AGCraftPlugin.plugin.toggleDebugMode();
-			arg0.sendMessage("Debug mode toggled to " + ChatColor.GOLD + AGCraftPlugin.plugin.enableDebugMode);
+			sender.sendMessage("Debug mode toggled to " + ChatColor.GOLD + AGCraftPlugin.plugin.enableDebugMode);
 			return true;
 		}
 		return false;

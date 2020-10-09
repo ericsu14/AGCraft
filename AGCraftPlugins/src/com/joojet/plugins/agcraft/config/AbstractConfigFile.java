@@ -14,6 +14,7 @@ import org.yaml.snakeyaml.Yaml;
 import com.joojet.biblefetcher.api.APIKeyReader;
 import com.joojet.biblefetcher.database.CreateDatabase;
 import com.joojet.plugins.agcraft.interfaces.AbstractInterpreter;
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 
 public abstract class AbstractConfigFile
 {
@@ -42,7 +43,7 @@ public abstract class AbstractConfigFile
 			if (!APIKeyReader.checkConfigFile(this.configFilePath))
 			{
 				this.createConfigFile();
-				System.out.println ("Created a new config file at " + this.configFilePath);
+				AGCraftPlugin.logger.info ("Created a new config file at " + this.configFilePath);
 			}
 			
 			// Once the config file is created (or already existing), load it into the internal data structure
@@ -116,10 +117,23 @@ public abstract class AbstractConfigFile
 			Object value = this.configFileValues.get(key);
 			if (outputInformation)
 			{
-				System.out.println ("Retrieved " + value.toString() + " for the key " + key);
+				AGCraftPlugin.logger.info("Retrieved " + value.toString() + " for the key, " + key);
 			}
 			return value;
 		}
+		
+		// Otherwise, attempt to load in a default value for this key from the generated mappings
+		HashMap <String, Object> defaultMapping = this.createConfigFileContents();
+		if (defaultMapping.containsKey(key))
+		{
+			Object value = defaultMapping.get(key);
+			if (outputInformation)
+			{
+				AGCraftPlugin.logger.warning("Could not retrieve a value for " + key + ". Using the default value of " + value + " instead.");
+			}
+			return value;
+		}
+		// If all else fails, return NULL.
 		return null;
 	}
 	
@@ -185,12 +199,12 @@ public abstract class AbstractConfigFile
 		E result = interpreter.searchTrie(this.getValue(key, false).toString());
 		if (result == null)
 		{
-			System.err.println ("Error: Cannot find value for " + key + ". Using default value " + defaultValue.toString() + " instead...");
+			AGCraftPlugin.logger.warning ("Error: Cannot find value for " + key + ". Using default value " + defaultValue.toString() + " instead...");
 			result = defaultValue;
 		}
 		else
 		{
-			System.out.println ("Loaded variable " + result.toString() + " for " + key + "!");
+			AGCraftPlugin.logger.config ("Loaded variable " + result.toString() + " for " + key + "!");
 		}
 		return result;
 	}

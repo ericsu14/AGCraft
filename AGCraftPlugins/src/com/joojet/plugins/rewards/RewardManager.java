@@ -115,7 +115,7 @@ public class RewardManager extends AGListener
 						break;
 				}
 				player.sendMessage(ChatColor.GREEN + "Be sure to run " + ChatColor.GOLD + "/rewards" + ChatColor.GREEN + " to claim your rewards once we revert back to the main server!");
-				System.out.println ("I just awarded " + player.getDisplayName() + " prizes for " + type.toString() + "!");
+				AGCraftPlugin.logger.info ("I just awarded " + player.getDisplayName() + " prizes for " + type.toString() + "!");
 			}
 		} 
 		catch (SQLException e) 

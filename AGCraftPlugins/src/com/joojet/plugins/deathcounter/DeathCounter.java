@@ -43,10 +43,10 @@ public class DeathCounter
 		{
 			if (p != null)
 			{
-				System.out.println ("Found offline player with UUID " + p.getUniqueId());
+				AGCraftPlugin.logger.info ("Found offline player with UUID " + p.getUniqueId());
 				// Gets the player's current deaths
 				int deaths = p.getStatistic(Statistic.DEATHS);
-				System.out.println ("Deaths: " + deaths);
+				AGCraftPlugin.logger.info ("Deaths: " + deaths);
 				deathCounterObj.getScore(p).setScore(deaths);
 			}
 		}

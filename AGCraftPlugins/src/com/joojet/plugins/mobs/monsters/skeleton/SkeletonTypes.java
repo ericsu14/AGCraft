@@ -13,7 +13,7 @@ public class SkeletonTypes extends MonsterTypes {
 		this.addEquipment(new PotentSkeleton(), 40);
 		this.addEquipment(new HurtfulSkeleton(), 18);
 		this.addEquipment(new UltimateBadassSkeleton(), 2);
-		this.addEquipment(new SoulEater(), 70);
-		this.addEquipment(new SkullKid (), 10);
+		this.addEquipment(new SoulEater(), 75);
+		this.addEquipment(new SkullKid (), 5);
 	}
 }

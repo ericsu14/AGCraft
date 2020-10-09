@@ -2,8 +2,10 @@ package com.joojet.plugins.agcraft.main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.joojet.biblefetcher.database.CreateDatabase;
 import com.joojet.biblefetcher.interpreter.BibleCommandInterpreter;
@@ -46,6 +48,8 @@ public class AGCraftPlugin extends JavaPlugin
 {
 	/** Key used to reference the amplified mob spawner's debug mode */
 	public final static String DEBUG_MODE_KEY = "debug-mode";
+	/** Stores the logger instance used by this plugin */
+	public static PluginLogger logger;
 	// Stores an instance of the plugin itself
 	public static AGCraftPlugin plugin;
 	// Config file manager
@@ -88,6 +92,8 @@ public class AGCraftPlugin extends JavaPlugin
 		this.monsterTypeInterpreter = new MonsterTypeInterpreter ();
 		this.musicListener = new MusicListener();
 		this.bossBarController = new BossBarController(this.monsterTypeInterpreter, this.musicListener);
+		logger = new PluginLogger (this);
+		logger.setLevel(Level.ALL);
 	}
 	
 	@Override
