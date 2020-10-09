@@ -28,7 +28,7 @@ public class DoomGuy extends MythicMob
 	{
 		super (MonsterType.DOOM_GUY);
 		this.name = StringUtil.alternateTextColors("The Doom Slayer", TextPattern.WORD, 
-				ChatColor.DARK_GRAY, ChatColor.DARK_RED, ChatColor.DARK_GREEN);
+				ChatColor.DARK_GRAY, ChatColor.DARK_RED);
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.05f, 1.00f);
 		this.color = ChatColor.DARK_RED;
 		this.setStat(MonsterStat.HEALTH, 50.0);
