@@ -298,7 +298,8 @@ public class EquipmentTools
 		Attribute attribute;
 		for (Entry<MonsterStat, Double> stat : mobStats.entrySet())
 		{
-			if (stat.getKey().containsAttribute())
+			if (stat.getKey().containsAttribute()
+					&& entity.getAttribute(stat.getKey().getAttribute()) != null)
 			{
 				if (stat.getKey() != MonsterStat.HEALTH)
 				{
