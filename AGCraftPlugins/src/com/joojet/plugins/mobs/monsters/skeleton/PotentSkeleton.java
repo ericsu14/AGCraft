@@ -24,10 +24,9 @@ public class PotentSkeleton extends OverworldMob
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.30);
 		this.weapon = new PotentBow (this.color);
 		this.chestplate = new BulletproofIronChestplate (this.color);
-		this.leggings = new ItemStack (Material.IRON_LEGGINGS, 1);
 		this.boots = new LightweightIronBoots (this.color);
 		this.setStat(MonsterStat.BASE_SPEED, 0.20);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 6.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 8.0);
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.EXPERIENCE, 15.0);
 	}
