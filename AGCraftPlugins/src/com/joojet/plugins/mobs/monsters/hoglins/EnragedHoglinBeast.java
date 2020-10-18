@@ -2,6 +2,7 @@ package com.joojet.plugins.mobs.monsters.hoglins;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
@@ -17,6 +18,7 @@ public class EnragedHoglinBeast extends LegendaryMob
 		super (MonsterType.ENRAGED_HOGLIN_BEAST);
 		this.name = "Enraged Hoglin Beast";
 		this.color = ChatColor.GOLD;
+		this.addBiomes(Biome.THE_VOID);
 		
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 30.0);
 		this.setStat(MonsterStat.BASE_ARMOR, 20.0);

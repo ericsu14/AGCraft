@@ -1,8 +1,6 @@
 package com.joojet.plugins.mobs.monsters.skeleton;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
