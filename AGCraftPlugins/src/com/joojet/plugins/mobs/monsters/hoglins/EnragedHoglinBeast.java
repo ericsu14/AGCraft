@@ -20,8 +20,8 @@ public class EnragedHoglinBeast extends LegendaryMob
 		this.color = ChatColor.GOLD;
 		this.addBiomes(Biome.THE_VOID);
 		
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 30.0);
-		this.setStat(MonsterStat.BASE_ARMOR, 20.0);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 20.0);
+		this.setStat(MonsterStat.BASE_ARMOR, 24.0);
 		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 12.0);
 		this.setStat(MonsterStat.KNOCKBACK_RESISTANCE, 0.45);
 		this.setStat(MonsterStat.EXPERIENCE, 60.0);
@@ -34,6 +34,6 @@ public class EnragedHoglinBeast extends LegendaryMob
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.25, 1, 3),
 				new MonsterDrop (Material.GOLD_INGOT, 0.75, 4, 7),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.25, 1, 1),
-				new MonsterDrop (Material.COOKED_PORKCHOP, 1.00, 24, 32));
+				new MonsterDrop (Material.COOKED_PORKCHOP, 1.00, 16, 24));
 	}
 }

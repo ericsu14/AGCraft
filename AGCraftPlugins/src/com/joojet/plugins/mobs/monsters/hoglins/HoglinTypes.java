@@ -10,7 +10,7 @@ public class HoglinTypes extends MonsterTypes
 	public HoglinTypes (MonsterTypeInterpreter monsterTypeInterpreter)
 	{
 		super (monsterTypeInterpreter, EntityType.HOGLIN);
-		this.addEquipment(new HoglinBeast (), 80);
-		this.addEquipment(new EnragedHoglinBeast (), 20);
+		this.addEquipment(new HoglinBeast (), 85);
+		this.addEquipment(new EnragedHoglinBeast (), 15);
 	}
 }

@@ -25,7 +25,7 @@ public class HoglinBeast extends EpicMob
 		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 6.0);
 		this.setStat(MonsterStat.EXPERIENCE, 25.0);
 		
-		this.addMonsterDrops(new MonsterDrop (Material.COOKED_PORKCHOP, 1.00, 2, 8),
+		this.addMonsterDrops(new MonsterDrop (Material.COOKED_PORKCHOP, 1.00, 2, 4),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.075, 1, 1));
 	}
 
