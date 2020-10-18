@@ -25,6 +25,7 @@ public class SoulDestroyer extends EpicMob
 		this.color = ChatColor.LIGHT_PURPLE;
 		
 		this.setDropRates(0.15f, 0.03f, 0.03f, 0.03f, 0.05f, 0.15f);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 6.0);
 		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);

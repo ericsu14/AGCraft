@@ -32,7 +32,7 @@ public class DoomGuy extends MythicMob
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.05f, 1.00f);
 		this.color = ChatColor.DARK_RED;
 		this.setStat(MonsterStat.HEALTH, 50.0);
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 20.0);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 12.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 125.0);
 		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,

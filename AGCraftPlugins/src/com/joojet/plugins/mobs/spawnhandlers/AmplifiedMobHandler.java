@@ -15,6 +15,7 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.hoglins.HoglinTypes;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
 import com.joojet.plugins.mobs.monsters.piglin.PiglinTypes;
 import com.joojet.plugins.mobs.monsters.skeleton.SkeletonTypes;
@@ -47,7 +48,8 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 				new WolfTypes(this.monsterTypeInterpreter),
 				new WitherSkeletonTypes(this.monsterTypeInterpreter),
 				new ZombiePigmenTypes(this.monsterTypeInterpreter),
-				new PiglinTypes(this.monsterTypeInterpreter));
+				new PiglinTypes(this.monsterTypeInterpreter),
+				new HoglinTypes (this.monsterTypeInterpreter));
 		
 		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.BUILD_IRONGOLEM,
 				SpawnReason.BUILD_SNOWMAN, SpawnReason.VILLAGE_DEFENSE, SpawnReason.BREEDING);

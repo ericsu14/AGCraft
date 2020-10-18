@@ -4,8 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
-import org.bukkit.inventory.ItemStack;
 
+import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -13,6 +13,8 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightDiamondBoots;
 import com.joojet.plugins.mobs.equipment.chest.ReinforcedDiamondChestplate;
+import com.joojet.plugins.mobs.equipment.head.ReinforcedDiamondHelmet;
+import com.joojet.plugins.mobs.equipment.leggings.ReinforcedDiamondLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.EnhancedWitheringArrow;
 import com.joojet.plugins.mobs.equipment.weapons.AngelOfDeath;
 import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
@@ -40,11 +42,16 @@ public class SoulObliterator extends LegendaryMob
 				EntityType.HUSK, EntityType.STRAY);
 		
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE);
-		this.helmet = new ItemStack (Material.WITHER_SKELETON_SKULL, 1);
+		this.helmet = new ReinforcedDiamondHelmet (this.color);
 		this.chestplate = new ReinforcedDiamondChestplate (this.color);
+		this.leggings = new ReinforcedDiamondLeggings (this.color);
 		this.boots = new LightweightDiamondBoots (this.color);
 		this.weapon = new AngelOfDeath (this.color);
 		this.offhand = new EnhancedWitheringArrow (this.color);
+		
+		this.addMonsterDrops(new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.25, 1, 2),
+				new MonsterDrop (Material.WITHER_SKELETON_SKULL, 0.10, 1, 1),
+				new MonsterDrop (Material.DIAMOND, 0.25, 1, 3));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 45.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.50);
