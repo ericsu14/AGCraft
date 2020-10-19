@@ -52,7 +52,9 @@ public enum RewardType
 	JOHNNY_RUSNAK,
 	SPIRITUAL_TRAVESTY,
 	SPRINKLES_CAKE,
-	THE_TERMINATOR;
+	THE_TERMINATOR,
+	SOUL_OBLITERATOR,
+	HELL_WALKER;
 	
 	public ItemStack getReward ()
 	{
@@ -124,6 +126,10 @@ public enum RewardType
 				return new SprinklesCake ();
 			case THE_TERMINATOR:
 				return new SummonTheTerminator();
+			case SOUL_OBLITERATOR:
+				return new SummonSoulObliterator();
+			case HELL_WALKER:
+				return new SummonHellWalker ();
 			default:
 				break;
 		}

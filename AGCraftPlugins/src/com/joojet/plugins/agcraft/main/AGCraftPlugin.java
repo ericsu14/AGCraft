@@ -261,7 +261,7 @@ public class AGCraftPlugin extends JavaPlugin
 	public void toggleDebugMode ()
 	{
 		enableDebugMode = !(enableDebugMode);
-		System.out.println ("Debug mode " + ((enableDebugMode) ? "activated" : "disabled") + ".");
+		logger.info ("Debug mode " + ((enableDebugMode) ? "activated" : "disabled") + ".");
 	}
 	
 	/** Adds in a new player command without a tab completer

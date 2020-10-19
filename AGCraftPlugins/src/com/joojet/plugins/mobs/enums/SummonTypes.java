@@ -24,7 +24,9 @@ public enum SummonTypes
 	ETERNAL_TROJAN_ARCHER,
 	SHADOW_CLONE_JOOJETSU,
 	THE_TERMINATOR,
-	JOHNNY_RUSNAK;
+	JOHNNY_RUSNAK,
+	HELL_WALKER,
+	SOUL_OBLITERATOR;
 	
 	public SummoningScroll getSummon ()
 	{
@@ -72,6 +74,10 @@ public enum SummonTypes
 				return new SummonTheTerminator();
 			case JOHNNY_RUSNAK:
 				return new SummonJohnnyRusnak();
+			case HELL_WALKER:
+				return new SummonHellWalker ();
+			case SOUL_OBLITERATOR:
+				return new SummonSoulObliterator();
 			default:
 				break;
 		}

@@ -12,6 +12,7 @@ public class WitherSkeletonTypes extends MonsterTypes
 		super (monsterTypeInterpreter, EntityType.WITHER_SKELETON);
 		this.addEquipment(new SoulDestroyer(), 60);
 		this.addEquipment(new SoulObliterator(), 35);
+		this.addEquipment(new HellWalker (), 10);
 		this.addEquipment(new DoomGuy(), 5);
 	}
 }
