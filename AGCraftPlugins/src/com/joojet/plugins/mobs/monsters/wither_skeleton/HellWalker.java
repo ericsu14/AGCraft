@@ -24,8 +24,8 @@ public class HellWalker extends MythicMob
 	public HellWalker ()
 	{
 		super (MonsterType.HELL_WALKER);
-		this.name = StringUtil.alternateTextColors("The Hell Walker", TextPattern.WORD, ChatColor.RED, ChatColor.DARK_GRAY);
-		this.color = ChatColor.RED;
+		this.name = StringUtil.alternateTextColors("The Hell Walker", TextPattern.WORD, ChatColor.DARK_GRAY, ChatColor.DARK_RED);
+		this.color = ChatColor.DARK_RED;
 		
 		this.addBiomes(Biome.THE_VOID);
 		
