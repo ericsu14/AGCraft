@@ -36,10 +36,11 @@ public class HellWalker extends MythicMob
 		this.weapon = new HellwalkerBlade (this.color);
 		this.offhand = new HellwalkerDagger (this.color);
 		
-		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER);
+		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER, MobFlag.HUNT_ON_SPAWN, MobFlag.SPAWN_LIGHTNING);
 		this.setStat(MonsterStat.EXPERIENCE, 60.0);
 		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 8.0);
+		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 75.0);
 		
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.35, 1, 3),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 1));
