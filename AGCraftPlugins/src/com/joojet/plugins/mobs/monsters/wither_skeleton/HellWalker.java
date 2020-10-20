@@ -24,7 +24,8 @@ public class HellWalker extends MythicMob
 	public HellWalker ()
 	{
 		super (MonsterType.HELL_WALKER);
-		this.name = StringUtil.alternateTextColors("The Hell Walker", TextPattern.WORD, ChatColor.DARK_GRAY, ChatColor.DARK_RED);
+		this.name = StringUtil.alternateTextColors("The Hell Walker", TextPattern.WORD, 
+				ChatColor.DARK_GRAY, ChatColor.DARK_RED);
 		this.color = ChatColor.DARK_RED;
 		
 		this.addBiomes(Biome.THE_VOID);
@@ -36,7 +37,8 @@ public class HellWalker extends MythicMob
 		this.weapon = new HellwalkerBlade (this.color);
 		this.offhand = new HellwalkerDagger (this.color);
 		
-		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER, MobFlag.HUNT_ON_SPAWN, MobFlag.SPAWN_LIGHTNING);
+		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER, MobFlag.HUNT_ON_SPAWN, 
+				MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME);
 		this.setStat(MonsterStat.EXPERIENCE, 60.0);
 		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 8.0);

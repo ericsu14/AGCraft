@@ -58,8 +58,13 @@ public class SummoningScrollListener extends AGListener
 			if (SummoningScroll.isSummoningScroll(item))
 			{
 				// Attempts to get the summon ID from the summoning scroll
-				SummoningScroll scroll = this.summonInterpreter.searchTrie(new SummonedMetadata().getStringMetadata(itemMeta));
-				if (scroll == null)
+				SummoningScroll scroll = null;
+				SummonedMetadata summonMetadata = new SummonedMetadata();
+				if (summonMetadata.getStringMetadata(itemMeta) != null)
+				{
+					scroll = this.summonInterpreter.searchTrie(summonMetadata.getStringMetadata(itemMeta));
+				}
+				else if (itemMeta.hasLocalizedName())
 				{
 					scroll = this.summonInterpreter.searchTrie(itemMeta.getLocalizedName());
 				}
