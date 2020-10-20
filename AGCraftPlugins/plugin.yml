@@ -79,6 +79,10 @@ commands:
     description: Launches a fireworks show around your location!
     usage: /fireworks <radius> <power> <ammo-count>
     permission: agcraft.player
+  summonEntity:
+    description: Summons a custom entity by its entity ID
+    usage: /summonEntity <entity ID>
+    permission: agcraft.admin
 
 permissions:
   agcraft.*:

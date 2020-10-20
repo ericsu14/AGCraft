@@ -20,7 +20,8 @@ public enum CommandType
 	FORGIVE_PLAYER (PermissionType.ADMIN),
 	CHANGE_SERVER_MODE (PermissionType.ADMIN),
 	RELOAD_CONFIG_FILE (PermissionType.ADMIN),
-	FIREWORKS (PermissionType.PLAYER);
+	FIREWORKS (PermissionType.PLAYER),
+	SUMMON_ENTITY (PermissionType.ADMIN);
 	
 	private PermissionType permissionType;
 	

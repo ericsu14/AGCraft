@@ -31,6 +31,8 @@ import com.joojet.plugins.mobs.PathfindTargetingEventListener;
 import com.joojet.plugins.mobs.SoulBoundListener;
 import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
+import com.joojet.plugins.mobs.commands.SummonEntity;
+import com.joojet.plugins.mobs.commands.tabcompleter.SummonEntityTabCompleter;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.music.MusicListener;
@@ -109,13 +111,14 @@ public class AGCraftPlugin extends JavaPlugin
 		CreateLocationDatabase.createDatabase();
 		CreateRewardsDatabase.createDatabase();
 		
+		this.summonTypeInterpreter = new SummoningScrollInterpreter ();
+		
 		// Loads in all commands
 		this.initCommands();
 		this.loadCommands();
 		
 		// Death counter
 		deathCounter = new DeathCounter();
-		this.summonTypeInterpreter = new SummoningScrollInterpreter ();
 		
 		// Amplified mob spawner
 		this.registerEventListener(new AmplifiedMobSpawner (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController));
@@ -208,6 +211,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addPlayerCommand (new ChangeServerMode (this.serverModeInterpreter));
 		this.addPlayerCommand (new ReloadConfigFile ());
 		this.addPlayerCommand (new FireworksCommand(this.musicListener));
+		this.addPlayerCommand (new SummonEntity (this.summonTypeInterpreter, this.bossBarController));
 		
 		// Tab Completer
 		this.addTabCompleter(new BibleTabCompleter (this.bibleInterpreter));
@@ -220,6 +224,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addTabCompleter(new RewardPlayerTabCompleter());
 		this.addTabCompleter(new PunishPlayerTabCompleter());
 		this.addTabCompleter(new FireworkCommandTabCompleter());
+		this.addTabCompleter(new SummonEntityTabCompleter());
 	}
 	
 	/** Loads in all known commands into the plugin */
