@@ -1,5 +1,7 @@
 package com.joojet.plugins.agcraft.interfaces;
 
+import java.util.HashSet;
+
 import com.joojet.biblefetcher.trie.TrieNode;
 import com.joojet.biblefetcher.trie.TrieUtil;
 
@@ -9,6 +11,8 @@ public abstract class AbstractInterpreter <E>
 	protected TrieNode <E> root;
 	/** Array of values used to populate the trie */
 	protected E[] values;
+	/** A set of all keys that are already inserted into this search trie */
+	protected HashSet <String> keys;
 	
 	/** Creates a new instance of the search term interpreter
 	 *  with an initially empty search trie. */
@@ -16,6 +20,7 @@ public abstract class AbstractInterpreter <E>
 	{
 		this.root = new TrieNode <E> (' ', null);
 		this.values = null;
+		this.keys = new HashSet <String> ();
 	}
 	/** Creates a new instance of the search term interpreter.
 	 *  This class stores the list of values into an internal search trie,
@@ -25,6 +30,7 @@ public abstract class AbstractInterpreter <E>
 	{
 		this.root = new TrieNode <E> (' ', null);
 		this.values = values;
+		this.keys = new HashSet <String> ();
 		this.populateTrie();
 	}
 	
@@ -35,7 +41,7 @@ public abstract class AbstractInterpreter <E>
 	{
 		for (E element : this.values)
 		{
-			TrieUtil.insertWord(element.toString(), element, this.root);
+			this.insertWord(element.toString(), element);
 		}
 	}
 	
@@ -44,7 +50,12 @@ public abstract class AbstractInterpreter <E>
 	 * 		@param value - Entry's value that is referenced by the key */
 	public void insertWord (String key, E value)
 	{
-		TrieUtil.insertWord(key, value, this.root);
+		String keyLower = key.toLowerCase();
+		if (!this.keys.contains(keyLower))
+		{
+			TrieUtil.insertWord(keyLower, value, this.root);
+			this.keys.add(keyLower);
+		}
 	}
 	
 	/** Searches the internal search trie for a stored value that is referenced by its
@@ -54,6 +65,12 @@ public abstract class AbstractInterpreter <E>
 	public E searchTrie (String input)
 	{
 		return TrieUtil.searchTrie(input, this.root);
+	}
+	
+	/** Returns a set of all keys that are already inserted into this trie */
+	public HashSet <String> getKeySet ()
+	{
+		return this.keys;
 	}
 	
 }

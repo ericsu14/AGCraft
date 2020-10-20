@@ -32,6 +32,7 @@ import com.joojet.plugins.mobs.SoulBoundListener;
 import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.commands.*;
@@ -74,6 +75,8 @@ public class AGCraftPlugin extends JavaPlugin
 	protected BibleCommandInterpreter bibleInterpreter;
 	/** Search trie used to lookup custom monsters by name */
 	protected MonsterTypeInterpreter monsterTypeInterpreter;
+	/** Search trie used to initialize custom summoning scroll instances */
+	protected SummoningScrollInterpreter summonTypeInterpreter;
 	
 	/** Stores a set of active listener instances */
 	protected ArrayList <AGListener> activeEventListeners;
@@ -112,12 +115,13 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Death counter
 		deathCounter = new DeathCounter();
+		this.summonTypeInterpreter = new SummoningScrollInterpreter ();
 		
 		// Amplified mob spawner
-		this.registerEventListener(new AmplifiedMobSpawner (this.monsterTypeInterpreter, this.bossBarController));
+		this.registerEventListener(new AmplifiedMobSpawner (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController));
 		
 		// Summoning Scroll listener
-		this.registerEventListener (new SummoningScrollListener(this.bossBarController));
+		this.registerEventListener (new SummoningScrollListener(this.summonTypeInterpreter, this.bossBarController));
 		
 		// Player login handler
 		this.registerEventListener(new RewardManager());

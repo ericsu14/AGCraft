@@ -18,7 +18,6 @@ import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MonsterStat;
-import com.joojet.plugins.mobs.enums.SummonTypes;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.metadata.SummonedMetadata;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
@@ -33,10 +32,11 @@ public class SummoningScrollListener extends AGListener
 	/** Stores a reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
 	
-	public SummoningScrollListener (BossBarController bossBarController)
+	
+	public SummoningScrollListener (SummoningScrollInterpreter summonTypeInterpreter, BossBarController bossBarController)
 	{
 		this.bossBarController = bossBarController;
-		this.summonInterpreter = new SummoningScrollInterpreter();
+		this.summonInterpreter = summonTypeInterpreter;
 	}
 	
 	@Override
@@ -57,11 +57,15 @@ public class SummoningScrollListener extends AGListener
 			ItemMeta itemMeta = item.getItemMeta();
 			if (SummoningScroll.isSummoningScroll(item))
 			{
-				SummonTypes scrollType = this.summonInterpreter.searchTrie(itemMeta.getLocalizedName());
-				if (scrollType != null)
+				// Attempts to get the summon ID from the summoning scroll
+				SummoningScroll scroll = this.summonInterpreter.searchTrie(new SummonedMetadata().getStringMetadata(itemMeta));
+				if (scroll == null)
 				{
-					SummoningScroll scroll = scrollType.getSummon();
-					
+					scroll = this.summonInterpreter.searchTrie(itemMeta.getLocalizedName());
+				}
+				
+				if (scroll != null)
+				{	
 					// Gets player's current location
 					Location spawnLocation = p.getEyeLocation();
 					
@@ -82,7 +86,7 @@ public class SummoningScrollListener extends AGListener
 					LivingEntity entity = (LivingEntity) p.getWorld().spawnEntity(spawnLocation, scroll.getMobType());
 					
 					// Attaches special metadata that identifies this entity as a summoned custom monster
-					new SummonedMetadata (scroll.getMob().getName()).addStringMetadata(entity);
+					new SummonedMetadata (scroll.getMob().toString()).addStringMetadata(entity);
 					
 					// If the spawned entity is a golem, make him player built
 					if (entity instanceof IronGolem)

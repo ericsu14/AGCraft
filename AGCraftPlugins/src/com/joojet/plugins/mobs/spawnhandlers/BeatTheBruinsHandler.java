@@ -8,6 +8,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import com.joojet.plugins.mobs.allies.horse.beatthebruins.USCHorseTypes;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.giant.beatthebruins.BruinGiantTypes;
 import com.joojet.plugins.mobs.monsters.phantom.beatthebruins.BeatTheBruinPhantomTypes;
@@ -22,15 +23,15 @@ public class BeatTheBruinsHandler extends AbstractSpawnHandler
 	/** The key used to reference this handler's spawn chance variable from the config file*/
 	public static final String BEAT_THE_BRUINS_HANDLER_KEY = "beat-the-bruins-spawn-chance";
 	
-	public BeatTheBruinsHandler (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
+	public BeatTheBruinsHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, BossBarController bossBarController)
 	{
-		super (monsterTypeInterpreter, bossBarController, BEAT_THE_BRUINS_HANDLER_KEY);
-		this.addMonsterTypes(new CollegeZombieTypes(this.monsterTypeInterpreter),
-				new CollegeSkeletonTypes(this.monsterTypeInterpreter),
-				new BruinPolarBearTypes (this.monsterTypeInterpreter),
-				new BruinGiantTypes (this.monsterTypeInterpreter),
-				new USCHorseTypes (this.monsterTypeInterpreter),
-				new BeatTheBruinPhantomTypes (this.monsterTypeInterpreter));
+		super (monsterTypeInterpreter, summonTypeInterpreter, bossBarController, BEAT_THE_BRUINS_HANDLER_KEY);
+		this.addMonsterTypes(new CollegeZombieTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new CollegeSkeletonTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new BruinPolarBearTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new BruinGiantTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new USCHorseTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new BeatTheBruinPhantomTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter));
 		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.SPAWNER_EGG, SpawnReason.REINFORCEMENTS);
 	}
 	

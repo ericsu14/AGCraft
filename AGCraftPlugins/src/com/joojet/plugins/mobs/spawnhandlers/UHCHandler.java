@@ -7,6 +7,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.monsters.ghast.UHC.UHCGhastTypes;
 
 public class UHCHandler extends AbstractSpawnHandler
@@ -14,10 +15,10 @@ public class UHCHandler extends AbstractSpawnHandler
 	/** The key used to reference this handler's spawn chance variable from the config file*/
 	public static final String UHC_HANDLER_KEY = "uhc-handler-spawn-chance";
 	
-	public UHCHandler (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
+	public UHCHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, BossBarController bossBarController)
 	{
-		super (monsterTypeInterpreter, bossBarController, UHC_HANDLER_KEY);
-		this.addMonsterTypes(new UHCGhastTypes(this.monsterTypeInterpreter));
+		super (monsterTypeInterpreter, summonTypeInterpreter, bossBarController, UHC_HANDLER_KEY);
+		this.addMonsterTypes(new UHCGhastTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter));
 		this.addSpawnReasons(SpawnReason.NATURAL);
 	}
 	

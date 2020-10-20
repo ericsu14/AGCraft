@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.monsters.phantom.julyfourth.FireworkPhantom;
 import com.joojet.plugins.mobs.monsters.phantom.julyfourth.JulyFourthPhantomTypes;
 import com.joojet.plugins.mobs.monsters.pillager.julyfourth.PatrioticPillagerTypes;
@@ -25,14 +26,14 @@ public class JulyFourthHandler extends AbstractSpawnHandler
 	/** Used to generate random fireworks */
 	private FireworkTypes fwTypes;
 	
-	public JulyFourthHandler (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
+	public JulyFourthHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, BossBarController bossBarController)
 	{
-		super (monsterTypeInterpreter, bossBarController, JULY_FOURTH_HANDLER_KEY);
+		super (monsterTypeInterpreter, summonTypeInterpreter, bossBarController, JULY_FOURTH_HANDLER_KEY);
 		this.fwTypes = new FireworkTypes ();
-		this.addMonsterTypes(new PatrioticZombieTypes(this.monsterTypeInterpreter), 
-				new PatrioticSkeletonTypes(this.monsterTypeInterpreter),
-				new PatrioticPillagerTypes(this.monsterTypeInterpreter),
-				new JulyFourthPhantomTypes (this.monsterTypeInterpreter));
+		this.addMonsterTypes(new PatrioticZombieTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter), 
+				new PatrioticSkeletonTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new PatrioticPillagerTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new JulyFourthPhantomTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter));
 		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.SPAWNER_EGG, SpawnReason.REINFORCEMENTS,
 				SpawnReason.DEFAULT, SpawnReason.DISPENSE_EGG, SpawnReason.LIGHTNING, SpawnReason.PATROL,
 				SpawnReason.TRAP);

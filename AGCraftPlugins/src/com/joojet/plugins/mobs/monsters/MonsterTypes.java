@@ -8,6 +8,8 @@ import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
+import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 
 public abstract class MonsterTypes 
 {
@@ -21,14 +23,17 @@ public abstract class MonsterTypes
 	protected int size;
 	/** Search trie used to lookup custom monsters by name */
 	protected MonsterTypeInterpreter monsterTypeInterpreter;
+	/** Search trie to initialize summoning scroll instances */
+	protected SummoningScrollInterpreter summonTypeInterpreter;
 	
-	public MonsterTypes (MonsterTypeInterpreter monsterTypeInterpreter, EntityType... entities)
+	public MonsterTypes (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, EntityType... entities)
 	{
 		this.equipmentList = new ArrayList <MobEquipment> ();
 		this.supportedEntities = new ArrayList <EntityType> ();
 		this.random = new Random ();
 		this.size = 0;
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
+		this.summonTypeInterpreter = summonTypeInterpreter;
 		
 		for (EntityType entity : entities)
 		{
@@ -44,6 +49,11 @@ public abstract class MonsterTypes
 		equipment.setSpawnWeight(weight);
 		equipmentList.add(equipment);
 		this.monsterTypeInterpreter.insertWord(equipment.toString(), equipment);
+		// Registers the entity as a new summoning scroll
+		if (!this.supportedEntities.isEmpty())
+		{
+			this.summonTypeInterpreter.insertWord(equipment.toString(), new SummoningScroll (equipment, this.supportedEntities.get(0)));
+		}
 		++this.size;
 	}
 	

@@ -13,6 +13,7 @@ import com.joojet.plugins.mobs.allies.snowman.SnowmanTypes;
 import com.joojet.plugins.mobs.allies.wolf.WolfTypes;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.hoglins.HoglinTypes;
@@ -34,22 +35,22 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 	/** Stores custom wandering villager instances */
 	private WanderingVillagerTypes wanderingTypes;
 	
-	public AmplifiedMobHandler (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
+	public AmplifiedMobHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, BossBarController bossBarController)
 	{
-		super (monsterTypeInterpreter, bossBarController, AMPLIFIED_MOB_HANDLER_KEY);
-		this.wanderingTypes = new WanderingVillagerTypes (this.monsterTypeInterpreter);
+		super (monsterTypeInterpreter, summonTypeInterpreter, bossBarController, AMPLIFIED_MOB_HANDLER_KEY);
+		this.wanderingTypes = new WanderingVillagerTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter);
 		
-		this.addMonsterTypes(new ZombieTypes(this.monsterTypeInterpreter),
-				new SkeletonTypes(this.monsterTypeInterpreter),
-				new SpiderTypes(this.monsterTypeInterpreter),
-				new GolemTypes(this.monsterTypeInterpreter),
-				new SnowmanTypes(this.monsterTypeInterpreter),
-				new HuskTypes(this.monsterTypeInterpreter),
-				new WolfTypes(this.monsterTypeInterpreter),
-				new WitherSkeletonTypes(this.monsterTypeInterpreter),
-				new ZombiePigmenTypes(this.monsterTypeInterpreter),
-				new PiglinTypes(this.monsterTypeInterpreter),
-				new HoglinTypes (this.monsterTypeInterpreter));
+		this.addMonsterTypes(new ZombieTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new SkeletonTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new SpiderTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new GolemTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new SnowmanTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new HuskTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new WolfTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new WitherSkeletonTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new ZombiePigmenTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new PiglinTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new HoglinTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter));
 		
 		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.BUILD_IRONGOLEM,
 				SpawnReason.BUILD_SNOWMAN, SpawnReason.VILLAGE_DEFENSE, SpawnReason.BREEDING);

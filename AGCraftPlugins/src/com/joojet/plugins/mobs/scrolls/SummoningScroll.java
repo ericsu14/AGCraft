@@ -12,11 +12,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.Equipment;
+import com.joojet.plugins.mobs.metadata.SummonedMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 import org.bukkit.ChatColor;
 
-public abstract class SummoningScroll extends Equipment 
+public class SummoningScroll extends Equipment 
 {
 	/** The mob to be summoned */
 	protected MobEquipment mob;
@@ -37,7 +38,7 @@ public abstract class SummoningScroll extends Equipment
 		ArrayList <String> scrollLore = new ArrayList <String> ();
 		scrollLore.add(ChatColor.DARK_PURPLE + "Right click to summon " + mob.getChatColor() + mob.getName());
 		scrollMeta.setLore(scrollLore);
-		scrollMeta.setLocalizedName(mob.getName());
+		new SummonedMetadata (mob.toString()).addStringMetadata(scrollMeta);
 		this.setItemMeta(scrollMeta);
 		
 		this.mob = mob;
@@ -84,7 +85,7 @@ public abstract class SummoningScroll extends Equipment
 	{
 		ItemMeta itemMeta = item.getItemMeta();
 		return (item.getType().equals(Material.PAPER)
-			&& itemMeta.hasLocalizedName()
+			&& (itemMeta.hasLocalizedName() || new SummonedMetadata().getStringMetadata(itemMeta) != null)
 			&& itemMeta.hasEnchants());
 	}
 	

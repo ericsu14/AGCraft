@@ -41,6 +41,7 @@ import com.joojet.plugins.mobs.equipment.Equipment;
 import com.joojet.plugins.mobs.equipment.EquipmentLoader;
 import com.joojet.plugins.mobs.fireworks.tasks.SpawnFireworksOnLocationTask;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.interpreter.ThemedServerEventInterpreter;
 import com.joojet.plugins.mobs.metadata.EquipmentTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -59,6 +60,8 @@ public class AmplifiedMobSpawner extends AGListener
 	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	/** Stores the command interpreter used for server event types */
 	protected ThemedServerEventInterpreter serverEventInterpreter;
+	/** Search trie used to initialize custom summoning scroll instances */
+	protected SummoningScrollInterpreter summonTypeInterpreter;
 	
 	/** Contains an internal search trie allowing custom equipment to be able to be looked up by its
 	 *  Equipment Type identifier. */
@@ -79,14 +82,15 @@ public class AmplifiedMobSpawner extends AGListener
 	/** Creates a new instance of this mob spawner class,
 	 *  which adds listeners to Minecraft's mob spawn events for
 	 *  having a certain chance of equipping them with custom armor, buffs, and weapons. */
-	public AmplifiedMobSpawner (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
+	public AmplifiedMobSpawner (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, BossBarController bossBarController)
 	{
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
-		this.julyFourthHandler = new JulyFourthHandler (this.monsterTypeInterpreter, this.bossBarController);
-		this.amplifiedMobHandler = new AmplifiedMobHandler(this.monsterTypeInterpreter, this.bossBarController);
-		this.bruinHandler = new BeatTheBruinsHandler (this.monsterTypeInterpreter, this.bossBarController);
-		this.uhcHandler = new UHCHandler(this.monsterTypeInterpreter, this.bossBarController);
+		this.summonTypeInterpreter = summonTypeInterpreter;
+		this.julyFourthHandler = new JulyFourthHandler (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController);
+		this.amplifiedMobHandler = new AmplifiedMobHandler(this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController);
+		this.bruinHandler = new BeatTheBruinsHandler (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController);
+		this.uhcHandler = new UHCHandler(this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController);
 	}
 	
 	@Override

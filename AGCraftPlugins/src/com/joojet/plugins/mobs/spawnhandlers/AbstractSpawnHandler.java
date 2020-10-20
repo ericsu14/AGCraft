@@ -14,6 +14,7 @@ import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MonsterTypes;
 import com.joojet.plugins.mobs.spawnhandlers.task.HandleSpawnEventTask;
@@ -33,6 +34,8 @@ public abstract class AbstractSpawnHandler
 	protected BossBarController bossBarController;
 	/** Search trie used to lookup custom monsters by name */
 	protected MonsterTypeInterpreter monsterTypeInterpreter;
+	/** Search trie to initialize summoning scroll instances */
+	protected SummoningScrollInterpreter summonTypeInterpreter;
 	/** Mob conversion chance */
 	protected Double spawnChance;
 	/** A key used to look up this handler's specific spawn chance from the main server config file */
@@ -49,11 +52,12 @@ public abstract class AbstractSpawnHandler
 	 *  @param spawnChance - Controls the chance in which custom mobs will spawn
 	 *  @param spawnChanceKey - A key used to look up this handler's specific spawn chance variable
 	 *         from the config file */
-	public AbstractSpawnHandler (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController, String spawnChanceKey)
+	public AbstractSpawnHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, BossBarController bossBarController, String spawnChanceKey)
 	{
 		this.spawnReasonFilter = EnumSet.noneOf(SpawnReason.class);
 		this.mobEquipmentTable = new HashMap <EntityType, MonsterTypes> ();
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
+		this.summonTypeInterpreter = summonTypeInterpreter;
 		this.bossBarController = bossBarController;
 		this.spawnChance = 0.15;
 		this.spawnChanceKey = spawnChanceKey;
