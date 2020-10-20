@@ -33,7 +33,6 @@ public class SkullKid extends MythicMob
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.40);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 30.0);
 		this.color = ChatColor.DARK_RED;
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING, 
 				MobFlag.HUNT_ON_SPAWN, MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER);

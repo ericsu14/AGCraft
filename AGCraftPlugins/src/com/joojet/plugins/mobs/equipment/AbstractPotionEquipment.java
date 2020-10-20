@@ -47,7 +47,7 @@ public abstract class AbstractPotionEquipment extends Equipment
 	protected void addPotionEffect (PotionEffectType effect, int duration, int amplifier)
 	{
 		PotionMeta potMeta = (PotionMeta) this.getItemMeta();
-		potMeta.addCustomEffect(new PotionEffect (effect, duration, amplifier), false);
+		potMeta.addCustomEffect(new PotionEffect (effect, duration, amplifier), true);
 		this.setItemMeta(potMeta);
 	}
 	

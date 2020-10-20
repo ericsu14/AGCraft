@@ -7,6 +7,7 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LightweightIronBoots;
 import com.joojet.plugins.mobs.equipment.chest.BulletproofIronChestplate;
+import com.joojet.plugins.mobs.equipment.leggings.ReinforcedChainmailLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.PotentBow;
 import com.joojet.plugins.mobs.monsters.factions.OverworldMob;
 
@@ -22,9 +23,10 @@ public class PotentSkeleton extends OverworldMob
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.30);
 		this.weapon = new PotentBow (this.color);
 		this.chestplate = new BulletproofIronChestplate (this.color);
+		this.leggings = new ReinforcedChainmailLeggings (this.color);
 		this.boots = new LightweightIronBoots (this.color);
 		this.setStat(MonsterStat.BASE_SPEED, 0.20);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 8.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 10.0);
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.EXPERIENCE, 15.0);
 	}
