@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -20,6 +21,7 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.metadata.SummonedMetadata;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
@@ -71,55 +73,7 @@ public class SummoningScrollListener extends AGListener
 				
 				if (scroll != null)
 				{	
-					// Gets player's current location
-					Location spawnLocation = p.getEyeLocation();
-					
-					// Checks if the monster has a y-limit flag enabled.
-					// If so, cancel the summoning scroll event if the player does not
-					// have EquipmentTools.openAirRequirement blocks of clear space above him/her.
-					if (scroll.getMob().containsStat(MonsterStat.Y_LIMIT)
-							&& (!EquipmentTools.checkSpawnSpace(p)
-									|| spawnLocation.getBlockY() < scroll.getMob().getStat(MonsterStat.Y_LIMIT)))
-					{
-						p.sendMessage(ChatColor.RED + "Error: Unable to summon the monster. Please check that there is at least "
-								+ EquipmentTools.openAirRequirement + " blocks of air above your current location.");
-						p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f);
-						return;
-					}
-		
-					// Spawns the entity into the world in front of the player
-					LivingEntity entity = (LivingEntity) p.getWorld().spawnEntity(spawnLocation, scroll.getMobType());
-					
-					// Attaches special metadata that identifies this entity as a summoned custom monster
-					new SummonedMetadata (scroll.getMob().toString()).addStringMetadata(entity);
-					
-					// If the spawned entity is a golem, make him player built
-					if (entity instanceof IronGolem)
-					{
-						IronGolem golem = (IronGolem) entity;
-						golem.setPlayerCreated(true);
-					}
-					
-					// If the spawned entity is a wolf, autotame him
-					if (entity instanceof Wolf)
-					{
-						Wolf wolf = (Wolf) entity;
-						wolf.setAdult();
-						wolf.setTamed(true);
-						wolf.setOwner(p);
-						wolf.setCollarColor(scroll.getMob().getDyeColor());
-					}
-					
-					EquipmentTools.equipEntity(entity, scroll.getMob(), this.bossBarController);
-					
-					// Entities are always persistent when summoned VIA summoning scroll
-					entity.setRemoveWhenFarAway(false);
-					
-					p.sendMessage(ChatColor.AQUA + "Sucessfully summoned " + scroll.getMob().getChatColor() + scroll.getName() + ChatColor.AQUA + "!");
-					p.playSound(spawnLocation, Sound.ENTITY_EVOKER_PREPARE_WOLOLO, 1.0f, 1.0f);
-					p.playSound(spawnLocation, Sound.ENTITY_EVOKER_CAST_SPELL, 1.0f, 1.0f);
-					p.spawnParticle(Particle.SPELL_INSTANT, spawnLocation, 10, 1.0, 1.0, 0.0, 0.1, null);
-					p.spawnParticle(Particle.SPELL_INSTANT, spawnLocation, 15, 1.0, 1.0, 0.0, 0.1, null);
+					summonMonster (p, scroll.getMob(), scroll.getMobType(), this.bossBarController);
 					int numScrolls = item.getAmount();
 					
 					// Dec. or wither away summoning scroll
@@ -135,6 +89,64 @@ public class SummoningScrollListener extends AGListener
 				}
 			}
 		}
+	}
+	
+	/** Summons a custom monster at the player's current location
+	 *  @param player - Player summoning the monster
+	 *  @param mob - MobEquipment instance of the monster being summoned
+	 *  @param entityType - The summoned monster's entity type
+	 *  @param bossBarController - Instance to the server's active boss bar controller */
+	public static void summonMonster (Player player, MobEquipment mob, EntityType entityType, BossBarController bossBarController)
+	{
+		// Gets player's current location
+		Location spawnLocation = player.getEyeLocation();
+		
+		// Checks if the monster has a y-limit flag enabled.
+		// If so, cancel the summoning scroll event if the player does not
+		// have EquipmentTools.openAirRequirement blocks of clear space above him/her.
+		if (mob.containsStat(MonsterStat.Y_LIMIT)
+				&& (!EquipmentTools.checkSpawnSpace(player)
+						|| spawnLocation.getBlockY() < mob.getStat(MonsterStat.Y_LIMIT)))
+		{
+			player.sendMessage(ChatColor.RED + "Error: Unable to summon the monster. Please check that there is at least "
+					+ EquipmentTools.openAirRequirement + " blocks of air above your current location.");
+			player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f);
+			return;
+		}
+
+		// Spawns the entity into the world in front of the player
+		LivingEntity entity = (LivingEntity) player.getWorld().spawnEntity(spawnLocation, entityType);
+		
+		// Attaches special metadata that identifies this entity as a summoned custom monster
+		new SummonedMetadata (mob.toString()).addStringMetadata(entity);
+		
+		// If the spawned entity is a golem, make him player built
+		if (entity instanceof IronGolem)
+		{
+			IronGolem golem = (IronGolem) entity;
+			golem.setPlayerCreated(true);
+		}
+		
+		// If the spawned entity is a wolf, autotame him
+		if (entity instanceof Wolf)
+		{
+			Wolf wolf = (Wolf) entity;
+			wolf.setAdult();
+			wolf.setTamed(true);
+			wolf.setOwner(player);
+			wolf.setCollarColor(mob.getDyeColor());
+		}
+		
+		EquipmentTools.equipEntity(entity, mob, bossBarController);
+		
+		// Entities are always persistent when summoned VIA summoning scroll
+		entity.setRemoveWhenFarAway(false);
+		
+		player.sendMessage(ChatColor.AQUA + "Sucessfully summoned " + mob.getChatColor() + mob.getName() + ChatColor.AQUA + "!");
+		player.playSound(spawnLocation, Sound.ENTITY_EVOKER_PREPARE_WOLOLO, 1.0f, 1.0f);
+		player.playSound(spawnLocation, Sound.ENTITY_EVOKER_CAST_SPELL, 1.0f, 1.0f);
+		player.spawnParticle(Particle.SPELL_INSTANT, spawnLocation, 10, 1.0, 1.0, 0.0, 0.1, null);
+		player.spawnParticle(Particle.SPELL_INSTANT, spawnLocation, 15, 1.0, 1.0, 0.0, 0.1, null);
 	}
 
 	@Override
