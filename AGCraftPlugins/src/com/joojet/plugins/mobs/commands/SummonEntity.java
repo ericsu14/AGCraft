@@ -19,10 +19,8 @@ public class SummonEntity extends AGCommandExecutor
 	public static final String MAX_SUMMONED_ENTITIES_TAG = "max-summoned-entities";
 	/** Stores interpreter used to reference all custom entity summons */
 	protected SummoningScrollInterpreter summonTypes;
-	
 	/** Stores a reference to the plugin's boss bar controller */
 	protected BossBarController bossBarController;
-	
 	/** Max entities that can be summoned at a time */
 	protected int maxSummonedEntities;
 	
@@ -35,7 +33,7 @@ public class SummonEntity extends AGCommandExecutor
 	}
 	
 	
-	/** Usage: /summonEntity <name of custom entity> */
+	/** Usage: /summonEntity <name of custom entity> <number of entities spawned> */
 	@Override
 	public boolean onCommand(CommandSender sender, Command arg1, String arg2, String[] args) {
 		int n = args.length;
@@ -49,6 +47,12 @@ public class SummonEntity extends AGCommandExecutor
 				if (n >= 2)
 				{
 					amount = Integer.parseInt(args[1]);
+				}
+				
+				if (amount > this.maxSummonedEntities)
+				{
+					player.sendMessage(ChatColor.RED + "Error: Number of summoned entities exceeds bound of " + this.maxSummonedEntities);
+					return false;
 				}
 				
 				SummoningScroll summon = this.summonTypes.searchTrie(summonID);
