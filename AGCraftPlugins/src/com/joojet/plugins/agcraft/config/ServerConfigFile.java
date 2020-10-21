@@ -46,7 +46,7 @@ public class ServerConfigFile extends AbstractConfigFile
 		data.put(FireworksCommand.MIN_FIREWORK_COUNT, 30);
 		data.put(Warp.WARP_RADIUS_TAG, 6);
 		data.put (Warp.WARP_HEALTH_THRESHOLD_TAG, 6);
-		data.put(SummonEntity.MAX_SUMMONED_ENTITIES_TAG, 100);
+		data.put(SummonEntity.MAX_SUMMONED_ENTITIES_TAG, 10);
 		return data;
 	}
 	
