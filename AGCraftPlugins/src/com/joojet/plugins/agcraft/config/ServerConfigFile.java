@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.mobs.commands.SummonEntity;
 import com.joojet.plugins.mobs.enums.ThemedServerEvent;
 import com.joojet.plugins.mobs.spawnhandlers.AmplifiedMobHandler;
 import com.joojet.plugins.mobs.spawnhandlers.BeatTheBruinsHandler;
@@ -45,6 +46,7 @@ public class ServerConfigFile extends AbstractConfigFile
 		data.put(FireworksCommand.MIN_FIREWORK_COUNT, 30);
 		data.put(Warp.WARP_RADIUS_TAG, 6);
 		data.put (Warp.WARP_HEALTH_THRESHOLD_TAG, 6);
+		data.put(SummonEntity.MAX_SUMMONED_ENTITIES_TAG, 100);
 		return data;
 	}
 	

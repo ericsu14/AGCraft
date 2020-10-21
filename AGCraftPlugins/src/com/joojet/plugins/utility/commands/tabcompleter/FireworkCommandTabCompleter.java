@@ -57,17 +57,4 @@ public class FireworkCommandTabCompleter extends AGTabCompleter
 		}
 		return result;
 	}
-	
-	/** Returns an array of integers between a certain range
-	 * 	@param min - Min value
-	 *  @param max - Max value */
-	protected List <String> generateBetweenRange (int min, int max)
-	{
-		List <String> result = new ArrayList <String> ();
-		for (int i = min; i <= max; ++i)
-		{
-			result.add(i + "");
-		}
-		return result;
-	}
 }

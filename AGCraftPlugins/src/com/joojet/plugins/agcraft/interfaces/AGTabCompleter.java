@@ -1,5 +1,6 @@
 package com.joojet.plugins.agcraft.interfaces;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -59,6 +60,19 @@ public abstract class AGTabCompleter implements TabCompleter
 		sorted().
 		toArray();
 		return (List<String>) Arrays.asList(Arrays.copyOf(result, result.length, String[].class)); 
+	}
+	
+	/** Returns an array of integers between a certain range
+	 * 	@param min - Min value
+	 *  @param max - Max value */
+	protected List <String> generateBetweenRange (int min, int max)
+	{
+		List <String> result = new ArrayList <String> ();
+		for (int i = min; i <= max; ++i)
+		{
+			result.add(i + "");
+		}
+		return result;
 	}
 	
 }

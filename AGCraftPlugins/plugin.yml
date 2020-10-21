@@ -81,7 +81,7 @@ commands:
     permission: agcraft.player
   summonEntity:
     description: Summons a custom entity by its entity ID
-    usage: /summonEntity <entity ID>
+    usage: /summonEntity <entity ID> <number of entities>
     permission: agcraft.admin
 
 permissions:
