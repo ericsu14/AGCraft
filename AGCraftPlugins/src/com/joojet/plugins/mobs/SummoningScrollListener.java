@@ -73,7 +73,11 @@ public class SummoningScrollListener extends AGListener
 				
 				if (scroll != null)
 				{	
-					summonMonster (p, scroll.getMob(), scroll.getMobType(), this.bossBarController);
+					if (!summonMonster (p, scroll.getMob(), scroll.getMobType(), this.bossBarController))
+					{
+						return;
+					}
+					
 					int numScrolls = item.getAmount();
 					
 					// Dec. or wither away summoning scroll
@@ -96,7 +100,7 @@ public class SummoningScrollListener extends AGListener
 	 *  @param mob - MobEquipment instance of the monster being summoned
 	 *  @param entityType - The summoned monster's entity type
 	 *  @param bossBarController - Instance to the server's active boss bar controller */
-	public static void summonMonster (Player player, MobEquipment mob, EntityType entityType, BossBarController bossBarController)
+	public static boolean summonMonster (Player player, MobEquipment mob, EntityType entityType, BossBarController bossBarController)
 	{
 		// Gets player's current location
 		Location spawnLocation = player.getEyeLocation();
@@ -111,7 +115,7 @@ public class SummoningScrollListener extends AGListener
 			player.sendMessage(ChatColor.RED + "Error: Unable to summon the monster. Please check that there is at least "
 					+ EquipmentTools.openAirRequirement + " blocks of air above your current location.");
 			player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f);
-			return;
+			return false;
 		}
 
 		// Spawns the entity into the world in front of the player
@@ -147,6 +151,7 @@ public class SummoningScrollListener extends AGListener
 		player.playSound(spawnLocation, Sound.ENTITY_EVOKER_CAST_SPELL, 1.0f, 1.0f);
 		player.spawnParticle(Particle.SPELL_INSTANT, spawnLocation, 10, 1.0, 1.0, 0.0, 0.1, null);
 		player.spawnParticle(Particle.SPELL_INSTANT, spawnLocation, 15, 1.0, 1.0, 0.0, 0.1, null);
+		return true;
 	}
 
 	@Override
