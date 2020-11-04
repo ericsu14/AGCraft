@@ -46,16 +46,16 @@ import com.joojet.plugins.mobs.pathfinding.PathfinderGoalGiantFireball;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
-import net.minecraft.server.v1_16_R2.EntityCreature;
-import net.minecraft.server.v1_16_R2.EntityGiantZombie;
-import net.minecraft.server.v1_16_R2.EntityInsentient;
-import net.minecraft.server.v1_16_R2.PathfinderGoalFloat;
-import net.minecraft.server.v1_16_R2.PathfinderGoalLeapAtTarget;
-import net.minecraft.server.v1_16_R2.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_16_R2.PathfinderGoalNearestAttackableTarget;
-import net.minecraft.server.v1_16_R2.PathfinderGoalRandomStrollLand;
+import net.minecraft.server.v1_16_R3.EntityCreature;
+import net.minecraft.server.v1_16_R3.EntityGiantZombie;
+import net.minecraft.server.v1_16_R3.EntityInsentient;
+import net.minecraft.server.v1_16_R3.PathfinderGoalFloat;
+import net.minecraft.server.v1_16_R3.PathfinderGoalLeapAtTarget;
+import net.minecraft.server.v1_16_R3.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_16_R3.PathfinderGoalNearestAttackableTarget;
+import net.minecraft.server.v1_16_R3.PathfinderGoalRandomStrollLand;
 
-import org.bukkit.craftbukkit.v1_16_R2.entity.CraftMob;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftMob;
 
 public class EquipmentTools 
 {	

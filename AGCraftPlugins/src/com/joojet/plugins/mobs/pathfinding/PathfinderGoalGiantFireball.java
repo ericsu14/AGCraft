@@ -7,10 +7,10 @@ import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
-import net.minecraft.server.v1_16_R2.EntityGiantZombie;
-import net.minecraft.server.v1_16_R2.EntityLiving;
-import net.minecraft.server.v1_16_R2.PathfinderGoal;
-import net.minecraft.server.v1_16_R2.Vec3D;
+import net.minecraft.server.v1_16_R3.EntityGiantZombie;
+import net.minecraft.server.v1_16_R3.EntityLiving;
+import net.minecraft.server.v1_16_R3.PathfinderGoal;
+import net.minecraft.server.v1_16_R3.Vec3D;
 
 /** A copy and pasted implementation from minecraft source files
  *  of their own GhastFireball pathfinder goal modified to hopefully work
@@ -68,7 +68,7 @@ public class PathfinderGoalGiantFireball extends PathfinderGoal
 				LargeFireball fireball = (LargeFireball) this.giantBukkit.getWorld().spawnEntity(new Location (this.giantBukkit.getWorld(), fireballLocation.getX(),
 						fireballLocation.getY(), fireballLocation.getZ()), EntityType.FIREBALL);
 				fireball.setDirection(fireballDirection);
-				fireball.setYield(3.5f);
+				fireball.setYield(4.0f);
 				fireball.setIsIncendiary(false);
 				fireball.setShooter(this.giantBukkit);
 				this.a = -80;

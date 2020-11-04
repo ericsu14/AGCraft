@@ -6,10 +6,10 @@ import org.bukkit.entity.LivingEntity;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.pathfinding.util.LaserBeam;
 
-import net.minecraft.server.v1_16_R2.DamageSource;
-import net.minecraft.server.v1_16_R2.EntityInsentient;
-import net.minecraft.server.v1_16_R2.EntityLiving;
-import net.minecraft.server.v1_16_R2.PathfinderGoal;
+import net.minecraft.server.v1_16_R3.DamageSource;
+import net.minecraft.server.v1_16_R3.EntityInsentient;
+import net.minecraft.server.v1_16_R3.EntityLiving;
+import net.minecraft.server.v1_16_R3.PathfinderGoal;
 
 public class PathfinderGoalLaserAttack extends PathfinderGoal
 {

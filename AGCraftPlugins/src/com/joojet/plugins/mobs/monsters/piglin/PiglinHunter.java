@@ -27,5 +27,6 @@ public class PiglinHunter extends RareMob
 		
 		this.setStat(MonsterStat.EXPERIENCE, 18.0);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 8.0);
+		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.30);
 	}
 }

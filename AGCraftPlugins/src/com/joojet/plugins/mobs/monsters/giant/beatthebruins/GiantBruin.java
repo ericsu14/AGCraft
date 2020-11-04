@@ -35,7 +35,7 @@ public class GiantBruin extends UCLAFaction
 		this.setStat(MonsterStat.HEALTH, 250.0);
 		this.setStat(MonsterStat.EXPERIENCE, 1200.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 150.0);
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 4.0);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 6.0);
 		this.setStat(MonsterStat.KNOCKBACK_RESISTANCE, 4.50);
 		
 		// Equipment

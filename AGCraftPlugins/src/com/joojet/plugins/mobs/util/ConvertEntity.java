@@ -2,7 +2,7 @@ package com.joojet.plugins.mobs.util;
 
 import org.bukkit.entity.EntityType;
 
-import net.minecraft.server.v1_16_R2.*;
+import net.minecraft.server.v1_16_R3.*;
 
 public class ConvertEntity 
 {
