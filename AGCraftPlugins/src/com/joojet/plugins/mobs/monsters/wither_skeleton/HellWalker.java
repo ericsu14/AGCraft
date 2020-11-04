@@ -19,7 +19,6 @@ import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.HellwalkerDagger;
 import com.joojet.plugins.mobs.equipment.weapons.HellwalkerBlade;
 import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
-import com.joojet.plugins.mobs.scrolls.SummonJohnnyRusnak;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class HellWalker extends MythicMob 
