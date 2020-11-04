@@ -7,9 +7,11 @@ import org.bukkit.block.Biome;
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
+import com.joojet.plugins.mobs.drops.SummoningScrollDrop;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.enums.SummonTypes;
 import com.joojet.plugins.mobs.equipment.boots.LightweightNetheriteBoots;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.HellwakerHead;
@@ -47,7 +49,7 @@ public class HellWalker extends MythicMob
 		
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.35, 1, 3),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 1),
-				new MonsterDrop (new SummonJohnnyRusnak(), 0.10));
+				new SummoningScrollDrop (SummonTypes.HELL_WALKER, 0.10));
 		
 		this.bossTheme = MusicType.HAIKYUU;
 		
