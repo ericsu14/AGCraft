@@ -20,6 +20,8 @@ public class PiglinCaptain extends LegendaryMob
 		this.name = "Piglin Captain";
 		this.color = ChatColor.GOLD;
 		this.setStat(MonsterStat.HEALTH, 40.0);
+		this.setStat(MonsterStat.BASE_ARMOR, 8.0);
+		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 6.0);
 		
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		

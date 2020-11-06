@@ -189,8 +189,7 @@ public class DamageDisplayListener extends AGListener
 			return;
 		}
 		
-		DamageType damageType = DamageType.HEALING;
-		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getAmount());
+		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), DamageType.HEALING, event.getAmount());
 	}
 	
 	/** Removes all unremoved damage display entities from the passed list of entities

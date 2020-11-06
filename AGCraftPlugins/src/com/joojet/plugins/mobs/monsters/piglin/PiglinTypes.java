@@ -13,6 +13,7 @@ public class PiglinTypes extends MonsterTypes
 		super (monsterTypeInterpreter, summonTypeInterpreter, EntityType.PIGLIN);
 		this.addEquipment(new PiglinHunter (), 55);
 		this.addEquipment(new PiglinSoldier (), 35);
-		this.addEquipment(new PiglinCaptain (), 10);
+		this.addEquipment(new PiglinCaptain (), 7);
+		this.addEquipment(new RoyalPiglinHunter (), 3);
 	}
 }
