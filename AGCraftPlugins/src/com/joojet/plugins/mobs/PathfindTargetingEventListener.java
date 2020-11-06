@@ -160,7 +160,7 @@ public class PathfindTargetingEventListener extends AGListener
 	@EventHandler
 	public void transferMobDataOnDrownedConversionEvent (EntityTransformEvent event)
 	{
-		if (event.getTransformReason() != TransformReason.DROWNED)
+		if (event.getTransformReason() == TransformReason.CURED)
 		{
 			return;
 		}

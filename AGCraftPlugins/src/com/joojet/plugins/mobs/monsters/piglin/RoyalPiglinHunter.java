@@ -7,6 +7,7 @@ import org.bukkit.block.Biome;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.drops.SummoningScrollDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.enums.SummonTypes;
@@ -25,12 +26,16 @@ public class RoyalPiglinHunter extends MythicMob
 		super (MonsterType.ROYAL_PIGLIN_HUNTER);
 		this.color = ChatColor.DARK_RED;
 		
+		this.name = "Royal Piglin Hunter";
+		
 		this.setStat(MonsterStat.HEALTH, 30.0);
 		this.setStat(MonsterStat.BASE_ARMOR, 8.0);
 		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 6.0);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 48.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 36.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 60.0);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 100.0);
+		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
+		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING);
 		
 		this.addMonsterDrops(new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.20, 1, 3),
 				new MonsterDrop (Material.DIAMOND, 1.00, 2, 4),
