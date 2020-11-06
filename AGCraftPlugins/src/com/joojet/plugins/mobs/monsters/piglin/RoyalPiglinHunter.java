@@ -31,7 +31,7 @@ public class RoyalPiglinHunter extends MythicMob
 		this.setStat(MonsterStat.HEALTH, 30.0);
 		this.setStat(MonsterStat.BASE_ARMOR, 8.0);
 		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 6.0);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 36.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 30.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 60.0);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 100.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
@@ -51,7 +51,7 @@ public class RoyalPiglinHunter extends MythicMob
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
 		
-		this.addPotionEffect(CustomPotionEffect.FULL_HEALING, CustomPotionEffect.SPEED);
+		this.addPotionEffect(CustomPotionEffect.FULL_HEALING);
 		
 		this.helmet = new RoyalPiglinHunterHead (this.color);
 		this.chestplate = new DarkNetheriteChestplate (this.color);
