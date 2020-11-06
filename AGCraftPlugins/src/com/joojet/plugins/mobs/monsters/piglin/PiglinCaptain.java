@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.monsters.piglin;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -31,6 +32,8 @@ public class PiglinCaptain extends LegendaryMob
 		this.helmet = new PiglinCaptainHead (this.color);
 		this.weapon = new PiglinAxe (this.color);
 		this.chestplate = new DarkNetheriteChestplate (this.color);
+		
+		this.addPotionEffect(CustomPotionEffect.REGEN);
 		
 		this.setStat(MonsterStat.EXPERIENCE, 45.0);
 		this.bossTheme = MusicType.KUZE_THEME;

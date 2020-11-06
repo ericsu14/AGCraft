@@ -46,7 +46,7 @@ public class RoyalPiglinHunter extends MythicMob
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
 		
-		this.addPotionEffect(CustomPotionEffect.UNDEAD_HEAL, CustomPotionEffect.SPEED);
+		this.addPotionEffect(CustomPotionEffect.FULL_HEALING, CustomPotionEffect.SPEED);
 		
 		this.helmet = new RoyalPiglinHunterHead (this.color);
 		this.chestplate = new DarkNetheriteChestplate (this.color);
