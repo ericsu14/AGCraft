@@ -31,7 +31,8 @@ public class OffhandTypes extends EquipmentTypes
 			new TotemOfTheEternalRushee (),
 			new USCCreeperShield (),
 			new WeakeningArrow (ChatColor.GREEN),
-			new WitheringArrow (ChatColor.LIGHT_PURPLE)
+			new WitheringArrow (ChatColor.LIGHT_PURPLE),
+			new HellwalkerDagger (ChatColor.RED)
 		);
 	}
 

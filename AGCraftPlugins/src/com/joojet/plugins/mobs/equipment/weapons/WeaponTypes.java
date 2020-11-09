@@ -39,7 +39,10 @@ public class WeaponTypes extends EquipmentTypes
 			new TerminatorSword (ChatColor.DARK_RED),
 			new TheTrojanDestroyer (),
 			new TrojanSword (ChatColor.RED),
-			new VeryPotentBow (ChatColor.BLUE)
+			new VeryPotentBow (ChatColor.BLUE),
+			new RoyalPiglinCrossbow (ChatColor.RED),
+			new HellwalkerBlade (ChatColor.RED),
+			new PigmanSword (ChatColor.LIGHT_PURPLE)
 		);
 	}
 	
