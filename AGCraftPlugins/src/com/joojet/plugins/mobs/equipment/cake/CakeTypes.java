@@ -9,6 +9,7 @@ public class CakeTypes extends EquipmentTypes
 	public CakeTypes (EquipmentTypeInterpreter interpreter)
 	{
 		super (EquipmentClassifier.CAKE, interpreter);
-		this.registerEquipments(new SprinklesCake ());
+		this.registerEquipments(new SprinklesCake (),
+				new JoojCake ());
 	}
 }

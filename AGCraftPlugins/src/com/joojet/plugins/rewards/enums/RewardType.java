@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import com.joojet.plugins.mobs.equipment.cake.JoojCake;
 import com.joojet.plugins.mobs.equipment.cake.SprinklesCake;
 import com.joojet.plugins.mobs.equipment.head.BruinHead;
 import com.joojet.plugins.mobs.equipment.offhand.BlueAndGold;
@@ -54,7 +55,8 @@ public enum RewardType
 	SPRINKLES_CAKE,
 	THE_TERMINATOR,
 	SOUL_OBLITERATOR,
-	HELL_WALKER;
+	HELL_WALKER,
+	JOOJ_CAKE;
 	
 	public ItemStack getReward ()
 	{
@@ -130,6 +132,8 @@ public enum RewardType
 				return new SummonSoulObliterator();
 			case HELL_WALKER:
 				return new SummonHellWalker ();
+			case JOOJ_CAKE:
+				return new JoojCake ();
 			default:
 				break;
 		}

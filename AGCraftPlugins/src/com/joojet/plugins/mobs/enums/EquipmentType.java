@@ -144,5 +144,6 @@ public enum EquipmentType
 	/** Scroll */
 	SUMMONING_SCROLL,
 	/** Birthday Cake */
-	SPRINKLES_CAKE
+	SPRINKLES_CAKE,
+	JOOJ_CAKE
 }

@@ -16,7 +16,8 @@ public enum MinigameRewardType
 	UHC_RUSH_WINNER ("UHC Rush - Winner", "08-26-2020", "Awarded for dominating a round of UHC during AGO's very own rush week! Fight on!"),
 	GIFT ("Gift", "now", "A small gift from the administrator!"),
 	JASON_BIRTHDAY ("Birthday Gift - Jason", "09-23-2020", "Happy birthday sprinkles! Thanks for being an everlasting light in this community!"
-			+ " Hope you have an amazing day today and best of wishes in your job and small group leading! ~ jooj");
+			+ " Hope you have an amazing day today and best of wishes in your job and small group leading! ~ jooj"),
+	JOOJ_BIRTHDAY ("Birthday Gift - Eric", "11-20-2020", "Happy birthday to myself, hehe! ~ jooj");
 	
 	/** Full name of the event */
 	private String fullName;
