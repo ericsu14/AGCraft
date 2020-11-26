@@ -40,8 +40,7 @@ public abstract class AbstractSkill
 	 * 		@param enemies - A list of enemies this skill may negatively affect */
 	public void useSkill (LivingEntity caster, ArrayList <LivingEntity> allies, ArrayList <LivingEntity> enemies)
 	{
-		if (cooldownTick <= 0 && this.checkConditons(caster, allies, enemies)
-				&& this.currentUsage > 0)
+		if (this.canUseSkill() && this.checkConditons(caster, allies, enemies))
 		{
 			this.handleSkill(caster, allies, enemies);
 			this.cooldownTick = this.cooldown;
@@ -65,6 +64,12 @@ public abstract class AbstractSkill
 	 * 		@param allies - A list of allies this skill may positively affect
 	 * 		@param enemies - A list of enemies this skill may negatively affect */
 	protected abstract boolean checkConditons (LivingEntity caster, ArrayList <LivingEntity> allies, ArrayList <LivingEntity> enemies);
+	
+	/** Returns a boolean indicating w/e or not a skill can be used based on its current cooldown and usage */
+	public boolean canUseSkill ()
+	{
+		return (cooldownTick <= 0 && this.currentUsage > 0);
+	}
 	
 	/** Returns the AOE effect radius assigned to this skill */
 	public int getRange ()

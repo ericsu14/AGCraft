@@ -50,7 +50,10 @@ public class CustomSkillsListener extends AGListener {
 		ArrayList <LivingEntity> allies = new ArrayList <LivingEntity> ();
 		ArrayList <LivingEntity> enemies = new ArrayList <LivingEntity> ();
 		
-		this.filterGoodAndBadEntities(caster, skill.getRange(), allies, enemies);
+		if (skill.canUseSkill())
+		{
+			this.filterGoodAndBadEntities(caster, skill.getRange(), allies, enemies);
+		}
 		
 		skill.useSkill(caster, allies, enemies);
 	}
