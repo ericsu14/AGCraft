@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.zombie.beatthebruins;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
@@ -19,6 +21,7 @@ import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.equipment.weapons.EternalTrojanSword;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
 
 public class TrojanWarrior extends USCFaction 
 {
@@ -50,5 +53,11 @@ public class TrojanWarrior extends USCFaction
 		
 		this.addMobFlags(MobFlag.SHOW_NAME,
 				MobFlag.DISABLE_SUFFOCATION_DAMAGE);
+	}
+
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		// TODO Auto-generated method stub
+		
 	}
 }

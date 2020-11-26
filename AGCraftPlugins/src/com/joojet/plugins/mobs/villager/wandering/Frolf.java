@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.villager.wandering;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -9,6 +11,7 @@ import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.potions.*;
 import com.joojet.plugins.mobs.scrolls.*;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 
 public class Frolf extends VillagerEquipment
@@ -115,6 +118,12 @@ public class Frolf extends VillagerEquipment
 		 * 		- Max stock: 1 */
 		SummoningScroll cookieScroll = new SummonCookie ();
 		this.addRecipe(cookieScroll, Material.DIAMOND, 24, 1);
+		
+	}
+
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		// TODO Auto-generated method stub
 		
 	}
 	

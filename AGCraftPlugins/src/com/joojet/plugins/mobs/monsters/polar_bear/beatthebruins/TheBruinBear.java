@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.polar_bear.beatthebruins;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -14,6 +16,7 @@ import com.joojet.plugins.mobs.enums.SummonTypes;
 import com.joojet.plugins.mobs.equipment.offhand.BruinShield;
 import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class TheBruinBear extends UCLAFaction
@@ -46,5 +49,11 @@ public class TheBruinBear extends UCLAFaction
 		this.setStat(MonsterStat.EXPERIENCE, 200.0);
 		this.ignoreList.clear();
 		this.bossTheme = MusicType.HAIKYUU;
+	}
+
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		// TODO Auto-generated method stub
+		
 	}
 }

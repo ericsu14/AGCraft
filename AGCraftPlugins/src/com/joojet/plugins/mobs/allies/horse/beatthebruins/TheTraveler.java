@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.allies.horse.beatthebruins;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Horse.Color;
@@ -11,6 +13,7 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LetItGo;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
 
 public class TheTraveler extends USCFaction 
 {
@@ -31,5 +34,11 @@ public class TheTraveler extends USCFaction
 		this.setStat(MonsterStat.HORSE_STYLE, Style.WHITEFIELD);
 		this.setStat(MonsterStat.BASE_SPEED, 0.35);
 		this.setStat(MonsterStat.HORSE_JUMP_STRENGTH, 1.0);
+	}
+
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		// TODO Auto-generated method stub
+		
 	}
 }

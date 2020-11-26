@@ -1,6 +1,6 @@
 package com.joojet.plugins.mobs.skills.enums;
 
-public enum SkillType 
+public enum SkillPropetry 
 {
 	BUFF, DEBUFF, SUMMON, TRANSFORMATION, ATTACK
 }

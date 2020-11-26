@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.skeleton.beatthebruins;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
@@ -12,6 +14,7 @@ import com.joojet.plugins.mobs.equipment.head.BruinHead;
 import com.joojet.plugins.mobs.equipment.leggings.BruinLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.BruinBow;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
 
 public class UCLAArcher extends UCLAFaction
 {
@@ -33,5 +36,11 @@ public class UCLAArcher extends UCLAFaction
 		this.weapon = new BruinBow ();
 		
 		this.setStat(MonsterStat.EXPERIENCE, 20.0);
+	}
+
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.villager.wandering;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -26,6 +28,7 @@ import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
 import com.joojet.plugins.mobs.equipment.weapons.TrojanSword;
 import com.joojet.plugins.mobs.scrolls.*;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 
 public class JohnnyRusnak extends VillagerEquipment
@@ -98,6 +101,12 @@ public class JohnnyRusnak extends VillagerEquipment
 		this.addRecipe(new SummonHellWalker (), Material.NETHERITE_INGOT, 1, 1);
 		this.addRecipe(new SummonDoomGuy(), Material.NETHERITE_INGOT, 2, 1);
 		this.addRecipe(new SummonGiantBruinTamer(), Material.NETHERITE_INGOT, 3, 1);
+		
+	}
+
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		// TODO Auto-generated method stub
 		
 	}
 }

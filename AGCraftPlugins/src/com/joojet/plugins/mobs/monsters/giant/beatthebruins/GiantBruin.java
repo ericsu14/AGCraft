@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.giant.beatthebruins;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -23,6 +25,7 @@ import com.joojet.plugins.mobs.equipment.weapons.EternalTrojanSword;
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.equipment.weapons.LeftCrashSymbol;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class GiantBruin extends UCLAFaction
@@ -79,6 +82,12 @@ public class GiantBruin extends UCLAFaction
 				MobFlag.FIREWORK_DEATH);
 		this.addBiomes(Biome.THE_VOID);
 		this.bossTheme = MusicType.HAIKYUU;
+		
+	}
+
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		// TODO Auto-generated method stub
 		
 	}
 }

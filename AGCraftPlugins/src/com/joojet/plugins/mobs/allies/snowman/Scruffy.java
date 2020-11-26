@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.allies.snowman;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 
 import com.joojet.plugins.mobs.allies.factions.AlliedMob;
@@ -9,6 +11,7 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LetItGo;
 import com.joojet.plugins.mobs.equipment.head.ScruffyFace;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
 
 public class Scruffy extends AlliedMob
 {
@@ -28,6 +31,12 @@ public class Scruffy extends AlliedMob
 		
 		// Boots
 		this.boots = new LetItGo (this.color);
+	}
+
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		// TODO Auto-generated method stub
+		
 	}
 		
 }

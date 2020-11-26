@@ -1,9 +1,12 @@
 package com.joojet.plugins.mobs.monsters.factions;
 
+import java.util.List;
+
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
 
 /** Extend from this class when you want your monster to spawn only in the overworld */
 public class OverworldMob extends MobEquipment
@@ -37,6 +40,12 @@ public class OverworldMob extends MobEquipment
 				Biome.GIANT_SPRUCE_TAIGA_HILLS, Biome.JUNGLE_HILLS, Biome.SNOWY_TAIGA_HILLS,
 				Biome.SWAMP_HILLS, Biome.TAIGA_HILLS, Biome.WOODED_HILLS, Biome.TALL_BIRCH_HILLS,
 				Biome.MOUNTAIN_EDGE, Biome.DEEP_WARM_OCEAN);
+	}
+
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

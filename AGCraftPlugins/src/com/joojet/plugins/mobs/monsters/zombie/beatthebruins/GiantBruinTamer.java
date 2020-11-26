@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.zombie.beatthebruins;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
@@ -18,6 +20,7 @@ import com.joojet.plugins.mobs.equipment.weapons.BruinSword;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 import com.joojet.plugins.mobs.monsters.giant.beatthebruins.GiantBruin;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
 
 public class GiantBruinTamer extends UCLAFaction
 {
@@ -46,5 +49,11 @@ public class GiantBruinTamer extends UCLAFaction
 		this.setStat(MonsterStat.HEALTH, 30.0);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.LEGENDARY);
 		this.setStat(MonsterStat.EXPERIENCE, 24.0);
+	}
+
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		// TODO Auto-generated method stub
+		
 	}
 }

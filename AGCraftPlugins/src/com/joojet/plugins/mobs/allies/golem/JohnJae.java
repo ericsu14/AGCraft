@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.allies.golem;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 
 import com.joojet.plugins.mobs.allies.factions.AlliedMob;
@@ -8,6 +10,7 @@ import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.ThePecks;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
 
 public class JohnJae extends AlliedMob
 {
@@ -28,5 +31,11 @@ public class JohnJae extends AlliedMob
 		
 		// Chestplate
 		this.chestplate = new ThePecks (this.color);
+	}
+
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		// TODO Auto-generated method stub
+		
 	}
 }

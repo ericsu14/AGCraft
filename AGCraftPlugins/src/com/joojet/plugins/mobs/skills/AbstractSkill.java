@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.bukkit.entity.LivingEntity;
 
-import com.joojet.plugins.mobs.skills.enums.SkillType;
+import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
 
 public abstract class AbstractSkill 
 {
@@ -13,19 +13,25 @@ public abstract class AbstractSkill
 	/** The skill's cooldown */
 	protected int cooldown;
 	/** The skill's type */
-	protected SkillType type;
+	protected SkillPropetry type;
 	/** Max amount of uses for this skill */
 	protected int maxUses;
 	/** Current cooldown tick */
 	private int cooldownTick;
+	/** Current usage of the skill */
+	private int currentUsage;
+	/** The weight of this skill. Higher weights means this skill is to be used more frequently. */
+	private int weight;
 	
-	public AbstractSkill (SkillType type, int range, int cooldown, int maxUses)
+	public AbstractSkill (SkillPropetry type, int range, int cooldown, int maxUses, int weight)
 	{
 		this.type = type;
 		this.cooldown = cooldown;
 		this.range = range;
 		this.maxUses = maxUses;
+		this.currentUsage = this.maxUses;
 		this.cooldownTick = 0;
+		this.weight = weight;
 	}
 	
 	/** Allows the caster to use a skill once the internal cooldown tick reaches zero and its specified conditions are met. 
@@ -34,10 +40,12 @@ public abstract class AbstractSkill
 	 * 		@param enemies - A list of enemies this skill may negatively affect */
 	public void useSkill (LivingEntity caster, ArrayList <LivingEntity> allies, ArrayList <LivingEntity> enemies)
 	{
-		if (cooldownTick <= 0 && this.checkConditons(caster, allies, enemies))
+		if (cooldownTick <= 0 && this.checkConditons(caster, allies, enemies)
+				&& this.currentUsage > 0)
 		{
 			this.handleSkill(caster, allies, enemies);
 			this.cooldownTick = this.cooldown;
+			--this.currentUsage;
 		}
 		else
 		{
@@ -62,5 +70,12 @@ public abstract class AbstractSkill
 	public int getRange ()
 	{
 		return this.range;
+	}
+	
+	/** Returns the weight assigned to this skill. Higher weights means this skill will be selected
+	 *  more frequently. */
+	public int getWeight ()
+	{
+		return this.weight;
 	}
 }
