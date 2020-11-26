@@ -41,11 +41,30 @@ public class CustomSkillsListener extends AGListener {
 
 	}
 	
+	/** Allows an entity to use a custom skill. This function also contains logic to filter out the caster's surrounding living entities
+	 *  into allies and enemies.
+	 *  @param caster - The Living Entity using the custom skill
+	 *  @param skill - The skill to be used */
 	public void useCustomSkill (LivingEntity caster, AbstractSkill skill)
 	{
 		ArrayList <LivingEntity> allies = new ArrayList <LivingEntity> ();
 		ArrayList <LivingEntity> enemies = new ArrayList <LivingEntity> ();
-		List <Entity> surroundingEntities = caster.getNearbyEntities(skill.getRange(), skill.getRange(), skill.getRange());
+		
+		this.filterGoodAndBadEntities(caster, skill.getRange(), allies, enemies);
+		
+		skill.useSkill(caster, allies, enemies);
+	}
+	
+	/** Filter's a skill caster's surrounding entities using the passed range into two categories,
+	 *  allies and enemies, based on the properties set in their respective MobEquipments or types.
+	 *  This function modifies the allies and entities lists that are passed by reference.
+	 * 	@param caster - LivingEntity using the skill
+	 *  @param range - Max. search range radius set by the skill
+	 *  @param allies - A list of allied entities surrounding the skill caster
+	 *  @param enemies - A list of enemies surrounding the skill caster*/
+	public void filterGoodAndBadEntities (LivingEntity caster, int range, List <LivingEntity> allies, List <LivingEntity> enemies)
+	{
+		List <Entity> surroundingEntities = caster.getNearbyEntities(range, (range / 2.0), range);
 		
 		boolean isAlly = false;
 		for (Entity entity : surroundingEntities)
@@ -98,8 +117,6 @@ public class CustomSkillsListener extends AGListener {
 				enemies.add(livingEntity);
 			}
 		}
-		
-		skill.useSkill(caster, allies, enemies);
 	}
 
 }
