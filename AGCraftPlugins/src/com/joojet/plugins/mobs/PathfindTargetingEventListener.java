@@ -9,6 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.EntityTransformEvent;
@@ -133,7 +134,7 @@ public class PathfindTargetingEventListener extends AGListener
 	}
 	
 	/** Resets custom mob targets upon chunk load events */
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGH)
 	public void resetTargetsOnChunkLoad (ChunkLoadEvent event)
 	{
 		Entity[] chunkEntities = event.getChunk().getEntities();
@@ -157,7 +158,7 @@ public class PathfindTargetingEventListener extends AGListener
 	
 	/** Captures zombie to drowned conversion events and transfers custom metadata to
 	 *  that new mob, if it exists. */
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGH)
 	public void transferMobDataOnDrownedConversionEvent (EntityTransformEvent event)
 	{
 		if (event.getTransformReason() == TransformReason.CURED)

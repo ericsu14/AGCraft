@@ -8,6 +8,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -63,7 +64,7 @@ public class DamageDisplayListener extends AGListener
 	
 	/** Listens to entity damage events and creates a damage display entity on
 	 *  the event entity's location over a small offset. */
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGH)
 	public void onEntityDamageByEntityEvent (EntityDamageByEntityEvent event)
 	{
 		if (AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL
@@ -133,7 +134,7 @@ public class DamageDisplayListener extends AGListener
 	
 	/** Listens to entity damage events that are not caused by other living entites
 	 *  and displays damage information on that entity */
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGH)
 	public void onEntityDamageEvent (EntityDamageEvent event)
 	{
 		// Prevent duplicate damage displays
@@ -179,7 +180,7 @@ public class DamageDisplayListener extends AGListener
 		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getFinalDamage());
 	}
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGH)
 	public void onEntityHealEvent (EntityRegainHealthEvent event)
 	{
 		// Do not run if the amount is negative or the server mode is running in Minigame mode (as this might give people's positions away in UHC)

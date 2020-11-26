@@ -19,6 +19,7 @@ import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -101,7 +102,7 @@ public class AmplifiedMobSpawner extends AGListener
 	}
 	
 	/** Amplifies mob spawns */
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGH)
 	public void onEntitySpawn (CreatureSpawnEvent event)
 	{
 		

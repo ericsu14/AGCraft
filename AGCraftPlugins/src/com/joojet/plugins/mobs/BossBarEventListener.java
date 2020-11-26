@@ -7,6 +7,7 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityResurrectEvent;
@@ -91,7 +92,7 @@ public class BossBarEventListener extends AGListener
 	}
 	
 	/** Recreates custom boss bars upon chunk load events */
-	@EventHandler
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void createBossBarsOnChunkLoad (ChunkLoadEvent event)
 	{
 		Entity[] chunkEntities = event.getChunk().getEntities();
