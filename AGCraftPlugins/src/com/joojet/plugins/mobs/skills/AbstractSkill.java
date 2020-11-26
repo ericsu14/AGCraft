@@ -2,9 +2,12 @@ package com.joojet.plugins.mobs.skills;
 
 import java.util.ArrayList;
 
+import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
+import com.joojet.plugins.mobs.util.LocationOffset;
 
 public abstract class AbstractSkill 
 {
@@ -82,5 +85,28 @@ public abstract class AbstractSkill
 	public int getWeight ()
 	{
 		return this.weight;
+	}
+	
+	/** Spawns a random amount of colored particles (can only be REDSTONE, SPELL_MOB and SPELL_MOB_AMBIENT)
+	 *  around an entity.
+	 *  @param entity - LivingEntity in which particles are spawned at
+	 *  @param count - Amount of particles to be spawned
+	 *  @param red - Particle's RGB red value
+	 *  @param green - Particle's RGB green value
+	 *  @param blue - Particle's RGB blue value
+	 *  @param particle - Type of particle to be spawned */
+	public void spawnColoredParticlesOnEntity (LivingEntity entity, int count, int red, int green, int blue, Particle particle)
+	{
+		if (count <= 0)
+		{
+			count = 1;
+		}
+		
+		Location entityLocation = entity.getEyeLocation();
+		for (int i = 0; i < count; ++i)
+		{
+			entity.getWorld().spawnParticle(particle, LocationOffset.addRandomOffsetOnLocation(entityLocation, 1),
+					0, (red / 256D), (green / 256D), (blue / 256D), 1, null);
+		}
 	}
 }
