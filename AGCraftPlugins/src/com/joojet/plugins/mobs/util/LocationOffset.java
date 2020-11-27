@@ -14,7 +14,7 @@ public class LocationOffset
 	 *  to that location.
 	 *  @param location - Location being transformed
 	 *  @param offset - Random offset applied to location */
-	public static Location addRandomOffsetOnLocation (Location location, int offset)
+	public static Location addRandomOffsetOnLocation (Location location, double offset)
 	{
 		double xOffset = generateRandomOffset (offset);
 		double yOffset = generateRandomOffset (offset);
@@ -30,10 +30,10 @@ public class LocationOffset
 	/** Generates a random number between -offset and +offset, which can be used
 	 *  as a random offset for a coordinate
 	 *  @param offset - The offset */
-	public static double generateRandomOffset (int offset)
+	public static double generateRandomOffset (double offset)
 	{
-		int min = -offset;
-		int max = offset;
-		return (double) rand.nextInt ((max - min) + 1) + min;
+		double min = -offset;
+		double max = offset;
+		return min + (max - min) * rand.nextDouble();
 	}
 }

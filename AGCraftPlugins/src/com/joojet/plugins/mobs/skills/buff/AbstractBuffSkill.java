@@ -80,6 +80,8 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 	/** Returns true if the entity has the desired potion effect that matches the set strength and effect. */
 	public boolean hasPotionEffect (LivingEntity entity)
 	{
-		return (entity.hasPotionEffect(this.potionType) && entity.getPotionEffect(this.potionType).getAmplifier() <= this.potionStrength);
+		return (entity.hasPotionEffect(this.potionType) && 
+				(entity.getPotionEffect(this.potionType).getAmplifier() <= this.potionStrength && 
+				entity.getPotionEffect(this.potionType).getDuration() <= this.potionDuration));
 	}
 }
