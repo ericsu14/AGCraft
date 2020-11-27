@@ -62,6 +62,14 @@ public class DamageDisplayListener extends AGListener
 		this.damageDisplayManager.cleanup();
 	}
 	
+	/** Displays a temporary nametag above an entity
+	 *  @param entity - Entity in which nametag is displayed to
+	 *  @param str - The nametag's string content */
+	public void displayStringAboveEntity (Entity entity, String str)
+	{
+		this.damageDisplayManager.createDamageDisplayonEntity(entity, str);
+	}
+	
 	/** Listens to entity damage events and creates a damage display entity on
 	 *  the event entity's location over a small offset. */
 	@EventHandler(priority = EventPriority.HIGH)

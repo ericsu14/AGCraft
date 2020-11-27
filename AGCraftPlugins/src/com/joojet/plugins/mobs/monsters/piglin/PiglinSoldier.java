@@ -36,6 +36,6 @@ public class PiglinSoldier extends EpicMob
 	
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AttackBuffSkill(0, 60, 60));
+		skills.add(new AttackBuffSkill(0, 60, 60, 20, 8));
 	}
 }

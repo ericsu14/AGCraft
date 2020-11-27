@@ -71,6 +71,7 @@ public class SkullKid extends MythicMob
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		skills.add(new ResistanceBuffSkill (0, 60, 60));
+		super.loadCustomSkills(skills);
+		skills.add(new ResistanceBuffSkill (0, 60, 20, 60, 8));
 	}
 }

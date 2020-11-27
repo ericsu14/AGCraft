@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.factions;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
 
@@ -10,6 +12,10 @@ import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
+import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
+import com.joojet.plugins.mobs.skills.buff.SpeedBuffSkill;
 
 public abstract class USCFaction extends MobEquipment
 {
@@ -47,5 +53,12 @@ public abstract class USCFaction extends MobEquipment
 		result.append(StringUtil.alternateTextColors(str, TextPattern.WORD, 
 				ChatColor.GOLD, ChatColor.RED));
 		return result.toString();
+	}
+	
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		skills.add(new AttackBuffSkill(0, 45, 15, 60, 8));
+		skills.add(new ResistanceBuffSkill (0, 45, 15, 60, 8));
+		skills.add(new SpeedBuffSkill (0, 45, 15, 60, 8));
 	}
 }

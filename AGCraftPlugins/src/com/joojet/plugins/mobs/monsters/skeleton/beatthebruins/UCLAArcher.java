@@ -41,6 +41,7 @@ public class UCLAArcher extends UCLAFaction
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new SpeedBuffSkill (1, 60, 60));
+		super.loadCustomSkills(skills);
+		skills.add(new SpeedBuffSkill (1, 60, 20, 60, 8));
 	}
 }

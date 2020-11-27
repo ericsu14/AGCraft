@@ -41,7 +41,7 @@ public class BossBarTask extends BukkitRunnable
 		{
 			// Scales boss bar's progress to the entity's currently health + any absorption bonuses
 			double entityHealth = (entity.getHealth() + entity.getAbsorptionAmount()) /
-					entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+					(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + entity.getAbsorptionAmount());
 			bossBar.setProgress(entityHealth);
 		}
 		else

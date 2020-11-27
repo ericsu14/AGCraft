@@ -71,6 +71,7 @@ public class AGCraftPlugin extends JavaPlugin
 	// Stores an instance to the BossBar controller
 	protected BossBarController bossBarController;
 	
+	
 	/** Search term interpreters */
 	// Stores the command interpreter used for server mode types
 	protected ServerModeInterpreter serverModeInterpreter;
@@ -85,6 +86,8 @@ public class AGCraftPlugin extends JavaPlugin
 	protected ArrayList <AGListener> activeEventListeners;
 	/** Music listener */
 	protected MusicListener musicListener;
+	// Stores a reference to the damage display listener
+	protected DamageDisplayListener damageDisplayListener;
 	
 	public AGCraftPlugin ()
 	{
@@ -97,6 +100,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.serverConfigFile = new ServerConfigFile ();
 		this.monsterTypeInterpreter = new MonsterTypeInterpreter ();
 		this.musicListener = new MusicListener();
+		this.damageDisplayListener = null;
 		this.bossBarController = new BossBarController(this.monsterTypeInterpreter, this.musicListener);
 		logger = new PluginLogger (this);
 		logger.setLevel(Level.ALL);
@@ -134,7 +138,8 @@ public class AGCraftPlugin extends JavaPlugin
 		this.registerEventListener (new ConsequenceManager());
 		
 		// Damage Display Listener
-		this.registerEventListener(new DamageDisplayListener (this.monsterTypeInterpreter, this.bossBarController));
+		this.damageDisplayListener = new DamageDisplayListener (this.monsterTypeInterpreter, this.bossBarController);
+		this.registerEventListener(this.damageDisplayListener);
 		
 		// Boss Bar event listener
 		this.registerEventListener(new BossBarEventListener(this.monsterTypeInterpreter, this.bossBarController));
@@ -143,7 +148,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.registerEventListener(new PathfindTargetingEventListener(this.monsterTypeInterpreter, this.bossBarController));
 		
 		// Custom skills listener
-		this.registerEventListener(new CustomSkillsListener (this.monsterTypeInterpreter));
+		this.registerEventListener(new CustomSkillsListener (this.monsterTypeInterpreter, this.damageDisplayListener));
 		
 		// Soulbounded items event listener
 		this.registerEventListener(new SoulBoundListener ());

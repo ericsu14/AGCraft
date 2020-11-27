@@ -1,7 +1,5 @@
 package com.joojet.plugins.mobs.monsters.zombie.beatthebruins;
 
-import java.util.List;
-
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
@@ -17,8 +15,6 @@ import com.joojet.plugins.mobs.equipment.leggings.USCBandUniformBottom;
 import com.joojet.plugins.mobs.equipment.offhand.RightCrashSymbol;
 import com.joojet.plugins.mobs.equipment.weapons.LeftCrashSymbol;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
-import com.joojet.plugins.mobs.skills.AbstractSkill;
-import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
 
 public class SpiritOfTroy extends USCFaction 
 {
@@ -37,11 +33,5 @@ public class SpiritOfTroy extends USCFaction
 		this.boots = new USCSpikedBoots (this.color);
 		this.weapon = new LeftCrashSymbol (this.color);
 		this.offhand = new RightCrashSymbol (this.color);
-	}
-
-	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new ResistanceBuffSkill (0, 45, 60));
-		
 	}
 }

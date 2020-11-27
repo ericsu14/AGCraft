@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.wither_skeleton;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -20,6 +22,8 @@ import com.joojet.plugins.mobs.equipment.head.DoomSlayerHead;
 import com.joojet.plugins.mobs.equipment.leggings.DoomGuyLegs;
 import com.joojet.plugins.mobs.equipment.weapons.DoomBlade;
 import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class DoomGuy extends MythicMob
@@ -66,5 +70,10 @@ public class DoomGuy extends MythicMob
 		
 		this.bossTheme = MusicType.DOOM_GUY;
 		this.setStat(MonsterStat.EXPERIENCE, 600.0);
+	}
+	
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		skills.add(new RageSkill (1, 90, 0.30));
 	}
 }

@@ -13,6 +13,17 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 
 public class DamageDisplayEntity extends MobEquipment 
 {
+	
+	/** Creates a new Damage Display entity with a configurable nametag
+	 *  @param name - Nametag that is to be displayed with this damage display entity */
+	public DamageDisplayEntity (String name)
+	{
+		super (MonsterType.DAMAGE_DISPLAY_ENTITY);
+		this.addMobFlags(MobFlag.SHOW_NAME);
+		this.color = ChatColor.RESET;
+		this.name = name;
+	}
+	
 	/** Creates a new MobEquipment instance for a Damage Display entity.
 	 *  	@param finalDamage - Final damage captured by event listener
 	 *  	@param damageType - Type of damage this event is caused by */

@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
 
+import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
 import com.joojet.plugins.mobs.util.LocationOffset;
 
@@ -21,7 +22,7 @@ public abstract class AbstractSkill
 	/** Max amount of uses for this skill */
 	protected int maxUses;
 	/** Current cooldown tick */
-	private int cooldownTick;
+	protected int cooldownTick;
 	/** Current usage of the skill */
 	private int currentUsage;
 	/** The weight of this skill. Higher weights means this skill is to be used more frequently. */
@@ -44,12 +45,13 @@ public abstract class AbstractSkill
 	/** Allows the caster to use a skill once the internal cooldown tick reaches zero and its specified conditions are met. 
 	 * 		@param caster - The LivingEntity using this skill
 	 * 		@param allies - A list of allies this skill may positively affect
-	 * 		@param enemies - A list of enemies this skill may negatively affect */
-	public void useSkill (LivingEntity caster, ArrayList <LivingEntity> allies, ArrayList <LivingEntity> enemies)
+	 * 		@param enemies - A list of enemies this skill may negatively affect
+	 * 		@param damageDisplayListener - A reference to the plugin's damage display listener, which is used to display floating name-tags */
+	public void useSkill (LivingEntity caster, ArrayList <LivingEntity> allies, ArrayList <LivingEntity> enemies, DamageDisplayListener damageDisplayListener)
 	{
 		if (this.canUseSkill() && this.checkConditons(caster, allies, enemies))
 		{
-			this.handleSkill(caster, allies, enemies);
+			this.handleSkill(caster, allies, enemies, damageDisplayListener);
 			this.cooldownTick = this.cooldown;
 			if (this.maxUses != Integer.MAX_VALUE)
 			{
@@ -68,7 +70,7 @@ public abstract class AbstractSkill
 	 * 		@param caster - The LivingEntity using this skill
 	 * 		@param allies - A list of allies this skill may positively affect
 	 * 		@param enemies - A list of enemies this skill may negatively affect */
-	protected abstract void handleSkill (LivingEntity caster, ArrayList <LivingEntity> allies, ArrayList <LivingEntity> enemies);
+	protected abstract void handleSkill (LivingEntity caster, ArrayList <LivingEntity> allies, ArrayList <LivingEntity> enemies, DamageDisplayListener damageDisplayListener);
 	
 	/** Defines conditions that need to be met in order for this skill to be used.
 	 * 		@return True if those conditions are met. False otherwise.

@@ -9,6 +9,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
 import com.joojet.plugins.mobs.spawning.FairSpawnController;
@@ -42,10 +43,14 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 	
 	/** Gives the caster and any of its surrounding allies a Strength I buff. */
 	@Override
-	protected void handleSkill(LivingEntity caster, ArrayList<LivingEntity> allies, ArrayList<LivingEntity> enemies) 
+	protected void handleSkill(LivingEntity caster, ArrayList<LivingEntity> allies, ArrayList<LivingEntity> enemies, DamageDisplayListener damageDisplayListener) 
 	{
 		this.applyPotionEffect(caster, this.potionType, this.potionDuration, this.potionStrength);
 		this.playBuffAnimation(caster);
+		if (!this.getBuffText().isEmpty())
+		{
+			damageDisplayListener.displayStringAboveEntity(caster, this.getBuffText());
+		}
 		
 		/** Apply buffs on allies a half second later */
 		new BukkitRunnable () {
@@ -59,6 +64,10 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 					{
 						applyPotionEffect(ally, potionType, potionDuration, potionStrength);
 						playBuffAnimation(ally);
+						if (!getBuffText().isEmpty())
+						{
+							damageDisplayListener.displayStringAboveEntity(ally, getBuffText());
+						}
 					}
 				}
 			}
@@ -67,6 +76,9 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 	
 	/** Animation used for when the entity is affected by a buff */
 	protected abstract void playBuffAnimation (LivingEntity entity);
+	
+	/** Returns a String that is displayed to those affected by the buff */
+	protected abstract String getBuffText ();
 
 	/** Applies a potion effect of choice to an entity if the entity doesn't already have it */
 	protected void applyPotionEffect (LivingEntity entity, PotionEffectType potion, int duration, int strength)

@@ -44,7 +44,42 @@ public class DamageDisplayManager
 		this.bossBarController = bossBarController;
 	}
 	
-	/** Creates an invisible armor stand displaying the final damage dealt to an entity after an attack */
+	/** Creates an invisible armor stand displaying String information above an entity
+	 *  @param entity - The entity the armor stand is hovering above
+	 *  @param str - String to be displayed in the armor stand's nametag */
+	public void createDamageDisplayonEntity (Entity entity, String str)
+	{
+		if (entity == null)
+		{
+			return;
+		}
+		
+		BoundingBox entityBox = entity.getBoundingBox();
+		Location entityLocation;
+		// Spawns this damage information entity at an offset slightly outside of the entity's hitbox.
+		double xRandomOffset = this.generateRandomNumber(-0.3, 0.3);
+		double yRandomOffset = this.generateRandomNumber(0.1, 0.3);
+		double zRandomOffset = this.generateRandomNumber(-0.3, 0.3);
+		
+		entityLocation = new Location (entity.getWorld(), entityBox.getMinX() + xRandomOffset, entityBox.getMaxY() + yRandomOffset, 
+				entityBox.getMinZ() + zRandomOffset);
+		
+		ArmorStand damageDisplayEntity = (ArmorStand) entity.getWorld().spawn(entityLocation, ArmorStand.class, armorStand -> {
+			armorStand.setInvulnerable(true);
+			armorStand.setVisible(false);
+			armorStand.setMarker(true);
+			EquipmentTools.equipEntity(armorStand, new DamageDisplayEntity (str), this.bossBarController);
+		});
+		
+		this.activeDisplayEntities.put(damageDisplayEntity.getUniqueId(), damageDisplayEntity);
+		new DamageDisplayEntityTask (damageDisplayEntity, this).runTaskLater(AGCraftPlugin.plugin, 20);
+		
+	}
+	
+	/** Creates an invisible armor stand displaying the final damage dealt to an entity after an attack
+	 * 	@param entity - The entity the armor stand is hovering above
+	 *  @param damageType - The type of damage being done
+	 *  @param health - Amount of damage dealt */
 	public void createDamageDisplayonEntity (Entity entity, DamageType damageType, double health)
 	{
 		if (entity == null || health <= 0.0)

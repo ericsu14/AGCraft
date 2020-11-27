@@ -22,7 +22,7 @@ public class MythicMob extends MobEquipment
 	public void loadCustomSkills(List<AbstractSkill> skills) {
 		// If a mythic mob does not have any predefined skill, automatically default to using
 		// the rage skill
-		skills.add(new RageSkill (1));
+		skills.add(new RageSkill (1, 90, 0.30));
 	}
 	
 }

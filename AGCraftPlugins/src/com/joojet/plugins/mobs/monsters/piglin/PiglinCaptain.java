@@ -46,7 +46,7 @@ public class PiglinCaptain extends LegendaryMob
 	
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AttackBuffSkill(1, 60, 60));
-		skills.add(new ResistanceBuffSkill (1, 60, 60));
+		skills.add(new AttackBuffSkill(1, 60, 20, 60, 8));
+		skills.add(new ResistanceBuffSkill (1, 60, 20, 60, 8));
 	}
 }

@@ -24,10 +24,14 @@ import com.joojet.plugins.mobs.skills.runnable.MobSkillRunnable;
 public class CustomSkillsListener extends AGListener {
 	/** A reference to the monster type interpreter defined in the main plugin class */
 	protected MonsterTypeInterpreter monsterInterpreter;
+	/** A reference to the damage display manager defined in the main class
+	 *  used to present visual information to the players when a mob uses a skill */
+	protected DamageDisplayListener damageDisplayListener;
 	
-	public CustomSkillsListener (MonsterTypeInterpreter monsterInterpreter)
+	public CustomSkillsListener (MonsterTypeInterpreter monsterInterpreter, DamageDisplayListener damageDisplayListener)
 	{
 		this.monsterInterpreter = monsterInterpreter;
+		this.damageDisplayListener = damageDisplayListener;
 	}
 	
 	@Override
@@ -75,7 +79,7 @@ public class CustomSkillsListener extends AGListener {
 		ArrayList <LivingEntity> enemies = new ArrayList <LivingEntity> ();
 		this.filterGoodAndBadEntities(caster, skill.getRange(), allies, enemies);
 		
-		skill.useSkill(caster, allies, enemies);
+		skill.useSkill(caster, allies, enemies, this.damageDisplayListener);
 	}
 	
 	/** Filter's a skill caster's surrounding entities using the passed range into two categories,
@@ -112,13 +116,15 @@ public class CustomSkillsListener extends AGListener {
 			// Otherwise, if the caster is any other living entity, the entity is an ally if:
 			// 1. The caster is in the entity's ignore list
 			// 2. The entity is in the caster's ignore list
-			// 3. The entity is not in the caster's list of rivaling factions
+			// 3. The entity is not in any faction and the caster is in a faction that is not friendly to the player (allows factioned mobs to be allies with normal mobs)
+			// 4. The entity is not in the caster's list of rivaling factions
 			else
 			{
 				MobEquipment casterEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(caster);
 				
 				isAlly = ((entityEquipment != null && entityEquipment.getIgnoreList().contains(caster.getType())) ||
 						  (casterEquipment != null && casterEquipment.getIgnoreList().contains(livingEntity.getType())) ||
+						  ((casterEquipment != null && entityEquipment == null) && (!casterEquipment.getIgnoreList().contains(EntityType.PLAYER) && livingEntity.getType() != EntityType.PLAYER)) ||
 						  ((casterEquipment != null && entityEquipment != null) && !casterEquipment.isRivalsOf(entityEquipment)));
 				
 				// Check for cases where the entity is not a custom mob and the entity is still not marked an ally
