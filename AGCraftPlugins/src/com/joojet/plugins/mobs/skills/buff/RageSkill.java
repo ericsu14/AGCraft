@@ -11,10 +11,14 @@ import org.bukkit.potion.PotionEffectType;
 
 public class RageSkill extends AbstractBuffSkill {
 	
+	/** Used to determine if a mob is enraged */
+	private boolean enraged;
+	
 	public RageSkill (int amplifier)
 	{
 		super (PotionEffectType.INCREASE_DAMAGE, 1000, amplifier, 1, Integer.MAX_VALUE, 8);
 		this.maxUses = 1;
+		this.enraged = false;
 	}
 	
 	@Override
@@ -31,6 +35,7 @@ public class RageSkill extends AbstractBuffSkill {
 		entity.addPotionEffect(new PotionEffect (PotionEffectType.INCREASE_DAMAGE, duration, strength, false, true));
 		entity.addPotionEffect(new PotionEffect (PotionEffectType.GLOWING, duration, 0, false, true));
 		entity.addPotionEffect(new PotionEffect (PotionEffectType.ABSORPTION, 300, 4, false, true));
+		this.enraged = true;
 	}
 
 	/** Activates rage mode once the monster's health drops below 35%, which increases damage */
@@ -38,6 +43,18 @@ public class RageSkill extends AbstractBuffSkill {
 	protected boolean checkConditons(LivingEntity caster, ArrayList<LivingEntity> allies,
 			ArrayList<LivingEntity> enemies) {
 		return (caster.getHealth() / caster.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) <= 0.35;
+	}
+	
+	/** Overrides the update function to play a small animation when mob is enraged */
+	@Override
+	public void update (LivingEntity caster)
+	{
+		super.update(caster);
+		if (enraged && this.random.nextBoolean())
+		{
+			this.spawnColoredParticlesOnEntity(caster, 10, 0, 0, 0, Particle.SMOKE_LARGE);
+			this.spawnColoredParticlesOnEntity(caster, 15, 0, 0, 0, Particle.FLAME);
+		}
 	}
 
 }

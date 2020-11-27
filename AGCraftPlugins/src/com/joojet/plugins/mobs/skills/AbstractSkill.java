@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.skills;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -25,6 +26,8 @@ public abstract class AbstractSkill
 	private int currentUsage;
 	/** The weight of this skill. Higher weights means this skill is to be used more frequently. */
 	private int weight;
+	/** Random number generator */
+	protected Random random;
 	
 	public AbstractSkill (SkillPropetry type, int range, int cooldown, int maxUses, int weight)
 	{
@@ -35,6 +38,7 @@ public abstract class AbstractSkill
 		this.currentUsage = this.maxUses;
 		this.cooldownTick = 0;
 		this.weight = weight;
+		this.random = new Random ();
 	}
 	
 	/** Allows the caster to use a skill once the internal cooldown tick reaches zero and its specified conditions are met. 
@@ -55,7 +59,7 @@ public abstract class AbstractSkill
 	}
 	
 	/** Updates the skill's internal cooldown timer */
-	public void update ()
+	public void update (LivingEntity caster)
 	{
 		this.cooldownTick = (this.cooldownTick - 1) >= 0 ? this.cooldownTick - 1 : 0;
 	}
