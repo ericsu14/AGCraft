@@ -13,9 +13,9 @@ public class AttackBuffSkill extends AbstractBuffSkill
 	
 	/** A monster skill that applies a strength buff to the caster itself and its
 	 *  surrounding allies. */
-	public AttackBuffSkill (int amplifier, int cooldown)
+	public AttackBuffSkill (int amplifier, int duration, int cooldown)
 	{
-		super (PotionEffectType.INCREASE_DAMAGE, 300, amplifier, 30, cooldown, 8);
+		super (PotionEffectType.INCREASE_DAMAGE, duration, amplifier, 30, cooldown, 8);
 	}
 	
 	/** Only use this skill if any surrounding player's threat score exceeds mythic level */

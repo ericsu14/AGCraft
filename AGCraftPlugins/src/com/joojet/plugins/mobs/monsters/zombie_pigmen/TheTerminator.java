@@ -56,6 +56,6 @@ public class TheTerminator extends MythicMob
 	
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AttackBuffSkill(1, 30));
+		skills.add(new AttackBuffSkill(1, 60, 60));
 	}
 }

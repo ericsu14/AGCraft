@@ -62,6 +62,6 @@ public class BarneyTheDinosaur extends LegendaryMob
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		skills.add(new ResistanceBuffSkill (1, 60));
+		skills.add(new ResistanceBuffSkill (1, 60, 60));
 	}
 }

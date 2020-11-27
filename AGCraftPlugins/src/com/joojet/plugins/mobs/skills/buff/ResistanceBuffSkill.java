@@ -11,9 +11,9 @@ import com.joojet.plugins.mobs.enums.MonsterClassifier;
 
 public class ResistanceBuffSkill extends AbstractBuffSkill
 {
-	public ResistanceBuffSkill(int amplifier, int cooldown) 
+	public ResistanceBuffSkill(int amplifier, int duration, int cooldown) 
 	{
-		super(PotionEffectType.DAMAGE_RESISTANCE, 300, amplifier, 30, cooldown, 6);
+		super(PotionEffectType.DAMAGE_RESISTANCE, duration, amplifier, 30, cooldown, 6);
 	}
 
 	@Override

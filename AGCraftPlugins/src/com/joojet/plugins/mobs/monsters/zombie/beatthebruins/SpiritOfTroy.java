@@ -41,7 +41,7 @@ public class SpiritOfTroy extends USCFaction
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new ResistanceBuffSkill (0, 30));
+		skills.add(new ResistanceBuffSkill (0, 45, 60));
 		
 	}
 }

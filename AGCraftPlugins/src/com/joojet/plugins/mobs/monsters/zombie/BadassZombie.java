@@ -47,6 +47,6 @@ public class BadassZombie extends EpicMob
 	
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AttackBuffSkill(0, 30));
+		skills.add(new AttackBuffSkill(0, 60, 30));
 	}
 }

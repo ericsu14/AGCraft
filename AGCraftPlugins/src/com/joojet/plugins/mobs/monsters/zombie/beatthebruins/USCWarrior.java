@@ -42,6 +42,6 @@ public class USCWarrior extends USCFaction
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AttackBuffSkill(0, 30));
+		skills.add(new AttackBuffSkill(0, 30, 60));
 	}
 }

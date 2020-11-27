@@ -60,8 +60,8 @@ public class UCLABearTamer extends UCLAFaction
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AttackBuffSkill(1, 60));
-		skills.add(new ResistanceBuffSkill (1, 60));
-		skills.add(new SpeedBuffSkill (1, 60));
+		skills.add(new AttackBuffSkill(1, 60, 60));
+		skills.add(new ResistanceBuffSkill (2, 45, 60));
+		skills.add(new SpeedBuffSkill (1, 60, 60));
 	}
 }

@@ -60,8 +60,8 @@ public class TrojanWarrior extends USCFaction
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AttackBuffSkill(0, 60));
-		skills.add(new ResistanceBuffSkill (0, 60));
-		skills.add(new SpeedBuffSkill (0, 60));
+		skills.add(new AttackBuffSkill(0, 45, 60));
+		skills.add(new ResistanceBuffSkill (0, 45, 60));
+		skills.add(new SpeedBuffSkill (0, 45, 60));
 	}
 }
