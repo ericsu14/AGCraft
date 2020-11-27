@@ -29,8 +29,7 @@ public class AttackBuffSkill extends AbstractBuffSkill
 	@Override
 	protected void playBuffAnimation(LivingEntity entity) {
 		this.spawnColoredParticlesOnEntity(entity, 30, 64, 0, 0, Particle.SPELL_MOB);
-		entity.getWorld().playSound(entity.getLocation(), Sound.BLOCK_ANVIL_USE, 1.0F, 1.0F);
-		entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_EVOKER_CAST_SPELL, 1.0F, 1.0F);
+		entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0F, 1.0F);
 	}
 
 }

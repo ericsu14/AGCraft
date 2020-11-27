@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.piglin;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
@@ -10,6 +12,8 @@ import com.joojet.plugins.mobs.equipment.head.PiglinSoldierHat;
 import com.joojet.plugins.mobs.equipment.leggings.RoyalGoldLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.PiglinSword;
 import com.joojet.plugins.mobs.monsters.factions.classifications.EpicMob;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 
 public class PiglinSoldier extends EpicMob 
 {
@@ -28,5 +32,10 @@ public class PiglinSoldier extends EpicMob
 		this.weapon = new PiglinSword (this.color);
 		
 		this.setStat(MonsterStat.EXPERIENCE, 25.0);
+	}
+	
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		skills.add(new AttackBuffSkill(0, 60, 60));
 	}
 }

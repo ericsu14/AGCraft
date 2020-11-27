@@ -1,9 +1,9 @@
 package com.joojet.plugins.mobs.damage;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -23,7 +23,7 @@ import com.joojet.plugins.mobs.util.EquipmentTools;
 public class DamageDisplayManager 
 {
 	/** Keeps track of active damage displays */
-	protected ConcurrentHashMap <UUID, ArmorStand> activeDisplayEntities;
+	protected HashMap <UUID, ArmorStand> activeDisplayEntities;
 	/** A set of Block Types a player cannot be on while detecting critical hits */
 	protected HashSet <Material> invalidBlocks;
 	/** Used to calculate a random offset */
@@ -33,7 +33,7 @@ public class DamageDisplayManager
 	
 	public DamageDisplayManager (BossBarController bossBarController)
 	{
-		this.activeDisplayEntities = new ConcurrentHashMap <UUID, ArmorStand> ();
+		this.activeDisplayEntities = new HashMap <UUID, ArmorStand> ();
 		
 		this.invalidBlocks = new HashSet <Material> ();
 		this.invalidBlocks.add(Material.LADDER);

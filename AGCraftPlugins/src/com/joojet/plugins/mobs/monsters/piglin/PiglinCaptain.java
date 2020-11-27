@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.piglin;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
@@ -11,6 +13,9 @@ import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.head.PiglinCaptainHead;
 import com.joojet.plugins.mobs.equipment.weapons.PiglinAxe;
 import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
+import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class PiglinCaptain extends LegendaryMob 
@@ -37,5 +42,11 @@ public class PiglinCaptain extends LegendaryMob
 		
 		this.setStat(MonsterStat.EXPERIENCE, 45.0);
 		this.bossTheme = MusicType.KUZE_THEME;
+	}
+	
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		skills.add(new AttackBuffSkill(1, 60, 60));
+		skills.add(new ResistanceBuffSkill (1, 60, 60));
 	}
 }

@@ -54,7 +54,8 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 			{
 				for (LivingEntity ally : allies)
 				{
-					if (!hasPotionEffect (ally) && ally.getType() != EntityType.CREEPER)
+					if (ally != null && !ally.isDead() 
+							&& !hasPotionEffect (ally) && ally.getType() != EntityType.CREEPER)
 					{
 						applyPotionEffect(ally, potionType, potionDuration, potionStrength);
 						playBuffAnimation(ally);

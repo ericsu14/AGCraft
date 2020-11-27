@@ -49,12 +49,12 @@ public class SoulObliterator extends LegendaryMob
 		this.weapon = new AngelOfDeath (this.color);
 		this.offhand = new EnhancedWitheringArrow (this.color);
 		
-		this.addMonsterDrops(new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.25, 1, 2),
+		this.addMonsterDrops(new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.30, 1, 2),
 				new MonsterDrop (Material.WITHER_SKELETON_SKULL, 0.10, 1, 1),
 				new MonsterDrop (Material.DIAMOND, 0.25, 1, 3));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 45.0);
-		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.50);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.90);
+		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.30);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.75);
 	}
 }
