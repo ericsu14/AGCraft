@@ -59,12 +59,12 @@ public abstract class WeightedEntry <E>
 			pivot = (int) Math.floor ((left + right) / 2);
 			curr = entryList.get(pivot);
 			
-			// If the target value is in range between the pivot's weights, return the mob equipment
+			// If the target value is in range between the pivot's weights, return the weighted entry
 			if (curr.inRange(roll))
 			{
 				return curr.getEntry();
 			}
-			// Search right if the roll exceeds the current mob's max weight
+			// Search right if the roll exceeds the current entry's max weight
 			else if (roll > curr.getMaxWeight())
 			{
 				left = pivot + 1;

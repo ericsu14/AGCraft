@@ -7,12 +7,19 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.event.world.ChunkLoadEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.runnable.MobSkillRunnable;
 
 public class CustomSkillsListener extends AGListener {
 	/** A reference to the monster type interpreter defined in the main plugin class */
@@ -41,6 +48,23 @@ public class CustomSkillsListener extends AGListener {
 
 	}
 	
+	@EventHandler(priority = EventPriority.LOW)
+	public void onEntitySpawn (EntitySpawnEvent spawnEvent)
+	{
+		this.loadCustomSkillsOntoEntity(spawnEvent.getEntity());
+	}
+	
+	@EventHandler (priority = EventPriority.LOW)
+	public void onChunkLoad (ChunkLoadEvent chunkLoadEvent)
+	{
+		Entity[] entities = chunkLoadEvent.getChunk().getEntities();
+		
+		for (Entity ent : entities)
+		{
+			this.loadCustomSkillsOntoEntity(ent);
+		}
+	}
+	
 	/** Allows an entity to use a custom skill. This function also contains logic to filter out the caster's surrounding living entities
 	 *  into allies and enemies.
 	 *  @param caster - The Living Entity using the custom skill
@@ -49,11 +73,7 @@ public class CustomSkillsListener extends AGListener {
 	{
 		ArrayList <LivingEntity> allies = new ArrayList <LivingEntity> ();
 		ArrayList <LivingEntity> enemies = new ArrayList <LivingEntity> ();
-		
-		if (skill.canUseSkill())
-		{
-			this.filterGoodAndBadEntities(caster, skill.getRange(), allies, enemies);
-		}
+		this.filterGoodAndBadEntities(caster, skill.getRange(), allies, enemies);
 		
 		skill.useSkill(caster, allies, enemies);
 	}
@@ -120,6 +140,30 @@ public class CustomSkillsListener extends AGListener {
 				enemies.add(livingEntity);
 			}
 		}
+	}
+	
+	/** Loads custom skills onto the entity in the next three seconds */
+	private void loadCustomSkillsOntoEntity (Entity entity)
+	{
+		if (!(entity instanceof LivingEntity))
+		{
+			return;
+		}
+		
+		LivingEntity livingEntity = (LivingEntity) entity;
+		CustomSkillsListener listener = this;
+		new BukkitRunnable () {
+			@Override
+			public void run()
+			{
+				MobEquipment equipment = monsterInterpreter.getMobEquipmentFromEntity(livingEntity);
+				if (equipment != null)
+				{
+					// TODO: Register the mob and its runnable instance into a hashmap.
+					new MobSkillRunnable (livingEntity, equipment, listener).runTaskTimer(AGCraftPlugin.plugin, 0, 20);
+				}
+			}
+		}.runTaskLater(AGCraftPlugin.plugin, 60);
 	}
 
 }

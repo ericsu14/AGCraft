@@ -26,6 +26,7 @@ import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.deathcounter.DeathCounter;
 import com.joojet.plugins.mobs.AmplifiedMobSpawner;
 import com.joojet.plugins.mobs.BossBarEventListener;
+import com.joojet.plugins.mobs.CustomSkillsListener;
 import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.PathfindTargetingEventListener;
 import com.joojet.plugins.mobs.SoulBoundListener;
@@ -140,6 +141,9 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Pathfind Targeting event listener
 		this.registerEventListener(new PathfindTargetingEventListener(this.monsterTypeInterpreter, this.bossBarController));
+		
+		// Custom skills listener
+		this.registerEventListener(new CustomSkillsListener (this.monsterTypeInterpreter));
 		
 		// Soulbounded items event listener
 		this.registerEventListener(new SoulBoundListener ());
