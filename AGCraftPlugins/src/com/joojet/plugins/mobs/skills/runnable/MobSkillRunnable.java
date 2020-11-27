@@ -51,6 +51,10 @@ public class MobSkillRunnable extends BukkitRunnable
 				this.customSkillsListener.useCustomSkill(caster, skill);
 			}
 		}
+		else
+		{
+			this.cancel();
+		}
 	}
 	
 	/** Searches and returns a random skill that the monster can use, if any one exists.
