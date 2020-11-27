@@ -110,7 +110,7 @@ public abstract class AbstractSkill
 		Location entityLocation = entity.getEyeLocation();
 		for (int i = 0; i < count; ++i)
 		{
-			entity.getWorld().spawnParticle(particle, LocationOffset.addRandomOffsetOnLocation(entityLocation, 0.5),
+			entity.getWorld().spawnParticle(particle, LocationOffset.addRandomOffsetOnLocation(entityLocation, 0.7),
 					0, (red / 256D), (green / 256D), (blue / 256D), 1, null);
 		}
 	}

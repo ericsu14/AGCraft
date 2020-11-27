@@ -73,7 +73,7 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 	{
 		if (!entity.hasPotionEffect(potion))
 		{
-			entity.addPotionEffect(new PotionEffect (potion, duration, strength));
+			entity.addPotionEffect(new PotionEffect (potion, duration, strength, false, true));
 		}
 	}
 	

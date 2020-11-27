@@ -1,7 +1,5 @@
 package com.joojet.plugins.mobs.monsters.wither_skeleton;
 
-import java.util.List;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -21,8 +19,6 @@ import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.HellwalkerDagger;
 import com.joojet.plugins.mobs.equipment.weapons.HellwalkerBlade;
 import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
-import com.joojet.plugins.mobs.skills.AbstractSkill;
-import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class HellWalker extends MythicMob 
@@ -56,10 +52,5 @@ public class HellWalker extends MythicMob
 		
 		this.bossTheme = MusicType.HAIKYUU;
 		
-	}
-	
-	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AttackBuffSkill(0, 60, 60));
 	}
 }

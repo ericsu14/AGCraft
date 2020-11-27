@@ -7,6 +7,7 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.RageSkill;
 
 public class MythicMob extends MobEquipment 
 {
@@ -19,8 +20,9 @@ public class MythicMob extends MobEquipment
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
-		
+		// If a mythic mob does not have any predefined skill, automatically default to using
+		// the rage skill
+		skills.add(new RageSkill (1));
 	}
 	
 }
