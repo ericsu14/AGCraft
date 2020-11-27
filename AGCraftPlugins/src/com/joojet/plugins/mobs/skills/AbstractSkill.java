@@ -49,10 +49,12 @@ public abstract class AbstractSkill
 			this.cooldownTick = this.cooldown;
 			--this.currentUsage;
 		}
-		else
-		{
-			this.cooldownTick = (this.cooldownTick - 1) >= 0 ? this.cooldownTick - 1 : 0;
-		}
+	}
+	
+	/** Updates the skill's internal cooldown timer */
+	public void update ()
+	{
+		this.cooldownTick = (this.cooldownTick - 1) >= 0 ? this.cooldownTick - 1 : 0;
 	}
 	
 	/** Allows the skillcaster to use a custom skill.

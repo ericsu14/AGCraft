@@ -10,6 +10,7 @@ import org.bukkit.entity.EntityType;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
+import com.joojet.plugins.mobs.util.WeightedEntry;
 
 public abstract class MonsterTypes 
 {
@@ -83,7 +84,7 @@ public abstract class MonsterTypes
 		if (!mobList.isEmpty())
 		{
 			int roll = this.random.nextInt (minWeight);
-			return this.searchMobList(roll, mobList);
+			return WeightedEntry.searchWeightedList(roll, mobList);
 		}
 		return null;
 	}
@@ -98,43 +99,5 @@ public abstract class MonsterTypes
 	public ArrayList <EntityType> getSupportedEntities ()
 	{
 		return this.supportedEntities;
-	}
-	
-	/** Conducts binary search upon the weighted mob list searching for the monster whose weight range
-	 *  satisfies the random number
-	 *  	@param roll - Random number
-	 *  	@param mobList - A list of weighted mobs */
-	private MobEquipment searchMobList (int roll, ArrayList <WeightedMob> mobList)
-	{
-		int n = mobList.size();
-		int left = 0;
-		int right = n - 1;
-		int pivot;
-		WeightedMob curr;
-		
-		while (left <= right)
-		{
-			pivot = (int) Math.floor ((left + right) / 2);
-			curr = mobList.get(pivot);
-			
-			// If the target value is in range between the pivot's weights, return the mob equipment
-			if (curr.inRange(roll))
-			{
-				return curr.getEquipment();
-			}
-			// Search right if the roll exceeds the current mob's max weight
-			else if (roll > curr.getMaxWeight())
-			{
-				left = pivot + 1;
-			}
-			// Otherwise, search left
-			else
-			{
-				right = pivot - 1;
-			}
-		}
-		
-		// Return null if the mob is not found
-		return null;
 	}
 }
