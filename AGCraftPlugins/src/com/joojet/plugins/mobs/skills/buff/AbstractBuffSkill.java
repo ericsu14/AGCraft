@@ -2,6 +2,7 @@ package com.joojet.plugins.mobs.skills.buff;
 
 import java.util.ArrayList;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -53,7 +54,7 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 			{
 				for (LivingEntity ally : allies)
 				{
-					if (!hasPotionEffect (ally))
+					if (!hasPotionEffect (ally) && ally.getType() != EntityType.CREEPER)
 					{
 						applyPotionEffect(ally, potionType, potionDuration, potionStrength);
 						playBuffAnimation(ally);

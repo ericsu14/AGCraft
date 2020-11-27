@@ -63,8 +63,8 @@ public class EternalTrojanArcher extends USCFaction
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AttackBuffSkill(1));
-		skills.add(new ResistanceBuffSkill (1));
-		skills.add(new SpeedBuffSkill (1));
+		skills.add(new AttackBuffSkill(0));
+		skills.add(new ResistanceBuffSkill (0));
+		skills.add(new SpeedBuffSkill (0));
 	}
 }
