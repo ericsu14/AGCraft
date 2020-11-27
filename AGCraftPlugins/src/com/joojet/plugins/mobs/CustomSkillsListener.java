@@ -126,7 +126,7 @@ public class CustomSkillsListener extends AGListener {
 				// This allows regular zombies and skeletons to be treated like allies, but not players, as the player
 				// must be in the caster's ignore list to be treated like an ally at this point.
 				if (!isAlly && casterEquipment != null && entityEquipment == null
-						&& !casterEquipment.getIgnoreList().contains(EntityType.PLAYER))
+						&& livingEntity.getType() != EntityType.PLAYER)
 				{
 					isAlly = !(casterEquipment.getHitList().contains(livingEntity.getType()));
 				}
