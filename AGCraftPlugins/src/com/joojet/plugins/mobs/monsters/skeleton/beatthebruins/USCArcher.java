@@ -14,6 +14,7 @@ import com.joojet.plugins.mobs.equipment.leggings.USCFootballTrousers;
 import com.joojet.plugins.mobs.equipment.weapons.FightOn;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.SpeedBuffSkill;
 
 public class USCArcher extends USCFaction
 {
@@ -35,8 +36,8 @@ public class USCArcher extends USCFaction
 	}
 
 	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
-		
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
+		skills.add(new SpeedBuffSkill (0));
 	}
 }

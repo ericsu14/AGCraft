@@ -22,6 +22,9 @@ import com.joojet.plugins.mobs.equipment.weapons.EternalSpiritOfTroy;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
+import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
+import com.joojet.plugins.mobs.skills.buff.SpeedBuffSkill;
 
 public class EternalTrojanArcher extends USCFaction 
 {
@@ -60,7 +63,8 @@ public class EternalTrojanArcher extends USCFaction
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
-		
+		skills.add(new AttackBuffSkill(1));
+		skills.add(new ResistanceBuffSkill (1));
+		skills.add(new SpeedBuffSkill (1));
 	}
 }

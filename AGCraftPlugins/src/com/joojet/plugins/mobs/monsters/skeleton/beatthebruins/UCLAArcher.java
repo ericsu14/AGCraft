@@ -15,6 +15,7 @@ import com.joojet.plugins.mobs.equipment.leggings.BruinLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.BruinBow;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.SpeedBuffSkill;
 
 public class UCLAArcher extends UCLAFaction
 {
@@ -40,7 +41,6 @@ public class UCLAArcher extends UCLAFaction
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
-		
+		skills.add(new SpeedBuffSkill (1));
 	}
 }

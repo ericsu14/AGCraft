@@ -7,6 +7,7 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 
 public class RareMob extends MobEquipment 
 {
@@ -17,9 +18,9 @@ public class RareMob extends MobEquipment
 	}
 
 	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
-		
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
+		skills.add(new AttackBuffSkill(0));
 	}
 
 }

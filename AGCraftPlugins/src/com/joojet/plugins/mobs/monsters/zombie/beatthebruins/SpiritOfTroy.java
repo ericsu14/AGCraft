@@ -18,6 +18,7 @@ import com.joojet.plugins.mobs.equipment.offhand.RightCrashSymbol;
 import com.joojet.plugins.mobs.equipment.weapons.LeftCrashSymbol;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
 
 public class SpiritOfTroy extends USCFaction 
 {
@@ -40,7 +41,7 @@ public class SpiritOfTroy extends USCFaction
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
+		skills.add(new ResistanceBuffSkill (0));
 		
 	}
 }

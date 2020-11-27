@@ -55,7 +55,7 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 				{
 					if (!hasPotionEffect (ally))
 					{
-						applyPotionEffect(caster, potionType, potionDuration, potionStrength);
+						applyPotionEffect(ally, potionType, potionDuration, potionStrength);
 						playBuffAnimation(ally);
 					}
 				}
@@ -66,7 +66,6 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 	/** Animation used for when the entity is affected by a buff */
 	protected abstract void playBuffAnimation (LivingEntity entity);
 
-	 
 	/** Applies a potion effect of choice to an entity if the entity doesn't already have it */
 	protected void applyPotionEffect (LivingEntity entity, PotionEffectType potion, int duration, int strength)
 	{
