@@ -47,7 +47,10 @@ public abstract class AbstractSkill
 		{
 			this.handleSkill(caster, allies, enemies);
 			this.cooldownTick = this.cooldown;
-			--this.currentUsage;
+			if (this.maxUses != Integer.MAX_VALUE)
+			{
+				--this.currentUsage;
+			}
 		}
 	}
 	

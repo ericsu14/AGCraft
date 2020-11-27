@@ -16,6 +16,8 @@ import com.joojet.plugins.mobs.equipment.offhand.BruinShield;
 import com.joojet.plugins.mobs.equipment.weapons.BruinSword;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
+import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
 
 public class UCLAJock extends UCLAFaction
 {
@@ -41,8 +43,9 @@ public class UCLAJock extends UCLAFaction
 	}
 
 	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
-		
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
+		skills.add(new AttackBuffSkill(1));
+		skills.add(new ResistanceBuffSkill (1));
 	}
 }

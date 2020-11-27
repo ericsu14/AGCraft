@@ -16,6 +16,7 @@ import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.equipment.weapons.TrojanSword;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 
 public class USCWarrior extends USCFaction
 {
@@ -41,7 +42,6 @@ public class USCWarrior extends USCFaction
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
-		
+		skills.add(new AttackBuffSkill(0));
 	}
 }
