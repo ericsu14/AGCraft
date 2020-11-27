@@ -7,7 +7,6 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
-import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 
 public class EpicMob extends MobEquipment 
 {
@@ -20,7 +19,7 @@ public class EpicMob extends MobEquipment
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
-		skills.add(new AttackBuffSkill(0));
+
 	}
 	
 }

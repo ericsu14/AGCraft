@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.zombie_pigmen;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -17,6 +19,8 @@ import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.TerminatorDagger;
 import com.joojet.plugins.mobs.equipment.weapons.TerminatorSword;
 import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class TheTerminator extends MythicMob
@@ -48,5 +52,10 @@ public class TheTerminator extends MythicMob
 		
 		this.setStat(MonsterStat.EXPERIENCE, 250.0);
 		this.bossTheme = MusicType.KUZE_THEME;
+	}
+	
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		skills.add(new AttackBuffSkill(1, 30));
 	}
 }

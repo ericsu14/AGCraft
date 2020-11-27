@@ -45,7 +45,7 @@ public class UCLAJock extends UCLAFaction
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
-		skills.add(new AttackBuffSkill(1));
-		skills.add(new ResistanceBuffSkill (1));
+		skills.add(new AttackBuffSkill(1, 30));
+		skills.add(new ResistanceBuffSkill (1, 30));
 	}
 }

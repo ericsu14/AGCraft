@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.skeleton;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -18,6 +20,8 @@ import com.joojet.plugins.mobs.equipment.offhand.CursedArrow;
 import com.joojet.plugins.mobs.equipment.weapons.ATerribleFate;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
 import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class SkullKid extends MythicMob 
@@ -62,5 +66,11 @@ public class SkullKid extends MythicMob
 		
 		this.setStat(MonsterStat.EXPERIENCE, 500.0);
 		this.bossTheme = MusicType.KUZE_THEME;
+	}
+	
+	@Override
+	public void loadCustomSkills (List <AbstractSkill> skills)
+	{
+		skills.add(new ResistanceBuffSkill (0, 60));
 	}
 }

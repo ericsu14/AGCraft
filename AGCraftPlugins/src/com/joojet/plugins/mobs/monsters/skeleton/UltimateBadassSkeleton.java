@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.skeleton;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -16,6 +18,10 @@ import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.ThanosArrow;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualFantasy;
 import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
+import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
+import com.joojet.plugins.mobs.skills.buff.SpeedBuffSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class UltimateBadassSkeleton extends LegendaryMob
@@ -52,5 +58,13 @@ public class UltimateBadassSkeleton extends LegendaryMob
 		
 		this.setStat(MonsterStat.EXPERIENCE, 50.0);
 		this.bossTheme = MusicType.HAIKYUU;
+	}
+	
+	@Override
+	public void loadCustomSkills (List <AbstractSkill> skills)
+	{
+		skills.add(new AttackBuffSkill(1, 60));
+		skills.add(new ResistanceBuffSkill (1, 60));
+		skills.add(new SpeedBuffSkill (0, 60));
 	}
 }

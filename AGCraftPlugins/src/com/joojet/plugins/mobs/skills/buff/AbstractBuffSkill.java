@@ -31,13 +31,13 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 	 *  @param potionStrength - Potion strength
 	 *  @param range - Max range of the potion
 	 *  @param weight - Weight of this buff skill */
-	public AbstractBuffSkill(PotionEffectType potionType, int potionDuration, int potionStrength, int range, int weight) 
+	public AbstractBuffSkill(PotionEffectType potionType, int potionDuration, int potionStrength, int range, int cooldown, int weight) 
 	{
-		super(SkillPropetry.BUFF, range, potionDuration, Integer.MAX_VALUE, weight);
+		super(SkillPropetry.BUFF, range, cooldown, Integer.MAX_VALUE, weight);
 		this.potionDuration = potionDuration * 20;
 		this.potionStrength = potionStrength;
 		this.potionType = potionType;
-		this.spawnWeight = new FairSpawnController (this.getRange());
+		this.spawnWeight = new FairSpawnController (this.getRange() / 2);
 	}
 	
 	/** Gives the caster and any of its surrounding allies a Strength I buff. */

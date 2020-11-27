@@ -38,6 +38,6 @@ public class USCArcher extends USCFaction
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
-		skills.add(new SpeedBuffSkill (0));
+		skills.add(new SpeedBuffSkill (0, 30));
 	}
 }

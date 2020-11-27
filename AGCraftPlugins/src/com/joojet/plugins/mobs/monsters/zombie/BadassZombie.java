@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.zombie;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
@@ -12,6 +14,8 @@ import com.joojet.plugins.mobs.equipment.head.ReinforcedIronHelmet;
 import com.joojet.plugins.mobs.equipment.leggings.ReinforcedIronLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.SharpenedIronSword;
 import com.joojet.plugins.mobs.monsters.factions.classifications.EpicMob;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 
 public class BadassZombie extends EpicMob
 {
@@ -39,5 +43,10 @@ public class BadassZombie extends EpicMob
 		this.boots = new LightweightIronBoots (this.color);
 		
 		this.setStat(MonsterStat.EXPERIENCE, 25.0);
+	}
+	
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		skills.add(new AttackBuffSkill(0, 30));
 	}
 }

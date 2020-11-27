@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.zombie_pigmen;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
@@ -11,6 +13,9 @@ import com.joojet.plugins.mobs.equipment.head.DarkNetheriteHelmet;
 import com.joojet.plugins.mobs.equipment.offhand.PigmanDagger;
 import com.joojet.plugins.mobs.equipment.weapons.PigmanSword;
 import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
+import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
 
 
 public class AkimboPigman extends LegendaryMob 
@@ -33,5 +38,11 @@ public class AkimboPigman extends LegendaryMob
 		this.offhand = new PigmanDagger (this.color);
 		
 		this.setStat(MonsterStat.EXPERIENCE, 40.0);
+	}
+	
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		skills.add(new AttackBuffSkill(1, 30));
+		skills.add(new ResistanceBuffSkill (1, 30));
 	}
 }

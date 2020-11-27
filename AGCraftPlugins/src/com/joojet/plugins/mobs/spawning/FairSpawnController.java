@@ -53,6 +53,13 @@ public class FairSpawnController
 		return numPlayers > 0 ? (sumOfScores / numPlayers) + (bias * (numPlayers - 1)) : 0.0;
 	}
 	
+	/** Sets the max scan radius used by the thread score calculation algorithm to a different value
+	 * 	@param maxRadius - New max scanning radius */
+	public void setMaxRadius (int maxRadius)
+	{
+		this.maxScanRadius = maxRadius;
+	}
+	
 	protected boolean checkIfMobIsWithinRangeOfPlayer (Player player, LivingEntity monster)
 	{
 		// Both the monster and the player needs to be in the same world

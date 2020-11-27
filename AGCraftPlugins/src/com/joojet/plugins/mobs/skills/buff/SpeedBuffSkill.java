@@ -11,9 +11,9 @@ import com.joojet.plugins.mobs.enums.MonsterClassifier;
 
 public class SpeedBuffSkill extends AbstractBuffSkill {
 	
-	public SpeedBuffSkill (int amplifier)
+	public SpeedBuffSkill (int amplifier, int cooldown)
 	{
-		super (PotionEffectType.SPEED, 300, amplifier, 30, 8);
+		super (PotionEffectType.SPEED, 300, amplifier, 30, cooldown, 8);
 	}
 	
 	@Override

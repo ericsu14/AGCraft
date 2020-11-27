@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.zombie;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -17,6 +19,8 @@ import com.joojet.plugins.mobs.equipment.leggings.BarneyLegs;
 import com.joojet.plugins.mobs.equipment.offhand.BarneyTotem;
 import com.joojet.plugins.mobs.equipment.weapons.BarneyDagger;
 import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class BarneyTheDinosaur extends LegendaryMob
@@ -53,5 +57,11 @@ public class BarneyTheDinosaur extends LegendaryMob
 		
 		this.setStat(MonsterStat.EXPERIENCE, 200.0);
 		this.bossTheme = MusicType.BARNEY;
+	}
+	
+	@Override
+	public void loadCustomSkills (List <AbstractSkill> skills)
+	{
+		skills.add(new ResistanceBuffSkill (1, 60));
 	}
 }
