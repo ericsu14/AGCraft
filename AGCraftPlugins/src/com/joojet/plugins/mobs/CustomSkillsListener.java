@@ -189,15 +189,16 @@ public class CustomSkillsListener extends AGListener {
 				
 				isAlly = ((entityEquipment != null && entityEquipment.getIgnoreList().contains(caster.getType())) ||
 						  (casterEquipment != null && casterEquipment.getIgnoreList().contains(livingEntity.getType())) ||
-						  ((casterEquipment != null && entityEquipment == null) && (!casterEquipment.getIgnoreList().contains(EntityType.PLAYER) && livingEntity.getType() != EntityType.PLAYER)) ||
-						  ((casterEquipment != null && entityEquipment != null) && !casterEquipment.isRivalsOf(entityEquipment)));
+						  ((casterEquipment != null && entityEquipment != null) && (!entityEquipment.getFactions().isEmpty() 
+								  && !casterEquipment.isRivalsOf(entityEquipment))));
 				
 				// Check for cases where the entity is not a custom mob and the entity is still not marked an ally
 				// from the previous checks. If so, the entity is an ally if it is not in the caster's hit list.
 				// This allows regular zombies and skeletons to be treated like allies, but not players, as the player
 				// must be in the caster's ignore list to be treated like an ally at this point.
-				if (!isAlly && casterEquipment != null && entityEquipment == null
-						&& livingEntity.getType() != EntityType.PLAYER)
+				if (!isAlly && casterEquipment != null && 
+						((entityEquipment == null && livingEntity.getType() != EntityType.PLAYER) ||
+						(casterEquipment.getIgnoreList().contains(EntityType.PLAYER))))
 				{
 					isAlly = !(casterEquipment.getHitList().contains(livingEntity.getType()));
 				}

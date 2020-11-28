@@ -18,8 +18,7 @@ public class HoglinBeast extends EpicMob
 		this.name = "Hoglin Beast";
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.addBiomes(Biome.THE_VOID);
-		this.addPotionEffect(CustomPotionEffect.REGEN, CustomPotionEffect.SPEED,
-				CustomPotionEffect.JUMP_BOOST);
+		this.addPotionEffect(CustomPotionEffect.SPEED, CustomPotionEffect.JUMP_BOOST);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 16.0);
 		this.setStat(MonsterStat.BASE_ARMOR, 14.0);
 		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 6.0);

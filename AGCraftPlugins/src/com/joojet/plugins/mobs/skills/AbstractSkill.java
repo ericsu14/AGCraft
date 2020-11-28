@@ -24,9 +24,9 @@ public abstract class AbstractSkill
 	/** Current cooldown tick */
 	protected int cooldownTick;
 	/** Current usage of the skill */
-	private int currentUsage;
+	protected int currentUsage;
 	/** The weight of this skill. Higher weights means this skill is to be used more frequently. */
-	private int weight;
+	protected int weight;
 	/** Random number generator */
 	protected Random random;
 	

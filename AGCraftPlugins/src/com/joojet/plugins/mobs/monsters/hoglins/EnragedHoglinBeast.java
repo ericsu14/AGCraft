@@ -26,8 +26,7 @@ public class EnragedHoglinBeast extends LegendaryMob
 		this.setStat(MonsterStat.KNOCKBACK_RESISTANCE, 0.45);
 		this.setStat(MonsterStat.EXPERIENCE, 60.0);
 		
-		this.addPotionEffect(CustomPotionEffect.SPEED, CustomPotionEffect.REGEN, 
-				CustomPotionEffect.JUMP_BOOST);
+		this.addPotionEffect(CustomPotionEffect.SPEED, CustomPotionEffect.JUMP_BOOST);
 		this.setStat(MonsterStat.HEALTH, 60.0);
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.SHOW_NAME, MobFlag.PERSISTENT_ATTACKER);
 		
