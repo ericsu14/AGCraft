@@ -30,7 +30,7 @@ public class FairSpawnController
 		this.bias = 0.025;
 		this.fairSpawnWeightContainer = new FairSpawnWeightContainer (
 			new EPFWeight(16.0, 4),
-			new FairSpawnWeight (Attribute.GENERIC_ARMOR_TOUGHNESS, 12.0, 2),
+			new FairSpawnWeight (Attribute.GENERIC_ARMOR_TOUGHNESS, 20.0, 2),
 			new FairSpawnWeight (Attribute.GENERIC_ARMOR, 20.0, 1),
 			new MaxHealthWeight (20.0, 1)
 		);
