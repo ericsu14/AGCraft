@@ -35,7 +35,6 @@ public class JohnJae extends AlliedMob
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
 		
 	}
 }

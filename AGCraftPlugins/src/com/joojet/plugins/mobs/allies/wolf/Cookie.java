@@ -10,6 +10,8 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.CookieHeart;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.AlliedAttackBuffSkill;
+import com.joojet.plugins.mobs.skills.buff.AlliedResistanceBuffSkill;
 
 public class Cookie extends AlliedMob
 {
@@ -28,7 +30,7 @@ public class Cookie extends AlliedMob
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
-		
+		skills.add(new AlliedAttackBuffSkill(0, 45, 15, 60, 8));
+		skills.add(new AlliedResistanceBuffSkill (0, 45, 15, 60, 8));
 	}
 }

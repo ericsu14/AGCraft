@@ -11,6 +11,8 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LetItGo;
 import com.joojet.plugins.mobs.equipment.chest.SnowballHeart;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.AlliedAttackBuffSkill;
+import com.joojet.plugins.mobs.skills.buff.AlliedResistanceBuffSkill;
 
 public class Snowball extends AlliedMob
 {
@@ -29,7 +31,7 @@ public class Snowball extends AlliedMob
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
-		
+		skills.add(new AlliedResistanceBuffSkill (0, 45, 15, 60, 8));
+		skills.add(new AlliedAttackBuffSkill(0, 45, 15, 60, 8));
 	}
 }

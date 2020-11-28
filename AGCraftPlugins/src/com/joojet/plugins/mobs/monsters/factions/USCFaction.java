@@ -13,9 +13,9 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
-import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
-import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
-import com.joojet.plugins.mobs.skills.buff.SpeedBuffSkill;
+import com.joojet.plugins.mobs.skills.buff.AlliedAttackBuffSkill;
+import com.joojet.plugins.mobs.skills.buff.AlliedResistanceBuffSkill;
+import com.joojet.plugins.mobs.skills.buff.AlliedSpeedBuffSkill;
 
 public abstract class USCFaction extends MobEquipment
 {
@@ -57,8 +57,8 @@ public abstract class USCFaction extends MobEquipment
 	
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AttackBuffSkill(0, 45, 15, 60, 8));
-		skills.add(new ResistanceBuffSkill (0, 45, 15, 60, 8));
-		skills.add(new SpeedBuffSkill (0, 45, 15, 60, 8));
+		skills.add(new AlliedAttackBuffSkill(0, 45, 15, 60, 8));
+		skills.add(new AlliedResistanceBuffSkill (0, 45, 15, 60, 8));
+		skills.add(new AlliedSpeedBuffSkill (0, 45, 15, 60, 8));
 	}
 }

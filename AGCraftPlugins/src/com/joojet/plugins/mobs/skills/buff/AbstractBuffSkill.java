@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.skills.buff;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -95,5 +96,19 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 		return (entity.hasPotionEffect(this.potionType) && 
 				(entity.getPotionEffect(this.potionType).getAmplifier() <= this.potionStrength && 
 				entity.getPotionEffect(this.potionType).getDuration() <= this.potionDuration));
+	}
+	
+	/** Returns true if there is at least one player around the caster
+	 * 	@param entities - A list of LivingEntities */
+	public boolean checkForSurroundingPlayers (List <LivingEntity> entities)
+	{
+		for (LivingEntity entity : entities)
+		{
+			if (entity.getType() == EntityType.PLAYER)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }
