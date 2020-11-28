@@ -43,7 +43,7 @@ public class MobSkillRunnable extends BukkitRunnable
 	public void run() 
 	{
 		// Keep selecting a random skill to use if the caster is not dead
-		if (this.caster != null && this.equipment != null && !caster.isDead())
+		if (this.caster != null && this.equipment != null && !caster.isDead() && !this.mobSkills.isEmpty())
 		{
 			AbstractSkill skill = this.getRandomSkill();
 			if (skill != null)

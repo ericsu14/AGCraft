@@ -156,6 +156,11 @@ public class CustomSkillsListener extends AGListener {
 	 *  @param enemies - A list of enemies surrounding the skill caster*/
 	public void filterGoodAndBadEntities (LivingEntity caster, int range, List <LivingEntity> allies, List <LivingEntity> enemies)
 	{
+		if (range <= 0)
+		{
+			return;
+		}
+		
 		List <Entity> surroundingEntities = caster.getNearbyEntities((range / 2.0), (range / 4.0), (range / 2.0));
 		
 		boolean isAlly = false;

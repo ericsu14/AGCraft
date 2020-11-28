@@ -23,7 +23,7 @@ public class RageSkill extends AbstractBuffSkill {
 	 *  @param duration - Duration of the monster's rage mode */
 	public RageSkill (int amplifier, int duration, double threshold)
 	{
-		super (PotionEffectType.INCREASE_DAMAGE, duration, amplifier, 1, duration, 8);
+		super (PotionEffectType.INCREASE_DAMAGE, duration, amplifier, 0, duration, 8);
 		this.maxUses = 1;
 		this.currentUsage = 1;
 		this.enraged = false;
