@@ -194,7 +194,8 @@ public class CustomSkillsListener extends AGListener {
 				
 				isAlly = ((entityEquipment != null && entityEquipment.getIgnoreList().contains(caster.getType())) ||
 						  (casterEquipment != null && casterEquipment.getIgnoreList().contains(livingEntity.getType())) ||
-						  ((casterEquipment != null && entityEquipment != null) && (!entityEquipment.getFactions().isEmpty() 
+						  ((casterEquipment != null && entityEquipment != null) && (
+								  !casterEquipment.getIgnoreList().contains(EntityType.PLAYER)
 								  && !casterEquipment.isRivalsOf(entityEquipment))));
 				
 				// Check for cases where the entity is not a custom mob and the entity is still not marked an ally

@@ -21,6 +21,14 @@ public abstract class AlliedMob extends MobEquipment
 				EntityType.OCELOT);
 		this.addFactions(Faction.ALLIES);
 		this.addRivalFactions(Faction.UCLA, Faction.DOOM_GUY, Faction.NETHER, Faction.PHANTOM);
-		this.addTargetsToHitList(EntityType.POLAR_BEAR);
+		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.PILLAGER,
+				EntityType.SPIDER, EntityType.CAVE_SPIDER, EntityType.EVOKER, EntityType.STRAY,
+				EntityType.HUSK, EntityType.BLAZE, EntityType.PIGLIN, EntityType.DROWNED,
+				EntityType.ENDERMAN, EntityType.ILLUSIONER, EntityType.POLAR_BEAR, EntityType.VINDICATOR,
+				EntityType.RAVAGER, EntityType.WITHER_SKELETON, EntityType.WITCH,
+				EntityType.GHAST, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN,
+				EntityType.SLIME, EntityType.MAGMA_CUBE, EntityType.ENDERMITE, EntityType.PHANTOM,
+				EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER, EntityType.GIANT, EntityType.HOGLIN,
+				EntityType.VEX, EntityType.PIGLIN_BRUTE, EntityType.ZOGLIN);
 	}
 }
