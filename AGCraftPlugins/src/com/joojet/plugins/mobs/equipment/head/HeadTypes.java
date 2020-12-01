@@ -22,6 +22,7 @@ public class HeadTypes extends EquipmentTypes
 			new DoomSlayerHead (ChatColor.DARK_RED),
 			new FrostyFace (ChatColor.AQUA),
 			new PharaohHead (ChatColor.LIGHT_PURPLE),
+			new HellwakerHead (ChatColor.RED),
 			new PiglinCaptainHead (ChatColor.GOLD),
 			new PiglinHunterHelmet (ChatColor.BLUE),
 			new PiglinSoldierHat (ChatColor.LIGHT_PURPLE),
