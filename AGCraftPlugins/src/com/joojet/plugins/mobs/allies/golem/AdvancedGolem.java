@@ -10,6 +10,7 @@ import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.attack.AnvilDropSkill;
 
 public class AdvancedGolem extends AlliedMob
 {
@@ -28,7 +29,6 @@ public class AdvancedGolem extends AlliedMob
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
-		
+		skills.add(new AnvilDropSkill (10, 12, 8, 2.0f, 1));
 	}
 }

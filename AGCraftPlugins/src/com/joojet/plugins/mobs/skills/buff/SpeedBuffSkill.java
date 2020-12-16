@@ -1,6 +1,6 @@
 package com.joojet.plugins.mobs.skills.buff;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
@@ -32,8 +32,8 @@ public class SpeedBuffSkill extends AbstractBuffSkill {
 	}
 
 	@Override
-	protected boolean checkConditons(LivingEntity caster, ArrayList<LivingEntity> allies,
-			ArrayList<LivingEntity> enemies) {
+	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies,
+			List<LivingEntity> enemies) {
 		return this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold();
 	}
 	

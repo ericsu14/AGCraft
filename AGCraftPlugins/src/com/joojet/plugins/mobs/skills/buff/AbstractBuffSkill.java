@@ -1,6 +1,5 @@
 package com.joojet.plugins.mobs.skills.buff;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.entity.EntityType;
@@ -44,7 +43,7 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 	
 	/** Gives the caster and any of its surrounding allies a Strength I buff. */
 	@Override
-	protected void handleSkill(LivingEntity caster, ArrayList<LivingEntity> allies, ArrayList<LivingEntity> enemies, DamageDisplayListener damageDisplayListener) 
+	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies, DamageDisplayListener damageDisplayListener) 
 	{
 		this.applyPotionEffect(caster, this.potionType, this.potionDuration, this.potionStrength);
 		this.playBuffAnimation(caster);

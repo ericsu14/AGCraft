@@ -1,6 +1,6 @@
 package com.joojet.plugins.mobs.skills.buff;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.entity.LivingEntity;
 
@@ -14,8 +14,8 @@ public class AlliedSpeedBuffSkill extends SpeedBuffSkill
 	
 	/** Only use this skill if there is at least one player around the entity */
 	@Override
-	protected boolean checkConditons(LivingEntity caster, ArrayList<LivingEntity> allies,
-			ArrayList<LivingEntity> enemies) 
+	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies,
+			List<LivingEntity> enemies) 
 	{
 		return this.checkForSurroundingPlayers(allies);
 	}

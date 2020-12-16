@@ -1,6 +1,6 @@
 package com.joojet.plugins.mobs.skills.buff;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
@@ -49,8 +49,8 @@ public class RageSkill extends AbstractBuffSkill {
 
 	/** Activates rage mode once the monster's health drops below 35%, which increases damage */
 	@Override
-	protected boolean checkConditons(LivingEntity caster, ArrayList<LivingEntity> allies,
-			ArrayList<LivingEntity> enemies) {
+	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies,
+			List<LivingEntity> enemies) {
 		return (caster.getHealth() / caster.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) <= this.threshold;
 	}
 	

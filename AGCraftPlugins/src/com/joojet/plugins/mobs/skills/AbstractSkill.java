@@ -1,6 +1,6 @@
 package com.joojet.plugins.mobs.skills;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Location;
@@ -47,7 +47,7 @@ public abstract class AbstractSkill
 	 * 		@param allies - A list of allies this skill may positively affect
 	 * 		@param enemies - A list of enemies this skill may negatively affect
 	 * 		@param damageDisplayListener - A reference to the plugin's damage display listener, which is used to display floating name-tags */
-	public void useSkill (LivingEntity caster, ArrayList <LivingEntity> allies, ArrayList <LivingEntity> enemies, DamageDisplayListener damageDisplayListener)
+	public void useSkill (LivingEntity caster, List <LivingEntity> allies, List <LivingEntity> enemies, DamageDisplayListener damageDisplayListener)
 	{
 		if (this.canUseSkill() && this.checkConditons(caster, allies, enemies))
 		{
@@ -70,14 +70,14 @@ public abstract class AbstractSkill
 	 * 		@param caster - The LivingEntity using this skill
 	 * 		@param allies - A list of allies this skill may positively affect
 	 * 		@param enemies - A list of enemies this skill may negatively affect */
-	protected abstract void handleSkill (LivingEntity caster, ArrayList <LivingEntity> allies, ArrayList <LivingEntity> enemies, DamageDisplayListener damageDisplayListener);
+	protected abstract void handleSkill (LivingEntity caster, List <LivingEntity> allies, List <LivingEntity> enemies, DamageDisplayListener damageDisplayListener);
 	
 	/** Defines conditions that need to be met in order for this skill to be used.
 	 * 		@return True if those conditions are met. False otherwise.
 	 * 		@param caster - The LivingEntity using this skill
 	 * 		@param allies - A list of allies this skill may positively affect
 	 * 		@param enemies - A list of enemies this skill may negatively affect */
-	protected abstract boolean checkConditons (LivingEntity caster, ArrayList <LivingEntity> allies, ArrayList <LivingEntity> enemies);
+	protected abstract boolean checkConditons (LivingEntity caster, List <LivingEntity> allies, List <LivingEntity> enemies);
 	
 	/** Returns a boolean indicating w/e or not a skill can be used based on its current cooldown and usage */
 	public boolean canUseSkill ()
