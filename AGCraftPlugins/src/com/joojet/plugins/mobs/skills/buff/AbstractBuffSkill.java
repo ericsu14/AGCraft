@@ -41,7 +41,7 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 		this.spawnWeight = new FairSpawnController (this.getRange() / 2);
 	}
 	
-	/** Gives the caster and any of its surrounding allies a Strength I buff. */
+	/** Gives the caster and any of its surrounding allies a buff. */
 	@Override
 	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies, DamageDisplayListener damageDisplayListener) 
 	{
