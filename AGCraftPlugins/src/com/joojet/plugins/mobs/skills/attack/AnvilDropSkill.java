@@ -10,6 +10,8 @@ import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
@@ -59,6 +61,8 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 			anvil.getWorld().spawnParticle(Particle.CRIT, anvil.getLocation(), 30, 1.0, 1.0, 1.0);
 			anvil.getWorld().spawnParticle(Particle.SPELL_INSTANT, anvil.getLocation(), 30, 1.0, 1.0, 1.0);
 			anvil.getWorld().spawnParticle(Particle.SMOKE_NORMAL, anvil.getLocation(), 10, 1.0, 1.0, 1.0);
+			
+			caster.addPotionEffect(new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 80, 3));
 			
 			new BukkitRunnable () {
 				// Max amount of time (in ticks) this runnable is active before forcefully closing
