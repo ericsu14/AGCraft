@@ -35,7 +35,7 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 	public AbstractBuffSkill(PotionEffectType potionType, int potionDuration, int potionStrength, int range, int cooldown, int weight) 
 	{
 		super(SkillPropetry.BUFF, range, cooldown, Integer.MAX_VALUE, weight);
-		this.potionDuration = potionDuration * 20;
+		this.potionDuration = potionDuration == 0 ? 1 : potionDuration * 20;
 		this.potionStrength = potionStrength;
 		this.potionType = potionType;
 		this.spawnWeight = new FairSpawnController (this.getRange() / 2);

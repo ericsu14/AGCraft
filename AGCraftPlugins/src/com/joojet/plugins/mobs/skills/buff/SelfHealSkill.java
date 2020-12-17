@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffectType;
@@ -18,7 +19,7 @@ public class SelfHealSkill extends AbstractBuffSkill {
 	 *  @param threshold - Min. threshold where the caster's health needs to be in order to use this skill */
 	public SelfHealSkill(int potionStrength, int cooldown, int weight, double threshold) 
 	{
-		super(PotionEffectType.HEAL, 1, potionStrength, 0, cooldown, weight);
+		super(PotionEffectType.HEAL, 0, potionStrength, 0, cooldown, weight);
 		this.threshold = threshold;
 	}
 	
@@ -27,6 +28,7 @@ public class SelfHealSkill extends AbstractBuffSkill {
 	protected void playBuffAnimation(LivingEntity entity) {
 		entity.getWorld().spawnParticle(Particle.HEART, entity.getEyeLocation(), 10, 1.0, 1.0, 1.0);
 		this.spawnColoredParticlesOnEntity(entity, 30, 0, 255, 0, Particle.SPELL_MOB);
+		entity.getWorld().playSound(entity.getEyeLocation(), Sound.ENTITY_ZOMBIE_VILLAGER_CURE, 1.0f, 1.0f);
 	}
 
 	@Override
