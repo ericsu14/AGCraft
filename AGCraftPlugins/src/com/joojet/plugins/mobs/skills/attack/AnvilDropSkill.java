@@ -4,19 +4,21 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
+import com.joojet.plugins.mobs.skills.runnable.ExplodingBlockRunnable;
 
 public class AnvilDropSkill extends AbstractAttackSkill {
 	
@@ -54,36 +56,11 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 		
 		for (LivingEntity target : targets)
 		{
-			FallingBlock anvil = (FallingBlock) target.getWorld().spawnFallingBlock(target.getLocation().add(0.0, 6.0, 0.0), Bukkit.createBlockData(Material.DAMAGED_ANVIL));
-			anvil.setHurtEntities(true);
-			anvil.setFallDistance(256.0f);
-			anvil.setSilent(true);
-			anvil.getWorld().spawnParticle(Particle.CRIT, anvil.getLocation(), 30, 1.0, 1.0, 1.0);
-			anvil.getWorld().spawnParticle(Particle.SPELL_INSTANT, anvil.getLocation(), 30, 1.0, 1.0, 1.0);
-			anvil.getWorld().spawnParticle(Particle.SMOKE_NORMAL, anvil.getLocation(), 10, 1.0, 1.0, 1.0);
+			FallingBlock anvil = this.spawnAnvil(target.getWorld(), target.getLocation().add(0.0, 6.0, 0.0));
 			
 			caster.addPotionEffect(new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 80, 3));
 			
-			new BukkitRunnable () {
-				// Max amount of time (in ticks) this runnable is active before forcefully closing
-				private int ticks = 100;
-				
-				@Override
-				public void run ()
-				{
-					if (ticks <= 0)
-					{
-						this.cancel();
-					}
-						
-					if (anvil.isOnGround() || anvil.isDead())
-					{
-						anvil.getWorld().createExplosion(anvil.getLocation(), power, false, false);
-						this.cancel();
-					}
-					--ticks;
-				}
-			}.runTaskTimer(AGCraftPlugin.plugin, 0, 1);
+			new ExplodingBlockRunnable (anvil, 100, this.power).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
 		}
 	}
 
@@ -111,6 +88,21 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 			}
 		}
 		return false;
+	}
+	
+	/** Spawns in a falling anvil projectile at a specific location
+	 *  @param world - The world this anvil entity is being spawned into
+	 *  @param location - The location in which this anvil is spawned */
+	protected FallingBlock spawnAnvil (World world, Location location)
+	{
+		FallingBlock anvil = (FallingBlock) world.spawnFallingBlock(location, Bukkit.createBlockData(Material.DAMAGED_ANVIL));
+		anvil.setHurtEntities(true);
+		anvil.setFallDistance(256.0f);
+		anvil.setSilent(true);
+		anvil.getWorld().spawnParticle(Particle.CRIT, anvil.getLocation().add(0.0, 1.0, 0.0), 30, 1.0, 1.0, 1.0);
+		anvil.getWorld().spawnParticle(Particle.SPELL_INSTANT, anvil.getLocation(), 30, 1.0, 1.0, 1.0);
+		anvil.getWorld().spawnParticle(Particle.SMOKE_NORMAL, anvil.getLocation(), 10, 1.0, 1.0, 1.0);
+		return anvil;
 	}
 
 }

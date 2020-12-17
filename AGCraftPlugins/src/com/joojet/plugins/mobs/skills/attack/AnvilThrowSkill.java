@@ -2,20 +2,18 @@ package com.joojet.plugins.mobs.skills.attack;
 
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.skills.runnable.ExplodingBlockRunnable;
 import com.joojet.plugins.mobs.util.MathUtil;
 
 public class AnvilThrowSkill extends AnvilDropSkill {
@@ -63,39 +61,11 @@ public class AnvilThrowSkill extends AnvilDropSkill {
 				continue;
 			}
 			
-			FallingBlock anvil = (FallingBlock) target.getWorld().spawnFallingBlock(caster.getLocation(), Bukkit.createBlockData(Material.DAMAGED_ANVIL));
-			anvil.setHurtEntities(true);
-			anvil.setFallDistance(256.0f);
-			anvil.setSilent(true);
-			anvil.getWorld().spawnParticle(Particle.CRIT, anvil.getLocation().add(0.0, 1.0, 0.0), 30, 1.0, 1.0, 1.0);
-			anvil.getWorld().spawnParticle(Particle.SPELL_INSTANT, anvil.getLocation(), 30, 1.0, 1.0, 1.0);
-			anvil.getWorld().spawnParticle(Particle.SMOKE_NORMAL, anvil.getLocation(), 10, 1.0, 1.0, 1.0);
-			anvil.setFireTicks(Integer.MAX_VALUE);
-			
+			FallingBlock anvil = this.spawnAnvil(target.getWorld(), caster.getLocation());
 			anvil.setVelocity(velocity.normalize());
-			
 			caster.addPotionEffect(new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 80, 3));
 			
-			new BukkitRunnable () {
-				// Max amount of time (in ticks) this runnable is active before forcefully closing
-				private int ticks = 140;
-				
-				@Override
-				public void run ()
-				{
-					if (ticks <= 0)
-					{
-						this.cancel();
-					}
-						
-					if (anvil.isOnGround() || anvil.isDead())
-					{
-						anvil.getWorld().createExplosion(anvil.getLocation(), power, false, false);
-						this.cancel();
-					}
-					--ticks;
-				}
-			}.runTaskTimer(AGCraftPlugin.plugin, 10, 1);
+			new ExplodingBlockRunnable (anvil, 140, this.power).runTaskTimer(AGCraftPlugin.plugin, 10, 1);
 		}
 	}
 }
