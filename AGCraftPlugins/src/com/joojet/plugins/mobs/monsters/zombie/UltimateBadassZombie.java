@@ -1,5 +1,6 @@
 package com.joojet.plugins.mobs.monsters.zombie;
 
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;

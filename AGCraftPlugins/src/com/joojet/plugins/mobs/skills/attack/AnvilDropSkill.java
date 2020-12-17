@@ -10,10 +10,13 @@ import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.enums.MonsterClassifier;
 
 public class AnvilDropSkill extends AbstractAttackSkill {
 	
@@ -59,6 +62,8 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 			anvil.getWorld().spawnParticle(Particle.SPELL_INSTANT, anvil.getLocation(), 30, 1.0, 1.0, 1.0);
 			anvil.getWorld().spawnParticle(Particle.SMOKE_NORMAL, anvil.getLocation(), 10, 1.0, 1.0, 1.0);
 			
+			caster.addPotionEffect(new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 80, 3));
+			
 			new BukkitRunnable () {
 				// Max amount of time (in ticks) this runnable is active before forcefully closing
 				private int ticks = 100;
@@ -66,21 +71,17 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 				@Override
 				public void run ()
 				{
-					if (anvil != null)
+					if (ticks <= 0)
 					{
-						if (ticks <= 0)
-						{
-							this.cancel();
-						}
-						
-						if (anvil.isOnGround() || anvil.isDead())
-						{
-							anvil.getWorld().createExplosion(anvil.getLocation(), power, false, false);
-							this.cancel();
-						}
-						--ticks;
-						
+						this.cancel();
 					}
+						
+					if (anvil.isOnGround() || anvil.isDead())
+					{
+						anvil.getWorld().createExplosion(anvil.getLocation(), power, false, false);
+						this.cancel();
+					}
+					--ticks;
 				}
 			}.runTaskTimer(AGCraftPlugin.plugin, 0, 1);
 		}
@@ -91,14 +92,23 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 	{
 		if (!enemies.isEmpty())
 		{
-			for (LivingEntity ally : allies)
+			// Do a villager check if the caster is an iron golem
+			if (caster.getType() == EntityType.IRON_GOLEM)
 			{
-				if (ally.getType() == EntityType.WANDERING_TRADER || ally.getType() == EntityType.VILLAGER)
+				for (LivingEntity ally : allies)
 				{
-					return false;
+					if (ally.getType() == EntityType.WANDERING_TRADER || ally.getType() == EntityType.VILLAGER)
+					{
+						return false;
+					}
 				}
+				return true;
 			}
-			return true;
+			// Otherwise, the caster is only allowed to use the skill if the the player's threat score exceeds mythic.
+			else
+			{
+				return this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold();
+			}
 		}
 		return false;
 	}

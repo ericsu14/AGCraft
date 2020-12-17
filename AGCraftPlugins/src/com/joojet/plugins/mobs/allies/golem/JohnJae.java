@@ -38,6 +38,6 @@ public class JohnJae extends AlliedMob
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
 		skills.add(new AnvilDropSkill (12, 15, 8, 3.0f, 1));
-		skills.add(new SelfHealSkill (14, 60, 8, 0.45));
+		skills.add(new SelfHealSkill (4, 60, 8, 0.45));
 	}
 }
