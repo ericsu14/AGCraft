@@ -16,7 +16,6 @@ import com.joojet.plugins.mobs.equipment.leggings.OgreLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.OgreAxe;
 import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
-import com.joojet.plugins.mobs.skills.attack.AnvilDropSkill;
 import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
 import com.joojet.plugins.mobs.skills.buff.SpeedBuffSkill;
@@ -49,6 +48,5 @@ public class Shrek extends LegendaryMob
 		skills.add(new AttackBuffSkill     (2, 45, 20, 60, 8));
 		skills.add(new ResistanceBuffSkill (1, 45, 20, 60, 8));
 		skills.add(new SpeedBuffSkill      (0, 45, 20, 60, 8));
-		skills.add(new AnvilDropSkill      (12, 10, 4, 3.0f, 3));
 	}
 }
