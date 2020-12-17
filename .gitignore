@@ -35,3 +35,4 @@ plugins/AGCraft/
 plugins/**
 tokei-x86_64-pc-windows-msvc.exe
 AGCraftPlugins/doc/**
+BibleFetcher/doc/**
