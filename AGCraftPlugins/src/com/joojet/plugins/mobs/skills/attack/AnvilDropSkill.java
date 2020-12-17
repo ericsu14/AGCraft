@@ -14,6 +14,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.enums.MonsterClassifier;
 
 public class AnvilDropSkill extends AbstractAttackSkill {
 	
@@ -87,14 +88,23 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 	{
 		if (!enemies.isEmpty())
 		{
-			for (LivingEntity ally : allies)
+			// Do a villager check if the caster is an iron golem
+			if (caster.getType() == EntityType.IRON_GOLEM)
 			{
-				if (ally.getType() == EntityType.WANDERING_TRADER || ally.getType() == EntityType.VILLAGER)
+				for (LivingEntity ally : allies)
 				{
-					return false;
+					if (ally.getType() == EntityType.WANDERING_TRADER || ally.getType() == EntityType.VILLAGER)
+					{
+						return false;
+					}
 				}
+				return true;
 			}
-			return true;
+			// Otherwise, the caster is only allowed to use the skill if the the player's threat score exceeds mythic.
+			else
+			{
+				return this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold();
+			}
 		}
 		return false;
 	}

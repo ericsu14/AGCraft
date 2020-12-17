@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.zombie;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -15,6 +17,8 @@ import com.joojet.plugins.mobs.equipment.head.DarkNetheriteHelmet;
 import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
 import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.attack.AnvilDropSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class UltimateBadassZombie extends LegendaryMob
@@ -45,6 +49,13 @@ public class UltimateBadassZombie extends LegendaryMob
 		
 		this.setStat (MonsterStat.EXPERIENCE, 50.0);
 		this.bossTheme = MusicType.GORO_THEME;
+	}
+	
+	@Override
+	public void loadCustomSkills (List <AbstractSkill> skills)
+	{
+		super.loadCustomSkills(skills);
+		skills.add(new AnvilDropSkill (12, 10, 4, 2.5f, 3));
 	}
 	
 }
