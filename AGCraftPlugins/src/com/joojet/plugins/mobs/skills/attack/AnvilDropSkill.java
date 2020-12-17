@@ -66,21 +66,17 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 				@Override
 				public void run ()
 				{
-					if (anvil != null)
+					if (ticks <= 0)
 					{
-						if (ticks <= 0)
-						{
-							this.cancel();
-						}
-						
-						if (anvil.isOnGround() || anvil.isDead())
-						{
-							anvil.getWorld().createExplosion(anvil.getLocation(), power, false, false);
-							this.cancel();
-						}
-						--ticks;
-						
+						this.cancel();
 					}
+						
+					if (anvil.isOnGround() || anvil.isDead())
+					{
+						anvil.getWorld().createExplosion(anvil.getLocation(), power, false, false);
+						this.cancel();
+					}
+					--ticks;
 				}
 			}.runTaskTimer(AGCraftPlugin.plugin, 0, 1);
 		}
