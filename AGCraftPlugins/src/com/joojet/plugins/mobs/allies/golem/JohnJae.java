@@ -12,6 +12,7 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.ThePecks;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.AnvilDropSkill;
+import com.joojet.plugins.mobs.skills.attack.AnvilThrowSkill;
 import com.joojet.plugins.mobs.skills.buff.SelfHealSkill;
 
 public class JohnJae extends AlliedMob
@@ -37,7 +38,8 @@ public class JohnJae extends AlliedMob
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AnvilDropSkill (12, 15, 8, 3.0f, 1));
-		skills.add(new SelfHealSkill (4, 60, 8, 0.45));
+		skills.add(new AnvilDropSkill (12, 12, 16, 4.0f, 1));
+		skills.add(new AnvilThrowSkill (30, 25, 4, 2.0f, 3));
+		skills.add(new SelfHealSkill (4, 60, 2, 0.45));
 	}
 }

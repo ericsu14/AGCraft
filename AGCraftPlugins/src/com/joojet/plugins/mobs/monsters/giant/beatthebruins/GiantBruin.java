@@ -89,7 +89,7 @@ public class GiantBruin extends UCLAFaction
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AttackBuffSkill(0, 60, 5, 90, 8));
-		skills.add(new ResistanceBuffSkill (1, 60, 5, 90, 8));
+		skills.add(new AttackBuffSkill(0, 60, 50, 90, 8));
+		skills.add(new ResistanceBuffSkill (1, 60, 50, 90, 8));
 	}
 }
