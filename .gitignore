@@ -34,3 +34,4 @@ plugins/AGCraft/
 *.txt
 plugins/**
 tokei-x86_64-pc-windows-msvc.exe
+AGCraftPlugins/doc/**
