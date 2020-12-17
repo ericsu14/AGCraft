@@ -31,6 +31,6 @@ public class AdvancedGolem extends AlliedMob
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
 		skills.add(new AnvilDropSkill (8, 15, 8, 2.0f, 1));
-		skills.add(new SelfHealSkill (2, 30, 8, 0.35));
+		skills.add(new SelfHealSkill (9, 30, 8, 0.35));
 	}
 }

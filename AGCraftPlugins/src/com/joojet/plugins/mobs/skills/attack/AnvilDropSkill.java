@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -86,8 +87,20 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 	}
 
 	@Override
-	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) {
-		return !enemies.isEmpty();
+	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
+	{
+		if (!enemies.isEmpty())
+		{
+			for (LivingEntity ally : allies)
+			{
+				if (ally.getType() == EntityType.WANDERING_TRADER || ally.getType() == EntityType.VILLAGER)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 
 }
