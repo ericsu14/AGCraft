@@ -77,6 +77,6 @@ public class SkullKid extends MythicMob
 	{
 		super.loadCustomSkills(skills);
 		skills.add(new ResistanceBuffSkill (0, 60, 20, 60, 80));
-		skills.add(new ThundagaSkill (32, 40, 6, 10, 5.0f, 4, 80));
+		skills.add(new ThundagaSkill (32, 20, 6, 10, 5.0f, 4, 80, 0.60));
 	}
 }
