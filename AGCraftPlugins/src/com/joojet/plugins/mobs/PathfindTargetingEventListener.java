@@ -249,12 +249,8 @@ public class PathfindTargetingEventListener extends AGListener
 	/** Returns the player that is nearest to the passed entity if it exists. */
 	private Player getNearbyPlayer (LivingEntity hunter, int radius)
 	{
-		ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(hunter, radius);
-		if (!nearbyPlayers.isEmpty())
-		{
-			return nearbyPlayers.get(0);
-		}
-		return null;
+		ArrayList <Player> players = ScanEntities.ScanNearbyPlayers(hunter, radius);
+		return players.isEmpty() ? null : players.get(0);
 	}
 	
 	/** Returns true if the living entity is a player with an active

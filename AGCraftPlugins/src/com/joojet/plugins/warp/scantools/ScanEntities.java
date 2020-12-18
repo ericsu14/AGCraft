@@ -2,6 +2,7 @@ package com.joojet.plugins.warp.scantools;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
@@ -9,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Sittable;
 import org.bukkit.entity.Tameable;
 import org.bukkit.entity.Vehicle;
+import org.bukkit.util.BoundingBox;
 
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -43,18 +45,19 @@ public class ScanEntities
 	/** Returns a list of players from an n-block radius around the entity */
 	public static ArrayList <Player> ScanNearbyPlayers (LivingEntity e, int radius)
 	{
-		int halfRadius = (int) (radius / 2.0);
-		ArrayList <Player> players = new ArrayList <Player> ();
-		ArrayList <Entity> entities = (ArrayList<Entity>) e.getNearbyEntities(radius, halfRadius, radius);
+		BoundingBox searchBox = e.getBoundingBox().clone();
+		searchBox.expand(radius);
 		
-		for (Entity ent : entities)
+		ArrayList <Player> nearbyPlayers = new ArrayList <Player> ();
+		
+		for (Player p : Bukkit.getOnlinePlayers())
 		{
-			if (ent instanceof Player)
+			if (searchBox.contains(p.getBoundingBox()))
 			{
-				players.add((Player) ent);
+				nearbyPlayers.add(p);
 			}
 		}
-		return players;
+		return nearbyPlayers;
 	}
 	
 	/** Returns a list of player-owned entities from an n-block radius around the entity */
