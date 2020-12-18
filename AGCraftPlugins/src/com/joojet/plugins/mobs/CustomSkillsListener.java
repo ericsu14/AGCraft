@@ -3,8 +3,13 @@ package com.joojet.plugins.mobs;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
+import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -12,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
@@ -20,10 +26,12 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunnable;
+import com.joojet.plugins.mobs.util.LocationOffset;
 
 public class CustomSkillsListener extends AGListener {
 	/** A reference to the monster type interpreter defined in the main plugin class */
@@ -33,12 +41,15 @@ public class CustomSkillsListener extends AGListener {
 	protected DamageDisplayListener damageDisplayListener;
 	/** Stores all active skill runnables in the server */
 	protected HashMap <UUID, MobSkillRunnable> mobSkillRunnableTable;
+	/** Random number generator used for generating chance rolls */
+	protected Random rand;
 	
 	public CustomSkillsListener (MonsterTypeInterpreter monsterInterpreter, DamageDisplayListener damageDisplayListener)
 	{
 		this.monsterInterpreter = monsterInterpreter;
 		this.damageDisplayListener = damageDisplayListener;
 		this.mobSkillRunnableTable = new HashMap <UUID, MobSkillRunnable> ();
+		this.rand = new Random ();
 	}
 	
 	@Override
@@ -145,6 +156,67 @@ public class CustomSkillsListener extends AGListener {
 		this.filterGoodAndBadEntities(caster, skill.getRange(), allies, enemies);
 		
 		skill.useSkill(caster, allies, enemies, this.damageDisplayListener);
+	}
+	
+	/** Captures entity-launched arrows and changes the arrow to its custom tipped arrow if
+	 *  it has one defined for it. This also modifies the base damage of the shot arrow
+	 *  if it belongs to a custom monster that has that custom attribute for arrows. */
+	@EventHandler
+	public void modifyCustomArrows (EntityShootBowEvent event)
+	{
+		if (event.getProjectile() == null 
+				|| !(event.getEntity() instanceof LivingEntity))
+		{
+			return;
+		}
+		
+		LivingEntity entity = (LivingEntity) event.getEntity();
+		MobEquipment equipment = this.monsterInterpreter.getMobEquipmentFromEntity (entity);
+		
+		if (equipment != null)
+		{
+			if (event.getProjectile() instanceof Arrow)
+			{
+				Arrow arrow = (Arrow) event.getProjectile();
+				/* Transforms arrow to a tipped arrow if its shooter has custom data 
+				 * specified for their arrows */
+				if (equipment.hasTippedArrow())
+				{
+					equipment.getTippedArrow().applyPotionDataToArrow(arrow);
+				}
+				
+				if (equipment.containsStat(MonsterStat.BASE_ARROW_DAMAGE))
+				{
+					arrow.setDamage(equipment.getStat(MonsterStat.BASE_ARROW_DAMAGE));
+				}
+				
+				/** Converts this arrow into a critical arrow if the mob has a crit chance stat set */
+				if (equipment.containsStat(MonsterStat.ARROW_CRITICAL_CHANCE))
+				{
+					boolean isCritical = (this.rand.nextDouble() <= equipment.getStat(MonsterStat.ARROW_CRITICAL_CHANCE));
+					arrow.setCritical(isCritical);
+					
+					if (isCritical && equipment.containsStat(MonsterStat.ARROW_PIERCING_CHANCE))
+					{
+						boolean isPiercing = (this.rand.nextDouble() <= equipment.getStat(MonsterStat.ARROW_PIERCING_CHANCE));
+						if (isPiercing)
+						{
+							arrow.setPierceLevel(1);
+							arrow.setKnockbackStrength(arrow.getKnockbackStrength() + 1);
+							
+							// Give an audio and visual cue that the mob is using a piercing arrow
+							Location entityLocation = entity.getEyeLocation();
+							entity.getWorld().playSound(entityLocation, Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0f, 1.0f);
+							for (int i = 0; i < 30; ++i)
+							{
+								entity.getWorld().spawnParticle(Particle.SPELL_MOB, LocationOffset.addRandomOffsetOnLocation(entityLocation, 1),
+										0, (128 / 256D), 0, 0, 1, null);
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	/** Filter's a skill caster's surrounding entities using the passed range into two categories,

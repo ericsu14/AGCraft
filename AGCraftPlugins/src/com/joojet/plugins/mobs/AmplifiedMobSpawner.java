@@ -1,17 +1,12 @@
 package com.joojet.plugins.mobs;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Skull;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -26,7 +21,6 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.spigotmc.event.entity.EntityMountEvent;
 
@@ -50,7 +44,6 @@ import com.joojet.plugins.mobs.spawnhandlers.AmplifiedMobHandler;
 import com.joojet.plugins.mobs.spawnhandlers.BeatTheBruinsHandler;
 import com.joojet.plugins.mobs.spawnhandlers.JulyFourthHandler;
 import com.joojet.plugins.mobs.spawnhandlers.UHCHandler;
-import com.joojet.plugins.mobs.util.LocationOffset;
 
 public class AmplifiedMobSpawner extends AGListener 
 {			
@@ -67,9 +60,6 @@ public class AmplifiedMobSpawner extends AGListener
 	/** Contains an internal search trie allowing custom equipment to be able to be looked up by its
 	 *  Equipment Type identifier. */
 	public EquipmentLoader equipmentLoader;
-	
-	/** Used to generate random numbers */
-	private Random rand = new Random ();
 	
 	/** A list of spawn handlers for custom events */
 	private JulyFourthHandler julyFourthHandler;
@@ -219,67 +209,6 @@ public class AmplifiedMobSpawner extends AGListener
 		if (equipment.containsFlag(MobFlag.ENABLE_PERSISTENCE_UPON_RIDING))
 		{
 			tamed.setRemoveWhenFarAway(false);
-		}
-	}
-	
-	/** Captures entity-launched arrows and changes the arrow to its custom tipped arrow if
-	 *  it has one defined for it. This also modifies the base damage of the shot arrow
-	 *  if it belongs to a custom monster that has that custom attribute for arrows. */
-	@EventHandler
-	public void modifyCustomArrows (EntityShootBowEvent event)
-	{
-		if (event.getProjectile() == null 
-				|| !(event.getEntity() instanceof LivingEntity))
-		{
-			return;
-		}
-		
-		LivingEntity entity = (LivingEntity) event.getEntity();
-		MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity (entity);
-		
-		if (equipment != null)
-		{
-			if (event.getProjectile() instanceof Arrow)
-			{
-				Arrow arrow = (Arrow) event.getProjectile();
-				/* Transforms arrow to a tipped arrow if its shooter has custom data 
-				 * specified for their arrows */
-				if (equipment.hasTippedArrow())
-				{
-					equipment.getTippedArrow().applyPotionDataToArrow(arrow);
-				}
-				
-				if (equipment.containsStat(MonsterStat.BASE_ARROW_DAMAGE))
-				{
-					arrow.setDamage(equipment.getStat(MonsterStat.BASE_ARROW_DAMAGE));
-				}
-				
-				/** Converts this arrow into a critical arrow if the mob has a crit chance stat set */
-				if (equipment.containsStat(MonsterStat.ARROW_CRITICAL_CHANCE))
-				{
-					boolean isCritical = (this.rand.nextDouble() <= equipment.getStat(MonsterStat.ARROW_CRITICAL_CHANCE));
-					arrow.setCritical(isCritical);
-					
-					if (isCritical && equipment.containsStat(MonsterStat.ARROW_PIERCING_CHANCE))
-					{
-						boolean isPiercing = (this.rand.nextDouble() <= equipment.getStat(MonsterStat.ARROW_PIERCING_CHANCE));
-						if (isPiercing)
-						{
-							arrow.setPierceLevel(1);
-							arrow.setKnockbackStrength(arrow.getKnockbackStrength() + 1);
-							
-							// Give an audio and visual cue that the mob is using a piercing arrow
-							Location entityLocation = entity.getEyeLocation();
-							entity.getWorld().playSound(entityLocation, Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0f, 1.0f);
-							for (int i = 0; i < 30; ++i)
-							{
-								entity.getWorld().spawnParticle(Particle.SPELL_MOB, LocationOffset.addRandomOffsetOnLocation(entityLocation, 1),
-										0, (128 / 256D), 0, 0, 1, null);
-							}
-						}
-					}
-				}
-			}
 		}
 	}
 	

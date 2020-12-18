@@ -39,7 +39,7 @@ public class SpeedBuffSkill extends AbstractBuffSkill {
 	
 	@Override
 	protected String getBuffText() {
-		return ChatColor.AQUA + "" + ChatColor.BOLD + "❈ SPEED" + ChatColor.GOLD + " UP";
+		return ChatColor.AQUA + "" + ChatColor.BOLD + "✻ SPEED" + ChatColor.GOLD + " UP";
 	}
 
 }
