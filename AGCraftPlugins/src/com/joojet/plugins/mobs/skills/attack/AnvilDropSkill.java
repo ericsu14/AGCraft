@@ -79,7 +79,7 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 						return false;
 					}
 				}
-				return true;
+				return caster.getFireTicks() == 0;
 			}
 			// Otherwise, the caster is only allowed to use the skill if the the player's threat score exceeds mythic.
 			else
