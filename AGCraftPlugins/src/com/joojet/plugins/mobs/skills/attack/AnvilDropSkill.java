@@ -60,7 +60,7 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 			
 			caster.addPotionEffect(new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 80, 3));
 			
-			new ExplodingBlockRunnable (anvil, 100, this.power).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
+			new ExplodingBlockRunnable (anvil, 100, this.power, target).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
 		}
 	}
 

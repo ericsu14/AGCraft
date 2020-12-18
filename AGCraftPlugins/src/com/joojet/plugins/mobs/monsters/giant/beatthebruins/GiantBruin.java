@@ -26,6 +26,7 @@ import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.equipment.weapons.LeftCrashSymbol;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
 import com.joojet.plugins.music.enums.MusicType;
@@ -91,5 +92,6 @@ public class GiantBruin extends UCLAFaction
 	public void loadCustomSkills(List<AbstractSkill> skills) {
 		skills.add(new AttackBuffSkill(0, 60, 50, 90, 8));
 		skills.add(new ResistanceBuffSkill (1, 60, 50, 90, 8));
+		skills.add(new ThundagaSkill (32, 30, Integer.MAX_VALUE, 10, 4.0f, 4, 80));
 	}
 }

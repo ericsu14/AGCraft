@@ -5,7 +5,6 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -51,7 +50,7 @@ public class RageSkill extends AbstractBuffSkill {
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies,
 			List<LivingEntity> enemies) {
-		return (caster.getHealth() / caster.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) <= this.threshold;
+		return this.checkHealthIsBelowThreshold(caster, this.threshold);
 	}
 	
 	/** Overrides the update function to play a small animation when mob is enraged */

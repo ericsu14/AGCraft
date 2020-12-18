@@ -65,7 +65,7 @@ public class AnvilThrowSkill extends AnvilDropSkill {
 			anvil.setVelocity(velocity.normalize());
 			caster.addPotionEffect(new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 80, 3));
 			
-			new ExplodingBlockRunnable (anvil, 140, this.power).runTaskTimer(AGCraftPlugin.plugin, 10, 1);
+			new ExplodingBlockRunnable (anvil, 140, this.power, target).runTaskTimer(AGCraftPlugin.plugin, 10, 1);
 		}
 	}
 }

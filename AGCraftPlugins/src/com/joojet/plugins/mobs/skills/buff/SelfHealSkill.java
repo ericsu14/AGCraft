@@ -5,7 +5,6 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffectType;
 
@@ -33,14 +32,12 @@ public class SelfHealSkill extends AbstractBuffSkill {
 
 	@Override
 	protected String getBuffText() {
-		// TODO Auto-generated method stub
 		return ChatColor.BOLD + "" + ChatColor.GREEN + "SELF HEAL";
 	}
 
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) {
-		// TODO Auto-generated method stub
-		return (caster.getHealth() / caster.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) <= this.threshold;
+		return this.checkHealthIsBelowThreshold(caster, this.threshold);
 	}
 
 }

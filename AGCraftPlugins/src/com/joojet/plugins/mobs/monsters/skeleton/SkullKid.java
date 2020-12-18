@@ -9,6 +9,7 @@ import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
+import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -21,6 +22,7 @@ import com.joojet.plugins.mobs.equipment.weapons.ATerribleFate;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
 import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
@@ -46,8 +48,10 @@ public class SkullKid extends MythicMob
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE,
 				CustomPotionEffect.SPEED,
 				CustomPotionEffect.UNDEAD_HEAL);
+		this.addFactions(Faction.DOOM_GUY);
+		this.addRivalFactions(Faction.UCLA, Faction.USC, Faction.PHANTOM, Faction.ALLIES, Faction.NETHER);
 		this.addTargetsToHitList(EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER_SKELETON, EntityType.HOGLIN, EntityType.PIGLIN,
-				EntityType.PIGLIN_BRUTE, EntityType.MAGMA_CUBE);
+				EntityType.PIGLIN_BRUTE, EntityType.MAGMA_CUBE, EntityType.IRON_GOLEM, EntityType.PLAYER, EntityType.ZOMBIE, EntityType.SKELETON);
 		
 		this.helmet = new SkullKidHelmet (this.color);
 		this.chestplate = new SkullKidChest (this.color);
@@ -72,6 +76,7 @@ public class SkullKid extends MythicMob
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
 		super.loadCustomSkills(skills);
-		skills.add(new ResistanceBuffSkill (0, 60, 20, 60, 8));
+		skills.add(new ResistanceBuffSkill (0, 60, 20, 60, 80));
+		skills.add(new ThundagaSkill (32, 40, 6, 10, 5.0f, 4, 80));
 	}
 }
