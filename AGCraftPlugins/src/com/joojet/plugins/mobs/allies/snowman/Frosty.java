@@ -11,6 +11,7 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.head.FrostyFace;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 
 public class Frosty extends AlliedMob
 {
@@ -33,7 +34,7 @@ public class Frosty extends AlliedMob
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
+		skills.add(new ThundagaSkill (20, 14, Integer.MAX_VALUE, 10, 1.0F, 3, 20, 1.00));
 		
 	}
 }

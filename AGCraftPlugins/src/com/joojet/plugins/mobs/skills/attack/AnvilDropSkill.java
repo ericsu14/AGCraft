@@ -57,9 +57,7 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 		for (LivingEntity target : targets)
 		{
 			FallingBlock anvil = this.spawnAnvil(target.getWorld(), target.getLocation().add(0.0, 6.0, 0.0));
-			
 			caster.addPotionEffect(new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 80, 3));
-			
 			new ExplodingBlockRunnable (anvil, 100, this.power, target).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
 		}
 	}
@@ -79,7 +77,7 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 						return false;
 					}
 				}
-				return caster.getFireTicks() == 0;
+				return true;
 			}
 			// Otherwise, the caster is only allowed to use the skill if the the player's threat score exceeds mythic.
 			else
