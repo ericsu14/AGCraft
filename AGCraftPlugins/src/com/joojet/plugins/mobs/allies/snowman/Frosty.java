@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.allies.snowman;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.allies.factions.AlliedMob;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
@@ -12,6 +13,7 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.head.FrostyFace;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
+import com.joojet.plugins.mobs.skills.buff.SelfHealSkill;
 
 public class Frosty extends AlliedMob
 {
@@ -22,6 +24,7 @@ public class Frosty extends AlliedMob
 		this.color = ChatColor.AQUA;
 		this.setStat(MonsterStat.HEALTH, 30.0);
 		this.addMobFlags(MobFlag.SHOW_NAME);
+		this.addEntitiesToIgnoreList(EntityType.CREEPER);
 		
 		this.addPotionEffect(CustomPotionEffect.RESISTANCE, 
 				CustomPotionEffect.WATER_BREATHING, 
@@ -35,6 +38,6 @@ public class Frosty extends AlliedMob
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
 		skills.add(new ThundagaSkill (20, 14, Integer.MAX_VALUE, 10, 1.0F, 3, 20, 1.00));
-		
+		skills.add(new SelfHealSkill (1, 30, 8, 0.40));
 	}
 }

@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.allies.golem;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.allies.factions.AlliedMob;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
@@ -24,6 +25,7 @@ public class JohnJae extends AlliedMob
 		this.color = ChatColor.GOLD;
 		this.addMobFlags(MobFlag.SHOW_NAME);
 		this.setStat(MonsterStat.HEALTH, 250.0);
+		this.addTargetsToHitList(EntityType.CREEPER);
 		
 		this.addPotionEffect(CustomPotionEffect.RESISTANCE_II, 
 				CustomPotionEffect.REGEN, 

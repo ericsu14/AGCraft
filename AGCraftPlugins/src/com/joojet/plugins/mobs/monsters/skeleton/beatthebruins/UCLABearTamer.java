@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.skeleton.beatthebruins;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
@@ -19,6 +21,8 @@ import com.joojet.plugins.mobs.equipment.weapons.TheTrojanDestroyer;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 import com.joojet.plugins.mobs.monsters.polar_bear.beatthebruins.TheBruinBear;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class UCLABearTamer extends UCLAFaction 
@@ -50,5 +54,11 @@ public class UCLABearTamer extends UCLAFaction
 		
 		this.addMonsterDrops(new MonsterDrop (new TheTrojanDestroyer(), 0.05));
 		this.bossTheme = MusicType.HAIKYUU;
+	}
+	
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		super.loadCustomSkills(skills);
+		skills.add(new ThundagaSkill (30, 20, Integer.MAX_VALUE, 8, 4.0F, 6, 80, 0.70));
 	}
 }

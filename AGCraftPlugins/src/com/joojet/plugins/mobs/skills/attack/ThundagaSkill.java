@@ -65,10 +65,19 @@ public class ThundagaSkill extends AbstractAttackSkill {
 						this.cancel();
 					}
 					
-					// Gives caster invincibility for 3 ticks so he can survive his own thunder 
+					// Gives caster (and all surrounding allies) invincibility for 3 ticks so he can survive his own thunder 
 					if (this.ticks == 1)
 					{
-						caster.addPotionEffect(new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 2, 5));
+						PotionEffect resistance = new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 2, 5);
+						caster.addPotionEffect(resistance);
+						for (LivingEntity ally : allies)
+						{
+							if (!ally.isDead())
+							{
+								ally.addPotionEffect(resistance);
+							}
+						}
+						
 					}
 					// Cast lightning and create explosion once delay is served
 					else if (this.ticks <= 0)
