@@ -39,7 +39,7 @@ public abstract class AbstractAttackSkill extends AbstractSkill
 		HashSet <Integer> capturedIndicies = new HashSet <Integer> ();
 		
 		int currAmount = amount;
-		while (currAmount > 0 && capturedIndicies.size() < n)
+		while (currAmount > 0 && result.size() < n)
 		{
 			int randIndex = this.random.nextInt(n);
 			if (!capturedIndicies.contains(randIndex))

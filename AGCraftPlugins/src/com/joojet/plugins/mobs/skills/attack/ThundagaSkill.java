@@ -65,7 +65,7 @@ public class ThundagaSkill extends AbstractAttackSkill {
 						this.cancel();
 					}
 					
-					// Gives caster (and all surrounding allies) invincibility for 3 ticks so he can survive his own thunder 
+					// Gives caster (and all surrounding allies) invincibility for 3 ticks so they can survive his own thunder 
 					if (this.ticks == 1)
 					{
 						PotionEffect resistance = new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 2, 5);
