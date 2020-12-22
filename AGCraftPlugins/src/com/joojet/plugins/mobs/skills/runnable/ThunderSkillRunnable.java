@@ -32,13 +32,14 @@ public class ThunderSkillRunnable extends BukkitRunnable {
 	public ThunderSkillRunnable (ThundagaSkill skill, Location targetLocation, LivingEntity caster, List <LivingEntity> allies)
 	{
 		this.skill = skill;
-		this.targetLocation = targetLocation;
+		this.targetLocation = targetLocation.clone();
 		this.caster = caster;
 		this.allies = allies;
 		this.ticks = skill.getDelayTicks();
 	}
 	@Override
-	public void run() {
+	public void run() 
+	{
 		// Cancels the skill if the caster is dead
 		if (this.caster.isDead())
 		{
@@ -62,8 +63,8 @@ public class ThunderSkillRunnable extends BukkitRunnable {
 		// Cast lightning and create explosion once delay is served
 		else if (this.ticks <= 0)
 		{
-			this.targetLocation.getWorld().strikeLightning(targetLocation);
-			this.targetLocation.getWorld().createExplosion(targetLocation.add(0.0, 1.0, 0.0), skill.getExplosionPower(), false, false, caster);
+			this.targetLocation.getWorld().strikeLightning(this.targetLocation);
+			this.targetLocation.getWorld().createExplosion(this.targetLocation.add(0.0, 1.0, 0.0), this.skill.getExplosionPower(), false, false, this.caster);
 			this.cancel();
 		}
 		// Otherwise, play particle effects on the location based on a dice roll
@@ -78,7 +79,6 @@ public class ThunderSkillRunnable extends BukkitRunnable {
 		}
 		
 		--this.ticks;
-
 	}
 
 }

@@ -46,7 +46,7 @@ public class ThundagaSkill extends AbstractAttackSkill {
 		
 		for (LivingEntity target : targets)
 		{
-			new ThunderSkillRunnable (this, target.getLocation().clone(), caster, allies).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
+			new ThunderSkillRunnable (this, target.getLocation(), caster, allies).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
 		}
 
 	}
