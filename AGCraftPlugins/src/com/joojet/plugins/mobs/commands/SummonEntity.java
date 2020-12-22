@@ -61,8 +61,9 @@ public class SummonEntity extends AGCommandExecutor
 				{
 					for (int i = 0; i < amount; ++i)
 					{
-						SummoningScrollListener.summonMonster(player, summon.getMob(), summon.getMobType(),this.bossBarController);
+						SummoningScrollListener.summonMonster(player, summon.getMob(), summon.getMobType(),this.bossBarController, true);
 					}
+					player.sendMessage(ChatColor.AQUA + "Successfully summoned " + ChatColor.GOLD + amount + " " + summon.getMob().getName() + "(s)!");
 					return true;
 				}
 				else

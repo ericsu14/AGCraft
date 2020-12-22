@@ -73,7 +73,7 @@ public class SummoningScrollListener extends AGListener
 				
 				if (scroll != null)
 				{	
-					if (!summonMonster (p, scroll.getMob(), scroll.getMobType(), this.bossBarController))
+					if (!summonMonster (p, scroll.getMob(), scroll.getMobType(), this.bossBarController, false))
 					{
 						return;
 					}
@@ -99,8 +99,9 @@ public class SummoningScrollListener extends AGListener
 	 *  @param player - Player summoning the monster
 	 *  @param mob - MobEquipment instance of the monster being summoned
 	 *  @param entityType - The summoned monster's entity type
-	 *  @param bossBarController - Instance to the server's active boss bar controller */
-	public static boolean summonMonster (Player player, MobEquipment mob, EntityType entityType, BossBarController bossBarController)
+	 *  @param bossBarController - Instance to the server's active boss bar controller
+	 *  @param silent - Determines whatever or not if the summon effects are played upon spawning in a mob */
+	public static boolean summonMonster (Player player, MobEquipment mob, EntityType entityType, BossBarController bossBarController, boolean silent)
 	{
 		// Gets player's current location
 		Location spawnLocation = player.getEyeLocation();
@@ -146,11 +147,14 @@ public class SummoningScrollListener extends AGListener
 		// Entities are always persistent when summoned VIA summoning scroll
 		entity.setRemoveWhenFarAway(false);
 		
-		player.sendMessage(ChatColor.AQUA + "Sucessfully summoned " + mob.getChatColor() + mob.getName() + ChatColor.AQUA + "!");
-		player.playSound(spawnLocation, Sound.ENTITY_EVOKER_PREPARE_WOLOLO, 1.0f, 1.0f);
-		player.playSound(spawnLocation, Sound.ENTITY_EVOKER_CAST_SPELL, 1.0f, 1.0f);
-		player.spawnParticle(Particle.SPELL_INSTANT, spawnLocation, 10, 1.0, 1.0, 0.0, 0.1, null);
-		player.spawnParticle(Particle.SPELL_INSTANT, spawnLocation, 15, 1.0, 1.0, 0.0, 0.1, null);
+		if (!silent)
+		{
+			player.sendMessage(ChatColor.AQUA + "Sucessfully summoned " + mob.getChatColor() + mob.getName() + ChatColor.AQUA + "!");
+			player.playSound(spawnLocation, Sound.ENTITY_EVOKER_PREPARE_WOLOLO, 1.0f, 1.0f);
+			player.playSound(spawnLocation, Sound.ENTITY_EVOKER_CAST_SPELL, 1.0f, 1.0f);
+			player.spawnParticle(Particle.SPELL_INSTANT, spawnLocation, 10, 1.0, 1.0, 0.0, 0.1, null);
+			player.spawnParticle(Particle.SPELL_INSTANT, spawnLocation, 15, 1.0, 1.0, 0.0, 0.1, null);
+		}
 		return true;
 	}
 

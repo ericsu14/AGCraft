@@ -29,7 +29,8 @@ public class ThundagaSkill extends AbstractAttackSkill {
 	 *  @param numTargets The max. amount of targets that will be randomly selected from this skill
 	 *  @param thunderDelay Delay before thunder hits (in ticks)
 	 *  @param healthThreshold Min. amount of health required in order for skill to be used */
-	public ThundagaSkill(int range, int cooldown, int maxUses, int weight, float power, int numTargets, int thunderDelay, double healthThreshold) {
+	public ThundagaSkill(int range, int cooldown, int maxUses, int weight, float power, int numTargets, int thunderDelay, double healthThreshold) 
+	{
 		super(range, cooldown, maxUses, weight);
 		this.power = power;
 		this.numTargets = numTargets;
