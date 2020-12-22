@@ -2,16 +2,12 @@ package com.joojet.plugins.mobs.skills.attack;
 
 import java.util.List;
 
-import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.skills.runnable.ThunderSkillRunnable;
 
 public class ThundagaSkill extends AbstractAttackSkill {
 	/** Number of targets this skill is targeting per use */
@@ -50,57 +46,7 @@ public class ThundagaSkill extends AbstractAttackSkill {
 		
 		for (LivingEntity target : targets)
 		{
-			Location targetLocation = target.getLocation().clone();
-			new BukkitRunnable () 
-			{
-				// AOE delay ticks
-				protected int ticks = thunderDelay;
-
-				@Override
-				public void run() 
-				{
-					// Cancels the skill if the caster is dead
-					if (caster.isDead())
-					{
-						this.cancel();
-					}
-					
-					// Gives caster (and all surrounding allies) invincibility for 3 ticks so they can survive his own thunder 
-					if (this.ticks == 1)
-					{
-						PotionEffect resistance = new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 2, 5);
-						caster.addPotionEffect(resistance);
-						for (LivingEntity ally : allies)
-						{
-							if (!ally.isDead())
-							{
-								ally.addPotionEffect(resistance);
-							}
-						}
-						
-					}
-					// Cast lightning and create explosion once delay is served
-					else if (this.ticks <= 0)
-					{
-						targetLocation.getWorld().strikeLightning(targetLocation);
-						targetLocation.getWorld().createExplosion(targetLocation.add(0.0, 1.0, 0.0), power, false, false, caster);
-						this.cancel();
-					}
-					// Otherwise, play particle effects on the location based on a dice roll
-					else if (random.nextDouble() >= 0.50)
-					{
-						targetLocation.getWorld().spawnParticle(Particle.SPELL_INSTANT, targetLocation, 10, 1.0, 1.0, 1.0);
-						if (!caster.isDead())
-						{
-							caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, caster.getLocation(), 4, 1.0, 1.0, 1.0);
-							caster.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, caster.getLocation(), 2, 1.0, 1.0, 1.0);
-						}
-					}
-					
-					--this.ticks;
-				}
-				
-			}.runTaskTimer(AGCraftPlugin.plugin, 0, 1);
+			new ThunderSkillRunnable (this, target.getLocation().clone(), caster, allies).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
 		}
 
 	}
@@ -109,6 +55,18 @@ public class ThundagaSkill extends AbstractAttackSkill {
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) {
 		// TODO Auto-generated method stub
 		return !enemies.isEmpty() && this.checkHealthIsBelowThreshold(caster, this.healthThreshold);
+	}
+	
+	/** Returns the thunder's explosion power */
+	public float getExplosionPower ()
+	{
+		return this.power;
+	}
+	
+	/** Returns the delay (in ticks) before the thunder stikes the location */
+	public int getDelayTicks ()
+	{
+		return this.thunderDelay;
 	}
 
 }

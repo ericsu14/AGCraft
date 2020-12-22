@@ -99,6 +99,12 @@ public abstract class AbstractSkill
 		return this.weight;
 	}
 	
+	/** Returns the skill's internal random number generator instance */
+	public Random getRandomGenerator ()
+	{
+		return this.random;
+	}
+	
 	/** Returns true if the caster's health reaches below a certain threshold
 	 *  @param caster The LivingEntity whose health is being checked
 	 *  @param threshold The threshold needed to be reached */
