@@ -68,9 +68,9 @@ public class ThunderSkillRunnable extends BukkitRunnable {
 			this.cancel();
 		}
 		// Otherwise, play particle effects on the location based on a dice roll
-		else if (this.skill.getRandomGenerator().nextDouble() >= 0.50)
+		else if (this.ticks % 2 == 0 && this.skill.getRandomGenerator().nextDouble() >= 0.50)
 		{
-			this.targetLocation.getWorld().spawnParticle(Particle.SPELL_INSTANT, this.targetLocation, 10, 1.0, 1.0, 1.0);
+			this.targetLocation.getWorld().spawnParticle(Particle.SPELL_INSTANT, this.targetLocation, 6, 1.0, 1.0, 1.0);
 			if (!this.caster.isDead())
 			{
 				this.caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, this.caster.getLocation(), 4, 1.0, 1.0, 1.0);
