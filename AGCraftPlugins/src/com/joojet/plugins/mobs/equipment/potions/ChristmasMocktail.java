@@ -35,7 +35,7 @@ public class ChristmasMocktail extends PotionEquipment
 		this.addPotionEffect(PotionEffectType.DOLPHINS_GRACE, 36000, 0);
 		this.addPotionEffect(PotionEffectType.REGENERATION, 36000, 0);
 		this.addLoreToItemMeta("Unleash your festive spirit with this Christmasy drink!");
-		this.setColor(Color.fromRGB(253, 236, 213));
+		this.setColor(Color.fromRGB(255, 40, 87));
 		this.makeSoulbound();
 		
 	}
