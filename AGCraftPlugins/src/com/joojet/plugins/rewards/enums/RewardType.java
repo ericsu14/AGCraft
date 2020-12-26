@@ -11,6 +11,7 @@ import com.joojet.plugins.mobs.equipment.offhand.BlueAndGold;
 import com.joojet.plugins.mobs.equipment.offhand.BruinShield;
 import com.joojet.plugins.mobs.equipment.offhand.CaptainAmericaShield;
 import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
+import com.joojet.plugins.mobs.equipment.potions.ChristmasMocktail;
 import com.joojet.plugins.mobs.equipment.potions.EternalRusheeMocktail;
 import com.joojet.plugins.mobs.equipment.potions.StrawberryMocktail;
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
@@ -56,7 +57,10 @@ public enum RewardType
 	THE_TERMINATOR,
 	SOUL_OBLITERATOR,
 	HELL_WALKER,
-	JOOJ_CAKE;
+	JOOJ_CAKE,
+	SCRUFFY,
+	FROSTY_THE_SNOWMAN,
+	CHRISTMAS_MOCKTAIL;
 	
 	public ItemStack getReward ()
 	{
@@ -134,6 +138,12 @@ public enum RewardType
 				return new SummonHellWalker ();
 			case JOOJ_CAKE:
 				return new JoojCake ();
+			case SCRUFFY:
+				return new SummonScruffy ();
+			case FROSTY_THE_SNOWMAN:
+				return new SummonFrosty ();
+			case CHRISTMAS_MOCKTAIL:
+				return new ChristmasMocktail();
 			default:
 				break;
 		}
