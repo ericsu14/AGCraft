@@ -71,6 +71,7 @@ public class ThunderSkillRunnable extends BukkitRunnable {
 		else if (this.ticks % 2 == 0 && this.skill.getRandomGenerator().nextDouble() >= 0.50)
 		{
 			this.targetLocation.getWorld().spawnParticle(Particle.SPELL_INSTANT, this.targetLocation, 6, 1.0, 1.0, 1.0);
+			this.targetLocation.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, this.targetLocation, 8, 1.0, 1.0, 1.0);
 			if (!this.caster.isDead())
 			{
 				this.caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, this.caster.getLocation(), 4, 1.0, 1.0, 1.0);

@@ -142,7 +142,7 @@ public class DamageDisplayListener extends AGListener
 	
 	/** Listens to entity damage events that are not caused by other living entites
 	 *  and displays damage information on that entity */
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onEntityDamageEvent (EntityDamageEvent event)
 	{
 		// Prevent duplicate damage displays

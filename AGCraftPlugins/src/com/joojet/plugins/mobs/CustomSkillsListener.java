@@ -16,6 +16,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
@@ -156,6 +158,21 @@ public class CustomSkillsListener extends AGListener {
 		this.filterGoodAndBadEntities(caster, skill.getRange(), allies, enemies);
 		
 		skill.useSkill(caster, allies, enemies, this.damageDisplayListener);
+	}
+	
+	/** Prevents dropped itemstack entities from being destroyed by explosions */
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void preventItemDropDestructionOnExplosionEvent (EntityDamageEvent event)
+	{
+		if (event.getCause() == DamageCause.ENTITY_EXPLOSION || 
+				event.getCause() == DamageCause.BLOCK_EXPLOSION ||
+				event.getCause() == DamageCause.LIGHTNING)
+		{
+			if (event.getEntity().getType() == EntityType.DROPPED_ITEM)
+			{
+				event.setCancelled(true);
+			}
+		}
 	}
 	
 	/** Captures entity-launched arrows and changes the arrow to its custom tipped arrow if

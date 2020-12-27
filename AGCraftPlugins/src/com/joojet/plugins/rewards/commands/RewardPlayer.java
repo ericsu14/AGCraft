@@ -74,7 +74,7 @@ public class RewardPlayer extends AGCommandExecutor
 			{
 				username = args[i];
 				
-				if (Bukkit.getOfflinePlayer(username) == null && Bukkit.getPlayer(username) == null)
+				if (username.isEmpty() || (Bukkit.getOfflinePlayer(username) == null && Bukkit.getPlayer(username) == null))
 				{
 					sender.sendMessage ("Cannot find player " + username);
 					return false;

@@ -47,6 +47,11 @@ public class AnvilThrowSkill extends AnvilDropSkill {
 		
 		for (LivingEntity target : targets)
 		{
+			// Checks if the entity has line of sight with the target. If not, ignore this entity.
+			if (!caster.hasLineOfSight(target))
+			{
+				continue;
+			}
 			
 			Vector velocity = MathUtil.calculateArcBetweenPoints(caster.getLocation().toVector().clone(), target.getLocation().toVector().clone(), 
 					(int) (caster.getHeight() * 2));

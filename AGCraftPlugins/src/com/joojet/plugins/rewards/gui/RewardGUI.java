@@ -40,7 +40,7 @@ public class RewardGUI implements Listener
      *  item lore for a rewards item */
     private int wordsPerLine;
     /** The total amount of reward items that will be displayed in the rewards menu at a time */
-    private int maxInvSize = 36;
+    private int maxInvSize = 48;
 
     public RewardGUI(Player player) 
     {
