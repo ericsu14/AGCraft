@@ -250,7 +250,7 @@ public class CustomSkillsListener extends AGListener {
 			return;
 		}
 		
-		List <Entity> surroundingEntities = caster.getNearbyEntities(range, range, range);
+		List <Entity> surroundingEntities = caster.getNearbyEntities(range / 2.0, range / 2.0, range / 2.0);
 		
 		boolean isAlly = false;
 		for (Entity entity : surroundingEntities)
