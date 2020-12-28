@@ -34,7 +34,7 @@ public class AnvilThrowSkill extends AnvilDropSkill {
 	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies,
 			DamageDisplayListener damageDisplayListener) 
 	{
-		List <LivingEntity> targets = this.selectRandomEntities(enemies, amount);
+		List <LivingEntity> targets = this.filterByLineOfSight(this.selectRandomEntities(enemies, amount), caster);
 		
 		if (!targets.isEmpty())
 		{
@@ -42,7 +42,7 @@ public class AnvilThrowSkill extends AnvilDropSkill {
 			caster.getWorld().spawnParticle(Particle.CRIT, caster.getEyeLocation(), 30, 1.0, 1.0, 1.0);
 			caster.getWorld().playSound(caster.getEyeLocation(), Sound.BLOCK_ANVIL_PLACE, 1.0f, 1.0f);
 			caster.getWorld().playSound(caster.getEyeLocation(), Sound.ITEM_TRIDENT_THROW, 1.0f, 1.0f);
-			damageDisplayListener.displayStringAboveEntity(caster, ChatColor.BOLD + "" + ChatColor.DARK_RED + "HAVE A TASTE OF IRON!");
+			damageDisplayListener.displayStringAboveEntity(caster, ChatColor.DARK_RED + "" + ChatColor.BOLD + "HAVE A TASTE OF IRON!");
 		}
 		
 		for (LivingEntity target : targets)
