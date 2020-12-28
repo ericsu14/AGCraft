@@ -15,6 +15,7 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.AnvilDropSkill;
 import com.joojet.plugins.mobs.skills.attack.AnvilThrowSkill;
 import com.joojet.plugins.mobs.skills.buff.SelfHealSkill;
+import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 
 public class JohnJae extends AlliedMob
 {
@@ -41,7 +42,8 @@ public class JohnJae extends AlliedMob
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
 		skills.add(new AnvilDropSkill (12, 12, 16, 4.0f, 1));
-		skills.add(new AnvilThrowSkill (30, 25, 4, 2.0f, 3));
-		skills.add(new SelfHealSkill (4, 60, 2, 0.45));
+		skills.add(new AnvilThrowSkill (30, 25, 8, 2.0f, 3));
+		skills.add(new SelfHealSkill (4, 60, 4, 0.45));
+		skills.add(new TeleportSkill (64, 60, Integer.MAX_VALUE, 2));
 	}
 }

@@ -60,10 +60,10 @@ public class SkullKid extends MythicMob
 		this.weapon = new ATerribleFate (this.color);
 		this.offhand = new CursedArrow (this.color);
 		
-		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 1.00, 2, 3),
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.75, 2, 3),
 				new MonsterDrop (Material.NETHERITE_INGOT, 0.75, 1, 1),
-				new MonsterDrop (new SpiritualTravesty(ChatColor.GOLD), 0.15),
-				new MonsterDrop (Material.DIAMOND, 0.10, 3, 7),
+				new MonsterDrop (new SpiritualTravesty(ChatColor.GOLD), 0.05),
+				new MonsterDrop (Material.DIAMOND, 0.05, 3, 7),
 				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 1.00, 5, 7),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 3),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.20, 1, 2));
@@ -77,6 +77,6 @@ public class SkullKid extends MythicMob
 	{
 		super.loadCustomSkills(skills);
 		skills.add(new ResistanceBuffSkill (0, 60, 20, 60, 80));
-		skills.add(new ThundagaSkill (32, 14, 6, 10, 5.0f, 4, 60, 0.60));
+		skills.add(new ThundagaSkill (32, 14, 6, 16, 5.0f, 4, 60, 0.60));
 	}
 }
