@@ -24,7 +24,7 @@ public class MythicMob extends MobEquipment
 		// If a mythic mob does not have any predefined skill, automatically default to using
 		// the rage skill
 		skills.add(new RageSkill (1, 90, 0.30));
-		skills.add(new AgressiveTeleportSkill (72, 20, Integer.MAX_VALUE, 2));
+		skills.add(new AgressiveTeleportSkill (256, 20, Integer.MAX_VALUE, 2));
 	}
 	
 }
