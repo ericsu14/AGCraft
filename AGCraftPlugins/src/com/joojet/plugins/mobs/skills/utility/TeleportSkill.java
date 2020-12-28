@@ -13,6 +13,7 @@ import org.bukkit.entity.LivingEntity;
 import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
+import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class TeleportSkill extends AbstractSkill {
 	
@@ -33,7 +34,7 @@ public class TeleportSkill extends AbstractSkill {
 	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies,
 			DamageDisplayListener damageDisplayListener) 
 	{		
-		List <LivingEntity> possibleTargets = this.filterSubmergedEntities(allies);
+		List <LivingEntity> possibleTargets = this.filterSubmergedEntities(allies, caster);
 		
 		if (possibleTargets.isEmpty())
 		{
@@ -62,9 +63,9 @@ public class TeleportSkill extends AbstractSkill {
 	
 	/** Filters a list of entities by removing entities who are submerged under a liquid source block.
 	 *  @param entities A list of entities to be filtered */
-	protected List <LivingEntity> filterSubmergedEntities (List <LivingEntity> entities)
+	protected List <LivingEntity> filterSubmergedEntities (List <LivingEntity> entities, LivingEntity caster)
 	{
-		Object [] filtered = entities.stream().filter(ent -> !this.isEngulfedInLiquids(ent)).toArray();
+		Object [] filtered = entities.stream().filter(ent -> (!this.isEngulfedInLiquids(ent) && EquipmentTools.checkSpawnSpace(ent, caster.getHeight()))).toArray();
 		return Arrays.asList(Arrays.copyOf(filtered, filtered.length, LivingEntity[].class));
 	}
 	

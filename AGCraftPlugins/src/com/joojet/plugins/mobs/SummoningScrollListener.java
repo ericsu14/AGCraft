@@ -110,7 +110,7 @@ public class SummoningScrollListener extends AGListener
 		// If so, cancel the summoning scroll event if the player does not
 		// have EquipmentTools.openAirRequirement blocks of clear space above him/her.
 		if (mob.containsStat(MonsterStat.Y_LIMIT)
-				&& (!EquipmentTools.checkSpawnSpace(player)
+				&& (!EquipmentTools.checkSpawnSpace(player, EquipmentTools.openAirRequirement)
 						|| spawnLocation.getBlockY() < mob.getStat(MonsterStat.Y_LIMIT)))
 		{
 			player.sendMessage(ChatColor.RED + "Error: Unable to summon the monster. Please check that there is at least "
