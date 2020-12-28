@@ -58,14 +58,16 @@ public class TeleportSkill extends AbstractSkill {
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return (!allies.isEmpty() && (enemies.isEmpty() || this.isEngulfedInLiquids(caster)));
+		return (!allies.isEmpty() && this.isEngulfedInLiquids(caster));
 	}
 	
 	/** Filters a list of entities by removing entities who are submerged under a liquid source block.
-	 *  @param entities A list of entities to be filtered */
+	 *  @param entities A list of entities to be filtered
+	 *  @param caster The living entity using the skill, whose height is used to check if the warp location has enough room to accommodate
+	 *                the caster's height. */
 	protected List <LivingEntity> filterSubmergedEntities (List <LivingEntity> entities, LivingEntity caster)
 	{
-		Object [] filtered = entities.stream().filter(ent -> (!this.isEngulfedInLiquids(ent) && EquipmentTools.checkSpawnSpace(ent, caster.getHeight()))).toArray();
+		Object [] filtered = entities.stream().filter(ent -> (!this.isEngulfedInLiquids(ent) && EquipmentTools.checkSpawnSpace(ent, caster.getHeight() * 1.5))).toArray();
 		return Arrays.asList(Arrays.copyOf(filtered, filtered.length, LivingEntity[].class));
 	}
 	
