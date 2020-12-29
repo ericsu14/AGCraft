@@ -48,7 +48,7 @@ public class ExplodingBlockRunnable extends BukkitRunnable
 			this.cancel();
 		}
 		
-		entity.getWorld().spawnParticle(Particle.SPELL_INSTANT, entity.getLocation(), 10, 1.0, 1.0, 0.0, 0.1, null);
+		entity.getWorld().spawnParticle(Particle.SPELL_INSTANT, entity.getLocation(), 2, 1.0, 1.0, 0.0, 0.1, null);
 		--ticks;
 	}
 

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -12,6 +11,7 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.potions.*;
 import com.joojet.plugins.mobs.scrolls.*;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 
 public class Frolf extends VillagerEquipment
@@ -22,7 +22,6 @@ public class Frolf extends VillagerEquipment
 		this.name = "frolf";
 		this.color = ChatColor.GOLD;
 		this.addMobFlags(MobFlag.SHOW_NAME);
-		this.addBiomes(Biome.THE_VOID);
 		
 		/** Trade 1: Golden Carrots (bundles of 16)
 		 * 		- Price: 3 Emeralds
@@ -40,6 +39,10 @@ public class Frolf extends VillagerEquipment
 		 *		- Price: 24 emeralds, max stock: 8 */
 		ItemStack goldApple = new ItemStack (Material.ENCHANTED_GOLDEN_APPLE, 1);
 		this.addRecipe(goldApple, Material.EMERALD, 24, 8);
+		
+		/** Trade 3.5: 16 Emeralds
+		 *      - Price: 4 diamonds, max stock: 4 */
+		this.addRecipe(new ItemStack (Material.EMERALD, 16), Material.DIAMOND, 4, 4);
 		
 		/** Trade 4: Netherite Ingot
 		 * 		- Price: 12 Diamonds
@@ -123,8 +126,7 @@ public class Frolf extends VillagerEquipment
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
-		
+		skills.add(new TeleportSkill (64, 30, Integer.MAX_VALUE, 2));
 	}
 	
 	

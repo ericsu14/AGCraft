@@ -13,5 +13,6 @@ public class WanderingVillagerTypes extends MonsterTypes
 		super(monsterTypeInterpreter, summonTypeInterpreter, EntityType.WANDERING_TRADER);
 		this.addEquipment(new Frolf(), 85);
 		this.addEquipment(new JohnnyRusnak(), 15);
+		this.addEquipment(new TommyTrojan (), 10);
 	}
 }
