@@ -26,5 +26,6 @@ public class EternalSpiritOfTroy extends Equipment
 		this.addUnsafeEnchantment(Enchantment.ARROW_FIRE, 1);
 		this.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 1);
 		this.addUnsafeEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
+		this.makeSoulbound();
 	}
 }
