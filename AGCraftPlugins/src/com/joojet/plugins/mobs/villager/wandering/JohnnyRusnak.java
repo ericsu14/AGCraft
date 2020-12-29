@@ -66,6 +66,6 @@ public class JohnnyRusnak extends VillagerEquipment
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
 		skills.add(new TeleportSkill (64, 30, Integer.MAX_VALUE, 2));
-		skills.add(new ThundagaSkill (20, 14, Integer.MAX_VALUE, 12, 3.0F, 6, 20, 1.00));
+		skills.add(new ThundagaSkill (20, 14, Integer.MAX_VALUE, 12, 3.0F, 6, 20, 0.85));
 	}
 }
