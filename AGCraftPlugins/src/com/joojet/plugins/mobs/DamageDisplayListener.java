@@ -22,7 +22,6 @@ import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.damage.DamageDisplayManager;
-import com.joojet.plugins.mobs.damage.entities.DamageDisplayEntity;
 import com.joojet.plugins.mobs.damage.enums.DamageType;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -54,9 +53,7 @@ public class DamageDisplayListener extends AGListener
 	@Override
 	public void onEnable ()
 	{
-		// Inserts a dummy damage display entity into the monster type interpreter so it can be referenced
-		DamageDisplayEntity ent = new DamageDisplayEntity ("null");
-		monsterTypeInterpreter.insertWord(ent.toString(), ent);
+
 	}
 	
 	@Override

@@ -28,6 +28,7 @@ import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
+import com.joojet.plugins.mobs.damage.entities.DamageDisplayEntity;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
@@ -40,6 +41,7 @@ import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.interpreter.ThemedServerEventInterpreter;
 import com.joojet.plugins.mobs.metadata.EquipmentTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 import com.joojet.plugins.mobs.spawnhandlers.AmplifiedMobHandler;
 import com.joojet.plugins.mobs.spawnhandlers.BeatTheBruinsHandler;
 import com.joojet.plugins.mobs.spawnhandlers.JulyFourthHandler;
@@ -89,6 +91,11 @@ public class AmplifiedMobSpawner extends AGListener
 	{
 		this.equipmentLoader = new EquipmentLoader();
 		this.serverEventInterpreter = new ThemedServerEventInterpreter();
+		
+		// Inserts a dummy damage display entity into the monster type interpreter so it can be referenced
+		DamageDisplayEntity ent = new DamageDisplayEntity ("PLACEHOLDER");
+		this.monsterTypeInterpreter.insertWord(ent.toString(), ent);
+		this.summonTypeInterpreter.insertWord(ent.toString(), new SummoningScroll (ent, EntityType.ARMOR_STAND));
 	}
 	
 	/** Amplifies mob spawns */
