@@ -14,6 +14,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
+import org.bukkit.event.world.ChunkLoadEvent;
+import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.potion.PotionEffectType;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
@@ -210,12 +212,30 @@ public class DamageDisplayListener extends AGListener
 			if (entity != null && entity.getType() == EntityType.ARMOR_STAND)
 			{
 				MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) entity);
-				if (equipment.getMonsterType() == MonsterType.DAMAGE_DISPLAY_ENTITY)
+				if (equipment != null && equipment.getMonsterType() == MonsterType.DAMAGE_DISPLAY_ENTITY)
 				{
 					this.damageDisplayManager.removeDamageDisplayEntity(entity.getUniqueId());
+					if (!entity.isDead())
+					{
+						entity.remove();
+					}
 				}
 			}
 		}
+	}
+	
+	/** Attempt to remove all damage display entities upon chunk loading */
+	@EventHandler (priority = EventPriority.LOWEST)
+	public void onChunkLoad (ChunkLoadEvent chunkLoadEvent)
+	{
+		this.removeDamageDisplayEntities(chunkLoadEvent.getChunk().getEntities());
+	}
+	
+	/** Attempt to remove all damage display entities upon chunk unloading */
+	@EventHandler (priority = EventPriority.LOWEST)
+	public void onChunkUnload (ChunkUnloadEvent chunkUnloadEvent)
+	{
+		this.removeDamageDisplayEntities(chunkUnloadEvent.getChunk().getEntities());
 	}
 	
 	/** Takes in a Bukkit DamageCause enum and converts it into its
