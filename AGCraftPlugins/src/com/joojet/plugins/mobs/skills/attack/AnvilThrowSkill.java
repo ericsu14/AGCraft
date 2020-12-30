@@ -13,6 +13,7 @@ import org.bukkit.util.Vector;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.runnable.ExplodingBlockRunnable;
 import com.joojet.plugins.mobs.util.MathUtil;
 
@@ -32,7 +33,7 @@ public class AnvilThrowSkill extends AnvilDropSkill {
 
 	@Override
 	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies,
-			DamageDisplayListener damageDisplayListener) 
+			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter) 
 	{
 		List <LivingEntity> targets = this.filterByLineOfSight(this.selectRandomEntities(enemies, amount), caster);
 		

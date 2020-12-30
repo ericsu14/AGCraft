@@ -38,8 +38,8 @@ public class RoyalPiglinHunter extends MythicMob
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING);
 		
 		this.addMonsterDrops(new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.20, 1, 3),
-				new MonsterDrop (Material.DIAMOND, 1.00, 2, 4),
-				new MonsterDrop (Material.GOLD_BLOCK, 1.00, 1, 3),
+				new MonsterDrop (Material.DIAMOND, 0.60, 2, 4),
+				new MonsterDrop (Material.GOLD_BLOCK, 0.50, 1, 3),
 				new SummoningScrollDrop (SummonTypes.JOHNNY_RUSNAK, 0.15),
 				new SummoningScrollDrop (SummonTypes.FROLF, 0.15),
 				new MonsterDrop (Material.EMERALD, 0.50, 1, 7),

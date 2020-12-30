@@ -12,6 +12,8 @@ import com.joojet.plugins.mobs.enums.EquipmentType;
 
 public abstract class AbstractPotionEquipment extends Equipment 
 {
+	/** Stores the custom color used for this potion */
+	protected Color potionColor;
 	/** Constructs a Potion with an item count of 1
 	 * 		@param equipmentType - Type of custom equipment this is
 	 * 		@param material - Type of material this item is made out of
@@ -20,6 +22,7 @@ public abstract class AbstractPotionEquipment extends Equipment
 	public AbstractPotionEquipment (EquipmentType equipmentType, Material material, EquipmentSlot equipment, ChatColor color)
 	{
 		super (equipmentType, material, equipment, color);
+		this.potionColor = Color.BLACK;
 		this.addPotionData();
 	}
 	
@@ -40,6 +43,7 @@ public abstract class AbstractPotionEquipment extends Equipment
 	{
 		PotionMeta potMeta = (PotionMeta) this.getItemMeta();
 		potMeta.setColor(color);
+		this.potionColor = color;
 		this.setItemMeta(potMeta);
 	}
 	

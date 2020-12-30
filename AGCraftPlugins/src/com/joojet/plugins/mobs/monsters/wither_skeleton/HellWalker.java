@@ -46,9 +46,9 @@ public class HellWalker extends MythicMob
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 12.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 75.0);
 		
-		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.35, 1, 3),
-				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 1),
-				new SummoningScrollDrop (SummonTypes.HELL_WALKER, 0.10));
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.10, 1, 3),
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.50, 1, 1),
+				new SummoningScrollDrop (SummonTypes.HELL_WALKER, 0.05));
 		
 		this.bossTheme = MusicType.HAIKYUU;
 		

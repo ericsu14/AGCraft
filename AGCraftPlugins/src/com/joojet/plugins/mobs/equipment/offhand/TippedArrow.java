@@ -35,10 +35,10 @@ public abstract class TippedArrow extends AbstractPotionEquipment
 	{
 		PotionMeta potionMeta =  (PotionMeta) this.getItemMeta();
 		arrow.setBasePotionData(potionMeta.getBasePotionData());
-		arrow.setColor(potionMeta.getColor());
 		for (PotionEffect effect : potionMeta.getCustomEffects())
 		{
 			arrow.addCustomEffect(effect, true);
 		}
+		arrow.setColor(this.potionColor);
 	}
 }

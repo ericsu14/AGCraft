@@ -4,8 +4,13 @@ import org.bukkit.Location;
 import org.bukkit.entity.AbstractArrow.PickupStatus;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import com.joojet.plugins.mobs.equipment.offhand.TippedArrow;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 public class LaunchCustomArrowRunnable extends BukkitRunnable {
 	
@@ -19,14 +24,20 @@ public class LaunchCustomArrowRunnable extends BukkitRunnable {
 	private int ammoCount;
 	/** Total amount of damage dealt by the arrow */
 	private double arrowDamage;
+	/** A reference to the plugin's monstertype interpreter, used to fetch custom monster data for this entity */
+	protected MonsterTypeInterpreter mobInterpreter;
+	/** The mob's custom tipped arrow that should be fired */
+	private TippedArrow tippedArrow;
 	
-	public LaunchCustomArrowRunnable (LivingEntity caster, LivingEntity target, int ammo, double arrowDamage)
+	public LaunchCustomArrowRunnable (LivingEntity caster, LivingEntity target, int ammo, double arrowDamage, MonsterTypeInterpreter mobInterpreter)
 	{
 		this.caster = caster;
 		this.target = target;
 		this.ammo = ammo;
 		this.ammoCount = ammo;
 		this.arrowDamage = arrowDamage;
+		this.mobInterpreter = mobInterpreter;
+		this.tippedArrow = this.getTippedArrowFromMob(this.caster);
 	}
 	
 	@Override
@@ -42,12 +53,19 @@ public class LaunchCustomArrowRunnable extends BukkitRunnable {
 			
 			Vector arrowDirection = target.getEyeLocation().toVector();
 			arrowDirection.subtract(caster.getEyeLocation().toVector());
-			Arrow arrow = caster.getWorld().spawnArrow(arrowSpawnPoint, arrowDirection.normalize(), 1.2f, 1.0f);
+			Arrow arrow = caster.getWorld().spawnArrow(arrowSpawnPoint, arrowDirection.normalize(), 1.2f, 2.0f);
 			
 			arrow.setDamage(this.arrowDamage);
 			arrow.setCritical(true);
 			arrow.setShooter(caster);
 			arrow.setPickupStatus(PickupStatus.CREATIVE_ONLY);
+			
+			// Tipped arrow metadata
+			if (this.tippedArrow != null)
+			{
+				this.tippedArrow.applyPotionDataToArrow(arrow);
+			}
+			
 			--this.ammoCount;
 		}
 		else
@@ -55,5 +73,28 @@ public class LaunchCustomArrowRunnable extends BukkitRunnable {
 			this.cancel();
 		}
 	}
-
+	
+	/** Gets custom tipped-arrow data from a living entity with custom mob metadata
+	 *  @param entity Entity we are extracting tipped-arrow data from */
+	protected TippedArrow getTippedArrowFromMob (LivingEntity entity)
+	{
+		MobEquipment mobEquipment = this.mobInterpreter.getMobEquipmentFromEntity(entity);
+		if (mobEquipment != null)
+		{
+			TippedArrow arrow = mobEquipment.getTippedArrow();
+			// If the mob doesn't have a tipped arrow, check its offhand for any tipped arrow information
+			if (arrow == null)
+			{
+				ItemStack [] mobEquips = mobEquipment.getEquipment();
+				if (mobEquips[5] != null && mobEquips[5] instanceof TippedArrow)
+				{
+					arrow = (TippedArrow) mobEquips[5];
+				}
+			}
+			
+			return arrow;
+		}
+		return null;
+	}
+	
 }

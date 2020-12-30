@@ -40,6 +40,7 @@ public class SkullKid extends MythicMob
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.40);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 30.0);
 		this.color = ChatColor.DARK_RED;
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING, 
 				MobFlag.HUNT_ON_SPAWN, MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER);
@@ -61,13 +62,13 @@ public class SkullKid extends MythicMob
 		this.weapon = new ATerribleFate (this.color);
 		this.offhand = new CursedArrow (this.color);
 		
-		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.75, 2, 3),
-				new MonsterDrop (Material.NETHERITE_INGOT, 0.75, 1, 1),
-				new MonsterDrop (new SpiritualTravesty(ChatColor.GOLD), 0.05),
-				new MonsterDrop (Material.DIAMOND, 0.05, 3, 7),
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.50, 2, 3),
+				new MonsterDrop (Material.NETHERITE_INGOT, 0.05, 1, 1),
+				new MonsterDrop (new SpiritualTravesty(ChatColor.GOLD), 0.01),
+				new MonsterDrop (Material.DIAMOND, 0.10, 1, 5),
 				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 1.00, 5, 7),
-				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 3),
-				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.20, 1, 2));
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.60, 1, 3),
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.10, 1, 2));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 500.0);
 		this.bossTheme = MusicType.KUZE_THEME;

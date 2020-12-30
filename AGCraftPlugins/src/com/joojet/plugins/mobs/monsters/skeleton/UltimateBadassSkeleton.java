@@ -46,9 +46,9 @@ public class UltimateBadassSkeleton extends LegendaryMob
 		// Boots
 		this.boots = new LightweightNetheriteBoots (this.color);
 		
-		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.10, 1, 2),
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.05, 1, 2),
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.30, 1, 1),
-				new MonsterDrop (Material.GOLDEN_CARROT, 0.15, 3, 16));
+				new MonsterDrop (Material.GOLDEN_CARROT, 0.075, 3, 16));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 50.0);
 		this.bossTheme = MusicType.HAIKYUU;

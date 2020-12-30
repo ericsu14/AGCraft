@@ -7,6 +7,7 @@ import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.runnable.LaunchCustomArrowRunnable;
 
 public class HurricaneSkill extends AbstractAttackSkill {
@@ -19,7 +20,7 @@ public class HurricaneSkill extends AbstractAttackSkill {
 
 	@Override
 	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies,
-			DamageDisplayListener damageDisplayListener) 
+			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter) 
 	{	
 		if (enemies.isEmpty())
 		{
@@ -31,7 +32,7 @@ public class HurricaneSkill extends AbstractAttackSkill {
 		if (target != null)
 		{
 			caster.getWorld().spawnParticle(Particle.SWEEP_ATTACK, caster.getLocation(), 4, 0.1, 0.1, 0.1);
-			new LaunchCustomArrowRunnable (caster, target, 12, 8.0).runTaskTimer(AGCraftPlugin.plugin, 20, 10);
+			new LaunchCustomArrowRunnable (caster, target, 12, 8.0, monsterTypeInterpreter).runTaskTimer(AGCraftPlugin.plugin, 20, 10);
 		}
 	}
 

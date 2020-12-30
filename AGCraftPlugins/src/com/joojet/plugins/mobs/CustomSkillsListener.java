@@ -157,7 +157,7 @@ public class CustomSkillsListener extends AGListener {
 		ArrayList <LivingEntity> enemies = new ArrayList <LivingEntity> ();
 		this.filterGoodAndBadEntities(caster, skill.getRange(), allies, enemies);
 		
-		skill.useSkill(caster, allies, enemies, this.damageDisplayListener);
+		skill.useSkill(caster, allies, enemies, this.damageDisplayListener, this.monsterInterpreter);
 	}
 	
 	/** Prevents dropped itemstack entities from being destroyed by explosions */
@@ -224,6 +224,7 @@ public class CustomSkillsListener extends AGListener {
 							// Give an audio and visual cue that the mob is using a piercing arrow
 							Location entityLocation = entity.getEyeLocation();
 							entity.getWorld().playSound(entityLocation, Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0f, 1.0f);
+							entity.getWorld().spawnParticle(Particle.SWEEP_ATTACK, entityLocation, 1, 0.1, 0.1, 0.1);
 							for (int i = 0; i < 30; ++i)
 							{
 								entity.getWorld().spawnParticle(Particle.SPELL_MOB, LocationOffset.addRandomOffsetOnLocation(entityLocation, 1),

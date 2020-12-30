@@ -18,6 +18,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.runnable.ExplodingBlockRunnable;
 
 public class AnvilDropSkill extends AbstractAttackSkill {
@@ -42,7 +43,7 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 
 	@Override
 	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies,
-			DamageDisplayListener damageDisplayListener) 
+			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter) 
 	{
 		List <LivingEntity> targets = this.filterByLineOfSight(this.selectRandomEntities(enemies, amount), caster);
 		

@@ -40,9 +40,9 @@ public class UltimateBadassZombie extends LegendaryMob
 		this.leggings = new DarkNetheriteLeggings (this.color);
 		this.boots = new LightweightNetheriteBoots (this.color);
 		
-		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.10, 1, 2),
-				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.30, 1, 1),
-				new MonsterDrop (Material.GOLDEN_CARROT, 0.15, 3, 16));
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.075, 1, 2),
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.20, 1, 1),
+				new MonsterDrop (Material.GOLDEN_CARROT, 0.10, 3, 16));
 		
 		this.setStat (MonsterStat.EXPERIENCE, 50.0);
 		this.bossTheme = MusicType.GORO_THEME;
