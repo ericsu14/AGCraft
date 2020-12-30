@@ -23,7 +23,7 @@ public class AgressiveTeleportSkill extends TeleportSkill
 	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies,
 			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter) 
 	{	
-		List <LivingEntity> possibleTargets = this.filterSubmergedEntities(enemies, caster);
+		List <LivingEntity> possibleTargets = this.filterNonPlayerEntities(this.filterSubmergedEntities(enemies, caster));
 		
 		if (possibleTargets.isEmpty())
 		{

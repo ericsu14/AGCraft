@@ -10,6 +10,7 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.BoundingBox;
 
@@ -71,6 +72,13 @@ public class TeleportSkill extends AbstractSkill {
 	protected List <LivingEntity> filterSubmergedEntities (List <LivingEntity> entities, LivingEntity caster)
 	{
 		Object [] filtered = entities.stream().filter(ent -> (!this.isEngulfedInLiquids(ent) && checkSurroundingArea (caster, ent))).toArray();
+		return Arrays.asList(Arrays.copyOf(filtered, filtered.length, LivingEntity[].class));
+	}
+	
+	/** Filters a list of entities by removing any entity that isnt a player */
+	protected List <LivingEntity> filterNonPlayerEntities (List <LivingEntity> entities)
+	{
+		Object[] filtered = entities.stream().filter(ent -> ent.getType() == EntityType.PLAYER).toArray();
 		return Arrays.asList(Arrays.copyOf(filtered, filtered.length, LivingEntity[].class));
 	}
 	
