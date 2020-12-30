@@ -20,7 +20,7 @@ import com.joojet.plugins.mobs.equipment.weapons.AngelOfDeath;
 import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
 
 
-public class SoulObliterator extends LegendaryMob
+public class SoulObliterator extends MythicMob
 {
 	public SoulObliterator ()
 	{
