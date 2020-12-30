@@ -35,8 +35,8 @@ public class AgressiveTeleportSkill extends TeleportSkill
 		// Gives the caster a glowing potion effect to let players know it has teleported
 		if (target != null)
 		{
-			caster.addPotionEffect(new PotionEffect (PotionEffectType.GLOWING, 400, 0));
-			target.sendMessage(ChatColor.RED + caster.getName() + " has teleported to your location.");
+			caster.addPotionEffect(new PotionEffect (PotionEffectType.GLOWING, 600, 0));
+			target.sendMessage(caster.getName() + ChatColor.RED + " teleported to your location.");
 		}
 	}
 	

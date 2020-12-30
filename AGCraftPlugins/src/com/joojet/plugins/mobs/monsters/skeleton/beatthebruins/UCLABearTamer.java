@@ -22,6 +22,7 @@ import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 import com.joojet.plugins.mobs.monsters.polar_bear.beatthebruins.TheBruinBear;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.attack.HurricaneSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
@@ -60,5 +61,6 @@ public class UCLABearTamer extends UCLAFaction
 	public void loadCustomSkills(List<AbstractSkill> skills) {
 		super.loadCustomSkills(skills);
 		skills.add(new ThundagaSkill (30, 20, Integer.MAX_VALUE, 8, 4.0F, 6, 80, 0.70));
+		skills.add(new HurricaneSkill (24, 20, Integer.MAX_VALUE, 16, 8, 0.5));
 	}
 }
