@@ -2,6 +2,7 @@ package com.joojet.plugins.mobs.skills.attack;
 
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
@@ -50,16 +51,19 @@ public class HurricaneSkill extends AbstractAttackSkill
 		
 		if (target != null)
 		{
+			caster.getWorld().playSound(caster.getLocation(), Sound.ENTITY_ILLUSIONER_CAST_SPELL, 1.0f, 1.0f);
 			caster.getWorld().spawnParticle(Particle.SWEEP_ATTACK, caster.getLocation(), 4, 0.1, 0.1, 0.1);
+			damageDisplayListener.displayStringAboveEntity(caster, ChatColor.YELLOW + "" + ChatColor.BOLD + "HURRICANE!");
 			new LaunchCustomArrowRunnable (caster, target, this.ammo, arrowDamage, monsterTypeInterpreter) {
 				@Override
 				public void playAnimationEffects() 
 				{
-					this.caster.getWorld().spawnParticle(Particle.TOTEM, caster.getLocation(), 10, 0.5, 0.5, 0.5);
+					this.caster.getWorld().spawnParticle(Particle.CRIT_MAGIC, caster.getLocation(), 16, 1.0, 0.5, 0.0);
 					this.caster.getWorld().playSound(caster.getLocation(), Sound.ENTITY_ARROW_SHOOT, 1.0F, 1.0F);
+					this.caster.getWorld().spawnParticle(Particle.SWEEP_ATTACK, caster.getLocation(), 1, 0.0, 0.0, 0.0);
 				}
 				
-			}.runTaskTimer(AGCraftPlugin.plugin, 20, 10);
+			}.runTaskTimer(AGCraftPlugin.plugin, 20, 8);
 		}
 	}
 
