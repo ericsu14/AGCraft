@@ -17,7 +17,6 @@ import com.joojet.plugins.mobs.equipment.head.ReinforcedDiamondHelmet;
 import com.joojet.plugins.mobs.equipment.leggings.ReinforcedDiamondLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.EnhancedWitheringArrow;
 import com.joojet.plugins.mobs.equipment.weapons.AngelOfDeath;
-import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
 import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
 
 

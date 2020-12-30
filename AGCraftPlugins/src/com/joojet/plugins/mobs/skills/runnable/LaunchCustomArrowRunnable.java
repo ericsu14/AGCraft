@@ -12,7 +12,7 @@ import com.joojet.plugins.mobs.equipment.offhand.TippedArrow;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
-public class LaunchCustomArrowRunnable extends BukkitRunnable {
+public abstract class LaunchCustomArrowRunnable extends BukkitRunnable {
 	
 	/** Total amount of arrows to be launched */
 	protected int ammo;
@@ -40,10 +40,14 @@ public class LaunchCustomArrowRunnable extends BukkitRunnable {
 		this.tippedArrow = this.getTippedArrowFromMob(this.caster);
 	}
 	
+	/** Plays custom animations around the caster every time it launches an arrow */
+	public abstract void playAnimationEffects ();
+	
 	@Override
 	public void run() 
 	{
-		if (ammoCount > 0 && !caster.isDead() && !target.isDead())
+		if (ammoCount > 0 && !caster.isDead() && !target.isDead()
+				&& caster.hasLineOfSight(target))
 		{
 			// Calculate the arrow's spawn location, which is going to be in front of the caster
 			// based on its forward vector
@@ -65,6 +69,8 @@ public class LaunchCustomArrowRunnable extends BukkitRunnable {
 			{
 				this.tippedArrow.applyPotionDataToArrow(arrow);
 			}
+			
+			this.playAnimationEffects();
 			
 			--this.ammoCount;
 		}
