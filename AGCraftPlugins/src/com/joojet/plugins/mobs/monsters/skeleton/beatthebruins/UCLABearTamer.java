@@ -38,6 +38,7 @@ public class UCLABearTamer extends UCLAFaction
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 10.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.30);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.50);
+		this.setStat(MonsterStat.HEALTH, 40.0);
 		
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
