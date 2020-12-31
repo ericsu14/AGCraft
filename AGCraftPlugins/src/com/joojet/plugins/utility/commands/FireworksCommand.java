@@ -106,7 +106,10 @@ public class FireworksCommand extends AGCommandExecutor
 						// Plays the custom firework music for all players within range of the player launching the
 						// firework show. This should also prevent sound overlapping issues.
 						ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(player, 48);
-						nearbyPlayers.add(player);
+						if (!nearbyPlayers.contains(player))
+						{
+							nearbyPlayers.add(player);
+						}
 						
 						for (Player nearbyPlayer : nearbyPlayers)
 						{
