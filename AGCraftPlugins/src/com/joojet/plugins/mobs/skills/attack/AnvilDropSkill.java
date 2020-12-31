@@ -59,7 +59,7 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 		{
 			FallingBlock anvil = this.spawnAnvil(target.getWorld(), target.getLocation().add(0.0, 6.0, 0.0));
 			caster.addPotionEffect(new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 80, 3));
-			new ExplodingBlockRunnable (anvil, 100, this.power, target).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
+			new ExplodingBlockRunnable (anvil, 100, this.power, caster).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
 		}
 	}
 
