@@ -49,7 +49,7 @@ public class ThunderSkillRunnable extends BukkitRunnable {
 		// Gives caster (and all surrounding allies) invincibility for 3 ticks so they can survive his own thunder 
 		if (this.ticks == 1)
 		{
-			PotionEffect resistance = new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 2, 5);
+			PotionEffect resistance = new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 10, 5);
 			this.caster.addPotionEffect(resistance);
 			for (LivingEntity ally : this.allies)
 			{
