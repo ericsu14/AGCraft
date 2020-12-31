@@ -26,9 +26,6 @@ public class JohnJae extends AlliedMob
 		this.color = ChatColor.GOLD;
 		this.addMobFlags(MobFlag.SHOW_NAME);
 		this.setStat(MonsterStat.HEALTH, 250.0);
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 35.0);
-		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 8.0);
-		this.setStat(MonsterStat.BASE_ARMOR, 6.0);
 		this.addTargetsToHitList(EntityType.CREEPER);
 		
 		this.addPotionEffect(CustomPotionEffect.RESISTANCE_II, 
