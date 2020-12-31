@@ -5,6 +5,8 @@ import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
@@ -47,12 +49,13 @@ public class ThunderSkillRunnable extends BukkitRunnable {
 		// Gives caster (and all surrounding allies) invincibility for 3 ticks so they can survive his own thunder 
 		if (this.ticks == 1)
 		{
-			this.caster.setNoDamageTicks(this.caster.getMaximumNoDamageTicks());
+			PotionEffect resistance = new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 10, 5);
+			this.caster.addPotionEffect(resistance);
 			for (LivingEntity ally : this.allies)
 			{
 				if (ally != null && !ally.isDead())
 				{
-					ally.setNoDamageTicks(ally.getMaximumNoDamageTicks());
+					ally.addPotionEffect(resistance);
 				}
 			}
 						
