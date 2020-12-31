@@ -53,7 +53,7 @@ public class ThunderSkillRunnable extends BukkitRunnable {
 			this.caster.addPotionEffect(resistance);
 			for (LivingEntity ally : this.allies)
 			{
-				if (!ally.isDead())
+				if (ally != null && !ally.isDead())
 				{
 					ally.addPotionEffect(resistance);
 				}
@@ -61,26 +61,30 @@ public class ThunderSkillRunnable extends BukkitRunnable {
 						
 		}
 		
-		for (Location targetLocation : this.targetLocations)
+		if (this.ticks % 2 == 0)
 		{
-			// Cast lightning and create explosion once delay is served
-			if (this.ticks <= 0)
+			for (Location targetLocation : this.targetLocations)
 			{
-				targetLocation.getWorld().strikeLightning(targetLocation);
-				targetLocation.getWorld().createExplosion(targetLocation.add(0.0, 1.0, 0.0), this.skill.getExplosionPower(), false, false, this.caster);
-				this.cancel();
-			}
-			// Otherwise, play particle effects on the location based on a dice roll
-			else if (this.ticks % 2 == 0)
-			{
-				targetLocation.getWorld().spawnParticle(Particle.SPELL_INSTANT, targetLocation, 6, 1.0, 1.0, 1.0);
-				targetLocation.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, targetLocation, 8, 1.0, 1.0, 1.0);
+				// Cast lightning and create explosion once delay is served
+				if (this.ticks <= 0)
+				{
+					targetLocation.getWorld().strikeLightning(targetLocation);
+					targetLocation.getWorld().createExplosion(targetLocation.add(0.0, 1.0, 0.0), this.skill.getExplosionPower(), false, false, this.caster);
+				}
+
+				targetLocation.getWorld().spawnParticle(Particle.SPELL_INSTANT, targetLocation, 2, 1.0, 1.0, 1.0);
+				targetLocation.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, targetLocation, 4, 1.0, 1.0, 1.0);
 				if (!this.caster.isDead())
 				{
-					this.caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, this.caster.getLocation(), 4, 1.0, 1.0, 1.0);
-					this.caster.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, this.caster.getLocation(), 2, 1.0, 1.0, 1.0);
+					this.caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, this.caster.getLocation(), 2, 1.0, 1.0, 1.0);
+					this.caster.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, this.caster.getLocation(), 4, 1.0, 1.0, 1.0);
 				}
 			}
+		}
+		
+		if (this.ticks <= 0)
+		{
+			this.cancel();
 		}
 		
 		--this.ticks;
