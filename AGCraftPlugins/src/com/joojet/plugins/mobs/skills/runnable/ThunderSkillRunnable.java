@@ -46,24 +46,25 @@ public class ThunderSkillRunnable extends BukkitRunnable {
 			this.cancel();
 		}
 		
+		// Gives caster (and all surrounding allies) invincibility for 3 ticks so they can survive his own thunder 
+		if (this.ticks == 1)
+		{
+			PotionEffect resistance = new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 2, 5);
+			this.caster.addPotionEffect(resistance);
+			for (LivingEntity ally : this.allies)
+			{
+				if (!ally.isDead())
+				{
+					ally.addPotionEffect(resistance);
+				}
+			}
+						
+		}
+		
 		for (Location targetLocation : this.targetLocations)
 		{
-			// Gives caster (and all surrounding allies) invincibility for 3 ticks so they can survive his own thunder 
-			if (this.ticks == 1)
-			{
-				PotionEffect resistance = new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 2, 5);
-				this.caster.addPotionEffect(resistance);
-				for (LivingEntity ally : this.allies)
-				{
-					if (!ally.isDead())
-					{
-						ally.addPotionEffect(resistance);
-					}
-				}
-				
-			}
 			// Cast lightning and create explosion once delay is served
-			else if (this.ticks <= 0)
+			if (this.ticks <= 0)
 			{
 				targetLocation.getWorld().strikeLightning(targetLocation);
 				targetLocation.getWorld().createExplosion(targetLocation.add(0.0, 1.0, 0.0), this.skill.getExplosionPower(), false, false, this.caster);
