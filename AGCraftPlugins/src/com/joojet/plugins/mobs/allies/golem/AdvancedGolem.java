@@ -24,6 +24,8 @@ public class AdvancedGolem extends AlliedMob
 		this.name = "Advanced Golem";
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.setStat(MonsterStat.HEALTH, 200.0);
+		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 8.0);
+		this.setStat(MonsterStat.BASE_ARMOR, 6.0);
 		this.addMobFlags(MobFlag.SHOW_NAME);
 		this.addTargetsToHitList(EntityType.CREEPER);
 		

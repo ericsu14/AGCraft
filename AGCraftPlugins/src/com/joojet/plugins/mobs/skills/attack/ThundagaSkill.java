@@ -1,7 +1,9 @@
 package com.joojet.plugins.mobs.skills.attack;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 
@@ -46,11 +48,12 @@ public class ThundagaSkill extends AbstractAttackSkill {
 		List <LivingEntity> targets = this.selectRandomEntities(enemies, this.numTargets);
 		caster.getWorld().playSound(caster.getLocation(), Sound.ENTITY_ILLUSIONER_CAST_SPELL, 1.0f, 1.0f);
 		
+		ArrayList <Location> targetLocations = new ArrayList <Location> ();
 		for (LivingEntity target : targets)
 		{
-			new ThunderSkillRunnable (this, target.getLocation(), caster, allies).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
+			targetLocations.add(target.getLocation().clone());
 		}
-
+		new ThunderSkillRunnable (this, targetLocations, caster, allies).runTaskTimer(AGCraftPlugin.plugin, 0, 2);
 	}
 
 	@Override

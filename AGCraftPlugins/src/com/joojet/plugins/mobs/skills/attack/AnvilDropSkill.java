@@ -78,7 +78,7 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 						return false;
 					}
 				}
-				return true;
+				return !this.filterByLineOfSight(enemies, caster).isEmpty();
 			}
 			// Otherwise, the caster is only allowed to use the skill if the the player's threat score exceeds mythic.
 			else
