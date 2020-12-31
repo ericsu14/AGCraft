@@ -2,6 +2,7 @@ name: AGCraftPlugins
 main: com.joojet.plugins.agcraft.main.AGCraftPlugin
 version: 1.8.0
 api-version: 1.13
+author: joojet
 commands:
   bible:
     description: Generates a written book containing specified sections of the Bible. The <start> and <end> parameters are optional.
