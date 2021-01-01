@@ -3,7 +3,6 @@ package com.joojet.plugins.mobs.skills.attack;
 import java.util.List;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
@@ -71,9 +70,7 @@ public class HurricaneSkill extends AbstractAttackSkill
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return !this.filterByLineOfSight(enemies, caster).isEmpty()
-				&& caster.getEquipment().getItemInMainHand() != null
-				&& caster.getEquipment().getItemInMainHand().getType() == Material.BOW;
+		return !this.filterByLineOfSight(enemies, caster).isEmpty() && this.hasBow(caster);
 	}
 
 }

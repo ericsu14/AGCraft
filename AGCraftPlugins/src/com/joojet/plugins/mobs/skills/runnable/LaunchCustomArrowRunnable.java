@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.skills.runnable;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.AbstractArrow.PickupStatus;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -47,7 +48,8 @@ public abstract class LaunchCustomArrowRunnable extends BukkitRunnable {
 	public void run() 
 	{
 		if (ammoCount > 0 && !caster.isDead() && !target.isDead()
-				&& caster.hasLineOfSight(target))
+				&& caster.hasLineOfSight(target)
+				&& this.hasBow(this.caster))
 		{
 			// Calculate the arrow's spawn location, which is going to be in front of the caster
 			// based on its forward vector
@@ -55,9 +57,9 @@ public abstract class LaunchCustomArrowRunnable extends BukkitRunnable {
 			Location arrowSpawnPoint = caster.getEyeLocation().clone();
 			arrowSpawnPoint.add(arrowSpawnPoint.getDirection());
 			
-			Vector arrowDirection = target.getEyeLocation().toVector();
-			arrowDirection.subtract(caster.getEyeLocation().toVector());
-			Arrow arrow = caster.getWorld().spawnArrow(arrowSpawnPoint, arrowDirection.normalize(), 1.2f, 2.0f);
+			Vector arrowDirection = target.getEyeLocation().add(0.0, 0.5, 0.0).toVector();
+			arrowDirection.subtract(arrowSpawnPoint.toVector());
+			Arrow arrow = caster.getWorld().spawnArrow(arrowSpawnPoint, arrowDirection.normalize(), 1.4f, 1.0f);
 			
 			arrow.setDamage(this.arrowDamage);
 			arrow.setCritical(true);
@@ -101,6 +103,13 @@ public abstract class LaunchCustomArrowRunnable extends BukkitRunnable {
 			return arrow;
 		}
 		return null;
+	}
+	
+	/** Returns true if the caster is wielding a bow */
+	protected boolean hasBow (LivingEntity caster)
+	{
+		ItemStack hand = caster.getEquipment().getItemInMainHand();
+		return (hand != null && (hand.getType() == Material.BOW || hand.getType() == Material.CROSSBOW));
 	}
 	
 }

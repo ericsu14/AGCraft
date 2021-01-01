@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
@@ -61,6 +63,13 @@ public abstract class AbstractAttackSkill extends AbstractSkill
 	{
 		Object [] filtered = list.stream().filter(ent -> caster.hasLineOfSight(ent)).toArray();
 		return Arrays.asList(Arrays.copyOf(filtered, filtered.length, LivingEntity[].class));
+	}
+	
+	/** Returns true if the caster is wielding a bow */
+	protected boolean hasBow (LivingEntity caster)
+	{
+		ItemStack hand = caster.getEquipment().getItemInMainHand();
+		return (hand != null && (hand.getType() == Material.BOW || hand.getType() == Material.CROSSBOW));
 	}
 
 }
