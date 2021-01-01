@@ -16,8 +16,11 @@ public class BarneyDagger extends Equipment
 		this.setDisplayName("Barney's Stupendously Sharp Dagger");
 		this.addLoreToItemMeta("Barney knows some pledges are gonna be clapped tonite...");
 		this.addAttackAttributes(9.0, 1.6);
+		this.addUnsafeEnchantment(Enchantment.SWEEPING_EDGE, 3);
 		this.addUnsafeEnchantment(Enchantment.KNOCKBACK, 3);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 2);
 		this.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 1);
+		this.makeUnbreakable();
+		this.makeSoulbound();
 	}
 }

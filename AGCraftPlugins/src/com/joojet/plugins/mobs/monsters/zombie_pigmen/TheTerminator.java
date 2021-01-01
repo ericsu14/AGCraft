@@ -27,14 +27,14 @@ public class TheTerminator extends MythicMob
 		this.name = "The Terminator";
 		this.color = ChatColor.DARK_RED;
 		
-		this.setStat(MonsterStat.HEALTH, 40.0);
+		this.setStat(MonsterStat.HEALTH, 32.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING, MobFlag.HUNT_ON_SPAWN, MobFlag.BOSS_BAR);
 		this.addTargetsToHitList(EntityType.PLAYER);
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
-		this.addPotionEffect(CustomPotionEffect.SPEED);
+		this.addPotionEffect(CustomPotionEffect.SPEED, CustomPotionEffect.UNDEAD_HEAL);
 		
 		this.helmet = new CyborgPigmanHead (this.color);
 		this.chestplate = new DarkNetheriteChestplate (this.color);

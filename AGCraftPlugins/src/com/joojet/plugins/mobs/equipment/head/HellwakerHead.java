@@ -18,8 +18,10 @@ public class HellwakerHead extends Equipment
 		this.loreColor = ChatColor.DARK_RED;
 		this.setDisplayName(StringUtil.alternateTextColors("The Head of the Hellwalker", TextPattern.WORD, ChatColor.RED, ChatColor.DARK_GRAY));
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
 		this.addAttackAttributes(2.0, 0.1);
 		this.addDefenseAttributes(3.0, 4.0, 0.25);
+		this.addHealthAttributes(8.0);
 		this.makeSoulbound();
 	}
 }

@@ -28,7 +28,7 @@ public class RoyalPiglinHunter extends MythicMob
 		
 		this.name = "Royal Piglin Hunter";
 		
-		this.setStat(MonsterStat.HEALTH, 30.0);
+		this.setStat(MonsterStat.HEALTH, 24.0);
 		this.setStat(MonsterStat.BASE_ARMOR, 8.0);
 		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 6.0);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 21.0);

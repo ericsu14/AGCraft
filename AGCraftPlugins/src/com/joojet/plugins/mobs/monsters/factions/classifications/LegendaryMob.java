@@ -2,6 +2,8 @@ package com.joojet.plugins.mobs.monsters.factions.classifications;
 
 import java.util.List;
 
+import org.bukkit.entity.EntityType;
+
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -18,6 +20,7 @@ public class LegendaryMob extends MobEquipment
 	{
 		super(mobType);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.LEGENDARY);
+		this.addTargetsToHitList(EntityType.PLAYER, EntityType.IRON_GOLEM, EntityType.SNOWMAN);
 	}
 
 	@Override

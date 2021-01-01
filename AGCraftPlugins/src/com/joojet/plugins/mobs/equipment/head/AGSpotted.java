@@ -13,6 +13,7 @@ public class AGSpotted extends Equipment
 	{
 		super (EquipmentType.AGSPOTTED, PlayerHead.CAMERA_HEAD, color);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
 		this.addLoreToItemMeta("Used for stalker pics and spottings.");
 		this.setDisplayName("#agspotted Camera");
 		this.addDefenseAttributes(3.0, 3.0, 0.15);

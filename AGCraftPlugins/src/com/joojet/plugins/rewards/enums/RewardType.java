@@ -4,9 +4,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import com.joojet.plugins.mobs.equipment.boots.BarneyFeet;
 import com.joojet.plugins.mobs.equipment.cake.JoojCake;
 import com.joojet.plugins.mobs.equipment.cake.SprinklesCake;
+import com.joojet.plugins.mobs.equipment.chest.BarneyChest;
+import com.joojet.plugins.mobs.equipment.head.BarneyHead;
 import com.joojet.plugins.mobs.equipment.head.BruinHead;
+import com.joojet.plugins.mobs.equipment.leggings.BruinLeggings;
+import com.joojet.plugins.mobs.equipment.offhand.BarneyTotem;
 import com.joojet.plugins.mobs.equipment.offhand.BlueAndGold;
 import com.joojet.plugins.mobs.equipment.offhand.BruinShield;
 import com.joojet.plugins.mobs.equipment.offhand.CaptainAmericaShield;
@@ -14,6 +19,7 @@ import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.equipment.potions.ChristmasMocktail;
 import com.joojet.plugins.mobs.equipment.potions.EternalRusheeMocktail;
 import com.joojet.plugins.mobs.equipment.potions.StrawberryMocktail;
+import com.joojet.plugins.mobs.equipment.weapons.BarneyDagger;
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
@@ -60,7 +66,13 @@ public enum RewardType
 	JOOJ_CAKE,
 	SCRUFFY,
 	FROSTY_THE_SNOWMAN,
-	CHRISTMAS_MOCKTAIL;
+	CHRISTMAS_MOCKTAIL,
+	BARNEY_HEAD,
+	BARNEY_SUIT,
+	BARNEY_PANTS,
+	BARNEY_FEET,
+	BARNEY_TOTEM,
+	BARNEY_DAGGER;
 	
 	public ItemStack getReward ()
 	{
@@ -144,6 +156,18 @@ public enum RewardType
 				return new SummonFrosty ();
 			case CHRISTMAS_MOCKTAIL:
 				return new ChristmasMocktail();
+			case BARNEY_HEAD:
+				return new BarneyHead (ChatColor.DARK_PURPLE);
+			case BARNEY_SUIT:
+				return new BarneyChest (ChatColor.DARK_PURPLE);
+			case BARNEY_PANTS:
+				return new BruinLeggings (ChatColor.DARK_PURPLE);
+			case BARNEY_FEET:
+				return new BarneyFeet (ChatColor.DARK_PURPLE);
+			case BARNEY_TOTEM:
+				return new BarneyTotem (ChatColor.DARK_PURPLE);
+			case BARNEY_DAGGER:
+				return new BarneyDagger (ChatColor.DARK_PURPLE);
 			default:
 				break;
 		}

@@ -7,8 +7,7 @@ import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
-/** Represents a generic allied mob that has a pre-computed ignore list
- *  and not in any faction. */
+/** Represents a generic allied mob that has a preset ignore list. */
 public abstract class AlliedMob extends MobEquipment
 {
 	public AlliedMob (MonsterType type)

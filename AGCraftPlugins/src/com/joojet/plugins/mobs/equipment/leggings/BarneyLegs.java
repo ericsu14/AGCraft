@@ -17,9 +17,10 @@ public class BarneyLegs extends LeatherEquipment
 		this.setDisplayName("Barney's Meaty Legs");
 		this.addLoreToItemMeta("He never skips leg day.");
 		this.addDefenseAttributes(5.0, 2.5, 0.05);
-		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
 		this.setColor(Color.fromRGB(182, 38, 132));
 		this.makeUnbreakable();
+		this.makeSoulbound();
 	}
 }

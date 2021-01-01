@@ -15,8 +15,12 @@ public class BarneyHead extends Equipment
 		this.setDisplayName("Barney the Dinosaur");
 		this.addLoreToItemMeta("now cha cha real smooth...");
 		this.addHealthAttributes(8.0);
-		this.addUnsafeEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 3);
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
 		this.addUnsafeEnchantment(Enchantment.BINDING_CURSE, 1);
-		this.addDefenseAttributes(2.0, 2.0, 0.10);
+		this.addDefenseAttributes(2.0, 4.0, 0.15);
+		this.addAttackAttributes(2.0, 0.0);
+		this.makeSoulbound();
 	}
 }

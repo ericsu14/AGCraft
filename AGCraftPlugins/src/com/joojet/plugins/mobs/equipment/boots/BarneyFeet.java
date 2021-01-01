@@ -18,12 +18,13 @@ public class BarneyFeet extends LeatherEquipment
 		this.addDefenseAttributes(4.0, 1.0, 0.05);
 		this.addAttackAttributes(1.0, 0.0);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 4);
-		this.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 4);
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
 		this.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, 4);
 		this.setDisplayName("Barney's Wacky Feet");
 		this.addLoreToItemMeta("I'm gonna stick this foot deep inside of uranus.");
 		this.setColor(Color.fromRGB(182, 38, 132));
 		this.makeUnbreakable();
+		this.makeSoulbound();
 	}
 }
