@@ -10,7 +10,7 @@ import com.joojet.plugins.mobs.equipment.cake.SprinklesCake;
 import com.joojet.plugins.mobs.equipment.chest.BarneyChest;
 import com.joojet.plugins.mobs.equipment.head.BarneyHead;
 import com.joojet.plugins.mobs.equipment.head.BruinHead;
-import com.joojet.plugins.mobs.equipment.leggings.BruinLeggings;
+import com.joojet.plugins.mobs.equipment.leggings.BarneyLegs;
 import com.joojet.plugins.mobs.equipment.offhand.BarneyTotem;
 import com.joojet.plugins.mobs.equipment.offhand.BlueAndGold;
 import com.joojet.plugins.mobs.equipment.offhand.BruinShield;
@@ -161,7 +161,7 @@ public enum RewardType
 			case BARNEY_SUIT:
 				return new BarneyChest (ChatColor.DARK_PURPLE);
 			case BARNEY_PANTS:
-				return new BruinLeggings (ChatColor.DARK_PURPLE);
+				return new BarneyLegs (ChatColor.DARK_PURPLE);
 			case BARNEY_FEET:
 				return new BarneyFeet (ChatColor.DARK_PURPLE);
 			case BARNEY_TOTEM:
