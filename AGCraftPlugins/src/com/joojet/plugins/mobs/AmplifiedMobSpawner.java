@@ -213,7 +213,7 @@ public class AmplifiedMobSpawner extends AGListener
 		
 		LivingEntity tamed = (LivingEntity) event.getMount();
 		MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(tamed);
-		if (equipment.containsFlag(MobFlag.ENABLE_PERSISTENCE_UPON_RIDING))
+		if (equipment != null && equipment.containsFlag(MobFlag.ENABLE_PERSISTENCE_UPON_RIDING))
 		{
 			tamed.setRemoveWhenFarAway(false);
 		}
