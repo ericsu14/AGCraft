@@ -33,5 +33,7 @@ public enum MobFlag
 	/** When enabled, the mob will be immune to suffocation damage */
 	DISABLE_SUFFOCATION_DAMAGE,
 	/** When enabled, the mob will finally shut up. */
-	MAKE_SILENT;
+	MAKE_SILENT,
+	/** When able, the mob is no longer able to pick up dropped gear or weapons */
+	DISABLE_PICK_UP_ITEMS;
 }

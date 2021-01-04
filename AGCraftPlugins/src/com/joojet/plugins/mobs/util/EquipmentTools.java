@@ -177,7 +177,7 @@ public class EquipmentTools
 		}
 		
 		// Name
-		if (!mobEquipment.getName().equals(""))
+		if (!mobEquipment.getName().isEmpty())
 		{
 			entity.setCustomName(mobEquipment.getChatColor() + "" + mobEquipment.getName());
 			entity.setCustomNameVisible(mobEquipment.containsFlag(MobFlag.SHOW_NAME));
@@ -218,6 +218,13 @@ public class EquipmentTools
 		if (mobEquipment.containsFlag(MobFlag.ON_FIRE))
 		{
 			entity.setFireTicks(Integer.MAX_VALUE);
+		}
+		
+		// Disables the ability for the mob to pick up dropped gear / weapons when
+		// the DISABLE_PICK_UP_ITEMS flag is enabled.
+		if (mobEquipment.containsFlag(MobFlag.DISABLE_PICK_UP_ITEMS))
+		{
+			entity.setCanPickupItems(false);
 		}
 		
 		// Spawns a lightning bolt on the mob's current location if enabled. This should scare the **** out of unsuspecting players
