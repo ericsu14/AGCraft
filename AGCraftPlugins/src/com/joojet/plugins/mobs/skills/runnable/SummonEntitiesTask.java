@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.SkillSummonedMetadata;
@@ -25,17 +26,20 @@ public class SummonEntitiesTask extends BukkitRunnable
 	protected MonsterTypeInterpreter mobInterpreter;
 	/** A reference to the plugin's boss bar controller */
 	protected BossBarController bossBarController;
+	/** Reference to the damage display listener */
+	protected DamageDisplayListener damageDisplayListener;
 	/** Keeps track of the max spawn weight used to init. the RNG */
 	private int maxSpawnWeight;
 	
 	public SummonEntitiesTask (List <Location> spawnLocations, AbstractSummonSkill skillInstance, MonsterTypeInterpreter mobInterpreter,
-			BossBarController bossBarController)
+			BossBarController bossBarController, DamageDisplayListener damageDisplayListener)
 	{
 		this.spawnLocations = spawnLocations;
 		this.skillInstance = skillInstance;
 		this.mobPool = skillInstance.getSummons();
 		this.mobInterpreter = mobInterpreter;
 		this.bossBarController = bossBarController;
+		this.damageDisplayListener = damageDisplayListener;
 		this.maxSpawnWeight = skillInstance.getMaxSpawnWeight();
 	}
 
@@ -56,7 +60,7 @@ public class SummonEntitiesTask extends BukkitRunnable
 			// Mark this entity as "SkillSummoned", preventing it from using any summon-entity skills.
 			new SkillSummonedMetadata (summon.getEntry()).addStringMetadata(summonedEntity);
 			EquipmentTools.equipEntity(summonedEntity, this.mobInterpreter.searchTrie(summon.getEntry().toString()), this.bossBarController);
-			this.skillInstance.playSummonAnimation(summonedEntity);
+			this.skillInstance.playSummonAnimation(summonedEntity, this.damageDisplayListener);
 		}
 		else
 		{

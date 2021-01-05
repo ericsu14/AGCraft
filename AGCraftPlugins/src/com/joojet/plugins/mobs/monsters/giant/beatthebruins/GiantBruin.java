@@ -29,6 +29,7 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
+import com.joojet.plugins.mobs.skills.summon.SummonBruinSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class GiantBruin extends UCLAFaction
@@ -80,7 +81,7 @@ public class GiantBruin extends UCLAFaction
 				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 0.25, 5, 7),
 				new MonsterDrop (Material.EXPERIENCE_BOTTLE, 0.10, 2, 3));
 		
-		this.addPotionEffect(CustomPotionEffect.SUPER_JUMP, CustomPotionEffect.GIANT_SLOWNESS);
+		this.addPotionEffect(CustomPotionEffect.SUPER_JUMP, CustomPotionEffect.GIANT_SLOWNESS, CustomPotionEffect.FULL_HEALING);
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING,
 				MobFlag.FIREWORK_DEATH);
 		this.addBiomes(Biome.THE_VOID);
@@ -93,5 +94,6 @@ public class GiantBruin extends UCLAFaction
 		skills.add(new AttackBuffSkill(0, 60, 50, 90, 8));
 		skills.add(new ResistanceBuffSkill (1, 60, 50, 90, 8));
 		skills.add(new ThundagaSkill (60, 20, Integer.MAX_VALUE, 10, 4.0f, 8, 80, 0.50));
+		skills.add(new SummonBruinSkill (32, 60, 3, 4, 10));
 	}
 }

@@ -19,6 +19,8 @@ import com.joojet.plugins.mobs.skills.runnable.SummonEntitiesTask;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 import com.joojet.plugins.mobs.util.LocationTools;
 
+import net.md_5.bungee.api.ChatColor;
+
 public abstract class AbstractSummonSkill extends AbstractSkill
 {
 	/** The total amount of monsters that can be summoned */
@@ -30,6 +32,7 @@ public abstract class AbstractSummonSkill extends AbstractSkill
 	/** Internally keeps track of the max. weight of the last summono inserted in the summon list */
 	private int maxWeight;
 	
+	/** Creates a new instance of a summoning skill, allowing the monster to summon custom monsters at will. */
 	public AbstractSummonSkill(int range, int cooldown, int maxUses, int weight, int maxSummons) 
 	{
 		super(SkillPropetry.SUMMON, range, cooldown, maxUses, weight);
@@ -48,11 +51,25 @@ public abstract class AbstractSummonSkill extends AbstractSkill
 			MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
 		List <Location> possibleLocations = this.getSpawnPoints(caster);
-		new SummonEntitiesTask (possibleLocations, this, monsterTypeInterpreter, bossBarController).runTaskTimer(AGCraftPlugin.plugin, 20, 4);
+		if (!possibleLocations.isEmpty())
+		{
+			this.playSkillCasterAnimation(caster, damageDisplayListener);
+			for (LivingEntity enemy : enemies)
+			{
+				if (enemy.getType() == EntityType.PLAYER)
+				{
+					enemy.sendMessage(caster.getName() + ChatColor.GOLD + " is calling for help!");
+				}
+			}
+			new SummonEntitiesTask (possibleLocations, this, monsterTypeInterpreter, bossBarController, damageDisplayListener).runTaskTimer(AGCraftPlugin.plugin, 20, 4);
+		}
 	}
 	
-	/** Plays a summon animation on an entity */
-	public abstract void playSummonAnimation (LivingEntity entity);
+	/** Plays a summon animation on the skill caster */
+	public abstract void playSkillCasterAnimation (LivingEntity caster, DamageDisplayListener damageDisplayListener);
+	
+	/** Plays a summon animation on a summoned entity */
+	public abstract void playSummonAnimation (LivingEntity entity, DamageDisplayListener damageDisplayListener);
 	
 	/** Registers a new summon into the list of custom monsters that can be summoned by this skill
 	 *  @param monsterType Type of custom monster that can be summoned
@@ -80,7 +97,7 @@ public abstract class AbstractSummonSkill extends AbstractSkill
 	@Override
 	public boolean canUseSkill (LivingEntity caster)
 	{
-		return super.canUseSkill(caster) && new SkillSummonedMetadata().getStringMetadata(caster) != null;
+		return super.canUseSkill(caster) && new SkillSummonedMetadata().getStringMetadata(caster) == null;
 	}
 	
 	/** Attempts to search around the caster's surrounding area to find any potential locations the entity can spawn in. */
