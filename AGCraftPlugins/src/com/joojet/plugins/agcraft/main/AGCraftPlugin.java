@@ -148,7 +148,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.registerEventListener(new PathfindTargetingEventListener(this.monsterTypeInterpreter, this.bossBarController));
 		
 		// Custom skills listener
-		this.registerEventListener(new CustomSkillsListener (this.monsterTypeInterpreter, this.damageDisplayListener));
+		this.registerEventListener(new CustomSkillsListener (this.monsterTypeInterpreter, this.damageDisplayListener, this.bossBarController));
 		
 		// Soulbounded items event listener
 		this.registerEventListener(new SoulBoundListener ());

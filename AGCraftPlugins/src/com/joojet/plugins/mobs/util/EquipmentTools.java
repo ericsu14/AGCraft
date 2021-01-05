@@ -440,9 +440,16 @@ public class EquipmentTools
 	 *  based on the variable, monsterHeight, available for the monster to spawn. */
 	public static boolean checkSpawnSpace (LivingEntity entity, double height)
 	{
-		Location entityLocation = entity.getLocation();
+		return checkSpawnSpace (entity.getLocation(), height);
+	}
+	
+	/** Checks if there is enough space for the monster to spawn.
+	 *  This does a raytrace cast to check if there is enough air blocks
+	 *  based on the variable, monsterHeight, available for the monster to spawn. */
+	public static boolean checkSpawnSpace (Location entityLocation, double height)
+	{
 		Vector directionVector = new Vector (0.0, 1.0, 0.0);
-		RayTraceResult result = entity.getWorld().rayTraceBlocks(entityLocation, directionVector.normalize(), 
+		RayTraceResult result = entityLocation.getWorld().rayTraceBlocks(entityLocation, directionVector.normalize(), 
 				height, FluidCollisionMode.ALWAYS, true);
 		if (result != null && result.getHitBlock() != null && result.getHitBlock().getType() != Material.AIR)
 		{

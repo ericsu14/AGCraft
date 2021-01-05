@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.equipment.Equipment;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
@@ -28,7 +29,8 @@ public abstract class WeaponSwitchSkill extends AbstractSkill
 
 	@Override
 	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies,
-			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter) {
+			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
+			BossBarController bossBarController) {
 		this.playAnimation(caster, damageDisplayListener);
 		caster.getEquipment().setItemInMainHand(this.weapon);
 	}

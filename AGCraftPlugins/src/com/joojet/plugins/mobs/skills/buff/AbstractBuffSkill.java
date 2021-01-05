@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
@@ -45,7 +46,7 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 	/** Gives the caster and any of its surrounding allies a buff. */
 	@Override
 	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies, DamageDisplayListener damageDisplayListener,
-			MonsterTypeInterpreter monsterTypeInterpreter) 
+			MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController) 
 	{
 		this.applyPotionEffect(caster, this.potionType, this.potionDuration, this.potionStrength);
 		this.playBuffAnimation(caster);

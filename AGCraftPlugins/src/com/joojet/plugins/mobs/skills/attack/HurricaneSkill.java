@@ -9,6 +9,7 @@ import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -31,7 +32,8 @@ public class HurricaneSkill extends AbstractAttackSkill
 
 	@Override
 	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies,
-			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter) 
+			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
+			BossBarController bossBarController) 
 	{	
 		if (enemies.isEmpty())
 		{

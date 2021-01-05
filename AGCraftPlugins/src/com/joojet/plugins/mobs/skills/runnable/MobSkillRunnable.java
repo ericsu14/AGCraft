@@ -67,7 +67,7 @@ public class MobSkillRunnable extends BukkitRunnable
 		
 		for (AbstractSkill skill : this.mobSkills)
 		{
-			if (skill.canUseSkill())
+			if (skill.canUseSkill(this.caster))
 			{
 				maxWeight = (minWeight + skill.getWeight()) - 1;
 				skillList.add(new WeightedMobSkill (skill, minWeight, maxWeight));

@@ -8,16 +8,15 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
-import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.util.BoundingBox;
 
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
+import com.joojet.plugins.mobs.util.LocationTools;
 
 public class TeleportSkill extends AbstractSkill {
 	
@@ -36,7 +35,8 @@ public class TeleportSkill extends AbstractSkill {
 
 	@Override
 	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies,
-			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter) 
+			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
+			BossBarController bossBarController) 
 	{		
 		List <LivingEntity> possibleTargets = this.filterSubmergedEntities(allies, caster);
 		
@@ -71,7 +71,7 @@ public class TeleportSkill extends AbstractSkill {
 	 *                the caster's height. */
 	protected List <LivingEntity> filterSubmergedEntities (List <LivingEntity> entities, LivingEntity caster)
 	{
-		Object [] filtered = entities.stream().filter(ent -> (!this.isEngulfedInLiquids(ent) && checkSurroundingArea (caster, ent))).toArray();
+		Object [] filtered = entities.stream().filter(ent -> (!this.isEngulfedInLiquids(ent) && LocationTools.checkSurroundingArea (caster, ent))).toArray();
 		return Arrays.asList(Arrays.copyOf(filtered, filtered.length, LivingEntity[].class));
 	}
 	
@@ -80,35 +80,6 @@ public class TeleportSkill extends AbstractSkill {
 	{
 		Object[] filtered = entities.stream().filter(ent -> ent.getType() == EntityType.PLAYER).toArray();
 		return Arrays.asList(Arrays.copyOf(filtered, filtered.length, LivingEntity[].class));
-	}
-	
-	/** Uses the caster's bounding box to check if there is enough room (denoted by air blocks) around a location
-	 *  for the caster to safely teleport to
-	 *  @param caster Skillcaster using the skill
-	 *  @param teleportLocation Location being checked */
-	protected boolean checkSurroundingArea (LivingEntity caster, LivingEntity target)
-	{
-		World world = caster.getWorld();
-		Block block = null;
-		
-		BoundingBox scanArea = BoundingBox.of(target.getLocation().add(0.0, caster.getHeight() / 2.0, 0.0), 
-				caster.getWidth() / 2.0, caster.getHeight() / 2.0, caster.getWidth() / 2.0);
-		
-		for (int i = (int) scanArea.getMinX(); i <= (int) scanArea.getMaxX(); ++i)
-		{
-			for (int j = (int) scanArea.getMinY(); j <= (int) scanArea.getMaxY(); ++j)
-			{
-				for (int k = (int) scanArea.getMinZ(); k <= (int) scanArea.getMaxZ(); ++k)
-				{
-					block = world.getBlockAt(i, j, k);
-					if (block == null || block.getType() != Material.AIR)
-					{
-						return false;
-					}
-				}
-			}
-		}
-		return true;
 	}
 	
 	/** Teleports an entity to a target entity's location

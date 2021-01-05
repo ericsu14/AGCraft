@@ -8,6 +8,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 
 public class AgressiveTeleportSkill extends TeleportSkill
@@ -21,7 +22,8 @@ public class AgressiveTeleportSkill extends TeleportSkill
 	
 	@Override
 	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies,
-			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter) 
+			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
+			BossBarController bossBarController) 
 	{	
 		List <LivingEntity> possibleTargets = this.filterNonPlayerEntities(this.filterSubmergedEntities(enemies, caster));
 		

@@ -9,9 +9,10 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
-import com.joojet.plugins.mobs.util.LocationOffset;
+import com.joojet.plugins.mobs.util.LocationTools;
 
 public abstract class AbstractSkill 
 {
@@ -50,11 +51,11 @@ public abstract class AbstractSkill
 	 * 		@param enemies - A list of enemies this skill may negatively affect
 	 * 		@param damageDisplayListener - A reference to the plugin's damage display listener, which is used to display floating name-tags */
 	public void useSkill (LivingEntity caster, List <LivingEntity> allies, List <LivingEntity> enemies, DamageDisplayListener damageDisplayListener,
-			MonsterTypeInterpreter monsterTypeInterpreter)
+			MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
-		if (this.canUseSkill() && this.checkConditons(caster, allies, enemies))
+		if (this.canUseSkill(caster) && this.checkConditons(caster, allies, enemies))
 		{
-			this.handleSkill(caster, allies, enemies, damageDisplayListener, monsterTypeInterpreter);
+			this.handleSkill(caster, allies, enemies, damageDisplayListener, monsterTypeInterpreter, bossBarController);
 			this.cooldownTick = this.cooldown;
 			if (this.maxUses != Integer.MAX_VALUE)
 			{
@@ -74,7 +75,7 @@ public abstract class AbstractSkill
 	 * 		@param allies - A list of allies this skill may positively affect
 	 * 		@param enemies - A list of enemies this skill may negatively affect */
 	protected abstract void handleSkill (LivingEntity caster, List <LivingEntity> allies, List <LivingEntity> enemies, DamageDisplayListener damageDisplayListener,
-			MonsterTypeInterpreter monsterTypeInterpreter);
+			MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController);
 	
 	/** Defines conditions that need to be met in order for this skill to be used.
 	 * 		@return True if those conditions are met. False otherwise.
@@ -84,7 +85,7 @@ public abstract class AbstractSkill
 	protected abstract boolean checkConditons (LivingEntity caster, List <LivingEntity> allies, List <LivingEntity> enemies);
 	
 	/** Returns a boolean indicating w/e or not a skill can be used based on its current cooldown and usage */
-	public boolean canUseSkill ()
+	public boolean canUseSkill (LivingEntity caster)
 	{
 		return (cooldownTick <= 0 && this.currentUsage > 0);
 	}
@@ -135,7 +136,7 @@ public abstract class AbstractSkill
 		Location entityLocation = entity.getEyeLocation();
 		for (int i = 0; i < count; ++i)
 		{
-			entity.getWorld().spawnParticle(particle, LocationOffset.addRandomOffsetOnLocation(entityLocation, 0.7),
+			entity.getWorld().spawnParticle(particle, LocationTools.addRandomOffsetOnLocation(entityLocation, 0.7),
 					0, (red / 256D), (green / 256D), (blue / 256D), 1, null);
 		}
 	}

@@ -28,12 +28,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunnable;
-import com.joojet.plugins.mobs.util.LocationOffset;
+import com.joojet.plugins.mobs.util.LocationTools;
 
 public class CustomSkillsListener extends AGListener {
 	/** A reference to the monster type interpreter defined in the main plugin class */
@@ -41,15 +42,19 @@ public class CustomSkillsListener extends AGListener {
 	/** A reference to the damage display manager defined in the main class
 	 *  used to present visual information to the players when a mob uses a skill */
 	protected DamageDisplayListener damageDisplayListener;
+	/** A reference to the plugin's boss bar controller used to initialize custom boss bar events */
+	protected BossBarController bossBarController;
 	/** Stores all active skill runnables in the server */
 	protected HashMap <UUID, MobSkillRunnable> mobSkillRunnableTable;
 	/** Random number generator used for generating chance rolls */
 	protected Random rand;
 	
-	public CustomSkillsListener (MonsterTypeInterpreter monsterInterpreter, DamageDisplayListener damageDisplayListener)
+	public CustomSkillsListener (MonsterTypeInterpreter monsterInterpreter, DamageDisplayListener damageDisplayListener,
+			BossBarController bossBarController)
 	{
 		this.monsterInterpreter = monsterInterpreter;
 		this.damageDisplayListener = damageDisplayListener;
+		this.bossBarController = bossBarController;
 		this.mobSkillRunnableTable = new HashMap <UUID, MobSkillRunnable> ();
 		this.rand = new Random ();
 	}
@@ -157,7 +162,7 @@ public class CustomSkillsListener extends AGListener {
 		ArrayList <LivingEntity> enemies = new ArrayList <LivingEntity> ();
 		this.filterGoodAndBadEntities(caster, skill.getRange(), allies, enemies);
 		
-		skill.useSkill(caster, allies, enemies, this.damageDisplayListener, this.monsterInterpreter);
+		skill.useSkill(caster, allies, enemies, this.damageDisplayListener, this.monsterInterpreter, this.bossBarController);
 	}
 	
 	/** Prevents dropped itemstack entities from being destroyed by explosions */
@@ -227,7 +232,7 @@ public class CustomSkillsListener extends AGListener {
 							entity.getWorld().spawnParticle(Particle.SWEEP_ATTACK, entityLocation, 1, 0.1, 0.1, 0.1);
 							for (int i = 0; i < 30; ++i)
 							{
-								entity.getWorld().spawnParticle(Particle.SPELL_MOB, LocationOffset.addRandomOffsetOnLocation(entityLocation, 1),
+								entity.getWorld().spawnParticle(Particle.SPELL_MOB, LocationTools.addRandomOffsetOnLocation(entityLocation, 1),
 										0, (128 / 256D), 0, 0, 1, null);
 							}
 						}

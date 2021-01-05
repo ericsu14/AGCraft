@@ -9,6 +9,7 @@ import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.runnable.ThunderSkillRunnable;
 
@@ -43,7 +44,8 @@ public class ThundagaSkill extends AbstractAttackSkill {
 
 	@Override
 	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies,
-			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter) 
+			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
+			BossBarController bossBarController) 
 	{
 		List <LivingEntity> targets = this.selectRandomEntities(enemies, this.numTargets);
 		caster.getWorld().playSound(caster.getLocation(), Sound.ENTITY_ILLUSIONER_CAST_SPELL, 1.0f, 1.0f);
