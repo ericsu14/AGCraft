@@ -5,48 +5,65 @@ import java.util.Map.Entry;
 
 public class TrieNode <T> 
 {
-	// Defines the max. amount of children this node could store
-	public final int kChildSize = 255;
-	private HashMap <T, Integer> linkedIDs;
-	// Stores the node's children
-	private TrieNode<T> children[];
-	// Amount of active children this node carries
+	/** Stores a list of values tied to this node */
+	private HashMap <T, Integer> linkedValues;
+	/** Stores the node's children, where the character is the key */
+	private HashMap <Character, TrieNode<T>> children;
+	/** Keeps track of the total amount of stored children carried by this node */
 	private int size;
-	// The node's current character
-	private char letter;
+	/** The node's key */
+	private char key;
 	
-	@SuppressWarnings("unchecked")
-	public TrieNode (char letter, T linkedID)
+	public TrieNode (char key, T value)
 	{
-		this.letter = letter;
+		this.key = key;
 		this.size = 0;
-		this.children = (TrieNode<T>[]) new TrieNode [this.kChildSize];
-		this.linkedIDs = new HashMap <T, Integer> ();
-		this.updateFrequency(linkedID);
+		this.children = new HashMap <Character, TrieNode <T>> ();
+		this.linkedValues = new HashMap <T, Integer> ();
+		this.linkSearchTerm(value);
 	}
 	
-	public void addChild (char letter, T linkedID)
+	/** Adds a new child node into this TrieNode. If there already exists
+	 *  a child node under the passed key, then the value will instead be added
+	 *  into the existing child's list of linked values.
+	 *  @param key Key of the new child node.
+	 *  @param value Value of the new node */
+	public void addChild (char key, T value)
 	{
-		this.children[letter] = new TrieNode <T> (letter, linkedID);
-		++this.size;
+		if (!this.children.containsKey(key))
+		{
+			this.children.put(key, new TrieNode <T> (key, value));
+			++this.size;
+		}
+		else
+		{
+			this.children.get(key).linkSearchTerm(value);
+		}
 	}
 	
-	public TrieNode <T> next (char letter)
+	/** Returns a child node whose key matches the passed input, if it exists.
+	 *  @param key The key of the child node being looked-up */
+	public TrieNode <T> next (char key)
 	{
-		return this.children[letter];
+		return this.children.get(key);
 	}
 	
+	/** Returns the total number of children this node contains */
 	public int size ()
 	{
 		return this.size;
 	}
 	
-	/** Returns the linked id with the highest frequency */
-	public T getLinkedID (String searchTerm)
+	/** Returns the node's value. If there are multiple values associated with this TrieNode
+	 *  and the searchTerm does not match with any of the node's linked values,
+	 *  the value that is most frequently inserted into this Trie will be returned.
+	 *  @param searchTerm The string that is to be searched. */
+	public T getValue (String searchTerm)
 	{
 		T result = null;
 		int currentCount = -1;
-		for (Entry<T, Integer> entry : this.linkedIDs.entrySet())
+		
+		for (Entry<T, Integer> entry : this.linkedValues.entrySet())
 		{	
 			/* Check if length of searchTerm matches length of formatted title */
 			if (entry.getKey().toString().equalsIgnoreCase(searchTerm))
@@ -75,30 +92,32 @@ public class TrieNode <T>
 		return result;
 	}
 	
-	public char getLetter ()
+	/** Returns the TrieNode's character key */
+	public char getKey ()
 	{
-		return this.letter;
+		return this.key;
 	}
 	
-	/** Each node in this trie could be tied to multiple bible IDs. These bible IDs are tracked
-	 *  with an internal hashtable that keeps track of the frequency of these bible IDs.
-	 *  This function updates that count. */
-	public void updateFrequency (T id)
+	/** Adds a new search term into the TrieNode's internal list of linked values.
+	 *  If this search term already exists in the TrieNode's linked value list,
+	 *  then its frequency will instead be updated.
+	 *  @param searchTerm Search term that is to be linked into this node */
+	protected void linkSearchTerm (T searchTerm)
 	{
 		// Null check
-		if (id == null)
+		if (searchTerm == null)
 		{
 			return;
 		}
 
-		if (!this.linkedIDs.containsKey (id))
+		if (!this.linkedValues.containsKey (searchTerm))
 		{
-			this.linkedIDs.put(id, 1);
+			this.linkedValues.put(searchTerm, 1);
 		}
 		else
 		{
-			int updCount = this.linkedIDs.get(id) + 1;
-			this.linkedIDs.replace(id, updCount);
+			int updCount = this.linkedValues.get(searchTerm) + 1;
+			this.linkedValues.replace(searchTerm, updCount);
 		}
 	}
 	

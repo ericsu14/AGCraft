@@ -25,7 +25,7 @@ public class TrieUtil
 				break;
 			}
 		}
-		return curr.getLinkedID(input);
+		return curr.getValue(input);
 	}
 	
 	/** Inserts a word into the trie
@@ -38,14 +38,7 @@ public class TrieUtil
 		TrieNode <T> curr = root;
 		for (char c : word.toCharArray())
 		{
-			if (curr.next(c) == null)
-			{
-				curr.addChild(c, id);
-			}
-			else
-			{
-				curr.next(c).updateFrequency(id);
-			}
+			curr.addChild(c, id);
 			curr = curr.next(c);
 		}
 	}
