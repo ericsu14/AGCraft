@@ -21,6 +21,4 @@ public class FireAura extends AbstractVisualSkill {
 			this.spawnColoredParticlesOnEntity(caster, 20, 0, 0, 0, Particle.FLAME);
 		}
 	}
-
-
 }
