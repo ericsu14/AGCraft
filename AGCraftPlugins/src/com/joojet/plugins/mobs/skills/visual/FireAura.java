@@ -18,7 +18,7 @@ public class FireAura extends AbstractVisualSkill {
 		// Randomly display fire particles around the entity
 		if (this.random.nextBoolean())
 		{
-			caster.getWorld().spawnParticle(Particle.FLAME, caster.getLocation(), 10, 0.2, caster.getHeight() / 2.0, 0.2);
+			this.spawnColoredParticlesOnEntity(caster, 20, 0, 0, 0, Particle.FLAME);
 		}
 	}
 
