@@ -1,7 +1,7 @@
 package com.joojet.plugins.mobs.skills.runnable;
 
+import java.util.HashMap;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -11,11 +11,11 @@ public class MobSkillRunner extends BukkitRunnable
 {
 	/** Stores a registry of mob skill tasks for every custom monster (that hash skills)
 	 *  in the server */
-	protected ConcurrentHashMap <UUID, MobSkillTask> mobSkillRegistry;
+	protected HashMap <UUID, MobSkillTask> mobSkillRegistry;
 	
 	public MobSkillRunner ()
 	{
-		this.mobSkillRegistry = new ConcurrentHashMap <UUID, MobSkillTask> ();
+		this.mobSkillRegistry = new HashMap <UUID, MobSkillTask> ();
 	}
 	
 	@Override
