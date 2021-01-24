@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.mobs.CustomSkillsListener;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -12,7 +11,7 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.WeightedMobSkill;
 import com.joojet.plugins.mobs.util.WeightedEntry;
 
-public class MobSkillRunnable extends BukkitRunnable
+public class MobSkillTask
 {
 	/** The living entity this instance is managing */
 	protected LivingEntity caster;
@@ -25,7 +24,7 @@ public class MobSkillRunnable extends BukkitRunnable
 	/** A random number generator used to select random mob skills */
 	protected Random rand;
 	
-	public MobSkillRunnable (LivingEntity caster, MobEquipment equipment, CustomSkillsListener customSkillsListener)
+	public MobSkillTask (LivingEntity caster, MobEquipment equipment, CustomSkillsListener customSkillsListener)
 	{
 		this.caster = caster;
 		this.equipment = equipment;
@@ -39,7 +38,6 @@ public class MobSkillRunnable extends BukkitRunnable
 		}
 	}
 	
-	@Override
 	public void run() 
 	{
 		// Keep selecting a random skill to use if the caster is not dead
@@ -50,10 +48,6 @@ public class MobSkillRunnable extends BukkitRunnable
 			{
 				this.customSkillsListener.useCustomSkill(caster, skill);
 			}
-		}
-		else
-		{
-			this.cancel();
 		}
 	}
 	
@@ -82,6 +76,12 @@ public class MobSkillRunnable extends BukkitRunnable
 			return WeightedEntry.searchWeightedList(roll, skillList);
 		}
 		return null;
+	}
+	
+	/** Returns the total number of skills that are attached to the custom monster */
+	public int getSkillSize()
+	{
+		return this.mobSkills.size();
 	}
 	
 }

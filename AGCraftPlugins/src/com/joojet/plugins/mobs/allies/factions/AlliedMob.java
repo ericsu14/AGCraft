@@ -17,7 +17,8 @@ public abstract class AlliedMob extends MobEquipment
 		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.HORSE,
 				EntityType.WOLF, EntityType.SNOWMAN, EntityType.IRON_GOLEM,
 				EntityType.CAT, EntityType.FOX, EntityType.OCELOT, EntityType.BEE,
-				EntityType.OCELOT);
+				EntityType.OCELOT, EntityType.TROPICAL_FISH, EntityType.PUFFERFISH, EntityType.SALMON,
+				EntityType.COD);
 		this.addFactions(Faction.ALLIES);
 		this.addRivalFactions(Faction.UCLA, Faction.DOOM_GUY, Faction.NETHER, Faction.PHANTOM);
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.PILLAGER,

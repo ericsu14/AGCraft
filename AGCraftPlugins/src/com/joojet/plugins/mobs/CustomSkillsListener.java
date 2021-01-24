@@ -1,10 +1,8 @@
 package com.joojet.plugins.mobs;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -23,20 +21,22 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MonsterStat;
+import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
-import com.joojet.plugins.mobs.skills.runnable.MobSkillRunnable;
+import com.joojet.plugins.mobs.skills.runnable.MobSkillTask;
+import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 import com.joojet.plugins.mobs.util.LocationTools;
 
-public class CustomSkillsListener extends AGListener {
+public class CustomSkillsListener extends AGListener 
+{
 	/** A reference to the monster type interpreter defined in the main plugin class */
 	protected MonsterTypeInterpreter monsterInterpreter;
 	/** A reference to the damage display manager defined in the main class
@@ -45,9 +45,11 @@ public class CustomSkillsListener extends AGListener {
 	/** A reference to the plugin's boss bar controller used to initialize custom boss bar events */
 	protected BossBarController bossBarController;
 	/** Stores all active skill runnables in the server */
-	protected HashMap <UUID, MobSkillRunnable> mobSkillRunnableTable;
 	/** Random number generator used for generating chance rolls */
 	protected Random rand;
+	/** Stores a registry for all active mob skill instances in the server
+	 *  and runs them each tick */
+	protected MobSkillRunner mobSkillRunner;
 	
 	public CustomSkillsListener (MonsterTypeInterpreter monsterInterpreter, DamageDisplayListener damageDisplayListener,
 			BossBarController bossBarController)
@@ -55,7 +57,7 @@ public class CustomSkillsListener extends AGListener {
 		this.monsterInterpreter = monsterInterpreter;
 		this.damageDisplayListener = damageDisplayListener;
 		this.bossBarController = bossBarController;
-		this.mobSkillRunnableTable = new HashMap <UUID, MobSkillRunnable> ();
+		this.mobSkillRunner = new MobSkillRunner ();
 		this.rand = new Random ();
 	}
 	
@@ -66,56 +68,21 @@ public class CustomSkillsListener extends AGListener {
 	}
 
 	@Override
-	public void onEnable() {
-		// TODO Auto-generated method stub
-
+	public void onEnable() 
+	{
+		this.mobSkillRunner.runTaskTimer(AGCraftPlugin.plugin, 20, 20);
 	}
 
 	@Override
-	public void onDisable() {
-		for (MobSkillRunnable runnable : this.mobSkillRunnableTable.values())
-		{
-			if (!runnable.isCancelled())
-			{
-				runnable.cancel();
-			}
-		}
-		
-		this.mobSkillRunnableTable.clear();
+	public void onDisable() 
+	{
+		this.mobSkillRunner.cancel();
 	}
 	
 	@EventHandler(priority = EventPriority.LOW)
 	public void onEntitySpawn (EntitySpawnEvent spawnEvent)
 	{
 		this.loadCustomSkillsOntoEntity(spawnEvent.getEntity());
-	}
-	
-	/** Returns true if there already exists a skill runnable instance for an entity */
-	public boolean containsSkillRunnable (Entity entity)
-	{
-		return this.mobSkillRunnableTable.containsKey(entity.getUniqueId());
-	}
-	
-	/** Associates a new skill runnable instance with an entity */
-	public void attachRunnableToEntity (Entity entity, MobSkillRunnable runnable)
-	{
-		if (!this.containsSkillRunnable(entity))
-		{
-			this.mobSkillRunnableTable.put(entity.getUniqueId(), runnable);
-		}
-	}
-	
-	/** Removes a skill runnable instance from an entity */
-	public void removeRunnableFromEntity (UUID entityUUID)
-	{
-		if (this.mobSkillRunnableTable.containsKey(entityUUID))
-		{
-			MobSkillRunnable runnable = this.mobSkillRunnableTable.remove(entityUUID);
-			if (!runnable.isCancelled())
-			{
-				runnable.cancel();
-			}
-		}
 	}
 	
 	@EventHandler (priority = EventPriority.LOW)
@@ -129,12 +96,20 @@ public class CustomSkillsListener extends AGListener {
 		}
 	}
 	
+	/** Listens to custom mob creation events */
+	@EventHandler
+	public void onCustomMobCreation (CreatedCustomMonsterEvent customMobEvent)
+	{
+		this.loadCustomSkillsOntoEntity(customMobEvent.getEntity());
+	}
+	
 	@EventHandler (priority = EventPriority.LOW)
 	public void onEntityDeath (EntityDeathEvent entityDeathEvent)
 	{
-		if (entityDeathEvent.getEntity() != null)
+		Entity deathEntity = entityDeathEvent.getEntity();
+		if (deathEntity != null && deathEntity instanceof LivingEntity)
 		{
-			this.removeRunnableFromEntity(entityDeathEvent.getEntity().getUniqueId());
+			this.mobSkillRunner.removeSkillFromEntity((LivingEntity) deathEntity);
 		}
 	}
 	
@@ -145,9 +120,9 @@ public class CustomSkillsListener extends AGListener {
 		
 		for (Entity entity : entities)
 		{
-			if (entity != null)
+			if (entity != null && entity instanceof LivingEntity)
 			{
-				this.removeRunnableFromEntity(entity.getUniqueId());
+				this.mobSkillRunner.removeSkillFromEntity((LivingEntity) entity);
 			}
 		}
 	}
@@ -319,26 +294,20 @@ public class CustomSkillsListener extends AGListener {
 	/** Loads custom skills onto the entity in the next second */
 	private void loadCustomSkillsOntoEntity (Entity entity)
 	{
-		if (!(entity instanceof LivingEntity) || this.containsSkillRunnable(entity))
+		if (entity instanceof LivingEntity)
 		{
-			return;
-		}
-		
-		LivingEntity livingEntity = (LivingEntity) entity;
-		CustomSkillsListener listener = this;
-		new BukkitRunnable () {
-			@Override
-			public void run()
+			LivingEntity livingEntity = (LivingEntity) entity;
+			MobEquipment equipment = this.monsterInterpreter.getMobEquipmentFromEntity(livingEntity);
+			
+			if (equipment != null)
 			{
-				MobEquipment equipment = monsterInterpreter.getMobEquipmentFromEntity(livingEntity);
-				if (equipment != null && !containsSkillRunnable (entity))
+				MobSkillTask task = new MobSkillTask (livingEntity, equipment, this);
+				if (task.getSkillSize() > 0)
 				{
-					MobSkillRunnable runnable = new MobSkillRunnable (livingEntity, equipment, listener);
-					attachRunnableToEntity (entity, runnable);
-					runnable.runTaskTimer(AGCraftPlugin.plugin, 0, 20);
+					this.mobSkillRunner.attachSkillToEntity(livingEntity, task);
 				}
 			}
-		}.runTaskLater(AGCraftPlugin.plugin, 20);
+		}
 	}
 
 }

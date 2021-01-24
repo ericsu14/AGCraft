@@ -6,6 +6,7 @@ import java.util.EnumSet;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
@@ -36,6 +37,7 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
+import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
@@ -293,6 +295,9 @@ public class EquipmentTools
 		
 		// Equip monster mounts
 		mountMob (entity, mobEquipment, bossBarController);
+		
+		// Creates a new CreatedCustomMonsterEvent after monster is fully transormed
+		Bukkit.getPluginManager().callEvent(new CreatedCustomMonsterEvent (entity, mobEquipment));
 	}
 	
 	/** Modifies base stats of the entity based on the values set in its MobEquipment container
