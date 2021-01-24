@@ -46,10 +46,7 @@ public class DamageDisplayListener extends AGListener
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
 		this.damageDisplayManager = new DamageDisplayManager (this.bossBarController);
-		this.allowedRegainReasons = EnumSet.noneOf(RegainReason.class);
-		this.allowedRegainReasons.add(RegainReason.CUSTOM);
-		this.allowedRegainReasons.add(RegainReason.MAGIC);
-		this.allowedRegainReasons.add(RegainReason.MAGIC_REGEN);
+		this.allowedRegainReasons = EnumSet.of(RegainReason.CUSTOM, RegainReason.MAGIC, RegainReason.MAGIC_REGEN);
 	}
 	
 	@Override
@@ -84,32 +81,34 @@ public class DamageDisplayListener extends AGListener
 		}
 		
 		DamageType damageType = DamageType.NORMAL;
+		LivingEntity eventEntity = (LivingEntity) event.getEntity();
+		Entity eventDamager = event.getDamager();
 		
 		// Checks for monster hits directed to players
-		if (event.getEntity().getType() == EntityType.PLAYER
-				&& event.getDamager().getType() != EntityType.PLAYER)
+		if (eventEntity.getType() == EntityType.PLAYER
+				&& eventDamager.getType() != EntityType.PLAYER)
 		{
 			damageType = DamageType.PLAYER;
 		}
 		// Checks for mob hits dealt by player inflicted critical hits
-		else if (event.getDamager().getType() == EntityType.PLAYER
+		else if (eventDamager.getType() == EntityType.PLAYER
 					&& event.getCause() != DamageCause.THORNS)
 		{
-			damageType = this.damageDisplayManager.checkCriticalHit((Player) event.getDamager()) ? DamageType.CRITICAL : DamageType.NORMAL;
+			damageType = this.damageDisplayManager.checkCriticalHit((Player) eventDamager) ? DamageType.CRITICAL : DamageType.NORMAL;
 		}
 		// Checks for mob hits dealt by allies
-		else if (event.getDamager() instanceof LivingEntity)
+		else if (eventDamager instanceof LivingEntity)
 		{
-			MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) event.getDamager());
+			MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) eventDamager);
 			if (equipment != null && equipment.getIgnoreList().contains(EntityType.PLAYER))
 			{
 				damageType = DamageType.ALLIED;
 			}
 		}
 		// Checks for damage inflicted by arrows
-		else if (event.getDamager() instanceof AbstractArrow)
+		else if (eventDamager instanceof AbstractArrow)
 		{
-			AbstractArrow projectile = (AbstractArrow) event.getDamager();
+			AbstractArrow projectile = (AbstractArrow) eventDamager;
 			if (projectile.getShooter() != null && projectile.getShooter() instanceof LivingEntity)
 			{
 				MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) projectile.getShooter());
@@ -139,7 +138,7 @@ public class DamageDisplayListener extends AGListener
 			damageType = this.getDamageTypeFromCause(event.getCause());
 		}
 		
-		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getFinalDamage());
+		this.damageDisplayManager.createDamageDisplayonEntity(eventEntity, damageType, event.getFinalDamage());
 	}
 	
 	/** Listens to entity damage events that are not caused by other living entites
@@ -148,8 +147,9 @@ public class DamageDisplayListener extends AGListener
 	public void onEntityDamageEvent (EntityDamageEvent event)
 	{
 		// Prevent duplicate damage displays
-		if (event instanceof EntityDamageByEntityEvent || event.getEntity() == null || event.getFinalDamage() < 0.0
-				|| !(event.getEntity() instanceof LivingEntity)
+		Entity eventEntity = event.getEntity();
+		if (event instanceof EntityDamageByEntityEvent || eventEntity == null || event.getFinalDamage() < 0.0
+				|| !(eventEntity instanceof LivingEntity)
 				|| AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL)
 		{
 			return;
@@ -157,9 +157,9 @@ public class DamageDisplayListener extends AGListener
 		
 		// Cancels damage event if the damage cause is MELTING and the entity has fire resistance
 		// This prevents snow golems from dying
-		if (event.getEntity() instanceof LivingEntity)
+		if (eventEntity instanceof LivingEntity)
 		{
-			LivingEntity ent = (LivingEntity) event.getEntity();
+			LivingEntity ent = (LivingEntity) eventEntity;
 			if (ent.hasPotionEffect(PotionEffectType.FIRE_RESISTANCE) 
 					&& (event.getCause() == DamageCause.MELTING))
 			{
@@ -187,7 +187,7 @@ public class DamageDisplayListener extends AGListener
 		}
 		
 		DamageType damageType = this.getDamageTypeFromCause(event.getCause());
-		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), damageType, event.getFinalDamage());
+		this.damageDisplayManager.createDamageDisplayonEntity(eventEntity, damageType, event.getFinalDamage());
 	}
 	
 	@EventHandler(priority = EventPriority.HIGH)
