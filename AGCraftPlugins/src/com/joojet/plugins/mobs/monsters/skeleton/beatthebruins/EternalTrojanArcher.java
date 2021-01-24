@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.skeleton.beatthebruins;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
@@ -19,6 +21,8 @@ import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.equipment.weapons.EternalSpiritOfTroy;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 
 public class EternalTrojanArcher extends USCFaction 
 {
@@ -53,5 +57,11 @@ public class EternalTrojanArcher extends USCFaction
 		
 		this.addMobFlags(MobFlag.SHOW_NAME,
 				MobFlag.DISABLE_SUFFOCATION_DAMAGE);
+	}
+	
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) {
+		super.loadCustomSkills(skills);
+		skills.add(new TeleportSkill (64, 20, Integer.MAX_VALUE, 1));
 	}
 }
