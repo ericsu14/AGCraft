@@ -48,7 +48,7 @@ public class AgressiveTeleportSkill extends TeleportSkill
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return (!enemies.isEmpty() && this.isEngulfedInLiquids(caster));
+		return (!enemies.isEmpty());
 	}
 
 }

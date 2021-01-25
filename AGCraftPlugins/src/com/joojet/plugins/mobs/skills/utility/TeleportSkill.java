@@ -62,7 +62,14 @@ public class TeleportSkill extends AbstractSkill {
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return (!allies.isEmpty() && this.isEngulfedInLiquids(caster));
+		return (!allies.isEmpty());
+	}
+	
+	/** Overrides the canUseSkill check to account for the caster being engulfed in liquids */
+	@Override
+	public boolean canUseSkill (LivingEntity caster)
+	{
+		return super.canUseSkill(caster) && this.isEngulfedInLiquids(caster);
 	}
 	
 	/** Filters a list of entities by removing entities who are submerged under a liquid source block.

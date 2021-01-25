@@ -34,7 +34,14 @@ public class SpeedBuffSkill extends AbstractBuffSkill {
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies,
 			List<LivingEntity> enemies) {
-		return this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold();
+		return true;
+	}
+	
+	@Override
+	public boolean canUseSkill (LivingEntity caster) 
+	{
+		return super.canUseSkill(caster) &&
+				(this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold());
 	}
 	
 	@Override

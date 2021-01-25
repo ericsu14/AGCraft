@@ -34,9 +34,16 @@ public class ResistanceBuffSkill extends AbstractBuffSkill
 	}
 
 	@Override
-	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
+	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies,
+			List<LivingEntity> enemies) {
+		return true;
+	}
+	
+	@Override
+	public boolean canUseSkill (LivingEntity caster) 
 	{
-		return this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold();
+		return super.canUseSkill(caster) &&
+				(this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold());
 	}
 	
 	@Override

@@ -38,7 +38,13 @@ public class SummonBruinSkill extends AbstractSummonSkill {
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return this.checkHealthIsBelowThreshold(caster, 0.70) && !enemies.isEmpty();
+		return !enemies.isEmpty();
+	}
+	
+	@Override
+	public boolean canUseSkill (LivingEntity caster)
+	{
+		return super.canUseSkill(caster) && this.checkHealthIsBelowThreshold(caster, 0.70);
 	}
 
 	@Override

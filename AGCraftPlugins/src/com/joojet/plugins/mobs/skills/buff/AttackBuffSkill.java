@@ -27,9 +27,15 @@ public class AttackBuffSkill extends AbstractBuffSkill
 	/** Only use this skill if any surrounding player's threat score exceeds mythic level */
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies,
-			List<LivingEntity> enemies) 
+			List<LivingEntity> enemies) {
+		return true;
+	}
+	
+	@Override
+	public boolean canUseSkill (LivingEntity caster) 
 	{
-		return this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold();
+		return super.canUseSkill(caster) &&
+				(this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold());
 	}
 
 	@Override

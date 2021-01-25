@@ -50,7 +50,14 @@ public class RageSkill extends AbstractBuffSkill {
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies,
 			List<LivingEntity> enemies) {
-		return this.checkHealthIsBelowThreshold(caster, this.threshold);
+		return true;
+	}
+	
+	@Override
+	public boolean canUseSkill (LivingEntity caster) 
+	{
+		return super.canUseSkill(caster) &&
+				(this.checkHealthIsBelowThreshold(caster, this.threshold));
 	}
 	
 	/** Overrides the update function to play a small animation when mob is enraged */

@@ -21,7 +21,6 @@ public class SelfHealSkill extends AbstractBuffSkill {
 		super(PotionEffectType.HEAL, 0, potionStrength, 0, cooldown, weight);
 		this.threshold = threshold;
 	}
-	
 
 	@Override
 	protected void playBuffAnimation(LivingEntity entity) {
@@ -36,8 +35,15 @@ public class SelfHealSkill extends AbstractBuffSkill {
 	}
 
 	@Override
-	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) {
-		return this.checkHealthIsBelowThreshold(caster, this.threshold);
+	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
+	{
+		return true;
+	}
+	
+	@Override
+	public boolean canUseSkill (LivingEntity caster)
+	{
+		return super.canUseSkill(caster) && this.checkHealthIsBelowThreshold(caster, this.threshold);
 	}
 
 }
