@@ -72,7 +72,14 @@ public class HurricaneSkill extends AbstractAttackSkill
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return !this.filterByLineOfSight(enemies, caster).isEmpty() && this.hasBow(caster);
+		return !this.filterByLineOfSight(enemies, caster).isEmpty();
+	}
+	
+	@Override
+	public boolean canUseSkill (LivingEntity caster)
+	{
+		return super.canUseSkill(caster) &&
+				this.hasBow(caster);
 	}
 
 }
