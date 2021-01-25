@@ -42,9 +42,15 @@ public class FairSpawnController
 		double sumOfScores = 0.0;
 		
 		List<Player> onlinePlayers = Arrays.asList(AGCraftPlugin.plugin.getServer().getOnlinePlayers().toArray(new Player[0]));
+		
+		// Creates a scan radius using the monster's expanded bounding box
+		BoundingBox monsterScanRadius = monster.getBoundingBox().clone();
+		monsterScanRadius.expand((double) this.maxScanRadius);
+		
 		for (Player player : onlinePlayers)
 		{
-			if (this.checkIfMobIsWithinRangeOfPlayer(player, monster))
+			
+			if (monster.getWorld() == player.getWorld() && monsterScanRadius.contains(player.getLocation().toVector()))
 			{
 				++numPlayers;
 				sumOfScores += this.fairSpawnWeightContainer.calculateThreatScore(player);
@@ -58,20 +64,5 @@ public class FairSpawnController
 	public void setMaxRadius (int maxRadius)
 	{
 		this.maxScanRadius = maxRadius;
-	}
-	
-	protected boolean checkIfMobIsWithinRangeOfPlayer (Player player, LivingEntity monster)
-	{
-		// Both the monster and the player needs to be in the same world
-		if (player.getLocation().getWorld() != monster.getLocation().getWorld())
-		{
-			return false;
-		}
-		
-		Location monsterSpawnLocation = monster.getLocation().clone();
-		BoundingBox scanRange = player.getBoundingBox().clone();
-		
-		scanRange.expand((double) maxScanRadius);
-		return scanRange.contains(monsterSpawnLocation.toVector());
 	}
 }
