@@ -3,7 +3,6 @@ package com.joojet.plugins.mobs.spawning;
 import java.util.Arrays;
 import java.util.List;
 
-import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -50,7 +49,8 @@ public class FairSpawnController
 		for (Player player : onlinePlayers)
 		{
 			
-			if (monster.getWorld() == player.getWorld() && monsterScanRadius.contains(player.getLocation().toVector()))
+			if (monster.getWorld().getEnvironment() == player.getWorld().getEnvironment() 
+					&& monsterScanRadius.contains(player.getLocation().toVector()))
 			{
 				++numPlayers;
 				sumOfScores += this.fairSpawnWeightContainer.calculateThreatScore(player);
