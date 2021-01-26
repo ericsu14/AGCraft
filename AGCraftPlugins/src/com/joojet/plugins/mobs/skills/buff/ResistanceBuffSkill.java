@@ -40,14 +40,13 @@ public class ResistanceBuffSkill extends AbstractBuffSkill
 	}
 	
 	@Override
-	public boolean canUseSkill (LivingEntity caster) 
-	{
-		return super.canUseSkill(caster) &&
-				(this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold());
+	protected boolean checkConditions(LivingEntity caster) {
+		return this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold();
 	}
 	
 	@Override
 	protected String getBuffText() {
 		return ChatColor.GRAY + "" + ChatColor.BOLD + "🛡 DEFENSE" + ChatColor.GOLD + " UP";
 	}
+
 }

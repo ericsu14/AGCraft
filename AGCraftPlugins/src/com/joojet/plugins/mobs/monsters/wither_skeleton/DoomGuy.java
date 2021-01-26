@@ -103,6 +103,11 @@ public class DoomGuy extends MythicMob
 			@Override
 			protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies,
 					List<LivingEntity> enemies) {
+				return true;
+			}
+
+			@Override
+			protected boolean checkConditions(LivingEntity caster) {
 				return this.checkHealthIsBelowThreshold(caster, 0.40);
 			}
 			

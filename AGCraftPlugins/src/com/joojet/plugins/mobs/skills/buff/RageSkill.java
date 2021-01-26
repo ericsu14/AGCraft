@@ -49,15 +49,15 @@ public class RageSkill extends AbstractBuffSkill {
 	/** Activates rage mode once the monster's health drops below 35%, which increases damage */
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies,
-			List<LivingEntity> enemies) {
+			List<LivingEntity> enemies) 
+	{
 		return true;
 	}
 	
 	@Override
-	public boolean canUseSkill (LivingEntity caster) 
+	protected boolean checkConditions(LivingEntity caster) 
 	{
-		return super.canUseSkill(caster) &&
-				(this.checkHealthIsBelowThreshold(caster, this.threshold));
+		return this.checkHealthIsBelowThreshold(caster, this.threshold);
 	}
 	
 	/** Overrides the update function to play a small animation when mob is enraged */

@@ -105,5 +105,12 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 		anvil.getWorld().spawnParticle(Particle.SMOKE_NORMAL, anvil.getLocation(), 10, 1.0, 1.0, 1.0);
 		return anvil;
 	}
+	
+	/** No self-caster check necessary for this skill to be used */
+	@Override
+	protected boolean checkConditions(LivingEntity caster) 
+	{
+		return true;
+	}
 
 }

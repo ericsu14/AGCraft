@@ -32,10 +32,8 @@ public class AttackBuffSkill extends AbstractBuffSkill
 	}
 	
 	@Override
-	public boolean canUseSkill (LivingEntity caster) 
-	{
-		return super.canUseSkill(caster) &&
-				(this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold());
+	protected boolean checkConditions(LivingEntity caster) {
+		return this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold();
 	}
 
 	@Override

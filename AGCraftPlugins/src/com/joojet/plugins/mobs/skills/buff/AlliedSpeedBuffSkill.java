@@ -17,7 +17,14 @@ public class AlliedSpeedBuffSkill extends SpeedBuffSkill
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies,
 			List<LivingEntity> enemies) 
 	{
-		return this.checkForSurroundingPlayers(allies);
+		return true;
+	}
+	
+	/** Allied buff skills can always be considered for use */
+	@Override
+	protected boolean checkConditions (LivingEntity caster)
+	{
+		return this.checkForSurroundingPlayers(caster);
 	}
 
 }

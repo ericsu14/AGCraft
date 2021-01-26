@@ -3,10 +3,13 @@ package com.joojet.plugins.mobs.skills;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.util.BoundingBox;
 
 import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
@@ -84,10 +87,15 @@ public abstract class AbstractSkill
 	 * 		@param enemies - A list of enemies this skill may negatively affect */
 	protected abstract boolean checkConditons (LivingEntity caster, List <LivingEntity> allies, List <LivingEntity> enemies);
 	
+	/** Defines conditions only (involving the caster itself) that needs to be checked in order for this skill to be
+	 *  included in the caster's list of usable skills each second.
+	 *   @param caster The LivingEntity using this skill */
+	protected abstract boolean checkConditions (LivingEntity caster);
+	
 	/** Returns a boolean indicating w/e or not a skill can be used based on its current cooldown and usage */
 	public boolean canUseSkill (LivingEntity caster)
 	{
-		return (cooldownTick <= 0 && this.currentUsage > 0);
+		return (cooldownTick <= 0 && this.currentUsage > 0) && this.checkConditions(caster);
 	}
 	
 	/** Returns the AOE effect radius assigned to this skill */
@@ -139,5 +147,20 @@ public abstract class AbstractSkill
 			entity.getWorld().spawnParticle(particle, LocationTools.addRandomOffsetOnLocation(entityLocation, 0.7),
 					0, (red / 256D), (green / 256D), (blue / 256D), 1, null);
 		}
+	}
+	
+	/** Returns true if there is at least one player around the caster
+	 * 	@param entities - A list of LivingEntities */
+	public boolean checkForSurroundingPlayers (LivingEntity caster)
+	{
+		BoundingBox searchRadius = caster.getBoundingBox().clone().expand((double) this.range);
+		for (Player player : Bukkit.getServer().getOnlinePlayers())
+		{
+			if (searchRadius.contains(player.getBoundingBox()))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

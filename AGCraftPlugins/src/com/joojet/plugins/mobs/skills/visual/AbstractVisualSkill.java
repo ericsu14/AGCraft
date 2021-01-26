@@ -46,7 +46,7 @@ public abstract class AbstractVisualSkill extends AbstractSkill
 	
 	/** Skill can never be used as it is just a passive visual effect skill. Therefore, this will always returns false */
 	@Override
-	public boolean canUseSkill (LivingEntity caster)
+	protected boolean checkConditions(LivingEntity caster) 
 	{
 		return false;
 	}

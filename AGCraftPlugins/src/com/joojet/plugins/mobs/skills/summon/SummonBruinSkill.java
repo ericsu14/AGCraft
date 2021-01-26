@@ -41,10 +41,11 @@ public class SummonBruinSkill extends AbstractSummonSkill {
 		return !enemies.isEmpty();
 	}
 	
+	/** The caster can only use this skill if its health is below 70% */
 	@Override
-	public boolean canUseSkill (LivingEntity caster)
+	protected boolean checkConditions(LivingEntity caster) 
 	{
-		return super.canUseSkill(caster) && this.checkHealthIsBelowThreshold(caster, 0.70);
+		return this.checkHealthIsBelowThreshold(caster, 0.70);
 	}
 
 	@Override

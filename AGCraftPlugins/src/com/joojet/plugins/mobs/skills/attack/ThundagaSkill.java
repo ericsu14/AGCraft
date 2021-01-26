@@ -59,15 +59,16 @@ public class ThundagaSkill extends AbstractAttackSkill {
 	}
 
 	@Override
-	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) {
+	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
+	{
 		return !enemies.isEmpty();
 	}
 	
+	/** This skill can only be used if the caster's health is below the set threshold */
 	@Override
-	public boolean canUseSkill (LivingEntity caster)
+	protected boolean checkConditions(LivingEntity caster) 
 	{
-		return super.canUseSkill(caster) && 
-				this.checkHealthIsBelowThreshold(caster, this.healthThreshold);
+		return this.checkHealthIsBelowThreshold(caster, this.healthThreshold);
 	}
 	
 	/** Returns the thunder's explosion power */

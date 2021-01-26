@@ -2,11 +2,14 @@ package com.joojet.plugins.mobs.skills.buff;
 
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.BoundingBox;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
@@ -98,19 +101,5 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 		return (entity.hasPotionEffect(this.potionType) && 
 				(entity.getPotionEffect(this.potionType).getAmplifier() <= this.potionStrength && 
 				entity.getPotionEffect(this.potionType).getDuration() <= this.potionDuration));
-	}
-	
-	/** Returns true if there is at least one player around the caster
-	 * 	@param entities - A list of LivingEntities */
-	public boolean checkForSurroundingPlayers (List <LivingEntity> entities)
-	{
-		for (LivingEntity entity : entities)
-		{
-			if (entity.getType() == EntityType.PLAYER)
-			{
-				return true;
-			}
-		}
-		return false;
 	}
 }

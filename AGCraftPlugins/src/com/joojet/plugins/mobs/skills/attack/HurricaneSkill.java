@@ -74,12 +74,12 @@ public class HurricaneSkill extends AbstractAttackSkill
 	{
 		return !this.filterByLineOfSight(enemies, caster).isEmpty();
 	}
-	
+
+	/** This skill can only be used if the caster is holding a bow */
 	@Override
-	public boolean canUseSkill (LivingEntity caster)
+	protected boolean checkConditions(LivingEntity caster) 
 	{
-		return super.canUseSkill(caster) &&
-				this.hasBow(caster);
+		return this.hasBow(caster);
 	}
 
 }

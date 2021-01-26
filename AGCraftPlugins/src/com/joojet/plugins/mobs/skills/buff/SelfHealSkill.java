@@ -35,15 +35,13 @@ public class SelfHealSkill extends AbstractBuffSkill {
 	}
 
 	@Override
-	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
-	{
+	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) {
 		return true;
 	}
-	
+
 	@Override
-	public boolean canUseSkill (LivingEntity caster)
-	{
-		return super.canUseSkill(caster) && this.checkHealthIsBelowThreshold(caster, this.threshold);
+	protected boolean checkConditions(LivingEntity caster) {
+		return this.checkHealthIsBelowThreshold(caster, this.threshold);
 	}
 
 }
