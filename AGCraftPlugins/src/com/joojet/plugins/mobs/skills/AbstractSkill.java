@@ -153,7 +153,7 @@ public abstract class AbstractSkill
 	 * 	@param entities - A list of LivingEntities */
 	public boolean checkForSurroundingPlayers (LivingEntity caster)
 	{
-		BoundingBox searchRadius = caster.getBoundingBox().clone().expand((double) this.range);
+		BoundingBox searchRadius = caster.getBoundingBox().clone().expand((double) (this.range / 2));
 		for (Player player : Bukkit.getServer().getOnlinePlayers())
 		{
 			if (searchRadius.contains(player.getBoundingBox()))
