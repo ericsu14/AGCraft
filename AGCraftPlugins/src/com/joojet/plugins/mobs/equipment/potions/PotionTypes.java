@@ -19,7 +19,8 @@ public class PotionTypes extends EquipmentTypes
 			new HastePotion (ChatColor.GOLD),
 			new LuckPotion (ChatColor.GOLD),
 			new EternalRusheeMocktail (ChatColor.YELLOW),
-			new StrawberryMocktail (ChatColor.LIGHT_PURPLE)
+			new StrawberryMocktail (ChatColor.LIGHT_PURPLE),
+			new ChristmasMocktail ()
 		);
 	}
 }
