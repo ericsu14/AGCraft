@@ -69,7 +69,7 @@ public class ThundagaSkill extends AbstractAttackSkill {
 	@Override
 	protected boolean checkConditions(LivingEntity caster) 
 	{
-		return this.checkHealthIsBelowThreshold(caster, this.healthThreshold)
+		return this.checkHealthIsBelowThreshold(caster, this.healthThreshold);
 	}
 	
 	/** Returns the thunder's explosion power */
