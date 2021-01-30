@@ -70,7 +70,6 @@ public class ThundagaSkill extends AbstractAttackSkill {
 	protected boolean checkConditions(LivingEntity caster) 
 	{
 		return this.checkHealthIsBelowThreshold(caster, this.healthThreshold)
-				&& this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold();
 	}
 	
 	/** Returns the thunder's explosion power */
