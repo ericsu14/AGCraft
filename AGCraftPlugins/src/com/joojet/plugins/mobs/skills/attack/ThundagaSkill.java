@@ -10,6 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
+import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.runnable.ThunderSkillRunnable;
 
@@ -68,7 +69,8 @@ public class ThundagaSkill extends AbstractAttackSkill {
 	@Override
 	protected boolean checkConditions(LivingEntity caster) 
 	{
-		return this.checkHealthIsBelowThreshold(caster, this.healthThreshold);
+		return this.checkHealthIsBelowThreshold(caster, this.healthThreshold)
+				&& this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold();
 	}
 	
 	/** Returns the thunder's explosion power */

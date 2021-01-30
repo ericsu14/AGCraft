@@ -18,14 +18,14 @@ import com.joojet.plugins.mobs.equipment.head.BarneyHead;
 import com.joojet.plugins.mobs.equipment.leggings.BarneyLegs;
 import com.joojet.plugins.mobs.equipment.offhand.BarneyTotem;
 import com.joojet.plugins.mobs.equipment.weapons.BarneyDagger;
-import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
+import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.mobs.skills.utility.AgressiveTeleportSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
-public class BarneyTheDinosaur extends LegendaryMob
+public class BarneyTheDinosaur extends MythicMob
 {
 	public BarneyTheDinosaur ()
 	{
@@ -66,6 +66,6 @@ public class BarneyTheDinosaur extends LegendaryMob
 	{
 		skills.add(new RageSkill (1, 120, 0.35));
 		skills.add(new AgressiveTeleportSkill (156, 10, Integer.MAX_VALUE, 2));
-		skills.add(new ThundagaSkill (32, 20, Integer.MAX_VALUE, 16, 4.0f, 6, 60, 0.70));
+		skills.add(new ThundagaSkill (32, 20, 3, 16, 4.0f, 6, 60, 0.70));
 	}
 }

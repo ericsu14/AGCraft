@@ -31,7 +31,7 @@ public abstract class UCLAFaction extends MobEquipment
 				EntityType.PLAYER, EntityType.PHANTOM, EntityType.WITHER_SKELETON, 
 				EntityType.SPIDER, EntityType.IRON_GOLEM, EntityType.HOGLIN);
 		this.addEntitiesToIgnoreList(EntityType.CREEPER);
-		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.EPIC);
+		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.LEGENDARY);
 	}
 	
 	/** A util function that generates a UCLA themed display name

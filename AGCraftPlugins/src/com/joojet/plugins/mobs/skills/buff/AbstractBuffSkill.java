@@ -14,7 +14,6 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
-import com.joojet.plugins.mobs.spawning.FairSpawnController;
 
 public abstract class AbstractBuffSkill extends AbstractSkill {
 	
@@ -24,8 +23,6 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 	protected int potionDuration;
 	/** Strength of the potion effect */
 	protected int potionStrength;
-	/** Used to calculate fair spawn weights */
-	protected FairSpawnController spawnWeight;
 	
 	/** Creates an abstract buff skill, which applies a potion effect to the caster itself and
 	 *  its surrounding allies
@@ -40,7 +37,6 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 		this.potionDuration = potionDuration == 0 ? 1 : potionDuration * 20;
 		this.potionStrength = potionStrength;
 		this.potionType = potionType;
-		this.spawnWeight = new FairSpawnController (this.getRange() / 2);
 	}
 	
 	/** Gives the caster and any of its surrounding allies a buff. */

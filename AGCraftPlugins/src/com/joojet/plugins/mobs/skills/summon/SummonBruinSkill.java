@@ -11,6 +11,7 @@ import org.bukkit.entity.LivingEntity;
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterType;
 
 public class SummonBruinSkill extends AbstractSummonSkill {
@@ -45,7 +46,8 @@ public class SummonBruinSkill extends AbstractSummonSkill {
 	@Override
 	protected boolean checkConditions(LivingEntity caster) 
 	{
-		return this.checkHealthIsBelowThreshold(caster, 0.70);
+		return this.checkHealthIsBelowThreshold(caster, 0.70) && 
+				this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold();
 	}
 
 	@Override

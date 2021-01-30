@@ -15,6 +15,7 @@ import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
+import com.joojet.plugins.mobs.spawning.FairSpawnController;
 import com.joojet.plugins.mobs.util.LocationTools;
 
 public abstract class AbstractSkill 
@@ -35,6 +36,8 @@ public abstract class AbstractSkill
 	protected int weight;
 	/** Random number generator */
 	protected Random random;
+	/** Used to calculate fair spawn weights */
+	protected FairSpawnController spawnWeight;
 	
 	public AbstractSkill (SkillPropetry type, int range, int cooldown, int maxUses, int weight)
 	{
@@ -46,6 +49,7 @@ public abstract class AbstractSkill
 		this.cooldownTick = 0;
 		this.weight = weight;
 		this.random = new Random ();
+		this.spawnWeight = new FairSpawnController (this.getRange() / 2);
 	}
 	
 	/** Allows the caster to use a skill once the internal cooldown tick reaches zero and its specified conditions are met. 

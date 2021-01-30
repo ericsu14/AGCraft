@@ -11,17 +11,12 @@ import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
-import com.joojet.plugins.mobs.spawning.FairSpawnController;
 
 public abstract class AbstractAttackSkill extends AbstractSkill 
 {
-	/** Used to calculate fair spawn weights */
-	protected FairSpawnController spawnWeight;
-	
 	public AbstractAttackSkill(int range, int cooldown, int maxUses, int weight) 
 	{
 		super(SkillPropetry.ATTACK, range, cooldown, maxUses, weight);
-		this.spawnWeight = new FairSpawnController (this.getRange() / 2);
 	}
 	
 	/** Randomly selects a set of entities from a list of LivingEntities.
