@@ -10,7 +10,6 @@ import org.bukkit.entity.LivingEntity;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
-import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.runnable.ThunderSkillRunnable;
 
