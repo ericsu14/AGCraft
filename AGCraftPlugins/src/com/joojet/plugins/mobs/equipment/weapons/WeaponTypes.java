@@ -42,7 +42,8 @@ public class WeaponTypes extends EquipmentTypes
 			new VeryPotentBow (ChatColor.BLUE),
 			new RoyalPiglinCrossbow (ChatColor.RED),
 			new HellwalkerBlade (ChatColor.RED),
-			new PigmanSword (ChatColor.LIGHT_PURPLE)
+			new PigmanSword (ChatColor.LIGHT_PURPLE),
+			new DoomBow (ChatColor.DARK_RED)
 		);
 	}
 	

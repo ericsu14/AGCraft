@@ -28,7 +28,8 @@ public class PiercingBlowSkill extends AbstractPassiveSkill implements PassivePr
 		
 		AbstractArrow arrow = (AbstractArrow) projectile;
 		
-		if (shooterEquipment != null && shooterEquipment.containsStat(MonsterStat.ARROW_PIERCING_CHANCE))
+		if (shooterEquipment != null && shooterEquipment.containsStat(MonsterStat.ARROW_PIERCING_CHANCE)
+				&& !arrow.isCritical())
 		{
 			boolean pierce = this.getRandomGenerator().nextDouble() <= shooterEquipment.getStat(MonsterStat.ARROW_PIERCING_CHANCE);
 			if (pierce)

@@ -27,7 +27,8 @@ public class CriticalShotSkill extends AbstractPassiveSkill implements PassivePr
 		AbstractArrow arrow = (AbstractArrow) projectile;
 		
 		if (shooterEquipment != null &&
-				shooterEquipment.containsStat(MonsterStat.ARROW_CRITICAL_CHANCE))
+				shooterEquipment.containsStat(MonsterStat.ARROW_CRITICAL_CHANCE)
+				&& !arrow.isCritical())
 		{
 			arrow.setCritical(this.getRandomGenerator().nextDouble() <= shooterEquipment.getStat(MonsterStat.ARROW_CRITICAL_CHANCE));
 		}

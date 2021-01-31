@@ -21,5 +21,6 @@ public class USCBandHead extends Equipment
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 6;
 		this.addLoreToItemMeta("March your way to victory and fight on!");
+		this.makeSoulbound();
 	}
 }

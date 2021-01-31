@@ -14,11 +14,11 @@ public class RoyalPiglinCrossbow extends Equipment
 	{
 		super (EquipmentType.ROYAL_PIGLIN_CROSSBOW, Material.CROSSBOW, EquipmentSlot.HAND, color);
 		this.setDisplayName("Royal Piglin Crossbow");
-		this.addUnsafeEnchantment(Enchantment.PIERCING, 3);
 		this.addUnsafeEnchantment(Enchantment.MULTISHOT, 1);
-		this.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
-		this.addUnsafeEnchantment(Enchantment.QUICK_CHARGE, 3);
-		
-		this.addLoreToItemMeta("A crossbow with highly illegal enchantment pairings. Use with care.");
+		this.addUnsafeEnchantment(Enchantment.QUICK_CHARGE, 4);
+		this.addSpeedAttribute(0.05);
+		this.addLoreToItemMeta("A crossbow used by a legendary piglin. Over 9000 hogs were slain by this crossbow.");
+		this.makeUnbreakable();
+		this.makeSoulbound();
 	}
 }
