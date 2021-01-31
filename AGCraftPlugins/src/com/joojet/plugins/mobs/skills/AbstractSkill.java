@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
@@ -146,10 +147,16 @@ public abstract class AbstractSkill
 		}
 		
 		Location entityLocation = entity.getEyeLocation();
+		
+		Object data = null;
+		if (particle == Particle.REDSTONE)
+		{
+			data = new Particle.DustOptions(Color.fromRGB(red, green, blue), 1.0f);
+		}
 		for (int i = 0; i < count; ++i)
 		{
 			entity.getWorld().spawnParticle(particle, LocationTools.addRandomOffsetOnLocation(entityLocation, 0.7),
-					0, (red / 256D), (green / 256D), (blue / 256D), 1, null);
+					0, (red / 256D), (green / 256D), (blue / 256D), 1, data);
 		}
 	}
 	

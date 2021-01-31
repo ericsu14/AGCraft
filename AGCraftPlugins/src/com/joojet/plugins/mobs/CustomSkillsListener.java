@@ -184,7 +184,7 @@ public class CustomSkillsListener extends AGListener
 	
 	/** Applies passive attack skills to any captured entity damage by entity events,
 	 *  which amplifies the damage output dealt by monsters that have certain Passive attack skills */
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void modifyEntityDamageEvent (EntityDamageByEntityEvent event)
 	{
 		if (event.getEntity() == null || event.getDamager() == null
@@ -214,7 +214,7 @@ public class CustomSkillsListener extends AGListener
 		// Handles incoming damage events if the target is a custom mob with PassiveAttack skills
 		if (targetEquipment != null && this.mobSkillRunner.containsSkill(target))
 		{
-			for (AbstractSkill skill : this.mobSkillRunner.getSkillTask(damager.getUniqueId()).getSkillList())
+			for (AbstractSkill skill : this.mobSkillRunner.getSkillTask(target.getUniqueId()).getSkillList())
 			{
 				if (skill instanceof PassiveAttack)
 				{

@@ -13,16 +13,19 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 
-public class RageSkill extends AbstractBuffSkill implements PassiveProjectile
+public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, PassiveAttack
 {
 	/** Used to determine if a mob is enraged */
 	private boolean enraged;
 	/** Health percentage threshold the monster's health needs to reach before this skill is activated */
 	private double threshold;
-	/** Base arrow damage amplifier used to increase damage of shot projectiles under rage */
+	/** Base damage amplifier used to increase damage of shot projectiles under rage */
 	private final double baseArrowAmplifier = 0.10;
+	/** Base damage amplifier used to increase incoming and outgoing damage when enraged */
+	private final double baseDamageAmplifier = 0.10;
 	
 	/** Allows a monster to temporarily increase its strength and health once its
 	 *  base health drops below a certain percentage.
@@ -49,7 +52,6 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile
 	@Override
 	protected void applyPotionEffect (LivingEntity entity, PotionEffectType potion, int duration, int strength)
 	{
-		entity.addPotionEffect(new PotionEffect (PotionEffectType.INCREASE_DAMAGE, duration, strength, false, true));
 		entity.addPotionEffect(new PotionEffect (PotionEffectType.GLOWING, duration, 0, false, true));
 		entity.addPotionEffect(new PotionEffect (PotionEffectType.ABSORPTION, duration, 4, false, true));
 		this.enraged = true;
@@ -116,6 +118,36 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile
 		this.spawnColoredParticlesOnEntity(shooter, 10, 0, 0, 0, Particle.LAVA);
 		shooter.getWorld().spawnParticle(Particle.SWEEP_ATTACK, shooter.getLocation(), 1, 0.0, 0.0, 0.0);
 		shooter.getWorld().playSound(shooter.getLocation(), Sound.ENTITY_PLAYER_ATTACK_KNOCKBACK, 1.0f, 1.0f);
+	}
+
+	@Override
+	public double modifyOutgoingDamageEvent(double damage, LivingEntity damager, LivingEntity target,
+			MobEquipment damagerEquipment) 
+	{
+		double bonusDamage = 0.0;
+		if (this.enraged)
+		{
+			bonusDamage = (damage * ((this.potionStrength + 1) * this.baseDamageAmplifier));
+			this.spawnColoredParticlesOnEntity(target, 10, 0, 0, 0, Particle.CRIT);
+			damager.getWorld().playSound(damager.getLocation(), Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0f, 1.0f);
+		}
+		return bonusDamage;
+	}
+
+	/** Custom mobs who are currently enraged takes more damage than usual. */
+	@Override
+	public double modifyIncomingDamageEvent(double damage, LivingEntity damager, LivingEntity target,
+			MobEquipment targetEquipment) 
+	{
+		double bonusDamage = 0.0;
+		
+		if (this.enraged)
+		{
+			bonusDamage = (damage * ((this.potionStrength + 1) * this.baseDamageAmplifier));
+			this.spawnColoredParticlesOnEntity(target, 20, 128, 0, 0, Particle.REDSTONE);
+			target.getWorld().playSound(target.getLocation(), Sound.BLOCK_STONE_BREAK, 1.0f, 1.0f);
+		}
+		return bonusDamage;
 	}
 
 }

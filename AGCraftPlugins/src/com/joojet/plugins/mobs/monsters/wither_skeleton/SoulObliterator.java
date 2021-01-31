@@ -26,7 +26,7 @@ public class SoulObliterator extends MythicMob
 	{
 		super (MonsterType.SOUL_OBLITERATOR);
 		this.name = "Soul Obliterator";
-		this.color = ChatColor.GOLD;
+		this.color = ChatColor.DARK_RED;
 		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR,
 				MobFlag.IGNORE_NON_FACTION_ENTITIES);
