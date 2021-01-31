@@ -88,7 +88,8 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile
 	}
 	
 	@Override
-	protected String getBuffText() {
+	protected String getBuffText() 
+	{
 		return ChatColor.RED + "" + ChatColor.BOLD + "☠ RAGE" + ChatColor.GOLD + " ENGAGED";
 	}
 	
@@ -104,7 +105,7 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile
 		}
 		
 		AbstractArrow arrow = (AbstractArrow) projectile;
-		double damageAmplifier = (baseArrowAmplifier * this.potionStrength) * arrow.getDamage();
+		double damageAmplifier = (baseArrowAmplifier * (this.potionStrength + 1)) * arrow.getDamage();
 		arrow.setDamage(arrow.getDamage() + damageAmplifier);
 		// Plays particle and sound effects after launching a projectile under rage
 		this.spawnColoredParticlesOnEntity(shooter, 10, 0, 0, 0, Particle.LAVA);
