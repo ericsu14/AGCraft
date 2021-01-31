@@ -5,16 +5,23 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Projectile;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class RageSkill extends AbstractBuffSkill {
-	
+import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
+
+public class RageSkill extends AbstractBuffSkill implements PassiveProjectile
+{
 	/** Used to determine if a mob is enraged */
 	private boolean enraged;
 	/** Health percentage threshold the monster's health needs to reach before this skill is activated */
 	private double threshold;
+	/** Base arrow damage amplifier used to increase damage of shot projectiles under rage */
+	private final double baseArrowAmplifier = 0.05;
 	
 	/** Allows a monster to temporarily increase its strength and health once its
 	 *  base health drops below a certain percentage.
@@ -66,7 +73,7 @@ public class RageSkill extends AbstractBuffSkill {
 	public void update (LivingEntity caster)
 	{
 		super.update(caster);
-		if (enraged && this.random.nextBoolean() && this.cooldownTick > 0)
+		if (this.enraged && this.random.nextBoolean() && this.cooldownTick > 0)
 		{
 			this.spawnColoredParticlesOnEntity(caster, 10, 0, 0, 0, Particle.SMOKE_LARGE);
 			this.spawnColoredParticlesOnEntity(caster, 15, 0, 0, 0, Particle.FLAME);
@@ -76,6 +83,26 @@ public class RageSkill extends AbstractBuffSkill {
 	@Override
 	protected String getBuffText() {
 		return ChatColor.RED + "" + ChatColor.BOLD + "☠ RAGE" + ChatColor.GOLD + " ENGAGED";
+	}
+	
+	/** Projectiles shot by mobs with an active rage buff now has their projectile's base damage
+	 *  increased by a certain percentage based on the passed amplifier. */
+	@Override
+	public void modifyProjectile(LivingEntity shooter, Projectile projectile, MobEquipment shooterEquipment) 
+	{
+		if (!this.enraged || shooter == null || shooterEquipment == null || projectile == null || 
+				!(projectile instanceof AbstractArrow))
+		{
+			return;
+		}
+		
+		AbstractArrow arrow = (AbstractArrow) projectile;
+		double damageAmplifier = (baseArrowAmplifier * this.potionStrength) * arrow.getDamage();
+		arrow.setDamage(arrow.getDamage() + damageAmplifier);
+		// Plays particle and sound effects after launching a projectile under rage
+		this.spawnColoredParticlesOnEntity(shooter, 10, 0, 0, 0, Particle.LAVA);
+		shooter.getWorld().spawnParticle(Particle.SWEEP_ATTACK, shooter.getLocation(), 1, 0.0, 0.0, 0.0);
+		shooter.getWorld().playSound(shooter.getLocation(), Sound.ENTITY_PLAYER_ATTACK_KNOCKBACK, 1.0f, 1.0f);
 	}
 
 }
