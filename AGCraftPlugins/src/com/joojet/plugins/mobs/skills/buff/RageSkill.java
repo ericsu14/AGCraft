@@ -11,6 +11,7 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 
@@ -21,7 +22,7 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile
 	/** Health percentage threshold the monster's health needs to reach before this skill is activated */
 	private double threshold;
 	/** Base arrow damage amplifier used to increase damage of shot projectiles under rage */
-	private final double baseArrowAmplifier = 0.05;
+	private final double baseArrowAmplifier = 0.10;
 	
 	/** Allows a monster to temporarily increase its strength and health once its
 	 *  base health drops below a certain percentage.
@@ -105,8 +106,11 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile
 		}
 		
 		AbstractArrow arrow = (AbstractArrow) projectile;
-		double damageAmplifier = (baseArrowAmplifier * (this.potionStrength + 1)) * arrow.getDamage();
-		arrow.setDamage(arrow.getDamage() + damageAmplifier);
+		// Adds a damage bonus to the launched projectile
+		double damageAmplifier = 1.0 + (baseArrowAmplifier * (this.potionStrength + 1));
+		double originalDamage = shooterEquipment.containsStat(MonsterStat.BASE_ARROW_DAMAGE) 
+				? shooterEquipment.getStat(MonsterStat.BASE_ARROW_DAMAGE) : arrow.getDamage();
+		arrow.setDamage(originalDamage * damageAmplifier);
 		// Plays particle and sound effects after launching a projectile under rage
 		this.spawnColoredParticlesOnEntity(shooter, 10, 0, 0, 0, Particle.LAVA);
 		shooter.getWorld().spawnParticle(Particle.SWEEP_ATTACK, shooter.getLocation(), 1, 0.0, 0.0, 0.0);

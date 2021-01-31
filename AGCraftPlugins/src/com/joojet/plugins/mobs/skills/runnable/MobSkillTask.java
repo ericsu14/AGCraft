@@ -96,7 +96,6 @@ public class MobSkillTask
 	{
 		if (this.equipment != null)
 		{
-			this.equipment.loadCustomSkills(this.mobSkills);
 			// Adds in the arrow's base damage modifier skill if the entity's ARROW_BASE_DAMAGE is set
 			if (this.equipment.containsStat(MonsterStat.BASE_ARROW_DAMAGE))
 			{
@@ -117,6 +116,7 @@ public class MobSkillTask
 			{
 				this.mobSkills.add(new TippedArrowSkill ());
 			}
+			this.equipment.loadCustomSkills(this.mobSkills);
 		}
 	}
 	
