@@ -73,10 +73,17 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile
 	public void update (LivingEntity caster)
 	{
 		super.update(caster);
-		if (this.enraged && this.random.nextBoolean() && this.cooldownTick > 0)
+		if (this.enraged)
 		{
-			this.spawnColoredParticlesOnEntity(caster, 10, 0, 0, 0, Particle.SMOKE_LARGE);
-			this.spawnColoredParticlesOnEntity(caster, 15, 0, 0, 0, Particle.FLAME);
+			if (this.random.nextBoolean())
+			{
+				this.spawnColoredParticlesOnEntity(caster, 10, 0, 0, 0, Particle.SMOKE_LARGE);
+				this.spawnColoredParticlesOnEntity(caster, 15, 0, 0, 0, Particle.FLAME);
+			}
+		}
+		if (this.cooldownTick <= 0)
+		{
+			this.enraged = false;
 		}
 	}
 	
