@@ -30,6 +30,8 @@ import com.joojet.plugins.mobs.equipment.weapons.DoomBow;
 import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.HurricaneSkill;
+import com.joojet.plugins.mobs.skills.buff.RageSkill;
+import com.joojet.plugins.mobs.skills.utility.AgressiveTeleportSkill;
 import com.joojet.plugins.mobs.skills.utility.WeaponSwitchSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
@@ -88,10 +90,11 @@ public class DoomGuy extends MythicMob
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		super.loadCustomSkills(skills);
+		skills.add(new RageSkill (1, 60, 0.30));
+		skills.add(new AgressiveTeleportSkill (156, 10, Integer.MAX_VALUE, 2));
 		// Allows doom guy to switch to its blade once its health reaches below 40%
-		skills.add(new WeaponSwitchSkill (200, 1, 6, new DoomBlade (this.color)) {
-
+		skills.add(new WeaponSwitchSkill (200, 1, 6, new DoomBlade (this.color)) 
+		{
 			@Override
 			protected void playAnimation(LivingEntity caster, DamageDisplayListener damageDisplayListener) {
 				caster.getLocation().getWorld().spawnParticle(Particle.ASH, caster.getLocation(), 10, 0.1, 0.1, 0.1);
@@ -112,7 +115,6 @@ public class DoomGuy extends MythicMob
 			}
 			
 		});
-		
 		skills.add(new HurricaneSkill (24, 20, Integer.MAX_VALUE, 4, 16, 0.75));
 	}
 	

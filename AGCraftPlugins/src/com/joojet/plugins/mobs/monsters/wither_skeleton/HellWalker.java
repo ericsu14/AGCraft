@@ -51,6 +51,5 @@ public class HellWalker extends MythicMob
 				new SummoningScrollDrop (SummonTypes.HELL_WALKER, 0.05));
 		
 		this.bossTheme = MusicType.HAIKYUU;
-		
 	}
 }

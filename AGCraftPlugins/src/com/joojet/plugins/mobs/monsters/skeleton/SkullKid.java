@@ -24,7 +24,9 @@ import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.HurricaneSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
+import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
+import com.joojet.plugins.mobs.skills.utility.AgressiveTeleportSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class SkullKid extends MythicMob 
@@ -77,7 +79,8 @@ public class SkullKid extends MythicMob
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		super.loadCustomSkills(skills);
+		skills.add(new RageSkill (1, 60, 0.30));
+		skills.add(new AgressiveTeleportSkill (156, 10, Integer.MAX_VALUE, 2));
 		skills.add(new ResistanceBuffSkill (0, 60, 20, 60, 80));
 		skills.add(new ThundagaSkill (32, 20, 6, 16, 5.0f, 4, 60, 0.60));
 		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 12, 12, 0.75));

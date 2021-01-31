@@ -13,8 +13,7 @@ public class EpicMob extends MobEquipment
 	public EpicMob(MonsterType mobType) 
 	{
 		super(mobType);
-		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.EPIC);
-		
+		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.EPIC);	
 	}
 
 	@Override
