@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -28,6 +29,7 @@ import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillTask;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
@@ -168,21 +170,59 @@ public class CustomSkillsListener extends AGListener
 		LivingEntity entity = (LivingEntity) event.getEntity();
 		MobEquipment equipment = this.monsterInterpreter.getMobEquipmentFromEntity (entity);
 		
-		if (equipment != null)
+		if (equipment != null && this.mobSkillRunner.containsSkill(entity))
 		{
-			MobSkillTask mobTask = this.mobSkillRunner.getSkillTask(entity.getUniqueId());
-			if (mobTask != null)
+			for (AbstractSkill skill : this.mobSkillRunner.getSkillTask(entity.getUniqueId()).getSkillList())
 			{
-				for (AbstractSkill skill : mobTask.getSkillList())
+				if (skill instanceof PassiveProjectile)
 				{
-					if (skill instanceof PassiveProjectile)
-					{
-						PassiveProjectile projectileSkill = (PassiveProjectile) skill;
-						projectileSkill.modifyProjectile(entity, projectile, equipment);
-					}
+					((PassiveProjectile) skill).modifyProjectile(entity, projectile, equipment);
 				}
 			}
 		}
+	}
+	
+	/** Applies passive attack skills to any captured entity damage by entity events,
+	 *  which amplifies the damage output dealt by monsters that have certain Passive attack skills */
+	@EventHandler(priority = EventPriority.HIGH)
+	public void modifyEntityDamageEvent (EntityDamageByEntityEvent event)
+	{
+		if (event.getEntity() == null || event.getDamager() == null
+				|| !(event.getDamager() instanceof LivingEntity) || !(event.getEntity() instanceof LivingEntity))
+		{
+			return;
+		}
+		
+		LivingEntity damager = (LivingEntity) event.getDamager();
+		LivingEntity target = (LivingEntity) event.getEntity();
+		
+		MobEquipment damagerEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(damager);
+		MobEquipment targetEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(target);
+		
+		double totalBonusDamage = 0.0;
+		// Handles outgoing damage events if the damager is a custom mob with PassiveAttack skills
+		if (damagerEquipment != null && this.mobSkillRunner.containsSkill(damager))
+		{
+			for (AbstractSkill skill : this.mobSkillRunner.getSkillTask(damager.getUniqueId()).getSkillList())
+			{
+				if (skill instanceof PassiveAttack)
+				{
+					totalBonusDamage += ((PassiveAttack) skill).modifyOutgoingDamageEvent(event.getDamage(), damager, target, damagerEquipment);
+				}
+			}
+		}
+		// Handles incoming damage events if the target is a custom mob with PassiveAttack skills
+		if (targetEquipment != null && this.mobSkillRunner.containsSkill(target))
+		{
+			for (AbstractSkill skill : this.mobSkillRunner.getSkillTask(damager.getUniqueId()).getSkillList())
+			{
+				if (skill instanceof PassiveAttack)
+				{
+					totalBonusDamage += ((PassiveAttack) skill).modifyIncomingDamageEvent(event.getDamage(), damager, target, targetEquipment);
+				}
+			}
+		}
+		event.setDamage(event.getDamage() + totalBonusDamage);
 	}
 	
 	/** Filter's a skill caster's surrounding entities using the passed range into two categories,

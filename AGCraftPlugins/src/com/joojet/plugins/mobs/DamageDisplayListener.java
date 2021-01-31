@@ -71,7 +71,7 @@ public class DamageDisplayListener extends AGListener
 	
 	/** Listens to entity damage events and creates a damage display entity on
 	 *  the event entity's location over a small offset. */
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onEntityDamageByEntityEvent (EntityDamageByEntityEvent event)
 	{
 		if (AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL

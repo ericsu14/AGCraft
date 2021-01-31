@@ -111,6 +111,7 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile
 		double originalDamage = shooterEquipment.containsStat(MonsterStat.BASE_ARROW_DAMAGE) 
 				? shooterEquipment.getStat(MonsterStat.BASE_ARROW_DAMAGE) : arrow.getDamage();
 		arrow.setDamage(originalDamage * damageAmplifier);
+		arrow.setFireTicks(Integer.MAX_VALUE);
 		// Plays particle and sound effects after launching a projectile under rage
 		this.spawnColoredParticlesOnEntity(shooter, 10, 0, 0, 0, Particle.LAVA);
 		shooter.getWorld().spawnParticle(Particle.SWEEP_ATTACK, shooter.getLocation(), 1, 0.0, 0.0, 0.0);
