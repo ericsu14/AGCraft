@@ -23,14 +23,16 @@ public class SelfHealSkill extends AbstractBuffSkill {
 	}
 
 	@Override
-	protected void playBuffAnimation(LivingEntity entity) {
+	protected void playBuffAnimation(LivingEntity entity) 
+	{
 		entity.getWorld().spawnParticle(Particle.HEART, entity.getEyeLocation(), 10, 1.0, 1.0, 1.0);
 		this.spawnColoredParticlesOnEntity(entity, 30, 0, 255, 0, Particle.SPELL_MOB);
 		entity.getWorld().playSound(entity.getEyeLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
 	}
 
 	@Override
-	protected String getBuffText() {
+	protected String getBuffText() 
+	{
 		return ChatColor.BOLD + "" + ChatColor.GREEN + "SELF HEAL";
 	}
 

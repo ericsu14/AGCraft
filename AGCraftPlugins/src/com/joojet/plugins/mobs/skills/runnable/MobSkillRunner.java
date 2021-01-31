@@ -27,6 +27,13 @@ public class MobSkillRunner extends BukkitRunnable
 		}
 	}
 	
+	/** Retrieves the MobSkillTask instance attached to the entity with its assigned UUID
+	 *  @param UUID of the living entity whose task we are retrieving */
+	public MobSkillTask getSkillTask (UUID uuid)
+	{
+		return this.mobSkillRegistry.get(uuid);
+	}
+	
 	public void attachSkillToEntity (LivingEntity entity, MobSkillTask task)
 	{
 		if (!this.containsSkill(entity))

@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -27,14 +24,13 @@ import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
-import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillTask;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
-import com.joojet.plugins.mobs.util.LocationTools;
 
 public class CustomSkillsListener extends AGListener 
 {
@@ -156,62 +152,33 @@ public class CustomSkillsListener extends AGListener
 		}
 	}
 	
-	/** Captures entity-launched arrows and changes the arrow to its custom tipped arrow if
-	 *  it has one defined for it. This also modifies the base damage of the shot arrow
-	 *  if it belongs to a custom monster that has that custom attribute for arrows. */
+	/** Applies passive arrow skills to any projectile captured by the Entity Shoot Bow event
+	 *  if the shooter has any passive projectile skills. */
 	@EventHandler
 	public void modifyCustomArrows (EntityShootBowEvent event)
 	{
-		if (event.getProjectile() == null 
+		if (event.getProjectile() == null
+				|| !(event.getProjectile() instanceof Projectile)
 				|| !(event.getEntity() instanceof LivingEntity))
 		{
 			return;
 		}
 		
+		Projectile projectile = (Projectile) event.getProjectile();
 		LivingEntity entity = (LivingEntity) event.getEntity();
 		MobEquipment equipment = this.monsterInterpreter.getMobEquipmentFromEntity (entity);
 		
 		if (equipment != null)
 		{
-			if (event.getProjectile() instanceof Arrow)
+			MobSkillTask mobTask = this.mobSkillRunner.getSkillTask(entity.getUniqueId());
+			if (mobTask != null)
 			{
-				Arrow arrow = (Arrow) event.getProjectile();
-				/* Transforms arrow to a tipped arrow if its shooter has custom data 
-				 * specified for their arrows */
-				if (equipment.hasTippedArrow())
+				for (AbstractSkill skill : mobTask.getSkillList())
 				{
-					equipment.getTippedArrow().applyPotionDataToArrow(arrow);
-				}
-				
-				if (equipment.containsStat(MonsterStat.BASE_ARROW_DAMAGE))
-				{
-					arrow.setDamage(equipment.getStat(MonsterStat.BASE_ARROW_DAMAGE));
-				}
-				
-				/** Converts this arrow into a critical arrow if the mob has a crit chance stat set */
-				if (equipment.containsStat(MonsterStat.ARROW_CRITICAL_CHANCE))
-				{
-					boolean isCritical = (this.rand.nextDouble() <= equipment.getStat(MonsterStat.ARROW_CRITICAL_CHANCE));
-					arrow.setCritical(isCritical);
-					
-					if (isCritical && equipment.containsStat(MonsterStat.ARROW_PIERCING_CHANCE))
+					if (skill instanceof PassiveProjectile)
 					{
-						boolean isPiercing = (this.rand.nextDouble() <= equipment.getStat(MonsterStat.ARROW_PIERCING_CHANCE));
-						if (isPiercing)
-						{
-							arrow.setPierceLevel(1);
-							arrow.setKnockbackStrength(arrow.getKnockbackStrength() + 1);
-							
-							// Give an audio and visual cue that the mob is using a piercing arrow
-							Location entityLocation = entity.getEyeLocation();
-							entity.getWorld().playSound(entityLocation, Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0f, 1.0f);
-							entity.getWorld().spawnParticle(Particle.SWEEP_ATTACK, entityLocation, 1, 0.1, 0.1, 0.1);
-							for (int i = 0; i < 30; ++i)
-							{
-								entity.getWorld().spawnParticle(Particle.SPELL_MOB, LocationTools.addRandomOffsetOnLocation(entityLocation, 1),
-										0, (128 / 256D), 0, 0, 1, null);
-							}
-						}
+						PassiveProjectile projectileSkill = (PassiveProjectile) skill;
+						projectileSkill.modifyProjectile(entity, projectile, equipment);
 					}
 				}
 			}

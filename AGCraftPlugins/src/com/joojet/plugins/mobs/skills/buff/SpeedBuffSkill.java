@@ -33,7 +33,8 @@ public class SpeedBuffSkill extends AbstractBuffSkill {
 
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies,
-			List<LivingEntity> enemies) {
+			List<LivingEntity> enemies) 
+	{
 		return true;
 	}
 	

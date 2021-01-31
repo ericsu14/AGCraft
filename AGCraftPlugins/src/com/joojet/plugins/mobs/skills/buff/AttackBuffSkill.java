@@ -32,18 +32,21 @@ public class AttackBuffSkill extends AbstractBuffSkill
 	}
 	
 	@Override
-	protected boolean checkConditions(LivingEntity caster) {
+	protected boolean checkConditions(LivingEntity caster) 
+	{
 		return this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold();
 	}
 
 	@Override
-	protected void playBuffAnimation(LivingEntity entity) {
+	protected void playBuffAnimation(LivingEntity entity) 
+	{
 		this.spawnColoredParticlesOnEntity(entity, 30, 64, 0, 0, Particle.SPELL_MOB);
 		entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0F, 1.0F);
 	}
 
 	@Override
-	protected String getBuffText() {
+	protected String getBuffText() 
+	{
 		return ChatColor.DARK_RED + "" + ChatColor.BOLD + "✦ ATTACK" + ChatColor.GOLD + " UP";
 	}
 

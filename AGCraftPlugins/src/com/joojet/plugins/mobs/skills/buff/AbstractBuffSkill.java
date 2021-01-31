@@ -52,7 +52,8 @@ public abstract class AbstractBuffSkill extends AbstractSkill {
 		}
 		
 		/** Apply buffs on allies a half second later */
-		new BukkitRunnable () {
+		new BukkitRunnable () 
+		{
 			@Override
 			public void run ()
 			{

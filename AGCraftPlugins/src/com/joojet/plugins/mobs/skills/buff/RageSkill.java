@@ -30,7 +30,8 @@ public class RageSkill extends AbstractBuffSkill {
 	}
 	
 	@Override
-	protected void playBuffAnimation(LivingEntity entity) {
+	protected void playBuffAnimation(LivingEntity entity) 
+	{
 		this.spawnColoredParticlesOnEntity(entity, 30, 255, 255, 255, Particle.VILLAGER_ANGRY);
 		this.spawnColoredParticlesOnEntity(entity, 30, 64, 0, 0, Particle.SPELL_MOB);
 		entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1.0F, 1.0F);
