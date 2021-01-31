@@ -57,7 +57,8 @@ public class TrojanWarrior extends USCFaction
 	}
 	
 	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
 		super.loadCustomSkills(skills);
 		skills.add(new TeleportSkill (64, 20, Integer.MAX_VALUE, 1));
 	}

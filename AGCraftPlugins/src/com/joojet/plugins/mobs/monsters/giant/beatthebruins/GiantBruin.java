@@ -91,9 +91,9 @@ public class GiantBruin extends UCLAFaction
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AttackBuffSkill(0, 60, 50, 90, 8));
-		skills.add(new ResistanceBuffSkill (1, 60, 50, 90, 8));
-		skills.add(new ThundagaSkill (60, 20, Integer.MAX_VALUE, 10, 4.0f, 8, 80, 0.50));
+		skills.add(new AttackBuffSkill(0, 60, 32, 90, 8));
+		skills.add(new ResistanceBuffSkill (1, 32, 50, 90, 8));
+		skills.add(new ThundagaSkill (32, 20, Integer.MAX_VALUE, 10, 4.0f, 8, 80, 0.50));
 		skills.add(new SummonBruinSkill (32, 90, 2, 4, 10));
 	}
 }

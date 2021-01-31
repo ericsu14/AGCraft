@@ -52,8 +52,8 @@ public class GiantBruinTamer extends UCLAFaction
 	}
 
 	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
 		
 	}
 }
