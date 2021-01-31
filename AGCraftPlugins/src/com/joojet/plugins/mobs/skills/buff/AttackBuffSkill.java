@@ -11,7 +11,6 @@ import com.joojet.plugins.mobs.enums.MonsterClassifier;
 
 public class AttackBuffSkill extends AbstractBuffSkill 
 {
-	
 	/** A monster skill that applies a strength buff to the caster itself and its
 	 *  surrounding allies.
 	 *  @param amplifier - Strength of the potion effect

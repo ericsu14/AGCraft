@@ -13,5 +13,5 @@ public interface PassiveProjectile
 	 *  @param shooter - The LivingEntity who fired the projectile
 	 *  @param projectile - The projectile entity that was fired by a living entity
 	 *  @param shooterEquipment - The MobEquipment instance attached to the shooter */
-	public abstract void modifyProjectile (LivingEntity shooter, Projectile projectile, MobEquipment shooterEquipment);
+	public void modifyProjectile (LivingEntity shooter, Projectile projectile, MobEquipment shooterEquipment);
 }

@@ -7,8 +7,8 @@ import org.bukkit.entity.Projectile;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 
-public class TippedArrowSkill extends AbstractPassiveSkill implements PassiveProjectile {
-
+public class TippedArrowSkill extends AbstractPassiveSkill implements PassiveProjectile 
+{
 	/** If the entity has a tipped arrow in its MobEquipment instance, transform the projectile into that
 	 *  tipped arrow. */
 	@Override

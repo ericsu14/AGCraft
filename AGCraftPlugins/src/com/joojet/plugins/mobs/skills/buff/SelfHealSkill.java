@@ -8,7 +8,9 @@ import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffectType;
 
-public class SelfHealSkill extends AbstractBuffSkill {
+public class SelfHealSkill extends AbstractBuffSkill 
+{
+	/** Health threshold needed to be met before the entity can use this skill */
 	protected double threshold;
 	
 	/** Creates a self heal skill, allowing the mob to self heal once its health reaches below a certain threshold

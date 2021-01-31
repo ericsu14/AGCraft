@@ -13,7 +13,6 @@ import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 
 public class PiercingBlowSkill extends AbstractPassiveSkill implements PassiveProjectile 
 {
-	
 	/** Applies the piercing blow effect to any projectile shot by custom monsters who have this effect enabled.
 	 *  Piercing blow shots are always critical hits, have increased knockback power, and have a piercing effect
 	 *  allowing the arrow to pierce through shields.*/

@@ -8,9 +8,8 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 
-public class ArrowDamageModifierSkill extends AbstractPassiveSkill implements PassiveProjectile {
-	
-	
+public class ArrowDamageModifierSkill extends AbstractPassiveSkill implements PassiveProjectile 
+{	
 	/** If the entity has a base arrow damage modifier attribute, apply that base damage modifier to the shot
 	 * projectile */
 	@Override

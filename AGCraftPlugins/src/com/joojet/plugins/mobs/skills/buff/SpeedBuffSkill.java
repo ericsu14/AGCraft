@@ -10,8 +10,8 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
 
-public class SpeedBuffSkill extends AbstractBuffSkill {
-	
+public class SpeedBuffSkill extends AbstractBuffSkill 
+{	
 	/** Applies a speed buff to the caster itself and all of its allies within a certin radius
 	 *  specified by range.
 	 *  @param amplifier - Strength of the potion effect

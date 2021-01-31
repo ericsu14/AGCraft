@@ -15,8 +15,8 @@ import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
 
-public abstract class AbstractBuffSkill extends AbstractSkill {
-	
+public abstract class AbstractBuffSkill extends AbstractSkill 
+{	
 	/** Potion effect to be used */
 	protected PotionEffectType potionType;
 	/** Duration of the potion effect (in seconds)*/

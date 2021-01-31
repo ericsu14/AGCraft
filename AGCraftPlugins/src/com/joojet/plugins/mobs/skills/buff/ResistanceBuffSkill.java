@@ -12,7 +12,6 @@ import com.joojet.plugins.mobs.enums.MonsterClassifier;
 
 public class ResistanceBuffSkill extends AbstractBuffSkill
 {
-	
 	/** Applies a resistance buff to the caster itself and all of its allies surrounding it within
 	 *  a radius specified by range.
 	 *  @param amplifier - Strength of the potion effect
