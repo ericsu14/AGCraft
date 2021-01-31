@@ -20,7 +20,7 @@ public class FairSpawnController
 	protected int maxScanRadius;
 	/** Used to calculate a threat score for the player */
 	protected FairSpawnWeightContainer fairSpawnWeightContainer;
-	/** Bias used to amplify game difficulity if there are multiple players around nearby enemy spawns */
+	/** Bias used to amplify game difficulty if there are multiple players around nearby enemy spawns */
 	protected double bias;
 	
 	public FairSpawnController (Integer maxScanRadius)

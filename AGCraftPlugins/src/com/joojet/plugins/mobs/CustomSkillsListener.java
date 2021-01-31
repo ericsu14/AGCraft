@@ -11,6 +11,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -251,7 +252,8 @@ public class CustomSkillsListener extends AGListener
 			if (caster instanceof Player)
 			{
 				isAlly = ((livingEntity instanceof Player) || 
-						(entityEquipment != null && entityEquipment.getIgnoreList().contains(EntityType.PLAYER)));
+						(entityEquipment != null && entityEquipment.getIgnoreList().contains(EntityType.PLAYER)) ||
+						entityEquipment == null && !(livingEntity instanceof Monster));
 			}
 			// Otherwise, if the caster is any other living entity, the entity is an ally if:
 			// 1. The caster is in the entity's ignore list
