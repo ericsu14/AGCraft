@@ -15,7 +15,7 @@ public class FairSpawnController
 {	
 	/** Key used to reference the spawn radius for custom monsters, which is also the
 	 *  configurable max scan radius used for this class */
-	public static final String CUSTOM_MOB_SCAN_RADIUS = "custom-mob-scan-range";
+	public static final String CUSTOM_MOB_SCAN_RADIUS = "custom-mob-spawn-radius";
 	/** Max scan radius used to calculate a player's threat score when spawning in monsters */
 	protected int maxScanRadius;
 	/** Used to calculate a threat score for the player */
