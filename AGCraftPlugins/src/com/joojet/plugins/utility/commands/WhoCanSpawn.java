@@ -1,5 +1,7 @@
 package com.joojet.plugins.utility.commands;
 
+import java.text.DecimalFormat;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -31,14 +33,15 @@ public class WhoCanSpawn extends AGCommandExecutor
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
+			DecimalFormat df = new DecimalFormat ("#.##");
 			double averageThreatScore = this.fairSpawnController.getAverageThreatScore(player);
 			int nearbyPlayers = this.fairSpawnController.getNearbyPlayers(player);
 			
-			player.sendMessage(ChatColor.GOLD + "Individual threat score: " + ChatColor.AQUA +  this.fairSpawnController.getIndividualThreatScore(player));
+			player.sendMessage(ChatColor.GOLD + "Individual threat score: " + ChatColor.AQUA +  df.format(this.fairSpawnController.getIndividualThreatScore(player)));
 			
 			if (nearbyPlayers > 0)
 			{
-				player.sendMessage(ChatColor.GOLD + "Combined threat score: " + ChatColor.AQUA + averageThreatScore);
+				player.sendMessage(ChatColor.GOLD + "Combined threat score: " + ChatColor.AQUA + df.format(averageThreatScore));
 				player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "(There are " + ChatColor.GOLD + nearbyPlayers + ChatColor.GRAY + "" + ChatColor.ITALIC + " nearby player(s) affecting the combined threat score)");
 			}
 			
