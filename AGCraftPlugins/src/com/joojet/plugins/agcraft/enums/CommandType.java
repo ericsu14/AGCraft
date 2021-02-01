@@ -21,7 +21,8 @@ public enum CommandType
 	CHANGE_SERVER_MODE (PermissionType.ADMIN),
 	RELOAD_CONFIG_FILE (PermissionType.ADMIN),
 	FIREWORKS (PermissionType.PLAYER),
-	SUMMON_ENTITY (PermissionType.ADMIN);
+	SUMMON_ENTITY (PermissionType.ADMIN),
+	WHO_CAN_SPAWN (PermissionType.PLAYER);
 	
 	private PermissionType permissionType;
 	

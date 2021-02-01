@@ -10,6 +10,7 @@ import com.joojet.plugins.mobs.spawnhandlers.AmplifiedMobHandler;
 import com.joojet.plugins.mobs.spawnhandlers.BeatTheBruinsHandler;
 import com.joojet.plugins.mobs.spawnhandlers.JulyFourthHandler;
 import com.joojet.plugins.mobs.spawnhandlers.UHCHandler;
+import com.joojet.plugins.mobs.spawning.FairSpawnController;
 import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.enums.MinigameRewardType;
@@ -47,6 +48,7 @@ public class ServerConfigFile extends AbstractConfigFile
 		data.put(Warp.WARP_RADIUS_TAG, 6);
 		data.put (Warp.WARP_HEALTH_THRESHOLD_TAG, 6);
 		data.put(SummonEntity.MAX_SUMMONED_ENTITIES_TAG, 10);
+		data.put(FairSpawnController.CUSTOM_MOB_SCAN_RADIUS, 128);
 		return data;
 	}
 	

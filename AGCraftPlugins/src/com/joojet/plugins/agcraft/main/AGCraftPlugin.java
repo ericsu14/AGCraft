@@ -221,6 +221,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.addPlayerCommand (new ReloadConfigFile ());
 		this.addPlayerCommand (new FireworksCommand(this.musicListener));
 		this.addPlayerCommand (new SummonEntity (this.summonTypeInterpreter, this.bossBarController));
+		this.addPlayerCommand (new WhoCanSpawn ());
 		
 		// Tab Completer
 		this.addTabCompleter(new BibleTabCompleter (this.bibleInterpreter));

@@ -84,6 +84,10 @@ commands:
     description: Summons a custom entity by its entity ID
     usage: /summonEntity <entity ID> <number of entities>
     permission: agcraft.admin
+  whocanspawn:
+    description: Lists your current individual and combined threat score and outputs the types of custom monsters that can spawn within your vincinity.
+    usage: /whocanspawn
+    permission: agcraft.player
 
 permissions:
   agcraft.*:

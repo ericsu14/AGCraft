@@ -159,5 +159,6 @@ public abstract class AbstractSpawnHandler
 	public void getSpawnChanceFromConfigFile (ServerConfigFile config)
 	{
 		this.spawnChance = config.getValueAsDouble(this.spawnChanceKey);
+		this.fairSpawnController.setMaxRadius(config.getValueAsInteger(FairSpawnController.CUSTOM_MOB_SCAN_RADIUS));
 	}
 }
