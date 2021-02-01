@@ -11,7 +11,6 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
@@ -22,8 +21,6 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, P
 	private boolean enraged;
 	/** Health percentage threshold the monster's health needs to reach before this skill is activated */
 	private double threshold;
-	/** Base damage amplifier used to increase damage of shot projectiles under rage */
-	private final double baseArrowAmplifier = 0.10;
 	/** Base damage amplifier used to increase incoming and outgoing damage when enraged */
 	private final double baseDamageAmplifier = 0.10;
 	
@@ -108,11 +105,6 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, P
 		}
 		
 		AbstractArrow arrow = (AbstractArrow) projectile;
-		// Adds a damage bonus to the launched projectile
-		double damageAmplifier = 1.0 + (baseArrowAmplifier * (this.potionStrength + 1));
-		double originalDamage = shooterEquipment.containsStat(MonsterStat.BASE_ARROW_DAMAGE) 
-				? shooterEquipment.getStat(MonsterStat.BASE_ARROW_DAMAGE) : arrow.getDamage();
-		arrow.setDamage(originalDamage * damageAmplifier);
 		arrow.setFireTicks(Integer.MAX_VALUE);
 		// Plays particle and sound effects after launching a projectile under rage
 		this.spawnColoredParticlesOnEntity(shooter, 10, 0, 0, 0, Particle.LAVA);

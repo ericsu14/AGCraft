@@ -187,29 +187,18 @@ public class CustomSkillsListener extends AGListener
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void modifyEntityDamageEvent (EntityDamageByEntityEvent event)
 	{
-		if (event.getEntity() == null || event.getDamager() == null || !(event.getDamager() instanceof LivingEntity))
+		if (event.getEntity() == null || event.getDamager() == null)
 		{
 			return;
 		}
 		
-		/** Retrieves the damager entity from the projectile source if the damaging entity is a projectile */
-		Entity targetEnt;
-		if (event.getEntity() instanceof Projectile)
-		{
-			targetEnt = (Entity) ((Projectile) event.getEntity()).getShooter();
-		}
-		else
-		{
-			targetEnt = event.getEntity();
-		}
+		LivingEntity damager = this.getLivingEntity(event.getDamager());
+		LivingEntity target = this.getLivingEntity(event.getEntity());
 		
-		if (targetEnt == null || !(targetEnt instanceof LivingEntity))
+		if (damager == null || target == null)
 		{
 			return;
 		}
-		
-		LivingEntity damager = (LivingEntity) event.getDamager();
-		LivingEntity target = (LivingEntity) targetEnt;
 		
 		MobEquipment damagerEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(damager);
 		MobEquipment targetEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(target);
@@ -238,6 +227,19 @@ public class CustomSkillsListener extends AGListener
 			}
 		}
 		event.setDamage(event.getDamage() + totalBonusDamage);
+	}
+	
+	/** Casts an entity into a living entity if applicable
+	 *  @param source - The source entity */
+	protected LivingEntity getLivingEntity (Entity source)
+	{
+		Entity entity = source;
+		if (source instanceof Projectile)
+		{
+			entity = (Entity) ((Projectile) source).getShooter();
+		}
+		
+		return (entity instanceof LivingEntity) ? (LivingEntity) entity : null;
 	}
 	
 	/** Filter's a skill caster's surrounding entities using the passed range into two categories,
