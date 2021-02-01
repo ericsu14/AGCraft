@@ -39,10 +39,10 @@ public class WhoCanSpawn extends AGCommandExecutor
 			if (nearbyPlayers > 0)
 			{
 				player.sendMessage(ChatColor.GOLD + "Combined threat score: " + ChatColor.AQUA + averageThreatScore);
-				player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "(There are " + ChatColor.GOLD + nearbyPlayers + ChatColor.GRAY + "" + ChatColor.ITALIC + " affecting the combined threat score)");
+				player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "(There are " + ChatColor.GOLD + nearbyPlayers + ChatColor.GRAY + "" + ChatColor.ITALIC + " nearby player(s) affecting the combined threat score)");
 			}
 			
-			player.sendMessage(ChatColor.GOLD + "Classifications of monsters that can spawn around you: ");
+			player.sendMessage(ChatColor.GOLD + "Types of monsters that can spawn around you: ");
 			StringBuilder classifications = new StringBuilder ();
 			for (MonsterClassifier classifier : MonsterClassifier.values())
 			{
@@ -53,7 +53,7 @@ public class WhoCanSpawn extends AGCommandExecutor
 					classifications.append(classifier.toString().toUpperCase());
 					classifications.append(ChatColor.GRAY);
 					classifications.append(" [");
-					classifications.append(ChatColor.GOLD);
+					classifications.append(ChatColor.AQUA);
 					classifications.append(classifier.getThreshold());
 					classifications.append(ChatColor.GRAY);
 					classifications.append("]");
