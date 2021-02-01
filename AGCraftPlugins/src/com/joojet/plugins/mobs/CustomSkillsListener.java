@@ -16,8 +16,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 
@@ -157,17 +157,16 @@ public class CustomSkillsListener extends AGListener
 	/** Applies passive arrow skills to any projectile captured by the Entity Shoot Bow event
 	 *  if the shooter has any passive projectile skills. */
 	@EventHandler
-	public void modifyCustomArrows (EntityShootBowEvent event)
+	public void modifyCustomProjectile (ProjectileLaunchEvent event)
 	{
-		if (event.getProjectile() == null
-				|| !(event.getProjectile() instanceof Projectile)
-				|| !(event.getEntity() instanceof LivingEntity))
+		if (event.getEntity() == null || !(event.getEntity() instanceof Projectile))
 		{
 			return;
 		}
 		
-		Projectile projectile = (Projectile) event.getProjectile();
-		LivingEntity entity = (LivingEntity) event.getEntity();
+		Projectile projectile = (Projectile) event.getEntity();
+		LivingEntity entity = this.getLivingEntity(projectile);
+		
 		MobEquipment equipment = this.monsterInterpreter.getMobEquipmentFromEntity (entity);
 		
 		if (equipment != null && this.mobSkillRunner.containsSkill(entity))
@@ -227,19 +226,6 @@ public class CustomSkillsListener extends AGListener
 			}
 		}
 		event.setDamage(event.getDamage() + totalBonusDamage);
-	}
-	
-	/** Casts an entity into a living entity if applicable
-	 *  @param source - The source entity */
-	protected LivingEntity getLivingEntity (Entity source)
-	{
-		Entity entity = source;
-		if (source instanceof Projectile)
-		{
-			entity = (Entity) ((Projectile) source).getShooter();
-		}
-		
-		return (entity instanceof LivingEntity) ? (LivingEntity) entity : null;
 	}
 	
 	/** Filter's a skill caster's surrounding entities using the passed range into two categories,
@@ -315,6 +301,19 @@ public class CustomSkillsListener extends AGListener
 				enemies.add(livingEntity);
 			}
 		}
+	}
+	
+	/** Casts an entity into a living entity if applicable
+	 *  @param source - The source entity */
+	protected LivingEntity getLivingEntity (Entity source)
+	{
+		Entity entity = source;
+		if (source instanceof Projectile)
+		{
+			entity = (Entity) ((Projectile) source).getShooter();
+		}
+		
+		return (entity instanceof LivingEntity) ? (LivingEntity) entity : null;
 	}
 	
 	/** Loads custom skills onto the entity in the next second */
