@@ -117,7 +117,7 @@ public abstract class AbstractConfigFile
 			Object value = this.configFileValues.get(key);
 			if (outputInformation)
 			{
-				AGCraftPlugin.logger.info("Retrieved " + value.toString() + " for the key, " + key);
+				AGCraftPlugin.logger.config("Retrieved " + value.toString() + " for the key, " + key);
 			}
 			return value;
 		}

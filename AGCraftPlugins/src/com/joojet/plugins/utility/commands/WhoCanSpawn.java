@@ -34,23 +34,29 @@ public class WhoCanSpawn extends AGCommandExecutor
 			double averageThreatScore = this.fairSpawnController.getAverageThreatScore(player);
 			int nearbyPlayers = this.fairSpawnController.getNearbyPlayers(player);
 			
-			player.sendMessage(ChatColor.AQUA + "Individual threat score: " + ChatColor.GOLD +  this.fairSpawnController.getIndividualThreatScore(player));
+			player.sendMessage(ChatColor.GOLD + "Individual threat score: " + ChatColor.AQUA +  this.fairSpawnController.getIndividualThreatScore(player));
 			
 			if (nearbyPlayers > 0)
 			{
-				player.sendMessage(ChatColor.AQUA + "Combined threat score: " + ChatColor.GOLD + averageThreatScore);
-				player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "(There are " + ChatColor.GOLD + nearbyPlayers + ChatColor.AQUA +" affecting the combined threat score)");
+				player.sendMessage(ChatColor.GOLD + "Combined threat score: " + ChatColor.AQUA + averageThreatScore);
+				player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "(There are " + ChatColor.GOLD + nearbyPlayers + ChatColor.GRAY + "" + ChatColor.ITALIC + " affecting the combined threat score)");
 			}
 			
-			player.sendMessage(ChatColor.AQUA + "Classifications of monsters that can spawn around you: ");
+			player.sendMessage(ChatColor.GOLD + "Classifications of monsters that can spawn around you: ");
 			StringBuilder classifications = new StringBuilder ();
 			for (MonsterClassifier classifier : MonsterClassifier.values())
 			{
-				if (averageThreatScore <= classifier.getThreshold())
+				if (classifier.getThreshold() <= averageThreatScore)
 				{
 					classifications.append(classifier.getChatColor());
 					classifications.append(ChatColor.BOLD);
 					classifications.append(classifier.toString().toUpperCase());
+					classifications.append(ChatColor.GRAY);
+					classifications.append(" [");
+					classifications.append(ChatColor.GOLD);
+					classifications.append(classifier.getThreshold());
+					classifications.append(ChatColor.GRAY);
+					classifications.append("]");
 					classifications.append("  ");
 				}
 			}

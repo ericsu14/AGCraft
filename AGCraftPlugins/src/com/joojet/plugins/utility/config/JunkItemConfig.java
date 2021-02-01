@@ -39,7 +39,7 @@ public class JunkItemConfig extends AbstractConfigFile
 				for (Material material : materials)
 				{
 					mapping.put(material, classifier);
-					AGCraftPlugin.logger.info ("Added " + material.toString() + " to the junk item classifier, " + currKey);
+					AGCraftPlugin.logger.config ("Added " + material.toString() + " to the junk item classifier, " + currKey);
 				}
 			}
 		}
