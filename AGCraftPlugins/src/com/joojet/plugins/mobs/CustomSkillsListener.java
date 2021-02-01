@@ -187,29 +187,29 @@ public class CustomSkillsListener extends AGListener
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void modifyEntityDamageEvent (EntityDamageByEntityEvent event)
 	{
-		if (event.getEntity() == null || event.getDamager() == null || !(event.getEntity() instanceof LivingEntity))
+		if (event.getEntity() == null || event.getDamager() == null || !(event.getDamager() instanceof LivingEntity))
 		{
 			return;
 		}
 		
 		/** Retrieves the damager entity from the projectile source if the damaging entity is a projectile */
-		Entity damagerEnt;
-		if (event.getDamager() instanceof Projectile)
+		Entity targetEnt;
+		if (event.getEntity() instanceof Projectile)
 		{
-			damagerEnt = (Entity) ((Projectile) event.getDamager()).getShooter();
+			targetEnt = (Entity) ((Projectile) event.getEntity()).getShooter();
 		}
 		else
 		{
-			damagerEnt = event.getDamager();
+			targetEnt = event.getEntity();
 		}
 		
-		if (damagerEnt == null || !(damagerEnt instanceof LivingEntity))
+		if (targetEnt == null || !(targetEnt instanceof LivingEntity))
 		{
 			return;
 		}
 		
-		LivingEntity damager = (LivingEntity) damagerEnt;
-		LivingEntity target = (LivingEntity) event.getEntity();
+		LivingEntity damager = (LivingEntity) event.getDamager();
+		LivingEntity target = (LivingEntity) targetEnt;
 		
 		MobEquipment damagerEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(damager);
 		MobEquipment targetEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(target);
