@@ -7,6 +7,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -105,10 +106,10 @@ public class DamageDisplayListener extends AGListener
 				damageType = DamageType.ALLIED;
 			}
 		}
-		// Checks for damage inflicted by arrows
-		else if (eventDamager instanceof AbstractArrow)
+		// Checks for damage inflicted by projectiles
+		else if (eventDamager instanceof Projectile)
 		{
-			AbstractArrow projectile = (AbstractArrow) eventDamager;
+			Projectile projectile = (Projectile) eventDamager;
 			if (projectile.getShooter() != null && projectile.getShooter() instanceof LivingEntity)
 			{
 				MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) projectile.getShooter());
@@ -125,7 +126,7 @@ public class DamageDisplayListener extends AGListener
 						damageType = DamageType.TRIDENT;
 						break;
 					case ARROW:
-						damageType = (projectile.isCritical()) ? DamageType.PROJECTILE_CRITICAL : DamageType.PROJECTILE;
+						damageType = (((AbstractArrow) projectile).isCritical()) ? DamageType.PROJECTILE_CRITICAL : DamageType.PROJECTILE;
 						break;
 					default:
 						break;

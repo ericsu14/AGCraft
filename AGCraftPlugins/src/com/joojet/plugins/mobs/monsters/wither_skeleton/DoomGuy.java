@@ -96,7 +96,8 @@ public class DoomGuy extends MythicMob
 		skills.add(new WeaponSwitchSkill (200, 1, 6, new DoomBlade (this.color)) 
 		{
 			@Override
-			protected void playAnimation(LivingEntity caster, DamageDisplayListener damageDisplayListener) {
+			protected void playAnimation(LivingEntity caster, DamageDisplayListener damageDisplayListener) 
+			{
 				caster.getLocation().getWorld().spawnParticle(Particle.ASH, caster.getLocation(), 10, 0.1, 0.1, 0.1);
 				caster.getLocation().getWorld().spawnParticle(Particle.SPELL_INSTANT, caster.getLocation(), 10, 0.1, 0.1, 0.1);
 				caster.getLocation().getWorld().playSound(caster.getLocation(), Sound.ENTITY_ILLUSIONER_CAST_SPELL, 1.0f, 1.0f);
@@ -105,12 +106,14 @@ public class DoomGuy extends MythicMob
 
 			@Override
 			protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies,
-					List<LivingEntity> enemies) {
+					List<LivingEntity> enemies) 
+			{
 				return true;
 			}
 
 			@Override
-			protected boolean checkConditions(LivingEntity caster) {
+			protected boolean checkConditions(LivingEntity caster) 
+			{
 				return this.checkHealthIsBelowThreshold(caster, 0.40);
 			}
 			

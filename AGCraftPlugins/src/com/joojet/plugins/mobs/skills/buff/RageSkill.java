@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.AbstractArrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;
 import org.bukkit.potion.PotionEffect;
@@ -113,8 +114,8 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, P
 	}
 
 	@Override
-	public double modifyOutgoingDamageEvent(double damage, LivingEntity damager, LivingEntity target,
-			MobEquipment damagerEquipment) 
+	public double modifyOutgoingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
+			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
 		double bonusDamage = 0.0;
 		if (this.enraged)
@@ -128,7 +129,7 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, P
 
 	/** Custom mobs who are currently enraged takes more damage than usual. */
 	@Override
-	public double modifyIncomingDamageEvent(double damage, LivingEntity damager, LivingEntity target,
+	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
 			MobEquipment targetEquipment) 
 	{
 		double bonusDamage = 0.0;

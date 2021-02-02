@@ -15,6 +15,7 @@ import com.joojet.plugins.mobs.equipment.head.ScruffyFace;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.SelfHealSkill;
+import com.joojet.plugins.mobs.skills.passive.IcySnowballSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 
 public class Scruffy extends AlliedMob
@@ -43,6 +44,7 @@ public class Scruffy extends AlliedMob
 		skills.add(new ThundagaSkill (20, 14, Integer.MAX_VALUE, 12, 2.0F, 6, 20, 1.00));
 		skills.add(new SelfHealSkill (2, 30, 8, 0.50));
 		skills.add(new TeleportSkill (64, 60, Integer.MAX_VALUE, 1));
+		skills.add(new IcySnowballSkill (0.60, 16.0));
 	}
 		
 }

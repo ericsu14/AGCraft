@@ -203,6 +203,7 @@ public class CustomSkillsListener extends AGListener
 		MobEquipment targetEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(target);
 		
 		double totalBonusDamage = 0.0;
+		double currDamage = 0.0;
 		// Handles outgoing damage events if the damager is a custom mob with PassiveAttack skills
 		if (damagerEquipment != null && this.mobSkillRunner.containsSkill(damager))
 		{
@@ -210,7 +211,15 @@ public class CustomSkillsListener extends AGListener
 			{
 				if (skill instanceof PassiveAttack)
 				{
-					totalBonusDamage += ((PassiveAttack) skill).modifyOutgoingDamageEvent(event.getDamage(), damager, target, damagerEquipment);
+					currDamage = ((PassiveAttack) skill).modifyOutgoingDamageEvent(event.getDamage(), event.getDamager(), damager, target,
+							damagerEquipment, targetEquipment);
+					// When Double.MIN_VALUE is returned then the damage event is canceled.
+					if (currDamage == Double.MIN_VALUE)
+					{
+						event.setCancelled(true);
+						return;
+					}
+					totalBonusDamage += currDamage;
 				}
 			}
 		}
@@ -221,7 +230,13 @@ public class CustomSkillsListener extends AGListener
 			{
 				if (skill instanceof PassiveAttack)
 				{
-					totalBonusDamage += ((PassiveAttack) skill).modifyIncomingDamageEvent(event.getDamage(), damager, target, targetEquipment);
+					currDamage = ((PassiveAttack) skill).modifyIncomingDamageEvent(event.getDamage(), event.getDamager(), damager, target, targetEquipment);
+					if (currDamage == Double.MIN_VALUE)
+					{
+						event.setCancelled(true);
+						return;
+					}
+					totalBonusDamage += currDamage;
 				}
 			}
 		}

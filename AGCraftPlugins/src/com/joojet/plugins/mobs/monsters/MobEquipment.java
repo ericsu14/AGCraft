@@ -10,6 +10,7 @@ import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
@@ -414,6 +415,25 @@ public abstract class MobEquipment
 			}
 		}
 		return false;
+	}
+	
+	/** Checks if this monster is allies with this mob
+	 *  @param ally The ally being checked
+	 * 	@param allyEquipment The ally's monster's MonEquipment instance */
+	public boolean isAlliesOf (LivingEntity ally, MobEquipment allyEquipment)
+	{
+		if (allyEquipment != null)
+		{
+			EnumSet <Faction> factions = allyEquipment.getFactions();
+			for (Faction faction : factions)
+			{
+				if (this.factions.contains(faction))
+				{
+					return true;
+				}
+			}
+		}
+		return this.ignoreList.contains(ally.getType());
 	}
 	
 	/** Returns true if this monster has a mounted mob */

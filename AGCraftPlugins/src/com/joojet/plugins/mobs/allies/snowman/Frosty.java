@@ -14,6 +14,7 @@ import com.joojet.plugins.mobs.equipment.head.FrostyFace;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.SelfHealSkill;
+import com.joojet.plugins.mobs.skills.passive.IcySnowballSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 
 public class Frosty extends AlliedMob
@@ -41,5 +42,6 @@ public class Frosty extends AlliedMob
 		skills.add(new ThundagaSkill (20, 14, Integer.MAX_VALUE, 12, 1.0F, 3, 20, 1.00));
 		skills.add(new SelfHealSkill (1, 30, 1, 0.40));
 		skills.add(new TeleportSkill (64, 60, Integer.MAX_VALUE, 1));
+		skills.add(new IcySnowballSkill (0.45, 10.0));
 	}
 }

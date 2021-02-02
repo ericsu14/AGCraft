@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
@@ -20,9 +21,11 @@ import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.runnable.ExplodingBlockRunnable;
 
-public class AnvilDropSkill extends AbstractAttackSkill {
+public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack {
 	
 	/** Explosion power of the falling anvil */
 	protected float power;
@@ -111,6 +114,21 @@ public class AnvilDropSkill extends AbstractAttackSkill {
 	protected boolean checkConditions(LivingEntity caster) 
 	{
 		return true;
+	}
+	
+	/** Prevents damage from being dealt to allied mobs */
+	@Override
+	public double modifyOutgoingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
+			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
+	{
+		return damagerEquipment.isAlliesOf(target, targetEquipment) ? Double.MIN_VALUE : 0;
+	}
+
+	@Override
+	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
+			MobEquipment targetEquipment) 
+	{
+		return 0;
 	}
 
 }

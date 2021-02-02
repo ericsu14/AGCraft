@@ -5,15 +5,18 @@ import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.runnable.ThunderSkillRunnable;
 
-public class ThundagaSkill extends AbstractAttackSkill {
+public class ThundagaSkill extends AbstractAttackSkill implements PassiveAttack {
 	/** Number of targets this skill is targeting per use */
 	protected int numTargets;
 	/** Number of ticks before thunder casts over affected area */
@@ -81,6 +84,21 @@ public class ThundagaSkill extends AbstractAttackSkill {
 	public int getDelayTicks ()
 	{
 		return this.thunderDelay;
+	}
+
+	/** Prevents damage from being dealt to allied mobs */
+	@Override
+	public double modifyOutgoingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
+			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
+	{
+		return damagerEquipment.isAlliesOf(target, targetEquipment) ? Double.MIN_VALUE : 0;
+	}
+
+	@Override
+	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
+			MobEquipment targetEquipment) 
+	{
+		return 0;
 	}
 
 }
