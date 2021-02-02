@@ -30,6 +30,8 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 	protected double baseSnowballDamage;
 	/** Duration of the slowness effect from thrown snowballs */
 	protected final int slowDuration = 100;
+	/** Base damage multiplier used to add a random offset in the damage calculations */
+	protected final double damageMultiplierOffset = 0.10;
 	
 	/** Allows the custom monster to throw damaging snowballs that inflict slowness on its targets
 	 *  @param snowballChance Chance of shooting an icy snowball
@@ -62,7 +64,7 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 			target.getWorld().playSound(target.getLocation(), Sound.BLOCK_SNOW_BREAK, 1.0f, 1.0f);
 			target.getWorld().playSound(target.getLocation(), Sound.ENTITY_PLAYER_ATTACK_CRIT, 0.8f, 1.0f);
 			target.addPotionEffect(new PotionEffect (PotionEffectType.SLOW, this.slowDuration, 0));
-			return this.baseSnowballDamage;
+			return this.calculateDamage();
 		}
 		return 0;
 	}
@@ -111,5 +113,13 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 		{
 			this.snowballs.remove(uuid);
 		}
+	}
+	
+	/** Calculates the damage of a thrown snowball using the assigned base damage
+	 *  added with a random offset based on the damage multiplier. */
+	public double calculateDamage ()
+	{
+		return this.baseSnowballDamage * 
+				this.random.nextInt ((int) Math.floor(this.baseSnowballDamage * this.damageMultiplierOffset) + 1);
 	}
 }
