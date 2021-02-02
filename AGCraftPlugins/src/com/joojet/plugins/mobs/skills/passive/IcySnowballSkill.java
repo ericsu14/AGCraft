@@ -64,7 +64,7 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 			target.getWorld().playSound(target.getLocation(), Sound.BLOCK_SNOW_BREAK, 1.0f, 1.0f);
 			target.getWorld().playSound(target.getLocation(), Sound.ENTITY_PLAYER_ATTACK_CRIT, 0.8f, 1.0f);
 			target.addPotionEffect(new PotionEffect (PotionEffectType.SLOW, this.slowDuration, 0));
-			return this.calculateDamage();
+			return this.baseSnowballDamage + this.calculateOffset();
 		}
 		return 0;
 	}
@@ -117,7 +117,7 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 	
 	/** Calculates the damage of a thrown snowball using the assigned base damage
 	 *  added with a random offset based on the damage multiplier. */
-	public double calculateDamage ()
+	public double calculateOffset ()
 	{
 		return this.baseSnowballDamage * 
 				this.random.nextInt ((int) Math.floor(this.baseSnowballDamage * this.damageMultiplierOffset) + 1);
