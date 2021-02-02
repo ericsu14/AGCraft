@@ -1,6 +1,8 @@
 package com.joojet.plugins.mobs.skills.passive;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Particle;
@@ -21,7 +23,7 @@ import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 public class IcySnowballSkill extends AbstractPassiveSkill implements PassiveProjectile, PassiveAttack
 {
 	/** Tracks the UUID of all snowballs fired by this entity*/
-	protected HashSet <UUID> snowballs;
+	protected HashMap <UUID, Projectile> snowballs;
 	/** Chance of spawning an Icy snowball */
 	protected double snowballChance;
 	/** Base damage of thrown snowballs */
@@ -35,7 +37,7 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 	public IcySnowballSkill (double snowballChance, double baseDamage)
 	{
 		super();
-		this.snowballs = new HashSet <UUID> ();
+		this.snowballs = new HashMap <UUID, Projectile> ();
 		this.snowballChance = snowballChance;
 		this.baseSnowballDamage = baseDamage;
 	}
@@ -44,7 +46,7 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 	public double modifyOutgoingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
 			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
-		if (this.snowballs.contains(source.getUniqueId()))
+		if (this.snowballs.containsKey(source.getUniqueId()))
 		{
 			this.snowballs.remove(source.getUniqueId());
 			
@@ -81,12 +83,33 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 		}
 		
 		// Adds projectile's UUID into the snowball UUID table
-		this.snowballs.add(projectile.getUniqueId());
+		this.snowballs.put(projectile.getUniqueId(), projectile);
 		
 		// Plays a particle effect indicating the skillcaster has just fired a special snowball
 		this.spawnColoredParticlesOnEntity(shooter, 15, 173, 216, 230, Particle.REDSTONE);
 		this.spawnColoredParticlesOnEntity(shooter, 15, 255, 255, 255, Particle.REDSTONE);
 		this.spawnColoredParticlesOnEntity(shooter, 10, 0, 0, 0, Particle.SPELL_INSTANT);
 		shooter.getWorld().playSound(shooter.getLocation(), Sound.ENTITY_SNOW_GOLEM_HURT, 1.0f, 1.0f);
+	}
+	
+	/** Cleanup routine every second for removing all dead snowballs that never hit their targets */
+	@Override
+	public void update (LivingEntity caster)
+	{
+		super.update(caster);
+		
+		List <UUID> deadSnowballs = new ArrayList <UUID> ();
+		for (Projectile projectile : this.snowballs.values())
+		{
+			if (projectile == null || projectile.isDead())
+			{
+				deadSnowballs.add(projectile.getUniqueId());
+			}
+		}
+		
+		for (UUID uuid : deadSnowballs)
+		{
+			this.snowballs.remove(uuid);
+		}
 	}
 }

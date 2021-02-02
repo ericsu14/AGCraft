@@ -13,8 +13,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
@@ -63,7 +61,6 @@ public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack
 		for (LivingEntity target : targets)
 		{
 			FallingBlock anvil = this.spawnAnvil(target.getWorld(), target.getLocation().add(0.0, 6.0, 0.0));
-			caster.addPotionEffect(new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 80, 3));
 			new ExplodingBlockRunnable (anvil, 100, this.power, caster).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
 		}
 	}

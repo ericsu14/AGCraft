@@ -7,8 +7,6 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
@@ -71,7 +69,6 @@ public class AnvilThrowSkill extends AnvilDropSkill {
 			
 			FallingBlock anvil = this.spawnAnvil(target.getWorld(), caster.getLocation());
 			anvil.setVelocity(velocity.normalize());
-			caster.addPotionEffect(new PotionEffect (PotionEffectType.DAMAGE_RESISTANCE, 80, 3));
 			
 			new ExplodingBlockRunnable (anvil, 140, this.power, caster).runTaskTimer(AGCraftPlugin.plugin, 10, 1);
 		}
