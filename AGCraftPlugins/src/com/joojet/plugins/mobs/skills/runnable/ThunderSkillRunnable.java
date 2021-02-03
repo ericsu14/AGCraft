@@ -9,7 +9,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 
-public class ThunderSkillRunnable extends BukkitRunnable {
+public class ThunderSkillRunnable extends BukkitRunnable 
+{
 	/** A reference to the thundaga skill instance using this runnable  */
 	protected ThundagaSkill skill;
 	/** The caster casting the skill */
@@ -54,13 +55,16 @@ public class ThunderSkillRunnable extends BukkitRunnable {
 					targetLocation.getWorld().strikeLightning(targetLocation);
 					targetLocation.getWorld().createExplosion(targetLocation.add(0.0, 1.0, 0.0), this.skill.getExplosionPower(), false, false, this.caster);
 				}
-
-				targetLocation.getWorld().spawnParticle(Particle.SPELL_INSTANT, targetLocation, 2, 1.0, 1.0, 1.0);
-				targetLocation.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, targetLocation, 4, 1.0, 1.0, 1.0);
-				if (!this.caster.isDead())
+				
+				else
 				{
-					this.caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, this.caster.getLocation(), 2, 1.0, 1.0, 1.0);
-					this.caster.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, this.caster.getLocation(), 4, 1.0, 1.0, 1.0);
+					targetLocation.getWorld().spawnParticle(Particle.SPELL_INSTANT, targetLocation, 4, 1.0, 1.0, 1.0);
+					targetLocation.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, targetLocation, 2, 1.0, 1.0, 1.0);
+					if (!this.caster.isDead())
+					{
+						skill.spawnColoredParticlesOnEntity(this.caster, 2, 0, 0, 0, Particle.VILLAGER_ANGRY);
+						this.caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, this.caster.getLocation(), 5, 1.0, 1.0, 1.0);
+					}
 				}
 			}
 		}

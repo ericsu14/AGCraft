@@ -249,6 +249,10 @@ public class CustomSkillsListener extends AGListener
 			{
 				((Mob) damager).setTarget(null);
 			}
+			if (target instanceof Mob)
+			{
+				((Mob) target).setTarget(null);
+			}
 			return;
 		}
 		event.setDamage(event.getDamage() + totalBonusDamage);

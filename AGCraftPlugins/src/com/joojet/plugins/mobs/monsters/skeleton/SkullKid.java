@@ -54,8 +54,12 @@ public class SkullKid extends MythicMob
 				CustomPotionEffect.UNDEAD_HEAL);
 		this.addFactions(Faction.DOOM_GUY);
 		this.addRivalFactions(Faction.UCLA, Faction.USC, Faction.PHANTOM, Faction.ALLIES, Faction.NETHER);
-		this.addTargetsToHitList(EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER_SKELETON, EntityType.HOGLIN, EntityType.PIGLIN,
-				EntityType.PIGLIN_BRUTE, EntityType.MAGMA_CUBE, EntityType.IRON_GOLEM, EntityType.PLAYER, EntityType.ZOMBIE, EntityType.SKELETON);
+		this.addTargetsToHitList(EntityType.ZOMBIFIED_PIGLIN,
+				EntityType.MAGMA_CUBE, EntityType.HOGLIN, EntityType.CREEPER, EntityType.ZOMBIE, EntityType.SKELETON,
+				EntityType.WITHER_SKELETON, EntityType.WITCH, EntityType.HOGLIN, EntityType.HUSK, EntityType.STRAY,
+				EntityType.POLAR_BEAR, EntityType.ZOMBIE_VILLAGER, EntityType.PILLAGER, EntityType.VEX, EntityType.PIGLIN_BRUTE,
+				EntityType.PIGLIN, EntityType.ENDERMAN, EntityType.RAVAGER, EntityType.DROWNED, EntityType.PHANTOM,
+				EntityType.EVOKER);
 		
 		this.helmet = new SkullKidHelmet (this.color);
 		this.chestplate = new SkullKidChest (this.color);

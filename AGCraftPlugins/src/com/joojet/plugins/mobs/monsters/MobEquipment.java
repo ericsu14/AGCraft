@@ -449,8 +449,7 @@ public abstract class MobEquipment
 		if (otherEquipment == null && other.getType() != EntityType.PLAYER ||
 				this.getIgnoreList().contains(EntityType.PLAYER))
 		{
-			result |= (!this.getMobFlags().contains(MobFlag.IGNORE_NON_FACTION_ENTITIES) 
-					&& !this.hitlist.contains(other.getType()));
+			result |= !this.hitlist.contains(other.getType());
 		}
 			
 		return this.ignoreList.contains(other.getType()) || result;

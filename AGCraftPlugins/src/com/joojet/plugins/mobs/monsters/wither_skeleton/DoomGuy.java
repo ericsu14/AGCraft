@@ -62,7 +62,9 @@ public class DoomGuy extends MythicMob
 		this.addTargetsToHitList(EntityType.ZOMBIFIED_PIGLIN,
 				EntityType.MAGMA_CUBE, EntityType.HOGLIN, EntityType.CREEPER, EntityType.ZOMBIE, EntityType.SKELETON,
 				EntityType.WITHER_SKELETON, EntityType.WITCH, EntityType.HOGLIN, EntityType.HUSK, EntityType.STRAY,
-				EntityType.POLAR_BEAR);
+				EntityType.POLAR_BEAR, EntityType.ZOMBIE_VILLAGER, EntityType.PILLAGER, EntityType.VEX, EntityType.PIGLIN_BRUTE,
+				EntityType.PIGLIN, EntityType.ENDERMAN, EntityType.RAVAGER, EntityType.DROWNED, EntityType.PHANTOM,
+				EntityType.EVOKER);
 		
 		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME, MobFlag.BOSS_BAR,
 				MobFlag.PERSISTENT_ATTACKER);
