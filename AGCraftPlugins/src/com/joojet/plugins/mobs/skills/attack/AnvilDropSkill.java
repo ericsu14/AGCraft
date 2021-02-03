@@ -118,7 +118,7 @@ public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack
 	public double modifyOutgoingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
 			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
-		return damagerEquipment.isAlliesOf(target, targetEquipment) ? Double.MIN_VALUE : 0;
+		return damagerEquipment.isAlliesOf(damager, target, targetEquipment) ? Double.MIN_VALUE : 0;
 	}
 
 	@Override

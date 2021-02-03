@@ -64,7 +64,8 @@ public class PathfindTargetingEventListener extends AGListener
 		LivingEntity hunted = event.getTarget();
 		
 		if (event.getReason() == TargetReason.FORGOT_TARGET
-				|| event.getReason() == TargetReason.RANDOM_TARGET)
+				|| event.getReason() == TargetReason.RANDOM_TARGET
+				|| event.getReason() == TargetReason.REINFORCEMENT_TARGET)
 		{
 			// Check for persistent mob flags. If so, force the entity to hunt a nearby player
 			MobEquipment hunterEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity (hunter);

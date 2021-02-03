@@ -418,13 +418,17 @@ public abstract class MobEquipment
 	}
 	
 	/** Checks if this monster is allies with this mob
-	 *  @param ally The ally being checked
-	 * 	@param allyEquipment The ally's monster's MonEquipment instance */
-	public boolean isAlliesOf (LivingEntity ally, MobEquipment allyEquipment)
+	 *  @param entity The LivingEntity holding this MobEquipment instance
+	 *  @param other The ally being checked
+	 * 	@param otherEquipment The ally's monster's MonEquipment instance */
+	public boolean isAlliesOf (LivingEntity entity, LivingEntity other, MobEquipment otherEquipment)
 	{
-		if (allyEquipment != null)
+		boolean result = false;
+		if (otherEquipment != null)
 		{
-			EnumSet <Faction> factions = allyEquipment.getFactions();
+			// Check if the entity is in the same faction as the other entity.
+			// If so, immediately return true
+			EnumSet <Faction> factions = otherEquipment.getFactions();
 			for (Faction faction : factions)
 			{
 				if (this.factions.contains(faction))
@@ -432,8 +436,24 @@ public abstract class MobEquipment
 					return true;
 				}
 			}
+			// Check if the entity is rivals with the other entity. If so, return false
+			if (this.isRivalsOf(otherEquipment))
+			{
+				return false;
+			}
+			result = otherEquipment.getIgnoreList().contains(entity.getType());
 		}
-		return this.ignoreList.contains(ally.getType());
+		
+		// Allows neutral mobs and custom mobs without anything in their hitlist
+		// to be allies with other non-factioned, non-player mobs
+		if (otherEquipment == null && other.getType() != EntityType.PLAYER ||
+				this.getIgnoreList().contains(EntityType.PLAYER))
+		{
+			result |= (!this.getMobFlags().contains(MobFlag.IGNORE_NON_FACTION_ENTITIES) 
+					&& !this.hitlist.contains(other.getType()));
+		}
+			
+		return this.ignoreList.contains(other.getType()) || result;
 	}
 	
 	/** Returns true if this monster has a mounted mob */

@@ -7,6 +7,7 @@ import java.util.Random;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -217,7 +218,7 @@ public class CustomSkillsListener extends AGListener
 					if (currDamage == Double.MIN_VALUE)
 					{
 						event.setCancelled(true);
-						return;
+						break;
 					}
 					totalBonusDamage += currDamage;
 				}
@@ -234,11 +235,21 @@ public class CustomSkillsListener extends AGListener
 					if (currDamage == Double.MIN_VALUE)
 					{
 						event.setCancelled(true);
-						return;
+						break;
 					}
 					totalBonusDamage += currDamage;
 				}
 			}
+		}
+		
+		// Cancels damage event and clears the damager's current target if canceled.
+		if (event.isCancelled())
+		{
+			if (damager instanceof Mob)
+			{
+				((Mob) damager).setTarget(null);
+			}
+			return;
 		}
 		event.setDamage(event.getDamage() + totalBonusDamage);
 	}
@@ -288,22 +299,9 @@ public class CustomSkillsListener extends AGListener
 			else
 			{
 				MobEquipment casterEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(caster);
-				
-				isAlly = ((entityEquipment != null && entityEquipment.getIgnoreList().contains(caster.getType())) ||
-						  (casterEquipment != null && casterEquipment.getIgnoreList().contains(livingEntity.getType())) ||
-						  ((casterEquipment != null && entityEquipment != null) && (
-								  !casterEquipment.getIgnoreList().contains(EntityType.PLAYER)
-								  && !casterEquipment.isRivalsOf(entityEquipment))));
-				
-				// Check for cases where the entity is not a custom mob and the entity is still not marked an ally
-				// from the previous checks. If so, the entity is an ally if it is not in the caster's hit list.
-				// This allows regular zombies and skeletons to be treated like allies, but not players, as the player
-				// must be in the caster's ignore list to be treated like an ally at this point.
-				if (!isAlly && casterEquipment != null && 
-						((entityEquipment == null && livingEntity.getType() != EntityType.PLAYER) ||
-						(casterEquipment.getIgnoreList().contains(EntityType.PLAYER))))
+				if (casterEquipment != null)
 				{
-					isAlly = !(casterEquipment.getHitList().contains(livingEntity.getType()));
+					isAlly = casterEquipment.isAlliesOf(caster, livingEntity, entityEquipment);
 				}
 			}
 			
