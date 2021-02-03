@@ -119,7 +119,7 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 	 *  added with a random offset based on the damage multiplier. */
 	public double calculateOffset ()
 	{
-		return this.baseSnowballDamage * 
+		return this.damageMultiplierOffset * 
 				this.random.nextInt ((int) Math.floor(this.baseSnowballDamage * this.damageMultiplierOffset) + 1);
 	}
 }
