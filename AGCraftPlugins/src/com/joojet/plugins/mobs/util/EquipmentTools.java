@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Map.Entry;
-import java.util.Random;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,13 +14,9 @@ import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Horse;
-import org.bukkit.entity.Horse.*;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
-import org.bukkit.entity.Monster;
 import org.bukkit.entity.Piglin;
-import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
@@ -38,7 +32,6 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
-import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.metadata.SummonedMetadata;
@@ -46,7 +39,6 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.pathfinding.PathfinderGoalGiantFireball;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
-import com.joojet.plugins.warp.scantools.ScanEntities;
 
 import net.minecraft.server.v1_16_R3.EntityCreature;
 import net.minecraft.server.v1_16_R3.EntityGiantZombie;
@@ -73,8 +65,6 @@ public class EquipmentTools
 	 *  all custom boss bars */
 	public static void equipEntity (LivingEntity entity, MobEquipment mobEquipment, BossBarController bossBarController)
 	{
-		Random rand = new Random ();
-		
 		// NULL check
 		if (entity == null || mobEquipment == null)
 		{
@@ -171,42 +161,17 @@ public class EquipmentTools
 			equipment.setItemInOffHandDropChance(dropRates[5]);
 		}
 		
-		// Adds random firework on the entity's offhand if the flag is enabled
-		if (mobEquipment.containsFlag(MobFlag.RANDOM_FIREWORK_ON_OFFHAND))
-		{
-			equipment.setItemInOffHand(new FireworkTypes().getRandomFirework(32, 2));
-			equipment.setItemInOffHandDropChance(dropRates[5]);
-		}
-		
 		// Name
 		if (!mobEquipment.getName().isEmpty())
 		{
 			entity.setCustomName(mobEquipment.getChatColor() + "" + mobEquipment.getName());
-			entity.setCustomNameVisible(mobEquipment.containsFlag(MobFlag.SHOW_NAME));
 		}
 		
 		// Modifies base stats of the custom mob
 		modifyBaseStats (entity, mobEquipment);
-		
-		// Enables entity persistence
-		if (mobEquipment.containsFlag(MobFlag.ENABLE_PERSISTENCE))
-		{
-			entity.setRemoveWhenFarAway(false);
-		}
-		
-		// Disables entity persistence
-		if (mobEquipment.containsFlag(MobFlag.DISABLE_PERSISTENCE)
-				|| mobEquipment.containsFlag(MobFlag.ENABLE_PERSISTENCE_UPON_RIDING))
-		{
-			entity.setRemoveWhenFarAway(true);
-		}
-		
-		// Makes the mob silent
-		if (mobEquipment.containsFlag(MobFlag.MAKE_SILENT))
-		{
-			entity.setSilent(true);
-		}
-		
+		// Applies active mob flag and mob stat attributes to the mob
+		applyCustomAttributes (entity, mobEquipment, bossBarController);
+
 		// Potion effects
 		if (!mobEquipment.getEffects().isEmpty())
 		{
@@ -216,86 +181,10 @@ public class EquipmentTools
 			}
 		}
 		
-		// Forever ablaze
-		if (mobEquipment.containsFlag(MobFlag.ON_FIRE))
-		{
-			entity.setFireTicks(Integer.MAX_VALUE);
-		}
-		
-		// Disables the ability for the mob to pick up dropped gear / weapons when
-		// the DISABLE_PICK_UP_ITEMS flag is enabled.
-		if (mobEquipment.containsFlag(MobFlag.DISABLE_PICK_UP_ITEMS))
-		{
-			entity.setCanPickupItems(false);
-		}
-		
-		// Spawns a lightning bolt on the mob's current location if enabled. This should scare the **** out of unsuspecting players
-		if (mobEquipment.containsFlag(MobFlag.SPAWN_LIGHTNING))
-		{
-			Location loc = entity.getLocation();
-			entity.getWorld().strikeLightningEffect(loc);
-		
-			if (mobEquipment.containsStat(MonsterStat.HUNT_ON_SPAWN_RADIUS))
-			{
-				int huntRadius = mobEquipment.getStat(MonsterStat.HUNT_ON_SPAWN_RADIUS).intValue();
-				ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(entity, (int) (huntRadius * 1.25));
-					
-				for (Player p : nearbyPlayers)
-				{
-					p.sendMessage(ChatColor.GOLD + "You feel a great disturbance in the force...");
-				}
-				
-				// Automatically sets the mob's target to a random nearby player if huntOnSpawn is set to true
-				if (mobEquipment.containsFlag(MobFlag.HUNT_ON_SPAWN))
-				{
-					if (entity instanceof Monster)
-					{
-						ArrayList <Player> nearbyPlayersHunt = ScanEntities.ScanNearbyPlayers(entity, huntRadius);
-						Monster mob = (Monster) entity;
-						int n = nearbyPlayersHunt.size();
-						if (!nearbyPlayersHunt.isEmpty())
-						{
-							Player p = nearbyPlayersHunt.get(rand.nextInt(n));
-							mob.setTarget(p);
-							p.sendMessage(ChatColor.DARK_RED + "You are being hunted...");
-						}
-					}
-				}
-			}
-		}
-		
-		// Set horse styles and color
-		if (entity instanceof Horse)
-		{
-			Horse horse = (Horse) entity;
-			if (mobEquipment.containsStat(MonsterStat.HORSE_COLOR))
-			{
-				horse.setColor(Color.values()
-						[mobEquipment.getStat(MonsterStat.HORSE_COLOR).intValue()]);
-			}
-			
-			if (mobEquipment.containsStat(MonsterStat.HORSE_STYLE))
-			{
-				horse.setStyle(Style.values()
-						[mobEquipment.getStat(MonsterStat.HORSE_STYLE).intValue()]);
-			}
-			
-			// Automatically tames the horse
-			horse.setTamed(true);
-		}
-		
-		// Activates a custom boss bar for the entity
-		if (mobEquipment.containsFlag(MobFlag.BOSS_BAR))
-		{
-			bossBarController.createBossBar(entity);
-		}
-		
 		// Initialize custom pathfinding targets
 		modifyPathfindingTargets (entity, mobEquipment);
-		
 		// Equip monster mounts
 		mountMob (entity, mobEquipment, bossBarController);
-		
 		// Creates a new CreatedCustomMonsterEvent after monster is fully transormed
 		Bukkit.getPluginManager().callEvent(new CreatedCustomMonsterEvent (entity, mobEquipment));
 	}
@@ -326,6 +215,26 @@ public class EquipmentTools
 					dmg.setHealth(health);
 				}
 			}
+		}
+	}
+	
+	/** Iterates through all MonsterStat and MobFlag attributes defined in the mobEquipment instance
+	 *  and applys all of its custom attributes to the living entity
+	 *  @param entity - Entity we are equipping custom armor to
+	 *  @param mobEquipment - Object containing custom mob equipment
+	 *  @param bossBarController - A reference to an active boss bar controller instance, which is used to manage */
+	public static void applyCustomAttributes (LivingEntity entity, MobEquipment mobEquipment, BossBarController bossBarController)
+	{
+		// Monster stat
+		for (MonsterStat stat : mobEquipment.getStatContainer().keySet())
+		{
+			stat.applyCustomAttributes(entity, mobEquipment, bossBarController);
+		}
+		
+		// Monster flags
+		for (MobFlag flag : mobEquipment.getMobFlags())
+		{
+			flag.applyCustomAttributes(entity, mobEquipment, bossBarController);
 		}
 	}
 	
@@ -462,5 +371,4 @@ public class EquipmentTools
 		}
 		return true;
 	}
-
 }

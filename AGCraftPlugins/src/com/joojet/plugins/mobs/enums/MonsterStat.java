@@ -1,8 +1,15 @@
 package com.joojet.plugins.mobs.enums;
 
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Horse;
+import org.bukkit.entity.Horse.*;
 
-public enum MonsterStat 
+import com.joojet.plugins.mobs.bossbar.BossBarController;
+import com.joojet.plugins.mobs.interfaces.CustomAttribute;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
+
+public enum MonsterStat implements CustomAttribute
 {
 	/** Entity's base health */
 	HEALTH (Attribute.GENERIC_MAX_HEALTH),
@@ -17,9 +24,35 @@ public enum MonsterStat
 	/** The minimum y value the original entity must be in order for this entity to spawn */
 	Y_LIMIT,
 	/** Stores the enum ordinal relating to the monster's horse color */
-	HORSE_COLOR,
+	HORSE_COLOR
+	{
+		@Override
+		public void applyCustomAttributes(LivingEntity entity, MobEquipment entityEquipment,
+				BossBarController bossBarController) 
+		{
+			if (entity instanceof Horse)
+			{
+				Horse horse = (Horse) entity;
+				horse.setColor(Color.values()
+						[entityEquipment.getStat(MonsterStat.HORSE_COLOR).intValue()]);
+			}
+		}
+	},
 	/** Stores the enum ordinal relating to the monster's horse style */
-	HORSE_STYLE,
+	HORSE_STYLE
+	{
+		@Override
+		public void applyCustomAttributes(LivingEntity entity, MobEquipment entityEquipment,
+				BossBarController bossBarController) 
+		{
+			if (entity instanceof Horse)
+			{
+				Horse horse = (Horse) entity;
+				horse.setStyle(Style.values()
+						[entityEquipment.getStat(MonsterStat.HORSE_STYLE).intValue()]);
+			}
+		}
+	},
 	/** Modifies the jump strength if this custom mob is a horse */
 	HORSE_JUMP_STRENGTH (Attribute.HORSE_JUMP_STRENGTH),
 	/** Modifies the base speed of the mob */
@@ -63,5 +96,13 @@ public enum MonsterStat
 	public Attribute getAttribute ()
 	{
 		return this.attribute;
+	}
+	
+	/** Does nothing when the mobflag does not have a custom definition specific for that attribute */
+	@Override
+	public void applyCustomAttributes(LivingEntity entity, MobEquipment entityEquipment,
+			BossBarController bossBarController) 
+	{
+		// Do nothing
 	}
 }
