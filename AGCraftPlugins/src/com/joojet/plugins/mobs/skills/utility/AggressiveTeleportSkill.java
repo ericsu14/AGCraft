@@ -11,11 +11,11 @@ import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 
-public class AgressiveTeleportSkill extends TeleportSkill
+public class AggressiveTeleportSkill extends TeleportSkill
 {
 	/** Creates a teleport skill where the entity warps to a random nearby enemy's location once the conditions in
 	 *  TeleportSkill are met*/
-	public AgressiveTeleportSkill(int range, int cooldown, int maxUses, int weight) 
+	public AggressiveTeleportSkill(int range, int cooldown, int maxUses, int weight) 
 	{
 		super(range, cooldown, maxUses, weight);
 	}

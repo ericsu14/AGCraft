@@ -31,7 +31,7 @@ import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.HurricaneSkill;
 import com.joojet.plugins.mobs.skills.buff.RageSkill;
-import com.joojet.plugins.mobs.skills.utility.AgressiveTeleportSkill;
+import com.joojet.plugins.mobs.skills.utility.AggressiveTeleportSkill;
 import com.joojet.plugins.mobs.skills.utility.WeaponSwitchSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
@@ -93,7 +93,7 @@ public class DoomGuy extends MythicMob
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
 		skills.add(new RageSkill (1, 60, 0.30));
-		skills.add(new AgressiveTeleportSkill (156, 10, Integer.MAX_VALUE, 2));
+		skills.add(new AggressiveTeleportSkill (156, 10, Integer.MAX_VALUE, 2));
 		// Allows doom guy to switch to its blade once its health reaches below 40%
 		skills.add(new WeaponSwitchSkill (200, 1, 6, new DoomBlade (this.color)) 
 		{

@@ -1,6 +1,176 @@
-
-
 # AGCraft Changelog History
+
+## Version 1.8.0 - February 3, 2021
+## Skills and Spells Update
+Even with the Amplified Monster system working in full force, PVE combat in this server is still stale, predictable and repetitive. The new Skills and Spells module is aimed towards making PVE combat more of a spiritual ~~fantasy~~ travesty. 
+
+In its core, every skill has a condition. If the condition is met, the skill is eligible to be used by the skill-caster. Once a skill is used, magical things will happen and the skill will go into a short cooldown before it can be used again. Certain skills can only be used a limited number of times for some boss monsters.
+
+Skills come in many different forms; some are area of effect spells that can cast lighting or throw exploding anvils onto enemies. Some can give an assortment of temporary status effects such as Strength to the skill-caster itself and any nearby allies. Some can even come in the form of passive skills, which can amplify the damage done by any projectile; even snowballs! With this new skill system, the possibilities are endless, and more interesting skills will be added in the near future.
+
+**Thus, the following skills have been implemented into the game:**
+
+## Attack Skills
+
+### Anvil Drop
+Magically spawns and drops a powerful, exploding anvil onto a random enemy. The skill-caster must have direct line of sight with the enemy in order for it to work.
+
+This skill will not deal any damage towards any allied player or entity in the strike zone.
+
+**Affected Mobs:**
+- John Jae
+
+### Anvil Throw
+Allows the skill-caster to launch up to three exploding anvils (at a parabolic arc) onto several randomly selected nearby enemies. The explosions are weaker in power compared to the Anvil Drop skill, but this skill can hit much more enemy monsters.
+
+This skill will not deal any damage towards any allied player or entity in the strike zone.
+
+**Affected Mobs:**
+- All Iron Golem variants
+
+### Hurricane
+Allows the skill-caster to continuously fire a barrage of arrows onto a single target for a short period of time. The number of arrows fired is dependent on the skill-caster's tier, where mythic monsters sustain fire for much longer compared to a legendary monster.
+
+The arrows fired from this skill deals will deal reduced damage and will not be affected by Piercing Blow. Thus, using your shield is an effective way for countering this attack. This skill will not work if the skill-caster is not wielding a bow or a crossbow.
+
+**Affected Mobs:**
+- Doom Guy
+- Skull Kid
+- UCLA Bear Tamer
+
+### Thundaga
+Casts a delayed lightning strike towards a set amount of nearby enemies within your vicinity. While this skill is used, particles will start spawning around the strike location, letting players know that they should get out of that area before being struck by lightning. Once the lightning bolt strikes, a large explosion will be created, dealing massive amounts of damage towards any enemy within the blast zone.
+
+The strength of the explosion is dependent on the Amplified Monster's tier. Mythic boss monsters have the strongest Thundaga spell, but also has the longest delay to compensate for its raw power. For some monsters, this skill can only be used when its health drops to a certain threshold.
+
+This skill will not deal any damage towards any allied player or entity in the strike zone.
+
+**Affected Mobs:**
+- Skull Kid
+- Giant Bruin
+- UCLA Bear Tamer
+- Barney the Dinosaur
+- All snowman variants
+- Johnny Rusnak
+
+## Buff Skills
+### Resistance / Strength / Speed buffs
+Allows the skill-caster to cast a temporary potion effect buff towards itself and all nearby allies. For non-allied monsters, this skill can only be used when your **threat score** exceeds the Mythic tier threshold. Allied monsters can use these buffs whenever there is a player nearby the skill-caster.
+
+*Affected Mobs:*
+- Skull Kid (Defense only)
+- All Legendary boss mobs
+- All USC / UCLA monsters
+- Piglin Soldier
+- Strong Zombie
+- All wolf types
+- Tommy Trojan
+
+### Rage
+Once the skill-caster's HP drops below a certain threshold (35% for most mobs with this skill), the skill-caster will go into **rage mode**. 
+
+When a skill-caster enters rage mode, the following things will happen:
+- The skill-caster deals 10% extra damage.
+	- This also applies for all projectile-based attacks as well.
+- The skill-caster receives 10% extra damage.
+- The skill-caster temporarily gains 10 absorption health points 
+- The skill-caster will be highlighted for the duration of this rage mode and will have particle effects visualizing its pure madness.
+
+Rage mode can only be used once and the effects will last for up to 30 seconds (60 seconds for Skull Kid and Doom Guy).
+
+**Affected Mobs:**
+- All Mythic-tiered monsters (Doom Guy and Skull Kid have a 20% damage increase)
+- Barney the Dinosaur
+
+### Self Heal
+
+Once the skill caster's HP drops below a certain threshold, the skill caster will immediately self-heal, recovering a portion of its own health. The strength of the healing effect is dependent on the caster's max health.
+
+
+**Affected Mobs**
+- All Iron Golem variants
+- All Snow Golem variants
+
+## Summoning Skills
+
+### Bruin Storm
+When the skill-caster's HP drops below a certain threshold, the skill-caster can spawn up to 10 random UCLA mobs to help aid in the fight. This skill can only be used when the player's threat score exceeds the threshold set for Mythic tier.
+
+**Affected Mobs:**
+- UCLA Bear Tamer (6 mobs)
+- Giant Bruin (10 mobs)
+
+## Utility Skills
+
+### Teleport
+When the skill-caster is either engulfed in lava or water, the skill-caster will randomly teleport to a nearby allied entity. Teleportation is only possible when there is enough air blocks that can fit the skill-caster's hitbox.
+
+**Affected Mobs:**
+- All Iron Golem variants
+- All Snow Golem variants
+
+### Aggressive Teleport
+It has the same effects as the teleportation skill, but it only allows the skill-caster to teleport to any nearby Player within a very large search radius. This prevents players from prematurely ending boss fights by pushing the mob into a large lava lake.
+
+**Affected Mobs:**
+- All Mythic mobs
+
+### Weapon Switch
+Once the skill-caster's health drops below a certain threshold, the skill caster's main hand switches to another weapon.
+
+Currently, it is used in Doom Guy's fight, allowing him to switch from his Doom Bow into his Doom Blade once his health drops below 40%, giving him a second phase to his boss fight.
+
+**Affected Mobs:**
+- Doom Guy
+
+
+## Passive Skills
+### Icy Snowball
+All snowballs thrown by the skill-caster has a random chance of becoming an **Icy Snowball**, which is a special snowball that actually deals damage and applies a slowness effect for 5 seconds when hit.
+
+**Affected Mobs**
+- Frosty the Snowman (Base power: 10, 45% chance) 
+- Scruffy (Base power: 16, 60% chance)
+
+Currently, this skill system only applies for NPC monsters. However, I do plan to add new equipment into the game allowing players to use these skills too!
+
+## Fair Spawning System
+-  The **Fair Spawning System** is a new module used within our Amplified Mobs spawning system to allow or disallow mobs from spawning based on how powerful your equipment and enchantments are.
+- Before an amplified monster is spawned into the game, this system works by calculating a **threat score** based on a combination of the following attributes a player may have:
+	- Protection Enchantments
+	- Max Health
+	- Armor Points
+	- Armor Toughness Points
+- This **threat score** is then compared to a threshold set on that amplified monster's difficulty tier. If the threat score exceeds the threshold, the amplified monster can spawn. Otherwise, it will remain in its vanilla, unaltered form.
+	- In general, the higher the threshold, the more powerful the amplified monster will be.
+	- The thresholds for all tiers of amplified monsters are as follows:
+
+|Tier|Threshold|Min. Equipment Needed
+|--|--|--|--|--|
+| Common | 0.0 |  Includes all vanilla mobs and allied mob spawns such as John Jae.
+| Uncommon | 0.30 | You would need at least a total of 7 levels of protection for uncommon mobs to spawn, and at least full iron armor.
+| Rare | 0.45 | Requires full Protection III iron armor for rare monsters to spawn.
+| Epic | 0.60 | Requires full Diamond armor with at least 14 levels of protection for epic mobs to spawn
+| Legendary | 0.70 | Requires full Protection IV netherite armor for legendary mobs to spawn.
+| Mythic | 0.825 | Requires full Protection IV netherite armor and a shield/totem that increases your bonus health by at least 10 points.
+
+- If there are more than 2 players within a 125 block radius of each other, the system takes the **average** of all nearby player's threat scores with an added 0.025 bonus for each additional player into consideration.
+-  This system is intended to balance out mob spawns in this server for newer and less hardcore players by scaling the server's added difficulty based on the equipment you are wear.
+
+## New Commands
+#### `/whocanspawn`
+- Runs a simulation with the **Fair Spawning Module** and tells you:
+	- Your individual threat score
+	- Your combined threat score when there is more than one player around you
+	- A list of monster tiers that are eligible for spawning around your area, along with their individual thresholds.
+- This adds a layer of transparency to this new system, and it allows you to control the added difficulty of the game through swapping between different armor sets.
+
+## Quality of Life Improvements
+- Emergency warps are no longer used when you are on fire, but have an active fire resistance effect on you.
+- Johnny Rusnak no longer sells USC themed equipment; all of that is moved into a new Wandering Trader, Tommy Trojan.
+- Many other bug fixes and improvements to the codebase.
+
+
 ## Version 1.7.9 - September 25, 2020
 
 ### New Commands
