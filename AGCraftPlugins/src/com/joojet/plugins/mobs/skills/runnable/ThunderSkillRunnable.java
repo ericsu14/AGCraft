@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -52,8 +53,9 @@ public class ThunderSkillRunnable extends BukkitRunnable
 				// Cast lightning and create explosion once delay is served
 				if (this.ticks <= 0)
 				{
-					targetLocation.getWorld().strikeLightning(targetLocation);
+					targetLocation.getWorld().spigot().strikeLightning(targetLocation, true);
 					targetLocation.getWorld().createExplosion(targetLocation.add(0.0, 1.0, 0.0), this.skill.getExplosionPower(), false, false, this.caster);
+					targetLocation.getWorld().playSound(targetLocation, Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 0.8f, 1.0f);
 				}
 				
 				else
