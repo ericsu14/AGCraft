@@ -6,7 +6,7 @@ Even with the Amplified Monster system working in full force, PVE combat in this
 
 In its core, every skill has a condition. If the condition is met, the skill is eligible to be used by the skill-caster. Once a skill is used, magical things will happen and the skill will go into a short cooldown before it can be used again. Certain skills can only be used a limited number of times for some boss monsters.
 
-Skills come in many different forms; some are area of effect spells that can cast lighting or throw exploding anvils onto enemies. Some can give an assortment of temporary status effects such as Strength to the skill-caster itself and any nearby allies. Some can even come in the form of passive skills, which can amplify the damage done by any projectile; even snowballs! With this new skill system, the possibilities are endless, and more interesting skills will be added in the near future.
+Skills come in many different forms; some are area of effect spells that can cast lighting or throw exploding anvils onto enemies. Some can give an assortment of temporary status effects such as Strength to the skill-caster itself and any nearby allies. Some can even come in the form of passive skills, which can amplify the damage done by any projectile, including snowballs and tridents! With this new skill system, the possibilities are endless, and more interesting skills will be added in the near future.
 
 **Thus, the following skills have been implemented into the game:**
 
@@ -39,11 +39,11 @@ The arrows fired from this skill deals will deal reduced damage and will not be 
 - UCLA Bear Tamer
 
 ### Thundaga
-Casts a delayed lightning strike towards a set amount of nearby enemies within your vicinity. While this skill is used, particles will start spawning around the strike location, letting players know that they should get out of that area before being struck by lightning. Once the lightning bolt strikes, a large explosion will be created, dealing massive amounts of damage towards any enemy within the blast zone.
+Casts a delayed lightning strike towards a set amount of nearby enemies within the skill-caster's vicinity. When this skill is being used, particles will start spawning around the strike location, letting players know that they should get out of that area or else be struck by lightning. Once the lightning bolt strikes, a large explosion will be created, dealing massive amounts of damage towards any enemy within the blast zone.
 
-The strength of the explosion is dependent on the Amplified Monster's tier. Mythic boss monsters have the strongest Thundaga spell, but also has the longest delay to compensate for its raw power. For some monsters, this skill can only be used when its health drops to a certain threshold.
+The strength of the explosion is dependent on the Amplified Monster's tier. Mythic boss monsters have the strongest Thundaga spell, but also has the longest delay to compensate for its raw power.
 
-This skill will not deal any damage towards any allied player or entity in the strike zone.
+For some monsters, this skill can only be used when its health drops to a certain threshold. This skill will not deal any damage towards any allied player or entity in the strike zone.
 
 **Affected Mobs:**
 - Skull Kid
@@ -145,17 +145,17 @@ Currently, this skill system only applies for NPC monsters. However, I do plan t
 	- In general, the higher the threshold, the more powerful the amplified monster will be.
 
 The thresholds for all tiers of amplified monsters are as follows:
-|Tier|Threshold|Min. Equipment Needed
+|Tier|Threshold|Min. Equipment Needed|
 |--|--|--|
-| Common | 0.0 |  Includes all vanilla mobs and allied mob spawns such as John Jae.
-| Uncommon | 0.30 | You would need at least a total of 7 levels of protection for uncommon mobs to spawn, and at least full iron armor.
+| Common | 0.0 |  Nothing, as this tier includes all vanilla mobs and allied mob spawns such as John Jae.
+| Uncommon | 0.30 | You would need at least a total of 7 levels of protection for uncommon mobs to spawn with at least full iron armor.
 | Rare | 0.45 | Requires full Protection III iron armor for rare monsters to spawn.
 | Epic | 0.60 | Requires full Diamond armor with at least 14 levels of protection for epic mobs to spawn
 | Legendary | 0.70 | Requires full Protection IV netherite armor for legendary mobs to spawn.
-| Mythic | 0.825 | Requires full Protection IV netherite armor and a shield/totem that increases your bonus health by at least 10 points.
+| Mythic | 0.825 | Requires full Protection IV netherite armor and a shield/totem that increases your max health by at least 10 points.
 
 - If there are more than 2 players within a 125 block radius of each other, the system takes the **average** of all nearby player's threat scores with an added 0.025 bonus for each additional player into consideration.
--  This system is intended to balance out mob spawns in this server for newer and less hardcore players by scaling the server's added difficulty based on the equipment you are wear.
+-  This system is intended to balance out mob spawns in this server for newer and less hardcore players by scaling the server's added difficulty based on the equipment you are wearing.
 
 ## New Commands
 #### `/whocanspawn`
@@ -169,6 +169,11 @@ The thresholds for all tiers of amplified monsters are as follows:
 - Emergency warps are no longer used when you are on fire, but have an active fire resistance effect on you.
 - Johnny Rusnak no longer sells USC themed equipment; all of that is moved into a new Wandering Trader, Tommy Trojan.
 - Many other bug fixes and improvements to the codebase.
+- Due to their tremendous power, both Barney the Dinosaur and Soul Obliterator are now Mythic tiered monsters.
+- All USC and UCLA monsters are now Legendary tier, provided on how much chaos they make in this server.
+- All Legendary and Mythic head drops now have an additional Projectile Protection IV enchant, which will help out with Skull Kid and Doom Guy's fight.
+- Skull Kid no longer has Instant Harm III on its tipped arrows. However, the base damage of his arrows are increased to extreme levels.
+- Royal Piglin Hunter's crossbow no longer has a Piercing enchant, and his Piercing Blow chance is now reduced to 30%. However, his new crossbow now has Quick Draw IV for slightly higher DPS.
 
 
 ## Version 1.7.9 - September 25, 2020
