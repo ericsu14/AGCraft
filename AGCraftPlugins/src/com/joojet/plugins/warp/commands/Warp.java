@@ -9,6 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.ChatColor;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
@@ -69,8 +70,9 @@ public class Warp extends AGCommandExecutor
 				return false;
 			}
 			
-			// Also deny warp if the player is either on fire or health drops below threshold
-			if (p.getFireTicks() > 0 || p.getHealth() < healthThreshold)
+			// Also deny warp if the player is either on fire (without fire resistance) or health drops below threshold
+			if ((p.getFireTicks() > 0 && !p.hasPotionEffect(PotionEffectType.FIRE_RESISTANCE))
+					|| p.getHealth() < healthThreshold)
 			{
 				try
 				{
