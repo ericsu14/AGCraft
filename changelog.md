@@ -143,10 +143,10 @@ Currently, this skill system only applies for NPC monsters. However, I do plan t
 	- Armor Toughness Points
 - This **threat score** is then compared to a threshold set on that amplified monster's difficulty tier. If the threat score exceeds the threshold, the amplified monster can spawn. Otherwise, it will remain in its vanilla, unaltered form.
 	- In general, the higher the threshold, the more powerful the amplified monster will be.
-	- The thresholds for all tiers of amplified monsters are as follows:
 
+The thresholds for all tiers of amplified monsters are as follows:
 |Tier|Threshold|Min. Equipment Needed
-|--|--|--|--|--|
+|--|--|--|
 | Common | 0.0 |  Includes all vanilla mobs and allied mob spawns such as John Jae.
 | Uncommon | 0.30 | You would need at least a total of 7 levels of protection for uncommon mobs to spawn, and at least full iron armor.
 | Rare | 0.45 | Requires full Protection III iron armor for rare monsters to spawn.
