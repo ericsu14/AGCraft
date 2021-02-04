@@ -187,7 +187,7 @@ Registers your current position as a new warp location under the name, ``<locati
 
 
 ## Warp
-<b>Usage:</b>
+<b>Usage:</b>\
 ``/warp <location name>``
 
 <b>Description</b>:\
@@ -213,3 +213,14 @@ Once you set your own location using `/setlocation <name> private`, you now free
 <b> Usage Examples: </b>\
 ``/warp home`` warps you back to your home bed spawn. \
 ``/warp village`` If ``village`` is a registered location in the server registry. Entering this command will warp you to where the location `village` is at.
+
+## Who Can Spawn
+<b>Usage:</b> \
+``/whocanspawn``
+
+<b>Description</b>:\
+- Runs a simulation with the **Fair Spawning Module** and tells you:
+	- Your individual threat score
+	- Your combined threat score when there is more than one player around you
+	- A list of monster tiers that are eligible for spawning around your area, along with their individual thresholds.
+- This adds a layer of transparency to this new system, and it allows you to control the added difficulty of the game through swapping between different armor sets.
