@@ -28,7 +28,8 @@ public class ChestTypes extends EquipmentTypes
 				new SnowballHeart (ChatColor.AQUA),
 				new ThePecks (ChatColor.GOLD),
 				new USCBandUniformTop (ChatColor.GOLD),
-				new USCFootballTunic (ChatColor.GOLD)
+				new USCFootballTunic (ChatColor.GOLD),
+				new SuperFeather ()
 		);
 	}
 

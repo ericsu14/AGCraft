@@ -5,9 +5,11 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.equipment.chest.SuperFeather;
 import com.joojet.plugins.mobs.interfaces.NMSSkillUser;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 import com.joojet.plugins.mobs.pathfinding.PathfinderGoalCustomMeleeAttack;
@@ -28,6 +30,7 @@ public class SuperChicken extends USCFaction implements NMSSkillUser
 	public SuperChicken() 
 	{
 		super(MonsterType.SUPER_CHICKEN);
+		this.setDropRates(0.0f, 0.01f, 0.0f, 0.0f, 0.0f, 0.0f);
 		this.name = "Super Chicken";
 		this.color = ChatColor.GOLD;
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.LEGENDARY);
@@ -36,6 +39,8 @@ public class SuperChicken extends USCFaction implements NMSSkillUser
 		this.setStat(MonsterStat.BASE_ARMOR, 12.0);
 		this.setStat(MonsterStat.BASE_KNOCKBACK_STRENGTH, 0.15);
 		this.setStat(MonsterStat.BASE_SPEED, 0.25);
+		this.addMobFlags(MobFlag.SHOW_NAME);
+		this.chestplate = new SuperFeather ();
 	}
 
 	@Override
