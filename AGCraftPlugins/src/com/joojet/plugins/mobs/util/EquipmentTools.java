@@ -32,22 +32,16 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
+import com.joojet.plugins.mobs.interfaces.NMSSkillUser;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.metadata.SummonedMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MountedMob;
-import com.joojet.plugins.mobs.pathfinding.PathfinderGoalGiantFireball;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 
-import net.minecraft.server.v1_16_R3.EntityCreature;
-import net.minecraft.server.v1_16_R3.EntityGiantZombie;
 import net.minecraft.server.v1_16_R3.EntityInsentient;
-import net.minecraft.server.v1_16_R3.PathfinderGoalFloat;
-import net.minecraft.server.v1_16_R3.PathfinderGoalLeapAtTarget;
-import net.minecraft.server.v1_16_R3.PathfinderGoalMeleeAttack;
 import net.minecraft.server.v1_16_R3.PathfinderGoalNearestAttackableTarget;
-import net.minecraft.server.v1_16_R3.PathfinderGoalRandomStrollLand;
 
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftMob;
 
@@ -279,7 +273,8 @@ public class EquipmentTools
 		}
 		
 		// Offloads custom pathfinding target initialization code into the next game tick
-		new BukkitRunnable () {
+		new BukkitRunnable () 
+		{
 			@Override
 			public void run ()
 			{
@@ -290,14 +285,10 @@ public class EquipmentTools
 				ArrayList <EntityType> hitlist = mobEquipment.getHitList();
 				EnumSet <EntityType> ignoreList = mobEquipment.getIgnoreList();
 				
-				// Load special pathfinding goals for giants
-				if (nmsMob instanceof EntityGiantZombie)
+				// Load special pathfinding goals for NMS Skill users
+				if (mobEquipment instanceof NMSSkillUser)
 				{
-					nmsMob.goalSelector.a(1, new PathfinderGoalFloat((EntityCreature) nmsMob));
-					nmsMob.goalSelector.a(1, new PathfinderGoalGiantFireball((EntityGiantZombie) nmsMob, entity));
-					nmsMob.goalSelector.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
-					nmsMob.goalSelector.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
-					nmsMob.goalSelector.a(4, new PathfinderGoalMeleeAttack ((EntityCreature) nmsMob, 1.0D, true));
+					((NMSSkillUser)mobEquipment).loadNMSSkills(nmsMob, entity);
 				}
 				
 				// Add target entity goals based on the values stored in the mob equipment's hitlist.

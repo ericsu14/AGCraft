@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.mobs.drops.*;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
@@ -24,7 +25,9 @@ import com.joojet.plugins.mobs.equipment.weapons.EternalSpiritOfTroy;
 import com.joojet.plugins.mobs.equipment.weapons.EternalTrojanSword;
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.equipment.weapons.LeftCrashSymbol;
+import com.joojet.plugins.mobs.interfaces.NMSSkillUser;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
+import com.joojet.plugins.mobs.pathfinding.PathfinderGoalGiantFireball;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
@@ -32,7 +35,15 @@ import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
 import com.joojet.plugins.mobs.skills.summon.SummonBruinSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
-public class GiantBruin extends UCLAFaction
+import net.minecraft.server.v1_16_R3.EntityCreature;
+import net.minecraft.server.v1_16_R3.EntityGiantZombie;
+import net.minecraft.server.v1_16_R3.EntityInsentient;
+import net.minecraft.server.v1_16_R3.PathfinderGoalFloat;
+import net.minecraft.server.v1_16_R3.PathfinderGoalLeapAtTarget;
+import net.minecraft.server.v1_16_R3.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_16_R3.PathfinderGoalRandomStrollLand;
+
+public class GiantBruin extends UCLAFaction implements NMSSkillUser
 {
 	public GiantBruin ()
 	{
@@ -90,10 +101,22 @@ public class GiantBruin extends UCLAFaction
 	}
 
 	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
 		skills.add(new AttackBuffSkill(0, 60, 32, 90, 8));
 		skills.add(new ResistanceBuffSkill (1, 32, 50, 90, 8));
 		skills.add(new ThundagaSkill (32, 20, Integer.MAX_VALUE, 10, 4.0f, 8, 80, 0.50));
 		skills.add(new SummonBruinSkill (32, 90, 2, 4, 10));
+	}
+	
+	/** Allows the giant to naturally attack other mobs and gives him the ability to summon fireballs at people. */
+	@Override
+	public void loadNMSSkills(EntityInsentient nmsMob, LivingEntity entity) 
+	{
+		nmsMob.goalSelector.a(1, new PathfinderGoalFloat((EntityCreature) nmsMob));
+		nmsMob.goalSelector.a(1, new PathfinderGoalGiantFireball((EntityGiantZombie) nmsMob, entity));
+		nmsMob.goalSelector.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
+		nmsMob.goalSelector.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
+		nmsMob.goalSelector.a(4, new PathfinderGoalMeleeAttack ((EntityCreature) nmsMob, 1.0D, true));
 	}
 }
