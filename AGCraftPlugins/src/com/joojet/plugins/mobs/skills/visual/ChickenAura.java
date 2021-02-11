@@ -13,9 +13,9 @@ public class ChickenAura extends AbstractVisualSkill implements PassiveAttack
 	@Override
 	protected void displayVisualEffects(LivingEntity caster) 
 	{
-		if (this.random.nextBoolean())
+		if (this.random.nextDouble() <= 0.10)
 		{
-			this.spawnColoredParticlesOnEntity(caster, 20, 0, 0, 0, Particle.FIREWORKS_SPARK);
+			this.spawnColoredParticlesOnEntity(caster, 4, 0, 0, 0, Particle.FIREWORKS_SPARK);
 		}
 	}
 
@@ -23,9 +23,9 @@ public class ChickenAura extends AbstractVisualSkill implements PassiveAttack
 	public double modifyOutgoingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
 			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
-		damager.getWorld().playSound(damager.getLocation(), Sound.ENTITY_CHICKEN_AMBIENT, 0.6f, 1.0f);
-		damager.getWorld().playSound(damager.getLocation(), Sound.ENTITY_RABBIT_ATTACK, 0.6f, 1.0f);
-		this.spawnColoredParticlesOnEntity(target, 6, 0, 0, 0, Particle.EXPLOSION_NORMAL);
+		damager.getWorld().playSound(damager.getLocation(), Sound.ENTITY_CHICKEN_HURT, 0.6f, (float) (this.random.nextDouble() + 1.0));
+		damager.getWorld().playSound(damager.getLocation(), Sound.ENTITY_PLAYER_ATTACK_WEAK, 0.6f, 1.0f);
+		this.spawnColoredParticlesOnEntity(target, 2, 0, 0, 0, Particle.EXPLOSION_NORMAL);
 		return 0;
 	}
 
