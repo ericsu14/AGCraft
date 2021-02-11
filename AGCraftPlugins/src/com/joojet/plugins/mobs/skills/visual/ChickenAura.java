@@ -1,0 +1,39 @@
+package com.joojet.plugins.mobs.skills.visual;
+
+import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+
+import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
+
+public class ChickenAura extends AbstractVisualSkill implements PassiveAttack
+{
+	@Override
+	protected void displayVisualEffects(LivingEntity caster) 
+	{
+		if (this.random.nextBoolean())
+		{
+			this.spawnColoredParticlesOnEntity(caster, 20, 0, 0, 0, Particle.FIREWORKS_SPARK);
+		}
+	}
+
+	@Override
+	public double modifyOutgoingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
+			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
+	{
+		damager.getWorld().playSound(damager.getLocation(), Sound.ENTITY_CHICKEN_AMBIENT, 0.6f, 1.0f);
+		damager.getWorld().playSound(damager.getLocation(), Sound.ENTITY_RABBIT_ATTACK, 0.6f, 1.0f);
+		this.spawnColoredParticlesOnEntity(target, 6, 0, 0, 0, Particle.EXPLOSION_NORMAL);
+		return 0;
+	}
+
+	@Override
+	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
+			MobEquipment targetEquipment) 
+	{
+		return 0;
+	}
+
+}

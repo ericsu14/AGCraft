@@ -70,6 +70,8 @@ public enum MonsterStat implements CustomAttribute
 	BASE_ARMOR_TOUGHNESS (Attribute.GENERIC_ARMOR_TOUGHNESS),
 	/** Modifies the knockback resistance stat of custom mobs */
 	KNOCKBACK_RESISTANCE (Attribute.GENERIC_KNOCKBACK_RESISTANCE),
+	/** Modified the knockback strength for the custom mob's melee attack */
+	BASE_KNOCKBACK_STRENGTH (Attribute.GENERIC_ATTACK_KNOCKBACK),
 	/** Sets the custom monster's classifier */
 	MONSTER_CLASSIFIER;
 	
@@ -103,6 +105,6 @@ public enum MonsterStat implements CustomAttribute
 	public void applyCustomAttributes(LivingEntity entity, MobEquipment entityEquipment,
 			BossBarController bossBarController) 
 	{
-		// Do nothing
+
 	}
 }

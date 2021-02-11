@@ -16,6 +16,7 @@ import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.monsters.chicken.ChickenTypes;
 import com.joojet.plugins.mobs.monsters.hoglins.HoglinTypes;
 import com.joojet.plugins.mobs.monsters.husk.HuskTypes;
 import com.joojet.plugins.mobs.monsters.piglin.PiglinTypes;
@@ -50,7 +51,8 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 				new WitherSkeletonTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
 				new ZombiePigmenTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
 				new PiglinTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
-				new HoglinTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter));
+				new HoglinTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new ChickenTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter));
 		
 		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.BUILD_IRONGOLEM,
 				SpawnReason.BUILD_SNOWMAN, SpawnReason.VILLAGE_DEFENSE, SpawnReason.BREEDING);
