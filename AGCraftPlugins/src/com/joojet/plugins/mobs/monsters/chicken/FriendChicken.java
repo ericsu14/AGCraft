@@ -25,7 +25,7 @@ public class FriendChicken extends AbstractChicken
 		this.setStat(MonsterStat.HEALTH, 8.0);
 		this.setStat(MonsterStat.BASE_ARMOR, 20.0);
 		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 20.0);
-		this.setStat(MonsterStat.BASE_SPEED, 0.15);
+		this.setStat(MonsterStat.BASE_SPEED, 0.20);
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING);
 	}
 	
