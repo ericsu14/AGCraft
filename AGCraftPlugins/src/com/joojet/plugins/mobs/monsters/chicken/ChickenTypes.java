@@ -12,6 +12,10 @@ public class ChickenTypes extends MonsterTypes {
 	{
 		super(monsterTypeInterpreter, summonTypeInterpreter, EntityType.CHICKEN);
 		this.addEquipment(new SuperChicken (), 1);
+		this.addEquipment(new CluckFreak (), 0);
+		this.addEquipment(new CrazyNugget (), 0);
+		this.addEquipment(new FriendChicken (), 0);
+		this.addEquipment(new ChickenFighter (), 0);
 	}
 
 }

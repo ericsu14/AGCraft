@@ -8,5 +8,6 @@ public enum Faction
 	DOOM_GUY,
 	NETHER,
 	PHANTOM,
-	ALLIES
+	ALLIES,
+	CHICKEN_GANG
 }

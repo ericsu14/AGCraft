@@ -36,7 +36,7 @@ public class SoulObliterator extends MythicMob
 				Biome.BASALT_DELTAS);
 		
 		this.addFactions(Faction.NETHER);
-		this.addRivalFactions(Faction.DOOM_GUY, Faction.USC, Faction.UCLA);
+		this.addRivalFactions(Faction.DOOM_GUY, Faction.USC, Faction.UCLA, Faction.CHICKEN_GANG);
 		this.addTargetsToHitList(EntityType.WITHER_SKELETON, EntityType.SKELETON, EntityType.ZOMBIE,
 				EntityType.HUSK, EntityType.STRAY);
 		

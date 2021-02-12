@@ -1,8 +1,10 @@
 package com.joojet.plugins.mobs.pathfinding;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityCombustByEntityEvent;
+import org.bukkit.potion.PotionEffectType;
 
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -53,6 +55,21 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 				mobEquipment.getStat(MonsterStat.BASE_ATTACK_DAMAGE).floatValue() : 4.0f;
 		float knockBack = mobEquipment.containsStat(MonsterStat.BASE_KNOCKBACK_STRENGTH) ? 
 				mobEquipment.getStat(MonsterStat.BASE_KNOCKBACK_STRENGTH).floatValue() : 0.1f;;
+				
+		// Amplifies attack damage with strength / weakness buffs
+		if (attacker instanceof EntityLiving)
+		{
+			LivingEntity bukkitAttacker = (LivingEntity) (org.bukkit.entity.Entity) attacker.getBukkitEntity();
+			if (bukkitAttacker.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE))
+			{
+				baseDamage += (bukkitAttacker.getPotionEffect(PotionEffectType.INCREASE_DAMAGE).getAmplifier() + 1) * 4;
+			}
+			if (bukkitAttacker.hasPotionEffect(PotionEffectType.WEAKNESS))
+			{
+				baseDamage -= (bukkitAttacker.getPotionEffect(PotionEffectType.WEAKNESS).getAmplifier() + 1) * 4;
+			}
+		}
+		
 		
 		if (target instanceof EntityLiving)
 		{

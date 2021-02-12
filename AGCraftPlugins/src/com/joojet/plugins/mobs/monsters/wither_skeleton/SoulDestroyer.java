@@ -33,7 +33,7 @@ public class SoulDestroyer extends EpicMob
 		this.addMobFlags(MobFlag.IGNORE_NON_FACTION_ENTITIES);
 		
 		this.addFactions(Faction.NETHER);
-		this.addRivalFactions(Faction.DOOM_GUY, Faction.USC, Faction.UCLA);
+		this.addRivalFactions(Faction.DOOM_GUY, Faction.USC, Faction.UCLA, Faction.CHICKEN_GANG);
 		this.addTargetsToHitList(EntityType.WITHER_SKELETON, EntityType.SKELETON, EntityType.ZOMBIE,
 				EntityType.HUSK, EntityType.STRAY);
 		
