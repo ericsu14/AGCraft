@@ -7,11 +7,13 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public class SummonChickenGang extends AbstractSummonSkill {
 
@@ -45,6 +47,11 @@ public class SummonChickenGang extends AbstractSummonSkill {
 		damageDisplayListener.displayStringAboveEntity(entity, entity.getCustomName());
 		entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_EVOKER_CAST_SPELL, 2.0f, 2.0f);
 		entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_CHICKEN_AMBIENT, (float) (this.random.nextDouble() + 1.0), 2.0f);
+		
+		for (Player p : ScanEntities.ScanNearbyPlayers(entity, this.range))
+		{
+			p.sendMessage(entity.getCustomName());
+		}
 	}
 
 	@Override
@@ -57,6 +64,13 @@ public class SummonChickenGang extends AbstractSummonSkill {
 	protected boolean checkConditions(LivingEntity caster) 
 	{
 		return this.checkHealthIsBelowThreshold(caster, 0.50);
+	}
+
+	@Override
+	public String getSentMessage(LivingEntity caster) 
+	{
+		return StringUtil.alternateTextColors("OUT OF YOUR FRIENDS, WHICH ARE YOU?", TextPattern.WORD,
+				ChatColor.RED, ChatColor.GOLD);
 	}
 
 }

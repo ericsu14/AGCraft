@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
@@ -18,8 +19,7 @@ import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
 import com.joojet.plugins.mobs.skills.runnable.SummonEntitiesTask;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 import com.joojet.plugins.mobs.util.LocationTools;
-
-import net.md_5.bungee.api.ChatColor;
+import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public abstract class AbstractSummonSkill extends AbstractSkill
 {
@@ -54,12 +54,9 @@ public abstract class AbstractSummonSkill extends AbstractSkill
 		if (!possibleLocations.isEmpty())
 		{
 			this.playSkillCasterAnimation(caster, damageDisplayListener);
-			for (LivingEntity enemy : enemies)
+			for (Player player : ScanEntities.ScanNearbyPlayers(caster, this.range))
 			{
-				if (enemy.getType() == EntityType.PLAYER)
-				{
-					enemy.sendMessage(caster.getName() + ChatColor.GOLD + " is calling for help!");
-				}
+				player.sendMessage(this.getSentMessage(caster));
 			}
 			new SummonEntitiesTask (possibleLocations, this, monsterTypeInterpreter, bossBarController, damageDisplayListener).runTaskTimer(AGCraftPlugin.plugin, 20, 4);
 		}
@@ -70,6 +67,9 @@ public abstract class AbstractSummonSkill extends AbstractSkill
 	
 	/** Plays a summon animation on a summoned entity */
 	public abstract void playSummonAnimation (LivingEntity entity, DamageDisplayListener damageDisplayListener);
+	
+	/** The message that is sent to all nearby players when the caster uses this skill */
+	public abstract String getSentMessage (LivingEntity caster);
 	
 	/** Registers a new summon into the list of custom monsters that can be summoned by this skill
 	 *  @param monsterType Type of custom monster that can be summoned

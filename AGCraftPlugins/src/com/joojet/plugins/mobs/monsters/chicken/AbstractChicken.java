@@ -13,6 +13,7 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.pathfinding.PathfinderGoalCustomMeleeAttack;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.buff.SelfHealSkill;
+import com.joojet.plugins.mobs.skills.passive.FearlessSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 import com.joojet.plugins.mobs.skills.visual.ChickenAura;
 
@@ -20,7 +21,6 @@ import net.minecraft.server.v1_16_R3.EntityCreature;
 import net.minecraft.server.v1_16_R3.EntityInsentient;
 import net.minecraft.server.v1_16_R3.PathfinderGoalFloat;
 import net.minecraft.server.v1_16_R3.PathfinderGoalLeapAtTarget;
-import net.minecraft.server.v1_16_R3.PathfinderGoalPanic;
 import net.minecraft.server.v1_16_R3.PathfinderGoalRandomStrollLand;
 
 /** Represents an abstract chicken */
@@ -54,6 +54,7 @@ public abstract class AbstractChicken extends MobEquipment implements NMSSkillUs
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
 		skills.add(new ChickenAura());
+		skills.add(new FearlessSkill ());
 		skills.add(new SelfHealSkill (1, 30, 16, 0.20));
 		skills.add(new TeleportSkill (128, 20, Integer.MAX_VALUE, 1));
 	}
@@ -65,9 +66,6 @@ public abstract class AbstractChicken extends MobEquipment implements NMSSkillUs
 		nmsMob.goalSelector.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
 		nmsMob.goalSelector.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
 		nmsMob.goalSelector.a(4, new PathfinderGoalCustomMeleeAttack ((EntityCreature) nmsMob, this));
-		
-		// Attempts to remove the PANIC pathfinder goal from the chicken
-		nmsMob.goalSelector.a(new PathfinderGoalPanic((EntityCreature) nmsMob, 1.4D));
 	}
 
 }

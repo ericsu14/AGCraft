@@ -22,7 +22,7 @@ public class SuperChicken extends AbstractChicken
 		this.setDropRates(0.0f, 0.01f, 0.0f, 0.0f, 0.0f, 0.0f);
 		this.name = "Super Chicken";
 		this.color = ChatColor.GOLD;
-		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.COMMON);
+		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.LEGENDARY);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 15.0);
 		this.setStat(MonsterStat.HEALTH, 30.0);
 		this.setStat(MonsterStat.BASE_ARMOR, 12.0);
@@ -38,6 +38,6 @@ public class SuperChicken extends AbstractChicken
 	{
 		super.loadCustomSkills(skills);
 		skills.add(new RageSkill (2, 60, 0.30));
-		skills.add(new SummonChickenGang (32, 90, Integer.MAX_VALUE, 16, 5));
+		skills.add(new SummonChickenGang (16, 120, Integer.MAX_VALUE, 16, 5));
 	}
 }

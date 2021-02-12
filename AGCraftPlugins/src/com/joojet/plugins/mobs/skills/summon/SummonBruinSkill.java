@@ -58,4 +58,10 @@ public class SummonBruinSkill extends AbstractSummonSkill {
 		caster.getWorld().playSound(caster.getLocation(), Sound.ENTITY_ILLUSIONER_CAST_SPELL, 1.0f, 1.0f);
 	}
 
+	@Override
+	public String getSentMessage(LivingEntity caster) 
+	{
+		return caster.getName() + ChatColor.GOLD + " is calling for help!";
+	}
+
 }

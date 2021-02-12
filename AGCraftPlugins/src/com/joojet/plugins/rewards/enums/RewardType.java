@@ -2,6 +2,7 @@ package com.joojet.plugins.rewards.enums;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.equipment.boots.BarneyFeet;
@@ -24,6 +25,7 @@ import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
 import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
 import com.joojet.plugins.mobs.fireworks.PaintTheSky;
+import com.joojet.plugins.mobs.monsters.chicken.SuperChicken;
 import com.joojet.plugins.mobs.scrolls.*;
 
 public enum RewardType 
@@ -72,7 +74,8 @@ public enum RewardType
 	BARNEY_PANTS,
 	BARNEY_FEET,
 	BARNEY_TOTEM,
-	BARNEY_DAGGER;
+	BARNEY_DAGGER,
+	SUPER_CHICKEN;
 	
 	public ItemStack getReward ()
 	{
@@ -168,6 +171,8 @@ public enum RewardType
 				return new BarneyTotem (ChatColor.DARK_PURPLE);
 			case BARNEY_DAGGER:
 				return new BarneyDagger (ChatColor.DARK_PURPLE);
+			case SUPER_CHICKEN:
+				return new SummoningScroll (new SuperChicken (), EntityType.CHICKEN);
 			default:
 				break;
 		}

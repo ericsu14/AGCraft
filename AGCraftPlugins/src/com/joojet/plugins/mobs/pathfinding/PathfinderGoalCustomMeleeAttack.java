@@ -12,6 +12,7 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import net.minecraft.server.v1_16_R3.DamageSource;
 import net.minecraft.server.v1_16_R3.EnchantmentManager;
 import net.minecraft.server.v1_16_R3.Entity;
+import net.minecraft.server.v1_16_R3.EntityChicken;
 import net.minecraft.server.v1_16_R3.EntityCreature;
 import net.minecraft.server.v1_16_R3.EntityInsentient;
 import net.minecraft.server.v1_16_R3.EntityLiving;
@@ -42,6 +43,18 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 			this.a.swingHand(EnumHand.MAIN_HAND);
 			this.attackEntity(this.a, target);
 		}
+	}
+	
+	/** Extends the mob's attack radius if that mob is a chicken, due to its smaller hitbox. */
+	@Override
+	protected double a(EntityLiving var0) 
+	{
+		float multiplier = 2.0F;
+		if (this.a instanceof EntityChicken)
+		{
+			multiplier += 1.5F;
+		}
+		return (this.a.getWidth() * multiplier * this.a.getWidth() * multiplier + var0.getWidth());
 	}
 	
 	/** A modified implementation of the NMS attack entity code that supports custom base damage
