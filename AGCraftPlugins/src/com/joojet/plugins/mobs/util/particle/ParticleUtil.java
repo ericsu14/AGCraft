@@ -10,6 +10,14 @@ import com.joojet.plugins.mobs.util.LocationTools;
 
 public class ParticleUtil 
 {
+	/** Uses the midpoint circle algorithm to draw a flat circle on the XZ plane in the world using the given particle
+	 *  @param centerX Center x coordinate of the circle
+	 *  @param centerY Center y coordinate of the circle
+	 *  @param centerZ Center z coordinate of the circle
+	 *  @param radius Radius of the circle
+	 *  @param particle Particle used to render the circle
+	 *  @param world World the circle is drawn to
+	 *  @param stepSize Distance between adjacent particles in the circle */
 	public static void drawCircleOnXZPlane (double centerX, double centerY, double centerZ, int radius, Particle particle, World world, double stepSize)
 	{
 		double d = (5 - radius * 4) / 4;
@@ -33,6 +41,16 @@ public class ParticleUtil
 		} while (x < z);
 	}
 	
+	/** Draws a line between the two corner coordinates with the given particle
+	 *  @param fromX Starting x coord. of the line
+	 *  @param fromY Starting y coord. of the line
+	 *  @param fromZ Starting z coord. of the line
+	 *  @param toX Ending x coord. of the line
+	 *  @param toY Ending y coord. of the line
+	 *  @param toZ Ending z coord. of the line
+	 *  @param particle Particle used to draw the line
+	 *  @param world World the line is drawn in
+	 *  @param stepSize Distance between adjacent particles in the line */
 	public static void drawLine (double fromX, double fromY, double fromZ, double toX, double toY, double toZ, Particle particle, World world, double stepSize)
 	{
 		for (double x = fromX; x <= toX; x += stepSize)
