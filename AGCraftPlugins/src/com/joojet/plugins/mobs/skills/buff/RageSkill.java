@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
+import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 
 public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, PassiveAttack
 {
@@ -41,8 +42,8 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, P
 	@Override
 	protected void playBuffAnimation(LivingEntity entity) 
 	{
-		this.spawnColoredParticlesOnEntity(entity, 30, 255, 255, 255, Particle.VILLAGER_ANGRY);
-		this.spawnColoredParticlesOnEntity(entity, 30, 64, 0, 0, Particle.SPELL_MOB);
+		ParticleUtil.spawnColoredParticlesOnEntity(entity, 30, 255, 255, 255, Particle.VILLAGER_ANGRY);
+		ParticleUtil.spawnColoredParticlesOnEntity(entity, 30, 64, 0, 0, Particle.SPELL_MOB);
 		entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1.0F, 1.0F);
 	}
 	
@@ -78,8 +79,8 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, P
 		{
 			if (this.random.nextBoolean())
 			{
-				this.spawnColoredParticlesOnEntity(caster, 10, 0, 0, 0, Particle.SMOKE_LARGE);
-				this.spawnColoredParticlesOnEntity(caster, 15, 0, 0, 0, Particle.FLAME);
+				ParticleUtil.spawnColoredParticlesOnEntity(caster, 10, 0, 0, 0, Particle.SMOKE_LARGE);
+				ParticleUtil.spawnColoredParticlesOnEntity(caster, 15, 0, 0, 0, Particle.FLAME);
 			}
 		}
 		if (this.cooldownTick <= 0)
@@ -108,7 +109,7 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, P
 		AbstractArrow arrow = (AbstractArrow) projectile;
 		arrow.setFireTicks(Integer.MAX_VALUE);
 		// Plays particle and sound effects after launching a projectile under rage
-		this.spawnColoredParticlesOnEntity(shooter, 10, 0, 0, 0, Particle.LAVA);
+		ParticleUtil.spawnColoredParticlesOnEntity(shooter, 10, 0, 0, 0, Particle.LAVA);
 		shooter.getWorld().spawnParticle(Particle.SWEEP_ATTACK, shooter.getLocation(), 1, 0.0, 0.0, 0.0);
 		shooter.getWorld().playSound(shooter.getLocation(), Sound.ENTITY_PLAYER_ATTACK_KNOCKBACK, 1.0f, 1.0f);
 	}
@@ -121,7 +122,7 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, P
 		if (this.enraged)
 		{
 			bonusDamage = (damage * ((this.potionStrength + 1) * this.baseDamageAmplifier));
-			this.spawnColoredParticlesOnEntity(target, 10, 0, 0, 0, Particle.CRIT);
+			ParticleUtil.spawnColoredParticlesOnEntity(target, 10, 0, 0, 0, Particle.CRIT);
 			damager.getWorld().playSound(damager.getLocation(), Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0f, 1.0f);
 		}
 		return bonusDamage;
@@ -137,7 +138,7 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, P
 		if (this.enraged)
 		{
 			bonusDamage = (damage * ((this.potionStrength + 1) * this.baseDamageAmplifier));
-			this.spawnColoredParticlesOnEntity(target, 20, 128, 0, 0, Particle.REDSTONE);
+			ParticleUtil.spawnColoredParticlesOnEntity(target, 20, 128, 0, 0, Particle.REDSTONE);
 			target.getWorld().playSound(target.getLocation(), Sound.BLOCK_STONE_BREAK, 1.0f, 1.0f);
 		}
 		return bonusDamage;

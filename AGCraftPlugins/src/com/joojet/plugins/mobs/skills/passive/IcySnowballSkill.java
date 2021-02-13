@@ -17,6 +17,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
+import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 
 /** Allows snowball projectiles fired by the skillcaster to actually deal damage and slow enemies down
  *  for several seconds */
@@ -58,9 +59,9 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 				return 0;
 			}
 			
-			this.spawnColoredParticlesOnEntity(target, 15, 0, 0, 0, Particle.SNOW_SHOVEL);
-			this.spawnColoredParticlesOnEntity(target, 15, 0, 0, 0, Particle.SNOWBALL);
-			this.spawnColoredParticlesOnEntity(target, 15, 0, 0, 0, Particle.CRIT);
+			ParticleUtil.spawnColoredParticlesOnEntity(target, 15, 0, 0, 0, Particle.SNOW_SHOVEL);
+			ParticleUtil.spawnColoredParticlesOnEntity(target, 15, 0, 0, 0, Particle.SNOWBALL);
+			ParticleUtil.spawnColoredParticlesOnEntity(target, 15, 0, 0, 0, Particle.CRIT);
 			target.getWorld().playSound(target.getLocation(), Sound.BLOCK_SNOW_BREAK, 1.0f, 1.0f);
 			target.getWorld().playSound(target.getLocation(), Sound.ENTITY_PLAYER_ATTACK_CRIT, 0.8f, 1.0f);
 			target.addPotionEffect(new PotionEffect (PotionEffectType.SLOW, this.slowDuration, 0));
@@ -88,9 +89,9 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 		this.snowballs.put(projectile.getUniqueId(), projectile);
 		
 		// Plays a particle effect indicating the skillcaster has just fired a special snowball
-		this.spawnColoredParticlesOnEntity(shooter, 15, 173, 216, 230, Particle.REDSTONE);
-		this.spawnColoredParticlesOnEntity(shooter, 15, 255, 255, 255, Particle.REDSTONE);
-		this.spawnColoredParticlesOnEntity(shooter, 10, 0, 0, 0, Particle.SPELL_INSTANT);
+		ParticleUtil.spawnColoredParticlesOnEntity(shooter, 15, 173, 216, 230, Particle.REDSTONE);
+		ParticleUtil.spawnColoredParticlesOnEntity(shooter, 15, 255, 255, 255, Particle.REDSTONE);
+		ParticleUtil.spawnColoredParticlesOnEntity(shooter, 10, 0, 0, 0, Particle.SPELL_INSTANT);
 		shooter.getWorld().playSound(shooter.getLocation(), Sound.ENTITY_SNOW_GOLEM_HURT, 1.0f, 1.0f);
 	}
 	

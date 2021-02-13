@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -17,7 +14,6 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
 import com.joojet.plugins.mobs.spawning.FairSpawnController;
-import com.joojet.plugins.mobs.util.LocationTools;
 
 public abstract class AbstractSkill 
 {
@@ -129,35 +125,6 @@ public abstract class AbstractSkill
 	protected boolean checkHealthIsBelowThreshold (LivingEntity caster, double threshold)
 	{
 		return (caster.getHealth() / caster.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) <= threshold;
-	}
-	
-	/** Spawns a random amount of colored particles (can only be REDSTONE, SPELL_MOB and SPELL_MOB_AMBIENT)
-	 *  around an entity.
-	 *  @param entity - LivingEntity in which particles are spawned at
-	 *  @param count - Amount of particles to be spawned
-	 *  @param red - Particle's RGB red value
-	 *  @param green - Particle's RGB green value
-	 *  @param blue - Particle's RGB blue value
-	 *  @param particle - Type of particle to be spawned */
-	public void spawnColoredParticlesOnEntity (LivingEntity entity, int count, int red, int green, int blue, Particle particle)
-	{
-		if (count <= 0)
-		{
-			count = 1;
-		}
-		
-		Location entityLocation = entity.getEyeLocation();
-		
-		Object data = null;
-		if (particle == Particle.REDSTONE)
-		{
-			data = new Particle.DustOptions(Color.fromRGB(red, green, blue), 1.0f);
-		}
-		for (int i = 0; i < count; ++i)
-		{
-			entity.getWorld().spawnParticle(particle, LocationTools.addRandomOffsetOnLocation(entityLocation, 0.7),
-					0, (red / 256D), (green / 256D), (blue / 256D), 1, data);
-		}
 	}
 	
 	/** Returns true if there is at least one player around the caster

@@ -63,7 +63,7 @@ public class ThunderSkillRunnable extends BukkitRunnable
 				targetLocation.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, targetLocation, 2, 1.0, 1.0, 1.0);
 				if (!this.caster.isDead())
 				{
-					skill.spawnColoredParticlesOnEntity(this.caster, 2, 0, 0, 0, Particle.VILLAGER_ANGRY);
+					ParticleUtil.spawnColoredParticlesOnEntity(this.caster, 2, 0, 0, 0, Particle.VILLAGER_ANGRY);
 					this.caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, this.caster.getLocation(), 5, 1.0, 1.0, 1.0);
 				}
 			}

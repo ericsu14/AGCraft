@@ -9,6 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffectType;
 
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
+import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 
 public class SpeedBuffSkill extends AbstractBuffSkill 
 {	
@@ -27,7 +28,7 @@ public class SpeedBuffSkill extends AbstractBuffSkill
 	@Override
 	protected void playBuffAnimation(LivingEntity entity) 
 	{
-		this.spawnColoredParticlesOnEntity(entity, 30, 224, 255, 255, Particle.SPELL_MOB);
+		ParticleUtil.spawnColoredParticlesOnEntity(entity, 30, 224, 255, 255, Particle.SPELL_MOB);
 		entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_ILLUSIONER_MIRROR_MOVE, 1.0F, 1.0F);
 	}
 
