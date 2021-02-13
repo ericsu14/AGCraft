@@ -69,7 +69,8 @@ public class ThunderSkillRunnable extends BukkitRunnable
 			}
 			else if (this.ticks % 10 == 0)
 			{
-				ParticleUtil.drawCircleOnXZPlane(targetLocation.getX(), targetLocation.getY() + 10.0, targetLocation.getZ(), 4, Particle.SMOKE_LARGE, targetLocation.getWorld());
+				ParticleUtil.drawCircleOnXZPlane(targetLocation.getX(), targetLocation.getY() + 10.0, targetLocation.getZ(), 4, 
+						Particle.SMOKE_LARGE, targetLocation.getWorld(), 0.5);
 			}
 		}
 		
