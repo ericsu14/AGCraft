@@ -67,12 +67,6 @@ public class ThunderSkillRunnable extends BukkitRunnable
 					this.caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, this.caster.getLocation(), 5, 1.0, 1.0, 1.0);
 				}
 			}
-			// Renders a lightning cloud above the strike zone
-			else if (this.ticks % 10 == 0)
-			{
-				ParticleUtil.drawCircleOnXZPlane(targetLocation.getX(), targetLocation.getY() + 10.0, targetLocation.getZ(), 6, 
-						Particle.SMOKE_LARGE, targetLocation.getWorld(), 0.5);
-			}
 		}
 		
 		if (this.ticks <= 0)

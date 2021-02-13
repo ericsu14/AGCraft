@@ -20,6 +20,8 @@ import net.minecraft.server.v1_16_R3.EnumHand;
 import net.minecraft.server.v1_16_R3.MathHelper;
 import net.minecraft.server.v1_16_R3.PathfinderGoalMeleeAttack;
 
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftLivingEntity;
+
 public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack 
 {
 	/** Mob equipment instance tied to the creature (used to extract attack damage attributes) */
@@ -41,7 +43,7 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 		{
 			this.g();
 			this.a.swingHand(EnumHand.MAIN_HAND);
-			this.attackEntity(this.a, target);
+			attackEntity(this.a, this.mobEquipment, target);
 		}
 	}
 	
@@ -57,17 +59,27 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 		return (this.a.getWidth() * multiplier * this.a.getWidth() * multiplier + var0.getWidth());
 	}
 	
+	/** Uses the modified attackEntity implementation for bukkit-based living entities.
+	 *  @param attacker Entity attacking the target
+	 *  @param attackerEquipment Attacker's mobEquipment instance
+	 *  @param target Target being attacked by the entity */
+	public static boolean attackEntity (LivingEntity attacker, MobEquipment attackerEquipment, LivingEntity target)
+	{
+		return attackEntity ((EntityInsentient) ((CraftLivingEntity) attacker).getHandle(), attackerEquipment, ((CraftLivingEntity) target).getHandle());			
+	}
+	
 	/** A modified implementation of the NMS attack entity code that supports custom base damage
 	 *  and knockback strength attributes found in our MobEquipment instances. This allows monsters
 	 *  who do not naturally have these attributes to be capable of attacking monsters.
 	 *  @param attacker Entity attacking the target
+	 *  @param attackerEquipment Attacker's mobEquipment instance
 	 *  @param target Target being attacked by the entity */
-	public boolean attackEntity (EntityInsentient attacker, Entity target)
+	public static boolean attackEntity (EntityInsentient attacker, MobEquipment attackerEquipment, Entity target)
 	{
-		float baseDamage = mobEquipment.containsStat(MonsterStat.BASE_ATTACK_DAMAGE) ? 
-				mobEquipment.getStat(MonsterStat.BASE_ATTACK_DAMAGE).floatValue() : 4.0f;
-		float knockBack = mobEquipment.containsStat(MonsterStat.BASE_KNOCKBACK_STRENGTH) ? 
-				mobEquipment.getStat(MonsterStat.BASE_KNOCKBACK_STRENGTH).floatValue() : 0.1f;;
+		float baseDamage = attackerEquipment.containsStat(MonsterStat.BASE_ATTACK_DAMAGE) ? 
+				attackerEquipment.getStat(MonsterStat.BASE_ATTACK_DAMAGE).floatValue() : 4.0f;
+		float knockBack = attackerEquipment.containsStat(MonsterStat.BASE_KNOCKBACK_STRENGTH) ? 
+				attackerEquipment.getStat(MonsterStat.BASE_KNOCKBACK_STRENGTH).floatValue() : 0.1f;;
 				
 		// Amplifies attack damage with strength / weakness buffs
 		if (attacker instanceof EntityLiving)

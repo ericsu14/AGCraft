@@ -59,7 +59,7 @@ public class ParticleUtil
 			{
 				for (double z = fromZ; z <= toZ; z += stepSize)
 				{
-					world.spawnParticle(particle, x, toY, z, 0, 0.0, 0.0, 0.0, 1.0);
+					world.spawnParticle(particle, x, toY, z, 0, 0.0, 0.0, 0.0, 0.0);
 				}
 			}
 		}
