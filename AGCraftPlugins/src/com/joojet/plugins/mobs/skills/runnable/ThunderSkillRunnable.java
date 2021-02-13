@@ -9,6 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
+import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 
 public class ThunderSkillRunnable extends BukkitRunnable 
 {
@@ -46,28 +47,29 @@ public class ThunderSkillRunnable extends BukkitRunnable
 			this.cancel();
 		}
 		
-		if (this.ticks % 2 == 0)
+		for (Location targetLocation : this.targetLocations)
 		{
-			for (Location targetLocation : this.targetLocations)
+			// Cast lightning and create explosion once delay is served
+			if (this.ticks <= 0)
 			{
-				// Cast lightning and create explosion once delay is served
-				if (this.ticks <= 0)
-				{
-					targetLocation.getWorld().spigot().strikeLightning(targetLocation, true);
-					targetLocation.getWorld().createExplosion(targetLocation.add(0.0, 1.0, 0.0), this.skill.getExplosionPower(), false, false, this.caster);
-					targetLocation.getWorld().playSound(targetLocation, Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 0.8f, 1.0f);
-				}
+				targetLocation.getWorld().spigot().strikeLightning(targetLocation, true);
+				targetLocation.getWorld().createExplosion(targetLocation.add(0.0, 1.0, 0.0), this.skill.getExplosionPower(), false, false, this.caster);
+				targetLocation.getWorld().playSound(targetLocation, Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 0.8f, 1.0f);
+			}
 				
-				else
+			else if (this.ticks % 4 == 0)
+			{
+				targetLocation.getWorld().spawnParticle(Particle.SPELL_INSTANT, targetLocation, 4, 1.0, 1.0, 1.0);
+				targetLocation.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, targetLocation, 2, 1.0, 1.0, 1.0);
+				if (!this.caster.isDead())
 				{
-					targetLocation.getWorld().spawnParticle(Particle.SPELL_INSTANT, targetLocation, 4, 1.0, 1.0, 1.0);
-					targetLocation.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, targetLocation, 2, 1.0, 1.0, 1.0);
-					if (!this.caster.isDead())
-					{
-						skill.spawnColoredParticlesOnEntity(this.caster, 2, 0, 0, 0, Particle.VILLAGER_ANGRY);
-						this.caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, this.caster.getLocation(), 5, 1.0, 1.0, 1.0);
-					}
+					skill.spawnColoredParticlesOnEntity(this.caster, 2, 0, 0, 0, Particle.VILLAGER_ANGRY);
+					this.caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, this.caster.getLocation(), 5, 1.0, 1.0, 1.0);
 				}
+			}
+			else if (this.ticks % 10 == 0)
+			{
+				ParticleUtil.drawCircleOnXZPlane(targetLocation.getX(), targetLocation.getY() + 10.0, targetLocation.getZ(), 4, Particle.SMOKE_LARGE, targetLocation.getWorld());
 			}
 		}
 		

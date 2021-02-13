@@ -14,8 +14,8 @@ import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterType;
 
-public class SummonBruinSkill extends AbstractSummonSkill {
-
+public class SummonBruinSkill extends AbstractSummonSkill 
+{
 	public SummonBruinSkill(int range, int cooldown, int maxUses, int weight, int maxSummons) 
 	{
 		super(range, cooldown, maxUses, weight, maxSummons);

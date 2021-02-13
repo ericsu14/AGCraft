@@ -24,7 +24,7 @@ public class CrazyNugget extends AbstractChicken
 		this.color = ChatColor.LIGHT_PURPLE;
 		this.addMobFlags(MobFlag.SHOW_NAME);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.COMMON);
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 12.0);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 8.0);
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.BASE_ARMOR, 8.0);
 		this.setStat(MonsterStat.BASE_KNOCKBACK_STRENGTH, 0.15);
