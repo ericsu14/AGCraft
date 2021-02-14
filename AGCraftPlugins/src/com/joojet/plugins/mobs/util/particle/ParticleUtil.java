@@ -27,7 +27,7 @@ public class ParticleUtil
 		// Uses the midpoint circle algorithm to render a circle on the XZ plane on a center coordinate
 		do
 		{
-			drawLine (centerX - x, centerY, centerZ - z, centerX + x, centerY, centerZ + z, particle, world, stepSize);
+			drawBox (centerX - x, centerY, centerZ - z, centerX + x, centerY, centerZ + z, particle, world, stepSize);
 			if (d < 0)
 			{
 				d += 2 * x + 1;
@@ -41,7 +41,7 @@ public class ParticleUtil
 		} while (x < z);
 	}
 	
-	/** Draws a line between the two corner coordinates with the given particle
+	/** Draws a box between the two corner coordinates with the given particle
 	 *  @param fromX Starting x coord. of the line
 	 *  @param fromY Starting y coord. of the line
 	 *  @param fromZ Starting z coord. of the line
@@ -51,7 +51,7 @@ public class ParticleUtil
 	 *  @param particle Particle used to draw the line
 	 *  @param world World the line is drawn in
 	 *  @param stepSize Distance between adjacent particles in the line */
-	public static void drawLine (double fromX, double fromY, double fromZ, double toX, double toY, double toZ, Particle particle, World world, double stepSize)
+	public static void drawBox (double fromX, double fromY, double fromZ, double toX, double toY, double toZ, Particle particle, World world, double stepSize)
 	{
 		for (double x = fromX; x <= toX; x += stepSize)
 		{

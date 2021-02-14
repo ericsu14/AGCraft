@@ -36,7 +36,7 @@ public class LazerBeamAttack extends AbstractAttackSkill
 		if (enemy != null)
 		{
 			new LaserBeamRunnable (caster, monsterTypeInterpreter.getMobEquipmentFromEntity(caster),
-					enemy, this).runTaskTimer(AGCraftPlugin.plugin, 20, 1);
+					enemy, this).runTaskTimer(AGCraftPlugin.plugin, 20, 4);
 		}
 	}
 

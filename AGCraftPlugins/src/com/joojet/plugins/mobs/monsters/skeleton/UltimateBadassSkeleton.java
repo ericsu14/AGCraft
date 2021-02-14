@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.skeleton;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -16,6 +18,8 @@ import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.ThanosArrow;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualFantasy;
 import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.attack.LazerBeamAttack;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class UltimateBadassSkeleton extends LegendaryMob
@@ -29,6 +33,8 @@ public class UltimateBadassSkeleton extends LegendaryMob
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.40);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.75);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 6.0);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 8.0);
 		
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
@@ -52,5 +58,12 @@ public class UltimateBadassSkeleton extends LegendaryMob
 		
 		this.setStat(MonsterStat.EXPERIENCE, 50.0);
 		this.bossTheme = MusicType.HAIKYUU;
+	}
+	
+	@Override
+	public void loadCustomSkills (List <AbstractSkill> skills)
+	{
+		super.loadCustomSkills(skills);
+		skills.add(new LazerBeamAttack (24, 12, Integer.MAX_VALUE, 4, 80));
 	}
 }

@@ -424,11 +424,13 @@ public abstract class MobEquipment
 	public boolean isAlliesOf (LivingEntity entity, LivingEntity other, MobEquipment otherEquipment)
 	{
 		boolean result = false;
+		boolean noFactions = false;
 		if (otherEquipment != null)
 		{
 			// Check if the entity is in the same faction as the other entity.
 			// If so, immediately return true
 			EnumSet <Faction> factions = otherEquipment.getFactions();
+			noFactions = this.factions.isEmpty() && factions.isEmpty();
 			for (Faction faction : factions)
 			{
 				if (this.factions.contains(faction))
@@ -446,7 +448,7 @@ public abstract class MobEquipment
 		
 		// Allows neutral mobs and custom mobs without anything in their hitlist
 		// to be allies with other non-factioned, non-player mobs
-		if (otherEquipment == null && other.getType() != EntityType.PLAYER ||
+		if (noFactions ||(otherEquipment == null && other.getType() != EntityType.PLAYER) ||
 				this.getIgnoreList().contains(EntityType.PLAYER))
 		{
 			result |= !this.hitlist.contains(other.getType());

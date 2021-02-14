@@ -33,7 +33,7 @@ public class MusicListener extends AGListener
 	@EventHandler
 	public void onPlayerLeave (PlayerQuitEvent event)
 	{
-		this.soundPlayer.removeSoundTaskFromTable(event.getPlayer().getUniqueId());
+		this.soundPlayer.removeSoundTaskFromTable(event.getPlayer());
 	}
 	
 	/** Sets the boss music's volume to a new value
@@ -66,12 +66,12 @@ public class MusicListener extends AGListener
 
 
 	@Override
-	public void loadConfigVariables(ServerConfigFile config) {
+	public void loadConfigVariables(ServerConfigFile config) 
+	{
 		// Music volume
 		this.setMusicVolume(config.getValueAsDouble(MUSIC_VOLUME_TAG));
 		// Firework music volume
 		this.setFireworkMusicVolume(config.getValueAsDouble(FIREWORKS_MUSIC_VOLUME_TAG));
-		
 	}
 
 

@@ -5,10 +5,10 @@ import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.music.MusicListener;
+import com.joojet.plugins.music.enums.MusicEndingType;
 import com.joojet.plugins.music.enums.MusicType;
 import com.joojet.plugins.music.enums.SoundPlayerState;
 import com.joojet.plugins.music.task.PlayCustomSoundTask;
@@ -36,7 +36,7 @@ public class SoundPlayer
 		this.playCustomMusicNearPlayer(type, player, SoundPlayerState.RUNNING, musicVolume);
 		
 		PlayCustomSoundTask task = this.activePlayerSoundTable.get(player.getUniqueId());
-		if (task.getMusicType() == type)
+		if (task.getMusicType() == type && task.getSoundPlayerState() == SoundPlayerState.RUNNING)
 		{
 			task.attachBossEntity(bossEntityUUID);
 		}
@@ -53,8 +53,9 @@ public class SoundPlayer
 	{
 		if (!this.activePlayerSoundTable.containsKey(player.getUniqueId()))
 		{
+			this.stopAllSoundsNearPlayer(player);
 			player.playSound(player.getLocation(), type.getNamespace(), musicVolume, 1.0F);
-			PlayCustomSoundTask soundTask = new PlayCustomSoundTask (player.getUniqueId(), type, this, state);
+			PlayCustomSoundTask soundTask = new PlayCustomSoundTask (player, type, this, state);
 			this.activePlayerSoundTable.put(player.getUniqueId(), soundTask);
 			soundTask.runTaskLater(AGCraftPlugin.plugin, type.duration().getTicks());
 		}
@@ -84,7 +85,10 @@ public class SoundPlayer
 		{
 			PlayCustomSoundTask task = this.activePlayerSoundTable.get(playerUUID);
 			
-			if (task.getMusicType() != type || task.getSoundPlayerState() != SoundPlayerState.RUNNING)
+			if (task == null ||
+					task.getMusicType() != type || 
+					task.getSoundPlayerState() == SoundPlayerState.FIREWORK ||
+					task.isCancelled())
 			{
 				return;
 			}
@@ -93,21 +97,13 @@ public class SoundPlayer
 			task.removeAttachedBossEntity(bossUUID);
 			
 			// If there are no more boss entities attached to this task, play the boss theme's ending music
-			if (task.getAttachedBossEntityCount() == 0)
+			if (task.getAttachedBossEntityCount() <= 0 && task.getSoundPlayerState() == SoundPlayerState.RUNNING)
 			{
-				player.stopSound(type.getNamespace());
+				this.stopAllSoundsNearPlayer(player);
 				if (type.hasEndingTheme())
 				{
 					task.setSoundPlayerState(SoundPlayerState.ENDING);
 					player.playSound(player.getLocation(), type.getEndTheme().getNamespace(), this.musicListener.musicVolume, 1.0F);
-					task.cancel();
-					new BukkitRunnable () {
-						@Override
-						public void run ()
-						{
-							removeSoundTaskFromTable (playerUUID);
-						}
-					}.runTaskLater(AGCraftPlugin.plugin, type.getEndTheme().duration().getTicks());
 				}
 			}
 		}
@@ -127,7 +123,7 @@ public class SoundPlayer
 				&& this.activePlayerSoundTable.get(playerUUID).getMusicType() == type)
 		{
 			player.stopSound(type.getNamespace());
-			this.removeSoundTaskFromTable(playerUUID);
+			this.removeSoundTaskFromTable(player);
 		}
 	}
 	
@@ -137,21 +133,28 @@ public class SoundPlayer
 	public void stopAllSoundsNearPlayer (Player player)
 	{
 		UUID playerUUID = player.getUniqueId();
+		
+		for (MusicType type : MusicType.values())
+		{
+			player.stopSound(type.getNamespace());
+		}
+		for (MusicEndingType type : MusicEndingType.values())
+		{
+			player.stopSound(type.getNamespace());
+		}
+		
 		if (this.activePlayerSoundTable.containsKey(playerUUID))
 		{
-			for (MusicType type : MusicType.values())
-			{
-				player.stopSound(type.getNamespace());
-			}
-			this.removeSoundTaskFromTable(playerUUID);
+			this.removeSoundTaskFromTable(player);
 		}
 	}
 	
 	/** Removes the sound task entry from the sound player table
 	 *  and cancels the task.
 	 *  @param uuid - UUID associated with the player who we are removing the active sound from */
-	public void removeSoundTaskFromTable (UUID uuid)
+	public void removeSoundTaskFromTable (Player player)
 	{
+		UUID uuid = player.getUniqueId();
 		if (this.activePlayerSoundTable != null && this.activePlayerSoundTable.containsKey(uuid))
 		{
 			PlayCustomSoundTask removedTask = this.activePlayerSoundTable.remove(uuid);

@@ -14,6 +14,7 @@ import com.joojet.plugins.mobs.monsters.factions.classifications.RareMob;
 import com.joojet.plugins.mobs.pathfinding.PathfinderGoalCustomMeleeAttack;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.LazerBeamAttack;
+import com.joojet.plugins.mobs.skills.visual.SquidPower;
 
 import net.minecraft.server.v1_16_R3.EntityCreature;
 import net.minecraft.server.v1_16_R3.EntityInsentient;
@@ -35,13 +36,14 @@ public class EvilSquid extends RareMob implements NMSSkillUser
 		
 		this.addTargetsToHitList(EntityType.PLAYER, EntityType.DROWNED, EntityType.GUARDIAN,
 				EntityType.ELDER_GUARDIAN, EntityType.ZOMBIE, EntityType.COD, EntityType.SALMON,
-				EntityType.TROPICAL_FISH, EntityType.TURTLE);
+				EntityType.TROPICAL_FISH, EntityType.TURTLE, EntityType.SQUID);
 	}
 	
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
 		skills.add(new LazerBeamAttack (16, 12, Integer.MAX_VALUE, 4, 80));
+		skills.add(new SquidPower (0.10));
 	}
 	
 	@Override

@@ -3,6 +3,7 @@ package com.joojet.plugins.music.task;
 import java.util.HashSet;
 import java.util.UUID;
 
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.music.enums.MusicType;
@@ -11,8 +12,8 @@ import com.joojet.plugins.music.player.SoundPlayer;
 
 public class PlayCustomSoundTask extends BukkitRunnable 
 {
-	/** The player's UUID */
-	protected UUID playerUUID;
+	/** The player */
+	protected Player player;
 	/** The type of music currently being played to the player */
 	protected MusicType musicType;
 	/** A reference to the soundplayer instance */
@@ -22,9 +23,9 @@ public class PlayCustomSoundTask extends BukkitRunnable
 	/** Set of entities attached to the currently playing boss music */
 	protected HashSet <UUID> attachedBossEntities;
 	
-	public PlayCustomSoundTask (UUID playerUUID, MusicType musicType, SoundPlayer musicPlayer, SoundPlayerState state)
+	public PlayCustomSoundTask (Player player, MusicType musicType, SoundPlayer musicPlayer, SoundPlayerState state)
 	{
-		this.playerUUID = playerUUID;
+		this.player = player;
 		this.musicType = musicType;
 		this.musicPlayer = musicPlayer;
 		this.state = state;
@@ -37,7 +38,7 @@ public class PlayCustomSoundTask extends BukkitRunnable
 	@Override
 	public void run() 
 	{
-		this.musicPlayer.removeSoundTaskFromTable(this.playerUUID);
+		this.musicPlayer.removeSoundTaskFromTable(this.player);
 	}
 	
 	public MusicType getMusicType ()

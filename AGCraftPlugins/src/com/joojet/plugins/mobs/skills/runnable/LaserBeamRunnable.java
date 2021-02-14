@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.skills.runnable;
 
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -9,6 +11,7 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.pathfinding.PathfinderGoalCustomMeleeAttack;
 import com.joojet.plugins.mobs.pathfinding.util.LaserBeam;
 import com.joojet.plugins.mobs.skills.attack.LazerBeamAttack;
+import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 
 public class LaserBeamRunnable extends BukkitRunnable
 {
@@ -33,7 +36,7 @@ public class LaserBeamRunnable extends BukkitRunnable
 		this.casterEquipment = casterEquipment;
 		this.target = target;
 		this.laserBeamSkill = laserBeamSkill;
-		this.chargeTime = laserBeamSkill.getDelayTicks();
+		this.chargeTime = laserBeamSkill.getDelayTicks() / 4;
 		this.active = false;
 	}
 	
@@ -43,16 +46,15 @@ public class LaserBeamRunnable extends BukkitRunnable
 		try
 		{
 			this.laser = new LaserBeam (this.caster.getEyeLocation().clone(), this.target.getLocation(),
-					(this.chargeTime / 20), 256);
+					(this.laserBeamSkill.getDelayTicks() / 20), 256);
 			this.laser.start(AGCraftPlugin.plugin);
 			this.laser.callColorChange();
+			this.active = true;
 		}
 		catch (ReflectiveOperationException roe)
 		{
-			this.cancel();
+			// Do Nothing
 		}
-		
-		this.active = true;
 	}
 	
 	@Override
@@ -67,6 +69,7 @@ public class LaserBeamRunnable extends BukkitRunnable
 		if (this.caster.isDead() || this.target.isDead() || !caster.hasLineOfSight(this.target))
 		{
 			this.cancel();
+			return;
 		}
 		
 		// Attacks the entity once the charge time diminishes
@@ -81,7 +84,9 @@ public class LaserBeamRunnable extends BukkitRunnable
 			{
 				PathfinderGoalCustomMeleeAttack.attackEntity (this.caster, this.casterEquipment, this.target);
 			}
+			this.playAttackAnimations();
 			this.cancel();
+			return;
 		}
 		// Otherwise, update the laser's starting and ending points based on their current eye locations
 		else
@@ -96,11 +101,13 @@ public class LaserBeamRunnable extends BukkitRunnable
 				catch (ReflectiveOperationException roe)
 				{
 					this.cancel();
+					return;
 				}
 			}
 			else
 			{
 				this.cancel();
+				return;
 			}
 		}
 		--this.chargeTime;
@@ -116,6 +123,15 @@ public class LaserBeamRunnable extends BukkitRunnable
 		{
 			this.laser.stop();
 		}
+	}
+	
+	/** Plays animations upon successful laser attacks */
+	public void playAttackAnimations ()
+	{
+		ParticleUtil.spawnColoredParticlesOnEntity(this.target, 4, 0, 0, 0, Particle.EXPLOSION_NORMAL);
+		ParticleUtil.spawnColoredParticlesOnEntity(this.target, 16, 0, 0, 0, Particle.CRIT);
+		this.target.getWorld().playSound(this.target.getLocation(), Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0f, 1.0f);
+		this.target.getWorld().playSound(this.target.getLocation(), Sound.ENTITY_GUARDIAN_ATTACK, 1.0f, 1.0f);
 	}
 
 }

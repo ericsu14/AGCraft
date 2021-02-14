@@ -68,7 +68,7 @@ public class PathfinderGoalGiantFireball extends PathfinderGoal
 				LargeFireball fireball = (LargeFireball) this.giantBukkit.getWorld().spawnEntity(new Location (this.giantBukkit.getWorld(), fireballLocation.getX(),
 						fireballLocation.getY(), fireballLocation.getZ()), EntityType.FIREBALL);
 				fireball.setDirection(fireballDirection);
-				fireball.setYield(4.0f);
+				fireball.setYield(3.0f);
 				fireball.setIsIncendiary(false);
 				fireball.setShooter(this.giantBukkit);
 				this.a = -80;

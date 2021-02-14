@@ -26,7 +26,7 @@ public class PotentSkeleton extends OverworldMob
 		this.leggings = new ReinforcedChainmailLeggings (this.color);
 		this.boots = new LightweightIronBoots (this.color);
 		this.setStat(MonsterStat.BASE_SPEED, 0.20);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 10.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 6.0);
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.EXPERIENCE, 15.0);
 	}
