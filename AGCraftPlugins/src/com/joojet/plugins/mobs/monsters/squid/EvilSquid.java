@@ -27,7 +27,7 @@ public class EvilSquid extends RareMob implements NMSSkillUser
 	{
 		super(MonsterType.EVIL_SQUID);
 		this.name = "Evil Squid";
-		this.addBiomes(Biome.THE_VOID);
+		this.addBiomes(Biome.DEEP_COLD_OCEAN, Biome.DEEP_FROZEN_OCEAN, Biome.DEEP_OCEAN);
 		this.color = ChatColor.LIGHT_PURPLE;
 		
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 8.0);
