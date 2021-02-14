@@ -66,7 +66,7 @@ public class LaserBeamRunnable extends BukkitRunnable
 		}
 		
 		// Breaks from the skill once the target is out of the caster's line of sight
-		if (this.caster.isDead() || this.target.isDead() || !caster.hasLineOfSight(this.target))
+		if (this.caster.isDead() || this.target.isDead() || this.outOfSight())
 		{
 			this.cancel();
 			return;
@@ -132,6 +132,21 @@ public class LaserBeamRunnable extends BukkitRunnable
 		ParticleUtil.spawnColoredParticlesOnEntity(this.target, 16, 0, 0, 0, Particle.CRIT);
 		this.target.getWorld().playSound(this.target.getLocation(), Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0f, 1.0f);
 		this.target.getWorld().playSound(this.target.getLocation(), Sound.ENTITY_GUARDIAN_ATTACK, 1.0f, 1.0f);
+	}
+	
+	/** Returns true if the target is either out of the caster's line of sight
+	 *  or out of range of the skillcaster's AOE radius */
+	public boolean outOfSight ()
+	{
+		// Checks if the target is out of the caster's line of sight
+		if (!this.caster.hasLineOfSight(this.target))
+		{
+			return true;
+		}
+		// Otherwise, check if the target is out of the caster's kill radius (which is the caster's AOE range increased by 20%
+		int killRange = (int) Math.ceil((this.laserBeamSkill.getRange() / 2.0) * 1.2);
+		return !this.caster.getBoundingBox().clone().expand(killRange)
+				.contains(this.target.getBoundingBox());
 	}
 
 }
