@@ -11,6 +11,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
@@ -25,6 +26,7 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.offhand.TippedArrow;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
+import com.joojet.plugins.mobs.metadata.IgnorePlayerMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.util.ConvertColors;
@@ -425,6 +427,16 @@ public abstract class MobEquipment
 	{
 		boolean result = false;
 		boolean noFactions = false;
+		
+		// Do not target players with active ignore metadata timestamps
+		if (other instanceof Player)
+		{
+			IgnorePlayerMetadata metadata = new IgnorePlayerMetadata ();
+			if (metadata.canIgnorePlayer((Player) other))
+			{
+				return true;
+			}
+		}
 		if (otherEquipment != null)
 		{
 			// Check if the entity is in the same faction as the other entity.

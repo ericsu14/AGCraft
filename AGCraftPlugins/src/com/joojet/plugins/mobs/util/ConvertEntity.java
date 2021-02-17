@@ -109,10 +109,43 @@ public class ConvertEntity
 				return EntityArmorStand.class;
 			case WITHER:
 				return EntityWither.class;
+			case SQUID:
+				return EntitySquid.class;
+			case COD:
+				return EntityCod.class;
+			case TROPICAL_FISH:
+				return EntityTropicalFish.class;
+			case PUFFERFISH:
+				return EntityPufferFish.class;
+			case SALMON:
+				return EntitySalmon.class;
+			case BAT:
+				return EntityBat.class;
+			case PANDA:
+				return EntityPanda.class;
+			case SHEEP:
+				return EntitySheep.class;
+			case SHULKER:
+				return EntityShulker.class;
+			case ITEM_FRAME:
+				return EntityItemFrame.class;
+			case DONKEY:
+				return EntityHorseDonkey.class;
+			case LLAMA:
+				return EntityLlama.class;
+			case MULE:
+				return EntityHorseMule.class;
+			case TURTLE:
+				return EntityTurtle.class;
+			case PARROT:
+				return EntityParrot.class;
+			case ZOGLIN:
+				return EntityZoglin.class;
+			case ENDER_DRAGON:
+				return EntityEnderDragon.class;
 			default:
 				break;
 		}
-		
 		return null;
 	}
 }

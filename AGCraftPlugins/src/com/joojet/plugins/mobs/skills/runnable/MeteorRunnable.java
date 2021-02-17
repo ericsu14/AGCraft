@@ -58,6 +58,7 @@ public class MeteorRunnable extends BukkitRunnable
 		{
 			this.meteorSkill.setActive(false);
 			this.cancel();
+			return;
 		}
 		
 		Location casterLocation = this.caster.getLocation();

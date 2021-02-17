@@ -17,8 +17,7 @@ public abstract class AlliedMob extends MobEquipment
 		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.HORSE,
 				EntityType.WOLF, EntityType.SNOWMAN, EntityType.IRON_GOLEM,
 				EntityType.CAT, EntityType.FOX, EntityType.OCELOT, EntityType.BEE,
-				EntityType.OCELOT, EntityType.TROPICAL_FISH, EntityType.PUFFERFISH, EntityType.SALMON,
-				EntityType.COD, EntityType.VILLAGER, EntityType.WANDERING_TRADER, EntityType.DOLPHIN, EntityType.LLAMA);
+				EntityType.OCELOT, EntityType.VILLAGER, EntityType.WANDERING_TRADER, EntityType.DOLPHIN, EntityType.LLAMA);
 		this.addFactions(Faction.ALLIES);
 		this.addRivalFactions(Faction.UCLA, Faction.DOOM_GUY, Faction.NETHER, Faction.PHANTOM);
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.PILLAGER,
@@ -29,6 +28,7 @@ public abstract class AlliedMob extends MobEquipment
 				EntityType.GHAST, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN,
 				EntityType.SLIME, EntityType.MAGMA_CUBE, EntityType.ENDERMITE, EntityType.PHANTOM,
 				EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER, EntityType.GIANT, EntityType.HOGLIN,
-				EntityType.VEX, EntityType.PIGLIN_BRUTE, EntityType.ZOGLIN, EntityType.ENDER_DRAGON);
+				EntityType.VEX, EntityType.PIGLIN_BRUTE, EntityType.ZOGLIN, EntityType.ENDER_DRAGON,
+				EntityType.ZOMBIE_VILLAGER);
 	}
 }

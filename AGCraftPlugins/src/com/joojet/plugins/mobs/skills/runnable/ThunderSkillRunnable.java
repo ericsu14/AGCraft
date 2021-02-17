@@ -45,6 +45,7 @@ public class ThunderSkillRunnable extends BukkitRunnable
 		if (this.caster.isDead())
 		{
 			this.cancel();
+			return;
 		}
 		
 		for (Location targetLocation : this.targetLocations)
@@ -72,6 +73,7 @@ public class ThunderSkillRunnable extends BukkitRunnable
 		if (this.ticks <= 0)
 		{
 			this.cancel();
+			return;
 		}
 		
 		--this.ticks;
