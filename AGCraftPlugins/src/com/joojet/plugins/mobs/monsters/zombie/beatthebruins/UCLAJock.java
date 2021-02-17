@@ -26,7 +26,7 @@ public class UCLAJock extends UCLAFaction
 		this.color = ChatColor.AQUA;
 		
 		this.addBiomes(Biome.THE_VOID);
-		this.addPotionEffect(CustomPotionEffect.SPEED, CustomPotionEffect.WEAKNESS);
+		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
 		this.weapon = new BruinSword (this.color);
 		this.helmet = new BruinHead ();

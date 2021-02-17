@@ -22,6 +22,9 @@ import com.joojet.plugins.mobs.equipment.weapons.EternalTrojanSword;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.buff.RageSkill;
+import com.joojet.plugins.mobs.skills.buff.UndeadSelfHealSkill;
+import com.joojet.plugins.mobs.skills.summon.SummonTrojansSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 
 public class TrojanWarrior extends USCFaction 
@@ -61,5 +64,8 @@ public class TrojanWarrior extends USCFaction
 	{
 		super.loadCustomSkills(skills);
 		skills.add(new TeleportSkill (64, 20, Integer.MAX_VALUE, 1));
+		skills.add(new UndeadSelfHealSkill (1, 30, 16, 0.35));
+		skills.add(new SummonTrojansSkill (16, 60, Integer.MAX_VALUE, 4, 5));
+		skills.add(new RageSkill (0, 60, 0.25));
 	}
 }

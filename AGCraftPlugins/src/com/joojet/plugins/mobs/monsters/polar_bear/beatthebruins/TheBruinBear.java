@@ -17,6 +17,7 @@ import com.joojet.plugins.mobs.equipment.offhand.BruinShield;
 import com.joojet.plugins.mobs.equipment.offhand.USCCreeperShield;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.passive.UCLATracerSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class TheBruinBear extends UCLAFaction
@@ -52,8 +53,8 @@ public class TheBruinBear extends UCLAFaction
 	}
 
 	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
-		
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
+		skills.add(new UCLATracerSkill ());	
 	}
 }

@@ -5,7 +5,6 @@ import org.bukkit.block.Biome;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
-import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.USCSpikedBoots;
@@ -25,7 +24,6 @@ public class SpiritOfTroy extends USCFaction
 		this.name = StringUtil.alternateTextColors("The Spirit of Troy", TextPattern.WORD, 
 				ChatColor.RED, ChatColor.GOLD);
 		this.color = ChatColor.RED;
-		this.addPotionEffect(CustomPotionEffect.SPEED, CustomPotionEffect.WEAKNESS);
 		this.setStat(MonsterStat.HEALTH, 12.0);
 		this.helmet = new USCBandHead (this.color);
 		this.chestplate = new USCBandUniformTop (this.color);

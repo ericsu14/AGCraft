@@ -3,7 +3,6 @@ package com.joojet.plugins.mobs.monsters.zombie.beatthebruins;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
-import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.USCSpikedBoots;
@@ -25,8 +24,6 @@ public class USCWarrior extends USCFaction
 		
 		this.color = ChatColor.GOLD;
 		this.addBiomes(Biome.THE_VOID);
-		this.addPotionEffect(CustomPotionEffect.SPEED,
-				CustomPotionEffect.RESISTANCE, CustomPotionEffect.WEAKNESS);
 		
 		this.helmet = new USCTrojan (this.color);
 		this.chestplate = new USCFootballTunic (this.color);

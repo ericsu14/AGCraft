@@ -16,6 +16,7 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.buff.AlliedAttackBuffSkill;
 import com.joojet.plugins.mobs.skills.buff.AlliedResistanceBuffSkill;
 import com.joojet.plugins.mobs.skills.buff.AlliedSpeedBuffSkill;
+import com.joojet.plugins.mobs.skills.passive.USCTracerSkill;
 
 public abstract class USCFaction extends MobEquipment
 {
@@ -57,8 +58,9 @@ public abstract class USCFaction extends MobEquipment
 	
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AlliedAttackBuffSkill(0, 45, 15, 60, 8));
-		skills.add(new AlliedResistanceBuffSkill (0, 45, 15, 60, 8));
-		skills.add(new AlliedSpeedBuffSkill (0, 45, 15, 60, 8));
+		skills.add(new AlliedAttackBuffSkill(0, 60, 16, 60, 8));
+		skills.add(new AlliedResistanceBuffSkill (0, 60, 16, 60, 8));
+		skills.add(new AlliedSpeedBuffSkill (0, 60, 16, 60, 8));
+		skills.add(new USCTracerSkill ());
 	}
 }

@@ -32,8 +32,8 @@ public class RoyalPiglinHunter extends MythicMob
 		this.setStat(MonsterStat.BASE_ARMOR, 8.0);
 		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 6.0);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 21.0);
-		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.60);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
+		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.10);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING);
 		

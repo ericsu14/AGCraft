@@ -32,6 +32,7 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
+import com.joojet.plugins.mobs.skills.passive.UCLATracerSkill;
 import com.joojet.plugins.mobs.skills.summon.SummonBruinSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
@@ -107,6 +108,7 @@ public class GiantBruin extends UCLAFaction implements NMSSkillUser
 		skills.add(new ResistanceBuffSkill (1, 32, 50, 90, 8));
 		skills.add(new ThundagaSkill (32, 20, Integer.MAX_VALUE, 10, 4.0f, 8, 80, 0.50));
 		skills.add(new SummonBruinSkill (32, 90, 2, 4, 10));
+		skills.add(new UCLATracerSkill ());
 	}
 	
 	/** Allows the giant to naturally attack other mobs and gives him the ability to summon fireballs at people. */

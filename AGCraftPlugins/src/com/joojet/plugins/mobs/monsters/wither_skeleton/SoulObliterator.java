@@ -53,7 +53,7 @@ public class SoulObliterator extends MythicMob
 				new MonsterDrop (Material.DIAMOND, 0.10, 1, 3));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 45.0);
-		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.30);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.75);
+		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.30);
 	}
 }

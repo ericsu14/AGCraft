@@ -15,7 +15,7 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
-
+import com.joojet.plugins.mobs.skills.passive.UCLATracerSkill;
 
 public abstract class UCLAFaction extends MobEquipment
 {
@@ -50,7 +50,8 @@ public abstract class UCLAFaction extends MobEquipment
 	
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AttackBuffSkill(1, 60, 15, 60, 8));
-		skills.add(new ResistanceBuffSkill (1, 45, 15, 60, 8));
+		skills.add(new AttackBuffSkill(1, 60, 16, 60, 8));
+		skills.add(new ResistanceBuffSkill (1, 60, 16, 60, 8));
+		skills.add(new UCLATracerSkill ());
 	}
 }

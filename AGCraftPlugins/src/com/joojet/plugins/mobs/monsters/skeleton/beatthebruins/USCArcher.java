@@ -22,7 +22,6 @@ public class USCArcher extends USCFaction
 		this.color = ChatColor.GOLD;
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 6.0);
-		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.20);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.45);
 		this.helmet = new USCTrojan (this.color);
 		this.chestplate = new USCFootballTunic (this.color);

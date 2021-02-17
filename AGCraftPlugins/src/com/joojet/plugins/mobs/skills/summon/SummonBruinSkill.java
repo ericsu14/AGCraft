@@ -29,7 +29,8 @@ public class SummonBruinSkill extends AbstractSummonSkill
 	}
 
 	@Override
-	public void playSummonAnimation(LivingEntity entity, DamageDisplayListener damageDisplayListener) {
+	public void playSummonAnimation(LivingEntity entity, DamageDisplayListener damageDisplayListener) 
+	{
 		entity.getWorld().spawnParticle(Particle.SPELL_INSTANT, entity.getLocation(), 40, 0.5, 0.5, 0.5);
 		damageDisplayListener.displayStringAboveEntity(entity, StringUtil.alternateTextColors("GOT U FAM!", TextPattern.WORD,
 				ChatColor.AQUA, ChatColor.GOLD));
@@ -51,7 +52,8 @@ public class SummonBruinSkill extends AbstractSummonSkill
 	}
 
 	@Override
-	public void playSkillCasterAnimation(LivingEntity caster, DamageDisplayListener damageDisplayListener) {
+	public void playSkillCasterAnimation(LivingEntity caster, DamageDisplayListener damageDisplayListener) 
+	{
 		damageDisplayListener.displayStringAboveEntity(caster, StringUtil.alternateTextColors("WHERE ARE MY BOIS AT?!?", TextPattern.WORD,
 				ChatColor.AQUA, ChatColor.GOLD));
 		caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, caster.getLocation(), 20, 0.1, 0.1, 0.1);

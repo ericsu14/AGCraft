@@ -19,8 +19,8 @@ public class PotentSkeleton extends OverworldMob
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.RARE);
 		this.name = "Potent Skeleton";
 		this.color = ChatColor.BLUE;
-		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.15);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.30);
+		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.30);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
 		this.weapon = new PotentBow (this.color);
 		this.chestplate = new BulletproofIronChestplate (this.color);
 		this.leggings = new ReinforcedChainmailLeggings (this.color);
