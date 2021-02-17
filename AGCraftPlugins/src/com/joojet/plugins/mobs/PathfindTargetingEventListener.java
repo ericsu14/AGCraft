@@ -162,10 +162,18 @@ public class PathfindTargetingEventListener extends AGListener
 	@EventHandler(priority = EventPriority.HIGH)
 	public void transferMobDataOnDrownedConversionEvent (EntityTransformEvent event)
 	{
+		// Cancels lightning strike transformations, otherwise skill-based lightning attacks will have unintended side effects.
+		if (event.getTransformReason() == TransformReason.LIGHTNING)
+		{
+			event.setCancelled(true);
+			return;
+		}
+		
 		if (event.getTransformReason() == TransformReason.CURED)
 		{
 			return;
 		}
+		
 		LivingEntity originalZombie = (LivingEntity) event.getEntity();
 		MobEquipment ogZombieEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(originalZombie);
 		if (ogZombieEquipment != null)
