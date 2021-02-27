@@ -15,8 +15,8 @@ public class USCTracerSkill extends AbstractPassiveSkill implements PassiveAttac
 	public double modifyOutgoingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
 			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
-		ParticleUtil.spawnColoredParticlesOnEntity(target, 4, 153, 27, 30, Particle.REDSTONE);
-		ParticleUtil.spawnColoredParticlesOnEntity(target, 4, 255, 204, 0, Particle.REDSTONE);
+		ParticleUtil.spawnColoredParticlesOnEntity(target, 6, 153, 27, 30, Particle.REDSTONE);
+		ParticleUtil.spawnColoredParticlesOnEntity(target, 6, 255, 204, 0, Particle.REDSTONE);
 		ParticleUtil.spawnColoredParticlesOnEntity(target, 6, 0, 0, 0, Particle.SMOKE_NORMAL);
 		return 0;
 	}
