@@ -64,6 +64,6 @@ public class UCLABearTamer extends UCLAFaction
 		super.loadCustomSkills(skills);
 		skills.add(new ThundagaSkill (24, 20, Integer.MAX_VALUE, 3, 3.0F, 6, 80, 0.70));
 		skills.add(new HurricaneSkill (24, 20, Integer.MAX_VALUE, 16, 8, 0.5));
-		skills.add(new SummonBruinSkill (24, 90, 2, 4, 6));
+		skills.add(new SummonBruinSkill (24, 90, 2, 4, 4));
 	}
 }

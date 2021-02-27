@@ -327,7 +327,11 @@ public class CustomSkillsListener extends AGListener
 		Entity entity = source;
 		if (source instanceof Projectile)
 		{
-			entity = (Entity) ((Projectile) source).getShooter();
+			Projectile projectile = (Projectile) source;
+			if (projectile.getShooter() != null && projectile.getShooter() instanceof Entity)
+			{
+				entity = (Entity) ((Projectile) source).getShooter();
+			}
 		}
 		
 		return (entity instanceof LivingEntity) ? (LivingEntity) entity : null;

@@ -38,10 +38,12 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.buff.AlliedAttackBuffSkill;
 import com.joojet.plugins.mobs.skills.buff.AlliedResistanceBuffSkill;
 import com.joojet.plugins.mobs.skills.buff.AlliedSpeedBuffSkill;
+import com.joojet.plugins.mobs.skills.summon.SummonTrojansSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 
-public class TommyTrojan extends VillagerEquipment {
+public class TommyTrojan extends VillagerEquipment 
+{
 
 	public TommyTrojan() 
 	{
@@ -89,11 +91,13 @@ public class TommyTrojan extends VillagerEquipment {
 	}
 
 	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
 		skills.add(new AlliedAttackBuffSkill(0, 60, 15, 60, 8));
 		skills.add(new AlliedResistanceBuffSkill (0, 60, 15, 60, 8));
 		skills.add(new AlliedSpeedBuffSkill (0, 60, 15, 60, 8));
 		skills.add(new TeleportSkill (64, 30, Integer.MAX_VALUE, 2));
+		skills.add(new SummonTrojansSkill (16, 300, Integer.MAX_VALUE, 4, 6));
 	}
 
 }
