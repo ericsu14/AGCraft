@@ -8,6 +8,7 @@ import org.bukkit.entity.EntityType;
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.enums.Faction;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -42,6 +43,7 @@ public abstract class USCFaction extends MobEquipment
 				EntityType.IRON_GOLEM, EntityType.SNOWMAN, EntityType.DOLPHIN, EntityType.VILLAGER,
 				EntityType.WANDERING_TRADER, EntityType.CREEPER, EntityType.PANDA);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.LEGENDARY);
+		this.addMobFlags(MobFlag.DISABLE_PICK_UP_ITEMS);
 	}
 	
 	/** A util function that generates a USC themed display name

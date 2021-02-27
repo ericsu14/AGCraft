@@ -20,6 +20,7 @@ import com.joojet.plugins.mobs.equipment.weapons.SpiritualFantasy;
 import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.LazerBeamAttack;
+import com.joojet.plugins.mobs.skills.buff.MythicRageSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class UltimateBadassSkeleton extends LegendaryMob
@@ -65,5 +66,6 @@ public class UltimateBadassSkeleton extends LegendaryMob
 	{
 		super.loadCustomSkills(skills);
 		skills.add(new LazerBeamAttack (24, 12, Integer.MAX_VALUE, 4, 80));
+		skills.add(new MythicRageSkill (0, 30, 0.35));
 	}
 }

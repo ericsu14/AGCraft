@@ -20,11 +20,11 @@ import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, PassiveAttack
 {
 	/** Used to determine if a mob is enraged */
-	private boolean enraged;
+	protected boolean enraged;
 	/** Health percentage threshold the monster's health needs to reach before this skill is activated */
-	private double threshold;
+	protected double threshold;
 	/** Base damage amplifier used to increase incoming and outgoing damage when enraged */
-	private final double baseDamageAmplifier = 0.10;
+	protected final double baseDamageAmplifier = 0.10;
 	
 	/** Allows a monster to temporarily increase its strength and health once its
 	 *  base health drops below a certain percentage.
@@ -37,6 +37,7 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, P
 		this.currentUsage = 1;
 		this.enraged = false;
 		this.threshold = threshold;
+		this.spawnWeight.setMaxRadius(16);
 	}
 	
 	@Override

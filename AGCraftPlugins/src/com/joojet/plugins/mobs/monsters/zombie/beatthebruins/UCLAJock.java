@@ -20,7 +20,7 @@ public class UCLAJock extends UCLAFaction
 	public UCLAJock ()
 	{
 		super (MonsterType.UCLA_JOCK);
-		this.setStat(MonsterStat.HEALTH, 10.0);
+		this.setStat(MonsterStat.HEALTH, 14.0);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 2.0);
 		
 		this.name = "The " + generateUCLADisplayName("Jock");
