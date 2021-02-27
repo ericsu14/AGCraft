@@ -18,7 +18,6 @@ public class CursedArrow extends TippedArrow
 	{
 		this.setDisplayName("Cursed Arrow");
 		this.addLoreToItemMeta("You’ve met with a terrible fate, haven’t you?");
-		this.addPotionEffect(PotionEffectType.BLINDNESS, 70, 0);
 		this.addPotionEffect(PotionEffectType.POISON, 160, 3);
 		this.addPotionEffect(PotionEffectType.CONFUSION, 150, 1);
 		this.addPotionEffect(PotionEffectType.HUNGER, 150, 1);

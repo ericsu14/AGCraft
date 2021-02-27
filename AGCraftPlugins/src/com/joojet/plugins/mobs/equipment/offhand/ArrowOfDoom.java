@@ -19,7 +19,6 @@ public class ArrowOfDoom extends TippedArrow {
 		this.setColor(Color.fromRGB(75, 83, 32));
 		this.addPotionEffect(PotionEffectType.WEAKNESS, 140, 1);
 		this.addPotionEffect(PotionEffectType.WITHER, 140, 3);
-		this.addPotionEffect(PotionEffectType.BLINDNESS, 140, 0);
 		this.addLoreToItemMeta("Custom-tipped arrows specifically made for slaying demons in the Nether. And you.");
 	}
 

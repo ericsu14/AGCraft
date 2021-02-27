@@ -31,6 +31,7 @@ import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.HurricaneSkill;
 import com.joojet.plugins.mobs.skills.buff.RageSkill;
+import com.joojet.plugins.mobs.skills.passive.BlindingArrow;
 import com.joojet.plugins.mobs.skills.utility.AggressiveTeleportSkill;
 import com.joojet.plugins.mobs.skills.utility.WeaponSwitchSkill;
 import com.joojet.plugins.music.enums.MusicType;
@@ -121,6 +122,7 @@ public class DoomGuy extends MythicMob
 			
 		});
 		skills.add(new HurricaneSkill (24, 20, Integer.MAX_VALUE, 4, 16, 0.75));
+		skills.add(new BlindingArrow (9, 3));
 	}
 	
 }
