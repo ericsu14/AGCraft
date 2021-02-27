@@ -89,6 +89,6 @@ public class SkullKid extends MythicMob
 		skills.add(new ResistanceBuffSkill (0, 60, 20, 60, 80));
 		skills.add(new ThundagaSkill (32, 20, 6, 16, 5.0f, 4, 60, 0.60));
 		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 12, 12, 0.75));
-		skills.add(new BlindingArrow (4, 7));
+		skills.add(new BlindingArrow (7, 4));
 	}
 }
