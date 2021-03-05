@@ -18,7 +18,7 @@ public class BruinTunic extends LeatherEquipment
 		this.wordsPerLine = 6;
 		this.loreColor = ChatColor.GOLD;
 		this.setDisplayName(UCLAFaction.generateUCLADisplayName("Football Jersey"));
-		this.addLoreToItemMeta("Show off your school spirit in the most wrong way possible!");
+		this.addLoreToItemMeta("Show off your school spirit in the most illegal way possible!");
 		this.setColor(Color.fromRGB(39, 116, 174));
 		this.addDefenseAttributes(5.0, 2.0, 0.10);
 	}

@@ -19,7 +19,7 @@ public class USCFootballTrousers extends LeatherEquipment
 		this.addDefenseAttributes(5.0, 1.5, 0.07);
 		this.wordsPerLine = 6;
 		this.loreColor = ChatColor.GOLD;
-		this.addLoreToItemMeta("Show off your school spirit with these flashy yet effective pants!");
+		this.addLoreToItemMeta("Show off your school spirit with these flashy pants!");
 		this.makeUnbreakable();
 	}
 }

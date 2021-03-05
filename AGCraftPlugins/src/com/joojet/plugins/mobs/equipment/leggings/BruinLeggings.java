@@ -18,7 +18,7 @@ public class BruinLeggings extends LeatherEquipment
 		this.loreColor = ChatColor.GOLD;
 		this.setDisplayName(UCLAFaction.generateUCLADisplayName("Bulky Leggings"));
 		this.setColor(Color.fromRGB(255, 209, 0));
-		this.addLoreToItemMeta("These people never skip leg day...");
+		this.addLoreToItemMeta("Jeez, these people never skip leg day...");
 		this.addDefenseAttributes(5.0, 1.0, 0.10);
 		this.addSpeedAttribute(0.05);
 	}
