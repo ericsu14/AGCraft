@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.zombie.beatthebruins;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
@@ -14,6 +16,8 @@ import com.joojet.plugins.mobs.equipment.leggings.USCBandUniformBottom;
 import com.joojet.plugins.mobs.equipment.offhand.RightCrashSymbol;
 import com.joojet.plugins.mobs.equipment.weapons.LeftCrashSymbol;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.passive.NerfDamageOutputSkill;
 
 public class SpiritOfTroy extends USCFaction 
 {
@@ -24,12 +28,20 @@ public class SpiritOfTroy extends USCFaction
 		this.name = StringUtil.alternateTextColors("The Spirit of Troy", TextPattern.WORD, 
 				ChatColor.RED, ChatColor.GOLD);
 		this.color = ChatColor.RED;
-		this.setStat(MonsterStat.HEALTH, 12.0);
+		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.helmet = new USCBandHead (this.color);
 		this.chestplate = new USCBandUniformTop (this.color);
 		this.leggings = new USCBandUniformBottom (this.color);
 		this.boots = new USCSpikedBoots (this.color);
 		this.weapon = new LeftCrashSymbol (this.color);
 		this.offhand = new RightCrashSymbol (this.color);
+	}
+	
+	@Override
+	public void loadCustomSkills (List <AbstractSkill> skills)
+	{
+		super.loadCustomSkills(skills);
+		// Nerfs damage output by 25% balance his damage output against the UCLA jock
+		skills.add(new NerfDamageOutputSkill (0.25));
 	}
 }

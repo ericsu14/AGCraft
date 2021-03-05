@@ -33,7 +33,7 @@ public class UltimateBadassSkeleton extends LegendaryMob
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.30);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.20);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 6.0);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 8.0);
 		
