@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.drops.FireworkDrop;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
@@ -39,6 +40,7 @@ public class BarneyTheDinosaur extends MythicMob
 				CustomPotionEffect.UNDEAD_HEAL);
 		this.addMobFlags(MobFlag.HUNT_ON_SPAWN, MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME,
 				MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER);
+		this.addTargetsToHitList(EntityType.PLAYER, EntityType.IRON_GOLEM, EntityType.SNOWMAN);
 		
 		this.name = "Barney the Dinosaur";
 		this.color = ChatColor.DARK_PURPLE;
