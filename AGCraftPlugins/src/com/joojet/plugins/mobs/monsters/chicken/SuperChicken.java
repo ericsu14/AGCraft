@@ -22,7 +22,7 @@ public class SuperChicken extends AbstractChicken
 		this.setDropRates(0.0f, 0.01f, 0.0f, 0.0f, 0.0f, 0.0f);
 		this.name = "Super Chicken";
 		this.color = ChatColor.GOLD;
-		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.LEGENDARY);
+		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.COMMON);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 15.0);
 		this.setStat(MonsterStat.HEALTH, 30.0);
 		this.setStat(MonsterStat.BASE_ARMOR, 12.0);
