@@ -48,7 +48,6 @@ public abstract class LaunchCustomArrowRunnable extends BukkitRunnable {
 	public void run() 
 	{
 		if (ammoCount > 0 && !caster.isDead() && !target.isDead()
-				&& caster.hasLineOfSight(target)
 				&& this.hasBow(this.caster))
 		{
 			// Calculate the arrow's spawn location, which is going to be in front of the caster
