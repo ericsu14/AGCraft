@@ -35,7 +35,7 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 		this.caster = caster;
 		this.target = target;
 		this.casterNMS = ((CraftMob) caster).getHandle();
-		this.range = (int) Math.ceil(range * 1.5);
+		this.range = (int) Math.ceil(range * 1.2);
 	}
 	
 	/** Launches a fang attack */
@@ -52,33 +52,33 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 		Location targetLocation = target.getLocation();
 		Location casterLocation = caster.getLocation();
 		
-		double var1 = Math.min(targetLocation.getBlockY(), casterLocation.getBlockY());
-		double var3 = Math.max(targetLocation.getBlockY(), casterLocation.getBlockY()) + 1.0D;
-		float var5 = (float) MathHelper.d(targetLocation.getBlockZ() - casterLocation.getBlockZ(), targetLocation.getBlockX() - casterLocation.getBlockX());
+		double var1 = Math.min(targetLocation.getY(), casterLocation.getY());
+		double var3 = Math.max(targetLocation.getY(), casterLocation.getY()) + 1.0D;
+		float var5 = (float) MathHelper.d(targetLocation.getZ() - casterLocation.getZ(), targetLocation.getX() - casterLocation.getX());
 		
 		if (caster.getBoundingBox().clone().expand(3.0D).contains(targetLocation.toVector()))
 		{
 			int var6;
 			
-			for (var6 = 0; var6 < 5; var6++)
+			for (var6 = 0; var6 < 6; var6++)
 			{
 				float var7 = var5 + var6 * FLOAT_PI * 0.4F;
-				this.summonFangs(casterLocation.getBlockX() + MathHelper.cos(var7) * 1.5D, casterLocation.getBlockZ() + MathHelper.sin(var7) * 1.5D, var1, var3, var7, 0, casterLocation.getWorld());
+				this.summonFangs(casterLocation.getX() + MathHelper.cos(var7) * 1.5D, casterLocation.getZ() + MathHelper.sin(var7) * 1.5D, var1, var3, var7, 0, casterLocation.getWorld());
 			}
-			for (var6 = 0; var6 < 8; var6++)
+			for (var6 = 0; var6 < 10; var6++)
 			{
 				float var7 = var5 + var6 + FLOAT_PI * 2.0F / 8.0F + 1.2566371F;
-				this.summonFangs(casterLocation.getBlockX() + MathHelper.cos(var7) * 2.5D, casterLocation.getBlockZ() + MathHelper.sin(var7) * 2.5D, var1, var3, var7, 3, casterLocation.getWorld());
+				this.summonFangs(casterLocation.getX() + MathHelper.cos(var7) * 2.5D, casterLocation.getZ() + MathHelper.sin(var7) * 2.5D, var1, var3, var7, 3, casterLocation.getWorld());
 			}
 		}
 		
 		else
 		{
-			for (int var6 = 0; var6 < 16; var6++)
+			for (int var6 = 0; var6 < this.range; var6++)
 			{
 				double var7 = 1.25D * (var6 + 1);
 				int var9 = 1 * var6;
-				summonFangs (casterLocation.getBlockX() + MathHelper.cos(var5) * var7, casterLocation.getBlockZ() + MathHelper.sin(var5) * var7, var1, var3, var5, var9, casterLocation.getWorld());
+				summonFangs (casterLocation.getX() + MathHelper.cos(var5) * var7, casterLocation.getZ() + MathHelper.sin(var5) * var7, var1, var3, var5, var9, casterLocation.getWorld());
 			}
 		}
 	}
