@@ -41,7 +41,8 @@ public class HurricaneSkill extends AbstractAttackSkill
 		}
 		
 		List <LivingEntity> targets = this.filterByLineOfSight(enemies, caster);
-		LivingEntity target = targets.get(this.random.nextInt(targets.size()));
+		this.sortByClosestProximity(targets, caster);
+		LivingEntity target = targets.get(0);
 		
 		// Update base arrow damage to the one found on the entity's mob equipment
 		double arrowDamage = 4.0 * this.arrowDamageMultipler;

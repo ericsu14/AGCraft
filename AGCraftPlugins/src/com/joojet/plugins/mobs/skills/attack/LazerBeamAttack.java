@@ -32,7 +32,8 @@ public class LazerBeamAttack extends AbstractAttackSkill
 			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
 			BossBarController bossBarController) 
 	{
-		LivingEntity enemy = enemies.get(this.random.nextInt(enemies.size()));
+		this.sortByClosestProximity(enemies, caster);
+		LivingEntity enemy = enemies.get(0);
 		if (enemy != null)
 		{
 			new LaserBeamRunnable (caster, monsterTypeInterpreter.getMobEquipmentFromEntity(caster),

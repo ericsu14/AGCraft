@@ -41,7 +41,7 @@ public class PiercingBlowSkill extends AbstractPassiveSkill implements PassivePr
 				Location entityLocation = shooter.getEyeLocation();
 				shooter.getWorld().playSound(entityLocation, Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0f, 1.0f);
 				shooter.getWorld().spawnParticle(Particle.SWEEP_ATTACK, entityLocation, 1, 0.1, 0.1, 0.1);
-				ParticleUtil.spawnColoredParticlesOnEntity(shooter, 30, 128, 0, 0, Particle.SPELL_MOB);
+				ParticleUtil.spawnColoredParticlesOnEntity(shooter, 8, 128, 0, 0, Particle.SPELL_MOB);
 			}
 		}
 	}

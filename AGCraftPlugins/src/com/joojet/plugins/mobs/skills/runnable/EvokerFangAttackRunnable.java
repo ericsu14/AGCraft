@@ -22,15 +22,20 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 	protected LivingEntity target;
 	/** NMS instance of the caster */
 	protected EntityInsentient casterNMS;
+	/** Range of the longer attack */
+	protected int range;
+	/** PI constant in the form of a float used in vector calculations */
+	private final float FLOAT_PI = 3.1415927F;
 	
 	/** Launches an evoker-fang attack in the world
 	 *  @param caster Entity casting this skill
 	 *  @param target Target attacked by this skill */
-	public EvokerFangAttackRunnable (LivingEntity caster, LivingEntity target)
+	public EvokerFangAttackRunnable (LivingEntity caster, LivingEntity target, int range)
 	{
 		this.caster = caster;
 		this.target = target;
 		this.casterNMS = ((CraftMob) caster).getHandle();
+		this.range = (int) Math.ceil(range * 1.5);
 	}
 	
 	/** Launches a fang attack */
@@ -57,12 +62,12 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 			
 			for (var6 = 0; var6 < 5; var6++)
 			{
-				float var7 = var5 + var6 * (float) Math.PI * 0.4F;
+				float var7 = var5 + var6 * FLOAT_PI * 0.4F;
 				this.summonFangs(casterLocation.getBlockX() + MathHelper.cos(var7) * 1.5D, casterLocation.getBlockZ() + MathHelper.sin(var7) * 1.5D, var1, var3, var7, 0, casterLocation.getWorld());
 			}
 			for (var6 = 0; var6 < 8; var6++)
 			{
-				float var7 = var5 + var6 + (float) Math.PI * 2.0F / 8.0F + 1.2566371F;
+				float var7 = var5 + var6 + FLOAT_PI * 2.0F / 8.0F + 1.2566371F;
 				this.summonFangs(casterLocation.getBlockX() + MathHelper.cos(var7) * 2.5D, casterLocation.getBlockZ() + MathHelper.sin(var7) * 2.5D, var1, var3, var7, 3, casterLocation.getWorld());
 			}
 		}

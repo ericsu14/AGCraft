@@ -39,13 +39,15 @@ public class TeleportSkill extends AbstractSkill {
 			BossBarController bossBarController) 
 	{		
 		List <LivingEntity> possibleTargets = this.filterSubmergedEntities(allies, caster);
+		this.sortByClosestProximity(possibleTargets, caster);
 		
 		if (possibleTargets.isEmpty())
 		{
 			return;
 		}
 		
-		LivingEntity target = possibleTargets.get(this.random.nextInt(possibleTargets.size()));
+		
+		LivingEntity target = possibleTargets.get(0);
 		this.teleportEntity(caster, target);
 	}
 	

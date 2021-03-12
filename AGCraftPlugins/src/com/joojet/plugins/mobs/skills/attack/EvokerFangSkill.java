@@ -34,11 +34,13 @@ public class EvokerFangSkill extends AbstractAttackSkill implements PassiveAttac
 			BossBarController bossBarController) 
 	{
 		List <LivingEntity> filteredTargets = this.filterByLineOfSight(enemies, caster);
-		LivingEntity target = filteredTargets.get(this.random.nextInt(filteredTargets.size()));
+		this.sortByClosestProximity(filteredTargets, caster);
+		
+		LivingEntity target = filteredTargets.get(0);
 		damageDisplayListener.displayStringAboveEntity(caster, ChatColor.YELLOW + ""  + ChatColor.BOLD + "FANGS!");
 		ParticleUtil.spawnColoredParticlesOnEntity(caster, 6, 0, 0, 0, Particle.SPELL_INSTANT);
 		caster.getWorld().playSound(caster.getLocation(), Sound.ENTITY_EVOKER_PREPARE_ATTACK, 1.0f, 1.0f);
-		new EvokerFangAttackRunnable (caster, target).runTaskLater(AGCraftPlugin.plugin, 10);
+		new EvokerFangAttackRunnable (caster, target, this.range).runTaskLater(AGCraftPlugin.plugin, 10);
 	}
 
 	@Override

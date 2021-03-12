@@ -29,7 +29,7 @@ public class ResistanceBuffSkill extends AbstractBuffSkill
 	@Override
 	protected void playBuffAnimation(LivingEntity entity) 
 	{
-		ParticleUtil.spawnColoredParticlesOnEntity(entity, 30, 128, 128, 128, Particle.SPELL_MOB);
+		ParticleUtil.spawnColoredParticlesOnEntity(entity, 8, 128, 128, 128, Particle.SPELL_MOB);
 		entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_ENDER_DRAGON_FLAP, 1.0F, 1.0F);
 	}
 

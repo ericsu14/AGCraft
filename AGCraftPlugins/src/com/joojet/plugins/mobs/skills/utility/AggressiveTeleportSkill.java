@@ -26,13 +26,14 @@ public class AggressiveTeleportSkill extends TeleportSkill
 			BossBarController bossBarController) 
 	{	
 		List <LivingEntity> possibleTargets = this.filterNonPlayerEntities(this.filterSubmergedEntities(enemies, caster));
+		this.sortByClosestProximity(possibleTargets, caster);
 		
 		if (possibleTargets.isEmpty())
 		{
 			return;
 		}
 		
-		LivingEntity target = possibleTargets.get(this.random.nextInt(possibleTargets.size()));
+		LivingEntity target = possibleTargets.get(0);
 		this.teleportEntity(caster, target);
 		// Gives the caster a glowing potion effect to let players know it has teleported
 		if (target != null)
