@@ -19,6 +19,7 @@ import com.joojet.plugins.mobs.equipment.leggings.DarkNetheriteLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
 import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.attack.EvokerFangSkill;
 import com.joojet.plugins.mobs.skills.buff.MythicRageSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
@@ -57,6 +58,7 @@ public class UltimateBadassZombie extends LegendaryMob
 	{
 		super.loadCustomSkills(skills);
 		skills.add(new MythicRageSkill (0, 30, 0.30));
+		skills.add(new EvokerFangSkill (16, 10, Integer.MAX_VALUE, 4, 16.0));
 	}
 	
 }

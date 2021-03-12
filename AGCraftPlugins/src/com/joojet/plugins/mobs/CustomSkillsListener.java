@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.EvokerFangs;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Monster;
@@ -330,7 +331,16 @@ public class CustomSkillsListener extends AGListener
 			Projectile projectile = (Projectile) source;
 			if (projectile.getShooter() != null && projectile.getShooter() instanceof Entity)
 			{
-				entity = (Entity) ((Projectile) source).getShooter();
+				entity = (Entity) projectile.getShooter();
+			}
+		}
+		
+		if (source instanceof EvokerFangs)
+		{
+			EvokerFangs fangs = (EvokerFangs) source;
+			if (fangs.getOwner() != null && fangs.getOwner() instanceof Entity)
+			{
+				entity = (Entity) fangs.getOwner();
 			}
 		}
 		
