@@ -12,7 +12,7 @@ import com.joojet.plugins.mobs.equipment.boots.USCSpikedBoots;
 import com.joojet.plugins.mobs.equipment.chest.USCFootballTunic;
 import com.joojet.plugins.mobs.equipment.head.USCTrojan;
 import com.joojet.plugins.mobs.equipment.leggings.USCFootballTrousers;
-import com.joojet.plugins.mobs.equipment.weapons.FightOn;
+import com.joojet.plugins.mobs.equipment.weapons.PotentBow;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.passive.NerfDamageOutputSkill;
@@ -36,13 +36,13 @@ public class HGUSCArcher extends USCFaction
 		this.chestplate = new USCFootballTunic (this.color);
 		this.leggings = new USCFootballTrousers (this.color);
 		this.boots = new USCSpikedBoots (this.color);
-		this.weapon = new FightOn (this.color);
+		this.weapon = new PotentBow (this.color);
 	}
 	
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		skills.add(new NerfDamageOutputSkill (0.85));
+		skills.add(new NerfDamageOutputSkill (0.80));
 		skills.add(new USCTracerSkill ());
 	}
 

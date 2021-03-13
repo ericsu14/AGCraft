@@ -46,7 +46,7 @@ public class HGUSCWarrior extends USCFaction
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		skills.add(new NerfDamageOutputSkill (0.90));
+		skills.add(new NerfDamageOutputSkill (0.85));
 		skills.add(new USCTracerSkill ());
 	}
 

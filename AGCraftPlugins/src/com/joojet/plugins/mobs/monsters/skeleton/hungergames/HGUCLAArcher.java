@@ -12,7 +12,7 @@ import com.joojet.plugins.mobs.equipment.boots.BruinFootballBoots;
 import com.joojet.plugins.mobs.equipment.chest.BruinTunic;
 import com.joojet.plugins.mobs.equipment.head.BruinHead;
 import com.joojet.plugins.mobs.equipment.leggings.BruinLeggings;
-import com.joojet.plugins.mobs.equipment.weapons.BruinBow;
+import com.joojet.plugins.mobs.equipment.weapons.PotentBow;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.passive.NerfDamageOutputSkill;
@@ -36,13 +36,13 @@ public class HGUCLAArcher extends UCLAFaction
 		this.chestplate = new BruinTunic (this.color);
 		this.leggings = new BruinLeggings (this.color);
 		this.boots = new BruinFootballBoots (this.color);
-		this.weapon = new BruinBow ();
+		this.weapon = new PotentBow (this.color);
 	}
 	
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		skills.add(new NerfDamageOutputSkill (0.85));
+		skills.add(new NerfDamageOutputSkill (0.80));
 		skills.add(new UCLATracerSkill ());
 	}
 
