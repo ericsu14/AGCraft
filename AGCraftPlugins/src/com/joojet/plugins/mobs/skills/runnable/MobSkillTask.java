@@ -2,6 +2,7 @@ package com.joojet.plugins.mobs.skills.runnable;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 
 import org.bukkit.entity.LivingEntity;
 
@@ -28,6 +29,8 @@ public class MobSkillTask
 	protected CustomSkillsListener customSkillsListener;
 	/** A random number generator used to select random mob skills */
 	protected Random rand;
+	/** UUID of the entity this skill task is attached to */
+	protected UUID casterUUID;
 	
 	public MobSkillTask (LivingEntity caster, MobEquipment equipment, CustomSkillsListener customSkillsListener)
 	{
@@ -36,20 +39,30 @@ public class MobSkillTask
 		this.mobSkills = new ArrayList <AbstractSkill> ();
 		this.rand = new Random ();
 		this.customSkillsListener = customSkillsListener;
+		this.casterUUID = caster.getUniqueId();
 		this.loadSkills();
 	}
 	
 	public void run() 
 	{
 		// Keep selecting a random skill to use if the caster is not dead
-		if (this.caster != null && this.equipment != null && !caster.isDead() && !this.mobSkills.isEmpty())
+		AbstractSkill skill = this.getRandomSkill();
+		if (skill != null)
 		{
-			AbstractSkill skill = this.getRandomSkill();
-			if (skill != null)
-			{
-				this.customSkillsListener.useCustomSkill(caster, skill);
-			}
+			this.customSkillsListener.useCustomSkill(caster, skill);
 		}
+	}
+	
+	/** Returns true if this mob skill task can be ran, which also checks if the entity is killed or not */
+	public boolean canRunTask ()
+	{
+		return (this.caster != null && this.equipment != null && !caster.isDead() && !this.mobSkills.isEmpty());
+	}
+	
+	/** Returns the UUID attached to the caster of this skill task */
+	public UUID getCasterUUID ()
+	{
+		return this.casterUUID;
 	}
 	
 	/** Searches and returns a random skill that the monster can use, if any one exists.

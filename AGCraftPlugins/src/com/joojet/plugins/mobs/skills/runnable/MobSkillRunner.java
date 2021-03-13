@@ -1,6 +1,8 @@
 package com.joojet.plugins.mobs.skills.runnable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.entity.LivingEntity;
@@ -21,9 +23,23 @@ public class MobSkillRunner extends BukkitRunnable
 	@Override
 	public void run() 
 	{
+		List <UUID> deadSkillTasks = new ArrayList <UUID> ();
 		for (MobSkillTask task : mobSkillRegistry.values())
 		{
-			task.run();
+			if (task.canRunTask())
+			{
+				task.run();
+			}
+			else
+			{
+				deadSkillTasks.add(task.getCasterUUID());
+			}
+		}
+		
+		// Removes dead skill tasks from the mob skill registry
+		for (UUID deadTask : deadSkillTasks)
+		{
+			this.mobSkillRegistry.remove(deadTask);
 		}
 	}
 	
