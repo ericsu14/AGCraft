@@ -42,6 +42,7 @@ import com.joojet.plugins.mobs.interpreter.ThemedServerEventInterpreter;
 import com.joojet.plugins.mobs.metadata.EquipmentTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
+import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 import com.joojet.plugins.mobs.spawnhandlers.AmplifiedMobHandler;
 import com.joojet.plugins.mobs.spawnhandlers.BeatTheBruinsHandler;
 import com.joojet.plugins.mobs.spawnhandlers.HungerGamesHandler;
@@ -59,6 +60,8 @@ public class AmplifiedMobSpawner extends AGListener
 	protected ThemedServerEventInterpreter serverEventInterpreter;
 	/** Search trie used to initialize custom summoning scroll instances */
 	protected SummoningScrollInterpreter summonTypeInterpreter;
+	/** Mob Skill runnable used to control our custom skill system */
+	protected MobSkillRunner mobSkillRunner;
 	
 	/** Contains an internal search trie allowing custom equipment to be able to be looked up by its
 	 *  Equipment Type identifier. */
@@ -77,16 +80,19 @@ public class AmplifiedMobSpawner extends AGListener
 	/** Creates a new instance of this mob spawner class,
 	 *  which adds listeners to Minecraft's mob spawn events for
 	 *  having a certain chance of equipping them with custom armor, buffs, and weapons. */
-	public AmplifiedMobSpawner (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, BossBarController bossBarController)
+	public AmplifiedMobSpawner (MonsterTypeInterpreter monsterTypeInterpreter, 
+			SummoningScrollInterpreter summonTypeInterpreter, BossBarController bossBarController,
+			MobSkillRunner mobSkillRunner)
 	{
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
 		this.summonTypeInterpreter = summonTypeInterpreter;
-		this.julyFourthHandler = new JulyFourthHandler (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController);
-		this.amplifiedMobHandler = new AmplifiedMobHandler(this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController);
-		this.bruinHandler = new BeatTheBruinsHandler (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController);
-		this.uhcHandler = new UHCHandler(this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController);
-		this.hgHandler = new HungerGamesHandler (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController);
+		this.mobSkillRunner = mobSkillRunner;
+		this.julyFourthHandler = new JulyFourthHandler (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController, this.mobSkillRunner);
+		this.amplifiedMobHandler = new AmplifiedMobHandler(this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController, this.mobSkillRunner);
+		this.bruinHandler = new BeatTheBruinsHandler (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController, this.mobSkillRunner);
+		this.uhcHandler = new UHCHandler(this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController, this.mobSkillRunner);
+		this.hgHandler = new HungerGamesHandler (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController, this.mobSkillRunner);
 	}
 	
 	@Override
@@ -159,13 +165,8 @@ public class AmplifiedMobSpawner extends AGListener
 				return;
 			}
 			
-			if (entityEquipment.containsStat(MonsterStat.EXPERIENCE) && event.getDroppedExp() > 0.0)
-			{
-				event.setDroppedExp(entityEquipment.getStat(MonsterStat.EXPERIENCE).intValue());
-			}
-			
 			// Adds any custom loot the monster may have
-			if (!entityEquipment.getMonsterDrops().isEmpty())
+			if (!entityEquipment.getMonsterDrops().isEmpty() && event.getDroppedExp() > 0.0)
 			{
 				ItemStack droppedItem;
 				ArrayList <MonsterDrop> drops = entityEquipment.getMonsterDrops();
@@ -177,6 +178,12 @@ public class AmplifiedMobSpawner extends AGListener
 						event.getDrops().add(droppedItem);
 					}
 				}
+			}
+			
+			// Sets custom mob experience
+			if (entityEquipment.containsStat(MonsterStat.EXPERIENCE) && event.getDroppedExp() > 0.0)
+			{
+				event.setDroppedExp(entityEquipment.getStat(MonsterStat.EXPERIENCE).intValue());
 			}
 			
 			// Spawns small fireworks show if this entity dies and

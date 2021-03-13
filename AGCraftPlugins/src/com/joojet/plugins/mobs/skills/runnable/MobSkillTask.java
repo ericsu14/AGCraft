@@ -13,6 +13,7 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.WeightedMobSkill;
 import com.joojet.plugins.mobs.skills.passive.ArrowDamageModifierSkill;
 import com.joojet.plugins.mobs.skills.passive.CriticalShotSkill;
+import com.joojet.plugins.mobs.skills.passive.NoOpSkill;
 import com.joojet.plugins.mobs.skills.passive.PiercingBlowSkill;
 import com.joojet.plugins.mobs.skills.passive.TippedArrowSkill;
 import com.joojet.plugins.mobs.util.WeightedEntry;
@@ -63,6 +64,12 @@ public class MobSkillTask
 	public UUID getCasterUUID ()
 	{
 		return this.casterUUID;
+	}
+	
+	/** Returns the mobEquipment instance associated with the caster */
+	public MobEquipment getMobEquipment ()
+	{
+		return this.equipment;
 	}
 	
 	/** Searches and returns a random skill that the monster can use, if any one exists.
@@ -128,6 +135,10 @@ public class MobSkillTask
 			if (this.equipment.hasTippedArrow())
 			{
 				this.mobSkills.add(new TippedArrowSkill ());
+			}
+			if (this.equipment.containsStat(MonsterStat.SPAWN_LIMIT))
+			{
+				this.mobSkills.add(new NoOpSkill ());
 			}
 			this.equipment.loadCustomSkills(this.mobSkills);
 		}

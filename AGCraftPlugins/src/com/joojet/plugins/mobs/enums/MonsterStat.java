@@ -73,7 +73,9 @@ public enum MonsterStat implements CustomAttribute
 	/** Modified the knockback strength for the custom mob's melee attack */
 	BASE_KNOCKBACK_STRENGTH (Attribute.GENERIC_ATTACK_KNOCKBACK),
 	/** Sets the custom monster's classifier */
-	MONSTER_CLASSIFIER;
+	MONSTER_CLASSIFIER,
+	/** Max amount of times this custom monster can spawn in the world */
+	SPAWN_LIMIT;
 	
 	/** The Minecraft entity attribute this monsterstat is tied to */
 	private Attribute attribute;

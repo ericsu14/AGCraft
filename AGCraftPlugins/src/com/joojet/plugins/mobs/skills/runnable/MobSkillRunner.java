@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.skills.runnable;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -8,16 +9,24 @@ import java.util.UUID;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.joojet.plugins.mobs.enums.MonsterStat;
+import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
+
 /** A runnable responsible for running all custom entity's mob skill tasks every second */
 public class MobSkillRunner extends BukkitRunnable 
 {
 	/** Stores a registry of mob skill tasks for every custom monster (that hash skills)
 	 *  in the server */
 	protected HashMap <UUID, MobSkillTask> mobSkillRegistry;
+	/** Keeps track of number of active custom monsters in the world for each
+	 *  unique custom monster type */
+	protected EnumMap <MonsterType, Integer> customMonsterFrequency;
 	
 	public MobSkillRunner ()
 	{
 		this.mobSkillRegistry = new HashMap <UUID, MobSkillTask> ();
+		this.customMonsterFrequency = new EnumMap <MonsterType, Integer> (MonsterType.class);
 	}
 	
 	@Override
@@ -55,6 +64,9 @@ public class MobSkillRunner extends BukkitRunnable
 		if (!this.containsSkill(entity))
 		{
 			this.mobSkillRegistry.put(entity.getUniqueId(), task);
+			// Updates custom monster count for that entity's custom type
+			MonsterType type = task.getMobEquipment().getMonsterType();
+			this.customMonsterFrequency.put(type, this.customMonsterFrequency.getOrDefault(type, 0) + 1);
 		}
 	}
 	
@@ -67,8 +79,33 @@ public class MobSkillRunner extends BukkitRunnable
 	{
 		if (this.containsSkill(entity))
 		{
-			this.mobSkillRegistry.remove(entity.getUniqueId());
+			MobSkillTask task = this.mobSkillRegistry.remove(entity.getUniqueId());
+			// Decrements custom monster count for that entity's custom type
+			MonsterType type = task.getMobEquipment().getMonsterType();
+			if (this.customMonsterFrequency.containsKey(type)
+					&& this.customMonsterFrequency.get(type) > 0)
+			{
+				this.customMonsterFrequency.put(type, this.customMonsterFrequency.get(type) - 1);
+			}
 		}
+	}
+	
+	/** Returns the total number of active custom monsters associated with
+	 *  the passed monster type in the server. */
+	public int getActiveCustomMonsterCount (MonsterType type)
+	{
+		return this.customMonsterFrequency.get(type);
+	}
+	
+	/** Returns true if the number of permitted active custom monsters of that type has been reached*
+	 * @param equipment Custom monster equipment being checked */
+	public boolean reachedSpawnLimit (MobEquipment equipment)
+	{
+		if (equipment.containsStat(MonsterStat.SPAWN_LIMIT))
+		{
+			return this.getActiveCustomMonsterCount(equipment.getMonsterType()) >= equipment.getStat(MonsterStat.SPAWN_LIMIT);
+		}
+		return false;
 	}
 
 }

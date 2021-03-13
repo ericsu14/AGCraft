@@ -53,12 +53,12 @@ public class CustomSkillsListener extends AGListener
 	protected MobSkillRunner mobSkillRunner;
 	
 	public CustomSkillsListener (MonsterTypeInterpreter monsterInterpreter, DamageDisplayListener damageDisplayListener,
-			BossBarController bossBarController)
+			BossBarController bossBarController, MobSkillRunner mobSkillRunner)
 	{
 		this.monsterInterpreter = monsterInterpreter;
 		this.damageDisplayListener = damageDisplayListener;
 		this.bossBarController = bossBarController;
-		this.mobSkillRunner = new MobSkillRunner ();
+		this.mobSkillRunner = mobSkillRunner;
 		this.rand = new Random ();
 	}
 	
@@ -72,6 +72,7 @@ public class CustomSkillsListener extends AGListener
 	public void onEnable() 
 	{
 		this.mobSkillRunner.runTaskTimer(AGCraftPlugin.plugin, 20, 20);
+		this.mobSkillRunner = new MobSkillRunner ();
 	}
 
 	@Override

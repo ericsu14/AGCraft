@@ -26,6 +26,7 @@ import com.joojet.plugins.mobs.monsters.squid.SquidTypes;
 import com.joojet.plugins.mobs.monsters.wither_skeleton.WitherSkeletonTypes;
 import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
 import com.joojet.plugins.mobs.monsters.zombie_pigmen.ZombiePigmenTypes;
+import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 import com.joojet.plugins.mobs.villager.wandering.WanderingVillagerTypes;
@@ -37,9 +38,10 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 	/** Stores custom wandering villager instances */
 	private WanderingVillagerTypes wanderingTypes;
 	
-	public AmplifiedMobHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, BossBarController bossBarController)
+	public AmplifiedMobHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, 
+			BossBarController bossBarController, MobSkillRunner mobSkillRunner)
 	{
-		super (monsterTypeInterpreter, summonTypeInterpreter, bossBarController, AMPLIFIED_MOB_HANDLER_KEY);
+		super (monsterTypeInterpreter, summonTypeInterpreter, bossBarController, mobSkillRunner, AMPLIFIED_MOB_HANDLER_KEY);
 		this.wanderingTypes = new WanderingVillagerTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter);
 		
 		this.addMonsterTypes(new ZombieTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),

@@ -36,6 +36,7 @@ import com.joojet.plugins.mobs.commands.SummonEntity;
 import com.joojet.plugins.mobs.commands.tabcompleter.SummonEntityTabCompleter;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
+import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.commands.*;
@@ -70,6 +71,8 @@ public class AGCraftPlugin extends JavaPlugin
 	protected HashMap <CommandType, PlayerCommand> playerCommands;
 	// Stores an instance to the BossBar controller
 	protected BossBarController bossBarController;
+	// Stores a reference to the Mob Skill runnable instance used to control our custom skill AI
+	protected MobSkillRunner mobSkillRunner;
 	
 	
 	/** Search term interpreters */
@@ -126,7 +129,7 @@ public class AGCraftPlugin extends JavaPlugin
 		deathCounter = new DeathCounter();
 		
 		// Amplified mob spawner
-		this.registerEventListener(new AmplifiedMobSpawner (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController));
+		this.registerEventListener(new AmplifiedMobSpawner (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController, this.mobSkillRunner));
 		
 		// Summoning Scroll listener
 		this.registerEventListener (new SummoningScrollListener(this.summonTypeInterpreter, this.bossBarController));
@@ -148,7 +151,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.registerEventListener(new PathfindTargetingEventListener(this.monsterTypeInterpreter, this.bossBarController));
 		
 		// Custom skills listener
-		this.registerEventListener(new CustomSkillsListener (this.monsterTypeInterpreter, this.damageDisplayListener, this.bossBarController));
+		this.registerEventListener(new CustomSkillsListener (this.monsterTypeInterpreter, this.damageDisplayListener, this.bossBarController, this.mobSkillRunner));
 		
 		// Soulbounded items event listener
 		this.registerEventListener(new SoulBoundListener ());

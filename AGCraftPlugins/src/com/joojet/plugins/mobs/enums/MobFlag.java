@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.interfaces.CustomAttribute;
+import com.joojet.plugins.mobs.interfaces.CustomSpawnMessage;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
@@ -49,10 +50,16 @@ public enum MobFlag implements CustomAttribute
 			{
 				int huntRadius = entityEquipment.getStat(MonsterStat.HUNT_ON_SPAWN_RADIUS).intValue();
 				ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(entity, (int) (huntRadius * 1.25));
-					
+				
+				String message = ChatColor.GOLD + "You feel a great disturbance in the force...";
+				if (entityEquipment instanceof CustomSpawnMessage)
+				{
+					message = ((CustomSpawnMessage) entityEquipment).getSpawnMessage();
+				}
+				
 				for (Player p : nearbyPlayers)
 				{
-					p.sendMessage(ChatColor.GOLD + "You feel a great disturbance in the force...");
+					p.sendMessage(message);
 				}
 			}
 		}

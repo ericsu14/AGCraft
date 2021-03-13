@@ -16,6 +16,7 @@ import com.joojet.plugins.mobs.monsters.phantom.beatthebruins.PhantomMenace;
 import com.joojet.plugins.mobs.monsters.polar_bear.beatthebruins.BruinPolarBearTypes;
 import com.joojet.plugins.mobs.monsters.skeleton.beatthebruins.CollegeSkeletonTypes;
 import com.joojet.plugins.mobs.monsters.zombie.beatthebruins.CollegeZombieTypes;
+import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class BeatTheBruinsHandler extends AbstractSpawnHandler
@@ -23,9 +24,10 @@ public class BeatTheBruinsHandler extends AbstractSpawnHandler
 	/** The key used to reference this handler's spawn chance variable from the config file*/
 	public static final String BEAT_THE_BRUINS_HANDLER_KEY = "beat-the-bruins-spawn-chance";
 	
-	public BeatTheBruinsHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, BossBarController bossBarController)
+	public BeatTheBruinsHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, 
+			BossBarController bossBarController, MobSkillRunner mobSkillRunner)
 	{
-		super (monsterTypeInterpreter, summonTypeInterpreter, bossBarController, BEAT_THE_BRUINS_HANDLER_KEY);
+		super (monsterTypeInterpreter, summonTypeInterpreter, bossBarController, mobSkillRunner, BEAT_THE_BRUINS_HANDLER_KEY);
 		this.addMonsterTypes(new CollegeZombieTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
 				new CollegeSkeletonTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
 				new BruinPolarBearTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),

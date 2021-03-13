@@ -17,6 +17,7 @@ import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MonsterTypes;
+import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 import com.joojet.plugins.mobs.spawnhandlers.task.HandleSpawnEventTask;
 import com.joojet.plugins.mobs.spawning.FairSpawnController;
 import com.joojet.plugins.mobs.util.EquipmentTools;
@@ -44,6 +45,8 @@ public abstract class AbstractSpawnHandler
 	protected Random rand;
 	/** Used to make spawns fairer by controlling which mobs spawn based on nearby player's current equipment */
 	protected FairSpawnController fairSpawnController;
+	/** Mob Skill runnable used to control our custom skill system */
+	protected MobSkillRunner mobSkillRunner;
 	
 	/** Creates a new instance of an Abstract Spawn Handler
 	 * 	@param monsterTypeInterpreter - A reference to the monster type interpreter, which is used to register
@@ -52,13 +55,15 @@ public abstract class AbstractSpawnHandler
 	 *  @param spawnChance - Controls the chance in which custom mobs will spawn
 	 *  @param spawnChanceKey - A key used to look up this handler's specific spawn chance variable
 	 *         from the config file */
-	public AbstractSpawnHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, BossBarController bossBarController, String spawnChanceKey)
+	public AbstractSpawnHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, 
+			BossBarController bossBarController, MobSkillRunner mobSkillRunner, String spawnChanceKey)
 	{
 		this.spawnReasonFilter = EnumSet.noneOf(SpawnReason.class);
 		this.mobEquipmentTable = new HashMap <EntityType, MonsterTypes> ();
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.summonTypeInterpreter = summonTypeInterpreter;
 		this.bossBarController = bossBarController;
+		this.mobSkillRunner = mobSkillRunner;
 		this.spawnChance = 0.15;
 		this.spawnChanceKey = spawnChanceKey;
 		this.fairSpawnController = new FairSpawnController (128);
@@ -94,6 +99,7 @@ public abstract class AbstractSpawnHandler
 	{
 		MobEquipment equipment = this.getRandomEqipment(type, biome);
 		if (equipment != null &&
+				!this.mobSkillRunner.reachedSpawnLimit(equipment) &&
 				this.fairSpawnController.getAverageThreatScore(entity) >= equipment.getFairSpawnThreshold())
 		{
 			EquipmentTools.equipEntity(entity, equipment, this.bossBarController);

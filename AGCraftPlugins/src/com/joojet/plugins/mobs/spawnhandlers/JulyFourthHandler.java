@@ -17,6 +17,7 @@ import com.joojet.plugins.mobs.monsters.phantom.julyfourth.JulyFourthPhantomType
 import com.joojet.plugins.mobs.monsters.pillager.julyfourth.PatrioticPillagerTypes;
 import com.joojet.plugins.mobs.monsters.skeleton.julyfourth.PatrioticSkeletonTypes;
 import com.joojet.plugins.mobs.monsters.zombie.julyfourth.PatrioticZombieTypes;
+import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
 public class JulyFourthHandler extends AbstractSpawnHandler
@@ -26,9 +27,10 @@ public class JulyFourthHandler extends AbstractSpawnHandler
 	/** Used to generate random fireworks */
 	private FireworkTypes fwTypes;
 	
-	public JulyFourthHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, BossBarController bossBarController)
+	public JulyFourthHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, 
+			BossBarController bossBarController, MobSkillRunner mobSkillRunner)
 	{
-		super (monsterTypeInterpreter, summonTypeInterpreter, bossBarController, JULY_FOURTH_HANDLER_KEY);
+		super (monsterTypeInterpreter, summonTypeInterpreter, bossBarController, mobSkillRunner, JULY_FOURTH_HANDLER_KEY);
 		this.fwTypes = new FireworkTypes ();
 		this.addMonsterTypes(new PatrioticZombieTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter), 
 				new PatrioticSkeletonTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),

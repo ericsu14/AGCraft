@@ -11,8 +11,7 @@ public class HGZombieTypes extends MonsterTypes {
 	public HGZombieTypes(MonsterTypeInterpreter monsterTypeInterpreter,
 			SummoningScrollInterpreter summonTypeInterpreter) 
 	{
-		super(monsterTypeInterpreter, summonTypeInterpreter, EntityType.ZOMBIE, 
-				EntityType.HUSK, EntityType.ZOMBIE_VILLAGER);
+		super(monsterTypeInterpreter, summonTypeInterpreter, EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER);
 		
 		this.addEquipment(new HGUCLAJock (), 60);
 		this.addEquipment(new HGUSCWarrior (), 25);

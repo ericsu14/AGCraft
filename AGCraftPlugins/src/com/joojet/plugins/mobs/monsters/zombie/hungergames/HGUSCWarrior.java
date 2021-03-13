@@ -25,8 +25,6 @@ public class HGUSCWarrior extends USCFaction
 	public HGUSCWarrior() 
 	{
 		super (MonsterType.HG_USC_WARRIOR);
-		this.setStat(MonsterStat.HEALTH, 14.0);
-		
 		this.name = generateUSCDisplayName("Trojan");
 		
 		this.color = ChatColor.GOLD;

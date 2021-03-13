@@ -9,15 +9,17 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.monsters.ghast.UHC.UHCGhastTypes;
+import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 
 public class UHCHandler extends AbstractSpawnHandler
 {
 	/** The key used to reference this handler's spawn chance variable from the config file*/
 	public static final String UHC_HANDLER_KEY = "uhc-handler-spawn-chance";
 	
-	public UHCHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, BossBarController bossBarController)
+	public UHCHandler (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, 
+			BossBarController bossBarController, MobSkillRunner mobSkillRunner)
 	{
-		super (monsterTypeInterpreter, summonTypeInterpreter, bossBarController, UHC_HANDLER_KEY);
+		super (monsterTypeInterpreter, summonTypeInterpreter, bossBarController, mobSkillRunner, UHC_HANDLER_KEY);
 		this.addMonsterTypes(new UHCGhastTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter));
 		this.addSpawnReasons(SpawnReason.NATURAL);
 	}
