@@ -23,6 +23,7 @@ public class HungerGamesHandler extends AbstractSpawnHandler
 		
 		this.addMonsterTypes(new HGZombieTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),
 				new HGSkeletonTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter));
+		this.addSpawnReasons(SpawnReason.CUSTOM, SpawnReason.NATURAL, SpawnReason.REINFORCEMENTS);
 	}
 
 	@Override
