@@ -23,11 +23,11 @@ public class DeathCounter
 		if (AGCraftPlugin.plugin.serverMode == ServerMode.NORMAL)
 		{
 			// Create a new deathcounter scoreboard if one doesn't already exist
-			deathCounterObj = this.scoreboard.getObjective(scoreboardName);
+			this.deathCounterObj = this.scoreboard.getObjective(scoreboardName);
 			if (deathCounterObj == null)
 			{
-				deathCounterObj = this.scoreboard.registerNewObjective(scoreboardName, deathCriteriaName, scoreboardDisplayName);
-				deathCounterObj.setDisplaySlot(DisplaySlot.BELOW_NAME);
+				this.deathCounterObj = this.scoreboard.registerNewObjective(scoreboardName, deathCriteriaName, scoreboardDisplayName);
+				this.deathCounterObj.setDisplaySlot(DisplaySlot.BELOW_NAME);
 			}
 			this.syncDeathCounts();
 		}
@@ -38,17 +38,24 @@ public class DeathCounter
 	public void syncDeathCounts ()
 	{
 		OfflinePlayer players [] = AGCraftPlugin.plugin.getServer().getOfflinePlayers();
-		
-		for (OfflinePlayer p : players)
+		try
 		{
-			if (p != null)
+			for (OfflinePlayer p : players)
 			{
-				AGCraftPlugin.logger.info ("Found offline player with UUID " + p.getUniqueId());
-				// Gets the player's current deaths
-				int deaths = p.getStatistic(Statistic.DEATHS);
-				AGCraftPlugin.logger.info ("Deaths: " + deaths);
-				deathCounterObj.getScore(p).setScore(deaths);
+				if (p != null)
+				{
+					AGCraftPlugin.logger.info ("Found offline player with UUID " + p.getUniqueId());
+					// Gets the player's current deaths
+					int deaths = p.getStatistic(Statistic.DEATHS);
+					AGCraftPlugin.logger.info ("Deaths: " + deaths);
+					this.deathCounterObj.getScore(p).setScore(deaths);
+				}
 			}
+		}
+		catch (NullPointerException npe)
+		{
+			AGCraftPlugin.logger.warning("Unable to sync death counts due to an internal error.");
+			AGCraftPlugin.logger.warning(npe.getMessage());
 		}
 	}
 	

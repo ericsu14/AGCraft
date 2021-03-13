@@ -27,6 +27,7 @@ import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
 import com.joojet.plugins.mobs.fireworks.PaintTheSky;
 import com.joojet.plugins.mobs.monsters.chicken.SuperChicken;
 import com.joojet.plugins.mobs.scrolls.*;
+import com.joojet.plugins.mobs.villager.wandering.TommyTrojan;
 
 public enum RewardType 
 {
@@ -75,7 +76,8 @@ public enum RewardType
 	BARNEY_FEET,
 	BARNEY_TOTEM,
 	BARNEY_DAGGER,
-	SUPER_CHICKEN;
+	SUPER_CHICKEN,
+	TOMMY_TROJAN;
 	
 	public ItemStack getReward ()
 	{
@@ -173,6 +175,8 @@ public enum RewardType
 				return new BarneyDagger (ChatColor.DARK_PURPLE);
 			case SUPER_CHICKEN:
 				return new SummoningScroll (new SuperChicken (), EntityType.CHICKEN);
+			case TOMMY_TROJAN:
+				return new SummoningScroll (new TommyTrojan (), EntityType.WANDERING_TRADER);
 			default:
 				break;
 		}

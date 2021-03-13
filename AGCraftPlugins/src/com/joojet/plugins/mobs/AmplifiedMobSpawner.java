@@ -44,6 +44,7 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 import com.joojet.plugins.mobs.spawnhandlers.AmplifiedMobHandler;
 import com.joojet.plugins.mobs.spawnhandlers.BeatTheBruinsHandler;
+import com.joojet.plugins.mobs.spawnhandlers.HungerGamesHandler;
 import com.joojet.plugins.mobs.spawnhandlers.JulyFourthHandler;
 import com.joojet.plugins.mobs.spawnhandlers.UHCHandler;
 
@@ -68,6 +69,7 @@ public class AmplifiedMobSpawner extends AGListener
 	private UHCHandler uhcHandler;
 	private AmplifiedMobHandler amplifiedMobHandler;
 	private BeatTheBruinsHandler bruinHandler;
+	private HungerGamesHandler hgHandler;
 	
 	/** A reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
@@ -84,6 +86,7 @@ public class AmplifiedMobSpawner extends AGListener
 		this.amplifiedMobHandler = new AmplifiedMobHandler(this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController);
 		this.bruinHandler = new BeatTheBruinsHandler (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController);
 		this.uhcHandler = new UHCHandler(this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController);
+		this.hgHandler = new HungerGamesHandler (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController);
 	}
 	
 	@Override
@@ -115,6 +118,9 @@ public class AmplifiedMobSpawner extends AGListener
 				this.uhcHandler.createSpawnEventHandlerTask(entity, type, reason, biome);
 				return;
 			case MINIGAME:
+				return;
+			case HUNGER_GAMES:
+				this.hgHandler.createSpawnEventHandlerTask(entity, type, reason, biome);
 				return;
 			default:
 				break;
@@ -281,6 +287,7 @@ public class AmplifiedMobSpawner extends AGListener
 		this.julyFourthHandler.getSpawnChanceFromConfigFile(config);
 		this.bruinHandler.getSpawnChanceFromConfigFile(config);
 		this.uhcHandler.getSpawnChanceFromConfigFile(config);
+		this.hgHandler.getSpawnChanceFromConfigFile(config);
 	}
 
 	@Override

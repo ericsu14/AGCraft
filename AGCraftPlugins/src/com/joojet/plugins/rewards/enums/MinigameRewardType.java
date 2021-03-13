@@ -18,7 +18,8 @@ public enum MinigameRewardType
 	JASON_BIRTHDAY ("Birthday Gift - Jason", "09-23-2020", "Happy birthday sprinkles! Thanks for being an everlasting light in this community!"
 			+ " Hope you have an amazing day today and best of wishes in your job and small group leading! ~ jooj"),
 	JOOJ_BIRTHDAY ("Birthday Gift - Eric", "11-20-2020", "Happy birthday to myself, hehe! ~ jooj"),
-	CHRISTMAS ("Belated Christmas", "12-26-2020", "Merry (belated) Christmas everyone! ~jooj");
+	CHRISTMAS ("Belated Christmas", "12-26-2020", "Merry (belated) Christmas everyone! ~jooj"),
+	HUNGER_GAMES_ENTERTAINMENT ("Hunger Games by Alpha Omicron", "3-15-2020");
 	
 	/** Full name of the event */
 	private String fullName;

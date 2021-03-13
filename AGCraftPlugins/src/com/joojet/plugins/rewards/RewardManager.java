@@ -53,6 +53,9 @@ public class RewardManager extends AGListener
 			case UHC:
 				this.handleUHCLoginEvent(player);
 				break;
+			case HUNGER_GAMES:
+				this.handleUHCLoginEvent(player);
+				break;
 			default:
 				return;
 		}
@@ -110,6 +113,14 @@ public class RewardManager extends AGListener
 								RewardType.ETERNAL_MOCKTAIL,
 								RewardType.USC_CREEPER_SHIELD,
 								RewardType.SNOWBALL);
+						break;
+					case HUNGER_GAMES_ENTERTAINMENT:
+						this.grantRewards(player, RewardType.TOMMY_TROJAN,
+								RewardType.SUPER_CHICKEN,
+								RewardType.DIAMONDS,
+								RewardType.GOLDEN_CARROTS,
+								RewardType.ENCHANTED_GOLDEN_APPLE,
+								RewardType.STRAWBERRY_MOCKTAIL);
 						break;
 					default:
 						break;
