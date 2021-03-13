@@ -109,7 +109,7 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 	public void transformWanderingTrader (LivingEntity entity, Biome biome)
 	{
 		WanderingTrader trader = (WanderingTrader) entity;
-		VillagerEquipment equipment = (VillagerEquipment) wanderingTypes.getRandomEquipment(biome);
+		VillagerEquipment equipment = (VillagerEquipment) wanderingTypes.getRandomEquipment(biome, this.mobSkillRunner);
 		EquipmentTools.equipEntity(trader, (MobEquipment) equipment, this.bossBarController);
 	}
 

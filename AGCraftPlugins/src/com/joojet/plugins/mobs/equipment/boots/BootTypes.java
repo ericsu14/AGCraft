@@ -25,7 +25,8 @@ public class BootTypes extends EquipmentTypes
 			new PatrioticBlueBoots (),
 			new RoyalGoldBoots (ChatColor.LIGHT_PURPLE),
 			new SkullKidBoots (ChatColor.DARK_RED),
-			new USCSpikedBoots (ChatColor.GOLD)
+			new USCSpikedBoots (ChatColor.GOLD),
+			new MrJohnsonFeet (ChatColor.DARK_PURPLE)
 		);
 	}
 

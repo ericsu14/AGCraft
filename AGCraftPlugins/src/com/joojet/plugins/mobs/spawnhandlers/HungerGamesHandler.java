@@ -10,6 +10,7 @@ import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.monsters.skeleton.hungergames.HGSkeletonTypes;
+import com.joojet.plugins.mobs.monsters.stray.hungergames.HGStrayTypes;
 import com.joojet.plugins.mobs.monsters.zombie.hungergames.HGZombieTypes;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 
@@ -25,7 +26,8 @@ public class HungerGamesHandler extends AbstractSpawnHandler
 		super(monsterTypeInterpreter, summonTypeInterpreter, bossBarController, mobSkillRunner, HUNGER_GAMES_SPAWN_HANDLER_KEY);
 		
 		this.addMonsterTypes(new HGZombieTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),
-				new HGSkeletonTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter));
+				new HGSkeletonTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new HGStrayTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter));
 		this.addSpawnReasons(SpawnReason.CUSTOM, SpawnReason.NATURAL, SpawnReason.REINFORCEMENTS);
 	}
 

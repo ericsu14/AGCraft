@@ -36,7 +36,8 @@ public class HeadTypes extends EquipmentTypes
 			new USCBandHead (ChatColor.GOLD),
 			new USCTrojan (ChatColor.GOLD),
 			new ZombiePigmenHead (ChatColor.LIGHT_PURPLE),
-			new RoyalPiglinHunterHead (ChatColor.RED)
+			new RoyalPiglinHunterHead (ChatColor.RED),
+			new MrJohnsonHead (ChatColor.DARK_PURPLE)
 		);
 	}
 

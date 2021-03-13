@@ -10,6 +10,7 @@ import org.bukkit.entity.EntityType;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
+import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 import com.joojet.plugins.mobs.util.WeightedEntry;
 
 public abstract class MonsterTypes 
@@ -60,7 +61,7 @@ public abstract class MonsterTypes
 	
 	/** Returns a random mob that spawns within a specific biome
 	 * 		@param biome - The biome the monster spawns in */
-	public MobEquipment getRandomEquipment (Biome biome)
+	public MobEquipment getRandomEquipment (Biome biome, MobSkillRunner mobSkillRunner)
 	{
 		int minWeight = 0;
 		int maxWeight = 0;
@@ -72,7 +73,8 @@ public abstract class MonsterTypes
 			spawnBiomes = mob.getSpawnBiomes();
 			/* Add this mob to the monster spawn list if their spawn biomes either contain THE_VOID
 			 * or the passed biome. */
-			if (spawnBiomes.contains(Biome.THE_VOID) || spawnBiomes.contains(biome))
+			if ((spawnBiomes.contains(Biome.THE_VOID) || spawnBiomes.contains(biome))
+					&& !mobSkillRunner.reachedSpawnLimit(mob))
 			{
 				maxWeight = (minWeight + mob.getSpawnWeight()) - 1;
 				mobList.add(new WeightedMob (mob, minWeight, maxWeight));

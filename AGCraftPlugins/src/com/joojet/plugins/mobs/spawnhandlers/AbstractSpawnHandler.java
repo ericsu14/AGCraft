@@ -98,9 +98,7 @@ public abstract class AbstractSpawnHandler
 	public void transformLivingEntityIntoAmplifiedMob (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome)
 	{
 		MobEquipment equipment = this.getRandomEqipment(type, biome);
-		if (equipment != null &&
-				!this.mobSkillRunner.reachedSpawnLimit(equipment) &&
-				this.fairSpawnController.getAverageThreatScore(entity) >= equipment.getFairSpawnThreshold())
+		if (equipment != null && this.fairSpawnController.getAverageThreatScore(entity) >= equipment.getFairSpawnThreshold())
 		{
 			EquipmentTools.equipEntity(entity, equipment, this.bossBarController);
 		}
@@ -138,7 +136,7 @@ public abstract class AbstractSpawnHandler
 		MonsterTypes mobTypes = this.mobEquipmentTable.get(type);
 		if (mobTypes != null)
 		{
-			result = mobTypes.getRandomEquipment(biome);
+			result = mobTypes.getRandomEquipment(biome, this.mobSkillRunner);
 		}
 		return result;
 	}

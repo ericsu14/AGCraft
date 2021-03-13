@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.bossbar;
 import java.util.UUID;
 
 import org.bukkit.attribute.Attribute;
+import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -41,9 +42,10 @@ public class BossBarTask extends BukkitRunnable
 		{
 			// Scales boss bar's progress to the entity's currently health + any absorption bonuses
 			double entityHealth = (entity.getHealth() + entity.getAbsorptionAmount()) /
-					(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+					(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + entity.getAbsorptionAmount());
 			// Caps entityHealth at 1.00
 			entityHealth = (entityHealth > 1.00) ? 1.00 : entityHealth;
+			bossBar.setColor(entity.getAbsorptionAmount() > 0.0 ? BarColor.YELLOW : BarColor.RED);
 			bossBar.setProgress(entityHealth);
 		}
 		else

@@ -26,7 +26,8 @@ public class LeggingTypes extends EquipmentTypes
 			new RoyalGoldLeggings (ChatColor.LIGHT_PURPLE),
 			new SkullKidPants (ChatColor.DARK_RED),
 			new USCBandUniformBottom (ChatColor.GOLD),
-			new USCFootballTrousers (ChatColor.GOLD)
+			new USCFootballTrousers (ChatColor.GOLD),
+			new MrJohnsonLeggings (ChatColor.DARK_PURPLE)
 		);
 	}
 	
