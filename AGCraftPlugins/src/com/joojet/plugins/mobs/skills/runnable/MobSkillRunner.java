@@ -48,6 +48,7 @@ public class MobSkillRunner extends BukkitRunnable
 		// Removes dead skill tasks from the mob skill registry
 		for (UUID deadTask : deadSkillTasks)
 		{
+			this.decrementMobFrequencyCount(mobSkillRegistry.get(deadTask).getMobEquipment().getMonsterType());
 			this.mobSkillRegistry.remove(deadTask);
 		}
 	}
@@ -81,12 +82,17 @@ public class MobSkillRunner extends BukkitRunnable
 		{
 			MobSkillTask task = this.mobSkillRegistry.remove(entity.getUniqueId());
 			// Decrements custom monster count for that entity's custom type
-			MonsterType type = task.getMobEquipment().getMonsterType();
-			if (this.customMonsterFrequency.containsKey(type)
-					&& this.customMonsterFrequency.get(type) > 0)
-			{
-				this.customMonsterFrequency.put(type, this.customMonsterFrequency.get(type) - 1);
-			}
+			this.decrementMobFrequencyCount(task.getMobEquipment().getMonsterType());
+		}
+	}
+	
+	/** Decrements mob frequency count for the passed MonsterType */
+	protected void decrementMobFrequencyCount (MonsterType type)
+	{
+		if (this.customMonsterFrequency.containsKey(type)
+				&& this.customMonsterFrequency.get(type) > 0)
+		{
+			this.customMonsterFrequency.put(type, this.customMonsterFrequency.get(type) - 1);
 		}
 	}
 	
