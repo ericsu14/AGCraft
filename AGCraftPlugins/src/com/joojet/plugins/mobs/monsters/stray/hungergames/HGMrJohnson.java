@@ -6,6 +6,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.drops.LootCrateDrop;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -34,6 +36,8 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		super(MonsterType.HG_MR_JOHNSON);
 		this.color = ChatColor.DARK_PURPLE;
 		this.addBiomes(Biome.THE_VOID);
+		
+		this.name = StringUtil.alternateTextColors("Mr. Johnson", TextPattern.WORD, ChatColor.DARK_BLUE, ChatColor.GOLD);
 		
 		this.helmet = new MrJohnsonHead (this.color);
 		this.chestplate = new MrJohnsonTunic (this.color);
@@ -64,7 +68,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		skills.add(new ThundagaSkill (8, 12, Integer.MAX_VALUE, 8, 1.5F, 4, 60, 0.60));
 		skills.add(new EvokerFangSkill (8, 8, Integer.MAX_VALUE, 4, 0));
 		skills.add(new HurricaneSkill (12, 16, Integer.MAX_VALUE, 2, 3, 0.60));
-		skills.add(new NerfDamageOutputSkill (0.40));
+		skills.add(new NerfDamageOutputSkill (0.60));
 		skills.add(new BlindingArrow (7, 6));
 	}
 

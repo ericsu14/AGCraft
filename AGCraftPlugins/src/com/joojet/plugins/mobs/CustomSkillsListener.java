@@ -72,7 +72,6 @@ public class CustomSkillsListener extends AGListener
 	public void onEnable() 
 	{
 		this.mobSkillRunner.runTaskTimer(AGCraftPlugin.plugin, 20, 20);
-		this.mobSkillRunner = new MobSkillRunner ();
 	}
 
 	@Override
