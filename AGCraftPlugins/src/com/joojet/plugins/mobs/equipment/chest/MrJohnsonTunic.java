@@ -19,7 +19,7 @@ public class MrJohnsonTunic extends LeatherEquipment
 		this.setColor(Color.fromRGB(47, 43, 40));
 		this.setDisplayName(StringUtil.alternateTextColors("Mr. Johnson's Upper Exoskeleton", TextPattern.WORD, 
 				ChatColor.GOLD, ChatColor.GOLD, ChatColor.DARK_GRAY, ChatColor.DARK_BLUE));
-		this.addDefenseAttributes(8.0, 3.0, 0.15);
+		this.addDefenseAttributes(6.0, 3.0, 0.15);
 		this.makeUnbreakable();
 	}
 
