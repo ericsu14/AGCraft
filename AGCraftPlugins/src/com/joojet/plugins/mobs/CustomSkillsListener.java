@@ -232,7 +232,7 @@ public class CustomSkillsListener extends AGListener
 			{
 				if (skill instanceof PassiveAttack)
 				{
-					currDamage = ((PassiveAttack) skill).modifyIncomingDamageEvent(event.getDamage(), event.getDamager(), damager, target, targetEquipment);
+					currDamage = ((PassiveAttack) skill).modifyIncomingDamageEvent(event.getDamage(), event.getDamager(), damager, target, damagerEquipment, targetEquipment);
 					if (currDamage == Double.MIN_VALUE)
 					{
 						event.setCancelled(true);
@@ -279,7 +279,7 @@ public class CustomSkillsListener extends AGListener
 		for (Entity entity : surroundingEntities)
 		{
 			isAlly = false;
-			if (!(entity instanceof LivingEntity))
+			if (!(entity instanceof LivingEntity) || entity.getType() == EntityType.ARMOR_STAND)
 			{
 				continue;
 			}

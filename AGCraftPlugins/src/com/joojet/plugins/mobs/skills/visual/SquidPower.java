@@ -55,7 +55,7 @@ public class SquidPower extends AbstractVisualSkill implements PassiveAttack
 
 	@Override
 	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
-			MobEquipment targetEquipment) 
+			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
 		return 0;
 	}

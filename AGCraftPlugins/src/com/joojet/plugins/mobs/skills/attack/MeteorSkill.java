@@ -59,7 +59,7 @@ public class MeteorSkill extends AbstractAttackSkill implements PassiveAttack
 	/** Cancels incoming damage events if the caster is currently using this skill */
 	@Override
 	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
-			MobEquipment targetEquipment) 
+			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
 		return this.isActive ? Double.MIN_VALUE : 0;
 	}

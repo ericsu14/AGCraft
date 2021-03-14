@@ -72,7 +72,7 @@ public class EvokerFangSkill extends AbstractAttackSkill implements PassiveAttac
 
 	@Override
 	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
-			MobEquipment targetEquipment) 
+			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
 		// TODO Auto-generated method stub
 		return 0;

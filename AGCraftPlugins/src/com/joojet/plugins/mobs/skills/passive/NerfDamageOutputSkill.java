@@ -37,7 +37,7 @@ public class NerfDamageOutputSkill extends AbstractPassiveSkill implements Passi
 
 	@Override
 	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
-			MobEquipment targetEquipment) 
+			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
 		return 0;
 	}

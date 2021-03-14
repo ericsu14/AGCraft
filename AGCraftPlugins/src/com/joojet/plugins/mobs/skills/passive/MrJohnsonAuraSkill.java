@@ -24,7 +24,7 @@ public class MrJohnsonAuraSkill extends AbstractPassiveSkill implements PassiveA
 
 	@Override
 	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
-			MobEquipment targetEquipment) 
+			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
 		return 0;
 	}

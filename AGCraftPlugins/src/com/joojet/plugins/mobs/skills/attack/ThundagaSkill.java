@@ -96,9 +96,9 @@ public class ThundagaSkill extends AbstractAttackSkill implements PassiveAttack 
 
 	@Override
 	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
-			MobEquipment targetEquipment) 
+			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
-		return 0;
+		return targetEquipment.isAlliesOf(target, damager, damagerEquipment) ? Double.MIN_VALUE : 0;
 	}
 
 }

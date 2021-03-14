@@ -132,7 +132,7 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, P
 	/** Custom mobs who are currently enraged takes more damage than usual. */
 	@Override
 	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
-			MobEquipment targetEquipment) 
+			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
 		double bonusDamage = 0.0;
 		
