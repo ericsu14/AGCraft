@@ -428,7 +428,8 @@ public abstract class MobEquipment
 		boolean result = false;
 		boolean noFactions = false;
 		
-		if (entity == other || entity.equals(other))
+		if (entity == other || entity.equals(other)
+				|| entity.getUniqueId().equals(other.getUniqueId()))
 		{
 			return true;
 		}
