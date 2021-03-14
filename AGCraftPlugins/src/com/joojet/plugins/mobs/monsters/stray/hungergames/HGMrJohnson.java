@@ -24,6 +24,7 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.EvokerFangSkill;
 import com.joojet.plugins.mobs.skills.attack.HurricaneSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
+import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.mobs.skills.passive.BlindingArrow;
 import com.joojet.plugins.mobs.skills.passive.NerfDamageOutputSkill;
 import com.joojet.plugins.music.enums.MusicType;
@@ -68,7 +69,8 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		skills.add(new ThundagaSkill (8, 12, Integer.MAX_VALUE, 8, 1.5F, 4, 60, 0.60));
 		skills.add(new EvokerFangSkill (8, 8, Integer.MAX_VALUE, 4, 0));
 		skills.add(new HurricaneSkill (12, 16, Integer.MAX_VALUE, 2, 3, 0.60));
-		skills.add(new NerfDamageOutputSkill (0.60));
+		skills.add(new RageSkill (0, 30, 0.35));
+		skills.add(new NerfDamageOutputSkill (0.50));
 		skills.add(new BlindingArrow (7, 6));
 	}
 

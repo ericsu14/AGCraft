@@ -100,7 +100,7 @@ public class MobSkillRunner extends BukkitRunnable
 	 *  the passed monster type in the server. */
 	public int getActiveCustomMonsterCount (MonsterType type)
 	{
-		return this.customMonsterFrequency.get(type);
+		return this.customMonsterFrequency.getOrDefault(type, 0);
 	}
 	
 	/** Returns true if the number of permitted active custom monsters of that type has been reached*
