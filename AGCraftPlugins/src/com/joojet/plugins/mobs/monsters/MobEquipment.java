@@ -428,6 +428,11 @@ public abstract class MobEquipment
 		boolean result = false;
 		boolean noFactions = false;
 		
+		if (entity == other || entity.equals(other))
+		{
+			return true;
+		}
+		
 		// Do not target players with active ignore metadata timestamps
 		if (other instanceof Player)
 		{
@@ -441,11 +446,11 @@ public abstract class MobEquipment
 		{
 			// Check if the entity is in the same faction as the other entity.
 			// If so, immediately return true
-			EnumSet <Faction> factions = otherEquipment.getFactions();
-			noFactions = this.factions.isEmpty() && factions.isEmpty();
-			for (Faction faction : factions)
+			EnumSet <Faction> otherFactions = otherEquipment.getFactions();
+			noFactions = this.factions.isEmpty() && otherFactions.isEmpty();
+			for (Faction otherFaction : otherFactions)
 			{
-				if (this.factions.contains(faction))
+				if (this.factions.contains(otherFaction))
 				{
 					return true;
 				}
@@ -455,12 +460,13 @@ public abstract class MobEquipment
 			{
 				return false;
 			}
+			
 			result = otherEquipment.getIgnoreList().contains(entity.getType());
 		}
 		
 		// Allows neutral mobs and custom mobs without anything in their hitlist
 		// to be allies with other non-factioned, non-player mobs
-		if (noFactions ||(otherEquipment == null && other.getType() != EntityType.PLAYER) ||
+		if (noFactions || (otherEquipment == null && other.getType() != EntityType.PLAYER) ||
 				this.getIgnoreList().contains(EntityType.PLAYER))
 		{
 			result |= !this.hitlist.contains(other.getType());
