@@ -32,7 +32,8 @@ public class OffhandTypes extends EquipmentTypes
 			new USCCreeperShield (),
 			new WeakeningArrow (ChatColor.GREEN),
 			new WitheringArrow (ChatColor.LIGHT_PURPLE),
-			new HellwalkerDagger (ChatColor.RED)
+			new HellwalkerDagger (ChatColor.RED),
+			new SnakeArrow (ChatColor.DARK_GREEN)
 		);
 	}
 
