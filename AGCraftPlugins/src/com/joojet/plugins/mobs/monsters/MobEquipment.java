@@ -428,12 +428,6 @@ public abstract class MobEquipment
 		boolean result = false;
 		boolean noFactions = false;
 		
-		// If damaging itself, return true
-		if (other == entity)
-		{
-			return true;
-		}
-		
 		// Do not target players with active ignore metadata timestamps
 		if (other instanceof Player)
 		{
@@ -457,7 +451,7 @@ public abstract class MobEquipment
 				}
 			}
 			// Check if the entity is rivals with the other entity. If so, return false
-			if (this.isRivalsOf(otherEquipment))
+			if (otherEquipment.isRivalsOf(this))
 			{
 				return false;
 			}
