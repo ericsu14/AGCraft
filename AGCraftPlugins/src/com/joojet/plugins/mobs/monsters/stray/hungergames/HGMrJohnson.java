@@ -19,7 +19,7 @@ import com.joojet.plugins.mobs.equipment.chest.MrJohnsonTunic;
 import com.joojet.plugins.mobs.equipment.head.MrJohnsonHead;
 import com.joojet.plugins.mobs.equipment.leggings.MrJohnsonLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.SnakeArrow;
-import com.joojet.plugins.mobs.equipment.weapons.VeryPotentBow;
+import com.joojet.plugins.mobs.equipment.weapons.PotentBow;
 import com.joojet.plugins.mobs.interfaces.CustomSpawnMessage;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
@@ -40,13 +40,14 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		this.color = ChatColor.DARK_PURPLE;
 		this.addBiomes(Biome.THE_VOID);
 		
+		this.setDropRates(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 		this.name = StringUtil.alternateTextColors("Mr. Johnson", TextPattern.WORD, ChatColor.DARK_BLUE, ChatColor.GOLD);
 		
 		this.helmet = new MrJohnsonHead (this.color);
 		this.chestplate = new MrJohnsonTunic (this.color);
 		this.leggings = new MrJohnsonLeggings (this.color);
 		this.boots = new MrJohnsonFeet (this.color);
-		this.weapon = new VeryPotentBow (this.color);
+		this.weapon = new PotentBow (this.color);
 		this.tippedArrow = new SnakeArrow (this.color);
 		
 		this.setStat(MonsterStat.HEALTH, 12.0);
@@ -56,7 +57,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.PLAYER, EntityType.SKELETON, EntityType.SPIDER,
 				EntityType.IRON_GOLEM, EntityType.SNOWMAN);
-		this.addTargetsToHitList(EntityType.CREEPER, EntityType.STRAY);
+		this.addEntitiesToIgnoreList(EntityType.CREEPER, EntityType.STRAY);
 		
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING,
 				MobFlag.DISABLE_PICK_UP_ITEMS);
@@ -73,9 +74,9 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
-		skills.add(new ThundagaSkill (8, 12, Integer.MAX_VALUE, 8, 1.5F, 4, 60, 0.60));
-		skills.add(new EvokerFangSkill (12, 8, Integer.MAX_VALUE, 4, 0));
-		skills.add(new HurricaneSkill (16, 16, Integer.MAX_VALUE, 2, 3, 0.60));
+		skills.add(new ThundagaSkill (12, 12, Integer.MAX_VALUE, 8, 2.0F, 4, 60, 0.60));
+		skills.add(new EvokerFangSkill (8, 8, Integer.MAX_VALUE, 4, 0));
+		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 2, 3, 0.60));
 		skills.add(new RageSkill (0, 30, 0.35));
 		skills.add(new NerfDamageOutputSkill (0.50));
 		skills.add(new BlindingArrow (7, 6));
