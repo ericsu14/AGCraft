@@ -38,9 +38,9 @@ public class EvokerFangSkill extends AbstractAttackSkill implements PassiveAttac
 		
 		LivingEntity target = filteredTargets.get(0);
 		damageDisplayListener.displayStringAboveEntity(caster, ChatColor.YELLOW + ""  + ChatColor.BOLD + "FANGS!");
-		ParticleUtil.spawnColoredParticlesOnEntity(caster, 6, 0, 0, 0, Particle.SPELL_INSTANT);
+		caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, caster.getLocation(), 10, 1.0, 1.0, 0.0, 0.1, null);
 		caster.getWorld().playSound(caster.getLocation(), Sound.ENTITY_EVOKER_PREPARE_ATTACK, 1.0f, 1.0f);
-		new EvokerFangAttackRunnable (caster, target, this.range).runTaskLater(AGCraftPlugin.plugin, 10);
+		new EvokerFangAttackRunnable (caster, target, this.range).runTaskLater(AGCraftPlugin.plugin, 20);
 	}
 
 	@Override

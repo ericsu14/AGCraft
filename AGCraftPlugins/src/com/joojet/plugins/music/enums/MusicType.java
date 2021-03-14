@@ -9,6 +9,7 @@ public enum MusicType {
 	HAIKYUU ("boss.haikyuu", "4:01", MusicEndingType.HAIKYUU_END),
 	BARNEY ("boss.barney", "2:30", MusicEndingType.BARNEY_END),
 	SHREK ("boss.shrek", "3:20", MusicEndingType.SHREK_END),
+	OUTLAW ("boss.outlaw", "3:22", MusicEndingType.OUTLAW_END),
 	BAKA_MITAI ("fireworks.baka_mitai", "4:48"),
 	FALLING_IN_LOVE ("fireworks.falling_in_love", "3:01"),
 	FLY_ME_TO_THE_MOON ("fireworks.fly_me_to_the_moon", "2:28"),

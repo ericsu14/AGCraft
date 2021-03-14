@@ -19,7 +19,7 @@ import com.joojet.plugins.mobs.equipment.chest.MrJohnsonTunic;
 import com.joojet.plugins.mobs.equipment.head.MrJohnsonHead;
 import com.joojet.plugins.mobs.equipment.leggings.MrJohnsonLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.SnakeArrow;
-import com.joojet.plugins.mobs.equipment.weapons.PotentBow;
+import com.joojet.plugins.mobs.equipment.weapons.PledgeDestroyer;
 import com.joojet.plugins.mobs.interfaces.CustomSpawnMessage;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
@@ -28,6 +28,7 @@ import com.joojet.plugins.mobs.skills.attack.HurricaneSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.mobs.skills.passive.BlindingArrow;
+import com.joojet.plugins.mobs.skills.passive.MrJohnsonAuraSkill;
 import com.joojet.plugins.mobs.skills.passive.NerfDamageOutputSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
@@ -47,7 +48,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		this.chestplate = new MrJohnsonTunic (this.color);
 		this.leggings = new MrJohnsonLeggings (this.color);
 		this.boots = new MrJohnsonFeet (this.color);
-		this.weapon = new PotentBow (this.color);
+		this.weapon = new PledgeDestroyer (this.color);
 		this.tippedArrow = new SnakeArrow (this.color);
 		
 		this.setStat(MonsterStat.HEALTH, 12.0);
@@ -68,7 +69,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 				new LootCrateDrop (1.00, 1, 1, Material.DIAMOND_HELMET, Material.DIAMOND_CHESTPLATE,
 						Material.DIAMOND_LEGGINGS, Material.DIAMOND_BOOTS, Material.DIAMOND_SWORD));
 		
-		this.bossTheme = MusicType.HAIKYUU;
+		this.bossTheme = MusicType.OUTLAW;
 	}
 
 	@Override
@@ -77,9 +78,10 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		skills.add(new ThundagaSkill (12, 12, Integer.MAX_VALUE, 8, 2.0F, 4, 60, 0.60));
 		skills.add(new EvokerFangSkill (8, 8, Integer.MAX_VALUE, 4, 0));
 		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 2, 3, 0.60));
-		skills.add(new RageSkill (0, 20, 0.35));
+		skills.add(new RageSkill (0, 15, 0.35));
 		skills.add(new NerfDamageOutputSkill (0.50));
 		skills.add(new BlindingArrow (7, 6));
+		skills.add(new MrJohnsonAuraSkill ());
 	}
 
 	@Override
