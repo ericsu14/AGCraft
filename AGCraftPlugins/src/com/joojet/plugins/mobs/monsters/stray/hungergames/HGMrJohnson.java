@@ -85,7 +85,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 	@Override
 	public String getSpawnMessage() 
 	{
-		return ChatColor.GOLD + "A powerful monster spawned into the arena! Eliminate him to get powerful equipment!";
+		return ChatColor.GOLD + "A powerful monster spawned into the arena! Eliminate him to get" + ChatColor.AQUA + " powerful equipment!";
 	}
 	
 }
