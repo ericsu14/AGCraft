@@ -42,7 +42,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		this.addBiomes(Biome.THE_VOID);
 		
 		this.setDropRates(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-		this.name = StringUtil.alternateTextColors("Mr. Johnson", TextPattern.WORD, ChatColor.DARK_BLUE, ChatColor.GOLD);
+		this.name = StringUtil.alternateTextColors("Mr. Johnson", TextPattern.WORD, ChatColor.BLUE, ChatColor.GOLD);
 		
 		this.helmet = new MrJohnsonHead (this.color);
 		this.chestplate = new MrJohnsonTunic (this.color);

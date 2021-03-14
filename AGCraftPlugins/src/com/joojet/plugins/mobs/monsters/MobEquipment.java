@@ -428,6 +428,12 @@ public abstract class MobEquipment
 		boolean result = false;
 		boolean noFactions = false;
 		
+		// If damaging itself, return true
+		if (other == entity)
+		{
+			return true;
+		}
+		
 		// Do not target players with active ignore metadata timestamps
 		if (other instanceof Player)
 		{

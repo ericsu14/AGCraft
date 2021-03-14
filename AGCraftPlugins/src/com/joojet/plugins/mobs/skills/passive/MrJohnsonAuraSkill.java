@@ -16,9 +16,9 @@ public class MrJohnsonAuraSkill extends AbstractPassiveSkill implements PassiveA
 	public double modifyOutgoingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
 			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
-		ParticleUtil.spawnColoredParticlesOnEntity(damager, 4, 4, 3, 11, Particle.REDSTONE);
-		ParticleUtil.spawnColoredParticlesOnEntity(damager, 4, 51, 52, 47, Particle.REDSTONE);
-		ParticleUtil.spawnColoredParticlesOnEntity(damager, 4, 18, 35, 104, Particle.REDSTONE);
+		ParticleUtil.spawnColoredParticlesOnEntity(target, 4, 4, 3, 11, Particle.REDSTONE);
+		ParticleUtil.spawnColoredParticlesOnEntity(target, 4, 51, 52, 47, Particle.REDSTONE);
+		ParticleUtil.spawnColoredParticlesOnEntity(target, 4, 18, 35, 104, Particle.REDSTONE);
 		return 0;
 	}
 

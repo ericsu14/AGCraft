@@ -17,7 +17,7 @@ public class PledgeDestroyer extends Equipment
 	{
 		super(EquipmentType.PLEDGE_DESTROYER, Material.BOW, EquipmentSlot.HAND, chatColor);
 		this.setDisplayName(StringUtil.alternateTextColors("The Pledge Destroyer", TextPattern.WORD, 
-				ChatColor.GOLD, ChatColor.DARK_PURPLE, ChatColor.GOLD));
+				ChatColor.GOLD, ChatColor.GRAY, ChatColor.GOLD));
 		this.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 3);
 		this.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
 		this.loreColor = ChatColor.GOLD;
