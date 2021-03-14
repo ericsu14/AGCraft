@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.equipment.leggings;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
@@ -19,7 +20,8 @@ public class MrJohnsonLeggings extends LeatherEquipment
 		this.addDefenseAttributes(5.0, 2.0, 0.10);
 		this.setDisplayName(StringUtil.alternateTextColors("Mr. Johnson's Lower Exoskeleton", TextPattern.WORD, 
 				ChatColor.GOLD, ChatColor.GOLD, ChatColor.DARK_GRAY, ChatColor.DARK_BLUE));
-		this.setColor(Color.fromRGB(17, 41, 89));
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 4);
+		this.setColor(Color.fromRGB(10, 10, 10));
 		this.makeUnbreakable();
 	}
 

@@ -22,6 +22,10 @@ public class BossBarTask extends BukkitRunnable
 	/** Stores a reference to the music listener used to enable and disable
 	 *  music cues for different boss fight events */
 	protected MusicListener musicListener;
+	/** Keeps track of the max. absorption health this monster has */
+	private double maxAbsorptionHealth;
+	/** Tracks if this entity has absorption health */
+	private boolean hasAbsorption;
 	
 	public BossBarTask (BossBarNode bossBarNode, BossBarController bossBarController, MusicListener musicListener)
 	{
@@ -30,6 +34,8 @@ public class BossBarTask extends BukkitRunnable
 		this.bossBarNode.setTask(this);
 		this.bossBarController = bossBarController;
 		this.musicListener = musicListener;
+		this.maxAbsorptionHealth = 0.0;
+		this.hasAbsorption = false;
 	}
 	
 	@Override
@@ -40,12 +46,19 @@ public class BossBarTask extends BukkitRunnable
 		
 		if (entity != null && !entity.isDead())
 		{
+			this.hasAbsorption = entity.getAbsorptionAmount() > 0.0;
 			// Scales boss bar's progress to the entity's currently health + any absorption bonuses
-			double entityHealth = (entity.getHealth() + entity.getAbsorptionAmount()) /
-					(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + entity.getAbsorptionAmount());
+			double currentHealth = entity.getHealth() + entity.getAbsorptionAmount();
+			double totalHealth = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + this.maxAbsorptionHealth;
+			// If the entity has absorption and its combined health exceeds its generic max health, scale the total health with the max absorption health
+			if (this.hasAbsorption && currentHealth > totalHealth)
+			{
+				this.maxAbsorptionHealth = Math.max(this.maxAbsorptionHealth, entity.getAbsorptionAmount());
+			}
+			double entityHealth = currentHealth / totalHealth;
 			// Caps entityHealth at 1.00
 			entityHealth = (entityHealth > 1.00) ? 1.00 : entityHealth;
-			bossBar.setColor(entity.getAbsorptionAmount() > 0.0 ? BarColor.YELLOW : BarColor.RED);
+			bossBar.setColor(this.hasAbsorption ? BarColor.YELLOW : BarColor.RED);
 			bossBar.setProgress(entityHealth);
 		}
 		else
