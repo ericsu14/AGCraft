@@ -11,6 +11,7 @@ import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.drops.LootCrateDrop;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
+import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -50,6 +51,9 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		this.boots = new MrJohnsonFeet (this.color);
 		this.weapon = new PledgeDestroyer (this.color);
 		this.tippedArrow = new SnakeArrow (this.color);
+		
+		this.addFactions(Faction.MR_JOHNSON);
+		this.addRivalFactions(Faction.ALLIES, Faction.USC, Faction.UCLA);
 		
 		this.setStat(MonsterStat.HEALTH, 12.0);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);

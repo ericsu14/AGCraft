@@ -28,7 +28,7 @@ public abstract class UCLAFaction extends MobEquipment
 		super (type);
 		this.addFactions(Faction.UCLA);
 		this.addRivalFactions(Faction.USC, Faction.PHANTOM, Faction.DOOM_GUY, Faction.ALLIES,
-				Faction.CHICKEN_GANG);
+				Faction.CHICKEN_GANG, Faction.MR_JOHNSON);
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.SKELETON,
 				EntityType.PLAYER, EntityType.PHANTOM, EntityType.WITHER_SKELETON, 
 				EntityType.SPIDER, EntityType.IRON_GOLEM, EntityType.HOGLIN, EntityType.SNOWMAN,

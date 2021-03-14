@@ -19,7 +19,8 @@ public abstract class AlliedMob extends MobEquipment
 				EntityType.CAT, EntityType.FOX, EntityType.OCELOT, EntityType.BEE,
 				EntityType.OCELOT, EntityType.VILLAGER, EntityType.WANDERING_TRADER, EntityType.DOLPHIN, EntityType.LLAMA);
 		this.addFactions(Faction.ALLIES);
-		this.addRivalFactions(Faction.UCLA, Faction.DOOM_GUY, Faction.NETHER, Faction.PHANTOM);
+		this.addRivalFactions(Faction.UCLA, Faction.DOOM_GUY, Faction.NETHER, Faction.PHANTOM,
+				Faction.MR_JOHNSON);
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.PILLAGER,
 				EntityType.SPIDER, EntityType.CAVE_SPIDER, EntityType.EVOKER, EntityType.STRAY,
 				EntityType.HUSK, EntityType.BLAZE, EntityType.PIGLIN, EntityType.DROWNED,

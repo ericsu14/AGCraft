@@ -9,5 +9,6 @@ public enum Faction
 	NETHER,
 	PHANTOM,
 	ALLIES,
-	CHICKEN_GANG
+	CHICKEN_GANG,
+	MR_JOHNSON
 }
