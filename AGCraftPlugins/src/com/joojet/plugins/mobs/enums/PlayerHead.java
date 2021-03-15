@@ -22,7 +22,8 @@ public enum PlayerHead {
 	USC_TROJAN ("e70a242a64fccf528aa2610386f521b537e021ea951fd26175a7f0c94bad51db"),
 	ETERNAL_SHADOW_CLONE_JOOJETSU ("243fadf439f09f3e10d95ee0330eb6a461a6cc3c435f0b2da04af50f1adeda6c"),
 	EVIL_WITHER_SKELETON ("16ca145ba435b375f763ff53b4ce04b2a0c873e8ff547e8b14b392fde6fbfd94"),
-	MR_JOHNSON ("9a08d9aaad22dcb45476fe4ec3ed76ea58027aa9ae5b32400dbac73c5f9d3f10");
+	MR_JOHNSON ("9a08d9aaad22dcb45476fe4ec3ed76ea58027aa9ae5b32400dbac73c5f9d3f10"),
+	MR_JOHNSON_2 ("4947d5a85cf87873b1d115ae7af45739c9f85b50ac213a0db5d94f6695136bbc");
 	
 	// URL code of playerhead stored in minecraft's skin server
 	private String url;

@@ -12,7 +12,7 @@ public class MrJohnsonHead extends Equipment
 
 	public MrJohnsonHead(ChatColor color) 
 	{
-		super(EquipmentType.MR_JOHNSON_HEAD, PlayerHead.MR_JOHNSON, color);
+		super(EquipmentType.MR_JOHNSON_HEAD, PlayerHead.MR_JOHNSON_2, color);
 		this.addDefenseAttributes(3.0, 3.0, 0.10);
 		this.addUnsafeEnchantment (Enchantment.PROTECTION_ENVIRONMENTAL, 3);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
