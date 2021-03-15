@@ -28,7 +28,7 @@ public class HGUCLAArcher extends UCLAFaction
 		this.addBiomes(Biome.THE_VOID);
 
 		this.setDropRates(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-		this.setStat(MonsterStat.HEALTH, 6.0);
+		this.setStat(MonsterStat.HEALTH, 4.0);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.COMMON);
 		
 		this.color = ChatColor.AQUA;
@@ -42,7 +42,7 @@ public class HGUCLAArcher extends UCLAFaction
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		skills.add(new NerfDamageOutputSkill (0.80));
+		skills.add(new NerfDamageOutputSkill (0.70));
 		skills.add(new UCLATracerSkill ());
 	}
 

@@ -55,7 +55,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		this.addFactions(Faction.MR_JOHNSON);
 		this.addRivalFactions(Faction.ALLIES, Faction.USC, Faction.UCLA);
 		
-		this.setStat(MonsterStat.HEALTH, 12.0);
+		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
 		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 150);
@@ -68,10 +68,10 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 				MobFlag.DISABLE_PICK_UP_ITEMS);
 		
 		// Allow Mr. Johnson to drop a random piece of diamond armor / equipment upon death
-		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.20, 1, 3),
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.20, 1, 2),
 				new MonsterDrop (Material.GOLDEN_APPLE, 0.75, 1, 1),
 				new LootCrateDrop (1.00, 1, 1, Material.DIAMOND_HELMET, Material.DIAMOND_CHESTPLATE,
-						Material.DIAMOND_LEGGINGS, Material.DIAMOND_BOOTS, Material.DIAMOND_SWORD));
+						Material.DIAMOND_LEGGINGS, Material.DIAMOND_BOOTS));
 		
 		this.bossTheme = MusicType.OUTLAW;
 	}
@@ -91,7 +91,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 	@Override
 	public String getSpawnMessage() 
 	{
-		return ChatColor.GOLD + "A powerful monster spawned into the arena! Eliminate him to get" + ChatColor.AQUA + " powerful equipment!";
+		return ChatColor.YELLOW + "A powerful monster spawned into the arena! Eliminate him to get" + ChatColor.AQUA + " powerful equipment!";
 	}
 	
 }

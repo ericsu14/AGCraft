@@ -29,7 +29,7 @@ public class HGUSCArcher extends USCFaction
 		this.color = ChatColor.GOLD;
 		
 		this.setDropRates(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-		this.setStat(MonsterStat.HEALTH, 6.0);
+		this.setStat(MonsterStat.HEALTH, 4.0);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.COMMON);
 		
 		this.helmet = new USCTrojan (this.color);
@@ -42,7 +42,7 @@ public class HGUSCArcher extends USCFaction
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		skills.add(new NerfDamageOutputSkill (0.80));
+		skills.add(new NerfDamageOutputSkill (0.70));
 		skills.add(new USCTracerSkill ());
 	}
 
