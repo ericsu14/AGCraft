@@ -46,7 +46,7 @@ public class HGUCLAJock extends UCLAFaction
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		skills.add(new NerfDamageOutputSkill (0.75));
+		skills.add(new NerfDamageOutputSkill (0.85));
 		skills.add(new UCLATracerSkill ());
 	}
 
