@@ -10,6 +10,7 @@ import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.attack.EvokerFangSkill;
 import com.joojet.plugins.mobs.skills.buff.AlliedAttackBuffSkill;
 
 public class ChickenFighter extends AbstractChicken 
@@ -35,6 +36,7 @@ public class ChickenFighter extends AbstractChicken
 	{
 		super.loadCustomSkills(skills);
 		skills.add(new AlliedAttackBuffSkill (0, 60, 16, 60, 16));
+		skills.add(new EvokerFangSkill (12, 10, Integer.MAX_VALUE, 4, 8));
 	}
 
 }

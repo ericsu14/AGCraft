@@ -19,6 +19,7 @@ import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
 import com.joojet.plugins.mobs.skills.runnable.SummonEntitiesTask;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 import com.joojet.plugins.mobs.util.LocationTools;
+import com.joojet.plugins.mobs.util.WeightedList;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public abstract class AbstractSummonSkill extends AbstractSkill
@@ -26,20 +27,14 @@ public abstract class AbstractSummonSkill extends AbstractSkill
 	/** The total amount of monsters that can be summoned */
 	protected int maxSummons;
 	/** A list of custom monsters this monster can randomly summon */
-	protected List <WeightedMobSummon> summons;
-	/** Internally keeps track of the min. weight used for the next inserted summon in the summon list */
-	private int minWeight;
-	/** Internally keeps track of the max. weight of the last summono inserted in the summon list */
-	private int maxWeight;
+	protected WeightedList <WeightedMobSummon, MonsterType> summons;
 	
 	/** Creates a new instance of a summoning skill, allowing the monster to summon custom monsters at will. */
 	public AbstractSummonSkill(int range, int cooldown, int maxUses, int weight, int maxSummons) 
 	{
 		super(SkillPropetry.SUMMON, range, cooldown, maxUses, weight);
 		this.maxSummons = maxSummons;
-		this.minWeight = 0;
-		this.maxWeight = 0;
-		this.summons = new ArrayList <WeightedMobSummon> ();
+		this.summons = new WeightedList <WeightedMobSummon, MonsterType> ();
 		this.initializeSummons();
 	}
 	
@@ -76,21 +71,13 @@ public abstract class AbstractSummonSkill extends AbstractSkill
 	 *  @param weight Custom monster's spawn weight, which alters the frequency this monster is summoned with this skill. */
 	public void addSummon (MonsterType monsterType, EntityType entityType, int weight)
 	{
-		this.maxWeight = this.minWeight + weight;
-		this.summons.add(new WeightedMobSummon (monsterType, entityType, this.minWeight, maxWeight));
-		this.minWeight = maxWeight + 1;
+		this.summons.addEntry(new WeightedMobSummon (monsterType, entityType, weight));
 	}
 	
 	/** Returns the list of monsters that can be randomly summoned by this skill */
-	public List <WeightedMobSummon> getSummons ()
+	public WeightedList <WeightedMobSummon, MonsterType> getSummons ()
 	{
 		return this.summons;
-	}
-	
-	/** Returns the max spawn weight for all loaded summons in the summon list */
-	public int getMaxSpawnWeight ()
-	{
-		return this.maxWeight;
 	}
 	
 	/** Overrides the existing canUseSkill function to also account for checking if the caster is a skill-summoned entity or not */

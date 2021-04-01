@@ -4,8 +4,9 @@ import com.joojet.plugins.mobs.util.WeightedEntry;
 
 public class WeightedMobSkill extends WeightedEntry<AbstractSkill> 
 {
-	public WeightedMobSkill(AbstractSkill entry, int minWeight, int maxWeight) 
+	public WeightedMobSkill(AbstractSkill entry, int weight)
 	{
-		super(entry, minWeight, maxWeight);
+		super (entry, weight);
 	}
+	
 }

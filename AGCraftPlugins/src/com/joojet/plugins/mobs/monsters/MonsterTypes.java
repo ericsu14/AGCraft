@@ -11,7 +11,7 @@ import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
-import com.joojet.plugins.mobs.util.WeightedEntry;
+import com.joojet.plugins.mobs.util.WeightedList;
 
 public abstract class MonsterTypes 
 {
@@ -63,10 +63,9 @@ public abstract class MonsterTypes
 	 * 		@param biome - The biome the monster spawns in */
 	public MobEquipment getRandomEquipment (Biome biome, MobSkillRunner mobSkillRunner)
 	{
-		int minWeight = 0;
-		int maxWeight = 0;
 		EnumSet <Biome> spawnBiomes;
-		ArrayList <WeightedMob> mobList = new ArrayList <WeightedMob> ();
+		// ArrayList <WeightedMob> mobList = new ArrayList <WeightedMob> ();
+		WeightedList <WeightedMob, MobEquipment> mobList = new WeightedList <WeightedMob, MobEquipment> ();
 		
 		for (MobEquipment mob : equipmentList)
 		{
@@ -76,17 +75,14 @@ public abstract class MonsterTypes
 			if ((spawnBiomes.contains(Biome.THE_VOID) || spawnBiomes.contains(biome))
 					&& !mobSkillRunner.reachedSpawnLimit(mob))
 			{
-				maxWeight = (minWeight + mob.getSpawnWeight()) - 1;
-				mobList.add(new WeightedMob (mob, minWeight, maxWeight));
-				minWeight = maxWeight + 1;
+				mobList.addEntry(new WeightedMob (mob, mob.getSpawnWeight()));
 			}
 		}
 		
 		// Binary searches the list with a random number and returns a random mob
 		if (!mobList.isEmpty())
 		{
-			int roll = this.random.nextInt (minWeight);
-			return WeightedEntry.searchWeightedList(roll, mobList);
+			return mobList.getRandomEntry();
 		}
 		return null;
 	}

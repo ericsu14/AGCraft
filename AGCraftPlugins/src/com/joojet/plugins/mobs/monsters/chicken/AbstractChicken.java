@@ -31,7 +31,7 @@ public abstract class AbstractChicken extends MobEquipment implements NMSSkillUs
 	{
 		super(mobType);
 		this.addFactions(Faction.CHICKEN_GANG);
-		this.addRivalFactions(Faction.NETHER, Faction.DOOM_GUY, Faction.UCLA, Faction.PHANTOM);
+		this.addRivalFactions(Faction.NETHER, Faction.DOOM_GUY, Faction.UCLA, Faction.PHANTOM, Faction.MR_JOHNSON);
 		this.addBiomes(Biome.THE_VOID);
 		
 		// Allows the chicken to hunt down any hostile mob

@@ -60,7 +60,8 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 		
 		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.BUILD_IRONGOLEM,
 				SpawnReason.BUILD_SNOWMAN, SpawnReason.VILLAGE_DEFENSE, SpawnReason.BREEDING,
-				SpawnReason.EGG, SpawnReason.DISPENSE_EGG, SpawnReason.JOCKEY);
+				SpawnReason.EGG, SpawnReason.DISPENSE_EGG, SpawnReason.JOCKEY,
+				SpawnReason.TRAP);
 	}
 	
 	@Override

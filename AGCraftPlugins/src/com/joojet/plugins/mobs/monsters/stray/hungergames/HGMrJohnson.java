@@ -9,8 +9,9 @@ import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
-import com.joojet.plugins.mobs.drops.LootCrateDrop;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
+import com.joojet.plugins.mobs.drops.WeightedDrop;
+import com.joojet.plugins.mobs.drops.WeightedLootCrateDrop;
 import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
@@ -53,7 +54,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		this.tippedArrow = new SnakeArrow (this.color);
 		
 		this.addFactions(Faction.MR_JOHNSON);
-		this.addRivalFactions(Faction.ALLIES, Faction.USC, Faction.UCLA);
+		this.addRivalFactions(Faction.ALLIES, Faction.USC, Faction.UCLA, Faction.CHICKEN_GANG);
 		
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
@@ -68,10 +69,15 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 				MobFlag.DISABLE_PICK_UP_ITEMS);
 		
 		// Allow Mr. Johnson to drop a random piece of diamond armor / equipment upon death
-		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.20, 1, 2),
-				new MonsterDrop (Material.GOLDEN_APPLE, 0.75, 1, 1),
-				new LootCrateDrop (1.00, 1, 1, Material.DIAMOND_HELMET, Material.DIAMOND_CHESTPLATE,
-						Material.DIAMOND_LEGGINGS, Material.DIAMOND_BOOTS));
+		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.50, 1, 1),
+				new MonsterDrop (Material.GOLDEN_APPLE, 1.00, 1, 1),
+				new WeightedLootCrateDrop (
+						1.00, 1, 1, 
+						new WeightedDrop (Material.DIAMOND_HELMET, 40), 
+						new WeightedDrop (Material.DIAMOND_CHESTPLATE, 10),
+						new WeightedDrop (Material.DIAMOND_LEGGINGS, 20), 
+						new WeightedDrop (Material.DIAMOND_BOOTS, 30))
+				);
 		
 		this.bossTheme = MusicType.OUTLAW;
 	}

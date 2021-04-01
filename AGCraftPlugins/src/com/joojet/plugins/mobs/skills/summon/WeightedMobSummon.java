@@ -10,9 +10,9 @@ public class WeightedMobSummon extends WeightedEntry<MonsterType>
 	/** Stores the type of LivingEntity this summon should be spawned as */
 	protected EntityType entityType;
 	
-	public WeightedMobSummon(MonsterType entry, EntityType entityType, int minWeight, int maxWeight) 
+	public WeightedMobSummon (MonsterType entry, EntityType entityType, int weight)
 	{
-		super(entry, minWeight, maxWeight);
+		super (entry, weight);
 		this.entityType = entityType;
 	}
 	

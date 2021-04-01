@@ -16,7 +16,7 @@ import com.joojet.plugins.mobs.skills.passive.CriticalShotSkill;
 import com.joojet.plugins.mobs.skills.passive.NoOpSkill;
 import com.joojet.plugins.mobs.skills.passive.PiercingBlowSkill;
 import com.joojet.plugins.mobs.skills.passive.TippedArrowSkill;
-import com.joojet.plugins.mobs.util.WeightedEntry;
+import com.joojet.plugins.mobs.util.WeightedList;
 
 public class MobSkillTask
 {
@@ -76,25 +76,20 @@ public class MobSkillTask
 	 *  This also updates the cooldown timer for all of the monster's skills. */
 	protected AbstractSkill getRandomSkill ()
 	{
-		int minWeight = 0;
-		int maxWeight = 0;
-		ArrayList <WeightedMobSkill> skillList = new ArrayList <WeightedMobSkill> ();
+		WeightedList <WeightedMobSkill, AbstractSkill> skillList = new WeightedList <WeightedMobSkill, AbstractSkill> ();
 		
 		for (AbstractSkill skill : this.mobSkills)
 		{
 			if (skill.canUseSkill(this.caster))
 			{
-				maxWeight = (minWeight + skill.getWeight()) - 1;
-				skillList.add(new WeightedMobSkill (skill, minWeight, maxWeight));
-				minWeight = maxWeight + 1;
+				skillList.addEntry(new WeightedMobSkill (skill, skill.getWeight()));
 			}
 			skill.update(this.caster);
 		}
 		
 		if (!skillList.isEmpty())
 		{
-			int roll = this.rand.nextInt(minWeight);
-			return WeightedEntry.searchWeightedList(roll, skillList);
+			return skillList.getRandomEntry();
 		}
 		return null;
 	}

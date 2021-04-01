@@ -7,7 +7,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 /** A special monster drop that drops a random item
- *  from a set of given materials */
+ *  from a set of given materials. 
+ *  All drops have an equally random chance of dropping. */
 public class LootCrateDrop extends MonsterDrop 
 {
 	protected List <Material> possibleDrops;

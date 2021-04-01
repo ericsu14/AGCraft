@@ -10,12 +10,25 @@ public abstract class WeightedEntry <E>
 	protected int minWeight;
 	/** Max range */
 	protected int maxWeight;
+	/** Weight assigned to the entry */
+	protected int weight;
 	
+	public WeightedEntry (E entry, int weight)
+	{
+		this.entry = entry;
+		this.minWeight = 0;
+		this.maxWeight = 0;
+		this.weight = weight;
+	}
+	
+	/** Constructs a weighted entry between the set min and max weights.
+	 *  @deprecated Use the new weightedlist to automatically perform min-max weight management. */
 	public WeightedEntry (E entry, int minWeight, int maxWeight)
 	{
 		this.entry = entry;
 		this.minWeight = minWeight;
 		this.maxWeight = maxWeight;
+		this.weight = this.maxWeight - this.minWeight;
 	}
 	
 	/** Returns true if the random roll is within the min and max ranges for this entry */
@@ -40,6 +53,21 @@ public abstract class WeightedEntry <E>
 	public int getMaxWeight ()
 	{
 		return this.maxWeight;
+	}
+	
+	/** Returns the weight assigned to this entry */
+	public int getWeight ()
+	{
+		return this.weight;
+	}
+	
+	/** Sets the min and max weights for this entry to its new values
+	 *  @param minWeight Weight's new min range
+	 *  @param maxWeight Weight's new max range */
+	public void setWeightRanges (int minWeight, int maxWeight)
+	{
+		this.minWeight = minWeight;
+		this.maxWeight = maxWeight;
 	}
 	
 	/** Conducts binary search upon the weighted entry list searching for the entry whose weight range

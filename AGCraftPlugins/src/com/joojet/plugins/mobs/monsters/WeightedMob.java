@@ -4,9 +4,9 @@ import com.joojet.plugins.mobs.util.WeightedEntry;
 
 public class WeightedMob extends WeightedEntry <MobEquipment>
 {
-	public WeightedMob (MobEquipment equipment, int min, int max)
+	public WeightedMob (MobEquipment equipment, int weight)
 	{
-		super (equipment, min, max);
+		super (equipment, weight);
 	}
 }
 
