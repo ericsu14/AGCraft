@@ -73,10 +73,10 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 				new MonsterDrop (Material.GOLDEN_APPLE, 1.00, 1, 1),
 				new WeightedLootCrateDrop (
 						1.00, 1, 1, 
-						new WeightedDrop (Material.DIAMOND_HELMET, 40), 
-						new WeightedDrop (Material.DIAMOND_CHESTPLATE, 10),
-						new WeightedDrop (Material.DIAMOND_LEGGINGS, 20), 
-						new WeightedDrop (Material.DIAMOND_BOOTS, 30))
+						new WeightedDrop (Material.DIAMOND_HELMET, 35), 
+						new WeightedDrop (Material.DIAMOND_CHESTPLATE, 15),
+						new WeightedDrop (Material.DIAMOND_LEGGINGS, 15), 
+						new WeightedDrop (Material.DIAMOND_BOOTS, 35))
 				);
 		
 		this.bossTheme = MusicType.OUTLAW;

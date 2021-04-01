@@ -2,6 +2,7 @@ package com.joojet.plugins.mobs.skills.passive;
 
 import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -26,6 +27,11 @@ public class MrJohnsonAuraSkill extends AbstractPassiveSkill implements PassiveA
 	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
 			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
+		// Prevents thunder damage from hurting Mr. Johnson
+		if (source.getType() == EntityType.LIGHTNING)
+		{
+			return Double.MIN_VALUE;
+		}
 		return 0;
 	}
 
