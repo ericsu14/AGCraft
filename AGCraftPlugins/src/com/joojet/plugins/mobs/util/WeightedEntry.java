@@ -1,7 +1,5 @@
 package com.joojet.plugins.mobs.util;
 
-import java.util.List;
-
 public abstract class WeightedEntry <E> 
 {
 	/** The stored entry */
@@ -68,53 +66,5 @@ public abstract class WeightedEntry <E>
 	{
 		this.minWeight = minWeight;
 		this.maxWeight = maxWeight;
-	}
-	
-	/** Conducts binary search upon the weighted entry list searching for the entry whose weight range
-	 *  satisfies the random number
-	 *  	@param roll - Random number
-	 *  	@param entryList - A list of weighted entries */
-	public static <T> T searchWeightedList (int roll, List <? extends WeightedEntry<T>> entryList)
-	{
-		WeightedEntry<T> entry = searchWeightedListForWeightedEntry (roll, entryList);
-		return entry != null ? entry.getEntry() : null;
-	}
-	
-	/** Conducts binary search upon the weighted entry list searching for a weighted entry whose weight range
-	 *  satisfies the random number
-	 *  	@param roll - Random number
-	 *  	@param entryList - A list of weighted entries */
-	public static <T> WeightedEntry<T> searchWeightedListForWeightedEntry (int roll, List <? extends WeightedEntry<T>> entryList)
-	{
-		int n = entryList.size();
-		int left = 0;
-		int right = n - 1;
-		int pivot;
-		WeightedEntry<T> curr;
-		
-		while (left <= right)
-		{
-			pivot = (int) Math.floor ((left + right) / 2);
-			curr = entryList.get(pivot);
-			
-			// If the target value is in range between the pivot's weights, return the weighted entry
-			if (curr.inRange(roll))
-			{
-				return curr;
-			}
-			// Search right if the roll exceeds the current entry's max weight
-			else if (roll > curr.getMaxWeight())
-			{
-				left = pivot + 1;
-			}
-			// Otherwise, search left
-			else
-			{
-				right = pivot - 1;
-			}
-		}
-		
-		// Return null if the mob is not found
-		return null;
 	}
 }

@@ -55,6 +55,12 @@ public class WeightedList <T extends WeightedEntry <E>, E>
 		return this.entries.isEmpty();
 	}
 	
+	/** Selects a random entry in the weighted list using binary search */
+	public E getRandomEntry ()
+	{
+		return this.getEntry(this.rand.nextInt(this.minWeight));
+	}
+	
 	/** Selects a random weighted entry in the weighted list using binary search */
 	public WeightedEntry <E> getRandomWeightedEntry ()
 	{
@@ -62,20 +68,44 @@ public class WeightedList <T extends WeightedEntry <E>, E>
 	}
 	
 	/** Selects a random weighted entry in the weighted list based on a random roll using binary search */
-	public WeightedEntry <E> getWeightedEntry (int roll)
+	public E getEntry (int roll)
 	{
-		return WeightedEntry.searchWeightedListForWeightedEntry (roll, this.entries);
-	}
-	
-	/** Selects a random entry in the weighted list using binary search */
-	public E getRandomEntry ()
-	{
-		return this.getEntry(this.rand.nextInt(this.minWeight));
+		return this.getWeightedEntry(roll).getEntry();
 	}
 	
 	/** Selects a random weighted entry in the weighted list based on a random roll using binary search */
-	public E getEntry (int roll)
+	public WeightedEntry <E> getWeightedEntry (int roll)
 	{
-		return WeightedEntry.searchWeightedList(roll, this.entries);
+		int n = this.entries.size();
+		int left = 0;
+		int right = n - 1;
+		int pivot;
+		WeightedEntry<E> curr;
+		
+		while (left <= right)
+		{
+			pivot = (int) Math.floor ((left + right) / 2);
+			curr = this.entries.get(pivot);
+			
+			// If the target value is in range between the pivot's weights, return the weighted entry
+			if (curr.inRange(roll))
+			{
+				return curr;
+			}
+			// Search right if the roll exceeds the current entry's max weight
+			else if (roll > curr.getMaxWeight())
+			{
+				left = pivot + 1;
+			}
+			// Otherwise, search left
+			else
+			{
+				right = pivot - 1;
+			}
+		}
+		
+		// Return null if the mob is not found
+		return null;
 	}
+
 }
