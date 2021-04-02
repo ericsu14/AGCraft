@@ -32,6 +32,7 @@ import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
+import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveEnvironmental;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillTask;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
@@ -181,6 +182,55 @@ public class CustomSkillsListener extends AGListener
 				}
 			}
 		}
+	}
+	
+	/** Handles environmental damage modifiers */
+	@EventHandler (priority = EventPriority.NORMAL)
+	public void modifyEntityEnvironmentalDamageEvent (EntityDamageEvent event)
+	{
+		if (event.getEntity() == null)
+		{
+			return;
+		}
+		
+		LivingEntity target = this.getLivingEntity(event.getEntity());
+		
+		if (target == null)
+		{
+			return;
+		}
+		
+		MobEquipment targetEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(target);
+		
+		double totalBonusDamage = 0.0;
+		double currDamage = 0.0;
+		if (targetEquipment != null && this.mobSkillRunner.containsSkill(target))
+		{
+			for (AbstractSkill skill : this.mobSkillRunner.getSkillTask(target.getUniqueId()).getSkillList())
+			{
+				if (skill instanceof PassiveEnvironmental)
+				{
+					currDamage = ((PassiveEnvironmental) skill).modifyIncomingEnvironmentalDamageEvent(event.getDamage(), event.getCause(), target, targetEquipment);
+					if (currDamage == Double.MIN_VALUE)
+					{
+						event.setCancelled(true);
+						break;
+					}
+					totalBonusDamage += currDamage;
+				}
+			}
+		}
+		
+		// Cancels damage event and clears the damager's current target if canceled.
+		if (event.isCancelled())
+		{
+			if (target instanceof Mob)
+			{
+				((Mob) target).setTarget(null);
+			}
+			return;
+		}
+		event.setDamage(event.getDamage() + totalBonusDamage);
 	}
 	
 	/** Applies passive attack skills to any captured entity damage by entity events,

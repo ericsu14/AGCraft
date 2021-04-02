@@ -2,14 +2,15 @@ package com.joojet.plugins.mobs.skills.passive;
 
 import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
+import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveEnvironmental;
 import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 
-public class MrJohnsonAuraSkill extends AbstractPassiveSkill implements PassiveAttack
+public class MrJohnsonAuraSkill extends AbstractPassiveSkill implements PassiveAttack, PassiveEnvironmental
 {
 
 	/** Adds Mr. Johnson themed particles on all of his attacks */
@@ -27,12 +28,18 @@ public class MrJohnsonAuraSkill extends AbstractPassiveSkill implements PassiveA
 	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
 			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
-		// Prevents thunder damage from hurting Mr. Johnson
-		if (source.getType() == EntityType.LIGHTNING)
+		return 0.0;
+	}
+
+	@Override
+	public double modifyIncomingEnvironmentalDamageEvent(double damage, DamageCause damageReason, LivingEntity target,
+			MobEquipment targetEquipment) 
+	{
+		if (damageReason == DamageCause.LIGHTNING)
 		{
 			return Double.MIN_VALUE;
 		}
-		return 0;
+		return 0.0;
 	}
 
 }

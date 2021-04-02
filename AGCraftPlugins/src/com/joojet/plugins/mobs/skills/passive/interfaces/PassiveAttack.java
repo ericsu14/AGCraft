@@ -17,8 +17,8 @@ public interface PassiveAttack
 	 *  @param damager The LivingEntity that caused the damage event
 	 *  @param target The LivingEntity that is victim of the damage event
 	 *  @param damagerEquipment The MobEquipment class belonging to the damager
-	 *  @param targetEquiopment The MobEquipment class belonging to the target
-	 *  @return Bonus damage dealt to the target (not incliding the original damage). If Double.MIN_VALUE is returned, the damage event will be canceled. */
+	 *  @param targetEquipment The MobEquipment class belonging to the target
+	 *  @return Bonus damage dealt to the target (not including the original damage). If Double.MIN_VALUE is returned, the damage event will be canceled. */
 	public double modifyOutgoingDamageEvent (double damage, Entity source, LivingEntity damager, LivingEntity target, MobEquipment damagerEquipment,
 			MobEquipment targetEquipment);
 	
@@ -30,7 +30,7 @@ public interface PassiveAttack
 	 *  @param target The LivingEntity that is victim of the damage event
 	 *  @param damagerEquipment The MobEquipment class belonging to the damager
 	 *  @param targetEquipment The MobEquipment class belonging to the target
-	 *  @return Bonus damage taken by the target (not incliding the original damage)*/
+	 *  @return Bonus damage taken by the target (not including the original damage)*/
 	public double modifyIncomingDamageEvent (double damage, Entity source, LivingEntity damager, LivingEntity target, MobEquipment damagerEquipment, 
 			MobEquipment targetEquipment);
 }
