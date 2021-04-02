@@ -279,7 +279,10 @@ public class CustomSkillsListener extends AGListener
 		for (Entity entity : surroundingEntities)
 		{
 			isAlly = false;
-			if (!(entity instanceof LivingEntity) || entity.getType() == EntityType.ARMOR_STAND)
+			if (!(entity instanceof LivingEntity) || 
+					entity.getType() == EntityType.ARMOR_STAND ||
+					entity.getType() == EntityType.ITEM_FRAME ||
+					entity.getType() == EntityType.DROPPED_ITEM)
 			{
 				continue;
 			}
