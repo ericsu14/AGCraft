@@ -42,7 +42,7 @@ public class HGUCLAArcher extends UCLAFaction
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		skills.add(new NerfDamageOutputSkill (0.70));
+		skills.add(new NerfDamageOutputSkill (0.60));
 		skills.add(new UCLATracerSkill ());
 	}
 

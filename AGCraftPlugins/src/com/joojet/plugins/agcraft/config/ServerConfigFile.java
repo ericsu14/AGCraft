@@ -5,7 +5,9 @@ import java.util.HashMap;
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.commands.SummonEntity;
+import com.joojet.plugins.mobs.enums.DamageDisplayMode;
 import com.joojet.plugins.mobs.enums.ThemedServerEvent;
+import com.joojet.plugins.mobs.interpreter.DamageDisplayModeInterpreter;
 import com.joojet.plugins.mobs.spawnhandlers.AmplifiedMobHandler;
 import com.joojet.plugins.mobs.spawnhandlers.BeatTheBruinsHandler;
 import com.joojet.plugins.mobs.spawnhandlers.HungerGamesHandler;
@@ -51,6 +53,7 @@ public class ServerConfigFile extends AbstractConfigFile
 		data.put(SummonEntity.MAX_SUMMONED_ENTITIES_TAG, 10);
 		data.put(FairSpawnController.CUSTOM_MOB_SCAN_RADIUS, 128);
 		data.put(HungerGamesHandler.HUNGER_GAMES_SPAWN_HANDLER_KEY, 1.00);
+		data.put(DamageDisplayModeInterpreter.DAMAGE_DISPLAY_MODE_KEY, DamageDisplayMode.AUTO.toString());
 		return data;
 	}
 	

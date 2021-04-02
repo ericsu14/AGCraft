@@ -26,8 +26,10 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.damage.DamageDisplayManager;
 import com.joojet.plugins.mobs.damage.enums.DamageType;
+import com.joojet.plugins.mobs.enums.DamageDisplayMode;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.interpreter.DamageDisplayModeInterpreter;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -41,6 +43,10 @@ public class DamageDisplayListener extends AGListener
 	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	/** A reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
+	/** Interpreter for damage display mode */
+	protected DamageDisplayModeInterpreter damageDisplayModeInterpreter;
+	/** Damage display mode */
+	protected DamageDisplayMode damageDisplayMode;
 	
 	public DamageDisplayListener (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
@@ -48,6 +54,7 @@ public class DamageDisplayListener extends AGListener
 		this.bossBarController = bossBarController;
 		this.damageDisplayManager = new DamageDisplayManager (this.bossBarController);
 		this.allowedRegainReasons = EnumSet.of(RegainReason.CUSTOM, RegainReason.MAGIC, RegainReason.MAGIC_REGEN);
+		this.damageDisplayModeInterpreter = new DamageDisplayModeInterpreter ();
 	}
 	
 	@Override
@@ -75,7 +82,7 @@ public class DamageDisplayListener extends AGListener
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onEntityDamageByEntityEvent (EntityDamageByEntityEvent event)
 	{
-		if (AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL
+		if (!this.checkDamageDisplayModuleIsEnabled()
 				|| !(event.getEntity() instanceof LivingEntity)
 				|| event.isCancelled())
 		{
@@ -152,7 +159,7 @@ public class DamageDisplayListener extends AGListener
 		Entity eventEntity = event.getEntity();
 		if (event instanceof EntityDamageByEntityEvent || eventEntity == null || event.getFinalDamage() < 0.0
 				|| !(eventEntity instanceof LivingEntity)
-				|| AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL)
+				|| !this.checkDamageDisplayModuleIsEnabled())
 		{
 			return;
 		}
@@ -196,7 +203,7 @@ public class DamageDisplayListener extends AGListener
 	public void onEntityHealEvent (EntityRegainHealthEvent event)
 	{
 		// Do not run if the amount is negative or the server mode is running in Minigame mode (as this might give people's positions away in UHC)
-		if (event.getAmount() < 0.0 || AGCraftPlugin.plugin.serverMode != ServerMode.NORMAL ||
+		if (event.getAmount() < 0.0 || !this.checkDamageDisplayModuleIsEnabled() ||
 				!this.allowedRegainReasons.contains(event.getRegainReason()))
 		{
 			return;
@@ -238,6 +245,21 @@ public class DamageDisplayListener extends AGListener
 	public void onChunkUnload (ChunkUnloadEvent chunkUnloadEvent)
 	{
 		this.removeDamageDisplayEntities(chunkUnloadEvent.getChunk().getEntities());
+	}
+	
+	/** Returns true if the damage display module is enabled */
+	public boolean checkDamageDisplayModuleIsEnabled ()
+	{
+		switch (this.damageDisplayMode)
+		{
+			case ENABLED:
+				return true;
+			case AUTO:
+				return AGCraftPlugin.plugin.serverMode == ServerMode.NORMAL;
+			default:
+				break;
+		}
+		return false;
 	}
 	
 	/** Takes in a Bukkit DamageCause enum and converts it into its
@@ -314,6 +336,7 @@ public class DamageDisplayListener extends AGListener
 	@Override
 	public void loadConfigVariables(ServerConfigFile config) 
 	{
-		
+		this.damageDisplayMode = config.searchElementFromInterpreter(this.damageDisplayModeInterpreter, DamageDisplayModeInterpreter.DAMAGE_DISPLAY_MODE_KEY, 
+				DamageDisplayMode.AUTO);
 	}
 }
