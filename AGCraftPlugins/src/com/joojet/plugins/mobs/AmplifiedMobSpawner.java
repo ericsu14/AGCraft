@@ -3,7 +3,6 @@ package com.joojet.plugins.mobs;
 import java.util.ArrayList;
 
 import org.bukkit.Material;
-import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Skull;
@@ -18,7 +17,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.ItemStack;
@@ -43,11 +41,7 @@ import com.joojet.plugins.mobs.metadata.EquipmentTypeMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
-import com.joojet.plugins.mobs.spawnhandlers.AmplifiedMobHandler;
-import com.joojet.plugins.mobs.spawnhandlers.BeatTheBruinsHandler;
-import com.joojet.plugins.mobs.spawnhandlers.HungerGamesHandler;
-import com.joojet.plugins.mobs.spawnhandlers.JulyFourthHandler;
-import com.joojet.plugins.mobs.spawnhandlers.UHCHandler;
+import com.joojet.plugins.mobs.spawnhandlers.SpawnController;
 
 public class AmplifiedMobSpawner extends AGListener 
 {			
@@ -66,13 +60,8 @@ public class AmplifiedMobSpawner extends AGListener
 	/** Contains an internal search trie allowing custom equipment to be able to be looked up by its
 	 *  Equipment Type identifier. */
 	public EquipmentLoader equipmentLoader;
-	
-	/** A list of spawn handlers for custom events */
-	private JulyFourthHandler julyFourthHandler;
-	private UHCHandler uhcHandler;
-	private AmplifiedMobHandler amplifiedMobHandler;
-	private BeatTheBruinsHandler bruinHandler;
-	private HungerGamesHandler hgHandler;
+	/** Contains all spawn handler instances for custom monster creation */
+	protected SpawnController spawnController;
 	
 	/** A reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
@@ -88,11 +77,7 @@ public class AmplifiedMobSpawner extends AGListener
 		this.bossBarController = bossBarController;
 		this.summonTypeInterpreter = summonTypeInterpreter;
 		this.mobSkillRunner = mobSkillRunner;
-		this.julyFourthHandler = new JulyFourthHandler (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController, this.mobSkillRunner);
-		this.amplifiedMobHandler = new AmplifiedMobHandler(this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController, this.mobSkillRunner);
-		this.bruinHandler = new BeatTheBruinsHandler (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController, this.mobSkillRunner);
-		this.uhcHandler = new UHCHandler(this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController, this.mobSkillRunner);
-		this.hgHandler = new HungerGamesHandler (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController, this.mobSkillRunner);
+		this.spawnController = new SpawnController (this, this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController, this.mobSkillRunner);
 	}
 	
 	@Override
@@ -100,6 +85,7 @@ public class AmplifiedMobSpawner extends AGListener
 	{
 		this.equipmentLoader = new EquipmentLoader();
 		this.serverEventInterpreter = new ThemedServerEventInterpreter();
+		this.spawnController.loadSpawnHandlers();
 		
 		// Inserts a dummy damage display entity into the monster type interpreter so it can be referenced
 		DamageDisplayEntity ent = new DamageDisplayEntity ("PLACEHOLDER");
@@ -111,42 +97,7 @@ public class AmplifiedMobSpawner extends AGListener
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onEntitySpawn (CreatureSpawnEvent event)
 	{
-		
-		EntityType type = event.getEntityType();
-		SpawnReason reason = event.getSpawnReason();
-		LivingEntity entity = event.getEntity();
-		Biome biome = entity.getLocation().getBlock().getBiome();
-		
-		// Handles Server Mode mob spawns
-		switch (AGCraftPlugin.plugin.serverMode)
-		{
-			case UHC:
-				this.uhcHandler.createSpawnEventHandlerTask(entity, type, reason, biome);
-				return;
-			case MINIGAME:
-				return;
-			case HUNGER_GAMES:
-				this.hgHandler.createSpawnEventHandlerTask(entity, type, reason, biome);
-				return;
-			default:
-				break;
-		}
-		
-		// Handles server wide event mob spawns
-		switch (this.serverEventMode)
-		{
-			case JULY_FOURTH:
-				this.julyFourthHandler.createSpawnEventHandlerTask(entity, type, reason, biome);
-				break;
-			case BEAT_THE_BRUINS:
-				this.bruinHandler.createSpawnEventHandlerTask(entity, type, reason, biome);
-				break;
-			default:
-				break;
-		}
-		
-		// Handles normal spawn events
-		this.amplifiedMobHandler.createSpawnEventHandlerTask(entity, type, reason, biome);
+		this.spawnController.handleSpawnEvent(event);
 	}
 	
 	/** Modifies entity experience drops on entity death events */
@@ -283,6 +234,12 @@ public class AmplifiedMobSpawner extends AGListener
 			}
 		}
 	}
+	
+	/** Returns the current themed server event mode */
+	public ThemedServerEvent getThemedServerEvent ()
+	{
+		return this.serverEventMode;
+	}
 
 	@Override
 	public void loadConfigVariables(ServerConfigFile config) 
@@ -290,16 +247,12 @@ public class AmplifiedMobSpawner extends AGListener
 		// Themed server event mode
 		this.serverEventMode = config.searchElementFromInterpreter(this.serverEventInterpreter,
 				ThemedServerEvent.getKey(), ThemedServerEvent.DEFAULT);
-		this.amplifiedMobHandler.getSpawnChanceFromConfigFile(config);
-		this.julyFourthHandler.getSpawnChanceFromConfigFile(config);
-		this.bruinHandler.getSpawnChanceFromConfigFile(config);
-		this.uhcHandler.getSpawnChanceFromConfigFile(config);
-		this.hgHandler.getSpawnChanceFromConfigFile(config);
+		this.spawnController.loadSpawnChances(config);
 	}
 
 	@Override
-	public void onDisable() {
-		// TODO Auto-generated method stub
+	public void onDisable() 
+	{
 		
 	}
 	
