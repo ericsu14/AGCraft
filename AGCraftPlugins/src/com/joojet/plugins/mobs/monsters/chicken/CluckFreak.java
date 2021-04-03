@@ -9,6 +9,7 @@ import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.attack.EvokerFangSkill;
 import com.joojet.plugins.mobs.skills.buff.AlliedResistanceBuffSkill;
 
 public class CluckFreak extends AbstractChicken
@@ -33,5 +34,6 @@ public class CluckFreak extends AbstractChicken
 	{
 		super.loadCustomSkills(skills);
 		skills.add(new AlliedResistanceBuffSkill (0, 60, 16, 60, 16));
+		skills.add(new EvokerFangSkill (12, 10, Integer.MAX_VALUE, 4, 8));
 	}
 }

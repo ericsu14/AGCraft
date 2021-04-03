@@ -16,6 +16,7 @@ import com.joojet.plugins.mobs.monsters.factions.classifications.LegendaryMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
+import com.joojet.plugins.mobs.skills.summon.SummonPiglinArmySkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class PiglinCaptain extends LegendaryMob 
@@ -48,5 +49,6 @@ public class PiglinCaptain extends LegendaryMob
 	public void loadCustomSkills(List<AbstractSkill> skills) {
 		skills.add(new AttackBuffSkill(1, 60, 20, 60, 8));
 		skills.add(new ResistanceBuffSkill (1, 60, 20, 60, 8));
+		skills.add(new SummonPiglinArmySkill (12, Integer.MAX_VALUE, 1, 8, 4));
 	}
 }
