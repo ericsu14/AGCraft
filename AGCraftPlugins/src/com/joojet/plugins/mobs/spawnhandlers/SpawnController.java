@@ -87,10 +87,12 @@ public class SpawnController
 		ServerMode mode = AGCraftPlugin.plugin.serverMode;
 		
 		// Handle server mode specific spawn events
-		if (mode != ServerMode.NORMAL && 
-				this.serverModeSpawnHandlers.containsKey(mode))
+		if (mode != ServerMode.NORMAL)
 		{
-			this.serverModeSpawnHandlers.get(mode).handleSpawnEvent(entity, type, reason, biome);
+			if (this.serverModeSpawnHandlers.containsKey(mode))
+			{
+				this.serverModeSpawnHandlers.get(mode).handleSpawnEvent(entity, type, reason, biome);
+			}
 		}
 		// Otherwise, handle normal server-based spawn events
 		else
@@ -108,6 +110,7 @@ public class SpawnController
 		}
 	}
 	
+	/** Loads spawn chances for each unique spawn handler from the server config. file */
 	public void loadSpawnChances (ServerConfigFile config)
 	{
 		for (AbstractSpawnHandler handler : this.serverModeSpawnHandlers.values())
