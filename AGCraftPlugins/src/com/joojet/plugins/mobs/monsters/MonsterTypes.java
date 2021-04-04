@@ -1,7 +1,9 @@
 package com.joojet.plugins.mobs.monsters;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.block.Biome;
@@ -13,12 +15,12 @@ import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 import com.joojet.plugins.mobs.util.WeightedList;
 
-public abstract class MonsterTypes 
+public abstract class MonsterTypes implements Cloneable
 {
 	/** Stores a list of monsters the Mob Equipment tied to this class can equip */
-	protected ArrayList <EntityType> supportedEntities;
+	protected List <EntityType> supportedEntities;
 	/** Stores custom mob equipment tied under this class */
-	protected ArrayList <MobEquipment> equipmentList;
+	protected List <MobEquipment> equipmentList;
 	/** RNG used for selecting a random monster when getRandomEquipment is called */
 	protected Random random;
 	/** Total number of custom mob equipment tied to this class */
@@ -87,6 +89,18 @@ public abstract class MonsterTypes
 		return null;
 	}
 	
+	/** Returns a clone of this MonsterType instance */
+	@Override
+	public MonsterTypes clone () throws CloneNotSupportedException
+	{
+		MonsterTypes copy = (MonsterTypes) super.clone();
+		copy = new MonsterTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter, 
+				Arrays.copyOf(this.supportedEntities.toArray(), this.supportedEntities.size(), EntityType[].class)) {};
+		copy.mergeMonsterTypes(this);
+		return copy;
+	}
+	
+	
 	/** Returns the total number of custom monsters appended to this list */
 	public int getSize ()
 	{
@@ -94,8 +108,22 @@ public abstract class MonsterTypes
 	}
 	
 	/** Returns the entities in which the mob equipment tied to this class can equip */
-	public ArrayList <EntityType> getSupportedEntities ()
+	public List <EntityType> getSupportedEntities ()
 	{
 		return this.supportedEntities;
+	}
+	
+	/** Returns the internal mob equipment list */
+	public List <MobEquipment> getMobEquipmentList ()
+	{
+		return this.equipmentList;
+	}
+	
+	/** Merges the MobEquipment list of another MonsterType instance into this instance's MobEquipment list
+	 *  @param mobTypes The MonsterType instance to be merged */
+	public void mergeMonsterTypes (MonsterTypes mobTypes)
+	{
+		this.equipmentList.addAll (mobTypes.getMobEquipmentList());
+		size += mobTypes.getSize();
 	}
 }

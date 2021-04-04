@@ -12,7 +12,7 @@ public class HGSkeletonTypes extends MonsterTypes
 	public HGSkeletonTypes(MonsterTypeInterpreter monsterTypeInterpreter,
 			SummoningScrollInterpreter summonTypeInterpreter) 
 	{
-		super(monsterTypeInterpreter, summonTypeInterpreter, EntityType.SKELETON);
+		super(monsterTypeInterpreter, summonTypeInterpreter, EntityType.SKELETON, EntityType.STRAY);
 		this.addEquipment(new HGUCLAArcher (), 65);
 		this.addEquipment(new HGUSCArcher (), 35);
 	}

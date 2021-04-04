@@ -1,8 +1,8 @@
 package com.joojet.plugins.mobs.spawnhandlers;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.block.Biome;
@@ -119,10 +119,24 @@ public abstract class AbstractSpawnHandler
 	{
 		for (MonsterTypes mobType : mobTypes)
 		{
-			ArrayList <EntityType> supportedEntities = mobType.getSupportedEntities();
+			List <EntityType> supportedEntities = mobType.getSupportedEntities();
 			for (EntityType entity : supportedEntities)
 			{
-				this.mobEquipmentTable.put(entity, mobType);
+				if (!this.mobEquipmentTable.containsKey(entity))
+				{
+					try 
+					{
+						this.mobEquipmentTable.put(entity, mobType.clone());
+					} 
+					catch (CloneNotSupportedException e)
+					{
+						e.printStackTrace();
+					}
+				}
+				else
+				{
+					this.mobEquipmentTable.get(entity).mergeMonsterTypes(mobType);
+				}
 			}
 		}
 	}

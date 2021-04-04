@@ -12,7 +12,7 @@ public class HGStrayTypes extends MonsterTypes
 	public HGStrayTypes(MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter) 
 	{
 		super(monsterTypeInterpreter, summonTypeInterpreter, EntityType.STRAY);
-		this.addEquipment(new HGMrJohnson (), 100);
+		this.addEquipment(new HGMrJohnson (), 900);
 	}
 
 }
