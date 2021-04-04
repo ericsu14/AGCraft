@@ -48,7 +48,7 @@ public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack
 			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
 			BossBarController bossBarController) 
 	{
-		List <LivingEntity> targets = this.filterByLineOfSight(this.selectRandomEntities(enemies, amount), caster);
+		List <LivingEntity> targets = this.convertStreamToList(this.filterByLineOfSight(this.selectRandomEntities(enemies, amount).stream(), caster));
 		
 		if (!targets.isEmpty())
 		{
@@ -80,7 +80,7 @@ public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack
 						return false;
 					}
 				}
-				return !this.filterByLineOfSight(enemies, caster).isEmpty();
+				return this.filterByLineOfSight(enemies.stream(), caster).toArray().length != 0;
 			}
 			// Otherwise, the caster is only allowed to use the skill if the the player's threat score exceeds mythic.
 			else

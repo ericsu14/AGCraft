@@ -72,7 +72,7 @@ public class DamageDisplayManager
 		});
 		
 		this.activeDisplayEntities.put(damageDisplayEntity.getUniqueId(), damageDisplayEntity);
-		new DamageDisplayEntityTask (damageDisplayEntity, this).runTaskLater(AGCraftPlugin.plugin, 20);
+		new DamageDisplayEntityTask (damageDisplayEntity, this).runTaskLater(AGCraftPlugin.plugin, 30);
 		
 	}
 	
@@ -113,7 +113,7 @@ public class DamageDisplayManager
 		});
 		
 		this.activeDisplayEntities.put(damageDisplayEntity.getUniqueId(), damageDisplayEntity);
-		new DamageDisplayEntityTask (damageDisplayEntity, this).runTaskLater(AGCraftPlugin.plugin, 20);
+		new DamageDisplayEntityTask (damageDisplayEntity, this).runTaskLater(AGCraftPlugin.plugin, 30);
 	}
 	
 	/** Removes a damage display entity fron the server */

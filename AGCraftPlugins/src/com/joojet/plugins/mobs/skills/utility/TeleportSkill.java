@@ -1,14 +1,13 @@
 package com.joojet.plugins.mobs.skills.utility;
 
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.mobs.DamageDisplayListener;
@@ -38,8 +37,10 @@ public class TeleportSkill extends AbstractSkill {
 			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
 			BossBarController bossBarController) 
 	{		
-		List <LivingEntity> possibleTargets = this.filterSubmergedEntities(allies, caster);
-		this.sortByClosestProximity(possibleTargets, caster);
+		List <LivingEntity> possibleTargets = this.convertStreamToList(
+				this.sortByClosestProximity(
+						this.filterSubmergedEntities(enemies.stream(), caster)
+						, caster));
 		
 		if (possibleTargets.isEmpty())
 		{
@@ -78,17 +79,9 @@ public class TeleportSkill extends AbstractSkill {
 	 *  @param entities A list of entities to be filtered
 	 *  @param caster The living entity using the skill, whose height is used to check if the warp location has enough room to accommodate
 	 *                the caster's height. */
-	protected List <LivingEntity> filterSubmergedEntities (List <LivingEntity> entities, LivingEntity caster)
+	protected Stream <LivingEntity> filterSubmergedEntities (Stream <LivingEntity> entities, LivingEntity caster)
 	{
-		Object [] filtered = entities.stream().filter(ent -> (!this.isEngulfedInLiquids(ent) && LocationTools.checkSurroundingArea (caster, ent))).toArray();
-		return Arrays.asList(Arrays.copyOf(filtered, filtered.length, LivingEntity[].class));
-	}
-	
-	/** Filters a list of entities by removing any entity that isnt a player */
-	protected List <LivingEntity> filterNonPlayerEntities (List <LivingEntity> entities)
-	{
-		Object[] filtered = entities.stream().filter(ent -> ent.getType() == EntityType.PLAYER).toArray();
-		return Arrays.asList(Arrays.copyOf(filtered, filtered.length, LivingEntity[].class));
+		return entities.filter(ent -> (!this.isEngulfedInLiquids(ent) && LocationTools.checkSurroundingArea (caster, ent)));
 	}
 	
 	/** Teleports an entity to a target entity's location

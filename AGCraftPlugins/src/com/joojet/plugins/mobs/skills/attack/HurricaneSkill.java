@@ -40,8 +40,7 @@ public class HurricaneSkill extends AbstractAttackSkill
 			return;
 		}
 		
-		List <LivingEntity> targets = this.filterByLineOfSight(enemies, caster);
-		this.sortByClosestProximity(targets, caster);
+		List <LivingEntity> targets = this.convertStreamToList(this.sortByClosestProximity(this.filterByLineOfSight(enemies.stream(), caster), caster));
 		LivingEntity target = targets.get(0);
 		
 		// Update base arrow damage to the one found on the entity's mob equipment
@@ -73,7 +72,7 @@ public class HurricaneSkill extends AbstractAttackSkill
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return !this.filterByLineOfSight(enemies, caster).isEmpty();
+		return this.filterByLineOfSight(enemies.stream(), caster).toArray().length != 0;
 	}
 
 	/** This skill can only be used if the caster is holding a bow */

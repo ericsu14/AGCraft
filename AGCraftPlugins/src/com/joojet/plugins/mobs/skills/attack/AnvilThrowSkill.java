@@ -35,7 +35,7 @@ public class AnvilThrowSkill extends AnvilDropSkill {
 			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
 			BossBarController bossBarController) 
 	{
-		List <LivingEntity> targets = this.filterByLineOfSight(this.selectRandomEntities(enemies, amount), caster);
+		List <LivingEntity> targets = this.convertStreamToList(this.filterByLineOfSight(this.selectRandomEntities(enemies, amount).stream(), caster));
 		
 		if (!targets.isEmpty())
 		{

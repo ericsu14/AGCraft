@@ -33,9 +33,10 @@ public class EvokerFangSkill extends AbstractAttackSkill implements PassiveAttac
 			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
 			BossBarController bossBarController) 
 	{
-		List <LivingEntity> filteredTargets = this.filterByLineOfSight(enemies, caster);
-		this.sortByClosestProximity(filteredTargets, caster);
+		// List <LivingEntity> filteredTargets = this.filterByLineOfSight(enemies, caster);
+		// this.sortByClosestProximity(filteredTargets, caster);
 		
+		List <LivingEntity> filteredTargets = this.convertStreamToList(this.sortByClosestProximity(this.filterByLineOfSight(enemies.stream(), caster), caster));
 		LivingEntity target = filteredTargets.get(0);
 		damageDisplayListener.displayStringAboveEntity(caster, ChatColor.YELLOW + ""  + ChatColor.BOLD + "FANGS!");
 		caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, caster.getLocation(), 10, 1.0, 1.0, 0.0, 0.1, null);
@@ -46,7 +47,7 @@ public class EvokerFangSkill extends AbstractAttackSkill implements PassiveAttac
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return !this.filterByLineOfSight(enemies, caster).isEmpty();
+		return this.filterByLineOfSight(enemies.stream(), caster).toArray().length != 0;
 	}
 
 	@Override

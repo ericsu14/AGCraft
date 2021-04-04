@@ -1,9 +1,9 @@
 package com.joojet.plugins.mobs.skills.attack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -52,12 +52,11 @@ public abstract class AbstractAttackSkill extends AbstractSkill
 	}
 	
 	/** Filters a list of entities by removing any entity that is not within the caster's line of sight.
-	 *  @param list List of living entities to be filtered.
+	 *  @param stream Stream of living entities to be filtered.
 	 *  @param caster Caster used for line of sight checks */
-	public List <LivingEntity> filterByLineOfSight (List <LivingEntity> list, LivingEntity caster)
+	public Stream <LivingEntity> filterByLineOfSight (Stream <LivingEntity> stream, LivingEntity caster)
 	{
-		Object [] filtered = list.stream().filter(ent -> caster.hasLineOfSight(ent)).toArray();
-		return Arrays.asList(Arrays.copyOf(filtered, filtered.length, LivingEntity[].class));
+		return stream.filter(ent -> caster.hasLineOfSight(ent));
 	}
 	
 	/** Returns true if the caster is wielding a bow */

@@ -1,11 +1,14 @@
 package com.joojet.plugins.mobs.skills;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Stream;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BoundingBox;
@@ -134,6 +137,15 @@ public abstract class AbstractSkill
 		return false;
 	}
 	
+	/** Sorts a stream of entities by the closest proximity to the skill-caster in ascending order  */
+	public Stream <LivingEntity> sortByClosestProximity (Stream <LivingEntity> stream, LivingEntity caster)
+	{
+		return stream.sorted((a, b) -> {
+			Location casterLocation = caster.getLocation();
+			return (int) (casterLocation.distanceSquared(a.getLocation()) - casterLocation.distanceSquared(b.getLocation()));
+		});
+	}
+	
 	/** Sorts a list of entities by the closest proximity to the skill-caster in ascending order  */
 	public void sortByClosestProximity (List <LivingEntity> list, LivingEntity caster)
 	{
@@ -141,6 +153,19 @@ public abstract class AbstractSkill
 			Location casterLocation = caster.getLocation();
 			return (int) (casterLocation.distanceSquared(a.getLocation()) - casterLocation.distanceSquared(b.getLocation()));
 		});
+	}
+	
+	/** Filters a list of entities by removing any entity that isnt a player */
+	protected Stream <LivingEntity> filterNonPlayerEntities (Stream <LivingEntity> entities)
+	{
+		return entities.filter(ent -> ent.getType() == EntityType.PLAYER);
+	}
+	
+	/** Converts a stream of living entities to a list */
+	protected List <LivingEntity> convertStreamToList (Stream <LivingEntity> entities)
+	{
+		Object [] array = entities.toArray();
+		return Arrays.asList(Arrays.copyOf(array, array.length, LivingEntity[].class));
 	}
 	
 	/** Returns true if the caster's health reaches below a certain threshold
