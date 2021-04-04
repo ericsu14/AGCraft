@@ -32,7 +32,7 @@ public class HungerGamesHandler extends AbstractSpawnHandler
 	}
 
 	@Override
-	public void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome) 
+	protected void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome) 
 	{
 		// If the entity already contains custom mob metadata, do nothing
 		if (new MonsterTypeMetadata().getStringMetadata(entity) != null)

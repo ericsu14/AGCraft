@@ -38,7 +38,7 @@ public class BeatTheBruinsHandler extends AbstractSpawnHandler
 	}
 	
 	@Override
-	public void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome) 
+	protected void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome) 
 	{
 		// Transforms phantoms into a helpful mob
 		if (type == EntityType.PHANTOM)

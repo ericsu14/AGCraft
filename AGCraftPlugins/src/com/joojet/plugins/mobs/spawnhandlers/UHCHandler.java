@@ -25,7 +25,7 @@ public class UHCHandler extends AbstractSpawnHandler
 	}
 	
 	/** Handles UHC-specific Mob Spawns */
-	public void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome)
+	protected void handleSpawnEvent(LivingEntity entity, EntityType type, SpawnReason reason, Biome biome)
 	{		
 		if (this.canSpawn(reason))
 		{

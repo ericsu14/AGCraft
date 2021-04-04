@@ -179,7 +179,7 @@ public class EquipmentTools
 		modifyPathfindingTargets (entity, mobEquipment);
 		// Equip monster mounts
 		mountMob (entity, mobEquipment, bossBarController);
-		// Creates a new CreatedCustomMonsterEvent after monster is fully transormed
+		// Creates a new CreatedCustomMonsterEvent after monster is fully transformed
 		Bukkit.getPluginManager().callEvent(new CreatedCustomMonsterEvent (entity, mobEquipment));
 	}
 	

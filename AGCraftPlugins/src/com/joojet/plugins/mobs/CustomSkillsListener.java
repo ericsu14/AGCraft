@@ -408,7 +408,7 @@ public class CustomSkillsListener extends AGListener
 			LivingEntity livingEntity = (LivingEntity) entity;
 			MobEquipment equipment = this.monsterInterpreter.getMobEquipmentFromEntity(livingEntity);
 			
-			if (equipment != null)
+			if (equipment != null && !this.mobSkillRunner.containsSkill(livingEntity))
 			{
 				MobSkillTask task = new MobSkillTask (livingEntity, equipment, this);
 				if (task.getSkillSize() > 0)

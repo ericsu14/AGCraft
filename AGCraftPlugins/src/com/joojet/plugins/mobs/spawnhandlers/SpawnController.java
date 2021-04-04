@@ -91,7 +91,7 @@ public class SpawnController
 		{
 			if (this.serverModeSpawnHandlers.containsKey(mode))
 			{
-				this.serverModeSpawnHandlers.get(mode).handleSpawnEvent(entity, type, reason, biome);
+				this.serverModeSpawnHandlers.get(mode).createSpawnEventHandlerTask(entity, type, reason, biome);
 			}
 		}
 		// Otherwise, handle normal server-based spawn events
@@ -100,12 +100,12 @@ public class SpawnController
 			ThemedServerEvent themedEvent = this.amplifiedMobSpawner.getThemedServerEvent();
 			if (this.themedEventSpawnHandlers.containsKey(themedEvent))
 			{
-				this.themedEventSpawnHandlers.get(themedEvent).handleSpawnEvent(entity, type, reason, biome);;
+				this.themedEventSpawnHandlers.get(themedEvent).createSpawnEventHandlerTask(entity, type, reason, biome);;
 			}
 			if (themedEvent != ThemedServerEvent.DEFAULT && 
 					this.themedEventSpawnHandlers.containsKey(ThemedServerEvent.DEFAULT))
 			{
-				this.themedEventSpawnHandlers.get(ThemedServerEvent.DEFAULT).handleSpawnEvent(entity, type, reason, biome);
+				this.themedEventSpawnHandlers.get(ThemedServerEvent.DEFAULT).createSpawnEventHandlerTask(entity, type, reason, biome);
 			}
 		}
 	}

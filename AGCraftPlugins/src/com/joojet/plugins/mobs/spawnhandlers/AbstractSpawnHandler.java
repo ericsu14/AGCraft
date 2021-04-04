@@ -9,6 +9,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
@@ -18,7 +19,6 @@ import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MonsterTypes;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
-import com.joojet.plugins.mobs.spawnhandlers.task.HandleSpawnEventTask;
 import com.joojet.plugins.mobs.spawning.FairSpawnController;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
@@ -79,7 +79,15 @@ public abstract class AbstractSpawnHandler
 	 *  @param roll - A random number determining if this entity should spawn */
 	public void createSpawnEventHandlerTask (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome)
 	{
-		new HandleSpawnEventTask(this, entity, type, reason, biome).runTask(AGCraftPlugin.plugin);
+		new BukkitRunnable() {
+
+			@Override
+			public void run() 
+			{
+				handleSpawnEvent (entity, type, reason, biome);
+			}
+			
+		}.runTask(AGCraftPlugin.plugin);
 	}
 	
 	/** Handles a mob spawn event caught in the Amplified Mob Spawn listener.
@@ -88,7 +96,7 @@ public abstract class AbstractSpawnHandler
 	 *  @param reason - The reason on why this entity is spawned
 	 *  @param biome - The biome in which this entity is spawned in
 	 *  @param roll - A random number determining if this entity should spawn */
-	public abstract void handleSpawnEvent (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome);
+	protected abstract void handleSpawnEvent (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome);
 	
 	/** Converts a living entity into a random amplified monster based on its EntityType
 	 * 	@param entity - The entity potentially being transformed into a custom mob

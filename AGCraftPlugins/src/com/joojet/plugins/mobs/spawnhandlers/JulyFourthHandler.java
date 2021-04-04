@@ -42,7 +42,7 @@ public class JulyFourthHandler extends AbstractSpawnHandler
 	}
 	
 	/** Handles 4th of july mob spawns */
-	public void handleSpawnEvent (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome)
+	protected void handleSpawnEvent (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome)
 	{
 		// Insta kill phantoms and let them explode
 		if (type == EntityType.PHANTOM)
