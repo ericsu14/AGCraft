@@ -40,7 +40,7 @@ public class HellWalker extends MythicMob
 		this.offhand = new HellwalkerDagger (this.color);
 		
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER, MobFlag.HUNT_ON_SPAWN, 
-				MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME);
+				MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME, MobFlag.DISABLE_MAGIC_HEALING);
 		this.setStat(MonsterStat.EXPERIENCE, 60.0);
 		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 12.0);

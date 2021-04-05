@@ -30,7 +30,7 @@ public class SoulDestroyer extends EpicMob
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
 		
-		this.addMobFlags(MobFlag.IGNORE_NON_FACTION_ENTITIES);
+		this.addMobFlags(MobFlag.IGNORE_NON_FACTION_ENTITIES, MobFlag.DISABLE_MAGIC_HEALING);
 		
 		this.addFactions(Faction.NETHER);
 		this.addRivalFactions(Faction.DOOM_GUY, Faction.USC, Faction.UCLA, Faction.CHICKEN_GANG);

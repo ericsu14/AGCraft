@@ -53,7 +53,8 @@ public class DamageDisplayListener extends AGListener
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
 		this.damageDisplayManager = new DamageDisplayManager (this.bossBarController);
-		this.allowedRegainReasons = EnumSet.of(RegainReason.CUSTOM, RegainReason.MAGIC, RegainReason.MAGIC_REGEN);
+		this.allowedRegainReasons = EnumSet.of(RegainReason.CUSTOM, RegainReason.MAGIC, RegainReason.MAGIC_REGEN, 
+				RegainReason.WITHER, RegainReason.ENDER_CRYSTAL);
 		this.damageDisplayModeInterpreter = new DamageDisplayModeInterpreter ();
 	}
 	
@@ -159,6 +160,7 @@ public class DamageDisplayListener extends AGListener
 		Entity eventEntity = event.getEntity();
 		if (event instanceof EntityDamageByEntityEvent || eventEntity == null || event.getFinalDamage() < 0.0
 				|| !(eventEntity instanceof LivingEntity)
+				|| event.isCancelled()
 				|| !this.checkDamageDisplayModuleIsEnabled())
 		{
 			return;
@@ -203,7 +205,7 @@ public class DamageDisplayListener extends AGListener
 	public void onEntityHealEvent (EntityRegainHealthEvent event)
 	{
 		// Do not run if the amount is negative or the server mode is running in Minigame mode (as this might give people's positions away in UHC)
-		if (event.getAmount() < 0.0 || !this.checkDamageDisplayModuleIsEnabled() ||
+		if (event.getAmount() < 0.0 || !this.checkDamageDisplayModuleIsEnabled() || event.isCancelled() ||
 				!this.allowedRegainReasons.contains(event.getRegainReason()))
 		{
 			return;

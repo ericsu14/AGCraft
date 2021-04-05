@@ -69,7 +69,7 @@ public class DoomGuy extends MythicMob
 				EntityType.EVOKER);
 		
 		this.addMobFlags(MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME, MobFlag.BOSS_BAR,
-				MobFlag.PERSISTENT_ATTACKER);
+				MobFlag.PERSISTENT_ATTACKER, MobFlag.DISABLE_MAGIC_HEALING);
 		
 		this.tippedArrow = new ArrowOfDoom (this.color);
 		

@@ -18,6 +18,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
@@ -34,6 +35,7 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveEnvironmental;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
+import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveRegeneration;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillTask;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 
@@ -233,7 +235,56 @@ public class CustomSkillsListener extends AGListener
 		event.setDamage(event.getDamage() + totalBonusDamage);
 	}
 	
-	/** Applies passive attack skills to any captured entity damage by entity events,
+	/** Handles PassiveRegeneration skills */
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void modifyEntityRegenEvent (EntityRegainHealthEvent event)
+	{
+		if (event.getEntity() == null)
+		{
+			return;
+		}
+		
+		LivingEntity target = this.getLivingEntity(event.getEntity());
+		
+		if (target == null)
+		{
+			return;
+		}
+		
+		MobEquipment targetEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(target);
+		
+		double totalBonusDamage = 0.0;
+		double currDamage = 0.0;
+		if (targetEquipment != null && this.mobSkillRunner.containsSkill(target))
+		{
+			for (AbstractSkill skill : this.mobSkillRunner.getSkillTask(target.getUniqueId()).getSkillList())
+			{
+				if (skill instanceof PassiveRegeneration)
+				{
+					currDamage = ((PassiveRegeneration) skill).modifyRegenerationEvent(event.getAmount(), event.getRegainReason(), target, targetEquipment);
+					if (currDamage == Double.MIN_VALUE)
+					{
+						event.setCancelled(true);
+						break;
+					}
+					totalBonusDamage += currDamage;
+				}
+			}
+		}
+		
+		// Cancels damage event and clears the damager's current target if canceled.
+		if (event.isCancelled())
+		{
+			if (target instanceof Mob)
+			{
+				((Mob) target).setTarget(null);
+			}
+			return;
+		}
+		event.setAmount(event.getAmount() + totalBonusDamage);
+	}
+	
+	/** Activates passive attack skills to any captured entity damage by entity events,
 	 *  which amplifies the damage output dealt by monsters that have certain Passive attack skills */
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void modifyEntityDamageEvent (EntityDamageByEntityEvent event)

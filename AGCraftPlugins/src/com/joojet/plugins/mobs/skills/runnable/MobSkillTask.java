@@ -7,12 +7,14 @@ import java.util.UUID;
 import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.mobs.CustomSkillsListener;
+import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.WeightedMobSkill;
 import com.joojet.plugins.mobs.skills.passive.ArrowDamageModifierSkill;
 import com.joojet.plugins.mobs.skills.passive.CriticalShotSkill;
+import com.joojet.plugins.mobs.skills.passive.DisableMagicHealSkill;
 import com.joojet.plugins.mobs.skills.passive.NoOpSkill;
 import com.joojet.plugins.mobs.skills.passive.PiercingBlowSkill;
 import com.joojet.plugins.mobs.skills.passive.TippedArrowSkill;
@@ -130,6 +132,11 @@ public class MobSkillTask
 			if (this.equipment.hasTippedArrow())
 			{
 				this.mobSkills.add(new TippedArrowSkill ());
+			}
+			// Adds in the disable magic heal skill when the monster has that flag enabled
+			if (this.equipment.containsFlag(MobFlag.DISABLE_MAGIC_HEALING))
+			{
+				this.mobSkills.add(new DisableMagicHealSkill ());
 			}
 			if (this.equipment.containsStat(MonsterStat.SPAWN_LIMIT))
 			{

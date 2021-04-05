@@ -153,7 +153,7 @@ public enum MobFlag implements CustomAttribute
 			entity.setSilent(true);
 		}
 	},
-	/** When able, the mob is no longer able to pick up dropped gear or weapons */
+	/** When enabled, the mob is no longer able to pick up dropped gear or weapons */
 	DISABLE_PICK_UP_ITEMS
 	{
 		@Override
@@ -161,7 +161,9 @@ public enum MobFlag implements CustomAttribute
 		{
 			entity.setCanPickupItems(false);
 		}
-	};
+	},
+	/** When enabled, the entity is unable to be healed from healing or harming potions */
+	DISABLE_MAGIC_HEALING;
 	
 	/** Does nothing when the mobflag does not have a custom definition specific for that attribute */
 	@Override

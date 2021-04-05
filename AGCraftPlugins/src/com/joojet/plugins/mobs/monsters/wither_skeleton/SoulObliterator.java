@@ -28,7 +28,7 @@ public class SoulObliterator extends MythicMob
 		this.color = ChatColor.DARK_RED;
 		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR,
-				MobFlag.IGNORE_NON_FACTION_ENTITIES);
+				MobFlag.IGNORE_NON_FACTION_ENTITIES, MobFlag.DISABLE_MAGIC_HEALING);
 		
 		this.setDropRates(0.15f, 0.03f, 0.03f, 0.03f, 0.05f, 0.15f);
 		
