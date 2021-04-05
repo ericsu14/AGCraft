@@ -35,7 +35,7 @@ public class ThrowEnderPearlSkill extends AbstractAttackSkill
 			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
 			BossBarController bossBarController) 
 	{
-		// Gets the player who is most farthest away from the caster within the skill's range		
+		// Gets the player who is most farthest away from the caster within the skill's rang
 		List <LivingEntity> targets = this.convertStreamToList(
 				this.sortByClosestProximity(
 						this.filterByLineOfSight(
@@ -48,7 +48,6 @@ public class ThrowEnderPearlSkill extends AbstractAttackSkill
 			return;
 		}
 		
-		this.sortByClosestProximity(targets, caster);
 		LivingEntity farthestTarget = targets.get(targets.size() - 1);
 		
 		Location farthestTargetLocation = farthestTarget.getLocation().clone();
@@ -86,10 +85,8 @@ public class ThrowEnderPearlSkill extends AbstractAttackSkill
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return this.sortByClosestProximity(
-				this.filterByLineOfSight(
-				this.filterNonPlayerEntities(enemies.stream()).
-				filter(entity -> checkEntityWithinRange (entity, caster)), caster), caster).toArray().length != 0;
+		return this.filterByLineOfSight(this.filterNonPlayerEntities(enemies.stream()).
+				filter(entity -> checkEntityWithinRange (entity, caster)), caster).toArray().length != 0;
 	}
 
 	@Override

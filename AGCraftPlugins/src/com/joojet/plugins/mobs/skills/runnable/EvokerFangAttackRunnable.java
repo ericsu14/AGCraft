@@ -35,7 +35,7 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 		this.caster = caster;
 		this.target = target;
 		this.casterNMS = ((CraftMob) caster).getHandle();
-		this.range = (int) Math.ceil(range * 1.2);
+		this.range = (int) Math.ceil((range / 2.0) * 1.5);
 	}
 	
 	/** Launches a fang attack */

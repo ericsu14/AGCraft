@@ -87,7 +87,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
 		skills.add(new ThundagaSkill (12, 12, Integer.MAX_VALUE, 8, 2.0F, 4, 60, 0.60));
-		skills.add(new EvokerFangSkill (8, 8, Integer.MAX_VALUE, 4, 0));
+		skills.add(new EvokerFangSkill (12, 8, Integer.MAX_VALUE, 4, 0));
 		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 2, 3, 0.60));
 		skills.add(new RageSkill (0, 15, 0.35));
 		skills.add(new NerfDamageOutputSkill (0.50));
