@@ -77,7 +77,8 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 						new WeightedDrop (Material.DIAMOND_HELMET, 35), 
 						new WeightedDrop (Material.DIAMOND_CHESTPLATE, 15),
 						new WeightedDrop (Material.DIAMOND_LEGGINGS, 15), 
-						new WeightedDrop (Material.DIAMOND_BOOTS, 35))
+						new WeightedDrop (Material.DIAMOND_BOOTS, 35)),
+				new MonsterDrop (Material.ENDER_PEARL, 0.30, 1, 1)
 				);
 		
 		this.bossTheme = MusicType.OUTLAW;
@@ -92,7 +93,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		skills.add(new RageSkill (0, 15, 0.35));
 		skills.add(new NerfDamageOutputSkill (0.50));
 		skills.add(new BlindingArrow (7, 6));
-		skills.add(new ThrowEnderPearlSkill(48, 25, 3, 2, 8.0));
+		skills.add(new ThrowEnderPearlSkill(64, 25, 3, 2, 10.0));
 		skills.add(new MrJohnsonAuraSkill ());
 	}
 

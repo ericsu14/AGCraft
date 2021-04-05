@@ -63,7 +63,7 @@ public class ThrowEnderPearlSkill extends AbstractAttackSkill
 			{
 				// Calculate the velocity vector between the caster and the farthest target
 				Vector velocity = MathUtil.calculateArcBetweenPoints(caster.getLocation().toVector().clone(), farthestTargetLocation.toVector(), 
-						(int) (caster.getHeight()));
+						(int) (caster.getHeight()), MathUtil.THROWN_PROJECTILE_GRAVITY);
 				
 				// Check if the velocity vector is finite. If not, skip spawning this anvil.
 				try
@@ -79,7 +79,7 @@ public class ThrowEnderPearlSkill extends AbstractAttackSkill
 				caster.launchProjectile(EnderPearl.class, velocity);
 			}
 			
-		}.runTaskLater(AGCraftPlugin.plugin, 20);
+		}.runTaskLater(AGCraftPlugin.plugin, 10);
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class ThrowEnderPearlSkill extends AbstractAttackSkill
 	protected boolean checkEntityWithinRange (LivingEntity entity, LivingEntity caster)
 	{
 		BoundingBox minBound = caster.getBoundingBox().clone().expand(this.minDistance);
-		BoundingBox maxBound = caster.getBoundingBox().clone().expand(this.range / 2.0);
+		BoundingBox maxBound = caster.getBoundingBox().clone().expand(this.range / 1.5);
 		BoundingBox entityBox = entity.getBoundingBox();
 		return !minBound.contains(entityBox) && maxBound.contains(entityBox);
 	}

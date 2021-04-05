@@ -4,6 +4,11 @@ import org.bukkit.util.Vector;
 
 public class MathUtil 
 {
+	/** Gravity constant used for falling blocks and thrown potions */
+	public static final double BLOCK_GRAVITY = 0.115;
+	/** Gravity constant used for projectiles */
+	public static final double THROWN_PROJECTILE_GRAVITY = 0.075;
+	
 	/** Mathematically computes a velocity vector that propels an object
 	 *  from position 1 to position 2 in a parabolic arc, which peaks at a set
 	 *  height.
@@ -15,12 +20,10 @@ public class MathUtil
 	 *  
 	 *  @param from - Starting point of the projectile
 	 *  @param to - Ending point of the projectile
-	 *  @param heightGain - Peak height of the arc */
-	public static Vector calculateArcBetweenPoints (Vector from, Vector to, int heightGain)
+	 *  @param heightGain - Peak height of the arc
+	 *  @param gravity - Gravity constant used in this calculation */
+	public static Vector calculateArcBetweenPoints (Vector from, Vector to, int heightGain, double gravity)
 	{
-		// Gravity of a potion
-        double gravity = 0.115;
- 
         // Block locations
         int endGain = to.getBlockY() - from.getBlockY();
         double horizDist = Math.sqrt(distanceSquared(from, to));

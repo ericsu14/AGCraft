@@ -55,7 +55,7 @@ public class AnvilThrowSkill extends AnvilDropSkill {
 			}
 			
 			Vector velocity = MathUtil.calculateArcBetweenPoints(caster.getLocation().toVector().clone(), target.getLocation().toVector().clone(), 
-					(int) (caster.getHeight() * 2));
+					(int) (caster.getHeight() * 2), MathUtil.BLOCK_GRAVITY);
 			
 			// Check if the velocity vector is finite. If not, skip spawning this anvil.
 			try
