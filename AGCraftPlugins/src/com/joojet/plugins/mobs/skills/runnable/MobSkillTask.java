@@ -11,13 +11,13 @@ import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
-import com.joojet.plugins.mobs.skills.WeightedMobSkill;
 import com.joojet.plugins.mobs.skills.passive.ArrowDamageModifierSkill;
 import com.joojet.plugins.mobs.skills.passive.CriticalShotSkill;
 import com.joojet.plugins.mobs.skills.passive.DisableMagicHealSkill;
 import com.joojet.plugins.mobs.skills.passive.NoOpSkill;
 import com.joojet.plugins.mobs.skills.passive.PiercingBlowSkill;
 import com.joojet.plugins.mobs.skills.passive.TippedArrowSkill;
+import com.joojet.plugins.mobs.skills.weightedentries.WeightedMobSkill;
 import com.joojet.plugins.mobs.util.WeightedList;
 
 public class MobSkillTask

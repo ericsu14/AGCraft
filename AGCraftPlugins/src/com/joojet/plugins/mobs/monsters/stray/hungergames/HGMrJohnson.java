@@ -21,12 +21,14 @@ import com.joojet.plugins.mobs.equipment.chest.MrJohnsonTunic;
 import com.joojet.plugins.mobs.equipment.head.MrJohnsonHead;
 import com.joojet.plugins.mobs.equipment.leggings.MrJohnsonLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.SnakeArrow;
+import com.joojet.plugins.mobs.equipment.potions.SnakeVenomPotion;
 import com.joojet.plugins.mobs.equipment.weapons.PledgeDestroyer;
 import com.joojet.plugins.mobs.interfaces.CustomSpawnMessage;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.EvokerFangSkill;
 import com.joojet.plugins.mobs.skills.attack.HurricaneSkill;
+import com.joojet.plugins.mobs.skills.attack.MrJohnsonPotionSkill;
 import com.joojet.plugins.mobs.skills.attack.ThrowEnderPearlSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.RageSkill;
@@ -78,7 +80,10 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 						new WeightedDrop (Material.DIAMOND_CHESTPLATE, 15),
 						new WeightedDrop (Material.DIAMOND_LEGGINGS, 15), 
 						new WeightedDrop (Material.DIAMOND_BOOTS, 35)),
-				new MonsterDrop (Material.ENDER_PEARL, 0.30, 1, 1)
+				new WeightedLootCrateDrop (
+						0.30, 1, 1,
+						new WeightedDrop (Material.ENDER_PEARL, 60),
+						new WeightedDrop (new SnakeVenomPotion (), 30))
 				);
 		
 		this.bossTheme = MusicType.OUTLAW;
@@ -94,6 +99,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		skills.add(new NerfDamageOutputSkill (0.50));
 		skills.add(new BlindingArrow (7, 6));
 		skills.add(new ThrowEnderPearlSkill(64, 25, 3, 2, 10.0));
+		skills.add(new MrJohnsonPotionSkill (24, 20, 3, 4));
 		skills.add(new MrJohnsonAuraSkill ());
 	}
 

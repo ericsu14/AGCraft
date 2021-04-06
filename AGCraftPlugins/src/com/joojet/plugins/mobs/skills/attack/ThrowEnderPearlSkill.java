@@ -2,6 +2,7 @@ package com.joojet.plugins.mobs.skills.attack;
 
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.EnderPearl;
@@ -15,8 +16,6 @@ import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.util.MathUtil;
-
-import net.md_5.bungee.api.ChatColor;
 
 public class ThrowEnderPearlSkill extends AbstractAttackSkill 
 {

@@ -1,11 +1,13 @@
 package com.joojet.plugins.mobs.skills.attack;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Stream;
 
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
@@ -14,9 +16,16 @@ import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
 
 public abstract class AbstractAttackSkill extends AbstractSkill 
 {
+	/** A set of undead monsters */
+	public EnumSet <EntityType> undeadMonsters;
+	
 	public AbstractAttackSkill(int range, int cooldown, int maxUses, int weight) 
 	{
 		super(SkillPropetry.ATTACK, range, cooldown, maxUses, weight);
+		undeadMonsters = EnumSet.of(EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER, 
+				EntityType.ZOMBIFIED_PIGLIN, EntityType.SKELETON, EntityType.WITHER_SKELETON,
+				EntityType.SPIDER, EntityType.CAVE_SPIDER, EntityType.DROWNED, EntityType.STRAY, EntityType.HUSK, EntityType.PHANTOM,
+				EntityType.WITHER, EntityType.ZOGLIN, EntityType.SKELETON_HORSE, EntityType.ZOMBIE_HORSE);
 	}
 	
 	/** Randomly selects a set of entities from a list of LivingEntities.
