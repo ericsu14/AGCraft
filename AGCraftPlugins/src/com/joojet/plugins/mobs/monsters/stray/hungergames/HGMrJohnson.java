@@ -81,7 +81,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 						new WeightedDrop (Material.DIAMOND_LEGGINGS, 15), 
 						new WeightedDrop (Material.DIAMOND_BOOTS, 35)),
 				new WeightedLootCrateDrop (
-						0.30, 1, 1,
+						0.70, 1, 1,
 						new WeightedDrop (Material.ENDER_PEARL, 60),
 						new WeightedDrop (new SnakeVenomPotion (), 30))
 				);

@@ -21,6 +21,8 @@ public class SnakeVenomPotion extends SplashPotionEquipment
 	protected void addPotionData() 
 	{
 		this.setColor(Color.GREEN);
+		this.loreColor = ChatColor.GOLD;
+		this.wordsPerLine = 6;
 		this.setDisplayName("Snake Venom");
 		this.addPotionEffect(PotionEffectType.POISON, 200, 0);
 		this.addPotionEffect(PotionEffectType.BLINDNESS, 140, 0);

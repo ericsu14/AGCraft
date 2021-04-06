@@ -53,7 +53,7 @@ public class MrJohnsonPotionSkill extends AbstractThrowPotionSkill
 	@Override
 	protected boolean checkConditions(LivingEntity caster) 
 	{
-		return this.checkHealthIsBelowThreshold(caster, 0.70);
+		return this.checkHealthIsBelowThreshold(caster, 0.60);
 	}
 
 }
