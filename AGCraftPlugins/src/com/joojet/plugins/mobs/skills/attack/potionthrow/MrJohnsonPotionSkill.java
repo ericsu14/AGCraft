@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.skills.attack;
+package com.joojet.plugins.mobs.skills.attack.potionthrow;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -9,6 +9,8 @@ import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.enums.ThrowablePotionType;
+import com.joojet.plugins.mobs.equipment.potions.PainfulMocktail;
 import com.joojet.plugins.mobs.equipment.potions.SnakeVenomPotion;
 import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 
@@ -23,7 +25,9 @@ public class MrJohnsonPotionSkill extends AbstractThrowPotionSkill
 	@Override
 	public void initializePotionsList() 
 	{
-		this.addPotion(new SnakeVenomPotion (), 100);
+		this.addPotion(new SnakeVenomPotion (), 60, ThrowablePotionType.SPLASH);
+		this.addPotion(new PainfulMocktail (), 30, ThrowablePotionType.SPLASH);
+		this.addPotion(new SnakeVenomPotion(), 10, ThrowablePotionType.LINGERING);
 	}
 
 	@Override

@@ -21,6 +21,7 @@ import com.joojet.plugins.mobs.equipment.chest.MrJohnsonTunic;
 import com.joojet.plugins.mobs.equipment.head.MrJohnsonHead;
 import com.joojet.plugins.mobs.equipment.leggings.MrJohnsonLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.SnakeArrow;
+import com.joojet.plugins.mobs.equipment.potions.PainfulMocktail;
 import com.joojet.plugins.mobs.equipment.potions.SnakeVenomPotion;
 import com.joojet.plugins.mobs.equipment.weapons.PledgeDestroyer;
 import com.joojet.plugins.mobs.interfaces.CustomSpawnMessage;
@@ -28,9 +29,9 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.EvokerFangSkill;
 import com.joojet.plugins.mobs.skills.attack.HurricaneSkill;
-import com.joojet.plugins.mobs.skills.attack.MrJohnsonPotionSkill;
 import com.joojet.plugins.mobs.skills.attack.ThrowEnderPearlSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
+import com.joojet.plugins.mobs.skills.attack.potionthrow.MrJohnsonPotionSkill;
 import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.mobs.skills.passive.BlindingArrow;
 import com.joojet.plugins.mobs.skills.passive.MrJohnsonAuraSkill;
@@ -83,7 +84,8 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 				new WeightedLootCrateDrop (
 						0.70, 1, 1,
 						new WeightedDrop (Material.ENDER_PEARL, 60),
-						new WeightedDrop (new SnakeVenomPotion (), 30))
+						new WeightedDrop (new SnakeVenomPotion (), 15),
+						new WeightedDrop (new PainfulMocktail (), 15))
 				);
 		
 		this.bossTheme = MusicType.OUTLAW;

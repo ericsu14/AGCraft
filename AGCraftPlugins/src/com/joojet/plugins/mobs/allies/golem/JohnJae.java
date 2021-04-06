@@ -12,8 +12,8 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.ThePecks;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
-import com.joojet.plugins.mobs.skills.attack.AnvilDropSkill;
-import com.joojet.plugins.mobs.skills.attack.AnvilThrowSkill;
+import com.joojet.plugins.mobs.skills.attack.anvil.AnvilDropSkill;
+import com.joojet.plugins.mobs.skills.attack.anvil.AnvilThrowSkill;
 import com.joojet.plugins.mobs.skills.buff.SelfHealSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 

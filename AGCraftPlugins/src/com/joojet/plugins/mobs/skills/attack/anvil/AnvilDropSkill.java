@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.skills.attack;
+package com.joojet.plugins.mobs.skills.attack.anvil;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.skills.attack.AbstractAttackSkill;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.runnable.ExplodingBlockRunnable;
 

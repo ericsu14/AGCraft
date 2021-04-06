@@ -64,7 +64,7 @@ public class ThrowEnderPearlSkill extends AbstractAttackSkill
 				Vector velocity = MathUtil.calculateArcBetweenPoints(caster.getLocation().toVector().clone(), farthestTargetLocation.toVector(), 
 						(int) (caster.getHeight()), MathUtil.THROWN_PROJECTILE_GRAVITY);
 				
-				// Check if the velocity vector is finite. If not, skip spawning this anvil.
+				// Check if the velocity vector is finite. If not, skip spawning this ender peral.
 				try
 				{
 					velocity.checkFinite();

@@ -1,9 +1,8 @@
-package com.joojet.plugins.mobs.skills.attack;
+package com.joojet.plugins.mobs.skills.attack.potionthrow;
 
 import java.util.List;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -12,8 +11,10 @@ import org.bukkit.util.Vector;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
+import com.joojet.plugins.mobs.enums.ThrowablePotionType;
 import com.joojet.plugins.mobs.equipment.AbstractPotionEquipment;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.skills.attack.AbstractAttackSkill;
 import com.joojet.plugins.mobs.skills.weightedentries.WeightedPotion;
 import com.joojet.plugins.mobs.util.MathUtil;
 import com.joojet.plugins.mobs.util.WeightedList;
@@ -41,9 +42,9 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 	public abstract void playCasterAnimationEffects (LivingEntity caster, DamageDisplayListener damageDisplayListener);
 	
 	/** Adds a new potion into the possible list of potions that can be thrown while using this skill */
-	public void addPotion (AbstractPotionEquipment potion, int weight)
+	public void addPotion (AbstractPotionEquipment potion, int weight, ThrowablePotionType potionType)
 	{
-		potion.setType(Material.SPLASH_POTION);
+		potion.setType(potionType.getMaterial());
 		this.potionList.addEntry(new WeightedPotion (potion, weight));
 	}
 	
@@ -53,7 +54,7 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 			BossBarController bossBarController) 
 	{
 		List <LivingEntity> targets = this.getTargets(caster, enemies);
-		if (targets.isEmpty())
+		if (targets.isEmpty() || this.potionList.isEmpty())
 		{
 			return;
 		}
@@ -71,7 +72,7 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 				Vector velocity = MathUtil.calculateArcBetweenPoints(caster.getLocation().toVector().clone(), targetLocation.toVector(), 
 						(int) (caster.getHeight()), MathUtil.THROWN_PROJECTILE_GRAVITY);
 				
-				// Check if the velocity vector is finite. If not, skip spawning this anvil.
+				// Check if the velocity vector is finite. If not, skip spawning this potion.
 				try
 				{
 					velocity.checkFinite();

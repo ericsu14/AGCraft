@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.skills.attack;
+package com.joojet.plugins.mobs.skills.attack.anvil;
 
 import java.util.List;
 
