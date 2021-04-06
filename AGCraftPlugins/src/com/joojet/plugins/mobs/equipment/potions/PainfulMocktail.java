@@ -18,7 +18,7 @@ public class PainfulMocktail extends SplashPotionEquipment
 	@Override
 	protected void addPotionData() 
 	{
-		this.loreColor = ChatColor.RED;
+		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 6;
 		
 		this.setColor(Color.YELLOW);
