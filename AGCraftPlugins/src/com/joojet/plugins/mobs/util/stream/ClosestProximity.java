@@ -5,6 +5,7 @@ import java.util.Comparator;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 
+/** Comparator used to sort a collection of entities by how close that entities is to the skill-caster's location */
 public class ClosestProximity implements Comparator <LivingEntity>
 {
 	protected Location casterLocation;

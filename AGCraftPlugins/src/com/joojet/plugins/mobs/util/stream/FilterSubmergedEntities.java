@@ -8,6 +8,8 @@ import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.mobs.util.LocationTools;
 
+/** Filters out entities who are submerged in a liquid source block and entities enclosed in areas where the skill-caster 
+ *  will not be able to safely teleport to. */
 public class FilterSubmergedEntities implements Predicate <LivingEntity>
 {
 	/** The skill-caster */
