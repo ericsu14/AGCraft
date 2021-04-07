@@ -1,7 +1,7 @@
 package com.joojet.plugins.mobs.skills.attack.potionthrow;
 
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
@@ -13,6 +13,8 @@ import com.joojet.plugins.mobs.enums.ThrowablePotionType;
 import com.joojet.plugins.mobs.equipment.potions.PainfulMocktail;
 import com.joojet.plugins.mobs.equipment.potions.SnakeVenomPotion;
 import com.joojet.plugins.mobs.util.particle.ParticleUtil;
+import com.joojet.plugins.mobs.util.stream.ClosestProximity;
+import com.joojet.plugins.mobs.util.stream.FilterLineOfSight;
 
 public class MrJohnsonPotionSkill extends AbstractThrowPotionSkill
 {
@@ -33,10 +35,10 @@ public class MrJohnsonPotionSkill extends AbstractThrowPotionSkill
 	@Override
 	public List<LivingEntity> getTargets(LivingEntity caster, List<LivingEntity> enemies) 
 	{
-		Stream <LivingEntity> targetStream = enemies.stream().filter(entity -> !this.undeadMonsters.contains(entity.getType()));
-		targetStream = this.filterByLineOfSight(targetStream, caster);
-		targetStream = this.sortByClosestProximity(targetStream, caster);
-		return this.convertStreamToList(targetStream);
+		return enemies.stream().
+				filter(entity -> !this.undeadMonsters.contains(entity.getType())).
+				filter(new FilterLineOfSight (caster)).
+				sorted (new ClosestProximity (caster.getLocation().clone())).collect(Collectors.toList());
 	}
 
 	@Override

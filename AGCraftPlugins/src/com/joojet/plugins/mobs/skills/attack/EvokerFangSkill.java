@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.skills.attack;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
@@ -17,6 +18,8 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.runnable.EvokerFangAttackRunnable;
 import com.joojet.plugins.mobs.util.particle.ParticleUtil;
+import com.joojet.plugins.mobs.util.stream.ClosestProximity;
+import com.joojet.plugins.mobs.util.stream.FilterLineOfSight;
 
 public class EvokerFangSkill extends AbstractAttackSkill implements PassiveAttack
 {
@@ -33,10 +36,10 @@ public class EvokerFangSkill extends AbstractAttackSkill implements PassiveAttac
 			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
 			BossBarController bossBarController) 
 	{
-		// List <LivingEntity> filteredTargets = this.filterByLineOfSight(enemies, caster);
-		// this.sortByClosestProximity(filteredTargets, caster);
+		List <LivingEntity> filteredTargets = enemies.stream().filter(new FilterLineOfSight (caster)).
+				sorted (new ClosestProximity (caster.getLocation().clone())).
+				collect(Collectors.toList());
 		
-		List <LivingEntity> filteredTargets = this.convertStreamToList(this.sortByClosestProximity(this.filterByLineOfSight(enemies.stream(), caster), caster));
 		LivingEntity target = filteredTargets.get(0);
 		damageDisplayListener.displayStringAboveEntity(caster, ChatColor.YELLOW + ""  + ChatColor.BOLD + "FANGS!");
 		caster.getWorld().spawnParticle(Particle.SPELL_INSTANT, caster.getLocation(), 10, 1.0, 1.0, 0.0, 0.1, null);
@@ -47,7 +50,7 @@ public class EvokerFangSkill extends AbstractAttackSkill implements PassiveAttac
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return this.filterByLineOfSight(enemies.stream(), caster).toArray().length != 0;
+		return !enemies.stream().filter(new FilterLineOfSight (caster)).collect(Collectors.toList()).isEmpty();
 	}
 
 	@Override

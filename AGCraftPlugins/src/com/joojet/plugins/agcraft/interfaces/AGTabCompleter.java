@@ -3,6 +3,7 @@ package com.joojet.plugins.agcraft.interfaces;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bukkit.command.TabCompleter;
 
@@ -40,12 +41,10 @@ public abstract class AGTabCompleter implements TabCompleter
 	 * 		@param input - The input used to filter the list of strings*/
 	protected List <String> filterListByInput (List <Object> values, String input)
 	{
-		Object[] result = values.stream().
+		return values.stream().
 		map (entry -> entry.toString().toLowerCase()).
 		filter (entry -> entry.contains(input)).
-		sorted().
-		toArray();
-		return (List<String>) Arrays.asList(Arrays.copyOf(result, result.length, String[].class)); 
+		sorted().collect(Collectors.toList());
 	}
 	
 	/** Filters a primitive array of objects based on the passed input and returns
@@ -54,12 +53,10 @@ public abstract class AGTabCompleter implements TabCompleter
 	 * 		@param input - The input used to filter the list of strings */
 	protected List <String> filterArrayByInput (Object values[], String input)
 	{
-		Object[] result = Arrays.asList(values).stream().
+		return Arrays.asList(values).stream().
 		map (entry -> entry.toString().toLowerCase()).
 		filter (entry -> entry.contains(input)).
-		sorted().
-		toArray();
-		return (List<String>) Arrays.asList(Arrays.copyOf(result, result.length, String[].class)); 
+		sorted().collect(Collectors.toList());
 	}
 	
 	/** Returns an array of integers between a certain range

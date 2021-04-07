@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.skills.attack.anvil;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
@@ -15,6 +16,7 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.runnable.ExplodingBlockRunnable;
 import com.joojet.plugins.mobs.util.MathUtil;
+import com.joojet.plugins.mobs.util.stream.FilterLineOfSight;
 
 public class AnvilThrowSkill extends AnvilDropSkill {
 	
@@ -35,7 +37,9 @@ public class AnvilThrowSkill extends AnvilDropSkill {
 			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
 			BossBarController bossBarController) 
 	{
-		List <LivingEntity> targets = this.convertStreamToList(this.filterByLineOfSight(this.selectRandomEntities(enemies, amount).stream(), caster));
+		List <LivingEntity> targets = this.selectRandomEntities(enemies, this.amount).stream().
+				filter(new FilterLineOfSight (caster)).
+				collect(Collectors.toList());
 		
 		if (!targets.isEmpty())
 		{

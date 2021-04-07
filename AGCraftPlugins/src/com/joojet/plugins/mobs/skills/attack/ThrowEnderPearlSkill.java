@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.skills.attack;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -16,6 +17,9 @@ import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.util.MathUtil;
+import com.joojet.plugins.mobs.util.stream.ClosestProximity;
+import com.joojet.plugins.mobs.util.stream.FilterLineOfSight;
+import com.joojet.plugins.mobs.util.stream.FilterNonPlayerEntities;
 
 public class ThrowEnderPearlSkill extends AbstractAttackSkill 
 {
@@ -35,11 +39,12 @@ public class ThrowEnderPearlSkill extends AbstractAttackSkill
 			BossBarController bossBarController) 
 	{
 		// Gets the player who is most farthest away from the caster within the skill's rang
-		List <LivingEntity> targets = this.convertStreamToList(
-				this.sortByClosestProximity(
-						this.filterByLineOfSight(
-						this.filterNonPlayerEntities(enemies.stream()).
-						filter(entity -> checkEntityWithinRange (entity, caster)), caster), caster));
+		List <LivingEntity> targets = enemies.stream().
+				filter(new FilterNonPlayerEntities ()).
+				filter(new FilterLineOfSight (caster)).
+				filter(entity -> checkEntityWithinRange (entity, caster)).
+				sorted (new ClosestProximity (caster.getLocation().clone())).
+				collect (Collectors.toList());
 		
 		// Do nothing if no player is nearby
 		if (targets.isEmpty())
@@ -84,8 +89,9 @@ public class ThrowEnderPearlSkill extends AbstractAttackSkill
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return this.filterByLineOfSight(this.filterNonPlayerEntities(enemies.stream()).
-				filter(entity -> checkEntityWithinRange (entity, caster)), caster).toArray().length != 0;
+		return !enemies.stream().filter(new FilterLineOfSight (caster)).
+				filter(entity -> checkEntityWithinRange (entity, caster)).
+				collect(Collectors.toList()).isEmpty();
 	}
 
 	@Override

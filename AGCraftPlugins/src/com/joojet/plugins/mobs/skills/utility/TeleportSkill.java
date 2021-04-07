@@ -2,7 +2,7 @@ package com.joojet.plugins.mobs.skills.utility;
 
 import java.util.EnumSet;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -15,7 +15,8 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.enums.SkillPropetry;
-import com.joojet.plugins.mobs.util.LocationTools;
+import com.joojet.plugins.mobs.util.stream.ClosestProximity;
+import com.joojet.plugins.mobs.util.stream.FilterSubmergedEntities;
 
 public class TeleportSkill extends AbstractSkill {
 	
@@ -37,10 +38,9 @@ public class TeleportSkill extends AbstractSkill {
 			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
 			BossBarController bossBarController) 
 	{		
-		List <LivingEntity> possibleTargets = this.convertStreamToList(
-				this.sortByClosestProximity(
-						this.filterSubmergedEntities(enemies.stream(), caster)
-						, caster));
+		List <LivingEntity> possibleTargets = allies.stream().filter(new FilterSubmergedEntities (caster)).
+				sorted(new ClosestProximity (caster.getLocation().clone())).
+				collect(Collectors.toList());
 		
 		if (possibleTargets.isEmpty())
 		{
@@ -65,7 +65,8 @@ public class TeleportSkill extends AbstractSkill {
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return (!allies.isEmpty());
+		return (!allies.stream().filter(new FilterSubmergedEntities (caster)).
+				collect(Collectors.toList()).isEmpty());
 	}
 	
 	/** The caster can only use this skill when surrounded by liquids */
@@ -73,15 +74,6 @@ public class TeleportSkill extends AbstractSkill {
 	protected boolean checkConditions(LivingEntity caster) 
 	{
 		return this.isEngulfedInLiquids(caster);
-	}
-	
-	/** Filters a list of entities by removing entities who are submerged under a liquid source block.
-	 *  @param entities A list of entities to be filtered
-	 *  @param caster The living entity using the skill, whose height is used to check if the warp location has enough room to accommodate
-	 *                the caster's height. */
-	protected Stream <LivingEntity> filterSubmergedEntities (Stream <LivingEntity> entities, LivingEntity caster)
-	{
-		return entities.filter(ent -> (!this.isEngulfedInLiquids(ent) && LocationTools.checkSurroundingArea (caster, ent)));
 	}
 	
 	/** Teleports an entity to a target entity's location

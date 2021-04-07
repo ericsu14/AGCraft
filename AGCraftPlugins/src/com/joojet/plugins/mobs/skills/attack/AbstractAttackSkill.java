@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -58,14 +57,6 @@ public abstract class AbstractAttackSkill extends AbstractSkill
 		}
 		
 		return result;
-	}
-	
-	/** Filters a list of entities by removing any entity that is not within the caster's line of sight.
-	 *  @param stream Stream of living entities to be filtered.
-	 *  @param caster Caster used for line of sight checks */
-	public Stream <LivingEntity> filterByLineOfSight (Stream <LivingEntity> stream, LivingEntity caster)
-	{
-		return stream.filter(ent -> caster.hasLineOfSight(ent));
 	}
 	
 	/** Returns true if the caster is wielding a bow */

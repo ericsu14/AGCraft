@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.skills.utility;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
@@ -10,6 +11,9 @@ import org.bukkit.potion.PotionEffectType;
 import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.util.stream.ClosestProximity;
+import com.joojet.plugins.mobs.util.stream.FilterNonPlayerEntities;
+import com.joojet.plugins.mobs.util.stream.FilterSubmergedEntities;
 
 public class AggressiveTeleportSkill extends TeleportSkill
 {
@@ -25,12 +29,17 @@ public class AggressiveTeleportSkill extends TeleportSkill
 			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
 			BossBarController bossBarController) 
 	{		
-		List <LivingEntity> possibleTargets = this.convertStreamToList(
+		/* List <LivingEntity> possibleTargets = this.convertStreamToList(
 				this.sortByClosestProximity(
 						this.filterNonPlayerEntities(
 								this.filterSubmergedEntities(enemies.stream(), caster)
 								), 
-						caster));
+						caster)); */
+		
+		List <LivingEntity> possibleTargets = enemies.stream().
+				filter(new FilterNonPlayerEntities()).
+				filter(new FilterSubmergedEntities(caster)).
+				sorted (new ClosestProximity (caster.getLocation().clone())).collect(Collectors.toList());
 		
 		if (possibleTargets.isEmpty())
 		{
@@ -53,7 +62,9 @@ public class AggressiveTeleportSkill extends TeleportSkill
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return (!enemies.isEmpty());
+		return (!enemies.stream().filter(new FilterNonPlayerEntities()).
+				filter(new FilterSubmergedEntities (caster)).
+				collect(Collectors.toList()).isEmpty());
 	}
 
 }

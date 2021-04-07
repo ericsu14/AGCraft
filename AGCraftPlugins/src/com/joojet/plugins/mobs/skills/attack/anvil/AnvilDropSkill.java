@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.skills.attack.anvil;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -23,6 +24,7 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.attack.AbstractAttackSkill;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.runnable.ExplodingBlockRunnable;
+import com.joojet.plugins.mobs.util.stream.FilterLineOfSight;
 
 public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack {
 	
@@ -48,8 +50,10 @@ public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack
 	protected void handleSkill(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies,
 			DamageDisplayListener damageDisplayListener, MonsterTypeInterpreter monsterTypeInterpreter,
 			BossBarController bossBarController) 
-	{
-		List <LivingEntity> targets = this.convertStreamToList(this.filterByLineOfSight(this.selectRandomEntities(enemies, amount).stream(), caster));
+	{		
+		List <LivingEntity> targets = this.selectRandomEntities(enemies, this.amount).stream().
+				filter(new FilterLineOfSight (caster)).
+				collect(Collectors.toList());
 		
 		if (!targets.isEmpty())
 		{
@@ -81,7 +85,7 @@ public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack
 						return false;
 					}
 				}
-				return this.filterByLineOfSight(enemies.stream(), caster).toArray().length != 0;
+				return !enemies.stream().filter(new FilterLineOfSight (caster)).collect(Collectors.toList()).isEmpty();
 			}
 			// Otherwise, the caster is only allowed to use the skill if the the player's threat score exceeds mythic.
 			else

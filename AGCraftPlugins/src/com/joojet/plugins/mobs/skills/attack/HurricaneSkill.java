@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs.skills.attack;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
@@ -14,6 +15,8 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.runnable.LaunchCustomArrowRunnable;
+import com.joojet.plugins.mobs.util.stream.ClosestProximity;
+import com.joojet.plugins.mobs.util.stream.FilterLineOfSight;
 
 public class HurricaneSkill extends AbstractAttackSkill 
 {
@@ -40,7 +43,11 @@ public class HurricaneSkill extends AbstractAttackSkill
 			return;
 		}
 		
-		List <LivingEntity> targets = this.convertStreamToList(this.sortByClosestProximity(this.filterByLineOfSight(enemies.stream(), caster), caster));
+		List <LivingEntity> targets = enemies.stream().
+				filter(new FilterLineOfSight (caster)).
+				sorted(new ClosestProximity (caster.getLocation().clone())).
+				collect(Collectors.toList());
+		
 		LivingEntity target = targets.get(0);
 		
 		// Update base arrow damage to the one found on the entity's mob equipment
@@ -72,7 +79,7 @@ public class HurricaneSkill extends AbstractAttackSkill
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return this.filterByLineOfSight(enemies.stream(), caster).toArray().length != 0;
+		return !enemies.stream().filter(new FilterLineOfSight (caster)).collect(Collectors.toList()).isEmpty();
 	}
 
 	/** This skill can only be used if the caster is holding a bow */
