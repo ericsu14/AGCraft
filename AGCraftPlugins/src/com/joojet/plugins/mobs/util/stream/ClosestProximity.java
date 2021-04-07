@@ -10,6 +10,11 @@ public class ClosestProximity implements Comparator <LivingEntity>
 {
 	protected Location casterLocation;
 	
+	public ClosestProximity (LivingEntity entity)
+	{
+		this.casterLocation = entity.getLocation().clone();
+	}
+	
 	public ClosestProximity (Location casterLocation)
 	{
 		this.casterLocation = casterLocation;

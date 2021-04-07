@@ -28,7 +28,8 @@ public class TeleportSkill extends AbstractSkill {
 	 *  @param cooldown Cooldown of the teleport skill in seconds
 	 *  @param maxUses Max. amount of times this skill can be used
 	 *  @param weight Weight of the skill */
-	public TeleportSkill(int range, int cooldown, int maxUses, int weight) {
+	public TeleportSkill(int range, int cooldown, int maxUses, int weight) 
+	{
 		super(SkillPropetry.UTILITY, range, cooldown, maxUses, weight);
 		this.liquidSourceBlocks = EnumSet.of(Material.LAVA, Material.WATER);
 	}

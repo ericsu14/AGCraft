@@ -36,6 +36,7 @@ import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.mobs.skills.passive.BlindingArrow;
 import com.joojet.plugins.mobs.skills.passive.MrJohnsonAuraSkill;
 import com.joojet.plugins.mobs.skills.passive.NerfDamageOutputSkill;
+import com.joojet.plugins.mobs.skills.utility.SituationalTeleportSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
@@ -102,6 +103,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		skills.add(new BlindingArrow (7, 6));
 		skills.add(new ThrowEnderPearlSkill(64, 25, 3, 2, 10.0));
 		skills.add(new MrJohnsonPotionSkill (24, 20, 3, 4));
+		skills.add(new SituationalTeleportSkill (32, 30, 1, 1));
 		skills.add(new MrJohnsonAuraSkill ());
 	}
 
