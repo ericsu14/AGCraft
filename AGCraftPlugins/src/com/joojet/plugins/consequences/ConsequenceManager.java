@@ -86,7 +86,7 @@ public class ConsequenceManager extends AGListener
 			protected void handlePromise(Boolean result) 
 			{
 				// If the player has any active consequences, force him to wear a clown head
-				if (ConsequenceDatabaseManager.hasConsequences(uuid))
+				if (result)
 				{
 					forceClownHead(p, "You think you can get away that easily...");
 				}

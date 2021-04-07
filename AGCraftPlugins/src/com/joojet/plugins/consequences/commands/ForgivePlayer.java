@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
@@ -47,16 +48,22 @@ public class ForgivePlayer extends AGCommandExecutor
 			}	
 			UUID uuid = Bukkit.getOfflinePlayer(username) == null ? Bukkit.getPlayer(username).getUniqueId() : Bukkit.getOfflinePlayer(username).getUniqueId();
 			
-			try 
+			new AsyncDatabaseTask <Boolean> ()
 			{
-				ConsequenceDatabaseManager.forgivePlayer(uuid);
-				sender.sendMessage (username + "'s consequences have been lifted.");
-			} 
-			catch (SQLException e) 
-			{
-				e.printStackTrace();
-				return false;
-			}
+				@Override
+				protected Boolean getDataFromDatabase() throws SQLException 
+				{
+					ConsequenceDatabaseManager.forgivePlayer(uuid);
+					return null;
+				}
+
+				@Override
+				protected void handlePromise(Boolean data) 
+				{
+					sender.sendMessage (username + "'s consequences have been lifted.");
+				}
+				
+			}.runDatabaseTask();
 			
 			return true;
 		}

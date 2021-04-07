@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
@@ -101,17 +102,23 @@ public class PunishPlayer extends AGCommandExecutor
 				cal.add(calField.getField(), timeModifiers[calField.ordinal()]);
 			}
 			
-			sender.sendMessage ("Consequence expires in: " + cal.getTime().toString());
-			
-			try 
+			new AsyncDatabaseTask <Boolean> ()
 			{
-				ConsequenceDatabaseManager.punishPlayer(uuid, cal);
-			} 
-			catch (SQLException e) 
-			{
-				e.printStackTrace();
-				return false;
-			}
+
+				@Override
+				protected Boolean getDataFromDatabase() throws SQLException 
+				{
+					ConsequenceDatabaseManager.punishPlayer(uuid, cal);
+					return true;
+				}
+
+				@Override
+				protected void handlePromise(Boolean data) 
+				{
+					sender.sendMessage ("Consequence expires in: " + cal.getTime().toString());
+				}
+				
+			}.runDatabaseTask();
 			
 			return true;
 		}
