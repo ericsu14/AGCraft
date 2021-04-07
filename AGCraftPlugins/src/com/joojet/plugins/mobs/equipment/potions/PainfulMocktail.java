@@ -21,7 +21,7 @@ public class PainfulMocktail extends SplashPotionEquipment
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 6;
 		
-		this.setColor(Color.YELLOW);
+		this.setColor(Color.BLACK);
 		
 		this.setDisplayName(StringUtil.alternateTextColors("Painfully Bad Mocktail", TextPattern.WORD, ChatColor.DARK_RED, ChatColor.DARK_GRAY));
 		this.addLoreToItemMeta("A mocktail so badly made that even standing near this questionable concoction will inflict great pain and make you ill.");
