@@ -8,6 +8,7 @@ import com.joojet.biblefetcher.interpreter.BibleCommandInterpreter;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.biblefetcher.task.FetchBibleTask;
 
 public class Bible extends AGCommandExecutor
@@ -30,8 +31,7 @@ public class Bible extends AGCommandExecutor
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			FetchBibleTask bibleTask = new FetchBibleTask (player, args, this.bibleCommandInterpreter);
-			bibleTask.run();
+			new FetchBibleTask (player, args, this.bibleCommandInterpreter).runTask(AGCraftPlugin.plugin);
 			return true;
 		}
 		return false;
