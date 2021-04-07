@@ -8,6 +8,13 @@ public class DatabaseResponse <E>
 	
 	protected boolean status;
 	
+	public DatabaseResponse (String message, boolean status)
+	{
+		this.data = null;
+		this.message = message;
+		this.status = status;
+	}
+	
 	public DatabaseResponse (E data, boolean status)
 	{
 		this.data = data;

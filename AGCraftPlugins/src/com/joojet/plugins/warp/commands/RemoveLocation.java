@@ -7,6 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
 
+import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.response.DatabaseResponse;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
@@ -38,23 +40,37 @@ public class RemoveLocation extends AGCommandExecutor
 			
 			String locationName = args[0];
 			
-			try
+			new AsyncDatabaseTask <DatabaseResponse <Object>> ()
 			{
-				LocationDatabaseManager.removeLocation(p.getUniqueId().toString(), locationName, p.getWorld().getEnvironment());
-				p.sendMessage(ChatColor.GOLD + "Successfully removed location " + ChatColor.AQUA + locationName + ChatColor.GOLD + " from the database!");
-				return true;
-			}
-			catch (SQLException e)
-			{
-				System.err.println (e.getMessage());
-				p.sendMessage(ChatColor.RED + "An internal error happened while retrieving your location.");
-				return false;
-			}
-			catch (RuntimeException e)
-			{
-				p.sendMessage(ChatColor.RED + e.getMessage());
-				return false;
-			}
+				@Override
+				protected DatabaseResponse<Object> getDataFromDatabase() throws SQLException 
+				{
+					boolean status;
+					StringBuilder message = new StringBuilder ();
+					try
+					{
+						LocationDatabaseManager.removeLocation(p.getUniqueId().toString(), locationName, p.getWorld().getEnvironment());
+						message.append(ChatColor.GOLD + "Successfully removed location " + ChatColor.AQUA + locationName + ChatColor.GOLD + " from the database!");
+						status = true;
+					}
+					catch (RuntimeException re)
+					{
+						message.append(ChatColor.RED + re.getMessage());
+						status = false;
+					}
+					return new DatabaseResponse <Object> (message.toString(), status);
+				}
+
+				@Override
+				protected void handlePromise(DatabaseResponse<Object> data) 
+				{
+					p.sendMessage(data.getMessage());
+					
+				}
+				
+			}.runDatabaseTask();
+			
+			return true;
 		}
 		return false;
 	}

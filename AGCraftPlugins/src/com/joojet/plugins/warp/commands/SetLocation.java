@@ -3,8 +3,13 @@ package com.joojet.plugins.warp.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.sql.SQLException;
+
 import org.bukkit.ChatColor;
 
+import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.response.DatabaseResponse;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
@@ -41,8 +46,6 @@ public class SetLocation extends AGCommandExecutor
 			}
 			
 			String locationName = args[0];
-			WarpAccessLevel access = (n >= 2) ? interpreter.searchTrie(args[1]) : WarpAccessLevel.PRIVATE;
-			access = (access == null) ? WarpAccessLevel.PRIVATE : access;
 			
 			// The player cannot set their location to a hardcoded location, home.
 			if (locationName.equalsIgnoreCase(Warp.home))
@@ -50,18 +53,36 @@ public class SetLocation extends AGCommandExecutor
 				p.sendMessage(ChatColor.RED + "home is a hardcoded location that cannot be overridden by the player.");
 				return false;
 			}
-			try
+			
+			new AsyncDatabaseTask <DatabaseResponse<Object>> ()
 			{
-				LocationDatabaseManager.insert(p, locationName, access);
-				p.sendMessage(ChatColor.GOLD + "" + "Location " + ChatColor.AQUA + locationName + ChatColor.GOLD + " has been successfully registered as a " + ChatColor.AQUA + access.name().toLowerCase() +
-						ChatColor.GOLD +" location " + (access.equals(WarpAccessLevel.PRIVATE) ? "to yourself." : "for everyone in the server!"));
-				return true;
-			}
-			catch (RuntimeException e)
-			{
-				p.sendMessage(ChatColor.RED + e.getMessage());
-				return false;
-			}
+				@Override
+				protected DatabaseResponse<Object> getDataFromDatabase() throws SQLException
+				{
+					WarpAccessLevel access = (n >= 2) ? interpreter.searchTrie(args[1]) : WarpAccessLevel.PRIVATE;
+					access = (access == null) ? WarpAccessLevel.PRIVATE : access;
+					
+					StringBuilder message = new StringBuilder ();
+					try
+					{
+						LocationDatabaseManager.insert(p, locationName, access);
+						message.append(ChatColor.GOLD + "" + "Location " + ChatColor.AQUA + locationName + ChatColor.GOLD + " has been successfully registered as a " + ChatColor.AQUA + access.name().toLowerCase() +
+								ChatColor.GOLD +" location " + (access.equals(WarpAccessLevel.PRIVATE) ? "to yourself." : "for everyone in the server!"));
+					}
+					catch (RuntimeException e)
+					{
+						message.append(ChatColor.RED + e.getMessage());
+					}
+					return new DatabaseResponse <Object> (message.toString(), true);
+				}
+
+				@Override
+				protected void handlePromise(DatabaseResponse<Object> data) 
+				{
+					p.sendMessage(data.getMessage());
+					
+				}
+			}.runDatabaseTask();
 		}
 		return false;
 	}

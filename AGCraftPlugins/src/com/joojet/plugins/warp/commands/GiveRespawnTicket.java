@@ -5,6 +5,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.response.DatabaseResponse;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
@@ -39,19 +41,38 @@ public class GiveRespawnTicket extends AGCommandExecutor
 				
 				String uuid = Bukkit.getOfflinePlayer(username) == null ? Bukkit.getPlayer(username).getUniqueId().toString() : 
 																		  Bukkit.getOfflinePlayer(username).getUniqueId().toString();
-				if (EWarpDatabaseManager.checkIfUserExists(uuid))
+				new AsyncDatabaseTask <DatabaseResponse<Integer>> ()
 				{
-					try 
+					@Override
+					protected DatabaseResponse<Integer> getDataFromDatabase() throws SQLException, RuntimeException 
 					{
-						EWarpDatabaseManager.incrementTicketCount(uuid);
-						sender.sendMessage ("Gave one respawn ticket to " + username + "!");
-						sender.sendMessage (username + " now has " + EWarpDatabaseManager.getTicketCount(uuid) + " tickets.");
-					} 
-					catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						StringBuilder message = new StringBuilder ();
+						boolean result;
+						
+						if (EWarpDatabaseManager.checkIfUserExists(uuid))
+						{
+							EWarpDatabaseManager.incrementTicketCount(uuid);
+							message.append("Gave one respawn ticket to " + username + "!");
+							message.append('\n');
+							message.append(username + " now has " + EWarpDatabaseManager.getTicketCount(uuid) + " tickets.");
+							result = true;
+						}
+						else
+						{
+							result = false;
+							message.append("Cannot find " + username + " in the database");
+						}
+								
+						return new DatabaseResponse <Integer> (0, message.toString(), result);
 					}
-				}
+
+					@Override
+					protected void handlePromise(DatabaseResponse<Integer> data) 
+					{
+						sender.sendMessage(data.getMessage());
+					}
+					
+				}.runDatabaseTask();
 			}
 			return true;
 		}

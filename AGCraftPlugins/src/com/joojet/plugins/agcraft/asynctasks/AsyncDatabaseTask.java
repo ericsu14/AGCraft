@@ -36,15 +36,13 @@ public abstract class AsyncDatabaseTask <T>
 				{
 					se.printStackTrace();
 				}
-				catch (RuntimeException re)
-				{
-					re.printStackTrace();
-				}
 			}
 		}.runTaskAsynchronously(AGCraftPlugin.plugin);
 	}
 	
-	protected abstract T getDataFromDatabase () throws SQLException, RuntimeException;
+	/** Asynchronous gets data from a database function */
+	protected abstract T getDataFromDatabase () throws SQLException;
 	
+	/** Synchronously handles data retrieved from the asynchronous call */
 	protected abstract void handlePromise (T data);
 }
