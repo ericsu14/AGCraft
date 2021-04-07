@@ -22,6 +22,7 @@ public class SituationalTeleportSkill extends TeleportSkill
 	public SituationalTeleportSkill(int range, int cooldown, int maxUses, int weight) 
 	{
 		super(range, cooldown, maxUses, weight);
+		this.cooldownTick = cooldown;
 	}
 
 	@Override
