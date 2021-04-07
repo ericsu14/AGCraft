@@ -21,7 +21,7 @@ public class USCCreeperShield extends ShieldEquipment
 		this.addPatterns(new Pattern (DyeColor.YELLOW, PatternType.CREEPER),
 				new Pattern (DyeColor.YELLOW, PatternType.CREEPER));
 		
-		this.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ENCHANTS);
+		this.addItemFlagstoMeta(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ENCHANTS);
 		this.makeUnbreakable();
 		this.addAttackAttributes(2.0, 0.0);
 		this.addDefenseAttributes(0.0, 3.0, 0.10);

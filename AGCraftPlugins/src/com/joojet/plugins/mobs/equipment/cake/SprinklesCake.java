@@ -25,7 +25,7 @@ public class SprinklesCake extends Equipment
 		this.addLoreToItemMeta(StringUtil.alternateTextColors("A cake baked by jooj to celebrate someone's special day!", TextPattern.WORD,
 				ChatColor.RED, ChatColor.GOLD, ChatColor.YELLOW, ChatColor.GREEN, ChatColor.BLUE, ChatColor.DARK_PURPLE, ChatColor.LIGHT_PURPLE));
 		this.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
-		this.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		this.addItemFlagstoMeta(ItemFlag.HIDE_ENCHANTS);
 		this.makeSoulbound();
 	}
 }

@@ -25,7 +25,7 @@ public class TotemOfTheEternalRushee extends Equipment {
 		this.addUnsafeEnchantment(Enchantment.SOUL_SPEED, 1);
 		this.addUnsafeEnchantment(Enchantment.LOOT_BONUS_MOBS, 1);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
-		this.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		this.addItemFlagstoMeta(ItemFlag.HIDE_ENCHANTS);
 		this.makeSoulbound();
 	}
 }

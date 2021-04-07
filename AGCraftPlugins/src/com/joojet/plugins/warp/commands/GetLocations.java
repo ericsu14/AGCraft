@@ -75,7 +75,7 @@ public class GetLocations extends AGCommandExecutor
 		}
 		else
 		{
-			p.sendMessage(ChatColor.GOLD + p.getDisplayName() + "'s " + ChatColor.AQUA + access.name().toLowerCase() + ChatColor.GOLD + " warp locations: ");
+			p.sendMessage(ChatColor.GOLD + p.getName() + "'s " + ChatColor.AQUA + access.name().toLowerCase() + ChatColor.GOLD + " warp locations: ");
 		}
 		
 		StringBuilder locationList = new StringBuilder ();

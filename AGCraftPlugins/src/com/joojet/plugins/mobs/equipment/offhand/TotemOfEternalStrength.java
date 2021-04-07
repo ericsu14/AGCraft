@@ -24,7 +24,7 @@ public class TotemOfEternalStrength extends Equipment
 		this.addLoreToItemMeta("Hold onto this totem to have the blessings of eternal strength."
 				+ " However, holding such great power also makes you less resilient towards attacks.");
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
-		this.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		this.addItemFlagstoMeta(ItemFlag.HIDE_ENCHANTS);
 		this.makeSoulbound();
 	}
 }

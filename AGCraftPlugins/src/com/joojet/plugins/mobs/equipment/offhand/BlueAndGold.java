@@ -30,7 +30,7 @@ public class BlueAndGold extends ShieldEquipment
 				new Pattern (DyeColor.YELLOW, PatternType.STRAIGHT_CROSS),
 				new Pattern (DyeColor.BLUE, PatternType.CURLY_BORDER));
 		
-		this.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ENCHANTS);
+		this.addItemFlagstoMeta(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ENCHANTS);
 		this.makeUnbreakable();
 		this.addAttackAttributes(4.0, 0.0);
 		this.addDefenseAttributes(4.0, 4.0, 0.10);

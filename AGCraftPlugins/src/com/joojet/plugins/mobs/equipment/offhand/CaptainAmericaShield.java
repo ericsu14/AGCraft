@@ -29,7 +29,7 @@ public class CaptainAmericaShield extends ShieldEquipment
 				new Pattern (DyeColor.WHITE, PatternType.CIRCLE_MIDDLE),
 				new Pattern (DyeColor.BLUE, PatternType.BORDER));
 		
-		this.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ENCHANTS);
+		this.addItemFlagstoMeta(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ENCHANTS);
 		this.makeUnbreakable();
 		this.addAttackAttributes(6.0, 0.0);
 		this.addDefenseAttributes(0.0, 4.0, 0.15);

@@ -27,7 +27,7 @@ public class JoojCake extends Equipment
 				+ "enjoy a little slice of the spiritual fantasy!", TextPattern.WORD,
 				ChatColor.RED, ChatColor.GOLD, ChatColor.YELLOW, ChatColor.GREEN, ChatColor.BLUE, ChatColor.DARK_PURPLE, ChatColor.LIGHT_PURPLE));
 		this.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
-		this.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		this.addItemFlagstoMeta(ItemFlag.HIDE_ENCHANTS);
 		this.makeSoulbound();
 	}
 }

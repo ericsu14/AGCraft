@@ -235,8 +235,8 @@ public abstract class Equipment extends ItemStack
 		this.setItemMeta(meta);
 	}
 	
-	/** Adds a list of item flags to this equipment */
-	protected void addItemFlags (ItemFlag... flags)
+	/** Adds a list of item flags to this equipment's item-meta */
+	protected void addItemFlagstoMeta (ItemFlag... flags)
 	{
 		ItemMeta meta = this.getItemMeta();
 		for (ItemFlag flag : flags)
