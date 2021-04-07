@@ -18,12 +18,13 @@ import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public class AsyncWarpPlayerTask extends AsyncDatabaseTask<Location>
 {
+	/** The player's bed spawn location */
 	protected Location playerBedSpawnLocation;
-	
+	/** The player executing this command */
 	protected Player player;
-	
+	/** The UUID of the player */
 	protected UUID playerUUID;
-	
+	/** The name of the location the player is warping to */
 	protected String locationName;
 	
 	public AsyncWarpPlayerTask (Player player, String locationName)

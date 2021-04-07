@@ -1,5 +1,6 @@
 package com.joojet.plugins.consequences;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.UUID;
 
@@ -12,6 +13,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
@@ -31,19 +33,32 @@ public class ConsequenceManager extends AGListener
 		}
 		
 		Player p = event.getPlayer();
-		
 		UUID uuid = p.getUniqueId();
 		
-		// If the player has any active consequences, force him to wear a clown head
-		if (ConsequenceDatabaseManager.hasConsequences(uuid))
+		new AsyncDatabaseTask <Boolean> ()
 		{
-			this.forceClownHead(p, "BAD SPORT! Because of your recent actions on this server, you will be forced to wear a clown head for a certain period of time as consequence.");
-		}
-		// Otherwise, remove the clown head from the player if he is wearing it
-		else
-		{
-			removeClownHead (p);
-		}
+			@Override
+			protected Boolean getDataFromDatabase() throws SQLException 
+			{
+				return ConsequenceDatabaseManager.hasConsequences(uuid);
+			}
+
+			@Override
+			protected void handlePromise(Boolean result) 
+			{
+				// If the player has any active consequences, force him to wear a clown head
+				if (result)
+				{
+					forceClownHead(p, "BAD SPORT! Because of your recent actions on this server, you will be forced to wear a clown head for a certain period of time as consequence.");
+				}
+				// Otherwise, remove the clown head from the player if he is wearing it
+				else
+				{
+					removeClownHead (p);
+				}
+			}
+			
+		}.runDatabaseTask();
 	}
 	
 	/** If the player has an active consequence, force him to wear the hat again */
@@ -59,11 +74,25 @@ public class ConsequenceManager extends AGListener
 		Player p = event.getPlayer();
 		UUID uuid = p.getUniqueId();
 		
-		// If the player has any active consequences, force him to wear a clown head
-		if (ConsequenceDatabaseManager.hasConsequences(uuid))
+		new AsyncDatabaseTask <Boolean> ()
 		{
-			this.forceClownHead(p, "You think you can get away that easily...");
-		}
+			@Override
+			protected Boolean getDataFromDatabase() throws SQLException 
+			{
+				return ConsequenceDatabaseManager.hasConsequences(uuid);
+			}
+
+			@Override
+			protected void handlePromise(Boolean result) 
+			{
+				// If the player has any active consequences, force him to wear a clown head
+				if (ConsequenceDatabaseManager.hasConsequences(uuid))
+				{
+					forceClownHead(p, "You think you can get away that easily...");
+				}
+			}
+			
+		}.runDatabaseTask();
 	}
 	
 	
@@ -72,22 +101,35 @@ public class ConsequenceManager extends AGListener
 	 * 		@param message - Custom message to be shown to the player */
 	private void forceClownHead (Player p, String message)
 	{
-		Calendar longest = ConsequenceDatabaseManager.getLongestRunningConsequence(p.getUniqueId());
-		
-		PlayerInventory inventory = p.getInventory();
-		// If the player has a helmet, force him to drop that helmet
-		if (inventory.getHelmet() != null)
+		new AsyncDatabaseTask <Calendar> ()
 		{
-			ItemStack helmet = inventory.getHelmet();
-			// If the player is not already wearing a clown head, force him to wear one
-			if (!ClownHead.isClownHead(helmet))
+
+			@Override
+			protected Calendar getDataFromDatabase() throws SQLException 
 			{
-				p.getWorld().dropItem(p.getLocation(), helmet);
+				return ConsequenceDatabaseManager.getLongestRunningConsequence(p.getUniqueId());
 			}
-		}
-		inventory.setHelmet(new ClownHead (ChatColor.DARK_RED, longest));
-		p.sendMessage(ChatColor.DARK_RED + message);
-		p.sendMessage(ChatColor.RED + "This will take effect until " + longest.getTime().toString());
+
+			@Override
+			protected void handlePromise(Calendar longest) 
+			{
+				PlayerInventory inventory = p.getInventory();
+				// If the player has a helmet, force him to drop that helmet
+				if (inventory.getHelmet() != null)
+				{
+					ItemStack helmet = inventory.getHelmet();
+					// If the player is not already wearing a clown head, force him to wear one
+					if (!ClownHead.isClownHead(helmet))
+					{
+						p.getWorld().dropItem(p.getLocation(), helmet);
+					}
+				}
+				inventory.setHelmet(new ClownHead (ChatColor.DARK_RED, longest));
+				p.sendMessage(ChatColor.DARK_RED + message);
+				p.sendMessage(ChatColor.RED + "This will take effect until " + longest.getTime().toString());
+			}
+			
+		}.runDatabaseTask();
 	}
 	
 	/** Removes a clown head from the player's inventory if he is wearing one */
@@ -109,7 +151,7 @@ public class ConsequenceManager extends AGListener
 	@Override
 	public void loadConfigVariables(ServerConfigFile config) 
 	{
-		// No varibles to load
+		// No variables to load
 	}
 
 	@Override

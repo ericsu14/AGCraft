@@ -11,10 +11,11 @@ import com.joojet.plugins.warp.database.EWarpDatabaseManager;
 
 public class AsyncEWarpCheckerTask extends AsyncDatabaseTask<DatabaseResponse <String>>  
 {
+	/** The name of the location the player is warping to */
 	protected String locationName;
-	
+	/** The player executing this command */
 	protected Player player;
-	
+	/** The UUID of the player */
 	protected String playerUUID;
 	
 	public AsyncEWarpCheckerTask (Player player, String locationName)

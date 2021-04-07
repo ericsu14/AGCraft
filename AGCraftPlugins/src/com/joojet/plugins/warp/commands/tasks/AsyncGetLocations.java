@@ -13,8 +13,11 @@ import com.joojet.plugins.warp.database.LocationEntry;
 
 public abstract class AsyncGetLocations extends AsyncDatabaseTask<Pair <List <LocationEntry>, List <LocationEntry>>> 
 {
+	/** Number of arguments in the command */
 	protected int argsLength;
+	/** Access level the player is searching for */
 	protected WarpAccessLevel accessLevel;
+	/** The player executing this command */
 	protected Player player;
 	
 	public AsyncGetLocations (int argsLength, WarpAccessLevel accessLevel, Player player)
