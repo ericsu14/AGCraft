@@ -1,11 +1,12 @@
 package com.joojet.plugins.biblefetcher.string;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ContentParser 
 {
 	/** Merges a list of passages into one large passage */
-	public static String mergeContent (ArrayList <String> list)
+	public static String mergeContent (List <String> list)
 	{
 		StringBuilder content = new StringBuilder ();
 		for (String s : list)
@@ -16,18 +17,18 @@ public class ContentParser
 	}
 	
 	/** Splits a large string into multiple pages */
-	public static ArrayList <String> formatContent (String content, int start)
+	public static List <String> formatContent (String content, int start)
 	{
-		ArrayList <String> temp = new ArrayList <String> ();
+		List <String> temp = new ArrayList <String> ();
 		temp.add(content);
 		return formatContent (temp, start);
 	}
 	
 	/** Splits a passage into two parts should it exceed character MC book's character limits */
-	public static ArrayList <String> formatContent (ArrayList <String> list, int start)
+	public static List <String> formatContent (List <String> list, int start)
 	{
 		int maxLength = 240;
-		ArrayList <String> result = new ArrayList <String> ();
+		List <String> result = new ArrayList <String> ();
 		
 		int i = start - 1;
 		boolean firstLine = true;

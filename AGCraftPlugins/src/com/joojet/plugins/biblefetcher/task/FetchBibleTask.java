@@ -3,21 +3,26 @@ package com.joojet.plugins.biblefetcher.task;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.biblefetcher.constants.BibleID;
 import com.joojet.biblefetcher.constants.BookID;
 import com.joojet.biblefetcher.fetcher.BibleFetcher;
 import com.joojet.biblefetcher.interpreter.BibleCommandInterpreter;
+import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.response.DatabaseResponse;
 import com.joojet.plugins.biblefetcher.string.ContentParser;
 
-public class FetchBibleTask extends Thread
+public class FetchBibleTask extends BukkitRunnable
 {
 	/** Player receiving the bible */
 	protected Player player;
@@ -67,41 +72,68 @@ public class FetchBibleTask extends Thread
 	@Override
 	public void run() 
 	{
-		try
+		new AsyncDatabaseTask <DatabaseResponse <List<String>>> ()
 		{
-			ArrayList <String> verses = fetchVerses (this.args);
-			verses.add(0, this.generateHeader());
-			
-			// Check if the player's inventory is full
-			if (player.getInventory().firstEmpty() == -1)
+
+			@Override
+			protected DatabaseResponse<List<String>> getDataFromDatabase() throws SQLException 
 			{
-				throw new RuntimeException ("Your inventory is full. Please clear at least one spot in your inventory before trying again.");
+				boolean result = false;
+				StringBuilder message = new StringBuilder ();
+				List <String> verses = new ArrayList <String> ();
+				try
+				{
+					verses = fetchVerses (args);
+					verses.add(0, generateHeader());
+					result = true;
+				}
+				
+				catch (RuntimeException re) {
+					message.append(re.getMessage());
+				} catch (MalformedURLException e) {
+					message.append(e.getMessage());
+				} catch (ProtocolException e) {
+					message.append(e.getMessage());
+				} catch (IOException e) {
+					message.append(e.getMessage());
+				}
+				
+				return new DatabaseResponse <List<String>> (verses, message.toString(), result);
+			}
+
+			@Override
+			protected void handlePromise(DatabaseResponse<List<String>> data) 
+			{
+				if (data.getStatus())
+				{
+					// Check if the player's inventory is full
+					if (player.getInventory().firstEmpty() == -1)
+					{
+						player.sendMessage(ChatColor.RED + "Your inventory is full. Please clear at least one spot in your inventory before trying again.");
+						return;
+					}
+					
+					// Merges the pages together
+					String mergedPages = ContentParser.mergeContent(ContentParser.formatContent(data.getData(), start));
+					ItemStack bible = new ItemStack (Material.WRITTEN_BOOK);
+					BookMeta bibleContent = (BookMeta) bible.getItemMeta();
+					
+					bibleContent.setTitle(generateHeader());
+					bibleContent.setAuthor(bibleID.getBibleID());
+					bibleContent.setPages(ContentParser.formatContent (mergedPages, 1));
+					bible.setItemMeta(bibleContent);
+					
+					player.getInventory().addItem(bible);
+					player.sendMessage(ChatColor.AQUA + "" + generateHeader() + ChatColor.GOLD + " has been added into your inventory.");
+				}
+				else
+				{
+					System.err.println ("[BibleFetcher] " + data.getMessage());
+					player.sendMessage (ChatColor.RED + "[BibleFetcher] " + data.getMessage());
+				}
 			}
 			
-			// Merges the pages together
-			String mergedPages = ContentParser.mergeContent(ContentParser.formatContent(verses, this.start));
-			ItemStack bible = new ItemStack (Material.WRITTEN_BOOK);
-			BookMeta bibleContent = (BookMeta) bible.getItemMeta();
-			
-			bibleContent.setTitle(this.generateHeader());
-			bibleContent.setAuthor(bibleID.getBibleID());
-			bibleContent.setPages(ContentParser.formatContent (mergedPages, 1));
-			bible.setItemMeta(bibleContent);
-			
-			player.getInventory().addItem(bible);
-			player.sendMessage(ChatColor.AQUA + "" + this.generateHeader() + ChatColor.GOLD + " has been added into your inventory.");
-		}
-		catch (RuntimeException e)
-		{
-			System.err.println ("[BibleFetcher] " + e.getMessage());
-			player.sendMessage (ChatColor.RED + "[God] " + e.getMessage());
-		}
-		
-		catch (Exception e)
-		{
-			System.err.println ("[BibleFetcher] " + e.getMessage());
-			player.sendMessage(ChatColor.RED + "[God] An internal error occured while fetching this passage.");
-		}
+		}.runDatabaseTask();
 	}
 	
 	/** Connects with the BibleParser API to fetch Bible passages based on what is present in the command's arguments
@@ -111,7 +143,7 @@ public class FetchBibleTask extends Thread
 	 * 		@throws IOException if there is a problem regarding connecting with the web API
 	 * 		@throws MalformedURLException if there is a problem with the web API's URL
 	 * 		@throws NumberFormatException if there is a problem extracting an integer based parameter in the commandline arguments */
-	protected ArrayList <String> fetchVerses (String [] args) throws RuntimeException, NumberFormatException, MalformedURLException, ProtocolException, IOException
+	protected List <String> fetchVerses (String [] args) throws RuntimeException, NumberFormatException, MalformedURLException, ProtocolException, IOException
 	{
 		this.n = args.length;
 		ArrayList <String> result = null;

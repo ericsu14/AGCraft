@@ -1,7 +1,7 @@
 package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.junit.jupiter.api.Test;
@@ -23,8 +23,8 @@ class TestFunctions {
 	{
 		try 
 		{
-			ArrayList <String> verses = BibleFetcher.getVerses(BibleID.KJV, BookID.REV, 11, 18, 18);
-			ArrayList <String> split = ContentParser.formatContent (verses, 1);
+			List <String> verses = BibleFetcher.getVerses(BibleID.KJV, BookID.REV, 11, 18, 18);
+			List <String> split = ContentParser.formatContent (verses, 1);
 			assertEquals (split.size(), 2);
 			vertifyCharacterLimits (split);
 		} 
@@ -43,8 +43,8 @@ class TestFunctions {
 		try 
 		{
 			// Known as the longest passage in the bible
-			ArrayList <String> verses = BibleFetcher.getVerses(BibleID.KJV, BookID.EST, 8, 9, 9);
-			ArrayList <String> split = ContentParser.formatContent (verses, 1);
+			List <String> verses = BibleFetcher.getVerses(BibleID.KJV, BookID.EST, 8, 9, 9);
+			List <String> split = ContentParser.formatContent (verses, 1);
 			assertEquals (split.size(), 3);
 			vertifyCharacterLimits (split);
 		} 
@@ -60,10 +60,10 @@ class TestFunctions {
 	{
 		try
 		{
-			ArrayList <String> verses = BibleFetcher.getVerses(BibleID.KJV, BookID.MRK, 1);
+			List <String> verses = BibleFetcher.getVerses(BibleID.KJV, BookID.MRK, 1);
 			verses.add(0, "Header");
 			String bigPassage = ContentParser.mergeContent(ContentParser.formatContent(verses, 1));
-			ArrayList <String> pages = ContentParser.formatContent(bigPassage, 1);
+			List <String> pages = ContentParser.formatContent(bigPassage, 1);
 			vertifyCharacterLimits (pages);
 		}
 		
@@ -100,7 +100,7 @@ class TestFunctions {
 	
 	
 	/** Checks if each item in the array is below 255 characters */
-	void vertifyCharacterLimits (ArrayList <String> list)
+	void vertifyCharacterLimits (List <String> list)
 	{
 		for (String s : list)
 		{

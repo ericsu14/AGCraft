@@ -31,7 +31,7 @@ public class Bible extends AGCommandExecutor
 		{
 			Player player = (Player) sender;
 			FetchBibleTask bibleTask = new FetchBibleTask (player, args, this.bibleCommandInterpreter);
-			bibleTask.start();
+			bibleTask.run();
 			return true;
 		}
 		return false;

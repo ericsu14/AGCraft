@@ -2,7 +2,7 @@ package com.joojet.biblefetcher.main;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
-import java.util.ArrayList;
+import java.util.List;
 
 import com.joojet.biblefetcher.constants.BibleID;
 import com.joojet.biblefetcher.constants.BookID;
@@ -13,7 +13,7 @@ public class Test {
 	
 	public static void fetchVerses (BibleID translation, BookID book, int chapter) throws MalformedURLException, ProtocolException, RuntimeException, IOException
 	{
-		ArrayList <String> container = BibleFetcher.getVerses(translation, book, chapter);
+		List <String> container = BibleFetcher.getVerses(translation, book, chapter);
 		
 		System.out.println (book.getFormattedTitle() + " " + chapter + " (" + translation.getBibleID() + ")");
 		int i = 1;
@@ -26,7 +26,7 @@ public class Test {
 	
 	public static void fetchVerses (BibleID translation, BookID book, int chapter, int to) throws MalformedURLException, ProtocolException, RuntimeException, IOException
 	{
-		ArrayList <String> container = BibleFetcher.getVerses(translation, book, chapter, to);
+		List <String> container = BibleFetcher.getVerses(translation, book, chapter, to);
 		
 		System.out.println (book.getFormattedTitle() + " " + chapter + ":" + to + "-" + (container.size() + (to - 1)) + " (" + translation.getBibleID() + ")");
 		int i = to;
@@ -39,7 +39,7 @@ public class Test {
 	
 	public static void fetchVerses (BibleID translation, BookID book, int chapter, int to, int from) throws MalformedURLException, ProtocolException, RuntimeException, IOException
 	{
-		ArrayList <String> container = BibleFetcher.getVerses(translation, book, chapter, to, from);
+		List <String> container = BibleFetcher.getVerses(translation, book, chapter, to, from);
 		System.out.println (book.getFormattedTitle() + " " + chapter + ":" + to + "-" + from + " (" + translation.getBibleID() + ")");
 		int i = to;
 		for (String s : container)
