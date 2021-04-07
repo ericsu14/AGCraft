@@ -1,0 +1,44 @@
+package com.joojet.plugins.warp.commands.tasks;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.bukkit.entity.Player;
+
+import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.util.Pair;
+import com.joojet.plugins.warp.constants.WarpAccessLevel;
+import com.joojet.plugins.warp.database.LocationDatabaseManager;
+import com.joojet.plugins.warp.database.LocationEntry;
+
+public abstract class AsyncGetLocations extends AsyncDatabaseTask<Pair <List <LocationEntry>, List <LocationEntry>>> 
+{
+	protected int argsLength;
+	protected WarpAccessLevel accessLevel;
+	protected Player player;
+	
+	public AsyncGetLocations (int argsLength, WarpAccessLevel accessLevel, Player player)
+	{
+		this.argsLength = argsLength;
+		this.accessLevel = accessLevel;
+		this.player = player;
+	}
+	
+	@Override
+	protected Pair<List<LocationEntry>, List<LocationEntry>> getDataFromDatabase()
+			throws SQLException, RuntimeException 
+	{
+		Pair<List<LocationEntry>, List<LocationEntry>> result = new Pair <List <LocationEntry>, List <LocationEntry>> (null, null);
+		// Prints all public locations
+		if (this.argsLength == 0 || this.accessLevel == WarpAccessLevel.PUBLIC)
+		{
+			result.setKey(LocationDatabaseManager.getLocationsAsList(this.player, WarpAccessLevel.PUBLIC));
+		}
+		if (this.argsLength == 0 || this.accessLevel == WarpAccessLevel.PRIVATE)
+		{
+			result.setEntry(LocationDatabaseManager.getLocationsAsList(this.player, WarpAccessLevel.PRIVATE));
+		}
+		return result;
+	}
+
+}
