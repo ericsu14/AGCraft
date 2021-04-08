@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
-import com.joojet.plugins.agcraft.asynctasks.response.DatabaseResponse;
+import com.joojet.plugins.agcraft.asynctasks.response.DatabaseStatus;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
@@ -40,10 +40,10 @@ public class RemoveLocation extends AGCommandExecutor
 			
 			String locationName = args[0];
 			
-			new AsyncDatabaseTask <DatabaseResponse <Object>> ()
+			new AsyncDatabaseTask <DatabaseStatus> ()
 			{
 				@Override
-				protected DatabaseResponse<Object> getDataFromDatabase() throws SQLException 
+				protected DatabaseStatus getDataFromDatabase() throws SQLException 
 				{
 					boolean status;
 					StringBuilder message = new StringBuilder ();
@@ -58,14 +58,13 @@ public class RemoveLocation extends AGCommandExecutor
 						message.append(ChatColor.RED + re.getMessage());
 						status = false;
 					}
-					return new DatabaseResponse <Object> (message.toString(), status);
+					return new DatabaseStatus (message.toString(), status);
 				}
 
 				@Override
-				protected void handlePromise(DatabaseResponse<Object> data) 
+				protected void handlePromise(DatabaseStatus data) 
 				{
 					p.sendMessage(data.getMessage());
-					
 				}
 				
 			}.runDatabaseTask();

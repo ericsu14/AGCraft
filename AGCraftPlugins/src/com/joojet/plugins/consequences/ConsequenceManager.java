@@ -102,7 +102,6 @@ public class ConsequenceManager extends AGListener
 	{
 		new AsyncDatabaseTask <Calendar> ()
 		{
-
 			@Override
 			protected Calendar getDataFromDatabase() throws SQLException 
 			{
@@ -148,20 +147,17 @@ public class ConsequenceManager extends AGListener
 	}
 
 	@Override
-	public void loadConfigVariables(ServerConfigFile config) 
-	{
+	public void loadConfigVariables(ServerConfigFile config) {
 		// No variables to load
 	}
 
 	@Override
 	public void onEnable() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void onDisable() {
 		// TODO Auto-generated method stub
-		
 	}
 }

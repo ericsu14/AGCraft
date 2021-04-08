@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import org.bukkit.ChatColor;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
-import com.joojet.plugins.agcraft.asynctasks.response.DatabaseResponse;
+import com.joojet.plugins.agcraft.asynctasks.response.DatabaseStatus;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
@@ -54,10 +54,10 @@ public class SetLocation extends AGCommandExecutor
 				return false;
 			}
 			
-			new AsyncDatabaseTask <DatabaseResponse<Object>> ()
+			new AsyncDatabaseTask <DatabaseStatus> ()
 			{
 				@Override
-				protected DatabaseResponse<Object> getDataFromDatabase() throws SQLException
+				protected DatabaseStatus getDataFromDatabase() throws SQLException
 				{
 					WarpAccessLevel access = (n >= 2) ? interpreter.searchTrie(args[1]) : WarpAccessLevel.PRIVATE;
 					access = (access == null) ? WarpAccessLevel.PRIVATE : access;
@@ -73,11 +73,11 @@ public class SetLocation extends AGCommandExecutor
 					{
 						message.append(ChatColor.RED + e.getMessage());
 					}
-					return new DatabaseResponse <Object> (message.toString(), true);
+					return new DatabaseStatus (message.toString(), true);
 				}
 
 				@Override
-				protected void handlePromise(DatabaseResponse<Object> data) 
+				protected void handlePromise(DatabaseStatus data) 
 				{
 					p.sendMessage(data.getMessage());
 					
