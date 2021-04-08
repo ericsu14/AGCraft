@@ -183,6 +183,7 @@ public abstract class Equipment extends ItemStack
 	 * 		@param meta - ItemMeta we are adding the lore info into */
 	protected void addLoreToItemMeta (String lore)
 	{
+		@SuppressWarnings("deprecation")
 		List <String> itemLore = this.getItemMeta().getLore();
 		if (itemLore == null)
 		{

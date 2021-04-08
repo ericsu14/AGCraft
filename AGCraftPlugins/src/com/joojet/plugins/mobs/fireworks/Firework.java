@@ -27,6 +27,7 @@ public abstract class Firework
     	StringBuilder str = new StringBuilder();
 		str.append(color);
 		ItemMeta meta = item.getItemMeta();
+		@SuppressWarnings("deprecation")
 		List <String> itemLore = meta.getLore();
 		
 		if (itemLore == null)

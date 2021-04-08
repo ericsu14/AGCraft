@@ -105,8 +105,13 @@ public class RewardManager extends AGListener
 
 			@SuppressWarnings("deprecation")
 			@Override
-			protected void handlePromise(Boolean check) 
+			protected void handlePromise(Boolean rewardsCheck) 
 			{
+				if (rewardsCheck)
+				{
+					return;
+				}
+				
 				player.sendMessage(ChatColor.GREEN + "Thanks for taking part in " + ChatColor.GOLD + type.getFullName() + "!");
 				player.sendMessage(ChatColor.GREEN + "As a token of apprication, I have added the following rewards to your account, which are: ");
 				switch (type)
