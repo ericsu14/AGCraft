@@ -8,7 +8,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.bukkit.event.EventHandler;
 
 import com.destroystokyo.paper.event.server.AsyncTabCompleteEvent;
-import com.joojet.plugins.agcraft.commands.CommandTypeInterpreter;
 import com.joojet.plugins.agcraft.commands.PlayerCommand;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
@@ -20,14 +19,13 @@ public class TabCompleteListener extends AGListener
 {
 	protected ConcurrentHashMap <CommandType, PlayerCommand> playerCommands;
 	
-	protected CommandTypeInterpreter commandTypeInterpreter;
-	
 	public TabCompleteListener (ConcurrentHashMap <CommandType, PlayerCommand> playerCommands)
 	{
 		this.playerCommands = playerCommands;
-		this.commandTypeInterpreter = new CommandTypeInterpreter ();
 	}
 	
+	/** Listens to PaperMC's AsyncTabCompleteEvents and run the AGCommand's async command handler
+	 *  if one exists for that command */
 	@EventHandler
 	public void onAsyncTabComplete (AsyncTabCompleteEvent event)
 	{
@@ -65,7 +63,13 @@ public class TabCompleteListener extends AGListener
 		{
 			// Parse out the slash character from the buffer and retrieve the first tokenized string, which is the command itself
 			String command = buffer.substring(1).split(" ")[0];
-			return this.commandTypeInterpreter.searchTrie(command);
+			for (CommandType commandType : CommandType.values())
+			{
+				if (command.equalsIgnoreCase(commandType.toString()))
+				{
+					return commandType;
+				}
+			}
 		}
 		return null;
 	}

@@ -57,7 +57,6 @@ public class ConsequenceManager extends AGListener
 					removeClownHead (p);
 				}
 			}
-			
 		}.runDatabaseTask();
 	}
 	

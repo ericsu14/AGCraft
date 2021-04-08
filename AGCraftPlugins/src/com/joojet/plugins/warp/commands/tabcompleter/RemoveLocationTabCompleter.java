@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.World.Environment;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -36,9 +37,11 @@ public class RemoveLocationTabCompleter extends AGTabCompleter implements AsyncT
 					// Gets all private and public locations from the database and outputs them to the autocompleter
 					try
 					{
-						LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PRIVATE).
+						Environment playerEnvironment = p.getWorld().getEnvironment();
+						String playerUUID = p.getUniqueId().toString();
+						LocationDatabaseManager.getLocationsAsList(playerUUID, playerEnvironment, WarpAccessLevel.PRIVATE).
 							forEach(entry -> allLocations.add(entry.getLocationName()));
-						LocationDatabaseManager.getLocationsAsList(p, WarpAccessLevel.PUBLIC).
+						LocationDatabaseManager.getLocationsAsList(playerUUID, playerEnvironment, WarpAccessLevel.PUBLIC).
 							forEach(entry -> allLocations.add(entry.getLocationName()));	
 						
 						return this.filterArrayByInput(allLocations.toArray(), input);

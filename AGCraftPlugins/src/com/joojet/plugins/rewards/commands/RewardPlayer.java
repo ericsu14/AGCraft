@@ -10,6 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.response.DatabaseStatus;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
@@ -85,19 +87,30 @@ public class RewardPlayer extends AGCommandExecutor
 			}
 			
 			// Rewards each player listed in this command
-			try 
+			new AsyncDatabaseTask <DatabaseStatus> ()
 			{
-				for (UUID p : players)
+				@Override
+				protected DatabaseStatus getDataFromDatabase() throws SQLException 
 				{
-					RewardDatabaseManager.grantReward(p, rewardType, eventType);
-					sender.sendMessage ("Sucessfully rewarded player with uuid " + p.toString() + " | " + rewardType.toString());
+					StringBuilder message = new StringBuilder ();
+					for (UUID p : players)
+					{
+						RewardDatabaseManager.grantReward(p, rewardType, eventType);
+						message.append ("Sucessfully rewarded player with uuid " + p.toString() + " | " + rewardType.toString());
+						message.append ('\n');
+					}
+
+					return new DatabaseStatus (message.toString(), true);
 				}
-			}
-			catch (SQLException e)
-			{
-				sender.sendMessage ("Error: " + e.getMessage());
-			}
-			
+
+				@Override
+				protected void handlePromise(DatabaseStatus data) 
+				{
+					sender.sendMessage(data.getMessage());
+				}
+				
+			}.runDatabaseTask();
+
 			return true;
 		}
 		sender.sendMessage ("Invalid source");

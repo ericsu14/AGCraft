@@ -20,6 +20,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.fireworks.tasks.SpawnFireworksOnLocationTask;
@@ -33,7 +34,7 @@ public class RewardGUI implements Listener
 	/** The inventory used for this rewards GUI */
     private Inventory inv;
     /** Stores a list of reward items shown to the player */
-    private ArrayList <RewardEntry> entries;
+    private List <RewardEntry> entries;
     /** Stores a reference to the player opening the rewards GUI */
     private Player player;
     /** Amount of words that could be fitted per line when generating
@@ -57,37 +58,47 @@ public class RewardGUI implements Listener
     /** Opens the inventory */
     public void openInventory() 
     {
-    	try 
+    	
+    	new AsyncDatabaseTask <List <RewardEntry>> ()
     	{
-    		this.entries = RewardDatabaseManager.fetchUnclaimedRewards(player.getUniqueId());
-	        this.inv = Bukkit.createInventory(null, maxInvSize, "Claim Rewards");
-	        int index = 0;
-	        for (RewardEntry entry : entries)
-	        {
-	        	// Prevents overflow
-	        	if (index > maxInvSize)
-	        	{
-	        		break;
-	        	}
-	        	
-	        	// Appends lore and reward ID to the item. Reward ID is always in the last slot of the item's lore
-	        	ItemStack reward = entry.getReward().getReward();
-	        	this.addLoreToItemMeta(reward, entry.getEvent().getFormattedLore(), ChatColor.YELLOW);
-	        	this.addLoreToItemMeta(reward, entry.getRewardID() + "", ChatColor.MAGIC);
-	        	this.inv.addItem(reward);
-	        	++index;
-	        }
-	        player.openInventory(inv);
-	    } 
-    	catch (SQLException e) 
-    	{
-    		player.sendMessage(ChatColor.RED + "An internal error occured while trying to fetch rewards.");
-    		e.printStackTrace();
-    	}
+
+			@Override
+			protected List<RewardEntry> getDataFromDatabase() throws SQLException 
+			{
+				return RewardDatabaseManager.fetchUnclaimedRewards(player.getUniqueId());
+			}
+
+			@SuppressWarnings("deprecation")
+			@Override
+			protected void handlePromise(List<RewardEntry> data) 
+			{
+				entries = data;
+				inv = Bukkit.createInventory(null, maxInvSize, "Claim Rewards");
+		        int index = 0;
+		        for (RewardEntry entry : entries)
+		        {
+		        	// Prevents overflow
+		        	if (index > maxInvSize)
+		        	{
+		        		break;
+		        	}
+		        	
+		        	// Appends lore and reward ID to the item. Reward ID is always in the last slot of the item's lore
+		        	ItemStack reward = entry.getReward().getReward();
+		        	addLoreToItemMeta(reward, entry.getEvent().getFormattedLore(), ChatColor.YELLOW);
+		        	addLoreToItemMeta(reward, entry.getRewardID() + "", ChatColor.MAGIC);
+		        	inv.addItem(reward);
+		        	++index;
+		        }
+		        player.openInventory(inv);
+			}
+    		
+    	}.runDatabaseTask();
     }
 
     /** Handles inventory click events */
-    @EventHandler
+    @SuppressWarnings("deprecation")
+	@EventHandler
     public void onInventoryClick(final InventoryClickEvent e) 
     {
     	if (e.getInventory() != inv) return;
@@ -122,31 +133,38 @@ public class RewardGUI implements Listener
     		}
     		
         	int rewardID = this.getRewardID(clickedItem);
-        	try
+        	
+        	new AsyncDatabaseTask <Boolean> ()
         	{
-        		RewardDatabaseManager.claimReward(rewardID);
-        		this.removeIDField(clickedItem);
-        		this.player.getInventory().addItem(clickedItem);
-        		this.player.sendMessage (ChatColor.AQUA + "Acquired " + clickedItem.getItemMeta().getDisplayName() + ChatColor.AQUA +"!");
-        		this.player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
-        		// Checks if we should launch a small fireworks show based on the retrieved item
-        		if (clickedItem.getType() == Material.CAKE)
-        		{
-        			new SpawnFireworksOnLocationTask (this.player.getLocation(), 48, 3, 250).runTaskTimer(AGCraftPlugin.plugin, 30, 15);
-        			this.player.sendMessage(ChatColor.GOLD + "Yay! Happy birthday " + ChatColor.AQUA + this.player.getDisplayName() +
-        					ChatColor.GOLD + "!!");
-        			this.player.getLocation().getWorld().playSound(this.player.getLocation(), Sound.MUSIC_DISC_CAT, SoundCategory.RECORDS, 10.0f, 1.0f);
-        			this.player.getWorld().setTime(14000);
-        		}
+
+				@Override
+				protected Boolean getDataFromDatabase() throws SQLException 
+				{
+					RewardDatabaseManager.claimReward(rewardID);
+					return true;
+				}
+
+				@Override
+				protected void handlePromise(Boolean data) 
+				{
+					removeIDField(clickedItem);
+	        		player.getInventory().addItem(clickedItem);
+	        		player.sendMessage (ChatColor.AQUA + "Acquired " + clickedItem.getItemMeta().getDisplayName() + ChatColor.AQUA +"!");
+	        		player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
+	        		// Checks if we should launch a small fireworks show based on the retrieved item
+	        		if (clickedItem.getType() == Material.CAKE)
+	        		{
+	        			new SpawnFireworksOnLocationTask (player.getLocation(), 48, 3, 250).runTaskTimer(AGCraftPlugin.plugin, 30, 15);
+	        			player.sendMessage(ChatColor.GOLD + "Yay! Happy birthday " + ChatColor.AQUA + player.getDisplayName() +
+	        					ChatColor.GOLD + "!!");
+	        			player.getLocation().getWorld().playSound(player.getLocation(), Sound.MUSIC_DISC_CAT, SoundCategory.RECORDS, 10.0f, 1.0f);
+	        			player.getWorld().setTime(14000);
+	        		}
+	        		
+	        		inv.remove(clickedItem);
+				}
         		
-        		this.inv.remove(clickedItem);
-        	}
-        	catch (SQLException ex)
-        	{
-        		this.player.sendMessage (ChatColor.RED + "Unable to get reward due to an internal error");
-        		System.err.println ("Player " + this.player.getDisplayName() + " is having trouble getting " + clickedItem.toString());
-        		ex.printStackTrace();
-        	}
+        	}.runDatabaseTask();
         }
     }
 
@@ -169,7 +187,8 @@ public class RewardGUI implements Listener
     
     /** Returns the ID of an item
      * 		@param ItemStack item - item we are extracting the reward entry ID from */
-    public int getRewardID (ItemStack item)
+    @SuppressWarnings("deprecation")
+	public int getRewardID (ItemStack item)
     {
     	ItemMeta meta = item.getItemMeta();
     	List <String> lore = meta.getLore();
@@ -197,7 +216,8 @@ public class RewardGUI implements Listener
     
     /** Removes ID field from an item's lore
      * 		@param item - Item we are stripping the ID info out of */
-    public void removeIDField (ItemStack item)
+    @SuppressWarnings("deprecation")
+	public void removeIDField (ItemStack item)
     {
     	ItemMeta meta = item.getItemMeta();
     	List <String> itemLore = meta.getLore();
@@ -217,7 +237,8 @@ public class RewardGUI implements Listener
 	 * 		@param item - Item we are adding lore info into
 	 * 		@param lore - The lore we are adding into the item meta
 	 * 		@param color - Color of the lore text */
-    public void addLoreToItemMeta (ItemStack item, String lore, ChatColor color)
+    @SuppressWarnings("deprecation")
+	public void addLoreToItemMeta (ItemStack item, String lore, ChatColor color)
     {
     	StringBuilder str = new StringBuilder();
 		str.append(color);
