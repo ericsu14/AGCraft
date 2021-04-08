@@ -1,5 +1,6 @@
 package com.joojet.plugins.warp.commands.tabcompleter;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +10,11 @@ import org.bukkit.entity.Player;
 
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGTabCompleter;
+import com.joojet.plugins.agcraft.interfaces.AsyncTabCompleteOperation;
 import com.joojet.plugins.warp.constants.WarpAccessLevel;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 
-public class RemoveLocationTabCompleter extends AGTabCompleter 
+public class RemoveLocationTabCompleter extends AGTabCompleter implements AsyncTabCompleteOperation
 {
 	public RemoveLocationTabCompleter ()
 	{
@@ -50,5 +52,12 @@ public class RemoveLocationTabCompleter extends AGTabCompleter
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<String> getDataFromDatabase(CommandSender sender, String alias, List<String> parameters)
+			throws SQLException 
+	{
+		return this.onTabComplete(sender, null, alias, parameters.toArray(new String[parameters.size()]));
 	}
 }

@@ -1,7 +1,7 @@
 package com.joojet.plugins.agcraft.main;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
@@ -9,6 +9,7 @@ import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.joojet.biblefetcher.database.CreateDatabase;
 import com.joojet.biblefetcher.interpreter.BibleCommandInterpreter;
+import com.joojet.plugins.agcraft.commands.PlayerCommand;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.enums.PermissionType;
@@ -16,7 +17,6 @@ import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.interfaces.AGTabCompleter;
-import com.joojet.plugins.agcraft.interfaces.PlayerCommand;
 import com.joojet.plugins.biblefetcher.commands.*;
 import com.joojet.plugins.biblefetcher.commands.tabcompleter.BibleTabCompleter;
 import com.joojet.plugins.consequences.ConsequenceManager;
@@ -68,7 +68,7 @@ public class AGCraftPlugin extends JavaPlugin
 	// Stores a reference to the death counter object
 	protected DeathCounter deathCounter;
 	// A list containing all known commands
-	protected HashMap <CommandType, PlayerCommand> playerCommands;
+	protected ConcurrentHashMap <CommandType, PlayerCommand> playerCommands;
 	// Stores an instance to the BossBar controller
 	protected BossBarController bossBarController;
 	// Stores a reference to the Mob Skill runnable instance used to control our custom skill AI
@@ -95,7 +95,7 @@ public class AGCraftPlugin extends JavaPlugin
 	public AGCraftPlugin ()
 	{
 		super ();
-		this.playerCommands = new HashMap <CommandType, PlayerCommand> ();
+		this.playerCommands = new ConcurrentHashMap <CommandType, PlayerCommand> ();
 		this.activeEventListeners = new ArrayList <AGListener> ();
 		this.serverConfigFile = null;
 		this.bibleInterpreter = new BibleCommandInterpreter();
@@ -159,6 +159,8 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Music controller event listener
 		this.registerEventListener(this.musicListener);
+		
+		this.registerEventListener(new TabCompleteListener (this.playerCommands));
 		
 		// Loads in the server config file and initializes its values
 		this.loadServerConfigFile();

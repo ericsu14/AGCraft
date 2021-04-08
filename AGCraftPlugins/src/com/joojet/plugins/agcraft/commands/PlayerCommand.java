@@ -1,7 +1,9 @@
-package com.joojet.plugins.agcraft.interfaces;
+package com.joojet.plugins.agcraft.commands;
 
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.enums.PermissionType;
+import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
+import com.joojet.plugins.agcraft.interfaces.AGTabCompleter;
 
 /** An object that stores a player command */
 public class PlayerCommand 
