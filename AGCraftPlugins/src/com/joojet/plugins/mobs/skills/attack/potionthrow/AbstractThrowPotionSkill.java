@@ -44,7 +44,11 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 	/** Adds a new potion into the possible list of potions that can be thrown while using this skill */
 	public void addPotion (AbstractPotionEquipment potion, int weight, ThrowablePotionType potionType)
 	{
-		potion.setType(potionType.getMaterial());
+		// Don't change the potion's type if it is already the same as potionType
+		if (potion.getType() != potionType.getMaterial())
+		{
+			potion.setType(potionType.getMaterial());
+		}
 		this.potionList.addEntry(new WeightedPotion (potion, weight));
 	}
 	
@@ -68,8 +72,9 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 			@Override
 			public void run() 
 			{
+				Location potionSpawnLocation = caster.getEyeLocation().add(caster.getEyeLocation().getDirection()).clone();
 				// Calculate the velocity vector between the caster and the farthest target
-				Vector velocity = MathUtil.calculateArcBetweenPoints(caster.getLocation().toVector().clone(), targetLocation.toVector(), 
+				Vector velocity = MathUtil.calculateArcBetweenPoints(potionSpawnLocation.toVector(), targetLocation.toVector(), 
 						(int) (caster.getHeight()), MathUtil.THROWN_PROJECTILE_GRAVITY);
 				
 				// Check if the velocity vector is finite. If not, skip spawning this potion.
@@ -82,8 +87,10 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 					return;
 				}
 				
-				ThrownPotion thrownPotion = caster.launchProjectile(ThrownPotion.class, velocity);
-				thrownPotion.setItem(potionList.getRandomEntry());
+				caster.getWorld().spawn(potionSpawnLocation, ThrownPotion.class, entity -> {
+					entity.setVelocity(velocity);
+					entity.setItem(potionList.getRandomEntry());
+				});
 			}
 			
 		}.runTaskLater(AGCraftPlugin.plugin, 10);

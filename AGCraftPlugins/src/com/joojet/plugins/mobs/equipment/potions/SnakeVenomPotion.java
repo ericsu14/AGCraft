@@ -11,7 +11,6 @@ import com.joojet.plugins.mobs.enums.EquipmentType;
 /** A poisonous splash potion thrown by Mr. Johnson */
 public class SnakeVenomPotion extends SplashPotionEquipment 
 {
-
 	public SnakeVenomPotion() 
 	{
 		super(EquipmentType.SNAKE_VENOM, ChatColor.GREEN);
