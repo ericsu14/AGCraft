@@ -26,8 +26,8 @@ public class PainfulMocktail extends SplashPotionEquipment
 		this.setDisplayName(StringUtil.alternateTextColors("Painfully Bad Mocktail", TextPattern.WORD, ChatColor.DARK_RED, ChatColor.DARK_GRAY));
 		this.addLoreToItemMeta("A mocktail so badly made that even standing near this questionable concoction will inflict great pain and make you ill.");
 		this.addPotionEffect(PotionEffectType.HARM, 1, 0);
-		this.addPotionEffect(PotionEffectType.HUNGER, 140, 0);
-		this.addPotionEffect(PotionEffectType.CONFUSION, 140, 0);
+		this.addPotionEffect(PotionEffectType.HUNGER, 280, 0);
+		this.addPotionEffect(PotionEffectType.CONFUSION, 280, 0);
 	}
 
 }
