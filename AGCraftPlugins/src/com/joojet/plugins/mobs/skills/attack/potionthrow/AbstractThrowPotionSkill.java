@@ -75,7 +75,7 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 				Location potionSpawnLocation = caster.getEyeLocation().add(caster.getEyeLocation().getDirection()).clone();
 				// Calculate the velocity vector between the caster and the farthest target
 				Vector velocity = MathUtil.calculateArcBetweenPoints(potionSpawnLocation.toVector(), targetLocation.toVector(), 
-						(int) (caster.getHeight()), MathUtil.BLOCK_GRAVITY);
+						(int) (caster.getHeight()), MathUtil.THROWN_PROJECTILE_GRAVITY);
 				
 				// Check if the velocity vector is finite. If not, skip spawning this potion.
 				try
