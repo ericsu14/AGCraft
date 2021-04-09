@@ -90,6 +90,7 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 				caster.getWorld().spawn(potionSpawnLocation, ThrownPotion.class, entity -> {
 					entity.setVelocity(velocity);
 					entity.setItem(potionList.getRandomEntry());
+					entity.setShooter(caster);
 				});
 			}
 			
