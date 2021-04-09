@@ -3,8 +3,10 @@ package com.joojet.plugins.mobs.monsters.skeleton.hungergames;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -37,6 +39,10 @@ public class HGUCLAArcher extends UCLAFaction
 		this.leggings = new BruinLeggings (this.color);
 		this.boots = new BruinFootballBoots (this.color);
 		this.weapon = new PotentBow (this.color);
+		
+		this.addMonsterDrops(
+			new MonsterDrop (Material.BOW, 0.075, 1, 1)
+		);
 	}
 	
 	@Override

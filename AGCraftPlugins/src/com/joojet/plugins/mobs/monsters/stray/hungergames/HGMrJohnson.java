@@ -101,8 +101,8 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		skills.add(new RageSkill (0, 15, 0.35));
 		skills.add(new NerfDamageOutputSkill (0.50));
 		skills.add(new BlindingArrow (7, 6));
-		skills.add(new ThrowEnderPearlSkill(64, 25, 3, 2, 10.0));
-		skills.add(new MrJohnsonPotionSkill (24, 20, 3, 4));
+		skills.add(new ThrowEnderPearlSkill(64, 25, 3, 2, 8.0));
+		skills.add(new MrJohnsonPotionSkill (32, 16, 3, 4));
 		skills.add(new SituationalTeleportSkill (32, 90, 1, 1));
 		skills.add(new MrJohnsonAuraSkill ());
 	}
