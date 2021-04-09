@@ -17,7 +17,7 @@ public class MrJohnsonHead extends Equipment
 		this.addDefenseAttributes(3.0, 3.0, 0.10);
 		this.addUnsafeEnchantment (Enchantment.PROTECTION_ENVIRONMENTAL, 4);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
-		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 4);
 		this.addUnsafeEnchantment(Enchantment.THORNS, 2);
 		this.setDisplayName(StringUtil.alternateTextColors("Mr. Johnson's Head", TextPattern.WORD, ChatColor.BLUE, ChatColor.GOLD));
