@@ -133,10 +133,10 @@ public class RewardGUI implements Listener
     		}
     		
         	int rewardID = this.getRewardID(clickedItem);
+        	inv.remove(clickedItem);
         	
         	new AsyncDatabaseTask <Boolean> ()
         	{
-
 				@Override
 				protected Boolean getDataFromDatabase() throws SQLException 
 				{
@@ -160,8 +160,6 @@ public class RewardGUI implements Listener
 	        			player.getLocation().getWorld().playSound(player.getLocation(), Sound.MUSIC_DISC_CAT, SoundCategory.RECORDS, 10.0f, 1.0f);
 	        			player.getWorld().setTime(14000);
 	        		}
-	        		
-	        		inv.remove(clickedItem);
 				}
         		
         	}.runDatabaseTask();
