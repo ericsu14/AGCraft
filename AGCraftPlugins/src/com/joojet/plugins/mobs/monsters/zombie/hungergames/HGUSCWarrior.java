@@ -29,7 +29,7 @@ public class HGUSCWarrior extends USCFaction
 		
 		this.color = ChatColor.GOLD;
 		this.addBiomes(Biome.THE_VOID);
-		this.setStat(MonsterStat.HEALTH, 6.0);
+		this.setStat(MonsterStat.HEALTH, 4.0);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.COMMON);
 		this.setDropRates(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 		

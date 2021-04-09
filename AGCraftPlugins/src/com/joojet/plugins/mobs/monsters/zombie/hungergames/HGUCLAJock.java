@@ -3,8 +3,10 @@ package com.joojet.plugins.mobs.monsters.zombie.hungergames;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
@@ -25,7 +27,7 @@ public class HGUCLAJock extends UCLAFaction
 	public HGUCLAJock() 
 	{
 		super(MonsterType.HG_UCLA_JOCK);
-		this.setStat(MonsterStat.HEALTH, 6.0);
+		this.setStat(MonsterStat.HEALTH, 4.0);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.COMMON);
 		this.setDropRates(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 		
@@ -41,6 +43,8 @@ public class HGUCLAJock extends UCLAFaction
 		this.leggings = new BruinLeggings (this.color);
 		this.boots = new BruinFootballBoots (this.color);
 		this.offhand = new BruinShield ();
+		
+		this.addMonsterDrops(new MonsterDrop (Material.BOW, 0.075, 1, 1));
 	}
 	
 	@Override

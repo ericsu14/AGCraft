@@ -30,7 +30,7 @@ public class HGSpiritOfTroy extends USCFaction {
 		this.name = StringUtil.alternateTextColors("The Spirit of Troy", TextPattern.WORD, 
 				ChatColor.RED, ChatColor.GOLD);
 		this.color = ChatColor.RED;
-		this.setStat(MonsterStat.HEALTH, 6.0);
+		this.setStat(MonsterStat.HEALTH, 4.0);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.COMMON);
 		this.setDropRates(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 		this.helmet = new USCBandHead (this.color);
