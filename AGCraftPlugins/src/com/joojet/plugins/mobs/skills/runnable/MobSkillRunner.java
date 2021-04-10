@@ -9,8 +9,10 @@ import java.util.UUID;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 /** A runnable responsible for running all custom entity's mob skill tasks every second */
@@ -22,11 +24,14 @@ public class MobSkillRunner extends BukkitRunnable
 	/** Keeps track of number of active custom monsters in the world for each
 	 *  unique custom monster type */
 	protected EnumMap <MonsterType, Integer> customMonsterFrequency;
+	/** Monster type interpreter used to lookup MobEquipment instances */
+	protected MonsterTypeInterpreter mobInterpreter;
 	
-	public MobSkillRunner ()
+	public MobSkillRunner (MonsterTypeInterpreter mobInterpreter)
 	{
 		this.mobSkillRegistry = new HashMap <UUID, MobSkillTask> ();
 		this.customMonsterFrequency = new EnumMap <MonsterType, Integer> (MonsterType.class);
+		this.mobInterpreter = mobInterpreter;
 	}
 	
 	@Override
@@ -92,7 +97,24 @@ public class MobSkillRunner extends BukkitRunnable
 		if (this.customMonsterFrequency.containsKey(type)
 				&& this.customMonsterFrequency.get(type) > 0)
 		{
-			this.customMonsterFrequency.put(type, this.customMonsterFrequency.get(type) - 1);
+			// Handles spawn limit cooldown modifier
+			MobEquipment equipment = this.mobInterpreter != null ? this.mobInterpreter.searchTrie(type.toString()) : null;
+			if (equipment != null && equipment.containsStat(MonsterStat.SPAWN_LIMIT_COOLDOWN))
+			{
+				new BukkitRunnable () 
+				{
+					@Override
+					public void run() 
+					{
+						customMonsterFrequency.put(type, customMonsterFrequency.get(type) - 1);
+					}
+					
+				}.runTaskLater(AGCraftPlugin.plugin, equipment.getStat(MonsterStat.SPAWN_LIMIT_COOLDOWN).longValue() * 20);
+			}
+			else
+			{
+				this.customMonsterFrequency.put(type, this.customMonsterFrequency.get(type) - 1);
+			}
 		}
 	}
 	

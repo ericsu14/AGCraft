@@ -75,7 +75,10 @@ public enum MonsterStat implements CustomAttribute
 	/** Sets the custom monster's classifier */
 	MONSTER_CLASSIFIER,
 	/** Max amount of times this custom monster can spawn in the world */
-	SPAWN_LIMIT;
+	SPAWN_LIMIT,
+	/** Sets a delay (in seconds) before the monster's spawn limit counter is decremented, effectively giving a temporary cooldown period before the custom
+	 *  monster can spawn again. */
+	SPAWN_LIMIT_COOLDOWN;
 	
 	/** The Minecraft entity attribute this monsterstat is tied to */
 	private Attribute attribute;

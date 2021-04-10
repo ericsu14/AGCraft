@@ -120,7 +120,7 @@ public class AGCraftPlugin extends JavaPlugin
 		CreateRewardsDatabase.createDatabase();
 		
 		this.summonTypeInterpreter = new SummoningScrollInterpreter ();
-		this.mobSkillRunner = new MobSkillRunner ();
+		this.mobSkillRunner = new MobSkillRunner (this.monsterTypeInterpreter);
 		
 		// Loads in all commands
 		this.initCommands();

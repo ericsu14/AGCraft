@@ -64,6 +64,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
 		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
+		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 30);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 150);
 		
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.PLAYER, EntityType.SKELETON, EntityType.SPIDER, EntityType.STRAY, 
@@ -83,7 +84,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 						new WeightedDrop (Material.DIAMOND_LEGGINGS, 15), 
 						new WeightedDrop (Material.DIAMOND_BOOTS, 35)),
 				new WeightedLootCrateDrop (
-						0.70, 1, 1,
+						1.00, 1, 1,
 						new WeightedDrop (Material.ENDER_PEARL, 60),
 						new WeightedDrop (new SnakeVenomPotion (), 15),
 						new WeightedDrop (new PainfulMocktail (), 15))
@@ -102,7 +103,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		skills.add(new NerfDamageOutputSkill (0.50));
 		skills.add(new BlindingArrow (7, 6));
 		skills.add(new ThrowEnderPearlSkill(64, 25, 3, 2, 8.0));
-		skills.add(new MrJohnsonPotionSkill (32, 16, 3, 4));
+		skills.add(new MrJohnsonPotionSkill (32, 20, 3, 4));
 		skills.add(new SituationalTeleportSkill (32, 90, 1, 1));
 		skills.add(new MrJohnsonAuraSkill ());
 	}

@@ -6,7 +6,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
 
-import com.joojet.plugins.mobs.drops.MonsterDrop;
+import com.joojet.plugins.mobs.drops.WeightedDrop;
+import com.joojet.plugins.mobs.drops.WeightedLootCrateDrop;
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -40,9 +41,12 @@ public class HGUCLAArcher extends UCLAFaction
 		this.boots = new BruinFootballBoots (this.color);
 		this.weapon = new PotentBow (this.color);
 		
-		this.addMonsterDrops(
-			new MonsterDrop (Material.BOW, 0.075, 1, 1)
-		);
+		this.addMonsterDrops(new WeightedLootCrateDrop (0.075, 1, 1, 
+				new WeightedDrop (Material.BOW, 40),
+				new WeightedDrop (Material.STONE_SWORD, 50),
+				new WeightedDrop (Material.GOLDEN_APPLE, 5),
+				new WeightedDrop (Material.IRON_AXE, 5)
+		));
 	}
 	
 	@Override
