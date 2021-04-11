@@ -64,7 +64,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
 		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
-		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 30);
+		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 60);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 150);
 		
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.PLAYER, EntityType.SKELETON, EntityType.SPIDER, EntityType.STRAY, 
