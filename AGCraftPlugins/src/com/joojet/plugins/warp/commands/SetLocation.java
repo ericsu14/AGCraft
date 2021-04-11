@@ -83,6 +83,7 @@ public class SetLocation extends AGCommandExecutor
 					
 				}
 			}.runDatabaseTask();
+			return true;
 		}
 		return false;
 	}
