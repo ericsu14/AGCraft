@@ -116,6 +116,13 @@ public class AmplifiedMobSpawner extends AGListener
 				return;
 			}
 			
+			// Checks if the mob has mob drops disabled
+			if (entityEquipment.containsFlag(MobFlag.DISABLE_MOB_DROPS))
+			{
+				event.getDrops().clear();
+				return;
+			}
+			
 			// Adds any custom loot the monster may have
 			if (!entityEquipment.getMonsterDrops().isEmpty() && event.getDroppedExp() > 0.0)
 			{

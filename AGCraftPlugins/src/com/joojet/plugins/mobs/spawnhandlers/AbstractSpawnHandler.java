@@ -79,8 +79,8 @@ public abstract class AbstractSpawnHandler
 	 *  @param roll - A random number determining if this entity should spawn */
 	public void createSpawnEventHandlerTask (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome)
 	{
-		new BukkitRunnable() {
-
+		new BukkitRunnable() 
+		{
 			@Override
 			public void run() 
 			{

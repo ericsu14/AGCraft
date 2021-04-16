@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.skills.attack;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
@@ -57,6 +58,7 @@ public class ThundagaSkill extends AbstractAttackSkill implements PassiveAttack 
 		for (LivingEntity target : targets)
 		{
 			targetLocations.add(target.getLocation().clone());
+			target.sendMessage(caster.getName() + ChatColor.GOLD + " is casting a " + ChatColor.RED + "lightning strike" + ChatColor.GOLD + "! I suggest you run.");
 		}
 		new ThunderSkillRunnable (this, targetLocations, caster, allies).runTaskTimer(AGCraftPlugin.plugin, 0, 2);
 	}
@@ -80,7 +82,7 @@ public class ThundagaSkill extends AbstractAttackSkill implements PassiveAttack 
 		return this.power;
 	}
 	
-	/** Returns the delay (in ticks) before the thunder stikes the location */
+	/** Returns the delay (in ticks) before the thunder strikes the location */
 	public int getDelayTicks ()
 	{
 		return this.thunderDelay;
@@ -98,7 +100,7 @@ public class ThundagaSkill extends AbstractAttackSkill implements PassiveAttack 
 	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
 			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
-		return targetEquipment.isAlliesOf(target, damager, damagerEquipment) ? Double.MIN_VALUE : 0;
+		return 0.0;
 	}
 
 }

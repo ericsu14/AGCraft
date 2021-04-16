@@ -64,8 +64,8 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
 		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
-		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 60);
-		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 150);
+		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 90);
+		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 250);
 		
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.PLAYER, EntityType.SKELETON, EntityType.SPIDER, EntityType.STRAY, 
 				EntityType.SLIME, EntityType.HUSK,EntityType.IRON_GOLEM, EntityType.SNOWMAN, EntityType.PILLAGER, EntityType.CAVE_SPIDER);
@@ -96,7 +96,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
-		skills.add(new ThundagaSkill (12, 12, Integer.MAX_VALUE, 8, 2.0F, 4, 60, 0.60));
+		skills.add(new ThundagaSkill (16, 16, Integer.MAX_VALUE, 8, 2.0F, 4, 60, 0.60));
 		skills.add(new EvokerFangSkill (12, 8, Integer.MAX_VALUE, 4, 0));
 		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 2, 3, 0.60));
 		skills.add(new RageSkill (0, 15, 0.35));
@@ -104,7 +104,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		skills.add(new BlindingArrow (7, 6));
 		skills.add(new ThrowEnderPearlSkill(64, 25, 3, 2, 8.0));
 		skills.add(new MrJohnsonPotionSkill (32, 20, 3, 4));
-		skills.add(new SituationalTeleportSkill (32, 90, 1, 1));
+		skills.add(new SituationalTeleportSkill (32, 120, 1, 1));
 		skills.add(new MrJohnsonAuraSkill ());
 	}
 

@@ -73,5 +73,6 @@ public enum MonsterType
 	HG_UCLA_JOCK,
 	HG_UCLA_ARCHER,
 	HG_SPIRIT_OF_TROY,
+	HG_CREEPER,
 	HG_MR_JOHNSON;
 }

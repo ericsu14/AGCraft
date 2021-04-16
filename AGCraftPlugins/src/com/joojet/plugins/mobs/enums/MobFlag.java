@@ -104,7 +104,7 @@ public enum MobFlag implements CustomAttribute
 	IGNORE_NON_FACTION_ENTITIES,
 	/** When enabled, the mob will spawn a small fireworks show upon death */
 	FIREWORK_DEATH,
-	/** When enabled, entities will naturally despawn upon chunk unloads reguardless if the monster is naturally non-hostile or not */
+	/** When enabled, entities will naturally despawn upon chunk unloads regardless if the monster is naturally non-hostile or not */
 	DISABLE_PERSISTENCE
 	{
 		@Override
@@ -163,7 +163,9 @@ public enum MobFlag implements CustomAttribute
 		}
 	},
 	/** When enabled, the entity is unable to be healed from healing or harming potions */
-	DISABLE_MAGIC_HEALING;
+	DISABLE_MAGIC_HEALING,
+	/** When enabled, the entity will not drop anything when dead */
+	DISABLE_MOB_DROPS;
 	
 	/** Does nothing when the mobflag does not have a custom definition specific for that attribute */
 	@Override

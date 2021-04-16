@@ -126,11 +126,12 @@ public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack
 		return damagerEquipment.isAlliesOf(damager, target, targetEquipment) ? Double.MIN_VALUE : 0;
 	}
 
+	/** Prevents the skill-caster from being hurt by falling blocks */
 	@Override
 	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
 			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
-		return 0;
+		return (source instanceof FallingBlock && ((FallingBlock) source).canHurtEntities()) ? Double.MIN_VALUE : 0.0;
 	}
 
 }

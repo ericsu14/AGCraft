@@ -1,19 +1,16 @@
 package com.joojet.plugins.mobs.skills.passive;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
@@ -23,8 +20,6 @@ import com.joojet.plugins.mobs.util.particle.ParticleUtil;
  *  for several seconds */
 public class IcySnowballSkill extends AbstractPassiveSkill implements PassiveProjectile, PassiveAttack
 {
-	/** Tracks the UUID of all snowballs fired by this entity*/
-	protected HashMap <UUID, Projectile> snowballs;
 	/** Chance of spawning an Icy snowball */
 	protected double snowballChance;
 	/** Base damage of thrown snowballs */
@@ -33,6 +28,8 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 	protected final int slowDuration = 100;
 	/** Base damage multiplier used to add a random offset in the damage calculations */
 	protected final double damageMultiplierOffset = 0.20;
+	/** Key used to identify icy snowball projectiles */
+	public final static String ICY_SNOWBALL_KEY = "ag_icy_snowball";
 	
 	/** Allows the custom monster to throw damaging snowballs that inflict slowness on its targets
 	 *  @param snowballChance Chance of shooting an icy snowball
@@ -40,7 +37,6 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 	public IcySnowballSkill (double snowballChance, double baseDamage)
 	{
 		super();
-		this.snowballs = new HashMap <UUID, Projectile> ();
 		this.snowballChance = snowballChance;
 		this.baseSnowballDamage = baseDamage;
 	}
@@ -49,9 +45,8 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 	public double modifyOutgoingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
 			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
-		if (this.snowballs.containsKey(source.getUniqueId()))
+		if (source.hasMetadata(ICY_SNOWBALL_KEY))
 		{
-			this.snowballs.remove(source.getUniqueId());
 			
 			// Deal no damage if the target is an ally
 			if (damagerEquipment.isAlliesOf(damager, target, targetEquipment))
@@ -85,35 +80,14 @@ public class IcySnowballSkill extends AbstractPassiveSkill implements PassivePro
 			return;
 		}
 		
-		// Adds projectile's UUID into the snowball UUID table
-		this.snowballs.put(projectile.getUniqueId(), projectile);
+		// Adds metadata identifying this snowball as an icy snowball
+		projectile.setMetadata(ICY_SNOWBALL_KEY, new FixedMetadataValue (AGCraftPlugin.plugin, ICY_SNOWBALL_KEY));
 		
 		// Plays a particle effect indicating the skillcaster has just fired a special snowball
 		ParticleUtil.spawnColoredParticlesOnEntity(shooter, 15, 173, 216, 230, Particle.REDSTONE);
 		ParticleUtil.spawnColoredParticlesOnEntity(shooter, 15, 255, 255, 255, Particle.REDSTONE);
 		ParticleUtil.spawnColoredParticlesOnEntity(shooter, 10, 0, 0, 0, Particle.SPELL_INSTANT);
 		shooter.getWorld().playSound(shooter.getLocation(), Sound.ENTITY_SNOW_GOLEM_HURT, 1.0f, 1.0f);
-	}
-	
-	/** Cleanup routine every second for removing all dead snowballs that never hit their targets */
-	@Override
-	public void update (LivingEntity caster)
-	{
-		super.update(caster);
-		
-		List <UUID> deadSnowballs = new ArrayList <UUID> ();
-		for (Projectile projectile : this.snowballs.values())
-		{
-			if (projectile == null || projectile.isDead())
-			{
-				deadSnowballs.add(projectile.getUniqueId());
-			}
-		}
-		
-		for (UUID uuid : deadSnowballs)
-		{
-			this.snowballs.remove(uuid);
-		}
 	}
 	
 	/** Calculates the damage of a thrown snowball using the assigned base damage
