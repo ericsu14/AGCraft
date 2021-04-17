@@ -14,6 +14,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.metadata.FixedMetadataValue;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.DamageDisplayListener;
@@ -28,6 +29,8 @@ import com.joojet.plugins.mobs.util.stream.FilterLineOfSight;
 
 public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack {
 	
+	/** Key used to recognize a projectile as a falling anvil */
+	public static final String FALLING_ANVIL_ID = "ag_falling_anvil";
 	/** Explosion power of the falling anvil */
 	protected float power;
 	/** Total number of anvils used at a time */
@@ -108,6 +111,7 @@ public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack
 		anvil.getWorld().spawnParticle(Particle.CRIT, anvil.getLocation().add(0.0, 1.0, 0.0), 30, 1.0, 1.0, 1.0);
 		anvil.getWorld().spawnParticle(Particle.SPELL_INSTANT, anvil.getLocation(), 30, 1.0, 1.0, 1.0);
 		anvil.getWorld().spawnParticle(Particle.SMOKE_NORMAL, anvil.getLocation(), 10, 1.0, 1.0, 1.0);
+		anvil.setMetadata(FALLING_ANVIL_ID, new FixedMetadataValue (AGCraftPlugin.plugin, FALLING_ANVIL_ID));
 		return anvil;
 	}
 	
@@ -126,12 +130,12 @@ public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack
 		return damagerEquipment.isAlliesOf(damager, target, targetEquipment) ? Double.MIN_VALUE : 0;
 	}
 
-	/** Prevents the skill-caster from being hurt by falling blocks */
+	/** Prevents the skill-caster from being hurt by its own anvil */
 	@Override
 	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
 			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
-		return (source instanceof FallingBlock && ((FallingBlock) source).canHurtEntities()) ? Double.MIN_VALUE : 0.0;
+		return (source.hasMetadata(FALLING_ANVIL_ID)) ? Double.MIN_VALUE : 0.0;
 	}
 
 }
