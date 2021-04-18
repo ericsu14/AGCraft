@@ -32,7 +32,7 @@ public abstract class UCLAFaction extends MobEquipment
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.SKELETON,
 				EntityType.PLAYER, EntityType.PHANTOM, EntityType.WITHER_SKELETON, 
 				EntityType.SPIDER, EntityType.IRON_GOLEM, EntityType.HOGLIN, EntityType.SNOWMAN,
-				EntityType.HUSK, EntityType.DROWNED, EntityType.ZOMBIE_VILLAGER);
+				EntityType.HUSK, EntityType.DROWNED, EntityType.ZOMBIE_VILLAGER, EntityType.STRAY);
 		this.addEntitiesToIgnoreList(EntityType.CREEPER, EntityType.GIANT);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.LEGENDARY);
 		this.addMobFlags(MobFlag.DISABLE_PICK_UP_ITEMS);

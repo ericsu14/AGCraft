@@ -2,7 +2,9 @@ package com.joojet.plugins.mobs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -28,6 +30,7 @@ import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.IgnorePlayerMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.util.EquipmentTools;
+import com.joojet.plugins.mobs.util.stream.ClosestProximity;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public class PathfindTargetingEventListener extends AGListener
@@ -259,6 +262,7 @@ public class PathfindTargetingEventListener extends AGListener
 	private Player getNearbyPlayer (LivingEntity hunter, int radius)
 	{
 		ArrayList <Player> players = ScanEntities.ScanNearbyPlayers(hunter, radius);
+		players.sort(new ClosestProximity (hunter));
 		return players.isEmpty() ? null : players.get(0);
 	}
 	
@@ -299,27 +303,31 @@ public class PathfindTargetingEventListener extends AGListener
 			scanRadius *= 10;
 		}
 		
-		List <Entity> entities = hunter.getNearbyEntities(scanRadius, scanRadius / 4.0, scanRadius);
+		List <LivingEntity> entities = hunter.getNearbyEntities(scanRadius, scanRadius / 4.0, scanRadius).stream().
+				filter(ent -> ent instanceof LivingEntity).
+				map(ent -> (LivingEntity) ent).
+				sorted (new ClosestProximity (hunter)).
+				collect(Collectors.toList());
 		
 		boolean foundVictim = false;
-		for (Entity target : entities)
+		for (LivingEntity target : entities)
 		{
 			if (foundVictim)
 			{
 				break;
 			}
 			
-			victim = null;
+			victim = (LivingEntity) target;
 			foundVictim = false;
 			
-			if (!(target instanceof LivingEntity))
+			if (this.ignorePlayerWithMetadata(victim))
 			{
 				continue;
 			}
-						
-			victim = (LivingEntity) target;
 			
-			if (this.ignorePlayerWithMetadata(victim))
+			// Ignore players that are either flying or in the spectator gamemode
+			if (victim instanceof Player && (((Player)victim).getAllowFlight() ||
+					((Player)victim).getGameMode() == GameMode.SPECTATOR))
 			{
 				continue;
 			}

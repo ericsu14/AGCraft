@@ -68,7 +68,8 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 250);
 		
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.PLAYER, EntityType.SKELETON, EntityType.SPIDER, EntityType.STRAY, 
-				EntityType.SLIME, EntityType.HUSK,EntityType.IRON_GOLEM, EntityType.SNOWMAN, EntityType.PILLAGER, EntityType.CAVE_SPIDER);
+				EntityType.SLIME, EntityType.HUSK,EntityType.IRON_GOLEM, EntityType.SNOWMAN, EntityType.PILLAGER, EntityType.CAVE_SPIDER,
+				EntityType.GIANT);
 		this.addEntitiesToIgnoreList(EntityType.CREEPER);
 		
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING,

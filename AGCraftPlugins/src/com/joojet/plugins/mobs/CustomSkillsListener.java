@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.EvokerFangs;
@@ -386,6 +387,18 @@ public class CustomSkillsListener extends AGListener
 					entity.getType() == EntityType.DROPPED_ITEM)
 			{
 				continue;
+			}
+			
+			// Ignores players who are either in spectator / creative mode or allowed to fly
+			if (entity instanceof Player)
+			{
+				Player player = (Player) entity;
+				
+				if (player.getGameMode() == GameMode.SPECTATOR
+						|| player.getAllowFlight())
+				{
+					continue;
+				}
 			}
 			
 			LivingEntity livingEntity = (LivingEntity) entity;
