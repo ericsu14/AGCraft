@@ -41,8 +41,11 @@ public class IgnorePlayerMetadata extends CalendarMetadata
 		try
 		{
 			Calendar lastUse = this.getCalendarFromHolder(player);
-			Calendar now = Calendar.getInstance();
-			return (now.compareTo(lastUse) < 0);
+			if (lastUse != null)
+			{
+				Calendar now = Calendar.getInstance();
+				return (now.compareTo(lastUse) < 0);
+			}
 		}
 		catch (ParseException pe)
 		{
