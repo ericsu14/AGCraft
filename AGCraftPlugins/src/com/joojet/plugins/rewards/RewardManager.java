@@ -13,6 +13,7 @@ import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.agcraft.util.StringUtil;
+import com.joojet.plugins.mobs.metadata.IgnorePlayerMetadata;
 import com.joojet.plugins.rewards.database.RewardDatabaseManager;
 import com.joojet.plugins.rewards.enums.MinigameRewardType;
 import com.joojet.plugins.rewards.enums.RewardType;
@@ -45,6 +46,8 @@ public class RewardManager extends AGListener
 	public void handlePlayerLogin (PlayerJoinEvent event)
 	{
 		Player player = event.getPlayer();
+		new IgnorePlayerMetadata (this.ignorePlayerUponLoginTime).addStringMetadata(player);
+		
 		switch (AGCraftPlugin.plugin.serverMode)
 		{
 			case NORMAL:
