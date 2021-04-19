@@ -15,7 +15,7 @@ public class PatrioticWhiteLeggings extends LeatherEquipment
 		super (EquipmentType.PATRIOTIC_WHITE_LEGGINGS, Material.LEATHER_LEGGINGS, EquipmentSlot.LEGS, ChatColor.WHITE);
 		this.setColor(Color.WHITE);
 		this.setDisplayName("Patriotic White Pants");
-		this.addLoreToItemMeta("Whiter than Collin!");
+		this.addLoreToItemMeta("White as snow!");
 		this.addDefenseAttributes(6.0, 2.0, 0.10);
 	}
 }

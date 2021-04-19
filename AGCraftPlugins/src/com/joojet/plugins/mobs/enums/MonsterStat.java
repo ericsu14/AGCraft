@@ -19,8 +19,6 @@ public enum MonsterStat implements CustomAttribute
 	HUNT_ON_SPAWN_RADIUS,
 	/** Modifies the entity's base attack damage */
 	BASE_ATTACK_DAMAGE (Attribute.GENERIC_ATTACK_DAMAGE),
-	/** Used internally by the MonsterTypes class to assign spawn weights to the entity */
-	SPAWN_WEIGHT,
 	/** The minimum y value the original entity must be in order for this entity to spawn */
 	Y_LIMIT,
 	/** Stores the enum ordinal relating to the monster's horse color */

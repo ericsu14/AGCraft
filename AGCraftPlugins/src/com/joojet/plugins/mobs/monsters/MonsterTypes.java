@@ -20,7 +20,7 @@ public abstract class MonsterTypes implements Cloneable
 	/** Stores a list of monsters the Mob Equipment tied to this class can equip */
 	protected List <EntityType> supportedEntities;
 	/** Stores custom mob equipment tied under this class */
-	protected List <MobEquipment> equipmentList;
+	protected List <WeightedMob> equipmentList;
 	/** RNG used for selecting a random monster when getRandomEquipment is called */
 	protected Random random;
 	/** Total number of custom mob equipment tied to this class */
@@ -32,7 +32,7 @@ public abstract class MonsterTypes implements Cloneable
 	
 	public MonsterTypes (MonsterTypeInterpreter monsterTypeInterpreter, SummoningScrollInterpreter summonTypeInterpreter, EntityType... entities)
 	{
-		this.equipmentList = new ArrayList <MobEquipment> ();
+		this.equipmentList = new ArrayList <WeightedMob> ();
 		this.supportedEntities = new ArrayList <EntityType> ();
 		this.random = new Random ();
 		this.size = 0;
@@ -50,8 +50,7 @@ public abstract class MonsterTypes implements Cloneable
 	 * 		@param weight - Weight used to amplify the monster's spawn chances (higher = more frequently)s */
 	public void addEquipment (MobEquipment equipment, int weight)
 	{
-		equipment.setSpawnWeight(weight);
-		equipmentList.add(equipment);
+		equipmentList.add(new WeightedMob (equipment, weight));
 		this.monsterTypeInterpreter.insertWord(equipment.toString(), equipment);
 		// Registers the entity as a new summoning scroll
 		if (!this.supportedEntities.isEmpty())
@@ -69,15 +68,15 @@ public abstract class MonsterTypes implements Cloneable
 		// ArrayList <WeightedMob> mobList = new ArrayList <WeightedMob> ();
 		WeightedList <WeightedMob, MobEquipment> mobList = new WeightedList <WeightedMob, MobEquipment> ();
 		
-		for (MobEquipment mob : equipmentList)
+		for (WeightedMob mob : equipmentList)
 		{
-			spawnBiomes = mob.getSpawnBiomes();
+			spawnBiomes = mob.getEntry().getSpawnBiomes();
 			/* Add this mob to the monster spawn list if their spawn biomes either contain THE_VOID
 			 * or the passed biome. */
 			if ((spawnBiomes.contains(Biome.THE_VOID) || spawnBiomes.contains(biome))
-					&& !mobSkillRunner.reachedSpawnLimit(mob))
+					&& !mobSkillRunner.reachedSpawnLimit(mob.getEntry()))
 			{
-				mobList.addEntry(new WeightedMob (mob, mob.getSpawnWeight()));
+				mobList.addEntry(mob);
 			}
 		}
 		
@@ -114,7 +113,7 @@ public abstract class MonsterTypes implements Cloneable
 	}
 	
 	/** Returns the internal mob equipment list */
-	public List <MobEquipment> getMobEquipmentList ()
+	public List <WeightedMob> getMobEquipmentList ()
 	{
 		return this.equipmentList;
 	}

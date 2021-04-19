@@ -3,6 +3,8 @@ package com.joojet.plugins.mobs.monsters.zombie.julyfourth;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.drops.FireworkDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterStat;
@@ -19,7 +21,8 @@ public class PatrioticZombie extends UncommonMob
 	public PatrioticZombie ()
 	{
 		super (MonsterType.PATRIOTIC_ZOMBIE);
-		this.name = this.americanizeText("Patriotic Zombie");
+		this.name = StringUtil.alternateTextColors("Patriotic Zombie", 
+				TextPattern.WORD, ChatColor.RED, ChatColor.WHITE, ChatColor.BLUE);
 		this.color = ChatColor.WHITE;
 		this.setStat(MonsterStat.HEALTH, 4.0);
 		

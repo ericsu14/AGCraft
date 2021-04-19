@@ -15,8 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
-import com.joojet.plugins.agcraft.enums.TextPattern;
-import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.drops.MonsterDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.Faction;
@@ -225,22 +223,6 @@ public abstract class MobEquipment
 		return this.effects;
 	}
 	
-	/** Returns this monster's spawnweight */
-	public int getSpawnWeight ()
-	{
-		if (this.mobStats.containsKey(MonsterStat.SPAWN_WEIGHT))
-		{
-			return this.mobStats.get(MonsterStat.SPAWN_WEIGHT).intValue();
-		}
-		return -1;
-	}
-	
-	/** Sets this monster's spawn weight to a new value */
-	public void setSpawnWeight (int spawnWeight)
-	{
-		this.mobStats.put(MonsterStat.SPAWN_WEIGHT, (double) spawnWeight);
-	}
-	
 	/** Adds biomes to the list of biomes the monster can spawn in */
 	public void addBiomes (Biome... biomes)
 	{
@@ -317,14 +299,6 @@ public abstract class MobEquipment
 		{
 			this.loot.add(drop);
 		}
-	}
-	
-	/** Americanizes a name by applying the USA colors to every character in a string
-	 *  in an alternating pattern */
-	public String americanizeText (String str)
-	{	
-		return StringUtil.alternateTextColors(str, TextPattern.CHARACTER, 
-				ChatColor.RED, ChatColor.WHITE, ChatColor.BLUE);
 	}
 	
 	/** Returns the monster's chat color as a color enum type */

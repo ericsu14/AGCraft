@@ -3,6 +3,8 @@ package com.joojet.plugins.mobs.monsters.skeleton.julyfourth;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
+import com.joojet.plugins.agcraft.enums.TextPattern;
+import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.drops.FireworkDrop;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterStat;
@@ -19,7 +21,8 @@ public class PatrioticSkeleton extends UncommonMob
 	public PatrioticSkeleton ()
 	{
 		super (MonsterType.PATRIOTIC_SKELETON);
-		this.name = this.americanizeText("Patriotic Skeleton");
+		this.name = StringUtil.alternateTextColors("Patriotic Skeleton", 
+				TextPattern.WORD, ChatColor.RED, ChatColor.WHITE, ChatColor.BLUE);
 		this.color = ChatColor.WHITE;
 		this.setStat(MonsterStat.HEALTH, 4.0);
 		
