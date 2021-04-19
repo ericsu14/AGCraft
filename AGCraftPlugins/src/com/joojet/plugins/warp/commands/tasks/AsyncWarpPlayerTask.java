@@ -11,12 +11,13 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.response.DatabaseResponse;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.warp.commands.Warp;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
-public class AsyncWarpPlayerTask extends AsyncDatabaseTask<Location>
+public class AsyncWarpPlayerTask extends AsyncDatabaseTask<DatabaseResponse <Location>>
 {
 	/** The player's bed spawn location */
 	protected Location playerBedSpawnLocation;
@@ -36,28 +37,49 @@ public class AsyncWarpPlayerTask extends AsyncDatabaseTask<Location>
 	}
 	
 	@Override
-	protected Location getDataFromDatabase() throws SQLException, RuntimeException
+	protected DatabaseResponse <Location> getDataFromDatabase() throws SQLException, RuntimeException
 	{
+		boolean status = true;
 		Location result = null;
-		switch (this.locationName)
+		StringBuilder message = new StringBuilder ();
+		try
 		{
-			case Warp.home:
-				result = this.playerBedSpawnLocation;
-				break;
-			default:
-				result = LocationDatabaseManager.getlocation(player, locationName);
-				break;
+			switch (this.locationName)
+			{
+				case Warp.home:
+					result = this.playerBedSpawnLocation;
+					break;
+				default:
+					result = LocationDatabaseManager.getlocation(player, locationName);
+					break;
+			}
 		}
-		return result;
+		catch (RuntimeException re)
+		{
+			message.append(re.getMessage());
+			status = false;
+		}
+		
+		return new DatabaseResponse <Location> (result, message.toString(), status);
 	}
 
 	@Override
-	protected void handlePromise(Location location) 
+	protected void handlePromise(DatabaseResponse <Location> response) 
 	{
+		// Null check for player
 		if (this.player == null)
 		{
 			return;
 		}
+		
+		// Send error message when something went wrong with location retrieval
+		if (!response.getStatus())
+		{
+			this.player.sendMessage(ChatColor.RED + response.getMessage());
+			return;
+		}
+		
+		Location location = response.getData();
 		
 		if (location == null)
 		{
