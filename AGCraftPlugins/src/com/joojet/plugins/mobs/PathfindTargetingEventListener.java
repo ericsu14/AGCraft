@@ -311,7 +311,7 @@ public class PathfindTargetingEventListener extends AGListener
 		}
 		
 		List <LivingEntity> entities = hunter.getNearbyEntities(scanRadius, scanRadius / 4.0, scanRadius).stream().
-				filter(ent -> ent instanceof LivingEntity).
+				filter(ent -> (ent instanceof LivingEntity) && hunter.hasLineOfSight(ent)).
 				map(ent -> (LivingEntity) ent).
 				sorted (new ClosestProximity (hunter)).
 				collect(Collectors.toList());
