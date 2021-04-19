@@ -474,7 +474,7 @@ public abstract class MobEquipment
 			// Check if the entity is rivals with the other entity. If so, return false
 			if (otherEquipment.isRivalsOf(this))
 			{
-				return true;
+				return false;
 			}
 			
 			result = otherEquipment.getIgnoreList().contains(entity.getType());
