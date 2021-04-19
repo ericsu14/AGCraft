@@ -1,6 +1,6 @@
 package com.joojet.plugins.mobs.enums;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
@@ -49,7 +49,7 @@ public enum MobFlag implements CustomAttribute
 			if (entityEquipment.containsStat(MonsterStat.HUNT_ON_SPAWN_RADIUS))
 			{
 				int huntRadius = entityEquipment.getStat(MonsterStat.HUNT_ON_SPAWN_RADIUS).intValue();
-				ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(entity, (int) (huntRadius * 1.25));
+				List <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(entity, (int) (huntRadius * 1.25));
 				
 				String message = ChatColor.GOLD + "You feel a great disturbance in the force...";
 				if (entityEquipment instanceof CustomSpawnMessage)
@@ -75,7 +75,7 @@ public enum MobFlag implements CustomAttribute
 				int huntRadius = entityEquipment.getStat(MonsterStat.HUNT_ON_SPAWN_RADIUS).intValue();
 				if (entity instanceof Monster)
 				{
-					ArrayList <Player> nearbyPlayersHunt = ScanEntities.ScanNearbyPlayers(entity, huntRadius);
+					List <Player> nearbyPlayersHunt = ScanEntities.ScanNearbyPlayers(entity, huntRadius);
 					Monster mob = (Monster) entity;
 					int n = nearbyPlayersHunt.size();
 					if (!nearbyPlayersHunt.isEmpty())

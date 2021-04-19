@@ -8,6 +8,7 @@ import org.bukkit.entity.LivingEntity;
 /** Comparator used to sort a collection of entities by how close that entities is to the skill-caster's location */
 public class ClosestProximity implements Comparator <LivingEntity>
 {
+	/** Stores the skill-caster's current location as a point of reference */
 	protected Location casterLocation;
 	
 	public ClosestProximity (LivingEntity entity)
@@ -20,10 +21,13 @@ public class ClosestProximity implements Comparator <LivingEntity>
 		this.casterLocation = casterLocation;
 	}
 	
+	/** Compares the squared distance between the entity and the skill-caster's location */
 	@Override
 	public int compare(LivingEntity a, LivingEntity b) 
 	{
-		return (int) (casterLocation.distanceSquared(a.getLocation()) - casterLocation.distanceSquared(b.getLocation()));
+		double aDist = this.casterLocation.distanceSquared(a.getLocation().clone());
+		double bDist = this.casterLocation.distanceSquared(b.getLocation().clone());
+		return Double.compare(aDist, bDist);
 	}
 
 }

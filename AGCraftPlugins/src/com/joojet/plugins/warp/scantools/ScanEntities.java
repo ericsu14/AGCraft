@@ -1,6 +1,7 @@
 package com.joojet.plugins.warp.scantools;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
@@ -21,7 +22,7 @@ public class ScanEntities
 	public static boolean ScanNearbyEnemies (Player p, int radius, MonsterTypeInterpreter monsterTypeInterpreter)
 	{
 		int halfRadius = (int) (radius / 2.0);
-		ArrayList <Entity> entities = (ArrayList<Entity>) p.getNearbyEntities(radius, halfRadius, radius);
+		List <Entity> entities = p.getNearbyEntities(radius, halfRadius, radius);
 		
 		for (Entity e : entities)
 		{
@@ -43,12 +44,12 @@ public class ScanEntities
 	}
 	
 	/** Returns a list of players from an n-block radius around the entity */
-	public static ArrayList <Player> ScanNearbyPlayers (LivingEntity e, int radius)
+	public static List <Player> ScanNearbyPlayers (LivingEntity e, int radius)
 	{
 		BoundingBox searchBox = e.getBoundingBox().clone();
 		searchBox.expand(radius);
 		
-		ArrayList <Player> nearbyPlayers = new ArrayList <Player> ();
+		List <Player> nearbyPlayers = new ArrayList <Player> ();
 		
 		for (Player p : Bukkit.getOnlinePlayers())
 		{
@@ -61,11 +62,11 @@ public class ScanEntities
 	}
 	
 	/** Returns a list of player-owned entities from an n-block radius around the entity */
-	public static ArrayList <Entity> ScanNearbyPlayerOwnedEntities (Player p, int radius)
+	public static List <Entity> ScanNearbyPlayerOwnedEntities (Player p, int radius)
 	{
 		int halfRadius = (int) (radius / 2.0);
-		ArrayList <Entity> entities = (ArrayList<Entity>) p.getNearbyEntities(radius, halfRadius, radius);
-		ArrayList <Entity> ownedEntities = new ArrayList <Entity> ();
+		List <Entity> entities = p.getNearbyEntities(radius, halfRadius, radius);
+		List <Entity> ownedEntities = new ArrayList <Entity> ();
 		
 		for (Entity ent : entities)
 		{

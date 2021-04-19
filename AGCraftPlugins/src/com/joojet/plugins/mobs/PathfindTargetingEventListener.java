@@ -1,6 +1,5 @@
 package com.joojet.plugins.mobs;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -261,9 +260,17 @@ public class PathfindTargetingEventListener extends AGListener
 	/** Returns the player that is nearest to the passed entity if it exists. */
 	private Player getNearbyPlayer (LivingEntity hunter, int radius)
 	{
-		ArrayList <Player> players = ScanEntities.ScanNearbyPlayers(hunter, radius);
+		List <Player> players = ScanEntities.ScanNearbyPlayers(hunter, radius);
 		players.sort(new ClosestProximity (hunter));
-		return players.isEmpty() ? null : players.get(0);
+		// Filter out players that are spectators
+		for (Player player : players)
+		{
+			if (!this.isSpectator(player))
+			{
+				return player;
+			}
+		}
+		return null;
 	}
 	
 	/** Returns true if the living entity is a player with an active
@@ -326,8 +333,7 @@ public class PathfindTargetingEventListener extends AGListener
 			}
 			
 			// Ignore players that are either flying or in the spectator gamemode
-			if (victim instanceof Player && (((Player)victim).getAllowFlight() ||
-					((Player)victim).getGameMode() == GameMode.SPECTATOR))
+			if (this.isSpectator(victim))
 			{
 				continue;
 			}
@@ -358,6 +364,14 @@ public class PathfindTargetingEventListener extends AGListener
 		}
 		
 		return foundVictim ? victim : null;
+	}
+	
+	/** Returns true if the player is either in spectator mode or a player with flying privileges (such as creative mode)
+	 *  @param player The player entity being checked */
+	public boolean isSpectator (LivingEntity player)
+	{
+		return (player instanceof Player) && (((Player)player).getAllowFlight() ||
+				((Player)player).getGameMode() == GameMode.SPECTATOR);
 	}
 
 	@Override

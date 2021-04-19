@@ -1,7 +1,7 @@
 package com.joojet.plugins.warp.commands.tasks;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
@@ -72,7 +72,7 @@ public class AsyncWarpPlayerTask extends AsyncDatabaseTask<Location>
 			return;
 		}
 		
-		ArrayList <Entity> ownedEntities = ScanEntities.ScanNearbyPlayerOwnedEntities(this.player, 40);
+		List <Entity> ownedEntities = ScanEntities.ScanNearbyPlayerOwnedEntities(this.player, 40);
 		
 		// Teleports the player
 		this.player.teleport(location);

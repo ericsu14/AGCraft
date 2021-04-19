@@ -1,8 +1,8 @@
 package com.joojet.plugins.utility.commands;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.World.Environment;
@@ -105,7 +105,7 @@ public class FireworksCommand extends AGCommandExecutor
 					{
 						// Plays the custom firework music for all players within range of the player launching the
 						// firework show. This should also prevent sound overlapping issues.
-						ArrayList <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(player, 48);
+						List <Player> nearbyPlayers = ScanEntities.ScanNearbyPlayers(player, 48);
 						if (!nearbyPlayers.contains(player))
 						{
 							nearbyPlayers.add(player);
