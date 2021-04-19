@@ -27,6 +27,7 @@ import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
+import com.joojet.plugins.mobs.metadata.IgnorePlayerMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 import com.joojet.plugins.mobs.util.stream.ClosestProximity;
@@ -252,7 +253,7 @@ public class PathfindTargetingEventListener extends AGListener
 		{
 			return hunterEquipment.isAlliesOf(hunter, hunted, huntedEquipment);
 		}
-		return (huntedEquipment != null) ? huntedEquipment.isAlliesOf(hunted, hunter, hunterEquipment) : false;
+		return (huntedEquipment != null) ? huntedEquipment.isAlliesOf(hunted, hunter, hunterEquipment) : this.ignorePlayerWithMetadata (hunted);
 	}
 	
 	/** Returns the player that is nearest to the passed entity if it exists. */
@@ -305,6 +306,18 @@ public class PathfindTargetingEventListener extends AGListener
 				collect(Collectors.toList());
 		
 		return entities.isEmpty() ? null : entities.get(0);
+	}
+	
+	/** Returns true if the living entity is a player with an active
+	 *  mob ignore player metadata. */
+	private boolean ignorePlayerWithMetadata (LivingEntity entity)
+	{
+		if (entity instanceof Player)
+		{
+			Player player = (Player) entity;
+			return new IgnorePlayerMetadata().canIgnorePlayer(player);
+		}
+		return false;
 	}
 	
 	/** Returns true if the player is either in spectator mode or a player with flying privileges (such as creative mode)
