@@ -11,6 +11,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -72,7 +73,7 @@ public abstract class MobEquipment
 	protected EnumSet <Faction> rivalFactions;
 	/** A list of entities this monster should hunt either in addition to, but not including
 	 *  the entities the monster naturally hunts in vanilla Minecraft. */
-	protected ArrayList <EntityType> hitlist;
+	protected EnumSet <EntityType> hitlist;
 	/** A list of entities that this monster should ignore, meaning that they will never
 	 *  become hostile to that entity. The entity in question will 
 	 *  also never be hostile to this mob. */
@@ -103,7 +104,7 @@ public abstract class MobEquipment
 		this.factions = EnumSet.noneOf(Faction.class);
 		this.rivalFactions = EnumSet.noneOf(Faction.class);
 		// Hitlist
-		this.hitlist = new ArrayList <EntityType> ();
+		this.hitlist = EnumSet.noneOf(EntityType.class);
 		// Ignore List
 		this.ignoreList = EnumSet.noneOf(EntityType.class);
 		// Mob flags
@@ -358,7 +359,7 @@ public abstract class MobEquipment
 	}
 	
 	/** Returns the list of  entities this monster should hunt */
-	public ArrayList <EntityType> getHitList ()
+	public EnumSet <EntityType> getHitList ()
 	{
 		return this.hitlist;
 	}
@@ -405,14 +406,14 @@ public abstract class MobEquipment
 		return this.mobFlags.contains(flag);
 	}
 	
-	/** Checks if this monster is in the passed custom mob's list of rivaling factions
+	/** Checks if this monster is in the other monster's list of rivaling factions
 	 *   @param mob - Monster's mob equipment being checked against this instance */
 	public boolean isRivalsOf (MobEquipment mob)
 	{
 		EnumSet <Faction> rivalingFactions = mob.getRivalFactions();
-		for (Faction faction : rivalingFactions)
+		for (Faction rivalFaction : rivalingFactions)
 		{
-			if (this.factions.contains(faction))
+			if (this.factions.contains(rivalFaction))
 			{
 				return true;
 			}
@@ -474,7 +475,7 @@ public abstract class MobEquipment
 			// Check if the entity is rivals with the other entity. If so, return false
 			if (otherEquipment.isRivalsOf(this))
 			{
-				return false;
+				return true;
 			}
 			
 			result = otherEquipment.getIgnoreList().contains(entity.getType());

@@ -25,6 +25,7 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
+import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.util.EquipmentTools;
@@ -47,7 +48,13 @@ public class PathfindTargetingEventListener extends AGListener
 	@Override
 	public void onEnable ()
 	{
-
+		// TODO Auto-generated method stub
+	}
+	
+	@Override
+	public void onDisable() 
+	{
+		// TODO Auto-generated method stub	
 	}
 	
 	/** Listens to AI target events and cancels targeting events if the custom mob is called
@@ -190,6 +197,36 @@ public class PathfindTargetingEventListener extends AGListener
 		}
 	}
 	
+	/** Captures entity spawn events and prevents them from targeting allied mobs if they are spawned as part of
+	 *  zombie reinforcement event */
+	@EventHandler
+	public void handleReinforcementMobSpawn (CreatedCustomMonsterEvent event)
+	{
+		if (event.getEntity() instanceof Monster)
+		{
+			Monster hunter = (Monster) event.getEntity();
+			
+			// No action needed if the hunter isn't automatically targeting a mob
+			if (hunter.getTarget() == null)
+			{
+				return;
+			}
+			
+			LivingEntity hunted = hunter.getTarget();
+			MobEquipment hunterEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(hunter);
+			MobEquipment huntedEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(hunted);
+			
+			if (hunterEquipment != null)
+			{
+				hunter.setTarget(hunterEquipment.isAlliesOf(hunter, hunted, huntedEquipment) ? null : hunted);
+			}
+			else if (huntedEquipment != null)
+			{
+				hunter.setTarget(huntedEquipment.isAlliesOf(hunted, hunter, hunterEquipment) ? null : hunted);
+			}
+		}
+	}
+	
 	/** Returns true if a monster should cancel their AI targeting event based on its hitlist, ignore list, and rivaling factions
 	 * 		@param hunter - The entity hunting the hunted
 	 * 		@param hunted - The entity being hunted */
@@ -272,7 +309,7 @@ public class PathfindTargetingEventListener extends AGListener
 	
 	/** Returns true if the player is either in spectator mode or a player with flying privileges (such as creative mode)
 	 *  @param player The player entity being checked */
-	public boolean isSpectator (LivingEntity player)
+	private boolean isSpectator (LivingEntity player)
 	{
 		return (player instanceof Player) && (((Player)player).getAllowFlight() ||
 				((Player)player).getGameMode() == GameMode.SPECTATOR);
@@ -282,11 +319,5 @@ public class PathfindTargetingEventListener extends AGListener
 	public void loadConfigVariables(ServerConfigFile config) 
 	{
 		
-	}
-
-	@Override
-	public void onDisable() 
-	{
-		// TODO Auto-generated method stub	
 	}
 }

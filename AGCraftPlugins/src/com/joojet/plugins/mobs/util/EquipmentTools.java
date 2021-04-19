@@ -282,7 +282,7 @@ public class EquipmentTools
 				EntityInsentient nmsMob = ((CraftMob) entity).getHandle();
 				
 				// Retrieves the monster's hitlist
-				ArrayList <EntityType> hitlist = mobEquipment.getHitList();
+				EnumSet <EntityType> hitlist = mobEquipment.getHitList();
 				EnumSet <EntityType> ignoreList = mobEquipment.getIgnoreList();
 				
 				// Load special pathfinding goals for NMS Skill users
