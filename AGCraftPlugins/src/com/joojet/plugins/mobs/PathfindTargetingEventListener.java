@@ -202,59 +202,21 @@ public class PathfindTargetingEventListener extends AGListener
 			return false;
 		}
 		
-		// Check ignore player with metadata condition
-		if (ignorePlayerWithMetadata (hunted))
+		/** Ignore players who are in spectator / creative mode */
+		if (this.isSpectator(hunted))
 		{
 			return true;
 		}
 				
 		MobEquipment hunterEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(hunter);
 		MobEquipment huntedEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(hunted);
-				
-		// First, check if the hunter is in the huntee's ignore list
-		// This is used to avoid iron golems, snowman, and wolves from aggro allied monsters
-		if (huntedEquipment != null && huntedEquipment.getIgnoreList().contains(hunter.getType()))
-		{
-			return true;
-		}
-				
-		// Secondly, check if the hunted is in the hunter's ignore list. If so, cancel
-		// the targeting event
-		if (hunterEquipment != null && hunterEquipment.getIgnoreList().contains(hunted.getType()))
-		{
-			return true;
-		}
 		
-				
-		// Thirdly, check for the case where the hunter equipment is
-		// active, but the hunted equipment is not. In this case,
-		// the return result will be set to whatever or not the
-		// hunter has the flag IGNORE_NON_FACTION_ENTITIES enabled.
-		if (hunterEquipment != null && huntedEquipment == null
-				&& hunted.getType() != EntityType.PLAYER)
+		// Checks if the hunter or hunted is allies of each other. Otherwise, return false
+		if (hunterEquipment != null)
 		{
-			return hunterEquipment.containsFlag(MobFlag.IGNORE_NON_FACTION_ENTITIES);
+			return hunterEquipment.isAlliesOf(hunter, hunted, huntedEquipment);
 		}
-		
-		// Require both equipment types to be active at this point
-		if (hunterEquipment == null || huntedEquipment == null)
-		{
-			return false;
-		}
-				
-		// Lastly, check if the hunter has any rivaling factions and
-		// the hunted is in at least one faction
-		if (!hunterEquipment.getRivalFactions().isEmpty()
-				&& !huntedEquipment.getFactions().isEmpty())
-		{
-			// Check if the hunted is in the hunter's list of rivaling factions
-			if (huntedEquipment.isRivalsOf(hunterEquipment))
-			{
-				return false;
-			}
-			return true;
-		}
-		return hunterEquipment.containsFlag(MobFlag.IGNORE_NON_FACTION_ENTITIES);
+		return (huntedEquipment != null) ? huntedEquipment.isAlliesOf(hunted, hunter, hunterEquipment) : false;
 	}
 	
 	/** Returns the player that is nearest to the passed entity if it exists. */
@@ -273,18 +235,6 @@ public class PathfindTargetingEventListener extends AGListener
 		return null;
 	}
 	
-	/** Returns true if the living entity is a player with an active
-	 *  mob ignore player metadata. */
-	private boolean ignorePlayerWithMetadata (LivingEntity entity)
-	{
-		if (entity instanceof Player)
-		{
-			Player player = (Player) entity;
-			return new IgnorePlayerMetadata().canIgnorePlayer(player);
-		}
-		return false;
-	}
-	
 	/** Returns an eligible entity (based on the living entity's hit, ignore, and faction list) that is near
 	 * the passed hunter. Returns null if no entity is found within a 20 block radius of the hunter. */
 	private LivingEntity retargetCustomMob (LivingEntity hunter)
@@ -301,9 +251,6 @@ public class PathfindTargetingEventListener extends AGListener
 			return null;
 		}
 		
-		LivingEntity victim = null;
-		MobEquipment victimEquipment;
-		
 		// Allow phantoms to have a larger scan radius
 		if (hunter.getType() == EntityType.PHANTOM)
 		{
@@ -311,59 +258,17 @@ public class PathfindTargetingEventListener extends AGListener
 		}
 		
 		List <LivingEntity> entities = hunter.getNearbyEntities(scanRadius, scanRadius / 4.0, scanRadius).stream().
-				filter(ent -> (ent instanceof LivingEntity) && hunter.hasLineOfSight(ent)).
+				filter(ent -> (ent instanceof LivingEntity) && hunter.hasLineOfSight(ent) && 
+						!isSpectator ((LivingEntity) ent)).
 				map(ent -> (LivingEntity) ent).
+				filter (other -> {
+					MobEquipment otherEquipment = monsterTypeInterpreter.getMobEquipmentFromEntity(other);
+					return !hunterEquipment.isAlliesOf(hunter, other, otherEquipment);
+				}).
 				sorted (new ClosestProximity (hunter)).
 				collect(Collectors.toList());
 		
-		boolean foundVictim = false;
-		for (LivingEntity target : entities)
-		{
-			if (foundVictim)
-			{
-				break;
-			}
-			
-			victim = (LivingEntity) target;
-			foundVictim = false;
-			
-			if (this.ignorePlayerWithMetadata(victim))
-			{
-				continue;
-			}
-			
-			// Ignore players that are either flying or in the spectator gamemode
-			if (this.isSpectator(victim))
-			{
-				continue;
-			}
-			
-			// Check if the victim is in its hitlist
-			if (hunterEquipment.getHitList().contains(victim.getType()) &&
-				!hunterEquipment.getIgnoreList().contains(victim.getType()))
-			{
-				// If so, attempt to get the victim's mob equipment
-				victimEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(victim);
-				if (victimEquipment != null
-						&& !hunterEquipment.getRivalFactions().isEmpty()
-						&& !victimEquipment.getFactions().isEmpty())
-				{
-					// Check if the victim's faction is in the hunter's rivaling factions
-					if (victimEquipment.isRivalsOf(hunterEquipment))
-					{
-						foundVictim = true;
-						break;
-					}
-				}
-				else
-				{
-					foundVictim = !(hunterEquipment.containsFlag(MobFlag.IGNORE_NON_FACTION_ENTITIES))
-							|| victim.getType() == EntityType.PLAYER;
-				}
-			}
-		}
-		
-		return foundVictim ? victim : null;
+		return entities.isEmpty() ? null : entities.get(0);
 	}
 	
 	/** Returns true if the player is either in spectator mode or a player with flying privileges (such as creative mode)
@@ -381,8 +286,8 @@ public class PathfindTargetingEventListener extends AGListener
 	}
 
 	@Override
-	public void onDisable() {
-		// TODO Auto-generated method stub
-		
+	public void onDisable() 
+	{
+		// TODO Auto-generated method stub	
 	}
 }

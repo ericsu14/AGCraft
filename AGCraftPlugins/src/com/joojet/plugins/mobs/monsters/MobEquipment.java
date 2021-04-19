@@ -65,16 +65,17 @@ public abstract class MobEquipment
 	/** A list of factions this monster is apart of */
 	protected EnumSet <Faction> factions;
 	/** A list of factions that this monster is set to target.
-	 *  If this set has at least one value inserted, the monster only attack
-	 *  entities that are either in this list and the monster's hit list or monsters
-	 *  that are in its hit list but does not carry a faction tag. */
+	 *  If this set has at least one value inserted, the monster will only attack
+	 *  entities whose factions are in this list. If the target in question is not part
+	 *  of any faction, but in this custom monster's hitlist, that target will be hunted down as well
+	 *  unless this custom monster has the IGNORE_NON_FACTIONED_MOBS flag enabled. */
 	protected EnumSet <Faction> rivalFactions;
-	/** A list of entities this monster should hunt either in addition not including
-	 *  the entities the monster naturally hunts in vanilla MineCraft. This behavior can
-	 *  be controlled by the variable, huntFromCustomListOnly. */
+	/** A list of entities this monster should hunt either in addition to, but not including
+	 *  the entities the monster naturally hunts in vanilla Minecraft. */
 	protected ArrayList <EntityType> hitlist;
 	/** A list of entities that this monster should ignore, meaning that they will never
-	 *  become hostile to that entity. */
+	 *  become hostile to that entity. The entity in question will 
+	 *  also never be hostile to this mob. */
 	protected EnumSet <EntityType> ignoreList;
 	/** A set of flags that could be applied to the monster upon spawning */
 	protected EnumSet <MobFlag> mobFlags;
@@ -428,7 +429,7 @@ public abstract class MobEquipment
 		boolean result = false;
 		boolean noFactions = false;
 		
-		if (entity == other)
+		if (entity.equals(other))
 		{
 			return true;
 		}
@@ -450,11 +451,19 @@ public abstract class MobEquipment
 			}
 		}
 		if (otherEquipment != null)
-		{
+		{ 
 			// Check if the entity is in the same faction as the other entity.
 			// If so, immediately return true
 			EnumSet <Faction> otherFactions = otherEquipment.getFactions();
 			noFactions = this.factions.isEmpty() && otherFactions.isEmpty();
+			
+			// Checks if the IGNORE_NONFACTIONED_ENTITIES flag's conditions are met. If so, treat the mob as an ally
+			if (this.containsFlag(MobFlag.IGNORE_NON_FACTION_ENTITIES) &&
+					otherFactions.isEmpty())
+			{
+				return true;
+			}
+			
 			for (Faction otherFaction : otherFactions)
 			{
 				if (this.factions.contains(otherFaction))

@@ -99,8 +99,8 @@ public enum MobFlag implements CustomAttribute
 	},
 	/** When enabled, the monster will never lose sight of its prey (meaning that it will never "forget" its enemy) */
 	PERSISTENT_ATTACKER,
-	/** When enabled, the monster will ignore entities that are not apart of any faction if they are in its hitlist.
-	 *  Does not apply to player */
+	/** When enabled, the monster will not attack any custom entity that are not apart of any faction,
+	 *  even if those monsters are in its hitlist. This flag does not apply to player */
 	IGNORE_NON_FACTION_ENTITIES,
 	/** When enabled, the mob will spawn a small fireworks show upon death */
 	FIREWORK_DEATH,
