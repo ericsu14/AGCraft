@@ -1,6 +1,5 @@
 package com.joojet.plugins.mobs.util;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Map.Entry;
@@ -33,7 +32,6 @@ import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
 import com.joojet.plugins.mobs.interfaces.NMSSkillUser;
-import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.metadata.SummonedMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -245,11 +243,6 @@ public class EquipmentTools
 		
 		PersistentDataHolder holder = (PersistentDataHolder) entity;
 		new MonsterTypeMetadata(mobEquipment.getMonsterType()).addStringMetadata(holder);
-		ArrayList <FactionMetadata> factions = mobEquipment.generateFactionMetadata();
-		for (FactionMetadata faction : factions)
-		{
-			faction.addStringMetadata(holder);
-		}
 	}
 	
 	/** Modifies an entity's pathfinding properties based on what is stored in

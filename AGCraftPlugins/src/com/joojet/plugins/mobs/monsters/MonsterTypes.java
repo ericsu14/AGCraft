@@ -47,7 +47,7 @@ public abstract class MonsterTypes implements Cloneable
 	
 	/** Adds in a new monster into the moblist.
 	 * 		@param equipment - Monster's equipment class
-	 * 		@param weight - Weight used to amplify the monster's spawn chances (higher = more frequently)s */
+	 * 		@param weight - Weight used to amplify the monster's spawn chances (higher = more frequently) */
 	public void addEquipment (MobEquipment equipment, int weight)
 	{
 		equipmentList.add(new WeightedMob (equipment, weight));

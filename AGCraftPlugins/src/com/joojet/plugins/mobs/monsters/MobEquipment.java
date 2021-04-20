@@ -23,7 +23,6 @@ import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.offhand.TippedArrow;
-import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.IgnorePlayerMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
@@ -359,17 +358,6 @@ public abstract class MobEquipment
 	public MonsterTypeMetadata generateMobTypeMetadata ()
 	{
 		return new MonsterTypeMetadata (this.mobType);
-	}
-	
-	/** Generates a list of faction metadata types based on the mob equipment's properties */
-	public ArrayList <FactionMetadata> generateFactionMetadata ()
-	{
-		ArrayList <FactionMetadata> result = new ArrayList <FactionMetadata> ();
-		for (Faction faction : this.factions)
-		{
-			result.add(new FactionMetadata (faction));
-		}
-		return result;
 	}
 	
 	/** Returns true if this mob equipment instance contains
