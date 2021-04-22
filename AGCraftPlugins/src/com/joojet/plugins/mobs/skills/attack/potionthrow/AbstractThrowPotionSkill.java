@@ -21,12 +21,12 @@ import com.joojet.plugins.mobs.util.WeightedList;
 
 public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill 
 {
-	protected WeightedList <WeightedPotion, AbstractPotionEquipment> potionList;
+	protected WeightedList <WeightedPotion> potionList;
 	
 	public AbstractThrowPotionSkill(int range, int cooldown, int maxUses, int weight) 
 	{
 		super(range, cooldown, maxUses, weight);
-		this.potionList = new WeightedList <WeightedPotion, AbstractPotionEquipment> ();
+		this.potionList = new WeightedList <WeightedPotion> ();
 		this.initializePotionsList();
 	}
 	
@@ -89,7 +89,7 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 				
 				caster.getWorld().spawn(potionSpawnLocation, ThrownPotion.class, entity -> {
 					entity.setVelocity(velocity);
-					entity.setItem(potionList.getRandomEntry());
+					entity.setItem(potionList.getRandomWeightedEntry().getEntry());
 					entity.setShooter(caster);
 				});
 			}

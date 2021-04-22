@@ -27,14 +27,14 @@ public abstract class AbstractSummonSkill extends AbstractSkill
 	/** The total amount of monsters that can be summoned */
 	protected int maxSummons;
 	/** A list of custom monsters this monster can randomly summon */
-	protected WeightedList <WeightedMobSummon, MonsterType> summons;
+	protected WeightedList <WeightedMobSummon> summons;
 	
 	/** Creates a new instance of a summoning skill, allowing the monster to summon custom monsters at will. */
 	public AbstractSummonSkill(int range, int cooldown, int maxUses, int weight, int maxSummons) 
 	{
 		super(SkillPropetry.SUMMON, range, cooldown, maxUses, weight);
 		this.maxSummons = maxSummons;
-		this.summons = new WeightedList <WeightedMobSummon, MonsterType> ();
+		this.summons = new WeightedList <WeightedMobSummon> ();
 		this.initializeSummons();
 	}
 	
@@ -75,7 +75,7 @@ public abstract class AbstractSummonSkill extends AbstractSkill
 	}
 	
 	/** Returns the list of monsters that can be randomly summoned by this skill */
-	public WeightedList <WeightedMobSummon, MonsterType> getSummons ()
+	public WeightedList <WeightedMobSummon> getSummons ()
 	{
 		return this.summons;
 	}

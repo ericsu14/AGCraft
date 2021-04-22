@@ -65,8 +65,7 @@ public abstract class MonsterTypes implements Cloneable
 	public MobEquipment getRandomEquipment (Biome biome, MobSkillRunner mobSkillRunner)
 	{
 		EnumSet <Biome> spawnBiomes;
-		// ArrayList <WeightedMob> mobList = new ArrayList <WeightedMob> ();
-		WeightedList <WeightedMob, MobEquipment> mobList = new WeightedList <WeightedMob, MobEquipment> ();
+		WeightedList <WeightedMob> mobList = new WeightedList <WeightedMob> ();
 		
 		for (WeightedMob mob : equipmentList)
 		{
@@ -83,7 +82,7 @@ public abstract class MonsterTypes implements Cloneable
 		// Binary searches the list with a random number and returns a random mob
 		if (!mobList.isEmpty())
 		{
-			return mobList.getRandomEntry();
+			return mobList.getRandomWeightedEntry().getEntry();
 		}
 		return null;
 	}

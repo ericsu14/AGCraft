@@ -19,16 +19,6 @@ public abstract class WeightedEntry <E>
 		this.weight = weight;
 	}
 	
-	/** Constructs a weighted entry between the set min and max weights.
-	 *  @deprecated Use the new weightedlist to automatically perform min-max weight management. */
-	public WeightedEntry (E entry, int minWeight, int maxWeight)
-	{
-		this.entry = entry;
-		this.minWeight = minWeight;
-		this.maxWeight = maxWeight;
-		this.weight = this.maxWeight - this.minWeight;
-	}
-	
 	/** Returns true if the random roll is within the min and max ranges for this entry */
 	public boolean inRange (int roll)
 	{

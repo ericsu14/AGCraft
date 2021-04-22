@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class WeightedList <T extends WeightedEntry <E>, E>
+public class WeightedList <T extends WeightedEntry<?>>
 { 
 	/** An internal list of weighted entries */
 	protected List <T> entries;
@@ -55,32 +55,20 @@ public class WeightedList <T extends WeightedEntry <E>, E>
 		return this.entries.isEmpty();
 	}
 	
-	/** Selects a random entry in the weighted list using binary search */
-	public E getRandomEntry ()
-	{
-		return this.getEntry(this.rand.nextInt(this.minWeight));
-	}
-	
 	/** Selects a random weighted entry in the weighted list using binary search */
-	public WeightedEntry <E> getRandomWeightedEntry ()
+	public T getRandomWeightedEntry ()
 	{
 		return this.getWeightedEntry (this.rand.nextInt(this.minWeight));
 	}
 	
 	/** Selects a random weighted entry in the weighted list based on a random roll using binary search */
-	public E getEntry (int roll)
-	{
-		return this.getWeightedEntry(roll).getEntry();
-	}
-	
-	/** Selects a random weighted entry in the weighted list based on a random roll using binary search */
-	public WeightedEntry <E> getWeightedEntry (int roll)
+	public T getWeightedEntry (int roll)
 	{
 		int n = this.entries.size();
 		int left = 0;
 		int right = n - 1;
 		int pivot;
-		WeightedEntry<E> curr;
+		T curr;
 		
 		while (left <= right)
 		{

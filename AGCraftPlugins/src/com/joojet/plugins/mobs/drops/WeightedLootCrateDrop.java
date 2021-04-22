@@ -8,13 +8,13 @@ import com.joojet.plugins.mobs.util.WeightedList;
 public class WeightedLootCrateDrop extends MonsterDrop
 {
 	/** A list of weighted drops */
-	protected WeightedList <WeightedDrop, ItemStack> dropList;
+	protected WeightedList <WeightedDrop> dropList;
 	
 	/** Creates a new weighted loot crate drop, which allows the monster to drop a mystery item from a list of possible drops with weights. */
 	public WeightedLootCrateDrop(double dropRate, int minAmount, int maxAmount, WeightedDrop ...drops) 
 	{
 		super(Material.STICK, dropRate, minAmount, maxAmount);
-		this.dropList = new WeightedList <WeightedDrop, ItemStack> ();
+		this.dropList = new WeightedList <WeightedDrop> ();
 		
 		for (WeightedDrop drop : drops)
 		{
@@ -34,7 +34,7 @@ public class WeightedLootCrateDrop extends MonsterDrop
 	{
 		if (rand.nextDouble() <= (this.dropRate + looting))
 		{
-			ItemStack item = this.dropList.getRandomEntry();
+			ItemStack item = this.dropList.getRandomWeightedEntry().getEntry();
 			
 			if (item != null && this.maxAmount <= item.getMaxStackSize())
 			{	

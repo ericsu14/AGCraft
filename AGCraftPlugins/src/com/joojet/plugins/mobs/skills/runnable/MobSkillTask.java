@@ -78,7 +78,7 @@ public class MobSkillTask
 	 *  This also updates the cooldown timer for all of the monster's skills. */
 	protected AbstractSkill getRandomSkill ()
 	{
-		WeightedList <WeightedMobSkill, AbstractSkill> skillList = new WeightedList <WeightedMobSkill, AbstractSkill> ();
+		WeightedList <WeightedMobSkill> skillList = new WeightedList <WeightedMobSkill> ();
 		
 		for (AbstractSkill skill : this.mobSkills)
 		{
@@ -91,7 +91,7 @@ public class MobSkillTask
 		
 		if (!skillList.isEmpty())
 		{
-			return skillList.getRandomEntry();
+			return skillList.getRandomWeightedEntry().getEntry();
 		}
 		return null;
 	}

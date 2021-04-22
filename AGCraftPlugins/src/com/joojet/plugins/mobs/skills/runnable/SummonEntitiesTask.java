@@ -8,7 +8,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
-import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.SkillSummonedMetadata;
 import com.joojet.plugins.mobs.skills.summon.AbstractSummonSkill;
@@ -19,7 +18,7 @@ import com.joojet.plugins.mobs.util.WeightedList;
 public class SummonEntitiesTask extends BukkitRunnable
 {
 	/** The type of custom mobs that can be summoned at a time */
-	protected WeightedList <WeightedMobSummon, MonsterType> mobPool;
+	protected WeightedList <WeightedMobSummon> mobPool;
 	/** A list of locations entities can be summoned at */
 	protected List <Location> spawnLocations;
 	/** A reference to the AbstractSummonSkill instance launching this task */

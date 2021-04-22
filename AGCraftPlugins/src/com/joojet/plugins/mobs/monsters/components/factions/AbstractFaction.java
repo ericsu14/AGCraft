@@ -3,7 +3,6 @@ package com.joojet.plugins.mobs.monsters.components.factions;
 import java.util.EnumSet;
 
 import com.joojet.plugins.mobs.enums.Faction;
-import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 /** Describes an abstract faction a custom monster can be apart of */
 public abstract class AbstractFaction 
@@ -44,12 +43,12 @@ public abstract class AbstractFaction
 		return this.faction;
 	}
 	
-	/** Checks if this monster is in the other monster's list of rivaling factions
-	 *   @param mob - Monster's mob equipment being checked against this instance */
-	public boolean isRivalsOf (MobEquipment mob)
+	/** Checks if this faction is in the other faction's list of rivaling factions
+	 *   @param otherFaction - Faction being checked against this instance */
+	public boolean isRivalsOf (AbstractFaction otherFaction)
 	{
-		EnumSet <Faction> rivalingFactions = mob.getRivalFactions();
-		return rivalingFactions.contains(this.getFactionIdentifier());
+		return  otherFaction.getRivalFactions().
+				contains(this.getFactionIdentifier());
 	}
 	
 	@Override
