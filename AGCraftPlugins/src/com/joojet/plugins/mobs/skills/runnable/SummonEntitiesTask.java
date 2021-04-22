@@ -50,7 +50,7 @@ public class SummonEntitiesTask extends BukkitRunnable
 			Location spawnLocation = this.spawnLocations.remove(0);
 			
 			// Secondly, randomly select a monster from the mob pool to spawn
-			WeightedMobSummon summon = (WeightedMobSummon) mobPool.getRandomWeightedEntry();
+			WeightedMobSummon summon = mobPool.getRandomWeightedEntry();
 			
 			// Finally, summon the custom monster into the world and play its custom animations
 			LivingEntity summonedEntity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, summon.getEntityType());
