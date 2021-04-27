@@ -43,7 +43,6 @@ public class HellWalker extends MythicMob
 				MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME, MobFlag.DISABLE_MAGIC_HEALING);
 		this.setStat(MonsterStat.EXPERIENCE, 60.0);
 		this.setStat(MonsterStat.HEALTH, 40.0);
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 6.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 75.0);
 		
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.10, 1, 3),

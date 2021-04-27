@@ -28,7 +28,7 @@ public class MythicMob extends MobEquipment
 		// the rage and agressive teleport skills
 		skills.add(new RageSkill (0, 15, 0.30));
 		skills.add(new AggressiveTeleportSkill (156, 10, Integer.MAX_VALUE, 2));
-		skills.add(new ThrowEnderPearlSkill (128, 20, 5, 1, 8));
+		skills.add(new ThrowEnderPearlSkill (128, 20, 5, 1, 16));
 	}
 	
 }

@@ -37,12 +37,11 @@ public class BarneyTheDinosaur extends MythicMob
 		this.addBiomes(Biome.FLOWER_FOREST, Biome.DARK_FOREST, Biome.DARK_FOREST_HILLS,
 				Biome.SWAMP, Biome.SWAMP_HILLS, Biome.JUNGLE, Biome.JUNGLE_HILLS, Biome.JUNGLE_EDGE,
 				Biome.GRAVELLY_MOUNTAINS, Biome.SUNFLOWER_PLAINS);
-		this.addPotionEffect(CustomPotionEffect.SPEED,
-				CustomPotionEffect.FIRE_RESISTANCE,
-				CustomPotionEffect.UNDEAD_HEAL);
+		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE, CustomPotionEffect.UNDEAD_HEAL);
 		this.addMobFlags(MobFlag.HUNT_ON_SPAWN, MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME,
 				MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER);
-		this.addTargetsToHitList(EntityType.PLAYER, EntityType.IRON_GOLEM, EntityType.SNOWMAN);
+		this.addTargetsToHitList(EntityType.PLAYER, EntityType.IRON_GOLEM, EntityType.SNOWMAN, EntityType.ZOMBIE, EntityType.SKELETON, 
+				EntityType.HUSK, EntityType.STRAY, EntityType.SLIME);
 		
 		this.name = "Barney the Dinosaur";
 		this.color = ChatColor.DARK_PURPLE;
