@@ -130,7 +130,7 @@ public class AmplifiedMobSpawner extends AGListener
 				ArrayList <MonsterDrop> drops = entityEquipment.getMonsterDrops();
 				for (MonsterDrop drop : drops)
 				{
-					droppedItem = drop.generateDrop(0.0);
+					droppedItem = drop.generateDrop(0.0, this.equipmentLoader);
 					if (droppedItem != null)
 					{
 						event.getDrops().add(droppedItem);

@@ -26,17 +26,13 @@ public class SoulEater extends EpicMob
 		this.addPotionEffect(CustomPotionEffect.SPEED,
 				CustomPotionEffect.FIRE_RESISTANCE);
 		
-		// Weapon
 		this.weapon = new AngelOfDeath (this.color);
-		// Offhand
 		this.offhand = new WitheringArrow (this.color);
-		// Helmet
 		this.helmet = new DarkNetheriteHelmet (this.color);
-		// Chestplate
 		this.chestplate = new DarkNetheriteChestplate (this.color);
 		this.setStat(MonsterStat.EXPERIENCE, 25.0);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 12.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 6.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.20);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.10);
 	}
 }

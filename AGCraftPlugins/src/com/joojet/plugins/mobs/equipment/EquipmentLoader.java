@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.bukkit.persistence.PersistentDataHolder;
 
 import com.joojet.plugins.mobs.enums.EquipmentClassifier;
+import com.joojet.plugins.mobs.enums.EquipmentType;
 import com.joojet.plugins.mobs.equipment.boots.BootTypes;
 import com.joojet.plugins.mobs.equipment.cake.CakeTypes;
 import com.joojet.plugins.mobs.equipment.chest.ChestTypes;
@@ -41,6 +42,13 @@ public class EquipmentLoader
 		
 	}
 	
+	/** Returns the equipment instance referenced by the EquipmentType identifier, 
+	 *  or null if not found. */
+	public Equipment getEquipment (EquipmentType equipmentType)
+	{
+		return this.interpreter.searchTrie(equipmentType.toString());
+	}
+	
 	/** Loads in a list of equipment types and registers those instances into 
 	 *  an internal hashmap. */
 	public void loadEquipment (EquipmentTypes... equipmentTypes)
@@ -57,8 +65,7 @@ public class EquipmentLoader
 		String idenfitier = new EquipmentTypeMetadata().getStringMetadata(holder);
 		if (idenfitier != null)
 		{
-			Equipment equipment = this.interpreter.searchTrie(idenfitier);
-			return equipment;
+			return this.interpreter.searchTrie(idenfitier);
 		}
 		return null;
 	}

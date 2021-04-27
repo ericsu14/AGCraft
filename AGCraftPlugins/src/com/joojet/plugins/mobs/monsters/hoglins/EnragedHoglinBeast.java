@@ -24,11 +24,13 @@ public class EnragedHoglinBeast extends LegendaryMob
 		this.color = ChatColor.GOLD;
 		this.addBiomes(Biome.THE_VOID);
 		
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 20.0);
-		this.setStat(MonsterStat.BASE_ARMOR, 24.0);
-		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 12.0);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 16.0);
+		this.setStat(MonsterStat.BASE_ARMOR, 12.0);
+		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 4.0);
 		this.setStat(MonsterStat.KNOCKBACK_RESISTANCE, 0.45);
 		this.setStat(MonsterStat.EXPERIENCE, 60.0);
+		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
+		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 180);
 		
 		this.addPotionEffect(CustomPotionEffect.SPEED, CustomPotionEffect.JUMP_BOOST);
 		this.setStat(MonsterStat.HEALTH, 40.0);

@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import com.joojet.plugins.mobs.enums.SummonTypes;
+import com.joojet.plugins.mobs.equipment.EquipmentLoader;
 
 public class SummoningScrollDrop extends MonsterDrop 
 {
@@ -23,7 +24,7 @@ public class SummoningScrollDrop extends MonsterDrop
 	/** Generates the stored summoning scroll as an itemstack
 	 *  if the random roll check passes. Otherwise, return null. */
 	@Override
-	public ItemStack generateDrop (double looting)
+	public ItemStack generateDrop (double looting, EquipmentLoader equipmentLoader)
 	{
 		return (this.rand.nextDouble() <= (this.dropRate + looting)) 
 				? this.summon.getSummon() : null;

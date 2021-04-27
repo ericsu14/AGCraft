@@ -32,6 +32,8 @@ public class UltimateBadassZombie extends LegendaryMob
 		this.color = ChatColor.GOLD;
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		this.setStat(MonsterStat.HEALTH, 24.0);
+		this.setStat(MonsterStat.SPAWN_LIMIT, 5);
+		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 180);
 		
 		this.addBiomes(Biome.THE_VOID);
 		

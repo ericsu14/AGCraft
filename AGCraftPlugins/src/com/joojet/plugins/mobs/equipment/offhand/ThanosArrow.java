@@ -18,8 +18,7 @@ public class ThanosArrow extends TippedArrow
 	public void addPotionData ()
 	{
 		this.setColor(Color.fromRGB(75, 0, 130));
-		this.addPotionEffect(PotionEffectType.WITHER, 70, 2);
-		this.addPotionEffect(PotionEffectType.HARM, 1, 1);
+		this.addPotionEffect(PotionEffectType.WITHER, 70, 1);
 		this.setDisplayName("Thanos Arrow");
 		this.addLoreToItemMeta("Will snap the enemy's health in half...");
 	}

@@ -8,6 +8,7 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.attack.ThrowEnderPearlSkill;
 import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.mobs.skills.utility.AggressiveTeleportSkill;
 
@@ -25,8 +26,9 @@ public class MythicMob extends MobEquipment
 	public void loadCustomSkills(List<AbstractSkill> skills) {
 		// If a mythic mob does not have any predefined skill, automatically default to using
 		// the rage and agressive teleport skills
-		skills.add(new RageSkill (0, 30, 0.30));
+		skills.add(new RageSkill (0, 15, 0.30));
 		skills.add(new AggressiveTeleportSkill (156, 10, Integer.MAX_VALUE, 2));
+		skills.add(new ThrowEnderPearlSkill (128, 20, 5, 1, 8));
 	}
 	
 }

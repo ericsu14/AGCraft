@@ -19,7 +19,7 @@ public class TrojanSword extends Equipment
 		this.wordsPerLine = 7;
 		this.addLoreToItemMeta("Tommy trojan once weilded this blade to defeat his sworn enemies. Now you will carry on his legacy and uphold the traditions of this university!");
 		this.addAttackAttributes(8.0, 1.8);
-		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);
+		this.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 3);
 		this.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
 		this.addUnsafeEnchantment(Enchantment.SWEEPING_EDGE, 3);
 		this.addUnsafeEnchantment(Enchantment.LOOT_BONUS_MOBS, 3);

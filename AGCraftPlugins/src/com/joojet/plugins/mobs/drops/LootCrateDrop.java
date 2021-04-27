@@ -6,6 +6,8 @@ import java.util.List;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import com.joojet.plugins.mobs.equipment.EquipmentLoader;
+
 /** A special monster drop that drops a random item
  *  from a set of given materials. 
  *  All drops have an equally random chance of dropping. */
@@ -24,7 +26,7 @@ public class LootCrateDrop extends MonsterDrop
 	}
 	
 	@Override
-	public ItemStack generateDrop (double looting)
+	public ItemStack generateDrop (double looting, EquipmentLoader equipmentLoader)
 	{
 		if (rand.nextDouble() <= (this.dropRate + looting))
 		{

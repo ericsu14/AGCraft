@@ -29,12 +29,12 @@ public class RoyalPiglinHunter extends MythicMob
 		this.name = "Royal Piglin Hunter";
 		
 		this.setStat(MonsterStat.HEALTH, 24.0);
-		this.setStat(MonsterStat.BASE_ARMOR, 8.0);
-		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 6.0);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 21.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.10);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.05);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
+		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
+		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 300);
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING);
 		
 		this.addMonsterDrops(new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.20, 1, 3),
@@ -46,7 +46,7 @@ public class RoyalPiglinHunter extends MythicMob
 				new SummoningScrollDrop (SummonTypes.ETERNAL_TROJAN_ARCHER, 0.10),
 				new SummoningScrollDrop (SummonTypes.JOHN_JAE, 0.07));
 		
-		this.setStat(MonsterStat.EXPERIENCE, 500.0);
+		this.setStat(MonsterStat.EXPERIENCE, 400.0);
 		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);

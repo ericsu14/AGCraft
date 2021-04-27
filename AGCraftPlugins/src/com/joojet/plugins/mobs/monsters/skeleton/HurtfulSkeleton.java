@@ -35,8 +35,7 @@ public class HurtfulSkeleton extends EpicMob
 		
 		this.setStat(MonsterStat.EXPERIENCE, 24.0);
 		this.setStat(MonsterStat.HEALTH, 16.0);
-		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.75);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 6.0);
+		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.50);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.10);
 	}
 }

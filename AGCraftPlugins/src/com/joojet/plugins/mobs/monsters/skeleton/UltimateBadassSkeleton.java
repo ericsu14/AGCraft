@@ -33,9 +33,11 @@ public class UltimateBadassSkeleton extends LegendaryMob
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.20);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.10);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 6.0);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 8.0);
+		this.setStat(MonsterStat.SPAWN_LIMIT, 5);
+		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 180);
 		
 		this.addBiomes(Biome.THE_VOID);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
@@ -66,6 +68,6 @@ public class UltimateBadassSkeleton extends LegendaryMob
 	{
 		super.loadCustomSkills(skills);
 		skills.add(new LazerBeamAttack (24, 12, Integer.MAX_VALUE, 4, 80));
-		skills.add(new MythicRageSkill (0, 30, 0.35));
+		skills.add(new MythicRageSkill (0, 15, 0.35));
 	}
 }

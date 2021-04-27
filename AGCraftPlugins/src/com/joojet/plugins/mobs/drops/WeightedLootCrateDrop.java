@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.drops;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import com.joojet.plugins.mobs.equipment.EquipmentLoader;
 import com.joojet.plugins.mobs.util.WeightedList;
 
 public class WeightedLootCrateDrop extends MonsterDrop
@@ -30,7 +31,7 @@ public class WeightedLootCrateDrop extends MonsterDrop
 	
 	/** Drops a randomly chosen item from the given list of drops */
 	@Override
-	public ItemStack generateDrop (double looting)
+	public ItemStack generateDrop (double looting, EquipmentLoader equipmentLoader)
 	{
 		if (rand.nextDouble() <= (this.dropRate + looting))
 		{

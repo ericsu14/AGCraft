@@ -45,19 +45,16 @@ public class DoomGuy extends MythicMob
 				ChatColor.DARK_GRAY, ChatColor.DARK_RED);
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.05f, 1.00f);
 		this.color = ChatColor.DARK_RED;
-		this.setStat(MonsterStat.HEALTH, 50.0);
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 8.0);
-		this.setStat(MonsterStat.BASE_SPEED, 0.25);
+		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 125.0);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 20.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 16.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.30);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.10);
 		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
 		
-		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE,
-				CustomPotionEffect.UNDEAD_HEAL, CustomPotionEffect.STRENGTH);
+		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE, CustomPotionEffect.UNDEAD_HEAL);
 		
 		this.addFactions(Faction.DOOM_GUY);
 		this.addRivalFactions(Faction.NETHER, Faction.USC, Faction.UCLA, Faction.CHICKEN_GANG);
@@ -89,12 +86,14 @@ public class DoomGuy extends MythicMob
 		
 		this.bossTheme = MusicType.DOOM_GUY;
 		this.setStat(MonsterStat.EXPERIENCE, 600.0);
+		this.setStat(MonsterStat.SPAWN_LIMIT, 1);
+		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 300);
 	}
 	
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		skills.add(new RageSkill (1, 60, 0.30));
+		skills.add(new RageSkill (1, 30, 0.30));
 		skills.add(new AggressiveTeleportSkill (156, 10, Integer.MAX_VALUE, 2));
 		// Allows doom guy to switch to its blade once its health reaches below 40%
 		skills.add(new WeaponSwitchSkill (200, 1, 6, new DoomBlade (this.color)) 
@@ -122,7 +121,7 @@ public class DoomGuy extends MythicMob
 			}
 			
 		});
-		skills.add(new HurricaneSkill (24, 20, Integer.MAX_VALUE, 4, 16, 0.75));
+		skills.add(new HurricaneSkill (24, 20, Integer.MAX_VALUE, 4, 4, 0.75));
 		skills.add(new BlindingArrow (9, 3));
 	}
 	

@@ -42,8 +42,8 @@ public class SkullKid extends MythicMob
 		this.setStat(MonsterStat.HEALTH, 50.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
-		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.25);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 20.0);
+		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.10);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 14.0);
 		this.color = ChatColor.DARK_RED;
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING, MobFlag.DISABLE_MAGIC_HEALING,
 				MobFlag.HUNT_ON_SPAWN, MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER);
@@ -84,11 +84,11 @@ public class SkullKid extends MythicMob
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		skills.add(new RageSkill (1, 60, 0.30));
+		skills.add(new RageSkill (1, 30, 0.30));
 		skills.add(new AggressiveTeleportSkill (156, 10, Integer.MAX_VALUE, 2));
 		skills.add(new ResistanceBuffSkill (0, 60, 20, 60, 80));
 		skills.add(new ThundagaSkill (32, 20, 6, 16, 5.0f, 4, 60, 0.60));
-		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 12, 12, 0.75));
+		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 12, 4, 0.75));
 		skills.add(new BlindingArrow (7, 4));
 	}
 }

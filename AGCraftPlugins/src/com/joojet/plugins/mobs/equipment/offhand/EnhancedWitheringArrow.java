@@ -18,7 +18,6 @@ public class EnhancedWitheringArrow extends TippedArrow
 	{
 		this.setColor(Color.fromRGB(75, 0, 130));
 		this.addPotionEffect(PotionEffectType.WITHER, 200, 2);
-		this.addPotionEffect(PotionEffectType.HARM, 1, 2);
 		this.setDisplayName("Enhanced Withering Arrow");
 		this.addLoreToItemMeta("Let your enemies wither away in complete misery...");
 	}

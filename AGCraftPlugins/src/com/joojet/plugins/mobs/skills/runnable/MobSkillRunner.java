@@ -72,7 +72,10 @@ public class MobSkillRunner extends BukkitRunnable
 			this.mobSkillRegistry.put(entity.getUniqueId(), task);
 			// Updates custom monster count for that entity's custom type
 			MonsterType type = task.getMobEquipment().getMonsterType();
-			this.customMonsterFrequency.put(type, this.customMonsterFrequency.getOrDefault(type, 0) + 1);
+			if (!entity.isPersistent())
+			{
+				this.customMonsterFrequency.put(type, this.customMonsterFrequency.getOrDefault(type, 0) + 1);
+			}
 		}
 	}
 	

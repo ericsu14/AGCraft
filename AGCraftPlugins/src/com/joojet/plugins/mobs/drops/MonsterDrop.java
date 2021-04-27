@@ -5,6 +5,9 @@ import java.util.Random;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import com.joojet.plugins.mobs.enums.EquipmentType;
+import com.joojet.plugins.mobs.equipment.EquipmentLoader;
+
 /** A class that represents a simple monster drop containing an itemstack with its associated
  *  drop rate from 0.0 - 1.0. */
 public class MonsterDrop 
@@ -21,6 +24,9 @@ public class MonsterDrop
 	protected int minAmount;
 	/** Max amount of items dropped */
 	protected int maxAmount;
+	/** Stores the type of equipment being dropped if this monster drop is set to drop
+	 *  a piece of custom equipment. */
+	protected EquipmentType equipmentType;
 	
 	/** Creates a new instance of a monster drop that can be assigned to a
 	 *  custom monster.
@@ -33,6 +39,7 @@ public class MonsterDrop
 		this.dropRate = dropRate;
 		this.minAmount = 1;
 		this.maxAmount = 1;
+		this.equipmentType = null;
 		this.rand = new Random();
 	}
 	
@@ -50,6 +57,19 @@ public class MonsterDrop
 		this.dropRate = dropRate;
 		this.minAmount = minAmount;
 		this.maxAmount = maxAmount;
+		this.equipmentType = null;
+		this.rand = new Random();
+	}
+	
+	/** Creates a new instance of a monster drop that is set to drop custom equipment referenced by
+	 *  the passed EquipmentType enum. */
+	public MonsterDrop (EquipmentType equipmentType, double dropRate, int minAmount, int maxAmount)
+	{
+		this.equipmentType = equipmentType;
+		this.material = Material.STICK;
+		this.dropRate = dropRate;
+		this.minAmount = minAmount;
+		this.maxAmount = maxAmount;
 		this.rand = new Random();
 	}
 	
@@ -60,12 +80,16 @@ public class MonsterDrop
 	 *  @param looting - The percentage of looting bonuses that can be passed
 	 *                   into this call, which will add the drop rate
 	 *                   by the looting percentage. */
-	public ItemStack generateDrop (double looting)
+	public ItemStack generateDrop (double looting, EquipmentLoader equipmentLoader)
 	{
-		ItemStack droppedItem = (this.drop != null) ? this.drop :
-			new ItemStack (this.material, this.generateRandomInt());
-		return (rand.nextDouble() <= (this.dropRate + looting)) ? 
+		if (this.equipmentType == null)
+		{
+			ItemStack droppedItem = (this.drop != null) ? this.drop :
+				new ItemStack (this.material, this.generateRandomInt());
+			return (rand.nextDouble() <= (this.dropRate + looting)) ? 
 				droppedItem : null;
+		}
+		return rand.nextDouble() <= (this.dropRate + looting) ? equipmentLoader.getEquipment(this.equipmentType) : null;
 	}
 	
 	/** Returns the dropped item */

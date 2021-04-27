@@ -29,8 +29,10 @@ public class BarneyTheDinosaur extends MythicMob
 	public BarneyTheDinosaur ()
 	{
 		super (MonsterType.BARNEY_THE_DINOSAUR);
-		this.setStat(MonsterStat.HEALTH, 10.0);
+		this.setStat(MonsterStat.HEALTH, 4.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 50.0);
+		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
+		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 300);
 		
 		this.addBiomes(Biome.FLOWER_FOREST, Biome.DARK_FOREST, Biome.DARK_FOREST_HILLS,
 				Biome.SWAMP, Biome.SWAMP_HILLS, Biome.JUNGLE, Biome.JUNGLE_HILLS, Biome.JUNGLE_EDGE,

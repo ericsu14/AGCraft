@@ -27,7 +27,7 @@ public class LegendaryMob extends MobEquipment
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
 		skills.add(new AttackBuffSkill(0, 60, 20, 60, 8));
-		skills.add(new ResistanceBuffSkill (1, 60, 20, 60, 8));
+		skills.add(new ResistanceBuffSkill (0, 60, 20, 60, 8));
 		skills.add(new SpeedBuffSkill (0, 60, 20, 60, 8));
 	}
 

@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.drops;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import com.joojet.plugins.mobs.equipment.EquipmentLoader;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 
 public class FireworkDrop extends MonsterDrop 
@@ -27,7 +28,7 @@ public class FireworkDrop extends MonsterDrop
 	 *  @param looting - The percentage of looting bonuses that can be passed
 	 *                   into this call, which will add the drop rate
 	 *                   by the looting percentage. */
-	public ItemStack generateDrop (double looting)
+	public ItemStack generateDrop (double looting, EquipmentLoader equipmentLoader)
 	{
 		ItemStack droppedItem = this.fireworkGenerator.getRandomFirework(this.generateRandomInt(), 3);
 		return (rand.nextDouble() <= (this.dropRate + looting)) ? 

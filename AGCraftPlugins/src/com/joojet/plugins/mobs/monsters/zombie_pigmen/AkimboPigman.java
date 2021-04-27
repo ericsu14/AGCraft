@@ -2,6 +2,7 @@ package com.joojet.plugins.mobs.monsters.zombie_pigmen;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -22,6 +23,8 @@ public class AkimboPigman extends LegendaryMob
 		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.color = ChatColor.GOLD;
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
+		// Do not naturally target players
+		this.hitlist.remove(EntityType.PLAYER);
 		
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		

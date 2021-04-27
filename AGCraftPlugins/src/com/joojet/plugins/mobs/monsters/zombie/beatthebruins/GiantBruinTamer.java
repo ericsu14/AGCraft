@@ -51,6 +51,8 @@ public class GiantBruinTamer extends UCLAFaction
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.LEGENDARY);
 		this.setStat(MonsterStat.EXPERIENCE, 24.0);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 8.0);
+		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
+		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 300);
 	}
 
 	@Override

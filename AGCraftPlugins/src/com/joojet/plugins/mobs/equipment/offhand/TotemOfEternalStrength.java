@@ -16,7 +16,7 @@ public class TotemOfEternalStrength extends Equipment
 		super (EquipmentType.TOTEM_OF_ETERNAL_STRENGTH, Material.TOTEM_OF_UNDYING, EquipmentSlot.OFF_HAND, 
 				ChatColor.RED);
 		this.setDisplayName("Totem of Eternal Strength");
-		this.addAttackAttributes(16.0, 0.1);
+		this.addAttackAttributes(24.0, 0.1);
 		this.addDefenseAttributes(-10.0, -6.0, 0.0);
 		this.addHealthAttributes(-10.0);
 		this.wordsPerLine = 7;
