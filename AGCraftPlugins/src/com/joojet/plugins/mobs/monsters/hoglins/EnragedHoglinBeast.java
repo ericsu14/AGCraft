@@ -25,11 +25,11 @@ public class EnragedHoglinBeast extends LegendaryMob
 		this.addBiomes(Biome.THE_VOID);
 		
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 16.0);
-		this.setStat(MonsterStat.BASE_ARMOR, 12.0);
-		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 4.0);
+		this.setStat(MonsterStat.BASE_ARMOR, 16.0);
+		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 8.0);
 		this.setStat(MonsterStat.KNOCKBACK_RESISTANCE, 0.45);
 		this.setStat(MonsterStat.EXPERIENCE, 60.0);
-		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
+		this.setStat(MonsterStat.SPAWN_LIMIT, 5);
 		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 180);
 		
 		this.addPotionEffect(CustomPotionEffect.SPEED, CustomPotionEffect.JUMP_BOOST);
