@@ -2,6 +2,8 @@ package com.joojet.plugins.mobs.monsters.factions.classifications;
 
 import java.util.List;
 
+import org.bukkit.entity.EntityType;
+
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
@@ -20,6 +22,7 @@ public class MythicMob extends MobEquipment
 		super(mobType);
 		this.addMobFlags(MobFlag.DISABLE_PICK_UP_ITEMS);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.MYTHIC);
+		this.addTargetsToHitList(EntityType.IRON_GOLEM, EntityType.SNOWMAN);
 	}
 
 	@Override
