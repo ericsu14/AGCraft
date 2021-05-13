@@ -12,13 +12,14 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LetItGo;
 import com.joojet.plugins.mobs.equipment.head.ScruffyFace;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.SelfHealSkill;
 import com.joojet.plugins.mobs.skills.passive.IcySnowballSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 
-public class Scruffy extends AlliedMob
+public class Scruffy extends AlliedMob implements CustomSkillUser
 {
 	public Scruffy ()
 	{

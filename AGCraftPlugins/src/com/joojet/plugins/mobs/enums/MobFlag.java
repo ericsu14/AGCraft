@@ -12,11 +12,15 @@ import org.bukkit.entity.Player;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.fireworks.FireworkTypes;
 import com.joojet.plugins.mobs.interfaces.CustomAttribute;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.interfaces.CustomSpawnMessage;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.passive.DisableMagicHealSkill;
+import com.joojet.plugins.mobs.skills.passive.DisableSuffocationSkill;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
-public enum MobFlag implements CustomAttribute
+public enum MobFlag implements CustomAttribute, CustomSkillUser
 {
 	/** The entity will spawn with a permanent burning effect */
 	ON_FIRE 
@@ -143,7 +147,14 @@ public enum MobFlag implements CustomAttribute
 		}
 	},
 	/** When enabled, the mob will be immune to suffocation damage */
-	DISABLE_SUFFOCATION_DAMAGE,
+	DISABLE_SUFFOCATION_DAMAGE
+	{
+		@Override
+		public void loadCustomSkills (List <AbstractSkill> skills)
+		{
+			skills.add(new DisableSuffocationSkill ());
+		}
+	},
 	/** When enabled, the mob will finally shut up. */
 	MAKE_SILENT
 	{
@@ -163,7 +174,14 @@ public enum MobFlag implements CustomAttribute
 		}
 	},
 	/** When enabled, the entity is unable to be healed from healing or harming potions */
-	DISABLE_MAGIC_HEALING,
+	DISABLE_MAGIC_HEALING
+	{
+		@Override
+		public void loadCustomSkills(List<AbstractSkill> skills) 
+		{
+			skills.add(new DisableMagicHealSkill ());
+		}
+	},
 	/** When enabled, the entity will not drop anything when dead */
 	DISABLE_MOB_DROPS;
 	
@@ -173,5 +191,12 @@ public enum MobFlag implements CustomAttribute
 			BossBarController bossBarController) 
 	{
 		// Do nothing
+	}
+	
+	/** Does nothing when no custom skill function is assigned to this flag */
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
+		
 	}
 }

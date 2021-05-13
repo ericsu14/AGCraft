@@ -10,11 +10,12 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.LetItGo;
 import com.joojet.plugins.mobs.equipment.chest.SnowballHeart;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.buff.AlliedAttackBuffSkill;
 import com.joojet.plugins.mobs.skills.buff.AlliedResistanceBuffSkill;
 
-public class Snowball extends AlliedMob
+public class Snowball extends AlliedMob implements CustomSkillUser
 {
 	public Snowball ()
 	{

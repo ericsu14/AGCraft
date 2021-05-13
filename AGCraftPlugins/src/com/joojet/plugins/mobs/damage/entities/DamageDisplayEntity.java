@@ -1,7 +1,6 @@
 package com.joojet.plugins.mobs.damage.entities;
 
 import java.text.DecimalFormat;
-import java.util.List;
 
 import org.bukkit.ChatColor;
 
@@ -9,7 +8,6 @@ import com.joojet.plugins.mobs.damage.enums.DamageType;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
-import com.joojet.plugins.mobs.skills.AbstractSkill;
 
 public class DamageDisplayEntity extends MobEquipment 
 {
@@ -56,11 +54,5 @@ public class DamageDisplayEntity extends MobEquipment
 			displayName.append(damageType.getReversedSymbols());
 		}
 		this.name = displayName.toString().trim();
-	}
-
-	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
-		
 	}
 }

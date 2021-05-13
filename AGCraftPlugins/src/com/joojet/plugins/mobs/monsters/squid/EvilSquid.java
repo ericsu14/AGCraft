@@ -9,6 +9,7 @@ import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.interfaces.NMSSkillUser;
 import com.joojet.plugins.mobs.monsters.factions.classifications.RareMob;
 import com.joojet.plugins.mobs.pathfinding.PathfinderGoalCustomMeleeAttack;
@@ -21,7 +22,7 @@ import net.minecraft.server.v1_16_R3.EntityInsentient;
 import net.minecraft.server.v1_16_R3.PathfinderGoalLeapAtTarget;
 import net.minecraft.server.v1_16_R3.PathfinderGoalRandomStroll;
 
-public class EvilSquid extends RareMob implements NMSSkillUser
+public class EvilSquid extends RareMob implements NMSSkillUser, CustomSkillUser
 {
 	public EvilSquid() 
 	{

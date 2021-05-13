@@ -24,6 +24,7 @@ import com.joojet.plugins.mobs.equipment.weapons.EternalSpiritOfTroy;
 import com.joojet.plugins.mobs.equipment.weapons.EternalTrojanSword;
 import com.joojet.plugins.mobs.equipment.weapons.FightOn;
 import com.joojet.plugins.mobs.equipment.weapons.TrojanSword;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.monsters.skeleton.beatthebruins.UCLAArcher;
 import com.joojet.plugins.mobs.monsters.zombie.beatthebruins.UCLAJock;
 import com.joojet.plugins.mobs.scrolls.BossScroll;
@@ -42,7 +43,7 @@ import com.joojet.plugins.mobs.skills.summon.SummonTrojansSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 
-public class TommyTrojan extends VillagerEquipment 
+public class TommyTrojan extends VillagerEquipment implements CustomSkillUser
 {
 
 	public TommyTrojan() 

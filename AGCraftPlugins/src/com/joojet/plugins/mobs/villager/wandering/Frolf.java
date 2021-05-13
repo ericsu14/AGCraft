@@ -9,12 +9,13 @@ import org.bukkit.inventory.ItemStack;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.potions.*;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.scrolls.*;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 
-public class Frolf extends VillagerEquipment
+public class Frolf extends VillagerEquipment implements CustomSkillUser
 {
 	public Frolf ()
 	{

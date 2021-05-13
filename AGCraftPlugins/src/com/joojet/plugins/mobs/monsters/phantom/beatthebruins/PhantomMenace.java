@@ -1,7 +1,5 @@
 package com.joojet.plugins.mobs.monsters.phantom.beatthebruins;
 
-import java.util.List;
-
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
@@ -11,7 +9,6 @@ import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
-import com.joojet.plugins.mobs.skills.AbstractSkill;
 
 public class PhantomMenace extends MobEquipment
 {
@@ -29,11 +26,5 @@ public class PhantomMenace extends MobEquipment
 		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.WOLF, EntityType.VILLAGER, EntityType.IRON_GOLEM, EntityType.SNOWMAN);
 		this.addPotionEffect(CustomPotionEffect.STRENGTH_II);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 20.0);
-	}
-
-	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
-		// TODO Auto-generated method stub
-		
 	}
 }

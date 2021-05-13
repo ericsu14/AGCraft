@@ -65,7 +65,7 @@ public class TrojanWarrior extends USCFaction
 		super.loadCustomSkills(skills);
 		skills.add(new TeleportSkill (64, 20, Integer.MAX_VALUE, 1));
 		skills.add(new UndeadSelfHealSkill (1, 30, 16, 0.35));
-		skills.add(new SummonTrojansSkill (16, 300, Integer.MAX_VALUE, 4, 6));
+		skills.add(new SummonTrojansSkill (16, 300, Integer.MAX_VALUE, 4, 4));
 		skills.add(new RageSkill (0, 60, 0.25));
 	}
 }

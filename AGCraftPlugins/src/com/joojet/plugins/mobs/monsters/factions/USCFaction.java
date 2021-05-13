@@ -12,6 +12,7 @@ import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.buff.AlliedAttackBuffSkill;
@@ -19,7 +20,7 @@ import com.joojet.plugins.mobs.skills.buff.AlliedResistanceBuffSkill;
 import com.joojet.plugins.mobs.skills.buff.AlliedSpeedBuffSkill;
 import com.joojet.plugins.mobs.skills.passive.USCTracerSkill;
 
-public abstract class USCFaction extends MobEquipment
+public abstract class USCFaction extends MobEquipment implements CustomSkillUser
 {
 	public static String USC_TEXT = StringUtil.alternateTextColors("USC", TextPattern.CHARACTER, ChatColor.RED,
 			ChatColor.GOLD);

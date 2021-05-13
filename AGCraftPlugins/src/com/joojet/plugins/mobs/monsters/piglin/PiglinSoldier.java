@@ -11,11 +11,12 @@ import com.joojet.plugins.mobs.equipment.chest.RoyalGoldChestplate;
 import com.joojet.plugins.mobs.equipment.head.PiglinSoldierHat;
 import com.joojet.plugins.mobs.equipment.leggings.RoyalGoldLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.PiglinSword;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.monsters.factions.classifications.EpicMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 
-public class PiglinSoldier extends EpicMob 
+public class PiglinSoldier extends EpicMob implements CustomSkillUser
 {
 	public PiglinSoldier ()
 	{

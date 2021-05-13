@@ -10,11 +10,12 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.DarkNetheriteChestplate;
 import com.joojet.plugins.mobs.equipment.weapons.FireVenomFang;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.monsters.factions.classifications.EpicMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.visual.FireAura;
 
-public class EnragedSpider extends EpicMob
+public class EnragedSpider extends EpicMob implements CustomSkillUser
 {
 	public EnragedSpider ()
 	{
@@ -43,7 +44,6 @@ public class EnragedSpider extends EpicMob
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		super.loadCustomSkills(skills);
 		skills.add(new FireAura ());
 	}
 }

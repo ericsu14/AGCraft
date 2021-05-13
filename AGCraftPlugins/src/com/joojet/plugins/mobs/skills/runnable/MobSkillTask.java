@@ -9,13 +9,9 @@ import org.bukkit.entity.LivingEntity;
 import com.joojet.plugins.mobs.CustomSkillsListener;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
-import com.joojet.plugins.mobs.skills.passive.ArrowDamageModifierSkill;
-import com.joojet.plugins.mobs.skills.passive.CriticalShotSkill;
-import com.joojet.plugins.mobs.skills.passive.DisableMagicHealSkill;
-import com.joojet.plugins.mobs.skills.passive.NoOpSkill;
-import com.joojet.plugins.mobs.skills.passive.PiercingBlowSkill;
 import com.joojet.plugins.mobs.skills.passive.TippedArrowSkill;
 import com.joojet.plugins.mobs.skills.weightedentries.WeightedMobSkill;
 import com.joojet.plugins.mobs.util.WeightedList;
@@ -113,36 +109,28 @@ public class MobSkillTask
 	{
 		if (this.equipment != null)
 		{
-			// Adds in the arrow's base damage modifier skill if the entity's ARROW_BASE_DAMAGE is set
-			if (this.equipment.containsStat(MonsterStat.BASE_ARROW_DAMAGE))
-			{
-				this.mobSkills.add(new ArrowDamageModifierSkill ());
-			}
-			// Adds in critical shot skill if the entity's ARROW_CRITICAL_CHANCE is enabled
-			if (this.equipment.containsStat(MonsterStat.ARROW_CRITICAL_CHANCE))
-			{
-				this.mobSkills.add(new CriticalShotSkill ());
-			}
-			// Adds in the piercing blow skill if the entity's ARROW_PIERCING_CHANCE is enabled
-			if (this.equipment.containsStat(MonsterStat.ARROW_PIERCING_CHANCE))
-			{
-				this.mobSkills.add(new PiercingBlowSkill ());
-			}
 			// Adds in the tipped arrow skill if the entity has a tipped arrow
 			if (this.equipment.hasTippedArrow())
 			{
 				this.mobSkills.add(new TippedArrowSkill ());
 			}
-			// Adds in the disable magic heal skill when the monster has that flag enabled
-			if (this.equipment.containsFlag(MobFlag.DISABLE_MAGIC_HEALING))
+			
+			// Loads in custom skills from the custom mob's MobFlags
+			for (MobFlag flag : this.equipment.getMobFlags())
 			{
-				this.mobSkills.add(new DisableMagicHealSkill ());
+				flag.loadCustomSkills(this.mobSkills);
 			}
-			if (this.equipment.containsStat(MonsterStat.SPAWN_LIMIT))
+			
+			// Loads in custom skills from the custom mob's MonsterStats
+			for (MonsterStat stat : this.equipment.getStatContainer().keySet())
 			{
-				this.mobSkills.add(new NoOpSkill ());
+				stat.loadCustomSkills(this.mobSkills);
 			}
-			this.equipment.loadCustomSkills(this.mobSkills);
+			
+			if (this.equipment instanceof CustomSkillUser)
+			{
+				((CustomSkillUser) this.equipment).loadCustomSkills(this.mobSkills);
+			}
 		}
 	}
 	

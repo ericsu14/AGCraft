@@ -11,13 +11,14 @@ import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.head.FrostyFace;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.SelfHealSkill;
 import com.joojet.plugins.mobs.skills.passive.IcySnowballSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 
-public class Frosty extends AlliedMob
+public class Frosty extends AlliedMob implements CustomSkillUser
 {
 	public Frosty ()
 	{

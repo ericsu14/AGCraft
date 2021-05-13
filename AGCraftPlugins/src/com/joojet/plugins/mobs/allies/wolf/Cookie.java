@@ -9,11 +9,12 @@ import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.CookieHeart;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.buff.AlliedAttackBuffSkill;
 import com.joojet.plugins.mobs.skills.buff.AlliedResistanceBuffSkill;
 
-public class Cookie extends AlliedMob
+public class Cookie extends AlliedMob implements CustomSkillUser
 {
 	public Cookie ()
 	{

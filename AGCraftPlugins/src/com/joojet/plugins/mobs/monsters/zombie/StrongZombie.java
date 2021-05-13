@@ -9,11 +9,12 @@ import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.chest.BulletproofIronChestplate;
 import com.joojet.plugins.mobs.equipment.weapons.SharpenedIronSword;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.monsters.factions.classifications.RareMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 
-public class StrongZombie extends RareMob 
+public class StrongZombie extends RareMob implements CustomSkillUser
 {
 	public StrongZombie ()
 	{
@@ -31,7 +32,8 @@ public class StrongZombie extends RareMob
 	}
 	
 	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
 		skills.add(new AttackBuffSkill(1, 30, 10, 60, 8));
 	}
 }

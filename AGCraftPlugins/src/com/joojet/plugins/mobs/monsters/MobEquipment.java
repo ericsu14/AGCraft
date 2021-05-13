@@ -3,7 +3,6 @@ package com.joojet.plugins.mobs.monsters;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.EnumSet;
-import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -26,7 +25,6 @@ import com.joojet.plugins.mobs.equipment.offhand.TippedArrow;
 import com.joojet.plugins.mobs.metadata.FactionMetadata;
 import com.joojet.plugins.mobs.metadata.IgnorePlayerMetadata;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
-import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.util.ConvertColors;
 import com.joojet.plugins.music.enums.MusicType;
 
@@ -119,10 +117,6 @@ public abstract class MobEquipment
 		// Generic monster classifier
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.COMMON);
 	}
-	
-	/** Loads new instances of custom monster skills into an active skills list for that mob
-	 * 	@param skills - A list of skills that are to be loaded with mob-specific custom skills */
-	public abstract void loadCustomSkills (List <AbstractSkill> skills);
 	
 	/** Sets up drop rates for this entity.
 	 *  Rates are stored as doubles from ranges 0.0f-1.0f, where

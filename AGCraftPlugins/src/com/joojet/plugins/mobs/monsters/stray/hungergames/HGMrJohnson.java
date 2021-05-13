@@ -24,6 +24,7 @@ import com.joojet.plugins.mobs.equipment.offhand.SnakeArrow;
 import com.joojet.plugins.mobs.equipment.potions.PainfulMocktail;
 import com.joojet.plugins.mobs.equipment.potions.SnakeVenomPotion;
 import com.joojet.plugins.mobs.equipment.weapons.PledgeDestroyer;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.interfaces.CustomSpawnMessage;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
@@ -39,7 +40,7 @@ import com.joojet.plugins.mobs.skills.passive.NerfDamageOutputSkill;
 import com.joojet.plugins.mobs.skills.utility.SituationalTeleportSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
-public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage
+public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage, CustomSkillUser
 {
 
 	public HGMrJohnson() 

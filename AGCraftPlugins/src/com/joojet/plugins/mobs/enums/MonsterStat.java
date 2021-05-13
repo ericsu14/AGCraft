@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.enums;
 
+import java.util.List;
+
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Horse;
@@ -7,9 +9,15 @@ import org.bukkit.entity.Horse.*;
 
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interfaces.CustomAttribute;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.passive.ArrowDamageModifierSkill;
+import com.joojet.plugins.mobs.skills.passive.CriticalShotSkill;
+import com.joojet.plugins.mobs.skills.passive.NoOpSkill;
+import com.joojet.plugins.mobs.skills.passive.PiercingBlowSkill;
 
-public enum MonsterStat implements CustomAttribute
+public enum MonsterStat implements CustomAttribute, CustomSkillUser
 {
 	/** Entity's base health */
 	HEALTH (Attribute.GENERIC_MAX_HEALTH),
@@ -56,12 +64,33 @@ public enum MonsterStat implements CustomAttribute
 	/** Modifies the base speed of the mob */
 	BASE_SPEED (Attribute.GENERIC_MOVEMENT_SPEED),
 	/** Modifies the base damage of shot arrows */
-	BASE_ARROW_DAMAGE,
+	BASE_ARROW_DAMAGE
+	{
+		@Override
+		public void loadCustomSkills(List<AbstractSkill> skills) 
+		{
+			skills.add(new ArrowDamageModifierSkill ());
+		}
+	},
 	/** Random chance (from 0.00-1.00) of entity-shot arrows from becoming a critical hit arrow */
-	ARROW_CRITICAL_CHANCE,
+	ARROW_CRITICAL_CHANCE
+	{
+		@Override
+		public void loadCustomSkills(List<AbstractSkill> skills) 
+		{
+			skills.add(new CriticalShotSkill ());
+		}
+	},
 	/** Random chance (from 0.00-1.00) of entity-shot critical arrows from having a piercing effect, being able to rip
 	 *  through shields. */
-	ARROW_PIERCING_CHANCE,
+	ARROW_PIERCING_CHANCE
+	{
+		@Override
+		public void loadCustomSkills(List<AbstractSkill> skills) 
+		{
+			skills.add(new PiercingBlowSkill ());
+		}
+	},
 	/** Modifies the base armor value of custom mobs */
 	BASE_ARMOR (Attribute.GENERIC_ARMOR),
 	/** Modifies the base armor toughness value of custom mobs */
@@ -73,7 +102,14 @@ public enum MonsterStat implements CustomAttribute
 	/** Sets the custom monster's classifier */
 	MONSTER_CLASSIFIER,
 	/** Max amount of times this custom monster can spawn in the world */
-	SPAWN_LIMIT,
+	SPAWN_LIMIT
+	{
+		@Override
+		public void loadCustomSkills(List<AbstractSkill> skills) 
+		{
+			skills.add(new NoOpSkill ());
+		}
+	},
 	/** Sets a delay (in seconds) before the monster's spawn limit counter is decremented, effectively giving a temporary cooldown period before the custom
 	 *  monster can spawn again. */
 	SPAWN_LIMIT_COOLDOWN;
@@ -109,5 +145,12 @@ public enum MonsterStat implements CustomAttribute
 			BossBarController bossBarController) 
 	{
 
+	}
+	
+	/** Does nothing when the mob stat does not give a custom skill */
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
+		
 	}
 }

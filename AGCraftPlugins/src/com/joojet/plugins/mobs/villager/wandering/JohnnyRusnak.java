@@ -16,13 +16,14 @@ import com.joojet.plugins.mobs.equipment.offhand.TotemOfTheEternalRushee;
 import com.joojet.plugins.mobs.equipment.potions.EnhancedStrengthPotion;
 import com.joojet.plugins.mobs.equipment.weapons.ShotBow;
 import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.scrolls.*;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 
-public class JohnnyRusnak extends VillagerEquipment
+public class JohnnyRusnak extends VillagerEquipment implements CustomSkillUser
 {
 	public JohnnyRusnak ()
 	{

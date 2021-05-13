@@ -13,11 +13,12 @@ import com.joojet.plugins.mobs.equipment.chest.ReinforcedDiamondChestplate;
 import com.joojet.plugins.mobs.equipment.head.ReinforcedIronHelmet;
 import com.joojet.plugins.mobs.equipment.leggings.ReinforcedIronLeggings;
 import com.joojet.plugins.mobs.equipment.weapons.SharpenedIronSword;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.monsters.factions.classifications.EpicMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
 
-public class BadassZombie extends EpicMob
+public class BadassZombie extends EpicMob implements CustomSkillUser
 {
 	public BadassZombie ()
 	{
@@ -46,7 +47,8 @@ public class BadassZombie extends EpicMob
 	}
 	
 	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
 		skills.add(new AttackBuffSkill(1, 45, 15, 60, 8));
 	}
 }

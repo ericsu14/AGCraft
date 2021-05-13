@@ -10,12 +10,13 @@ import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.anvil.AnvilThrowSkill;
 import com.joojet.plugins.mobs.skills.buff.SelfHealSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 
-public class AdvancedGolem extends AlliedMob
+public class AdvancedGolem extends AlliedMob implements CustomSkillUser
 {
 	public AdvancedGolem ()
 	{
@@ -32,7 +33,8 @@ public class AdvancedGolem extends AlliedMob
 	}
 
 	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
 		skills.add(new AnvilThrowSkill (20, 15, 16, 2.0f, 2));
 		skills.add(new SelfHealSkill (3, 30, 4, 0.35));
 		skills.add(new TeleportSkill (64, 60, Integer.MAX_VALUE, 2));
