@@ -60,7 +60,7 @@ public class UltimateBadassZombie extends LegendaryMob
 	{
 		super.loadCustomSkills(skills);
 		skills.add(new MythicRageSkill (0, 30, 0.30));
-		skills.add(new EvokerFangSkill (12, 10, Integer.MAX_VALUE, 4, 8.0));
+		skills.add(new EvokerFangSkill (8, 10, Integer.MAX_VALUE, 4, 8.0));
 	}
 	
 }
