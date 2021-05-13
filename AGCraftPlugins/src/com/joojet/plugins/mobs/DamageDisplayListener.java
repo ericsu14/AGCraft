@@ -17,7 +17,6 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
-import org.bukkit.potion.PotionEffectType;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
@@ -163,27 +162,6 @@ public class DamageDisplayListener extends AGListener
 				|| !this.checkDamageDisplayModuleIsEnabled())
 		{
 			return;
-		}
-		
-		// Cancels damage event if the damage cause is MELTING and the entity has fire resistance
-		// This prevents snow golems from dying
-		if (eventEntity instanceof LivingEntity)
-		{
-			LivingEntity ent = (LivingEntity) eventEntity;
-			if (ent.hasPotionEffect(PotionEffectType.FIRE_RESISTANCE) 
-					&& (event.getCause() == DamageCause.MELTING))
-			{
-				event.setCancelled(true);
-				return;
-			}
-			
-			if (ent.hasPotionEffect(PotionEffectType.WATER_BREATHING)
-					&& (event.getCause() == DamageCause.DROWNING
-							|| event.getCause() == DamageCause.DRYOUT))
-			{
-				event.setCancelled(true);
-				return;
-			}
 		}
 		
 		DamageType damageType = this.getDamageTypeFromCause(event.getCause());

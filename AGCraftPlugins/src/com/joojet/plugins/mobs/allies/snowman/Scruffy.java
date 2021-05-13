@@ -27,7 +27,8 @@ public class Scruffy extends AlliedMob implements CustomSkillUser
 		this.name = "Scruffy";
 		this.color = ChatColor.GOLD;
 		this.setStat(MonsterStat.HEALTH, 40.0);
-		this.addMobFlags(MobFlag.SHOW_NAME);
+		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.DISABLE_DROWNING, 
+				MobFlag.DISABLE_MELTING);
 		this.addEntitiesToIgnoreList(EntityType.CREEPER);
 		
 		this.addPotionEffect(CustomPotionEffect.RESISTANCE, CustomPotionEffect.WATER_BREATHING,

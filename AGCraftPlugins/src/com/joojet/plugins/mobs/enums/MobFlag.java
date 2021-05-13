@@ -16,7 +16,9 @@ import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.interfaces.CustomSpawnMessage;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.passive.DisableDrowningSkill;
 import com.joojet.plugins.mobs.skills.passive.DisableMagicHealSkill;
+import com.joojet.plugins.mobs.skills.passive.DisableMeltingSkill;
 import com.joojet.plugins.mobs.skills.passive.DisableSuffocationSkill;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
@@ -183,7 +185,25 @@ public enum MobFlag implements CustomAttribute, CustomSkillUser
 		}
 	},
 	/** When enabled, the entity will not drop anything when dead */
-	DISABLE_MOB_DROPS;
+	DISABLE_MOB_DROPS,
+	/** When enabled, the entity will no longer melt to death */
+	DISABLE_MELTING
+	{
+		@Override
+		public void loadCustomSkills (List <AbstractSkill> skills)
+		{
+			skills.add(new DisableMeltingSkill ());
+		}
+	},
+	/** When enabled, the entity will no longer drown to death */
+	DISABLE_DROWNING
+	{
+		@Override
+		public void loadCustomSkills (List <AbstractSkill> skills)
+		{
+			skills.add(new DisableDrowningSkill());
+		}
+	};
 	
 	/** Does nothing when the mobflag does not have a custom definition specific for that attribute */
 	@Override

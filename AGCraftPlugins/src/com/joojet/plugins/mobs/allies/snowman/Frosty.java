@@ -26,7 +26,8 @@ public class Frosty extends AlliedMob implements CustomSkillUser
 		this.name = "Frosty the Snowman";
 		this.color = ChatColor.AQUA;
 		this.setStat(MonsterStat.HEALTH, 30.0);
-		this.addMobFlags(MobFlag.SHOW_NAME);
+		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.DISABLE_DROWNING, 
+				MobFlag.DISABLE_MELTING);
 		this.addEntitiesToIgnoreList(EntityType.CREEPER);
 		
 		this.addPotionEffect(CustomPotionEffect.RESISTANCE, 
