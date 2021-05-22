@@ -283,7 +283,6 @@ public class EquipmentTools
 				
 				// Retrieves the monster's hitlist
 				EnumSet <EntityType> hitlist = mobEquipment.getHitList();
-				EnumSet <EntityType> ignoreList = mobEquipment.getIgnoreList();
 				
 				// Load special pathfinding goals for NMS Skill users
 				if (mobEquipment instanceof NMSSkillUser)
@@ -298,16 +297,6 @@ public class EquipmentTools
 					if (mobClass != null)
 					{
 						nmsMob.targetSelector.a (5, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
-					}
-				}
-				
-				// Attempt to remove target entity goals that are in the mob's ignore list
-				for (EntityType ignored : ignoreList)
-				{
-					Class <?> mobClass = ConvertEntity.getNMSEntity(ignored);
-					if (mobClass != null)
-					{
-						nmsMob.targetSelector.a(new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
 					}
 				}
 			}

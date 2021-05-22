@@ -12,6 +12,7 @@ import com.joojet.plugins.mobs.DamageDisplayListener;
 import com.joojet.plugins.mobs.enums.ThrowablePotionType;
 import com.joojet.plugins.mobs.equipment.potions.PainfulMocktail;
 import com.joojet.plugins.mobs.equipment.potions.SnakeVenomPotion;
+import com.joojet.plugins.mobs.skills.enums.TargetSelector;
 import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 import com.joojet.plugins.mobs.util.stream.ClosestProximity;
 import com.joojet.plugins.mobs.util.stream.FilterLineOfSight;
@@ -21,7 +22,7 @@ public class MrJohnsonPotionSkill extends AbstractThrowPotionSkill
 	
 	public MrJohnsonPotionSkill(int range, int cooldown, int maxUses, int weight) 
 	{
-		super(range, cooldown, maxUses, weight);
+		super(range, cooldown, maxUses, weight, TargetSelector.ENEMIES);
 	}
 
 	@Override
