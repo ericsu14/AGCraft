@@ -24,15 +24,12 @@ public class EPFWeight extends FairSpawnWeight {
 		double value = 0.0;
 		ItemStack[] equipmentContent = this.getEquipmentContents(player);
 		
-		for (int i = 0; i < equipmentContent.length; ++i)
+		for (ItemStack equipment : equipmentContent)
 		{
-			ItemStack equipment = equipmentContent[i];
-			if (equipment != null && equipment.getType() != Material.AIR)
+			if (equipment != null && equipment.getType() != Material.AIR
+					&& equipment.containsEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL))
 			{
-				if (equipment.containsEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL))
-				{
-					value += equipment.getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL);
-				}
+				value += equipment.getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL);
 			}
 		}
 		
