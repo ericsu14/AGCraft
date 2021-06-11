@@ -13,6 +13,7 @@ import com.joojet.plugins.mobs.pathfinding.util.LaserBeam;
 import com.joojet.plugins.mobs.skills.attack.LazerBeamAttack;
 import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 
+@Deprecated
 public class LaserBeamRunnable extends BukkitRunnable
 {
 	/** The living entity casting this skill */

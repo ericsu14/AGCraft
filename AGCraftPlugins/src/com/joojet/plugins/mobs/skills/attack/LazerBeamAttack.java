@@ -10,6 +10,8 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.skills.runnable.LaserBeamRunnable;
 
+/** Deprecated for now as the lazer beam code no loner works on 1.17 */
+@Deprecated
 public class LazerBeamAttack extends AbstractAttackSkill
 {
 	/** Amount of time (in ticks) the laser beam will charge up before attacking */

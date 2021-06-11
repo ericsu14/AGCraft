@@ -21,7 +21,6 @@ import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.monsters.factions.UCLAFaction;
 import com.joojet.plugins.mobs.monsters.giant.beatthebruins.GiantBruin;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
-import com.joojet.plugins.mobs.skills.attack.LazerBeamAttack;
 
 public class GiantBruinTamer extends UCLAFaction
 {
@@ -59,6 +58,5 @@ public class GiantBruinTamer extends UCLAFaction
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
 		super.loadCustomSkills(skills);
-		skills.add(new LazerBeamAttack (24, 12, Integer.MAX_VALUE, 16, 80));
 	}
 }

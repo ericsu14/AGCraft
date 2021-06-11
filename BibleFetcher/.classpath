@@ -24,6 +24,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="/AGCraftPlugins/lib/spigot-1.17.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
