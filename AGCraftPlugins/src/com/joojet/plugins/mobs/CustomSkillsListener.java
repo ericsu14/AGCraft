@@ -10,7 +10,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.EvokerFangs;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Mob;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -228,10 +227,6 @@ public class CustomSkillsListener extends AGListener
 		// Cancels damage event and clears the damager's current target if canceled.
 		if (event.isCancelled())
 		{
-			if (target instanceof Mob)
-			{
-				((Mob) target).setTarget(null);
-			}
 			return;
 		}
 		event.setDamage(event.getDamage() + totalBonusDamage);
@@ -277,10 +272,6 @@ public class CustomSkillsListener extends AGListener
 		// Cancels damage event and clears the damager's current target if canceled.
 		if (event.isCancelled())
 		{
-			if (target instanceof Mob)
-			{
-				((Mob) target).setTarget(null);
-			}
 			return;
 		}
 		event.setAmount(event.getAmount() + totalBonusDamage);
@@ -349,14 +340,6 @@ public class CustomSkillsListener extends AGListener
 		// Cancels damage event and clears the damager's current target if canceled.
 		if (event.isCancelled())
 		{
-			if (damager instanceof Mob)
-			{
-				((Mob) damager).setTarget(null);
-			}
-			if (target instanceof Mob)
-			{
-				((Mob) target).setTarget(null);
-			}
 			return;
 		}
 		event.setDamage(event.getDamage() + totalBonusDamage);

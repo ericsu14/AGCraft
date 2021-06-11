@@ -295,7 +295,7 @@ public class EquipmentTools
 					Class <?> mobClass = ConvertEntity.getNMSEntity(victim);
 					if (mobClass != null)
 					{
-						nmsMob.bO.a (5, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
+						nmsMob.bP.a (5, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
 					}
 				}
 			}
