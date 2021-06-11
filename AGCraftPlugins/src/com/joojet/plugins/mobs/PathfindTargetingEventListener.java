@@ -17,6 +17,7 @@ import org.bukkit.event.entity.EntityTransformEvent;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 import org.bukkit.event.entity.EntityTransformEvent.TransformReason;
 import org.bukkit.event.world.ChunkLoadEvent;
+import org.bukkit.event.world.WorldLoadEvent;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
@@ -140,6 +141,29 @@ public class PathfindTargetingEventListener extends AGListener
 		{
 			Monster mob = (Monster) entity;
 			mob.setTarget(damager);
+		}
+	}
+	
+	/** Resets custom mob targets upon a world load event */
+	@EventHandler
+	public void resetTargetsOnWorldLoad (WorldLoadEvent worldEvent)
+	{
+		List <Entity> worldEntities = worldEvent.getWorld().getEntities();
+		
+		LivingEntity livingEntity;
+		MobEquipment entityEquipment;
+		for (Entity entity : worldEntities)
+		{
+			if (entity != null && entity instanceof LivingEntity)
+			{
+				livingEntity = (LivingEntity) entity;
+				entityEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(livingEntity);
+				if (entityEquipment != null)
+				{
+					EquipmentTools.modifyBaseStats(livingEntity, entityEquipment);
+					EquipmentTools.modifyPathfindingTargets(livingEntity, entityEquipment);
+				}
+			}
 		}
 	}
 	

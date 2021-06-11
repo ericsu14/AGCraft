@@ -25,6 +25,7 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
+import org.bukkit.event.world.WorldLoadEvent;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
@@ -90,6 +91,18 @@ public class CustomSkillsListener extends AGListener
 	public void onEntitySpawn (EntitySpawnEvent spawnEvent)
 	{
 		this.loadCustomSkillsOntoEntity(spawnEvent.getEntity());
+	}
+	
+	/** Sets custom skills for amplified mobs upon world loads */
+	@EventHandler (priority = EventPriority.LOW)
+	public void onWorldLoad (WorldLoadEvent worldLoadEvent)
+	{
+		List <Entity> entities = worldLoadEvent.getWorld().getEntities();
+		
+		for (Entity ent : entities)
+		{
+			this.loadCustomSkillsOntoEntity(ent);
+		}
 	}
 	
 	@EventHandler (priority = EventPriority.LOW)
