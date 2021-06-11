@@ -17,10 +17,10 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.LazerBeamAttack;
 import com.joojet.plugins.mobs.skills.visual.SquidPower;
 
-import net.minecraft.server.v1_16_R3.EntityCreature;
-import net.minecraft.server.v1_16_R3.EntityInsentient;
-import net.minecraft.server.v1_16_R3.PathfinderGoalLeapAtTarget;
-import net.minecraft.server.v1_16_R3.PathfinderGoalRandomStroll;
+import net.minecraft.world.entity.EntityCreature;
+import net.minecraft.world.entity.EntityInsentient;
+import net.minecraft.world.entity.ai.goal.PathfinderGoalLeapAtTarget;
+import net.minecraft.world.entity.ai.goal.PathfinderGoalRandomStroll;
 
 public class EvilSquid extends RareMob implements NMSSkillUser, CustomSkillUser
 {
@@ -50,9 +50,9 @@ public class EvilSquid extends RareMob implements NMSSkillUser, CustomSkillUser
 	@Override
 	public void loadNMSSkills(EntityInsentient nmsMob, LivingEntity entity) 
 	{
-		nmsMob.goalSelector.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
-		nmsMob.goalSelector.a(20, new PathfinderGoalCustomMeleeAttack ((EntityCreature) nmsMob, this));
-		nmsMob.goalSelector.a(6, new PathfinderGoalRandomStroll ((EntityCreature) nmsMob, 1.0D, 80));
+		nmsMob.bO.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
+		nmsMob.bO.a(20, new PathfinderGoalCustomMeleeAttack ((EntityCreature) nmsMob, this));
+		nmsMob.bO.a(6, new PathfinderGoalRandomStroll ((EntityCreature) nmsMob, 1.0D, 80));
 	}
 	
 }

@@ -1,12 +1,13 @@
 package com.joojet.plugins.mobs.skills.passive;
 
 import java.util.Arrays;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftMob;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftMob;
 import org.bukkit.entity.LivingEntity;
 
-import net.minecraft.server.v1_16_R3.EntityInsentient;
-import net.minecraft.server.v1_16_R3.PathfinderGoalPanic;
-import net.minecraft.server.v1_16_R3.PathfinderGoalWrapped;
+import net.minecraft.world.entity.EntityInsentient;
+import net.minecraft.world.entity.ai.goal.PathfinderGoalPanic;
+import net.minecraft.world.entity.ai.goal.PathfinderGoalWrapped;
+
 
 /** Attempts to remove the panic pathfinder mob-goal from the mob wielding this skill,
  *  forcing it to be fearless when attacking mobs. */
@@ -31,13 +32,13 @@ public class FearlessSkill extends AbstractPassiveSkill
 		// Cast this into a NMS entity monster
 		EntityInsentient nmsMob = ((CraftMob) caster).getHandle();
 		// Attempts to remove the PANIC pathfinder goal from the chicken
-		Object[] rawGoals = nmsMob.goalSelector.d().toArray();
+		Object[] rawGoals = nmsMob.bO.d().toArray();
 		PathfinderGoalWrapped[] goals = Arrays.copyOf(rawGoals, rawGoals.length, PathfinderGoalWrapped[].class);
 		for (PathfinderGoalWrapped goal : goals)
 		{
 			if (goal.j() instanceof PathfinderGoalPanic)
 			{
-				nmsMob.goalSelector.a(goal.j());
+				nmsMob.bO.a(goal.j());
 				removed = true;
 			}
 		}

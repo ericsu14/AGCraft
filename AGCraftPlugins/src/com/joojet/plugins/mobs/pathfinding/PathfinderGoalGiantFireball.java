@@ -7,10 +7,11 @@ import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
-import net.minecraft.server.v1_16_R3.EntityGiantZombie;
-import net.minecraft.server.v1_16_R3.EntityLiving;
-import net.minecraft.server.v1_16_R3.PathfinderGoal;
-import net.minecraft.server.v1_16_R3.Vec3D;
+import net.minecraft.world.entity.EntityLiving;
+import net.minecraft.world.entity.ai.goal.PathfinderGoal;
+import net.minecraft.world.entity.monster.EntityGiantZombie;
+import net.minecraft.world.phys.Vec3D;
+
 
 /** A copy and pasted implementation from minecraft source files
  *  of their own GhastFireball pathfinder goal modified to hopefully work
@@ -47,7 +48,7 @@ public class PathfinderGoalGiantFireball extends PathfinderGoal
 	{
 		EntityLiving entityliving = this.giant.getGoalTarget();
 		if (entityliving != null &&
-				entityliving.h(this.giant) < 1524.0D &&
+				entityliving.f(this.giant) < 1524.0D &&
 				this.giant.hasLineOfSight(entityliving)) 
 		{
 			// World world = this.giant.world;
@@ -59,9 +60,9 @@ public class PathfinderGoalGiantFireball extends PathfinderGoal
 			}
 			if (this.a == 20) 
 			{
-				Vec3D vec3d = this.giant.f(1.0F);
+				Vec3D vec3d = this.giant.e(1.0F);
 				
-				Vector fireballLocation = new Vector (this.giant.locX() + vec3d.x * 4.0D, this.giant.e(0.5D) + 0.5D, this.giant.locZ() + vec3d.z * 4.0D);
+				Vector fireballLocation = new Vector (this.giant.locX() + vec3d.getX() * 4.0D, this.giant.e(0.5D) + 0.5D, this.giant.locZ() + vec3d.getZ() * 4.0D);
 				Vector targetLocation = new Vector (entityliving.locX(), entityliving.locY(), entityliving.locZ());
 				Vector fireballDirection = targetLocation.subtract(fireballLocation).normalize();
 				

@@ -2,17 +2,17 @@ package com.joojet.plugins.mobs.skills.runnable;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftMob;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftMob;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import net.minecraft.server.v1_16_R3.BlockPosition;
-import net.minecraft.server.v1_16_R3.EntityEvokerFangs;
-import net.minecraft.server.v1_16_R3.EntityInsentient;
-import net.minecraft.server.v1_16_R3.EnumDirection;
-import net.minecraft.server.v1_16_R3.IBlockData;
-import net.minecraft.server.v1_16_R3.MathHelper;
-import net.minecraft.server.v1_16_R3.VoxelShape;
+import net.minecraft.core.BlockPosition;
+import net.minecraft.core.EnumDirection;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.entity.EntityInsentient;
+import net.minecraft.world.entity.projectile.EntityEvokerFangs;
+import net.minecraft.world.level.block.state.IBlockData;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class EvokerFangAttackRunnable extends BukkitRunnable
 {
@@ -92,16 +92,17 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 		do
 		{
 			BlockPosition var14 = var10.down();
-			IBlockData var15 = this.casterNMS.world.getType(var14);
-			if (var15.d (this.casterNMS.world, var14, EnumDirection.UP))
+			net.minecraft.world.level.World casterWorld = this.casterNMS.getWorld();
+			IBlockData var15 = casterWorld.getType(var14);
+			if (var15.d (casterWorld, var14, EnumDirection.a))
 			{
-				if (!this.casterNMS.world.isEmpty (var10))
+				if (!this.casterNMS.getWorld().isEmpty (var10))
 				{
-					IBlockData var16 = this.casterNMS.world.getType(var10);
-					VoxelShape var17 = var16.getCollisionShape(this.casterNMS.world, var10);
+					IBlockData var16 = casterWorld.getType(var10);
+					VoxelShape var17 = var16.getCollisionShape(this.casterNMS.getWorld(), var10);
 					if (!var17.isEmpty())
 					{
-						var12 = var17.c(EnumDirection.EnumAxis.Y);
+						var12 = var17.c(EnumDirection.EnumAxis.a);
 					}
 				}
 				var11 = true;
@@ -112,7 +113,7 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 		
 		if (var11)
 		{
-			this.casterNMS.world.addEntity(new EntityEvokerFangs (this.casterNMS.world, var0, var10.getY() + var12, var2, var8, var9, this.casterNMS));
+			this.casterNMS.getWorld().addEntity(new EntityEvokerFangs (this.casterNMS.getWorld(), var0, var10.getY() + var12, var2, var8, var9, this.casterNMS));
 		}
 	}
 }

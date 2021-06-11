@@ -2,7 +2,18 @@ package com.joojet.plugins.mobs.util;
 
 import org.bukkit.entity.EntityType;
 
-import net.minecraft.server.v1_16_R3.*;
+import net.minecraft.server.level.EntityPlayer;
+import net.minecraft.world.entity.ambient.*;
+import net.minecraft.world.entity.animal.*;
+import net.minecraft.world.entity.animal.horse.*;
+import net.minecraft.world.entity.boss.enderdragon.*;
+import net.minecraft.world.entity.boss.wither.*;
+import net.minecraft.world.entity.decoration.*;
+import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.entity.monster.hoglin.*;
+import net.minecraft.world.entity.monster.piglin.*;
+import net.minecraft.world.entity.npc.*;
+
 
 public class ConvertEntity 
 {

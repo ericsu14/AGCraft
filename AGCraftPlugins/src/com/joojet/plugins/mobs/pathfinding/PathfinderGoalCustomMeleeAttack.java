@@ -9,18 +9,18 @@ import org.bukkit.potion.PotionEffectType;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
-import net.minecraft.server.v1_16_R3.DamageSource;
-import net.minecraft.server.v1_16_R3.EnchantmentManager;
-import net.minecraft.server.v1_16_R3.Entity;
-import net.minecraft.server.v1_16_R3.EntityChicken;
-import net.minecraft.server.v1_16_R3.EntityCreature;
-import net.minecraft.server.v1_16_R3.EntityInsentient;
-import net.minecraft.server.v1_16_R3.EntityLiving;
-import net.minecraft.server.v1_16_R3.EnumHand;
-import net.minecraft.server.v1_16_R3.MathHelper;
-import net.minecraft.server.v1_16_R3.PathfinderGoalMeleeAttack;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumHand;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityCreature;
+import net.minecraft.world.entity.EntityInsentient;
+import net.minecraft.world.entity.EntityLiving;
+import net.minecraft.world.entity.ai.goal.PathfinderGoalMeleeAttack;
+import net.minecraft.world.entity.animal.EntityChicken;
+import net.minecraft.world.item.enchantment.EnchantmentManager;
 
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftLivingEntity;
 
 public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack 
 {
@@ -42,7 +42,7 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 		if (var1 <= attackRadius && this.h())
 		{
 			this.g();
-			this.a.swingHand(EnumHand.MAIN_HAND);
+			this.a.swingHand(EnumHand.a);
 			attackEntity(this.a, this.mobEquipment, target);
 		}
 	}
@@ -120,15 +120,21 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 		{
 			if (knockBack > 0.0F && target instanceof EntityLiving)
 			{
-				((EntityLiving) target).a(knockBack * 0.5f, MathHelper.sin(attacker.yaw * 0.017453292F), 
-						-MathHelper.cos(attacker.yaw * 0.017453292F));
+				((EntityLiving) target).a(knockBack * 0.5f, MathHelper.sin(attacker.getBukkitYaw() * 0.017453292F), 
+						-MathHelper.cos(attacker.getBukkitYaw() * 0.017453292F));
 				attacker.setMot(attacker.getMot().d(0.6D, 1.0F, 0.6D));
 			}
 			attacker.a(attacker, target);
-			attacker.z(target);
+			attacker.x(target);
 		}
 		
 		return flag;
+	}
+
+	@Override
+	public boolean a() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

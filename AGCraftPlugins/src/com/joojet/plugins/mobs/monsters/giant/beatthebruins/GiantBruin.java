@@ -36,13 +36,13 @@ import com.joojet.plugins.mobs.skills.passive.UCLATracerSkill;
 import com.joojet.plugins.mobs.skills.summon.SummonBruinSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
-import net.minecraft.server.v1_16_R3.EntityCreature;
-import net.minecraft.server.v1_16_R3.EntityGiantZombie;
-import net.minecraft.server.v1_16_R3.EntityInsentient;
-import net.minecraft.server.v1_16_R3.PathfinderGoalFloat;
-import net.minecraft.server.v1_16_R3.PathfinderGoalLeapAtTarget;
-import net.minecraft.server.v1_16_R3.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_16_R3.PathfinderGoalRandomStrollLand;
+import net.minecraft.world.entity.EntityCreature;
+import net.minecraft.world.entity.monster.EntityGiantZombie;
+import net.minecraft.world.entity.EntityInsentient;
+import net.minecraft.world.entity.ai.goal.PathfinderGoalFloat;
+import net.minecraft.world.entity.ai.goal.PathfinderGoalLeapAtTarget;
+import net.minecraft.world.entity.ai.goal.PathfinderGoalMeleeAttack;
+import net.minecraft.world.entity.ai.goal.PathfinderGoalRandomStrollLand;
 
 public class GiantBruin extends UCLAFaction implements NMSSkillUser
 {
@@ -115,10 +115,10 @@ public class GiantBruin extends UCLAFaction implements NMSSkillUser
 	@Override
 	public void loadNMSSkills(EntityInsentient nmsMob, LivingEntity entity) 
 	{
-		nmsMob.goalSelector.a(1, new PathfinderGoalFloat((EntityCreature) nmsMob));
-		nmsMob.goalSelector.a(1, new PathfinderGoalGiantFireball((EntityGiantZombie) nmsMob, entity));
-		nmsMob.goalSelector.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
-		nmsMob.goalSelector.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
-		nmsMob.goalSelector.a(4, new PathfinderGoalMeleeAttack ((EntityCreature) nmsMob, 1.0D, true));
+		nmsMob.bO.a(1, new PathfinderGoalFloat((EntityCreature) nmsMob));
+		nmsMob.bO.a(1, new PathfinderGoalGiantFireball((EntityGiantZombie) nmsMob, entity));
+		nmsMob.bO.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
+		nmsMob.bO.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
+		nmsMob.bO.a(4, new PathfinderGoalMeleeAttack ((EntityCreature) nmsMob, 1.0D, true));
 	}
 }

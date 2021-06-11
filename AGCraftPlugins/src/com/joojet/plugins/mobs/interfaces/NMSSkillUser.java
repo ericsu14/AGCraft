@@ -2,7 +2,7 @@ package com.joojet.plugins.mobs.interfaces;
 
 import org.bukkit.entity.LivingEntity;
 
-import net.minecraft.server.v1_16_R3.EntityInsentient;
+import net.minecraft.world.entity.EntityInsentient;
 
 /** If the custom mob equipment instance is an NMS SKill User,
  *  override the loadNMSSkills function to load a custom set of
@@ -14,7 +14,7 @@ public interface NMSSkillUser
 	 *  instance.
 	 *  
 	 *  Usage Example:
-	 *  nmsMob.goalSelector.a (weight, goal);
+	 *  nmsMob.bO.a (weight, goal); // Goal selector changed to bO in 1.17 versions
 	 *  
 	 *  @param nmsMob CraftBukkit instance of the entity that is spawned
 	 *  @param entity Bukkit instance of the entity that is spawned*/

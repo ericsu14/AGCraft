@@ -10,6 +10,7 @@ import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftMob;
 import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
@@ -40,10 +41,8 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 
-import net.minecraft.server.v1_16_R3.EntityInsentient;
-import net.minecraft.server.v1_16_R3.PathfinderGoalNearestAttackableTarget;
-
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftMob;
+import net.minecraft.world.entity.EntityInsentient;
+import net.minecraft.world.entity.ai.goal.target.PathfinderGoalNearestAttackableTarget;
 
 public class EquipmentTools 
 {	
@@ -296,7 +295,7 @@ public class EquipmentTools
 					Class <?> mobClass = ConvertEntity.getNMSEntity(victim);
 					if (mobClass != null)
 					{
-						nmsMob.targetSelector.a (5, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
+						nmsMob.bO.a (5, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
 					}
 				}
 			}

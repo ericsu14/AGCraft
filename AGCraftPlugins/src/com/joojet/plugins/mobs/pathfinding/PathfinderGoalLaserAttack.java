@@ -6,10 +6,10 @@ import org.bukkit.entity.LivingEntity;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.pathfinding.util.LaserBeam;
 
-import net.minecraft.server.v1_16_R3.DamageSource;
-import net.minecraft.server.v1_16_R3.EntityInsentient;
-import net.minecraft.server.v1_16_R3.EntityLiving;
-import net.minecraft.server.v1_16_R3.PathfinderGoal;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityInsentient;
+import net.minecraft.world.entity.EntityLiving;
+import net.minecraft.world.entity.ai.goal.PathfinderGoal;
 
 public class PathfinderGoalLaserAttack extends PathfinderGoal
 {
@@ -43,7 +43,7 @@ public class PathfinderGoalLaserAttack extends PathfinderGoal
 	{
 		// Entity must be alive
 		// and target must be 9 blocks away from this entity?
-		return (super.b() && this.nmsEntity.h(this.nmsEntity.getGoalTarget()) > 9.0D);
+		return (super.b() && this.nmsEntity.f(this.nmsEntity.getGoalTarget()) > 9.0D);
 	}
 	
 	/** Resets tick cooldown and navigation and tells the mob to
