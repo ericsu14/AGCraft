@@ -1,6 +1,7 @@
 package com.joojet.plugins.mobs;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -375,7 +376,7 @@ public class CustomSkillsListener extends AGListener
 			return;
 		}
 		
-		List <Entity> surroundingEntities = caster.getNearbyEntities(range / 2.0, range / 2.0, range / 2.0);
+		Collection <Entity> surroundingEntities = caster.getWorld().getNearbyEntities(caster.getLocation(), range / 2.0, range / 2.0, range / 2.0);
 		
 		boolean isAlly = false;
 		for (Entity entity : surroundingEntities)

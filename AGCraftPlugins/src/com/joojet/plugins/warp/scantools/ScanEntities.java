@@ -1,6 +1,7 @@
 package com.joojet.plugins.warp.scantools;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -22,7 +23,7 @@ public class ScanEntities
 	public static boolean ScanNearbyEnemies (Player p, int radius, MonsterTypeInterpreter monsterTypeInterpreter)
 	{
 		int halfRadius = (int) (radius / 2.0);
-		List <Entity> entities = p.getNearbyEntities(radius, halfRadius, radius);
+		Collection<Entity> entities = p.getWorld().getNearbyEntities(p.getLocation(), radius, halfRadius, radius);
 		
 		for (Entity e : entities)
 		{
@@ -65,7 +66,7 @@ public class ScanEntities
 	public static List <Entity> ScanNearbyPlayerOwnedEntities (Player p, int radius)
 	{
 		int halfRadius = (int) (radius / 2.0);
-		List <Entity> entities = p.getNearbyEntities(radius, halfRadius, radius);
+		Collection<Entity> entities = p.getWorld().getNearbyEntities(p.getLocation(), radius, halfRadius, radius);
 		List <Entity> ownedEntities = new ArrayList <Entity> ();
 		
 		for (Entity ent : entities)

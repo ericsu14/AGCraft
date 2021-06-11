@@ -294,7 +294,7 @@ public class PathfindTargetingEventListener extends AGListener
 			scanRadius *= 10;
 		}
 		
-		List <LivingEntity> entities = hunter.getNearbyEntities(scanRadius, scanRadius / 4.0, scanRadius).stream().
+		List <LivingEntity> entities = hunter.getWorld().getNearbyEntities(hunter.getLocation(), scanRadius, scanRadius / 4.0, scanRadius).stream().
 				filter(ent -> (ent instanceof LivingEntity) && hunter.hasLineOfSight(ent) && 
 						!isSpectator ((LivingEntity) ent)).
 				map(ent -> (LivingEntity) ent).

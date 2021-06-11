@@ -11,6 +11,7 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 
 import com.joojet.plugins.mobs.enums.EquipmentType;
@@ -32,20 +33,22 @@ public abstract class ShieldEquipment extends Equipment
 	 * @param color - Base color applied onto this shield */
 	protected void setBaseColor (DyeColor color)
 	{
-		BlockStateMeta itemMeta = (BlockStateMeta) this.getItemMeta();
+		/* BlockStateMeta itemMeta = (BlockStateMeta) this.getItemMeta();
+		this.attachBannerState (itemMeta);
 		BlockState state = itemMeta.getBlockState();
 		Banner bannerState = (Banner) state;
 		bannerState.setBaseColor (color);
 		bannerState.update();
 		itemMeta.setBlockState(bannerState);
 		itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-		this.setItemMeta(itemMeta);
+		this.setItemMeta(itemMeta); */
 	}
 	
 	/** Adds a list of custom banner patterns to the shield */
 	protected void addPatterns (Pattern... patterns)
 	{
-		BlockStateMeta itemMeta = (BlockStateMeta) this.getItemMeta();
+		/* BlockStateMeta itemMeta = (BlockStateMeta) this.getItemMeta();
+		this.attachBannerState (itemMeta);
 		BlockState state = itemMeta.getBlockState();
 		Banner bannerState = (Banner) state;
 		List <Pattern> customPatterns = new ArrayList <Pattern> ();
@@ -56,6 +59,16 @@ public abstract class ShieldEquipment extends Equipment
 		bannerState.setPatterns(customPatterns);
 		bannerState.update();
 		itemMeta.setBlockState(bannerState);
-		this.setItemMeta(itemMeta);
+		this.setItemMeta(itemMeta); */
+	}
+	
+	private void attachBannerState (BlockStateMeta bannerMeta)
+	{
+		if (!bannerMeta.hasBlockState())
+		{
+			ItemStack banner = new ItemStack (Material.WHITE_BANNER, 1);
+			BlockState bannerState = ((BlockStateMeta) banner.getItemMeta()).getBlockState();
+			bannerMeta.setBlockState(bannerState);
+		}
 	}
 }

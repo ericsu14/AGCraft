@@ -17,7 +17,6 @@ public class DeathCounter
 	private Scoreboard scoreboard;
 	private Objective deathCounterObj;
 	
-	@SuppressWarnings("deprecation")
 	public DeathCounter ()
 	{		
 		this.scoreboard = AGCraftPlugin.plugin.getServer().getScoreboardManager().getMainScoreboard();
