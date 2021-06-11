@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -33,6 +34,7 @@ import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.attack.anvil.AnvilDropSkill;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveEnvironmental;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
@@ -343,6 +345,17 @@ public class CustomSkillsListener extends AGListener
 			return;
 		}
 		event.setDamage(event.getDamage() + totalBonusDamage);
+	}
+	
+	/** Prevents anvils from being formed by falling anvils spawned-in by anvil skills */
+	@EventHandler
+	public void cancelFallingBlockEvent (EntityChangeBlockEvent changeBlockEvent)
+	{
+		Entity context = changeBlockEvent.getEntity();
+		if (context.hasMetadata(AnvilDropSkill.FALLING_ANVIL_ID))
+		{
+			changeBlockEvent.setCancelled(true);
+		}
 	}
 	
 	/** Filter's a skill caster's surrounding entities using the passed range into two categories,

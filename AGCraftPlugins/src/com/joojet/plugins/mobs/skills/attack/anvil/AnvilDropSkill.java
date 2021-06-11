@@ -62,7 +62,7 @@ public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack
 		{
 			caster.swingMainHand();
 			caster.getWorld().spawnParticle(Particle.CRIT, caster.getEyeLocation(), 30, 1.0, 1.0, 1.0);
-			caster.getWorld().playSound(caster.getEyeLocation(), Sound.BLOCK_ANVIL_PLACE, 1.0f, 1.0f);
+			caster.getWorld().playSound(caster.getEyeLocation(), Sound.BLOCK_ANVIL_PLACE, 1.0f, 6.0f);
 			damageDisplayListener.displayStringAboveEntity(caster, ChatColor.DARK_RED + "" + ChatColor.BOLD + "TAKE THIS!");
 		}
 		
@@ -105,9 +105,10 @@ public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack
 	protected FallingBlock spawnAnvil (World world, Location location)
 	{
 		FallingBlock anvil = (FallingBlock) world.spawnFallingBlock(location, Bukkit.createBlockData(Material.DAMAGED_ANVIL));
-		anvil.setHurtEntities(true);
+		anvil.setHurtEntities(false);
 		anvil.setFallDistance(256.0f);
 		anvil.setSilent(true);
+		anvil.setDropItem(false);
 		anvil.getWorld().spawnParticle(Particle.CRIT, anvil.getLocation().add(0.0, 1.0, 0.0), 30, 1.0, 1.0, 1.0);
 		anvil.getWorld().spawnParticle(Particle.SPELL_INSTANT, anvil.getLocation(), 30, 1.0, 1.0, 1.0);
 		anvil.getWorld().spawnParticle(Particle.SMOKE_NORMAL, anvil.getLocation(), 10, 1.0, 1.0, 1.0);

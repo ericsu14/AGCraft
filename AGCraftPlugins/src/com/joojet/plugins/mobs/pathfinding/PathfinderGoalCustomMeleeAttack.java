@@ -38,7 +38,7 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 	@Override
 	protected void a (EntityLiving target, double var1)
 	{
-		double attackRadius = a(target);
+		double attackRadius = this.a(target);
 		if (var1 <= attackRadius && this.h())
 		{
 			this.g();
@@ -120,7 +120,7 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 		{
 			if (knockBack > 0.0F && target instanceof EntityLiving)
 			{
-				((EntityLiving) target).a(knockBack * 0.5f, MathHelper.sin(attacker.getBukkitYaw() * 0.017453292F), 
+				((EntityLiving) target).p(knockBack * 0.5f, MathHelper.sin(attacker.getBukkitYaw() * 0.017453292F), 
 						-MathHelper.cos(attacker.getBukkitYaw() * 0.017453292F));
 				attacker.setMot(attacker.getMot().d(0.6D, 1.0F, 0.6D));
 			}
@@ -129,12 +129,6 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 		}
 		
 		return flag;
-	}
-
-	@Override
-	public boolean a() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }
