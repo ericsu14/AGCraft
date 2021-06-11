@@ -354,6 +354,7 @@ public class CustomSkillsListener extends AGListener
 		Entity context = changeBlockEvent.getEntity();
 		if (context.hasMetadata(AnvilDropSkill.FALLING_ANVIL_ID))
 		{
+			context.remove();
 			changeBlockEvent.setCancelled(true);
 		}
 	}

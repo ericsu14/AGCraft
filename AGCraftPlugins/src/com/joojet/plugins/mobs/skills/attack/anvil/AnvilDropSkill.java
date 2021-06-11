@@ -62,7 +62,7 @@ public class AnvilDropSkill extends AbstractAttackSkill implements PassiveAttack
 		{
 			caster.swingMainHand();
 			caster.getWorld().spawnParticle(Particle.CRIT, caster.getEyeLocation(), 30, 1.0, 1.0, 1.0);
-			caster.getWorld().playSound(caster.getEyeLocation(), Sound.BLOCK_ANVIL_PLACE, 1.0f, 6.0f);
+			caster.getWorld().playSound(caster.getEyeLocation(), Sound.BLOCK_ANVIL_PLACE, 0.6f, 1.0f);
 			damageDisplayListener.displayStringAboveEntity(caster, ChatColor.DARK_RED + "" + ChatColor.BOLD + "TAKE THIS!");
 		}
 		
