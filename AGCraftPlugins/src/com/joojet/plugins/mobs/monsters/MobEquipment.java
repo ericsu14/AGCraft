@@ -439,8 +439,13 @@ public abstract class MobEquipment
 					return true;
 				}
 			}
-			// Check if the entity is rivals with the other entity. If so, return false
-			result = !otherEquipment.isRivalsOf(this) || otherEquipment.getIgnoreList().contains(entity.getType());
+			// Prevents factioned entities from targeting entities in neutral factions
+			if (!this.getFactions().isEmpty() && !otherEquipment.getFactions().isEmpty())
+			{
+				result |= !otherEquipment.isRivalsOf(this);
+			}
+			
+			result |= otherEquipment.getIgnoreList().contains(entity.getType());
 		}
 		
 		// Allows neutral mobs and custom mobs without anything in their hitlist

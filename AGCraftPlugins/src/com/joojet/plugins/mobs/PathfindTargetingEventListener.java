@@ -17,7 +17,6 @@ import org.bukkit.event.entity.EntityTransformEvent;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 import org.bukkit.event.entity.EntityTransformEvent.TransformReason;
 import org.bukkit.event.world.ChunkLoadEvent;
-import org.bukkit.event.world.WorldLoadEvent;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
@@ -32,6 +31,7 @@ import com.joojet.plugins.mobs.metadata.IgnorePlayerMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 import com.joojet.plugins.mobs.util.stream.ClosestProximity;
+import com.joojet.plugins.mobs.util.worker.ChunkWorkerQueue;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public class PathfindTargetingEventListener extends AGListener
@@ -40,11 +40,35 @@ public class PathfindTargetingEventListener extends AGListener
 	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	/** Stores a reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
+	/** A chunk pool used to initialize pathfinding targets upon chunk loads */
+	protected ChunkWorkerQueue pathfinderWorker;
 	
 	public PathfindTargetingEventListener (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
+		
+		// Allows entities loaded into the world to have their defined custom pathfinding behavior
+		this.pathfinderWorker = new ChunkWorkerQueue (30, 6) 
+		{
+			@Override
+			public void processEntity(Entity entity) 
+			{
+				LivingEntity livingEntity;
+				MobEquipment entityEquipment;
+				if (entity != null && entity instanceof LivingEntity)
+				{
+					livingEntity = (LivingEntity) entity;
+					entityEquipment = monsterTypeInterpreter.getMobEquipmentFromEntity(livingEntity);
+					if (entityEquipment != null)
+					{
+						EquipmentTools.modifyBaseStats(livingEntity, entityEquipment);
+						EquipmentTools.modifyPathfindingTargets(livingEntity, entityEquipment);
+					}
+				}
+			}
+			
+		};
 	}
 	
 	@Override
@@ -144,50 +168,11 @@ public class PathfindTargetingEventListener extends AGListener
 		}
 	}
 	
-	/** Resets custom mob targets upon a world load event */
-	@EventHandler
-	public void resetTargetsOnWorldLoad (WorldLoadEvent worldEvent)
-	{
-		List <Entity> worldEntities = worldEvent.getWorld().getEntities();
-		
-		LivingEntity livingEntity;
-		MobEquipment entityEquipment;
-		for (Entity entity : worldEntities)
-		{
-			if (entity != null && entity instanceof LivingEntity)
-			{
-				livingEntity = (LivingEntity) entity;
-				entityEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(livingEntity);
-				if (entityEquipment != null)
-				{
-					EquipmentTools.modifyBaseStats(livingEntity, entityEquipment);
-					EquipmentTools.modifyPathfindingTargets(livingEntity, entityEquipment);
-				}
-			}
-		}
-	}
-	
 	/** Resets custom mob targets upon chunk load events */
 	@EventHandler(priority = EventPriority.HIGH)
 	public void resetTargetsOnChunkLoad (ChunkLoadEvent event)
 	{
-		Entity[] chunkEntities = event.getChunk().getEntities();
-		
-		LivingEntity livingEntity;
-		MobEquipment entityEquipment;
-		for (Entity entity : chunkEntities)
-		{
-			if (entity != null && entity instanceof LivingEntity)
-			{
-				livingEntity = (LivingEntity) entity;
-				entityEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(livingEntity);
-				if (entityEquipment != null)
-				{
-					EquipmentTools.modifyBaseStats(livingEntity, entityEquipment);
-					EquipmentTools.modifyPathfindingTargets(livingEntity, entityEquipment);
-				}
-			}
-		}
+		this.pathfinderWorker.enqueue(event.getChunk());
 	}
 	
 	/** Captures zombie to drowned conversion events and transfers custom metadata to

@@ -212,7 +212,7 @@ public class EquipmentTools
 	}
 	
 	/** Iterates through all MonsterStat and MobFlag attributes defined in the mobEquipment instance
-	 *  and applys all of its custom attributes to the living entity
+	 *  and applies all of its custom attributes to the living entity
 	 *  @param entity - Entity we are equipping custom armor to
 	 *  @param mobEquipment - Object containing custom mob equipment
 	 *  @param bossBarController - A reference to an active boss bar controller instance, which is used to manage */

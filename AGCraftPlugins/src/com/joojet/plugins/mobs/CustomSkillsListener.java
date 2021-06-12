@@ -25,7 +25,6 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
-import org.bukkit.event.world.WorldLoadEvent;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
@@ -41,6 +40,7 @@ import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveEnvironmental;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveRegeneration;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillTask;
+import com.joojet.plugins.mobs.util.worker.ChunkWorkerQueue;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 
 public class CustomSkillsListener extends AGListener 
@@ -58,6 +58,9 @@ public class CustomSkillsListener extends AGListener
 	/** Stores a registry for all active mob skill instances in the server
 	 *  and runs them each tick */
 	protected MobSkillRunner mobSkillRunner;
+	/** A worker queue used to process loaded chunks and initializes skill systems for any custom monsters
+	 *  that needs it */
+	protected ChunkWorkerQueue customSkillWorker;
 	
 	public CustomSkillsListener (MonsterTypeInterpreter monsterInterpreter, DamageDisplayListener damageDisplayListener,
 			BossBarController bossBarController, MobSkillRunner mobSkillRunner)
@@ -67,6 +70,15 @@ public class CustomSkillsListener extends AGListener
 		this.bossBarController = bossBarController;
 		this.mobSkillRunner = mobSkillRunner;
 		this.rand = new Random ();
+		this.customSkillWorker = new ChunkWorkerQueue (30, 6) 
+		{
+			/** Initializes custom skill system for the entity if it is set to have one  */
+			@Override
+			public void processEntity(Entity entity) 
+			{
+				loadCustomSkillsOntoEntity(entity);
+			}
+		};
 	}
 	
 	@Override
@@ -93,27 +105,10 @@ public class CustomSkillsListener extends AGListener
 		this.loadCustomSkillsOntoEntity(spawnEvent.getEntity());
 	}
 	
-	/** Sets custom skills for amplified mobs upon world loads */
-	@EventHandler (priority = EventPriority.LOW)
-	public void onWorldLoad (WorldLoadEvent worldLoadEvent)
-	{
-		List <Entity> entities = worldLoadEvent.getWorld().getEntities();
-		
-		for (Entity ent : entities)
-		{
-			this.loadCustomSkillsOntoEntity(ent);
-		}
-	}
-	
 	@EventHandler (priority = EventPriority.LOW)
 	public void onChunkLoad (ChunkLoadEvent chunkLoadEvent)
 	{
-		Entity[] entities = chunkLoadEvent.getChunk().getEntities();
-		
-		for (Entity ent : entities)
-		{
-			this.loadCustomSkillsOntoEntity(ent);
-		}
+		this.customSkillWorker.enqueue(chunkLoadEvent.getChunk());
 	}
 	
 	/** Listens to custom mob creation events */
