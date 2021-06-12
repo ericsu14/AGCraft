@@ -4,12 +4,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import org.bukkit.Chunk;
-import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
-import com.joojet.plugins.agcraft.util.Pair;
 
 /** An abstract worker pool module used to queue chunks loaded into and out of the game, 
  *  so that all entities within these chunks can be processed on a timer.  */
@@ -20,7 +18,7 @@ public abstract class ChunkWorkerQueue
 	/** Limits the amount of chunks processed per wave */
 	protected int limit;
 	/** A queue used to store incoming chunks to be processed */
-	protected Queue <Pair <World, Pair <Integer, Integer>>> chunkQueue;
+	protected Queue <ChunkData> chunkQueue;
 	
 	/** Creates a new instance of a chunk worker queue, allowing chunks to be safely loaded into the queue
 	 *  and have all entities within that chunk to be processed on a timer.
@@ -30,7 +28,7 @@ public abstract class ChunkWorkerQueue
 	{
 		this.timer = timer;
 		this.limit = limit;
-		this.chunkQueue = new LinkedList <Pair <World, Pair <Integer, Integer>>> ();
+		this.chunkQueue = new LinkedList <ChunkData> ();
 		
 		new BukkitRunnable () 
 		{
@@ -39,8 +37,8 @@ public abstract class ChunkWorkerQueue
 			{
 				while (!chunkQueue.isEmpty())
 				{
-					Pair <World, Pair <Integer, Integer>> chunkCoordinates = chunkQueue.poll();
-					Chunk processedChunk = chunkCoordinates.getKey().getChunkAt(chunkCoordinates.getEntry().getKey(), chunkCoordinates.getEntry().getEntry());
+					ChunkData chunkData = chunkQueue.poll();
+					Chunk processedChunk = chunkData.getChunk();
 					if (processedChunk != null)
 					{
 						Entity [] chunkEntities = processedChunk.getEntities();
@@ -59,7 +57,7 @@ public abstract class ChunkWorkerQueue
 	 *  @param Chunk being enqueued */
 	public void enqueue (Chunk chunk)
 	{
-		this.chunkQueue.add(new Pair <World, Pair <Integer, Integer>> (chunk.getWorld(), new Pair <Integer, Integer> (chunk.getX(), chunk.getZ())));
+		this.chunkQueue.add(new ChunkData (chunk));
 	}
 	
 	/** A custom function used to  process an entity stored within a chunk
