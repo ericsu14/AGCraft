@@ -12,7 +12,6 @@ import org.bukkit.block.banner.Pattern;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.BlockStateMeta;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.enums.EquipmentType;
@@ -34,63 +33,45 @@ public abstract class ShieldEquipment extends Equipment
 	 * @param color - Base color applied onto this shield */
 	protected void setBaseColor (DyeColor color)
 	{
-		new BukkitRunnable () 
+		BlockStateMeta itemMeta = (BlockStateMeta) getItemMeta();
+		if (itemMeta.hasBlockState())
 		{
-			@Override
-			public void run() 
-			{
-				BlockStateMeta itemMeta = (BlockStateMeta) getItemMeta();
-				if (itemMeta.hasBlockState())
-				{
-					BlockState state = itemMeta.getBlockState();
-					Banner bannerState = (Banner) state;
-					bannerState.setBaseColor (color);
-					bannerState.update();
-					itemMeta.setBlockState(bannerState);
-					itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-					setItemMeta(itemMeta);
-				}
-				else
-				{
-					AGCraftPlugin.plugin.getLogger().warning("Unable to set base color for " + this.toString());
-				}
-				
-			}
-			
-		}.runTaskLater(AGCraftPlugin.plugin, 20);
+			BlockState state = itemMeta.getBlockState();
+			Banner bannerState = (Banner) state;
+			bannerState.setBaseColor (color);
+			bannerState.update();
+			itemMeta.setBlockState(bannerState);
+			itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+			setItemMeta(itemMeta);
+		}
+		else
+		{
+			AGCraftPlugin.plugin.getLogger().warning("Unable to set base color for " + this.toString());
+		}
 	}
 	
 	/** Adds a list of custom banner patterns to the shield */
 	protected void addPatterns (Pattern... patterns)
 	{
-		new BukkitRunnable () 
+		BlockStateMeta itemMeta = (BlockStateMeta) getItemMeta();
+		if (itemMeta.hasBlockState())
 		{
-			@Override
-			public void run() 
+			BlockState state = itemMeta.getBlockState();
+			Banner bannerState = (Banner) state;
+			List <Pattern> customPatterns = new ArrayList <Pattern> ();
+			for (Pattern pattern : patterns)
 			{
-				BlockStateMeta itemMeta = (BlockStateMeta) getItemMeta();
-				if (itemMeta.hasBlockState())
-				{
-					BlockState state = itemMeta.getBlockState();
-					Banner bannerState = (Banner) state;
-					List <Pattern> customPatterns = new ArrayList <Pattern> ();
-					for (Pattern pattern : patterns)
-					{
-						customPatterns.add(pattern);
-					}
-					bannerState.setPatterns(customPatterns);
-					bannerState.update();
-					itemMeta.setBlockState(bannerState);
-					setItemMeta(itemMeta);
-				}
-				else
-				{
-					AGCraftPlugin.plugin.getLogger().warning("Unable to add pattern for " + this.toString());
-				}
-				
+				customPatterns.add(pattern);
 			}
-			
-		}.runTaskLater(AGCraftPlugin.plugin, 20);
+			bannerState.setPatterns(customPatterns);
+			bannerState.update();
+			itemMeta.setBlockState(bannerState);
+			setItemMeta(itemMeta);
+		}
+		else
+		{
+			AGCraftPlugin.plugin.getLogger().warning("Unable to add pattern for " + this.toString());
+		}
 	}
 	
 	/* private void attachBannerState (BlockStateMeta bannerMeta)
