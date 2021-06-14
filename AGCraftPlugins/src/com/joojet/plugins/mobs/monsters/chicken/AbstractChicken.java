@@ -44,7 +44,8 @@ public abstract class AbstractChicken extends MobEquipment implements NMSSkillUs
 				EntityType.GHAST, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN,
 				EntityType.SLIME, EntityType.MAGMA_CUBE, EntityType.ENDERMITE, EntityType.PHANTOM,
 				EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER, EntityType.GIANT, EntityType.HOGLIN,
-				EntityType.VEX, EntityType.PIGLIN_BRUTE, EntityType.ZOGLIN, EntityType.ZOMBIE_VILLAGER);
+				EntityType.VEX, EntityType.PIGLIN_BRUTE, EntityType.ZOGLIN, EntityType.ZOMBIE_VILLAGER,
+				EntityType.SHULKER);
 		
 		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.IRON_GOLEM, EntityType.SNOWMAN, EntityType.WOLF,
 				EntityType.VILLAGER, EntityType.WANDERING_TRADER);

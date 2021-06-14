@@ -3,8 +3,11 @@ package com.joojet.plugins.mobs.util;
 import org.bukkit.entity.EntityType;
 
 import net.minecraft.server.level.EntityPlayer;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ambient.*;
 import net.minecraft.world.entity.animal.*;
+import net.minecraft.world.entity.animal.axolotl.Axolotl;
+import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.*;
 import net.minecraft.world.entity.boss.enderdragon.*;
 import net.minecraft.world.entity.boss.wither.*;
@@ -13,6 +16,7 @@ import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.monster.hoglin.*;
 import net.minecraft.world.entity.monster.piglin.*;
 import net.minecraft.world.entity.npc.*;
+import net.minecraft.world.entity.projectile.*;
 
 
 public class ConvertEntity 
@@ -138,6 +142,8 @@ public class ConvertEntity
 				return EntitySheep.class;
 			case SHULKER:
 				return EntityShulker.class;
+			case SHULKER_BULLET:
+				return EntityShulkerBullet.class;
 			case ITEM_FRAME:
 				return EntityItemFrame.class;
 			case DONKEY:
@@ -154,6 +160,12 @@ public class ConvertEntity
 				return EntityZoglin.class;
 			case ENDER_DRAGON:
 				return EntityEnderDragon.class;
+			case GLOW_SQUID:
+				return GlowSquid.class;
+			case AXOLOTL:
+				return Axolotl.class;
+			case GOAT:
+				return Goat.class;
 			default:
 				break;
 		}

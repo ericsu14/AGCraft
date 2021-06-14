@@ -30,7 +30,7 @@ public abstract class USCFaction extends MobEquipment implements CustomSkillUser
 		super (type);
 		this.addFactions(Faction.USC);
 		this.addRivalFactions(Faction.UCLA, Faction.PHANTOM, Faction.DOOM_GUY,
-				Faction.MR_JOHNSON);
+				Faction.MR_JOHNSON, Faction.NETHER);
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.PILLAGER,
 				EntityType.SPIDER, EntityType.CAVE_SPIDER, EntityType.EVOKER, EntityType.STRAY,
 				EntityType.HUSK, EntityType.BLAZE, EntityType.PIGLIN, EntityType.DROWNED,
@@ -39,7 +39,8 @@ public abstract class USCFaction extends MobEquipment implements CustomSkillUser
 				EntityType.GHAST, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN,
 				EntityType.SLIME, EntityType.MAGMA_CUBE, EntityType.ENDERMITE, EntityType.PHANTOM,
 				EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER, EntityType.GIANT, EntityType.HOGLIN,
-				EntityType.VEX, EntityType.PIGLIN_BRUTE, EntityType.ZOGLIN, EntityType.ZOMBIE_VILLAGER);
+				EntityType.VEX, EntityType.PIGLIN_BRUTE, EntityType.ZOGLIN, EntityType.ZOMBIE_VILLAGER,
+				EntityType.SHULKER);
 		
 		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.WOLF, EntityType.CAT,
 				EntityType.IRON_GOLEM, EntityType.SNOWMAN, EntityType.DOLPHIN, EntityType.VILLAGER,

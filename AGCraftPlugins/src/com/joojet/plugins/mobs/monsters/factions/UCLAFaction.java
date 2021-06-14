@@ -29,11 +29,12 @@ public abstract class UCLAFaction extends MobEquipment implements CustomSkillUse
 		super (type);
 		this.addFactions(Faction.UCLA);
 		this.addRivalFactions(Faction.USC, Faction.PHANTOM, Faction.DOOM_GUY, Faction.ALLIES,
-				Faction.CHICKEN_GANG, Faction.MR_JOHNSON);
+				Faction.CHICKEN_GANG, Faction.MR_JOHNSON, Faction.NETHER);
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.SKELETON,
 				EntityType.PLAYER, EntityType.PHANTOM, EntityType.WITHER_SKELETON, 
 				EntityType.SPIDER, EntityType.IRON_GOLEM, EntityType.HOGLIN, EntityType.SNOWMAN,
-				EntityType.HUSK, EntityType.DROWNED, EntityType.ZOMBIE_VILLAGER, EntityType.STRAY);
+				EntityType.HUSK, EntityType.DROWNED, EntityType.ZOMBIE_VILLAGER, EntityType.STRAY,
+				EntityType.SHULKER, EntityType.SHULKER_BULLET);
 		this.addEntitiesToIgnoreList(EntityType.CREEPER, EntityType.GIANT);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.LEGENDARY);
 		this.addMobFlags(MobFlag.DISABLE_PICK_UP_ITEMS);

@@ -36,7 +36,7 @@ public class EvilSquid extends RareMob implements NMSSkillUser, CustomSkillUser
 		
 		this.addTargetsToHitList(EntityType.PLAYER, EntityType.DROWNED, EntityType.GUARDIAN,
 				EntityType.ELDER_GUARDIAN, EntityType.ZOMBIE, EntityType.COD, EntityType.SALMON,
-				EntityType.TROPICAL_FISH, EntityType.TURTLE, EntityType.SQUID);
+				EntityType.TROPICAL_FISH, EntityType.TURTLE, EntityType.SQUID, EntityType.GLOW_SQUID);
 	}
 	
 	@Override

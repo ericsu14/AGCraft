@@ -15,8 +15,6 @@ public abstract class ChunkWorkerQueue
 {
 	/** Time before the next wave of chunks are processed */
 	protected int timer;
-	/** Limits the amount of chunks processed per wave */
-	protected int limit;
 	/** A queue used to store incoming chunks to be processed */
 	protected Queue <ChunkData> chunkQueue;
 	
@@ -24,10 +22,9 @@ public abstract class ChunkWorkerQueue
 	 *  and have all entities within that chunk to be processed on a timer.
 	 *  @param timer Time between chunk processes
 	 *  @param limit Amount of chunks processed per wave */
-	public ChunkWorkerQueue (int timer, int limit)
+	public ChunkWorkerQueue (int timer)
 	{
 		this.timer = timer;
-		this.limit = limit;
 		this.chunkQueue = new LinkedList <ChunkData> ();
 		
 		new BukkitRunnable () 
