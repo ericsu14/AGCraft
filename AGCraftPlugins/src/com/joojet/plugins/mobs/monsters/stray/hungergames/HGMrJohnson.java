@@ -70,7 +70,7 @@ public class HGMrJohnson extends MobEquipment implements CustomSpawnMessage, Cus
 		
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.PLAYER, EntityType.SKELETON, EntityType.SPIDER, EntityType.STRAY, 
 				EntityType.SLIME, EntityType.HUSK,EntityType.IRON_GOLEM, EntityType.SNOWMAN, EntityType.PILLAGER, EntityType.CAVE_SPIDER,
-				EntityType.GIANT);
+				EntityType.GIANT, EntityType.EVOKER, EntityType.VEX);
 		this.addEntitiesToIgnoreList(EntityType.CREEPER);
 		
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING,
