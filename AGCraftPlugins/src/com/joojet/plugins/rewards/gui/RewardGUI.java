@@ -68,7 +68,6 @@ public class RewardGUI implements Listener
 				return RewardDatabaseManager.fetchUnclaimedRewards(player.getUniqueId());
 			}
 
-			@SuppressWarnings("deprecation")
 			@Override
 			protected void handlePromise(List<RewardEntry> data) 
 			{
@@ -97,7 +96,6 @@ public class RewardGUI implements Listener
     }
 
     /** Handles inventory click events */
-    @SuppressWarnings("deprecation")
 	@EventHandler
     public void onInventoryClick(final InventoryClickEvent e) 
     {
@@ -185,7 +183,6 @@ public class RewardGUI implements Listener
     
     /** Returns the ID of an item
      * 		@param ItemStack item - item we are extracting the reward entry ID from */
-    @SuppressWarnings("deprecation")
 	public int getRewardID (ItemStack item)
     {
     	ItemMeta meta = item.getItemMeta();
@@ -214,7 +211,6 @@ public class RewardGUI implements Listener
     
     /** Removes ID field from an item's lore
      * 		@param item - Item we are stripping the ID info out of */
-    @SuppressWarnings("deprecation")
 	public void removeIDField (ItemStack item)
     {
     	ItemMeta meta = item.getItemMeta();
@@ -235,7 +231,6 @@ public class RewardGUI implements Listener
 	 * 		@param item - Item we are adding lore info into
 	 * 		@param lore - The lore we are adding into the item meta
 	 * 		@param color - Color of the lore text */
-    @SuppressWarnings("deprecation")
 	public void addLoreToItemMeta (ItemStack item, String lore, ChatColor color)
     {
     	StringBuilder str = new StringBuilder();

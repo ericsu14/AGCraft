@@ -106,7 +106,6 @@ public class RewardManager extends AGListener
 				return RewardDatabaseManager.checkIfPlayerHasReward(playerUUID, type);
 			}
 
-			@SuppressWarnings("deprecation")
 			@Override
 			protected void handlePromise(Boolean rewardsCheck) 
 			{
@@ -185,7 +184,6 @@ public class RewardManager extends AGListener
 				return true;
 			}
 
-			@SuppressWarnings("deprecation")
 			@Override
 			protected void handlePromise(Boolean data) 
 			{

@@ -54,7 +54,7 @@ public class SkullKid extends MythicMob
 				CustomPotionEffect.SPEED,
 				CustomPotionEffect.UNDEAD_HEAL);
 		this.addFactions(Faction.DOOM_GUY);
-		this.addRivalFactions(Faction.UCLA, Faction.USC, Faction.PHANTOM, Faction.ALLIES, Faction.NETHER);
+		this.addRivalFactions(Faction.UCLA, Faction.USC, Faction.PHANTOM, Faction.ALLIES, Faction.NETHER, Faction.CHICKEN_GANG);
 		this.addTargetsToHitList(EntityType.ZOMBIFIED_PIGLIN,
 				EntityType.MAGMA_CUBE, EntityType.HOGLIN, EntityType.CREEPER, EntityType.ZOMBIE, EntityType.SKELETON,
 				EntityType.WITHER_SKELETON, EntityType.WITCH, EntityType.HOGLIN, EntityType.HUSK, EntityType.STRAY,

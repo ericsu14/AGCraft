@@ -57,7 +57,7 @@ public class DoomGuy extends MythicMob
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE, CustomPotionEffect.UNDEAD_HEAL);
 		
 		this.addFactions(Faction.DOOM_GUY);
-		this.addRivalFactions(Faction.NETHER, Faction.USC, Faction.UCLA, Faction.CHICKEN_GANG);
+		this.addRivalFactions(Faction.NETHER, Faction.USC, Faction.UCLA, Faction.CHICKEN_GANG, Faction.ALLIES);
 		this.addTargetsToHitList(EntityType.ZOMBIFIED_PIGLIN,
 				EntityType.MAGMA_CUBE, EntityType.HOGLIN, EntityType.CREEPER, EntityType.ZOMBIE, EntityType.SKELETON,
 				EntityType.WITHER_SKELETON, EntityType.WITCH, EntityType.HOGLIN, EntityType.HUSK, EntityType.STRAY,
