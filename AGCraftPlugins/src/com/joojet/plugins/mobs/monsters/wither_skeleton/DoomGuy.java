@@ -47,7 +47,7 @@ public class DoomGuy extends MythicMob
 		this.color = ChatColor.DARK_RED;
 		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 125.0);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 16.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 12.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.10);
 		

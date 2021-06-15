@@ -33,16 +33,13 @@ public abstract class ShieldEquipment extends Equipment
 	protected void setBaseColor (DyeColor color)
 	{
 		BlockStateMeta itemMeta = (BlockStateMeta) getItemMeta();
-		if (itemMeta.hasBlockState())
-		{
-			BlockState state = itemMeta.getBlockState();
-			Banner bannerState = (Banner) state;
-			bannerState.setBaseColor (color);
-			bannerState.update();
-			itemMeta.setBlockState(bannerState);
-			itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-			setItemMeta(itemMeta);
-		}
+		BlockState state = itemMeta.getBlockState();
+		Banner bannerState = (Banner) state;
+		bannerState.setBaseColor (color);
+		bannerState.update();
+		itemMeta.setBlockState(bannerState);
+		itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+		setItemMeta(itemMeta);
 	}
 	
 	/** Adds a list of custom banner patterns to the shield */
@@ -56,14 +53,11 @@ public abstract class ShieldEquipment extends Equipment
 			customPatterns.add(pattern);
 		}
 		
-		if (itemMeta.hasBlockState())
-		{
-			BlockState state = itemMeta.getBlockState();
-			Banner bannerState = (Banner) state;
-			bannerState.setPatterns(customPatterns);
-			bannerState.update();
-			itemMeta.setBlockState(bannerState);
-			setItemMeta(itemMeta);
-		}
+		BlockState state = itemMeta.getBlockState();
+		Banner bannerState = (Banner) state;
+		bannerState.setPatterns(customPatterns);
+		bannerState.update();
+		itemMeta.setBlockState(bannerState);
+		setItemMeta(itemMeta);
 	}
 }
