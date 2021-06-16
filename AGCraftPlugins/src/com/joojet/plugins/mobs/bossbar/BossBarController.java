@@ -28,6 +28,8 @@ public class BossBarController
 	/** BukkitRunnable instance updating all active boss bars every tick */
 	protected BossBarTaskRunner bossTaskRunner;
 	
+	/** Constructs a new BossBarController instance serving as an API for any module dependent
+	 *  on this controller to activate boss bars. */
 	public BossBarController (MonsterTypeInterpreter monsterTypeInterpreter, MusicListener musicListener)
 	{
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
@@ -35,6 +37,7 @@ public class BossBarController
 		this.bossTaskRunner = new BossBarTaskRunner();
 	}
 	
+	/** Enables the BossTaskRunner to start dynamically updating all active boss bars  */
 	public void onEnable ()
 	{
 		this.bossTaskRunner.runTaskTimer(AGCraftPlugin.plugin, 0, 1);
@@ -64,7 +67,7 @@ public class BossBarController
 			{
 				bossTheme = equipment.getBossTheme();
 			}
-			this.bossTaskRunner.addBossBarTask(uuidKey, new BossBarTask (bossBar, entity, bossTheme, this, musicListener));
+			this.bossTaskRunner.addBossBarTask(uuidKey, new BossBarTask (bossBar, entity, bossTheme, musicListener));
 		}
 	}
 	
@@ -128,11 +131,5 @@ public class BossBarController
 	public void setBossMetadataOnEntity (LivingEntity entity)
 	{
 		new BossMetadata(entity.getUniqueId()).addStringMetadata((PersistentDataHolder) entity);
-	}
-	
-	/** Cleans up and disables all active boss bars */
-	public void cleanup ()
-	{
-		
 	}
 }

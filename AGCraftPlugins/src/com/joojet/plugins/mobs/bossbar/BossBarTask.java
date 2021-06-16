@@ -24,8 +24,6 @@ public class BossBarTask
 	protected boolean isActive;
 	/** UUID of the Boss Bar entry */
 	protected UUID bossUUID;
-	/** An instance to the boss bar controller */
-	protected BossBarController bossBarController;
 	/** Stores a reference to the music listener used to enable and disable
 	 *  music cues for different boss fight events */
 	protected MusicListener musicListener;
@@ -34,11 +32,15 @@ public class BossBarTask
 	/** Tracks if this entity has absorption health */
 	protected boolean hasAbsorption;
 	
-	public BossBarTask (BossBar bossBar, LivingEntity bossEntity, MusicType bossTheme, BossBarController bossBarController, MusicListener musicListener)
+	/** Constructs a new BossBarTask containing data needed to manage a BossEntity's boss bar
+	 *  @param bossBar BossBar instance
+	 *  @param bossEntity Underlying LivingEntity used to update the entity's own BossBar
+	 *  @param bossTheme Boss entity's boss theme
+	 *  @param musicListener A reference to the MusicListener instance used to stop boss music */
+	public BossBarTask (BossBar bossBar, LivingEntity bossEntity, MusicType bossTheme, MusicListener musicListener)
 	{
 		this.bossEntity = bossEntity;
 		this.bossUUID = bossEntity.getUniqueId();
-		this.bossBarController = bossBarController;
 		this.bossBar = bossBar;
 		this.musicListener = musicListener;
 		this.maxAbsorptionHealth = 0.0;

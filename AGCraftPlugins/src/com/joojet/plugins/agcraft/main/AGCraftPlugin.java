@@ -171,10 +171,7 @@ public class AGCraftPlugin extends JavaPlugin
 	
 	@Override
 	public void onDisable ()
-	{
-		// Removes all active boss bars
-		this.bossBarController.cleanup();
-		
+	{		
 		// Invokes the onDisable routine for all event listeners
 		for (AGListener listener: this.activeEventListeners)
 		{
