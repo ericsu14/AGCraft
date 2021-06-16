@@ -1,7 +1,6 @@
 package com.joojet.plugins.mobs.bossbar;
 
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
@@ -21,19 +20,24 @@ import com.joojet.plugins.music.enums.MusicType;
 
 public class BossBarController 
 {
-	/** Stores a static table of all active custom boss bars in this server */
-	public ConcurrentHashMap <UUID, BossBarNode> activeBossBars;
 	/** Search trie used to lookup custom monsters by name */
 	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	/** Stores a reference to the music listener used to enable and disable
 	 *  music cues for different boss fight events */
 	protected MusicListener musicListener;
+	/** BukkitRunnable instance updating all active boss bars every tick */
+	protected BossBarTaskRunner bossTaskRunner;
 	
 	public BossBarController (MonsterTypeInterpreter monsterTypeInterpreter, MusicListener musicListener)
 	{
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.musicListener = musicListener;
-		this.activeBossBars = new ConcurrentHashMap <UUID, BossBarNode> ();
+		this.bossTaskRunner = new BossBarTaskRunner();
+	}
+	
+	public void onEnable ()
+	{
+		this.bossTaskRunner.runTaskTimer(AGCraftPlugin.plugin, 0, 1);
 	}
 	
 	/** Attempts to create a new Boss Bar for the passed living entity
@@ -51,7 +55,7 @@ public class BossBarController
 			uuidKey = entity.getUniqueId();
 			setBossMetadataOnEntity (entity);
 		}
-		if (!activeBossBars.containsKey(uuidKey))
+		if (!this.bossTaskRunner.containsTask(uuidKey))
 		{
 			BossBar bossBar = AGCraftPlugin.plugin.getServer().createBossBar(entity.getCustomName(), BarColor.RED, BarStyle.SEGMENTED_6, BarFlag.PLAY_BOSS_MUSIC);
 			MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(entity);
@@ -60,26 +64,7 @@ public class BossBarController
 			{
 				bossTheme = equipment.getBossTheme();
 			}
-			activeBossBars.put(uuidKey, new BossBarNode (bossBar, entity, uuidKey, bossTheme));
-			activateBossBar (uuidKey);
-		}
-		else
-		{
-			BossBarNode entry = activeBossBars.get(uuidKey);
-			entry.entity = entity;
-			activeBossBars.replace(uuidKey, entry);
-		}
-	}
-	
-	/** Makes the entity's boss bar referenced by its passed UUID functional by creating a new
-	 *  BossBarTask runnable in this plugin. This task dynamically scales the boss bar's
-	 *  health to the attached entity's current health points. */
-	public void activateBossBar (UUID uuidKey)
-	{
-		BossBarNode bossNode = activeBossBars.get(uuidKey);
-		if (bossNode != null && !bossNode.hasActiveTask())
-		{
-			new BossBarTask (bossNode, this, this.musicListener).runTaskTimer(AGCraftPlugin.plugin, 0, 1);
+			this.bossTaskRunner.addBossBarTask(uuidKey, new BossBarTask (bossBar, entity, bossTheme, this, musicListener));
 		}
 	}
 	
@@ -91,11 +76,11 @@ public class BossBarController
 		UUID uuidKey = getBossBarUUID (bossEntity);
 		if (uuidKey != null && bossEntity.getType() != EntityType.PLAYER)
 		{
-			if (!activeBossBars.containsKey(uuidKey))
+			if (!this.bossTaskRunner.containsTask(uuidKey))
 			{
 				createBossBar (bossEntity);
 			}
-			activeBossBars.get(uuidKey).bossBar.addPlayer(player);
+			this.bossTaskRunner.addPlayerToBossBar(uuidKey, player);
 			
 			// Attempts to play the entity's boss music if it exists
 			MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(bossEntity);
@@ -110,9 +95,9 @@ public class BossBarController
 	public void removePlayerFromBossBar (Player player, LivingEntity bossEntity)
 	{
 		UUID uuidKey = getBossBarUUID (bossEntity);
-		if (uuidKey != null && activeBossBars.containsKey(uuidKey))
+		if (uuidKey != null && this.bossTaskRunner.containsTask(uuidKey))
 		{
-			activeBossBars.get(uuidKey).bossBar.removePlayer(player);
+			this.bossTaskRunner.removePlayerFromBossBar(uuidKey, player);
 			this.musicListener.soundPlayer.stopAllSoundsNearPlayer(player);
 		}
 	}
@@ -122,19 +107,9 @@ public class BossBarController
 	public void removeBossBar (LivingEntity entity)
 	{
 		UUID uuidKey = getBossBarUUID (entity);
-		BossBarNode entry;
-		if (uuidKey != null && activeBossBars.containsKey(uuidKey))
+		if (uuidKey != null && this.bossTaskRunner.containsTask(uuidKey))
 		{
-			entry = activeBossBars.get(uuidKey);
-			if (entry != null)
-			{
-				if (entry.hasActiveTask())
-				{
-					entry.task.cleanup();
-					entry.task.cancel();
-				}
-				activeBossBars.remove(uuidKey);
-			}
+			this.bossTaskRunner.removeBossBarTask(uuidKey);
 		}
 	}
 	
@@ -158,23 +133,6 @@ public class BossBarController
 	/** Cleans up and disables all active boss bars */
 	public void cleanup ()
 	{
-		LivingEntity ent;
-		if (activeBossBars == null)
-		{
-			return;
-		}
 		
-		for (BossBarNode node : activeBossBars.values())
-		{
-			if (node != null)
-			{
-				ent = node.entity;
-				if (ent != null)
-				{
-					removeBossBar (ent);
-				}
-			}
-		}
-		activeBossBars.clear();
 	}
 }

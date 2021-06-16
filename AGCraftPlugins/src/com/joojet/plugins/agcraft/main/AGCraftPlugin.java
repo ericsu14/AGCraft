@@ -129,6 +129,9 @@ public class AGCraftPlugin extends JavaPlugin
 		// Death counter
 		deathCounter = new DeathCounter();
 		
+		// Enabled the boss bar controller
+		this.bossBarController.onEnable();
+		
 		// Amplified mob spawner
 		this.registerEventListener(new AmplifiedMobSpawner (this.monsterTypeInterpreter, this.summonTypeInterpreter, this.bossBarController, this.mobSkillRunner));
 		

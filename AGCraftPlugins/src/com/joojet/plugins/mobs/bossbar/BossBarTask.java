@@ -7,53 +7,59 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.potion.PotionEffectType;
 
 import com.joojet.plugins.music.MusicListener;
+import com.joojet.plugins.music.enums.MusicType;
 
-public class BossBarTask extends BukkitRunnable 
+public class BossBarTask
 {
+	/** Boss bar instance */
+	protected BossBar bossBar;
+	/** Boss entity  */
+	protected LivingEntity bossEntity;
+	/** Boss's custom music theme */
+	protected MusicType bossTheme;
+	/** True if the underlying entity this task is managing is still active in the game */
+	protected boolean isActive;
 	/** UUID of the Boss Bar entry */
 	protected UUID bossUUID;
-	/** Instance of the Boss Bar entry attached to this task */
-	protected BossBarNode bossBarNode;
 	/** An instance to the boss bar controller */
 	protected BossBarController bossBarController;
 	/** Stores a reference to the music listener used to enable and disable
 	 *  music cues for different boss fight events */
 	protected MusicListener musicListener;
 	/** Keeps track of the max. absorption health this monster has */
-	private double maxAbsorptionHealth;
+	protected double maxAbsorptionHealth;
 	/** Tracks if this entity has absorption health */
-	private boolean hasAbsorption;
+	protected boolean hasAbsorption;
 	
-	public BossBarTask (BossBarNode bossBarNode, BossBarController bossBarController, MusicListener musicListener)
+	public BossBarTask (BossBar bossBar, LivingEntity bossEntity, MusicType bossTheme, BossBarController bossBarController, MusicListener musicListener)
 	{
-		this.bossBarNode = bossBarNode;
-		this.bossUUID = this.bossBarNode.uuid;
-		this.bossBarNode.setTask(this);
+		this.bossEntity = bossEntity;
+		this.bossUUID = bossEntity.getUniqueId();
 		this.bossBarController = bossBarController;
+		this.bossBar = bossBar;
 		this.musicListener = musicListener;
 		this.maxAbsorptionHealth = 0.0;
 		this.hasAbsorption = false;
+		this.isActive = true;
 	}
 	
-	@Override
-	public void run() 
+	/** Update method called on each tick */
+	public void update() 
 	{
-		BossBar bossBar = this.bossBarNode.bossBar;
-		LivingEntity entity = this.bossBarNode.entity;
 		
-		if (entity != null && !entity.isDead())
+		if (this.bossEntity != null && !this.bossEntity.isDead())
 		{
-			this.hasAbsorption = entity.getAbsorptionAmount() > 0.0;
+			this.hasAbsorption = bossEntity.hasPotionEffect(PotionEffectType.ABSORPTION);
 			// Scales boss bar's progress to the entity's currently health + any absorption bonuses
-			double currentHealth = entity.getHealth() + entity.getAbsorptionAmount();
-			double totalHealth = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + this.maxAbsorptionHealth;
+			double currentHealth = bossEntity.getHealth() + bossEntity.getAbsorptionAmount();
+			double totalHealth = bossEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + this.maxAbsorptionHealth;
 			// If the entity has absorption and its combined health exceeds its generic max health, scale the total health with the max absorption health
 			if (this.hasAbsorption && currentHealth > totalHealth)
 			{
-				this.maxAbsorptionHealth = Math.max(this.maxAbsorptionHealth, entity.getAbsorptionAmount());
+				this.maxAbsorptionHealth = Math.max(this.maxAbsorptionHealth, this.bossEntity.getAbsorptionAmount());
 			}
 			double entityHealth = currentHealth / totalHealth;
 			// Caps entityHealth at 1.00
@@ -63,29 +69,69 @@ public class BossBarTask extends BukkitRunnable
 		}
 		else
 		{
-			this.cleanup();
-			this.bossBarController.activeBossBars.remove(bossUUID);
-			this.cancel();
+			this.isActive = false;
 		}
+	}
+	
+	/** Remaps the boss entity this task is managing to a new LivingEntity instance */
+	public void setBossEntity (LivingEntity bossEntity)
+	{
+		this.bossEntity = bossEntity;
+		this.isActive = true;
+	}
+	
+	/** Gets the LivingEntity governed by this BossBarTask */
+	public LivingEntity getBossEntity ()
+	{
+		return this.bossEntity;
+	}
+	
+	/** Returns the UUID associated with the boss entity */
+	public UUID getBossUUID ()
+	{
+		return this.bossUUID;
+	}
+	
+	/** Adds a player to the boss entity's BossBar instance, allowing the BossBar
+	 *  to be seen by that player
+	 *  @param player Player to be added into the boss entity's boss bar */
+	public void addPlayerToBossBar (Player player)
+	{
+		this.bossBar.addPlayer(player);
+	}
+	
+	/** Removes a player to the boss entity's BossBar instance, therefore disallowing
+	 *  the player from seeing the boss entity's boss bar
+	 *  @param player Player to be removed from the boss entity's boss bar */
+	public void removePlayerFromBossBar (Player player)
+	{
+		this.bossBar.removePlayer(player);
 	}
 	
 	/** Disables this task's active boss bar */
 	public void cleanup ()
 	{
-		BossBar bossBar = this.bossBarNode.bossBar;
+		BossBar bossBar = this.bossBar;
 		// Removes all active boss sounds from each player registered in the boss bar.
-		if (this.bossBarNode.bossTheme != null)
+		if (this.bossTheme != null)
 		{
 			for (Player player : bossBar.getPlayers())
 			{
 				if (player != null)
 				{
-					this.musicListener.soundPlayer.stopCurrentlyPlayingBossMusicOnPlayer(this.bossBarNode.bossTheme, player, bossUUID);
+					this.musicListener.soundPlayer.stopCurrentlyPlayingBossMusicOnPlayer(this.bossTheme, player, bossUUID);
 				}
 			}
 		}
 		bossBar.removeAll();
 		bossBar.setVisible(false);
+	}
+	
+	/** Gets the BossBarTask's current status, indicating if the underlying boss entity is active
+	 *  or inactive and should be marked for removal. */
+	public boolean isActive ()
+	{
+		return this.isActive;
 	}
 
 }
