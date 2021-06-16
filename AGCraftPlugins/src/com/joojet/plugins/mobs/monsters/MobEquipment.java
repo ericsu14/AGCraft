@@ -394,17 +394,7 @@ public abstract class MobEquipment
 	 * 	@param otherEquipment The ally's monster's MonEquipment instance */
 	public boolean isAlliesOf (LivingEntity entity, LivingEntity other, MobEquipment otherEquipment)
 	{
-		boolean result = false;
-		boolean noFactions = false;
-		
 		if (entity.equals(other))
-		{
-			return true;
-		}
-		
-		if (other.getType() == EntityType.ARMOR_STAND || 
-				other.getType() == EntityType.ITEM_FRAME ||
-				other.getType() == EntityType.DROPPED_ITEM)
 		{
 			return true;
 		}
@@ -418,6 +408,26 @@ public abstract class MobEquipment
 				return true;
 			}
 		}
+		
+		return this.isAlliesOf(entity.getType(), other.getType(), otherEquipment);
+	}
+	
+	/** Checks if this monster is allies with this mob
+	 *  @param entity The type of the LivingEntity holding this MobEquipment instance
+	 *  @param other The type of the ally being checked
+	 * 	@param otherEquipment The ally's monster's MonEquipment instance */
+	public boolean isAlliesOf (EntityType entity, EntityType other, MobEquipment otherEquipment)
+	{
+		boolean result = false;
+		boolean noFactions = false;
+		
+		if (other == EntityType.ARMOR_STAND || 
+				other == EntityType.ITEM_FRAME ||
+						other == EntityType.DROPPED_ITEM)
+		{
+			return true;
+		}
+		
 		if (otherEquipment != null)
 		{ 
 			// Check if the entity is in the same faction as the other entity.
@@ -445,18 +455,18 @@ public abstract class MobEquipment
 				result |= !otherEquipment.isRivalsOf(this);
 			}
 			
-			result |= otherEquipment.getIgnoreList().contains(entity.getType());
+			result |= otherEquipment.getIgnoreList().contains(entity);
 		}
 		
 		// Allows neutral mobs and custom mobs without anything in their hitlist
 		// to be allies with other non-factioned, non-player mobs
-		if (noFactions || (otherEquipment == null && other.getType() != EntityType.PLAYER) ||
+		if (noFactions || (otherEquipment == null && other != EntityType.PLAYER) ||
 				this.getIgnoreList().contains(EntityType.PLAYER))
 		{
-			result |= !this.hitlist.contains(other.getType());
+			result |= !this.hitlist.contains(other);
 		}
 			
-		return this.ignoreList.contains(other.getType()) || result;
+		return this.ignoreList.contains(other) || result;
 	}
 	
 	/** Returns true if this monster has a mounted mob */
