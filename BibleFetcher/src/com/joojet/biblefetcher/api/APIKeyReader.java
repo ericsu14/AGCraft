@@ -15,7 +15,7 @@ import com.joojet.biblefetcher.database.CreateDatabase;
 
 public class APIKeyReader 
 {
-	public static final String configFileName = "config";
+	public static final String configFileName = "api-keys";
 	public static final String configFileSuffix = ".txt";
 	
 	/** Creates a config file that stores API keys 
