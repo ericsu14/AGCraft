@@ -377,6 +377,11 @@ public abstract class MobEquipment
 	 *   @param mob - Monster's mob equipment being checked against this instance */
 	public boolean isRivalsOf (MobEquipment mob)
 	{
+		if (mob == null)
+		{
+			return false;
+		}
+		
 		EnumSet <Faction> rivalingFactions = mob.getRivalFactions();
 		for (Faction rivalFaction : rivalingFactions)
 		{
@@ -442,6 +447,7 @@ public abstract class MobEquipment
 				return true;
 			}
 			
+			// Checks to see if this entity is in the same faction as the other entity
 			for (Faction otherFaction : otherFactions)
 			{
 				if (this.factions.contains(otherFaction))
@@ -452,7 +458,14 @@ public abstract class MobEquipment
 			// Prevents factioned entities from targeting entities in neutral factions
 			if (!this.getFactions().isEmpty() && !otherEquipment.getFactions().isEmpty())
 			{
-				result |= !otherEquipment.isRivalsOf(this);
+				result |= (!otherEquipment.isRivalsOf(this) && !this.isRivalsOf(otherEquipment));
+			}
+			
+			// If this entity is not in a faction, allow it to be allies with other mobs who do not have
+			// this mob's EntityType in their hitlist.
+			if (this.getFactions().isEmpty() && !noFactions)
+			{
+				result |= !otherEquipment.getHitList().contains(entity);
 			}
 			
 			result |= otherEquipment.getIgnoreList().contains(entity);
@@ -461,9 +474,16 @@ public abstract class MobEquipment
 		// Allows neutral mobs and custom mobs without anything in their hitlist
 		// to be allies with other non-factioned, non-player mobs
 		if (noFactions || (otherEquipment == null && other != EntityType.PLAYER) ||
-				this.getIgnoreList().contains(EntityType.PLAYER))
+				(this.getIgnoreList().contains(EntityType.PLAYER) && !this.isRivalsOf(otherEquipment)))
 		{
 			result |= !this.hitlist.contains(other);
+		}
+		
+		// If both entities are not in any factions, check if this mob's EntityType is in the other monster's hitlist.
+		// If so, make this entity target the other entity.
+		if ((noFactions && otherEquipment != null))
+		{
+			result &= !otherEquipment.getHitList().contains(entity);
 		}
 			
 		return this.ignoreList.contains(other) || result;

@@ -15,6 +15,7 @@ public class SimpleUSCTestMob extends MobEquipment
 		super(MonsterType.HG_USC_WARRIOR);
 		this.addFactions(Faction.USC);
 		this.addRivalFactions(Faction.UCLA);
+		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.IRON_GOLEM);
 		
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.SKELETON);
 	}
