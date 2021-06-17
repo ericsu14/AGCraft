@@ -43,12 +43,18 @@ public abstract class ChunkWorkerQueue
 					{	
 						new AsyncDatabaseTask <Chunk> () 
 						{
+							/** Offloads delayed chunk loading to an async thread, since chunk loading is
+							 *  done asynchronously in 1.17 */
 							@Override
 							protected Chunk getDataFromDatabase() throws SQLException 
 							{
 								return chunkData.getChunk();
 							}
-	
+							
+							/** Handles the fully loaded chunk after the delay has been served
+							 *  with the provided method
+							 *  @param processedChunk Chunk that is fully loaded from the current instance
+							 *         of the world */
 							@Override
 							protected void handlePromise(Chunk processedChunk) 
 							{
@@ -78,7 +84,7 @@ public abstract class ChunkWorkerQueue
 		this.chunkQueue.add(new ChunkData (chunk));
 	}
 	
-	/** A custom function used to  process an entity stored within a chunk
+	/** A custom function used to process an entity stored within a chunk
 	 *  @param entity Entity being processed in the chunk */
 	public abstract void processEntity (Entity entity);
 }
