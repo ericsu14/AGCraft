@@ -1,19 +1,20 @@
 package com.joojet.plugins.music.player;
 
 import java.util.HashMap;
+import java.util.Stack;
 import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.music.enums.MusicEndingType;
 import com.joojet.plugins.music.enums.MusicType;
 import com.joojet.plugins.music.enums.SoundPlayerState;
 import com.joojet.plugins.music.task.PlayCustomSoundTask;
 
-public class SoundPlayer 
+public class SoundPlayer extends BukkitRunnable
 {
 	/** Stores a reference to the music listener class */
 	protected MusicListener musicListener;
@@ -24,6 +25,40 @@ public class SoundPlayer
 	{
 		this.musicListener = musicListener;
 		this.activePlayerSoundTable = new HashMap <UUID, PlayCustomSoundTask> ();
+	}
+	
+	@Override
+	public void run() 
+	{
+		Stack <PlayCustomSoundTask> finishedTasks = new Stack <PlayCustomSoundTask> ();
+		
+		for (PlayCustomSoundTask soundTask : this.activePlayerSoundTable.values())
+		{
+			soundTask.update();
+			
+			if (soundTask.isFinished())
+			{
+				finishedTasks.push(soundTask);
+			}
+		}
+		
+		while (!finishedTasks.isEmpty())
+		{
+			PlayCustomSoundTask soundTask = finishedTasks.pop();
+			
+			if (soundTask.getPlayer() != null && 
+					soundTask.getSoundPlayerState() == SoundPlayerState.RUNNING)
+			{
+				soundTask.resetTimer();
+				Player player = soundTask.getPlayer();
+				player.playSound(player.getLocation(), soundTask.getMusicType().getNamespace(), musicListener.musicVolume, 1.0F);
+			}
+			else
+			{
+				this.removeSoundTaskFromTable(soundTask.getPlayer());
+			}
+		}
+		
 	}
 	
 	/** A wrapper for our custom music playing function that registers a boss entity to the task's internal list of
@@ -57,7 +92,6 @@ public class SoundPlayer
 			player.playSound(player.getLocation(), type.getNamespace(), musicVolume, 1.0F);
 			PlayCustomSoundTask soundTask = new PlayCustomSoundTask (player, type, this, state);
 			this.activePlayerSoundTable.put(player.getUniqueId(), soundTask);
-			soundTask.runTaskLater(AGCraftPlugin.plugin, type.duration().getTicks());
 		}
 	}
 	
@@ -73,7 +107,7 @@ public class SoundPlayer
 	
 	
 	/** Attempts to stop the currently playing boss music on player if there are no active boss entities remaining
-	 *  that are tied to the activly playing boss music. If so, the boss music's ending theme will be played.
+	 *  that are tied to the actively playing boss music. If so, the boss music's ending theme will be played.
 	 *  @param type - Song being stopped
 	 *  @param player - The player the song is being stopped
 	 *  @param bossUUID - Boss we are removing from the music task */
@@ -87,8 +121,7 @@ public class SoundPlayer
 			
 			if (task == null ||
 					task.getMusicType() != type || 
-					task.getSoundPlayerState() == SoundPlayerState.FIREWORK ||
-					task.isCancelled())
+					task.getSoundPlayerState() == SoundPlayerState.FIREWORK)
 			{
 				return;
 			}
@@ -157,11 +190,7 @@ public class SoundPlayer
 		UUID uuid = player.getUniqueId();
 		if (this.activePlayerSoundTable != null && this.activePlayerSoundTable.containsKey(uuid))
 		{
-			PlayCustomSoundTask removedTask = this.activePlayerSoundTable.remove(uuid);
-			if (removedTask != null && !removedTask.isCancelled())
-			{
-				removedTask.cancel();
-			}
+			this.activePlayerSoundTable.remove(uuid);
 		}
 	}
 	

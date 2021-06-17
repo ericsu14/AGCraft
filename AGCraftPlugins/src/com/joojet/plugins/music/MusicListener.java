@@ -7,6 +7,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.music.enums.MusicType;
 import com.joojet.plugins.music.player.SoundPlayer;
 
@@ -76,15 +77,15 @@ public class MusicListener extends AGListener
 
 
 	@Override
-	public void onEnable() {
-		// TODO Auto-generated method stub
-		
+	public void onEnable() 
+	{
+		this.soundPlayer.runTaskTimer(AGCraftPlugin.plugin, 0, 20);
 	}
 
 
 	@Override
-	public void onDisable() {
-		// TODO Auto-generated method stub
+	public void onDisable() 
+	{
 		
 	}
 }
