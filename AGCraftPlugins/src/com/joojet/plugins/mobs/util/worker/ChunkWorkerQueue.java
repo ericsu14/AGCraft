@@ -2,9 +2,7 @@ package com.joojet.plugins.mobs.util.worker;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-// import java.util.LinkedList;
 import java.util.List;
-// import java.util.Queue;
 
 import org.bukkit.Chunk;
 import org.bukkit.entity.Entity;
@@ -14,7 +12,11 @@ import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 
 /** An abstract worker pool module used to queue chunks loaded into and out of the game, 
- *  so that all entities within these chunks can be processed on a timer.  */
+ *  so that all entities stored on those chunks can be processed at a later time.
+ *  
+ *  This is because chunk-loading is done asynchronously in the 1.17 releases of Spigot,
+ *  therefore making the chunk.getEntities() call unreliable. A delay is necessary
+ *  to ensure that all entities are loaded before processing its entities. */
 public abstract class ChunkWorkerQueue 
 {
 	/** Time before the next wave of chunks are processed */
