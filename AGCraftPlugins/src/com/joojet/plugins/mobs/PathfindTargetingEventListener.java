@@ -31,6 +31,7 @@ import com.joojet.plugins.mobs.metadata.IgnorePlayerMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 import com.joojet.plugins.mobs.util.stream.ClosestProximity;
+import com.joojet.plugins.mobs.util.worker.ChunkWorkerQueue;
 // import com.joojet.plugins.mobs.util.worker.ChunkWorkerQueue;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
@@ -41,14 +42,14 @@ public class PathfindTargetingEventListener extends AGListener
 	/** Stores a reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
 	/** A chunk pool used to initialize pathfinding targets upon chunk loads */
-	// protected ChunkWorkerQueue pathfinderWorker;
+	protected ChunkWorkerQueue pathfinderWorker;
 	
 	public PathfindTargetingEventListener (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
 		
-		/*
+		
 		// Allows entities loaded into the world to have their defined custom pathfinding behavior
 		this.pathfinderWorker = new ChunkWorkerQueue (10) 
 		{
@@ -69,7 +70,7 @@ public class PathfindTargetingEventListener extends AGListener
 				}
 			}
 			
-		}; */
+		};
 	}
 	
 	@Override
@@ -173,7 +174,7 @@ public class PathfindTargetingEventListener extends AGListener
 	@EventHandler(priority = EventPriority.HIGH)
 	public void resetTargetsOnChunkLoad (ChunkLoadEvent event)
 	{
-		Entity [] chunkEntities = event.getChunk().getEntities();
+		/* Entity [] chunkEntities = event.getChunk().getEntities();
 		for (Entity entity : chunkEntities)
 		{
 			LivingEntity livingEntity;
@@ -188,7 +189,8 @@ public class PathfindTargetingEventListener extends AGListener
 					EquipmentTools.modifyPathfindingTargets(livingEntity, entityEquipment);
 				}
 			}
-		}
+		} */
+		this.pathfinderWorker.enqueue(event.getChunk());
 	}
 	
 	/** Captures zombie to drowned conversion events and transfers custom metadata to

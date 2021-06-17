@@ -39,7 +39,7 @@ public class ChunkData
 	
 	public Chunk getChunk ()
 	{
-		return this.chunk;
+		return this.world.getChunkAt(this.coordinates.getKey(), this.coordinates.getEntry());
 	}
 	
 }

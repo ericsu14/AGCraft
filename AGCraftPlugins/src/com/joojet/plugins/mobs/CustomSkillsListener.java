@@ -40,6 +40,7 @@ import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveEnvironmental;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveRegeneration;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillTask;
+import com.joojet.plugins.mobs.util.worker.ChunkWorkerQueue;
 // import com.joojet.plugins.mobs.util.worker.ChunkWorkerQueue;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 
@@ -60,7 +61,7 @@ public class CustomSkillsListener extends AGListener
 	protected MobSkillRunner mobSkillRunner;
 	/** A worker queue used to process loaded chunks and initializes skill systems for any custom monsters
 	 *  that needs it */
-	// protected ChunkWorkerQueue customSkillWorker;
+	protected ChunkWorkerQueue customSkillWorker;
 	
 	public CustomSkillsListener (MonsterTypeInterpreter monsterInterpreter, DamageDisplayListener damageDisplayListener,
 			BossBarController bossBarController, MobSkillRunner mobSkillRunner)
@@ -70,7 +71,7 @@ public class CustomSkillsListener extends AGListener
 		this.bossBarController = bossBarController;
 		this.mobSkillRunner = mobSkillRunner;
 		this.rand = new Random ();
-		/* this.customSkillWorker = new ChunkWorkerQueue (10) 
+		this.customSkillWorker = new ChunkWorkerQueue (10) 
 		{
 			// Initializes custom skill system for the entity if it is set to have one
 			@Override
@@ -78,7 +79,7 @@ public class CustomSkillsListener extends AGListener
 			{
 				loadCustomSkillsOntoEntity(entity);
 			}
-		}; */
+		};
 	}
 	
 	@Override
@@ -108,11 +109,12 @@ public class CustomSkillsListener extends AGListener
 	@EventHandler (priority = EventPriority.LOW)
 	public void onChunkLoad (ChunkLoadEvent chunkLoadEvent)
 	{
-		Entity [] chunkEntities = chunkLoadEvent.getChunk().getEntities();
+		/* Entity [] chunkEntities = chunkLoadEvent.getChunk().getEntities();
 		for (Entity entity : chunkEntities)
 		{
 			loadCustomSkillsOntoEntity(entity);
-		}
+		} */
+		this.customSkillWorker.enqueue(chunkLoadEvent.getChunk());
 	}
 	
 	/** Listens to custom mob creation events */

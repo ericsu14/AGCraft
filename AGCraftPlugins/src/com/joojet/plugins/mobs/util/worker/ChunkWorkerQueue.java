@@ -1,12 +1,16 @@
 package com.joojet.plugins.mobs.util.worker;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.sql.SQLException;
+import java.util.ArrayList;
+// import java.util.LinkedList;
+import java.util.List;
+// import java.util.Queue;
 
 import org.bukkit.Chunk;
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 
 /** An abstract worker pool module used to queue chunks loaded into and out of the game, 
@@ -16,7 +20,7 @@ public abstract class ChunkWorkerQueue
 	/** Time before the next wave of chunks are processed */
 	protected int timer;
 	/** A queue used to store incoming chunks to be processed */
-	protected Queue <ChunkData> chunkQueue;
+	protected List <ChunkData> chunkQueue;
 	
 	/** Creates a new instance of a chunk worker queue, allowing chunks to be safely loaded into the queue
 	 *  and have all entities within that chunk to be processed on a timer.
@@ -25,24 +29,41 @@ public abstract class ChunkWorkerQueue
 	public ChunkWorkerQueue (int timer)
 	{
 		this.timer = timer;
-		this.chunkQueue = new LinkedList <ChunkData> ();
+		this.chunkQueue = new ArrayList <ChunkData> ();
 		
 		new BukkitRunnable () 
 		{
 			@Override
 			public void run() 
 			{
-				while (!chunkQueue.isEmpty())
+				for (int i = 0; i < chunkQueue.size(); ++i)
 				{
-					ChunkData chunkData = chunkQueue.poll();
-					Chunk processedChunk = chunkData.getChunk();
-					if (processedChunk != null)
-					{
-						Entity [] chunkEntities = processedChunk.getEntities();
-						for (Entity entity : chunkEntities)
+					ChunkData chunkData = chunkQueue.get(i);
+					if (chunkData.canReadChunk())
+					{	
+						new AsyncDatabaseTask <Chunk> () 
 						{
-							processEntity (entity);
-						}
+							@Override
+							protected Chunk getDataFromDatabase() throws SQLException 
+							{
+								return chunkData.getChunk();
+							}
+	
+							@Override
+							protected void handlePromise(Chunk processedChunk) 
+							{
+								if (processedChunk != null)
+								{
+									Entity [] chunkEntities = processedChunk.getEntities();
+									for (Entity entity : chunkEntities)
+									{
+										processEntity (entity);
+									}
+								}
+							}
+							
+						}.runDatabaseTask();
+						chunkQueue.remove(i);
 					}
 				}
 			}
