@@ -42,6 +42,7 @@ public class BossBarTask
 		this.bossEntity = bossEntity;
 		this.bossUUID = bossEntity.getUniqueId();
 		this.bossBar = bossBar;
+		this.bossTheme = bossTheme;
 		this.musicListener = musicListener;
 		this.maxAbsorptionHealth = 0.0;
 		this.hasAbsorption = false;
