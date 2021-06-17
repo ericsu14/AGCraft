@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.music.enums.MusicEndingType;
 import com.joojet.plugins.music.enums.MusicType;
@@ -132,12 +133,21 @@ public class SoundPlayer extends BukkitRunnable
 			// If there are no more boss entities attached to this task, play the boss theme's ending music
 			if (task.getAttachedBossEntityCount() <= 0 && task.getSoundPlayerState() == SoundPlayerState.RUNNING)
 			{
-				this.stopAllSoundsNearPlayer(player);
-				if (type.hasEndingTheme())
+				new BukkitRunnable () 
 				{
-					task.setSoundPlayerState(SoundPlayerState.ENDING);
-					player.playSound(player.getLocation(), type.getEndTheme().getNamespace(), this.musicListener.musicVolume, 1.0F);
-				}
+					@Override
+					public void run() 
+					{
+						stopAllSoundsNearPlayer(player);
+						if (type.hasEndingTheme())
+						{
+							task.setSoundPlayerState(SoundPlayerState.ENDING);
+							player.playSound(player.getLocation(), type.getEndTheme().getNamespace(), musicListener.musicVolume, 1.0F);
+						}
+					}
+					
+				}.runTask(AGCraftPlugin.plugin);
+
 			}
 		}
 	}
