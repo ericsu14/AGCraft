@@ -89,7 +89,7 @@ public class CustomSkillsListener extends AGListener
 	@Override
 	public void loadConfigVariables(ServerConfigFile config) 
 	{
-		this.asyncLoadChunkDelay = config.getValueAsInteger(ChunkWorkerQueue.ASYNC_CHUNK_LOAD_TAG);
+		// TODO
 	}
 
 	@Override

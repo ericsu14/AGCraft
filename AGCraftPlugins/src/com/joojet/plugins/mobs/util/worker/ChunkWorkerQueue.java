@@ -20,7 +20,6 @@ import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
  *  to ensure that all entities are loaded before processing its entities. */
 public abstract class ChunkWorkerQueue extends BukkitRunnable
 {
-	public static final String ASYNC_CHUNK_LOAD_TAG = "async-chunk-load-delay";
 	/** A queue used to store incoming chunks to be processed */
 	protected List <ChunkData> chunkQueue;
 	/** Ensures that no duplicate data is inserted */
