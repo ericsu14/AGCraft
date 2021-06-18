@@ -9,8 +9,6 @@ import com.joojet.plugins.agcraft.util.Pair;
 
 public class ChunkData 
 {
-	/** Stored chunk */
-	// protected Chunk chunk;
 	/** World in which the chunk resides */
 	protected World world;
 	/** <X, Z> coordinate pair for the chunk */
@@ -21,7 +19,6 @@ public class ChunkData
 	/** Wraps a chunk instance allowing the worker queue to delay its processing */
 	public ChunkData (Chunk chunk)
 	{
-		// this.chunk = chunk;
 		this.world = chunk.getWorld();
 		this.coordinates = new Pair <Integer, Integer> (chunk.getX(), chunk.getZ());
 		this.isDelayed = false;
@@ -51,9 +48,16 @@ public class ChunkData
 		return this.coordinates;
 	}
 	
+	/** Gets the world in which the underlying chunk is located */
 	public World getWorld ()
 	{
 		return this.world;
+	}
+	
+	/** Returns true if the chunk is force-loaded into the world */
+	public boolean isForceLoaded ()
+	{
+		return this.world.isChunkForceLoaded(this.coordinates.getKey(), this.coordinates.getEntry());
 	}
 	
 	/** Returns true if both ChunkData instances points to the same chunk */
@@ -77,21 +81,23 @@ public class ChunkData
 			
 			return (this.coordinates.getKey() == otherCoordinates.getKey() 
 					&& this.coordinates.getEntry() == otherCoordinates.getEntry()
-					&& this.world == otherChunk.getWorld());
+					&& this.world.getEnvironment() == otherChunk.getWorld().getEnvironment());
 		}
 		return false;
 	}
 	
+	/** Outputs a String representation of this ChunkData, which outputs its chunk coordinates and world */
 	@Override
 	public String toString ()
 	{
-		return "{ X: " + this.coordinates.getKey() + ", Z: " + this.coordinates.getEntry() + " }";
+		return "{ X: " + this.coordinates.getKey() + ", Z: " + this.coordinates.getEntry() + " | world: " + this.world.getEnvironment()  + " }";
 	}
 	
+	/** Constructs a hash-code using the ChunkData's environment and X,Z coordinates */
 	@Override
 	public int hashCode ()
 	{
-		return Objects.hash(this.world, this.coordinates.getKey(), this.coordinates.getEntry());
+		return Objects.hash(this.world.getEnvironment(), this.coordinates.getKey(), this.coordinates.getEntry());
 	}
 	
 }

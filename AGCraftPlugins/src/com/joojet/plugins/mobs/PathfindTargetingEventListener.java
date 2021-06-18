@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -32,7 +33,6 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 import com.joojet.plugins.mobs.util.stream.ClosestProximity;
 import com.joojet.plugins.mobs.util.worker.ChunkWorkerQueue;
-// import com.joojet.plugins.mobs.util.worker.ChunkWorkerQueue;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public class PathfindTargetingEventListener extends AGListener
@@ -78,6 +78,7 @@ public class PathfindTargetingEventListener extends AGListener
 	@Override
 	public void onEnable ()
 	{
+		this.pathfinderWorker.loadSpawnChunks(Bukkit.getWorlds());
 		this.pathfinderWorker.runTaskTimer(AGCraftPlugin.plugin, 20, this.asyncLoadChunkDelay);
 	}
 	
@@ -176,22 +177,6 @@ public class PathfindTargetingEventListener extends AGListener
 	@EventHandler(priority = EventPriority.HIGH)
 	public void resetTargetsOnChunkLoad (ChunkLoadEvent event)
 	{
-		/* Entity [] chunkEntities = event.getChunk().getEntities();
-		for (Entity entity : chunkEntities)
-		{
-			LivingEntity livingEntity;
-			MobEquipment entityEquipment;
-			if (entity != null && entity instanceof LivingEntity)
-			{
-				livingEntity = (LivingEntity) entity;
-				entityEquipment = monsterTypeInterpreter.getMobEquipmentFromEntity(livingEntity);
-				if (entityEquipment != null)
-				{
-					EquipmentTools.modifyBaseStats(livingEntity, entityEquipment);
-					EquipmentTools.modifyPathfindingTargets(livingEntity, entityEquipment);
-				}
-			}
-		} */
 		this.pathfinderWorker.enqueue(event.getChunk());
 	}
 	

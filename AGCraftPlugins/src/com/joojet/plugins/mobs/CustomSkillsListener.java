@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -95,6 +96,7 @@ public class CustomSkillsListener extends AGListener
 	public void onEnable() 
 	{
 		this.mobSkillRunner.runTaskTimer(AGCraftPlugin.plugin, 20, 20);
+		this.customSkillWorker.loadSpawnChunks(Bukkit.getWorlds());
 		this.customSkillWorker.runTaskTimer(AGCraftPlugin.plugin, 20, this.asyncLoadChunkDelay);
 	}
 
@@ -114,11 +116,6 @@ public class CustomSkillsListener extends AGListener
 	@EventHandler (priority = EventPriority.LOW)
 	public void onChunkLoad (ChunkLoadEvent chunkLoadEvent)
 	{
-		/* Entity [] chunkEntities = chunkLoadEvent.getChunk().getEntities();
-		for (Entity entity : chunkEntities)
-		{
-			loadCustomSkillsOntoEntity(entity);
-		} */
 		this.customSkillWorker.enqueue(chunkLoadEvent.getChunk());
 	}
 	

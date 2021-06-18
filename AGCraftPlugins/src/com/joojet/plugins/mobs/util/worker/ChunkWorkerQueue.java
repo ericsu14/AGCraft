@@ -6,11 +6,11 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.bukkit.Chunk;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
-import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 
 /** An abstract worker pool module used to queue chunks loaded into and out of the game, 
  *  so that all entities stored on those chunks can be processed at a later time.
@@ -79,6 +79,21 @@ public abstract class ChunkWorkerQueue extends BukkitRunnable
 		
 		this.chunkQueue.removeAll(finishedChunks);
 		this.duplicateChunkDataChecker.removeAll(finishedChunks);
+	}
+	
+	/** Enqueues all loaded chunks from a list of active worlds
+	 *  @param worlds A collection of worlds */
+	public void loadSpawnChunks (List <World> worlds)
+	{
+		for (World world : worlds)
+		{
+			Chunk [] loadedChunks = world.getLoadedChunks();
+			
+			for (Chunk loadedChunk : loadedChunks)
+			{
+				this.enqueue(loadedChunk);
+			}
+		}
 	}
 	
 	/** Enqueues a chunk into the worker queue by storing its world and <X,Z> coordinate pair
