@@ -43,12 +43,14 @@ public class PathfindTargetingEventListener extends AGListener
 	protected BossBarController bossBarController;
 	/** A chunk pool used to initialize pathfinding targets upon chunk loads */
 	protected ChunkWorkerQueue pathfinderWorker;
+	/** Stores time between async entity processing */
+	protected int asyncLoadChunkDelay;
 	
 	public PathfindTargetingEventListener (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
-		
+		this.asyncLoadChunkDelay = 10;
 		
 		// Allows entities loaded into the world to have their defined custom pathfinding behavior
 		this.pathfinderWorker = new ChunkWorkerQueue () 
@@ -76,7 +78,7 @@ public class PathfindTargetingEventListener extends AGListener
 	@Override
 	public void onEnable ()
 	{
-		this.pathfinderWorker.runTaskTimer(AGCraftPlugin.plugin, 0, 10);
+		this.pathfinderWorker.runTaskTimer(AGCraftPlugin.plugin, 20, this.asyncLoadChunkDelay);
 	}
 	
 	@Override
@@ -358,6 +360,6 @@ public class PathfindTargetingEventListener extends AGListener
 	@Override
 	public void loadConfigVariables(ServerConfigFile config) 
 	{
-		
+		this.asyncLoadChunkDelay = config.getValueAsInteger(ChunkWorkerQueue.ASYNC_CHUNK_LOAD_TAG);
 	}
 }

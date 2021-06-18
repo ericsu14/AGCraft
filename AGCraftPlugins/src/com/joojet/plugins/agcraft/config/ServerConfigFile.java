@@ -14,6 +14,7 @@ import com.joojet.plugins.mobs.spawnhandlers.HungerGamesHandler;
 import com.joojet.plugins.mobs.spawnhandlers.JulyFourthHandler;
 import com.joojet.plugins.mobs.spawnhandlers.UHCHandler;
 import com.joojet.plugins.mobs.spawning.FairSpawnController;
+import com.joojet.plugins.mobs.util.worker.ChunkWorkerQueue;
 import com.joojet.plugins.music.MusicListener;
 import com.joojet.plugins.rewards.RewardManager;
 import com.joojet.plugins.rewards.enums.MinigameRewardType;
@@ -54,6 +55,7 @@ public class ServerConfigFile extends AbstractConfigFile
 		data.put(FairSpawnController.CUSTOM_MOB_SCAN_RADIUS, 128);
 		data.put(HungerGamesHandler.HUNGER_GAMES_SPAWN_HANDLER_KEY, 1.00);
 		data.put(DamageDisplayModeInterpreter.DAMAGE_DISPLAY_MODE_KEY, DamageDisplayMode.AUTO.toString());
+		data.put(ChunkWorkerQueue.ASYNC_CHUNK_LOAD_TAG, 10);
 		return data;
 	}
 	

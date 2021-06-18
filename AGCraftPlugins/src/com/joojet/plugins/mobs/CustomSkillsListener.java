@@ -62,6 +62,8 @@ public class CustomSkillsListener extends AGListener
 	/** A worker queue used to process loaded chunks and initializes skill systems for any custom monsters
 	 *  that needs it */
 	protected ChunkWorkerQueue customSkillWorker;
+	/** Stores time between async entity processing */
+	protected int asyncLoadChunkDelay;
 	
 	public CustomSkillsListener (MonsterTypeInterpreter monsterInterpreter, DamageDisplayListener damageDisplayListener,
 			BossBarController bossBarController, MobSkillRunner mobSkillRunner)
@@ -70,6 +72,7 @@ public class CustomSkillsListener extends AGListener
 		this.damageDisplayListener = damageDisplayListener;
 		this.bossBarController = bossBarController;
 		this.mobSkillRunner = mobSkillRunner;
+		this.asyncLoadChunkDelay = 10;
 		this.rand = new Random ();
 		this.customSkillWorker = new ChunkWorkerQueue () 
 		{
@@ -85,14 +88,14 @@ public class CustomSkillsListener extends AGListener
 	@Override
 	public void loadConfigVariables(ServerConfigFile config) 
 	{
-
+		this.asyncLoadChunkDelay = config.getValueAsInteger(ChunkWorkerQueue.ASYNC_CHUNK_LOAD_TAG);
 	}
 
 	@Override
 	public void onEnable() 
 	{
 		this.mobSkillRunner.runTaskTimer(AGCraftPlugin.plugin, 20, 20);
-		this.customSkillWorker.runTaskTimer(AGCraftPlugin.plugin, 0, 20);
+		this.customSkillWorker.runTaskTimer(AGCraftPlugin.plugin, 20, this.asyncLoadChunkDelay);
 	}
 
 	@Override

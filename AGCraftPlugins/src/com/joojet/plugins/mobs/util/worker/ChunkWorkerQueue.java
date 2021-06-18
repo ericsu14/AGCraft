@@ -18,6 +18,7 @@ import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
  *  to ensure that all entities are loaded before processing its entities. */
 public abstract class ChunkWorkerQueue extends BukkitRunnable
 {
+	public static final String ASYNC_CHUNK_LOAD_TAG = "async-chunk-load-delay";
 	/** A queue used to store incoming chunks to be processed */
 	protected List <ChunkData> chunkQueue;
 	
@@ -33,6 +34,7 @@ public abstract class ChunkWorkerQueue extends BukkitRunnable
 	@Override
 	public void run ()
 	{
+		List <ChunkData> finishedChunks = new ArrayList <ChunkData> ();
 		for (int i = 0; i < chunkQueue.size(); ++i)
 		{
 			ChunkData chunkData = chunkQueue.get(i);
@@ -66,9 +68,11 @@ public abstract class ChunkWorkerQueue extends BukkitRunnable
 					}
 					
 				}.runAsyncTask();
-				chunkQueue.remove(i);
+				finishedChunks.add(chunkData);
 			}
 		}
+		
+		chunkQueue.removeAll(finishedChunks);
 	}
 	
 	/** Enqueues a chunk into the worker queue by storing its world and <X,Z> coordinate pair
