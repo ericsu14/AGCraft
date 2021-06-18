@@ -17,8 +17,8 @@ public class WeakeningArrow extends TippedArrow
 	public void addPotionData ()
 	{
 		this.setColor(Color.GRAY);
-		this.addPotionEffect(PotionEffectType.WEAKNESS, 70, 0);
-		this.setDisplayName("Weakening Arrow");
-		this.addLoreToItemMeta("Weakens the enemy for a short amount of time.");
+		this.addPotionEffect(PotionEffectType.SLOW, 100, 0);
+		this.setDisplayName("Take it #agslow");
+		this.addLoreToItemMeta("Slows down the enemy for a short amount of time.");
 	}
 }

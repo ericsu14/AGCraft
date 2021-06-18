@@ -22,6 +22,7 @@ import com.joojet.plugins.mobs.equipment.weapons.BarneyDagger;
 import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
+import com.joojet.plugins.mobs.skills.passive.NerfDamageOutputSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class BarneyTheDinosaur extends MythicMob
@@ -29,7 +30,7 @@ public class BarneyTheDinosaur extends MythicMob
 	public BarneyTheDinosaur ()
 	{
 		super (MonsterType.BARNEY_THE_DINOSAUR);
-		this.setStat(MonsterStat.HEALTH, 4.0);
+		this.setStat(MonsterStat.HEALTH, 2.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 50.0);
 		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
 		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 300);
@@ -41,7 +42,7 @@ public class BarneyTheDinosaur extends MythicMob
 		this.addMobFlags(MobFlag.HUNT_ON_SPAWN, MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME,
 				MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER);
 		this.addTargetsToHitList(EntityType.PLAYER, EntityType.IRON_GOLEM, EntityType.SNOWMAN, EntityType.ZOMBIE, EntityType.SKELETON, 
-				EntityType.HUSK, EntityType.STRAY, EntityType.SLIME);
+				EntityType.HUSK, EntityType.STRAY, EntityType.SLIME, EntityType.EVOKER, EntityType.PILLAGER);
 		
 		this.name = "Barney the Dinosaur";
 		this.color = ChatColor.DARK_PURPLE;
@@ -66,6 +67,7 @@ public class BarneyTheDinosaur extends MythicMob
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
 		super.loadCustomSkills(skills);
-		skills.add(new ThundagaSkill (32, 20, 3, 16, 4.0f, 6, 60, 0.70));
+		skills.add(new ThundagaSkill (32, 20, 3, 16, 3.0f, 6, 60, 0.70));
+		skills.add(new NerfDamageOutputSkill (0.15));
 	}
 }

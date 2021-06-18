@@ -46,7 +46,7 @@ public class Scruffy extends AlliedMob implements CustomSkillUser
 		skills.add(new ThundagaSkill (20, 14, Integer.MAX_VALUE, 12, 2.0F, 6, 20, 1.00));
 		skills.add(new SelfHealSkill (2, 30, 8, 0.50));
 		skills.add(new TeleportSkill (64, 60, Integer.MAX_VALUE, 1));
-		skills.add(new IcySnowballSkill (0.60, 16.0));
+		skills.add(new IcySnowballSkill (1.00, 12.0));
 	}
 		
 }

@@ -42,6 +42,6 @@ public class USCWarrior extends USCFaction
 	{
 		super.loadCustomSkills(skills);
 		// Nerfs damage output by 30% to balance his damage output against the UCLA jock
-		skills.add(new NerfDamageOutputSkill (0.30));
+		skills.add(new NerfDamageOutputSkill (0.40));
 	}
 }

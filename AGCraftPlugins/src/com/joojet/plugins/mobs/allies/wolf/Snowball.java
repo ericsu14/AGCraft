@@ -26,7 +26,7 @@ public class Snowball extends AlliedMob implements CustomSkillUser
 		this.chestplate = new SnowballHeart (this.color);
 		this.boots = new LetItGo (this.color);
 		this.setDropRates(0.0f, 1.15f, 0.0f, 0.0f, 0.0f, 0.0f);
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 8.0);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 6.0);
 		this.setStat(MonsterStat.HEALTH, 40.0);
 	}
 

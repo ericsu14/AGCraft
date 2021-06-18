@@ -11,7 +11,6 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
-import com.joojet.plugins.mobs.skills.attack.ThrowEnderPearlSkill;
 import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.mobs.skills.utility.AggressiveTeleportSkill;
 
@@ -24,6 +23,8 @@ public class MythicMob extends MobEquipment implements CustomSkillUser
 		this.addMobFlags(MobFlag.DISABLE_PICK_UP_ITEMS);
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.MYTHIC);
 		this.addTargetsToHitList(EntityType.IRON_GOLEM, EntityType.SNOWMAN);
+		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
+		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 300);
 	}
 
 	@Override
@@ -33,7 +34,6 @@ public class MythicMob extends MobEquipment implements CustomSkillUser
 		// the rage and aggressive teleport skills
 		skills.add(new RageSkill (0, 15, 0.30));
 		skills.add(new AggressiveTeleportSkill (156, 10, Integer.MAX_VALUE, 2));
-		skills.add(new ThrowEnderPearlSkill (128, 20, 5, 1, 16));
 	}
 	
 }

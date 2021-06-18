@@ -31,8 +31,7 @@ public class UltimateBadassZombie extends LegendaryMob
 		this.name = "Shadow Clone joojetsu";
 		this.color = ChatColor.GOLD;
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
-		this.setStat(MonsterStat.HEALTH, 24.0);
-		this.setStat(MonsterStat.SPAWN_LIMIT, 5);
+		this.setStat(MonsterStat.SPAWN_LIMIT, 3);
 		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 180);
 		
 		this.addBiomes(Biome.THE_VOID);
@@ -60,7 +59,7 @@ public class UltimateBadassZombie extends LegendaryMob
 	{
 		super.loadCustomSkills(skills);
 		skills.add(new MythicRageSkill (0, 15, 0.30));
-		skills.add(new EvokerFangSkill (8, 10, Integer.MAX_VALUE, 4, 8.0));
+		skills.add(new EvokerFangSkill (12, 10, Integer.MAX_VALUE, 4, 8.0));
 	}
 	
 }

@@ -32,6 +32,7 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.HurricaneSkill;
 import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.mobs.skills.passive.BlindingArrow;
+import com.joojet.plugins.mobs.skills.passive.NerfDamageOutputSkill;
 import com.joojet.plugins.mobs.skills.utility.AggressiveTeleportSkill;
 import com.joojet.plugins.mobs.skills.utility.WeaponSwitchSkill;
 import com.joojet.plugins.music.enums.MusicType;
@@ -45,7 +46,7 @@ public class DoomGuy extends MythicMob
 				ChatColor.DARK_GRAY, ChatColor.DARK_RED);
 		this.setDropRates(0.03f, 0.03f, 0.03f, 0.03f, 0.05f, 1.00f);
 		this.color = ChatColor.DARK_RED;
-		this.setStat(MonsterStat.HEALTH, 40.0);
+		this.setStat(MonsterStat.HEALTH, 30.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 125.0);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 12.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
@@ -123,6 +124,7 @@ public class DoomGuy extends MythicMob
 		});
 		skills.add(new HurricaneSkill (24, 20, Integer.MAX_VALUE, 4, 4, 0.75));
 		skills.add(new BlindingArrow (9, 3));
+		skills.add(new NerfDamageOutputSkill (0.15));
 	}
 	
 }

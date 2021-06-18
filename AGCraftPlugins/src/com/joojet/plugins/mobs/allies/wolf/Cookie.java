@@ -25,7 +25,7 @@ public class Cookie extends AlliedMob implements CustomSkillUser
 		this.addPotionEffect(CustomPotionEffect.REGEN, CustomPotionEffect.FIRE_RESISTANCE,
 				CustomPotionEffect.FULL_HEALING, CustomPotionEffect.RESISTANCE_II);
 		this.chestplate = new CookieHeart (this.color);
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 12.0);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 8.0);
 		this.setStat(MonsterStat.HEALTH, 40.0);
 	}
 

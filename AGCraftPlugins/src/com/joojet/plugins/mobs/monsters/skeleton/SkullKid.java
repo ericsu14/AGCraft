@@ -23,6 +23,7 @@ import com.joojet.plugins.mobs.equipment.weapons.SpiritualTravesty;
 import com.joojet.plugins.mobs.monsters.factions.classifications.MythicMob;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.HurricaneSkill;
+import com.joojet.plugins.mobs.skills.attack.ThrowEnderPearlSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
@@ -39,7 +40,7 @@ public class SkullKid extends MythicMob
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
 		
-		this.setStat(MonsterStat.HEALTH, 50.0);
+		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.10);
@@ -87,8 +88,9 @@ public class SkullKid extends MythicMob
 		skills.add(new RageSkill (1, 30, 0.30));
 		skills.add(new AggressiveTeleportSkill (156, 10, Integer.MAX_VALUE, 2));
 		skills.add(new ResistanceBuffSkill (0, 60, 20, 60, 80));
-		skills.add(new ThundagaSkill (32, 20, 6, 16, 5.0f, 4, 60, 0.60));
+		skills.add(new ThundagaSkill (32, 20, 6, 16, 4.0f, 4, 60, 0.60));
 		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 12, 4, 0.75));
 		skills.add(new BlindingArrow (7, 4));
+		skills.add(new ThrowEnderPearlSkill (128, 20, 5, 1, 16));
 	}
 }

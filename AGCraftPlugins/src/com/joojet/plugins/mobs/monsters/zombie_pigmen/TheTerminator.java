@@ -27,10 +27,7 @@ public class TheTerminator extends MythicMob
 		this.name = "The Terminator";
 		this.color = ChatColor.DARK_RED;
 		
-		this.setStat(MonsterStat.HEALTH, 32.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
-		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
-		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 300);
 		
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING, MobFlag.HUNT_ON_SPAWN, MobFlag.BOSS_BAR);
 		this.addTargetsToHitList(EntityType.PLAYER);

@@ -41,7 +41,7 @@ public class SpiritOfTroy extends USCFaction
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
 		super.loadCustomSkills(skills);
-		// Nerfs damage output by 25% balance his damage output against the UCLA jock
-		skills.add(new NerfDamageOutputSkill (0.25));
+		// Nerfs damage output by 30% balance his damage output against the UCLA jock
+		skills.add(new NerfDamageOutputSkill (0.30));
 	}
 }

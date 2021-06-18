@@ -50,7 +50,7 @@ public class PathfindTargetingEventListener extends AGListener
 	{
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
-		this.asyncLoadChunkDelay = 10;
+		this.asyncLoadChunkDelay = 20;
 		
 		// Allows entities loaded into the world to have their defined custom pathfinding behavior
 		this.pathfinderWorker = new ChunkWorkerQueue () 

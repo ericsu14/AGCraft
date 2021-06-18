@@ -34,8 +34,7 @@ public class UltimateBadassSkeleton extends LegendaryMob
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.10);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 6.0);
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 7.0);
-		this.setStat(MonsterStat.SPAWN_LIMIT, 5);
+		this.setStat(MonsterStat.SPAWN_LIMIT, 3);
 		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 180);
 		
 		this.addBiomes(Biome.THE_VOID);
