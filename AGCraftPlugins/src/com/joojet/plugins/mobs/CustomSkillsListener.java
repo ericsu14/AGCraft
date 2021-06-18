@@ -71,7 +71,7 @@ public class CustomSkillsListener extends AGListener
 		this.bossBarController = bossBarController;
 		this.mobSkillRunner = mobSkillRunner;
 		this.rand = new Random ();
-		this.customSkillWorker = new ChunkWorkerQueue (10) 
+		this.customSkillWorker = new ChunkWorkerQueue () 
 		{
 			// Initializes custom skill system for the entity if it is set to have one
 			@Override
@@ -83,8 +83,8 @@ public class CustomSkillsListener extends AGListener
 	}
 	
 	@Override
-	public void loadConfigVariables(ServerConfigFile config) {
-		// TODO Auto-generated method stub
+	public void loadConfigVariables(ServerConfigFile config) 
+	{
 
 	}
 
@@ -92,12 +92,14 @@ public class CustomSkillsListener extends AGListener
 	public void onEnable() 
 	{
 		this.mobSkillRunner.runTaskTimer(AGCraftPlugin.plugin, 20, 20);
+		this.customSkillWorker.runTaskTimer(AGCraftPlugin.plugin, 0, 20);
 	}
 
 	@Override
 	public void onDisable() 
 	{
 		this.mobSkillRunner.cancel();
+		this.customSkillWorker.cancel();
 	}
 	
 	@EventHandler(priority = EventPriority.LOW)

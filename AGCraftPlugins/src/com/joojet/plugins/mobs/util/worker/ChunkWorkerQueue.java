@@ -9,7 +9,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
-import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 
 /** An abstract worker pool module used to queue chunks loaded into and out of the game, 
  *  so that all entities stored on those chunks can be processed at a later time.
@@ -17,10 +16,8 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
  *  This is because chunk-loading is done asynchronously in the 1.17 releases of Spigot,
  *  therefore making the chunk.getEntities() call unreliable. A delay is necessary
  *  to ensure that all entities are loaded before processing its entities. */
-public abstract class ChunkWorkerQueue 
+public abstract class ChunkWorkerQueue extends BukkitRunnable
 {
-	/** Time before the next wave of chunks are processed */
-	protected int timer;
 	/** A queue used to store incoming chunks to be processed */
 	protected List <ChunkData> chunkQueue;
 	
@@ -28,55 +25,50 @@ public abstract class ChunkWorkerQueue
 	 *  and have all entities within that chunk to be processed on a timer.
 	 *  @param timer Time between chunk processes
 	 *  @param limit Amount of chunks processed per wave */
-	public ChunkWorkerQueue (int timer)
+	public ChunkWorkerQueue ()
 	{
-		this.timer = timer;
 		this.chunkQueue = new ArrayList <ChunkData> ();
-		
-		new BukkitRunnable () 
+	}
+	
+	@Override
+	public void run ()
+	{
+		for (int i = 0; i < chunkQueue.size(); ++i)
 		{
-			@Override
-			public void run() 
-			{
-				for (int i = 0; i < chunkQueue.size(); ++i)
+			ChunkData chunkData = chunkQueue.get(i);
+			if (chunkData.canReadChunk())
+			{	
+				new AsyncDatabaseTask <Chunk> () 
 				{
-					ChunkData chunkData = chunkQueue.get(i);
-					if (chunkData.canReadChunk())
-					{	
-						new AsyncDatabaseTask <Chunk> () 
-						{
-							/** Offloads delayed chunk loading to an async thread, since chunk loading is
-							 *  done asynchronously in 1.17 */
-							@Override
-							protected Chunk getDataFromDatabase() throws SQLException 
-							{
-								return chunkData.getChunk();
-							}
-							
-							/** Handles the fully loaded chunk after the delay has been served
-							 *  with the provided method
-							 *  @param processedChunk Chunk that is fully loaded from the current instance
-							 *         of the world */
-							@Override
-							protected void handlePromise(Chunk processedChunk) 
-							{
-								if (processedChunk != null)
-								{
-									Entity [] chunkEntities = processedChunk.getEntities();
-									for (Entity entity : chunkEntities)
-									{
-										processEntity (entity);
-									}
-								}
-							}
-							
-						}.runDatabaseTask();
-						chunkQueue.remove(i);
+					/** Offloads delayed chunk loading to an async thread, since chunk loading is
+					 *  done asynchronously in 1.17 */
+					@Override
+					protected Chunk getDataFromDatabase() throws SQLException 
+					{
+						return chunkData.getChunk();
 					}
-				}
+					
+					/** Handles the fully loaded chunk after the delay has been served
+					 *  with the provided method
+					 *  @param processedChunk Chunk that is fully loaded from the current instance
+					 *         of the world */
+					@Override
+					protected void handlePromise(Chunk processedChunk) 
+					{
+						if (processedChunk != null)
+						{
+							Entity [] chunkEntities = processedChunk.getEntities();
+							for (Entity entity : chunkEntities)
+							{
+								processEntity (entity);
+							}
+						}
+					}
+					
+				}.runDatabaseTask();
+				chunkQueue.remove(i);
 			}
-			
-		}.runTaskTimer(AGCraftPlugin.plugin, 20, this.timer);
+		}
 	}
 	
 	/** Enqueues a chunk into the worker queue by storing its world and <X,Z> coordinate pair

@@ -51,7 +51,7 @@ public class PathfindTargetingEventListener extends AGListener
 		
 		
 		// Allows entities loaded into the world to have their defined custom pathfinding behavior
-		this.pathfinderWorker = new ChunkWorkerQueue (10) 
+		this.pathfinderWorker = new ChunkWorkerQueue () 
 		{
 			@Override
 			public void processEntity(Entity entity) 
@@ -76,13 +76,13 @@ public class PathfindTargetingEventListener extends AGListener
 	@Override
 	public void onEnable ()
 	{
-		// TODO Auto-generated method stub
+		this.pathfinderWorker.runTaskTimer(AGCraftPlugin.plugin, 0, 10);
 	}
 	
 	@Override
 	public void onDisable() 
 	{
-		// TODO Auto-generated method stub	
+		this.pathfinderWorker.cancel();
 	}
 	
 	/** Listens to AI target events and cancels targeting events if the custom mob is called
