@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
@@ -35,10 +35,10 @@ public class ConsequenceManager extends AGListener
 		Player p = event.getPlayer();
 		UUID uuid = p.getUniqueId();
 		
-		new AsyncDatabaseTask <Boolean> ()
+		new AsyncTask <Boolean> ()
 		{
 			@Override
-			protected Boolean getDataFromDatabase() throws SQLException 
+			protected Boolean getAsyncData() throws SQLException 
 			{
 				return ConsequenceDatabaseManager.hasConsequences(uuid);
 			}
@@ -57,7 +57,7 @@ public class ConsequenceManager extends AGListener
 					removeClownHead (p);
 				}
 			}
-		}.runDatabaseTask();
+		}.runAsyncTask();
 	}
 	
 	/** If the player has an active consequence, force him to wear the hat again */
@@ -73,10 +73,10 @@ public class ConsequenceManager extends AGListener
 		Player p = event.getPlayer();
 		UUID uuid = p.getUniqueId();
 		
-		new AsyncDatabaseTask <Boolean> ()
+		new AsyncTask <Boolean> ()
 		{
 			@Override
-			protected Boolean getDataFromDatabase() throws SQLException 
+			protected Boolean getAsyncData() throws SQLException 
 			{
 				return ConsequenceDatabaseManager.hasConsequences(uuid);
 			}
@@ -91,7 +91,7 @@ public class ConsequenceManager extends AGListener
 				}
 			}
 			
-		}.runDatabaseTask();
+		}.runAsyncTask();
 	}
 	
 	
@@ -100,10 +100,10 @@ public class ConsequenceManager extends AGListener
 	 * 		@param message - Custom message to be shown to the player */
 	private void forceClownHead (Player p, String message)
 	{
-		new AsyncDatabaseTask <Calendar> ()
+		new AsyncTask <Calendar> ()
 		{
 			@Override
-			protected Calendar getDataFromDatabase() throws SQLException 
+			protected Calendar getAsyncData() throws SQLException 
 			{
 				return ConsequenceDatabaseManager.getLongestRunningConsequence(p.getUniqueId());
 			}
@@ -127,7 +127,7 @@ public class ConsequenceManager extends AGListener
 				p.sendMessage(ChatColor.RED + "This will take effect until " + longest.getTime().toString());
 			}
 			
-		}.runDatabaseTask();
+		}.runAsyncTask();
 	}
 	
 	/** Removes a clown head from the player's inventory if he is wearing one */

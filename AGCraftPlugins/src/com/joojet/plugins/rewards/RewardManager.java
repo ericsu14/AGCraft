@@ -8,7 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
@@ -67,11 +67,11 @@ public class RewardManager extends AGListener
 	/** Handles normal player login events */
 	public void handleNormalLoginEvent (Player player)
 	{
-		new AsyncDatabaseTask <Integer> ()
+		new AsyncTask <Integer> ()
 		{
 
 			@Override
-			protected Integer getDataFromDatabase() throws SQLException 
+			protected Integer getAsyncData() throws SQLException 
 			{
 				return RewardDatabaseManager.fetchUnclaimedRewards(player.getUniqueId()).size();
 			}
@@ -87,7 +87,7 @@ public class RewardManager extends AGListener
 				}
 			}
 			
-		}.runDatabaseTask();
+		}.runAsyncTask();
 	}
 	
 	/** Handles player login events during UHC gamenights */
@@ -97,11 +97,11 @@ public class RewardManager extends AGListener
 		UUID playerUUID = player.getUniqueId();
 		MinigameRewardType type = this.minigameEventType;
 		
-		new AsyncDatabaseTask <Boolean> ()
+		new AsyncTask <Boolean> ()
 		{
 
 			@Override
-			protected Boolean getDataFromDatabase() throws SQLException 
+			protected Boolean getAsyncData() throws SQLException 
 			{
 				return RewardDatabaseManager.checkIfPlayerHasReward(playerUUID, type);
 			}
@@ -151,7 +151,7 @@ public class RewardManager extends AGListener
 				AGCraftPlugin.logger.info ("I just awarded " + player.getDisplayName() + " prizes for " + type.toString() + "!");
 			}
 			
-		}.runDatabaseTask();
+		}.runAsyncTask();
 	}
 	
 	/** Sets the player ignore time value to a new value */
@@ -175,10 +175,10 @@ public class RewardManager extends AGListener
 	private void grantReward (Player player, RewardType reward)
 	{
 		UUID playerUUID = player.getUniqueId();
-		new AsyncDatabaseTask <Boolean> ()
+		new AsyncTask <Boolean> ()
 		{
 			@Override
-			protected Boolean getDataFromDatabase() throws SQLException 
+			protected Boolean getAsyncData() throws SQLException 
 			{
 				RewardDatabaseManager.grantReward(playerUUID, reward , minigameEventType);
 				return true;
@@ -203,7 +203,7 @@ public class RewardManager extends AGListener
 				player.sendMessage(ChatColor.AQUA + "Acquired " + ChatColor.GOLD + displayName + " ( x" + reward.getReward().getAmount() + ")");
 			}
 			
-		}.runDatabaseTask();
+		}.runAsyncTask();
 	}
 
 	@Override

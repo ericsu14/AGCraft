@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.asynctasks.response.DatabaseResponse;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
@@ -41,10 +41,10 @@ public class GiveRespawnTicket extends AGCommandExecutor
 				
 				String uuid = Bukkit.getOfflinePlayer(username) == null ? Bukkit.getPlayer(username).getUniqueId().toString() : 
 																		  Bukkit.getOfflinePlayer(username).getUniqueId().toString();
-				new AsyncDatabaseTask <DatabaseResponse<Integer>> ()
+				new AsyncTask <DatabaseResponse<Integer>> ()
 				{
 					@Override
-					protected DatabaseResponse<Integer> getDataFromDatabase() throws SQLException, RuntimeException 
+					protected DatabaseResponse<Integer> getAsyncData() throws SQLException, RuntimeException 
 					{
 						StringBuilder message = new StringBuilder ();
 						boolean result;
@@ -72,7 +72,7 @@ public class GiveRespawnTicket extends AGCommandExecutor
 						sender.sendMessage(data.getMessage());
 					}
 					
-				}.runDatabaseTask();
+				}.runAsyncTask();
 			}
 			return true;
 		}

@@ -18,7 +18,7 @@ import com.joojet.biblefetcher.constants.BibleID;
 import com.joojet.biblefetcher.constants.BookID;
 import com.joojet.biblefetcher.fetcher.BibleFetcher;
 import com.joojet.biblefetcher.interpreter.BibleCommandInterpreter;
-import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.asynctasks.response.DatabaseResponse;
 import com.joojet.plugins.biblefetcher.string.ContentParser;
 
@@ -72,11 +72,11 @@ public class FetchBibleTask extends BukkitRunnable
 	@Override
 	public void run() 
 	{
-		new AsyncDatabaseTask <DatabaseResponse <List<String>>> ()
+		new AsyncTask <DatabaseResponse <List<String>>> ()
 		{
 
 			@Override
-			protected DatabaseResponse<List<String>> getDataFromDatabase() throws SQLException 
+			protected DatabaseResponse<List<String>> getAsyncData() throws SQLException 
 			{
 				boolean result = false;
 				StringBuilder message = new StringBuilder ();
@@ -133,7 +133,7 @@ public class FetchBibleTask extends BukkitRunnable
 				}
 			}
 			
-		}.runDatabaseTask();
+		}.runAsyncTask();
 	}
 	
 	/** Connects with the BibleParser API to fetch Bible passages based on what is present in the command's arguments

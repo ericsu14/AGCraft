@@ -5,13 +5,13 @@ import java.util.List;
 
 import org.bukkit.entity.Player;
 
-import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.util.Pair;
 import com.joojet.plugins.warp.constants.WarpAccessLevel;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 import com.joojet.plugins.warp.database.LocationEntry;
 
-public abstract class AsyncGetLocations extends AsyncDatabaseTask<Pair <List <LocationEntry>, List <LocationEntry>>> 
+public abstract class AsyncGetLocations extends AsyncTask<Pair <List <LocationEntry>, List <LocationEntry>>> 
 {
 	/** Number of arguments in the command */
 	protected int argsLength;
@@ -28,7 +28,7 @@ public abstract class AsyncGetLocations extends AsyncDatabaseTask<Pair <List <Lo
 	}
 	
 	@Override
-	protected Pair<List<LocationEntry>, List<LocationEntry>> getDataFromDatabase()
+	protected Pair<List<LocationEntry>, List<LocationEntry>> getAsyncData()
 			throws SQLException, RuntimeException 
 	{
 		Pair<List<LocationEntry>, List<LocationEntry>> result = new Pair <List <LocationEntry>, List <LocationEntry>> (null, null);

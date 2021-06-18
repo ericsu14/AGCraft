@@ -8,7 +8,7 @@ import org.bukkit.Chunk;
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 
 /** An abstract worker pool module used to queue chunks loaded into and out of the game, 
  *  so that all entities stored on those chunks can be processed at a later time.
@@ -38,12 +38,12 @@ public abstract class ChunkWorkerQueue extends BukkitRunnable
 			ChunkData chunkData = chunkQueue.get(i);
 			if (chunkData.canReadChunk())
 			{	
-				new AsyncDatabaseTask <Chunk> () 
+				new AsyncTask <Chunk> () 
 				{
 					/** Offloads delayed chunk loading to an async thread, since chunk loading is
 					 *  done asynchronously in 1.17 */
 					@Override
-					protected Chunk getDataFromDatabase() throws SQLException 
+					protected Chunk getAsyncData() throws SQLException 
 					{
 						return chunkData.getChunk();
 					}
@@ -65,7 +65,7 @@ public abstract class ChunkWorkerQueue extends BukkitRunnable
 						}
 					}
 					
-				}.runDatabaseTask();
+				}.runAsyncTask();
 				chunkQueue.remove(i);
 			}
 		}

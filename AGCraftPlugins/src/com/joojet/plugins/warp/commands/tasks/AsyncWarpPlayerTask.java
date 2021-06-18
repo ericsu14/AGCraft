@@ -10,14 +10,14 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.asynctasks.response.DatabaseResponse;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.warp.commands.Warp;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
-public class AsyncWarpPlayerTask extends AsyncDatabaseTask<DatabaseResponse <Location>>
+public class AsyncWarpPlayerTask extends AsyncTask<DatabaseResponse <Location>>
 {
 	/** The player's bed spawn location */
 	protected Location playerBedSpawnLocation;
@@ -37,7 +37,7 @@ public class AsyncWarpPlayerTask extends AsyncDatabaseTask<DatabaseResponse <Loc
 	}
 	
 	@Override
-	protected DatabaseResponse <Location> getDataFromDatabase() throws SQLException, RuntimeException
+	protected DatabaseResponse <Location> getAsyncData() throws SQLException, RuntimeException
 	{
 		boolean status = true;
 		Location result = null;

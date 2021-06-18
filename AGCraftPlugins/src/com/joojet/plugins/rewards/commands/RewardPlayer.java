@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.asynctasks.response.DatabaseStatus;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
@@ -87,10 +87,10 @@ public class RewardPlayer extends AGCommandExecutor
 			}
 			
 			// Rewards each player listed in this command
-			new AsyncDatabaseTask <DatabaseStatus> ()
+			new AsyncTask <DatabaseStatus> ()
 			{
 				@Override
-				protected DatabaseStatus getDataFromDatabase() throws SQLException 
+				protected DatabaseStatus getAsyncData() throws SQLException 
 				{
 					StringBuilder message = new StringBuilder ();
 					for (UUID p : players)
@@ -109,7 +109,7 @@ public class RewardPlayer extends AGCommandExecutor
 					sender.sendMessage(data.getMessage());
 				}
 				
-			}.runDatabaseTask();
+			}.runAsyncTask();
 
 			return true;
 		}

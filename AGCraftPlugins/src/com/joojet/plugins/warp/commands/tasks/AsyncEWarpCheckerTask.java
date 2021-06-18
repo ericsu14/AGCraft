@@ -5,11 +5,11 @@ import java.sql.SQLException;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.asynctasks.response.DatabaseResponse;
 import com.joojet.plugins.warp.database.EWarpDatabaseManager;
 
-public class AsyncEWarpCheckerTask extends AsyncDatabaseTask<DatabaseResponse <String>>  
+public class AsyncEWarpCheckerTask extends AsyncTask<DatabaseResponse <String>>  
 {
 	/** The name of the location the player is warping to */
 	protected String locationName;
@@ -26,7 +26,7 @@ public class AsyncEWarpCheckerTask extends AsyncDatabaseTask<DatabaseResponse <S
 	}
 	
 	@Override
-	protected DatabaseResponse<String> getDataFromDatabase() throws SQLException, RuntimeException 
+	protected DatabaseResponse<String> getAsyncData() throws SQLException, RuntimeException 
 	{
 		boolean status = true;
 		StringBuilder message = new StringBuilder ();
@@ -78,7 +78,7 @@ public class AsyncEWarpCheckerTask extends AsyncDatabaseTask<DatabaseResponse <S
 		// Warp the player to the location iff the status is true
 		if (data.getStatus())
 		{
-			new AsyncWarpPlayerTask (this.player, this.locationName).runDatabaseTask();
+			new AsyncWarpPlayerTask (this.player, this.locationName).runAsyncTask();
 		}
 	}
 	

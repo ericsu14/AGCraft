@@ -59,7 +59,7 @@ public class GetLocations extends AGCommandExecutor
 					}
 				}
 				
-			}.runDatabaseTask();
+			}.runAsyncTask();
 			
 			return true;
 		}

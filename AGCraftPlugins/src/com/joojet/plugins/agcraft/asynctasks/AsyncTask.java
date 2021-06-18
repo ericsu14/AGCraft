@@ -6,11 +6,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 
-public abstract class AsyncDatabaseTask <T>
+public abstract class AsyncTask <T>
 {
 	/** Schedules and retrieves data from an user-defined asynchronous database task, 
 	 *  then synchronously schedules and launches a user-defined handler right after. */
-	public void runDatabaseTask ()
+	public void runAsyncTask ()
 	{
 		new BukkitRunnable ()
 		{
@@ -20,7 +20,7 @@ public abstract class AsyncDatabaseTask <T>
 				try 
 				{
 					// Gets requested data from the database
-					T data = getDataFromDatabase ();
+					T data = getAsyncData ();
 					
 					// Once the data is retrieved, handle the event
 					new BukkitRunnable () 
@@ -41,7 +41,7 @@ public abstract class AsyncDatabaseTask <T>
 	}
 	
 	/** Asynchronous gets data from a database function */
-	protected abstract T getDataFromDatabase () throws SQLException;
+	protected abstract T getAsyncData () throws SQLException;
 	
 	/** Synchronously handles data retrieved from the asynchronous call */
 	protected abstract void handlePromise (T data);

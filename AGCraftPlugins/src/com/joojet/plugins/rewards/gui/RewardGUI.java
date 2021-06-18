@@ -20,7 +20,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.joojet.plugins.agcraft.asynctasks.AsyncDatabaseTask;
+import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.fireworks.tasks.SpawnFireworksOnLocationTask;
@@ -59,11 +59,11 @@ public class RewardGUI implements Listener
     public void openInventory() 
     {
     	
-    	new AsyncDatabaseTask <List <RewardEntry>> ()
+    	new AsyncTask <List <RewardEntry>> ()
     	{
 
 			@Override
-			protected List<RewardEntry> getDataFromDatabase() throws SQLException 
+			protected List<RewardEntry> getAsyncData() throws SQLException 
 			{
 				return RewardDatabaseManager.fetchUnclaimedRewards(player.getUniqueId());
 			}
@@ -92,7 +92,7 @@ public class RewardGUI implements Listener
 		        player.openInventory(inv);
 			}
     		
-    	}.runDatabaseTask();
+    	}.runAsyncTask();
     }
 
     /** Handles inventory click events */
@@ -133,10 +133,10 @@ public class RewardGUI implements Listener
         	int rewardID = this.getRewardID(clickedItem);
         	inv.remove(clickedItem);
         	
-        	new AsyncDatabaseTask <Boolean> ()
+        	new AsyncTask <Boolean> ()
         	{
 				@Override
-				protected Boolean getDataFromDatabase() throws SQLException 
+				protected Boolean getAsyncData() throws SQLException 
 				{
 					RewardDatabaseManager.claimReward(rewardID);
 					return true;
@@ -160,7 +160,7 @@ public class RewardGUI implements Listener
 	        		}
 				}
         		
-        	}.runDatabaseTask();
+        	}.runAsyncTask();
         }
     }
 
