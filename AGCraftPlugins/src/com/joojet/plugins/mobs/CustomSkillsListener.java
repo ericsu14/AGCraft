@@ -26,12 +26,14 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
+import com.joojet.plugins.mobs.event.InjectCustomGoalsToEntityEvent;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
@@ -47,6 +49,8 @@ import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 
 public class CustomSkillsListener extends AGListener 
 {
+	/** Metadata key used to identify entities who are already attached to the CustomSkillListener */
+	public final String customSkillTag = "ag-custom-skill";
 	/** A reference to the monster type interpreter defined in the main plugin class */
 	protected MonsterTypeInterpreter monsterInterpreter;
 	/** A reference to the damage display manager defined in the main class
@@ -375,6 +379,16 @@ public class CustomSkillsListener extends AGListener
 		}
 	}
 	
+	@EventHandler
+	public void handleCustomSkillInjection (InjectCustomGoalsToEntityEvent event)
+	{
+		Entity entity = event.getEntity();
+		if (entity != null && !entity.hasMetadata(this.customSkillTag))
+		{
+			this.loadCustomSkillsOntoEntity(entity);
+		}
+	}
+	
 	/** Filter's a skill caster's surrounding entities using the passed range into two categories,
 	 *  allies and enemies, based on the properties set in their respective MobEquipments or types.
 	 *  This function modifies the allies and entities lists that are passed by reference.
@@ -457,6 +471,7 @@ public class CustomSkillsListener extends AGListener
 	protected LivingEntity getLivingEntity (Entity source)
 	{
 		Entity entity = source;
+		
 		if (source instanceof Projectile)
 		{
 			Projectile projectile = (Projectile) source;
@@ -475,6 +490,7 @@ public class CustomSkillsListener extends AGListener
 			}
 		}
 		
+		Bukkit.getPluginManager().callEvent(new InjectCustomGoalsToEntityEvent (entity));
 		return (entity instanceof LivingEntity) ? (LivingEntity) entity : null;
 	}
 	
@@ -493,6 +509,7 @@ public class CustomSkillsListener extends AGListener
 				{
 					this.mobSkillRunner.attachSkillToEntity(livingEntity, task);
 				}
+				livingEntity.setMetadata(this.customSkillTag, new FixedMetadataValue (AGCraftPlugin.plugin, this.customSkillTag));
 			}
 		}
 	}

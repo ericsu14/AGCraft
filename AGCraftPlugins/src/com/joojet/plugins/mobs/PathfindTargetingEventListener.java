@@ -13,11 +13,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.EntityTransformEvent;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 import org.bukkit.event.entity.EntityTransformEvent.TransformReason;
 import org.bukkit.event.world.ChunkLoadEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
@@ -27,6 +29,7 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
+import com.joojet.plugins.mobs.event.InjectCustomGoalsToEntityEvent;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.metadata.IgnorePlayerMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
@@ -37,6 +40,8 @@ import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public class PathfindTargetingEventListener extends AGListener
 {
+	/** Key used to distinguish entities who have already been injected with pathfinding goals */
+	public final String pathfindingGoalKey = "ag-pathfinding-goals";
 	/** Search trie used to lookup custom monsters by name */
 	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	/** Stores a reference to the boss bar controller defined in main */
@@ -58,20 +63,8 @@ public class PathfindTargetingEventListener extends AGListener
 			@Override
 			public void processEntity(Entity entity) 
 			{
-				LivingEntity livingEntity;
-				MobEquipment entityEquipment;
-				if (entity != null && entity instanceof LivingEntity)
-				{
-					livingEntity = (LivingEntity) entity;
-					entityEquipment = monsterTypeInterpreter.getMobEquipmentFromEntity(livingEntity);
-					if (entityEquipment != null)
-					{
-						EquipmentTools.modifyBaseStats(livingEntity, entityEquipment);
-						EquipmentTools.modifyPathfindingTargets(livingEntity, entityEquipment);
-					}
-				}
+				injectPathfindingGoals (entity);
 			}
-			
 		};
 	}
 	
@@ -86,6 +79,18 @@ public class PathfindTargetingEventListener extends AGListener
 	public void onDisable() 
 	{
 		this.pathfinderWorker.cancel();
+	}
+	
+	/** Listens to any AI target event and propagates the entity in question to our custom mob goals handler
+	 *  if they are not loaded for them yet.  */
+	@EventHandler
+	public void onTargetChangeEvent (EntityTargetEvent targetEvent)
+	{
+		Entity entity = targetEvent.getEntity();
+		if (!entity.hasMetadata(pathfindingGoalKey))
+		{
+			Bukkit.getPluginManager().callEvent(new InjectCustomGoalsToEntityEvent (entity));
+		}
 	}
 	
 	/** Listens to AI target events and cancels targeting events if the custom mob is called
@@ -238,6 +243,36 @@ public class PathfindTargetingEventListener extends AGListener
 			else if (huntedEquipment != null)
 			{
 				hunter.setTarget(huntedEquipment.isAlliesOf(hunted, hunter, hunterEquipment) ? null : hunted);
+			}
+		}
+	}
+	
+	/** Captures inject custom goal events and injects pathfinding goals into the entity if haven't already  */
+	@EventHandler
+	public void handlePathfindingGoalInjection (InjectCustomGoalsToEntityEvent event)
+	{
+		Entity entity = event.getEntity();
+		if (entity != null && !entity.hasMetadata(this.pathfindingGoalKey))
+		{
+			this.injectPathfindingGoals(entity);
+		}
+	}
+	
+	/** Injects pathfinding goals into the entity if they do not exist
+	 *  @param entity Entity receiving pathfinding goals if it is a custom monster */
+	public void injectPathfindingGoals (Entity entity)
+	{
+		LivingEntity livingEntity;
+		MobEquipment entityEquipment;
+		if (entity != null && entity instanceof LivingEntity)
+		{
+			livingEntity = (LivingEntity) entity;
+			entityEquipment = monsterTypeInterpreter.getMobEquipmentFromEntity(livingEntity);
+			if (entityEquipment != null)
+			{
+				EquipmentTools.modifyBaseStats(livingEntity, entityEquipment);
+				EquipmentTools.modifyPathfindingTargets(livingEntity, entityEquipment);
+				livingEntity.setMetadata(this.pathfindingGoalKey, new FixedMetadataValue (AGCraftPlugin.plugin, this.pathfindingGoalKey));
 			}
 		}
 	}
