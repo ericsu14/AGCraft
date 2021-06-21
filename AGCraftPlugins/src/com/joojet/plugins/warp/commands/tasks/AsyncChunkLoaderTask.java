@@ -5,9 +5,11 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import org.bukkit.ChatColor;
-import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
@@ -16,6 +18,7 @@ import org.bukkit.entity.Player;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.asynctasks.response.DatabaseStatus;
+import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.agcraft.util.Pair;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.mobs.util.worker.ChunkData;
@@ -57,13 +60,10 @@ public class AsyncChunkLoaderTask extends AsyncTask<DatabaseStatus>
 				chunkData.add(currentChunkData);
 				
 				Pair <Integer, Integer> currentCoordinates = currentChunkData.getChunkCoordinates();
-				if (currentChunkLevel < this.renderDistance)
-				{
-					neighboringChunks.add(new ChunkData (currentCoordinates.getKey() + 1, currentCoordinates.getEntry(), world, currentChunkLevel + 1));
-					neighboringChunks.add(new ChunkData (currentCoordinates.getKey() - 1, currentCoordinates.getEntry(), world, currentChunkLevel + 1));
-					neighboringChunks.add(new ChunkData (currentCoordinates.getKey(), currentCoordinates.getEntry() + 1, world, currentChunkLevel + 1));
-					neighboringChunks.add(new ChunkData (currentCoordinates.getKey(), currentCoordinates.getEntry() - 1, world, currentChunkLevel + 1));
-				}
+				neighboringChunks.add(new ChunkData (currentCoordinates.getKey() + 1, currentCoordinates.getEntry(), world, currentChunkLevel + 1));
+				neighboringChunks.add(new ChunkData (currentCoordinates.getKey() - 1, currentCoordinates.getEntry(), world, currentChunkLevel + 1));
+				neighboringChunks.add(new ChunkData (currentCoordinates.getKey(), currentCoordinates.getEntry() + 1, world, currentChunkLevel + 1));
+				neighboringChunks.add(new ChunkData (currentCoordinates.getKey(), currentCoordinates.getEntry() - 1, world, currentChunkLevel + 1));
 			}
 		}
 		
@@ -75,15 +75,34 @@ public class AsyncChunkLoaderTask extends AsyncTask<DatabaseStatus>
 	{
 		HashSet <ChunkData> chunkData = this.getNearbyChunks( (int)Math.floor(this.teleportLocation.getX() / 16), 
 				(int) Math.floor(this.teleportLocation.getZ() / 16), this.teleportLocation.getWorld());
-		ForkJoinPool chunkLoader = new ForkJoinPool (Runtime.getRuntime().availableProcessors());
+		ExecutorService chunkWorkerPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+		for (ChunkData data : chunkData)
+		{
+			chunkWorkerPool.execute(new Runnable () {
 
-		try
-		{
-			chunkLoader.submit(() -> chunkData.parallelStream().forEach(data -> data.getChunk())).join();
+				@Override
+				public void run() {
+					data.getWorld().getChunkAtAsync(data.getChunkCoordinates().getKey(), data.getChunkCoordinates().getEntry());
+				}
+				
+			});
 		}
-		finally
+		chunkWorkerPool.shutdown();
+		boolean terminate = false;
+		try 
 		{
-			chunkLoader.shutdown();
+			terminate = chunkWorkerPool.awaitTermination(512, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) 
+		{
+			AGCraftPlugin.logger.warning("Unable to load all tasks");
+		}
+		finally 
+		{
+			if (!terminate)
+			{
+				chunkWorkerPool.shutdownNow();
+				AGCraftPlugin.logger.warning("Unable to load all chunks. Time limit exceeded.");
+			}
 		}
 		return new DatabaseStatus ("", true);
 	}
