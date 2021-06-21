@@ -1,21 +1,16 @@
 package com.joojet.plugins.warp.commands.tasks;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.asynctasks.response.DatabaseResponse;
-import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.warp.commands.Warp;
 import com.joojet.plugins.warp.database.LocationDatabaseManager;
-import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public class AsyncWarpPlayerTask extends AsyncTask<DatabaseResponse <Location>>
 {
@@ -94,44 +89,7 @@ public class AsyncWarpPlayerTask extends AsyncTask<DatabaseResponse <Location>>
 			return;
 		}
 		
-		List <Entity> ownedEntities = ScanEntities.ScanNearbyPlayerOwnedEntities(this.player, 40);
-		
-		// Teleports the player
-		this.player.teleport(location);
-		this.player.playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, 0.4f, 1f);
-		
-		// Teleports any player-owned entities to the player's current location as well
-		StringBuilder teleportedEntities = new StringBuilder ();
-		int index = 0;
-		for (Entity entity : ownedEntities)
-		{
-			entity.teleport(this.player.getLocation());
-			
-			// Appends an "and" to the last element of the string if there is more than one owned entity to teleport
-			if (index == ownedEntities.size() - 1 && ownedEntities.size() > 1)
-			{
-				teleportedEntities = new StringBuilder (teleportedEntities.substring(0, teleportedEntities.length() - 2));
-				teleportedEntities.append(ChatColor.GOLD);
-				teleportedEntities.append(" and ");
-			}
-			
-			teleportedEntities.append(ChatColor.AQUA);
-			teleportedEntities.append(entity.getName());
-			
-			// Appends a comma on the end of the string if there is more than one entity to teleport
-			if (index < ownedEntities.size() - 1)
-			{
-				teleportedEntities.append(", ");
-			}
-			
-			++index;
-		}
-		// Notifies the player that their owned entities are teleported with them.
-		if (!ownedEntities.isEmpty())
-		{
-			this.player.sendMessage(ChatColor.GOLD + "Teleported " + teleportedEntities.toString() + ChatColor.GOLD + " to your location. Please rejoin the server if they are invisible.");
-		}
-		this.player.sendMessage(ChatColor.GOLD + "Teleported you to location " + ChatColor.AQUA + this.locationName + ChatColor.GOLD + " at " + GetCoordinates.getCoordinates(this.player));
+		new AsyncChunkLoaderTask (this.player, this.locationName, location, 10).runAsyncTask();
 	}
 
 }

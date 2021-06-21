@@ -15,13 +15,26 @@ public class ChunkData
 	protected Pair <Integer, Integer> coordinates;
 	/** Forces the worker queue to check the chunk at a delayed rate */
 	protected boolean isDelayed;
+	/** Used to track current depth of BFS search */
+	protected int currentLevel;
 	
-	/** Wraps a chunk instance allowing the worker queue to delay its processing */
+	/** Constructs a new ChunkData class using the properties of an existing chunk */
 	public ChunkData (Chunk chunk)
 	{
 		this.world = chunk.getWorld();
 		this.coordinates = new Pair <Integer, Integer> (chunk.getX(), chunk.getZ());
 		this.isDelayed = false;
+		this.currentLevel = 0;
+	}
+	
+	/** Constructs a new ChunkData class using known <X,Z> chunk coordinate values including its
+	 *  own environment  */
+	public ChunkData (int x, int z, World world, int currentLevel)
+	{
+		this.world = world;
+		this.coordinates = new Pair <Integer, Integer> (x, z);
+		this.isDelayed = false;
+		this.currentLevel = currentLevel;
 	}
 	
 	/** Checks if the chunk data can be read on this current wave and marks it as readable
@@ -34,6 +47,11 @@ public class ChunkData
 			this.isDelayed = true;
 		}
 		return result;
+	}
+	
+	public int getCurrentLevel ()
+	{
+		return this.currentLevel;
 	}
 	
 	/** Calls the chunk's world to access the chunk at its given coordinates */
@@ -79,8 +97,8 @@ public class ChunkData
 			ChunkData otherChunk = (ChunkData) obj;
 			Pair <Integer, Integer> otherCoordinates = otherChunk.getChunkCoordinates();
 			
-			return (this.coordinates.getKey() == otherCoordinates.getKey() 
-					&& this.coordinates.getEntry() == otherCoordinates.getEntry()
+			return (this.coordinates.getKey().equals(otherCoordinates.getKey())
+					&& this.coordinates.getEntry().equals(otherCoordinates.getEntry())
 					&& this.world.getEnvironment() == otherChunk.getWorld().getEnvironment());
 		}
 		return false;
