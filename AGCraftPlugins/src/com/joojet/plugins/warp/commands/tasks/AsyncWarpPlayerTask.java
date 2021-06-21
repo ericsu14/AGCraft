@@ -89,7 +89,7 @@ public class AsyncWarpPlayerTask extends AsyncTask<DatabaseResponse <Location>>
 			return;
 		}
 		
-		new AsyncChunkLoaderTask (this.player, this.locationName, location, 10).runAsyncTask();
+		new AsyncChunkLoaderTask (this.player, this.locationName, location, 12).runAsyncTask();
 	}
 
 }

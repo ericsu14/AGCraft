@@ -5,8 +5,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.stream.Collectors;
-
+import java.util.concurrent.ForkJoinPool;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -16,13 +15,14 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
+import com.joojet.plugins.agcraft.asynctasks.response.DatabaseStatus;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.agcraft.util.Pair;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.mobs.util.worker.ChunkData;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
-public class AsyncChunkLoaderTask extends AsyncTask<List <Chunk>> 
+public class AsyncChunkLoaderTask extends AsyncTask<DatabaseStatus> 
 {
 	/** Player being teleported */
 	protected Player player;
@@ -72,21 +72,27 @@ public class AsyncChunkLoaderTask extends AsyncTask<List <Chunk>>
 	}
 	
 	@Override
-	protected List<Chunk> getAsyncData() throws SQLException 
+	protected DatabaseStatus getAsyncData() throws SQLException 
 	{
 		Chunk origin = this.teleportLocation.getChunk();
 		HashSet <ChunkData> chunkData = this.getNearbyChunks(origin.getX(), origin.getZ(), origin.getWorld());
 		
 		AGCraftPlugin.logger.info("Found " + chunkData.size() + " nearby chunks with a search radius of " + this.renderDistance);
-		// TODO: Find a better way to parallelize this
-		return chunkData.parallelStream().map((c) -> c.getChunk()).collect(Collectors.toList());
+		ForkJoinPool chunkLoader = new ForkJoinPool (Runtime.getRuntime().availableProcessors());
+		try
+		{
+			chunkLoader.submit(() -> chunkData.parallelStream().forEach(data -> data.getChunk()));
+		}
+		finally
+		{
+			chunkLoader.shutdown();
+		}
+		return new DatabaseStatus ("", true);
 	}
 
 	@Override
-	protected void handlePromise(List<Chunk> data) 
+	protected void handlePromise(DatabaseStatus data) 
 	{
-		AGCraftPlugin.logger.info("Pre-loaded " + data.size() + " chunks while warping to " + locationName);
-		
 		List <Entity> ownedEntities = ScanEntities.ScanNearbyPlayerOwnedEntities(player, 40);
 		
 		// Teleports the player
