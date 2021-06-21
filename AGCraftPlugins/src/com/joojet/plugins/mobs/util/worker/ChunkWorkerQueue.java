@@ -1,6 +1,5 @@
 package com.joojet.plugins.mobs.util.worker;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,7 +9,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
+import com.joojet.plugins.agcraft.util.Pair;
 
 /** An abstract worker pool module used to queue chunks loaded into and out of the game, 
  *  so that all entities stored on those chunks can be processed at a later time.
@@ -44,34 +43,20 @@ public abstract class ChunkWorkerQueue extends BukkitRunnable
 			ChunkData chunkData = chunkQueue.get(i);
 			if (chunkData.canReadChunk())
 			{	
-				new AsyncTask <Chunk> () 
-				{
-					/** Offloads delayed chunk loading to an async thread, since chunk loading is
-					 *  done asynchronously in 1.17 */
-					@Override
-					protected Chunk getAsyncData() throws SQLException 
+				Pair <Integer, Integer> chunkDataLocation = chunkData.getChunkCoordinates();
+				/** Offloads delayed chunk loading to an async thread, since chunk loading is
+				 *  done asynchronously in 1.17 */
+				chunkData.getWorld().getChunkAtAsync(chunkDataLocation.getKey(), chunkDataLocation.getEntry()).thenAccept(chunk -> {
+					if (chunk != null)
 					{
-						return chunkData.getChunk();
-					}
-					
-					/** Handles the fully loaded chunk after the delay has been served
-					 *  with the provided method
-					 *  @param processedChunk Chunk that is fully loaded from the current instance
-					 *         of the world */
-					@Override
-					protected void handlePromise(Chunk processedChunk) 
-					{
-						if (processedChunk != null)
+						Entity[] chunkEntities = chunk.getEntities();
+						
+						for (Entity entity : chunkEntities)
 						{
-							Entity [] chunkEntities = processedChunk.getEntities();
-							for (Entity entity : chunkEntities)
-							{
-								processEntity (entity);
-							}
+							processEntity (entity);
 						}
 					}
-					
-				}.runAsyncTask();
+				});
 				finishedChunks.add(chunkData);
 			}
 		}
