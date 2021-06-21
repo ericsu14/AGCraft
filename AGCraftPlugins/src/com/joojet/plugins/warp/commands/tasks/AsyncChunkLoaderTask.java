@@ -16,7 +16,6 @@ import org.bukkit.entity.Player;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.asynctasks.response.DatabaseStatus;
-import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.agcraft.util.Pair;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
 import com.joojet.plugins.mobs.util.worker.ChunkData;
@@ -74,14 +73,13 @@ public class AsyncChunkLoaderTask extends AsyncTask<DatabaseStatus>
 	@Override
 	protected DatabaseStatus getAsyncData() throws SQLException 
 	{
-		Chunk origin = this.teleportLocation.getChunk();
-		HashSet <ChunkData> chunkData = this.getNearbyChunks(origin.getX(), origin.getZ(), origin.getWorld());
-		
-		AGCraftPlugin.logger.info("Found " + chunkData.size() + " nearby chunks with a search radius of " + this.renderDistance);
+		HashSet <ChunkData> chunkData = this.getNearbyChunks( (int)Math.floor(this.teleportLocation.getX() / 16), 
+				(int) Math.floor(this.teleportLocation.getZ() / 16), this.teleportLocation.getWorld());
 		ForkJoinPool chunkLoader = new ForkJoinPool (Runtime.getRuntime().availableProcessors());
+
 		try
 		{
-			chunkLoader.submit(() -> chunkData.parallelStream().forEach(data -> data.getChunk()));
+			chunkLoader.submit(() -> chunkData.parallelStream().forEach(data -> data.getChunk())).join();
 		}
 		finally
 		{
