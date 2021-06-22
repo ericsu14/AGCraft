@@ -68,11 +68,11 @@ public class Warp extends AGCommandExecutor
 			if ((p.getFireTicks() > 0 && !p.hasPotionEffect(PotionEffectType.FIRE_RESISTANCE))
 					|| p.getHealth() < healthThreshold)
 			{
-				new AsyncEWarpCheckerTask (p, locName).runAsyncTask();;
+				new AsyncEWarpCheckerTask (p, locName).runAsyncTask();
 			}
 			else
 			{
-				new AsyncWarpPlayerTask (p, locName).runAsyncTask();;
+				new AsyncWarpPlayerTask (p, locName).runAsyncTask();
 			}
 			return true;
 		}

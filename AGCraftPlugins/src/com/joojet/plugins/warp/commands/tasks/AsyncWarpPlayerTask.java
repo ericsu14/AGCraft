@@ -31,7 +31,7 @@ public class AsyncWarpPlayerTask extends AsyncTask<DatabaseResponse <Location>>
 	
 	public AsyncWarpPlayerTask (Player player, String locationName)
 	{
-		this.playerBedSpawnLocation = player.getBedSpawnLocation();
+		this.playerBedSpawnLocation = player.getBedSpawnLocation().clone();
 		this.player = player;
 		this.playerUUID = player.getUniqueId();
 		this.locationName = locationName;
