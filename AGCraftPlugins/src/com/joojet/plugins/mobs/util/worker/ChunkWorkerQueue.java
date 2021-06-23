@@ -44,40 +44,50 @@ public abstract class ChunkWorkerQueue extends BukkitRunnable
 			ChunkData chunkData = chunkQueue.get(i);
 			if (chunkData.canReadChunk())
 			{	
-				new AsyncTask <Chunk> () 
-				{
-					/** Offloads delayed chunk loading to an async thread, since chunk loading is
-					 *  done asynchronously in 1.17 */
-					@Override
-					protected Chunk getAsyncData() throws SQLException 
-					{
-						return chunkData.getChunk();
-					}
-					
-					/** Handles the fully loaded chunk after the delay has been served
-					 *  with the provided method
-					 *  @param processedChunk Chunk that is fully loaded from the current instance
-					 *         of the world */
-					@Override
-					protected void handlePromise(Chunk processedChunk) 
-					{
-						if (processedChunk != null)
-						{
-							Entity [] chunkEntities = processedChunk.getEntities();
-							for (Entity entity : chunkEntities)
-							{
-								processEntity (entity);
-							}
-						}
-					}
-					
-				}.runAsyncTask();
 				finishedChunks.add(chunkData);
 			}
 		}
 		
-		this.chunkQueue.removeAll(finishedChunks);
-		this.duplicateChunkDataChecker.removeAll(finishedChunks);
+		if (!finishedChunks.isEmpty())
+		{
+			this.chunkQueue.removeAll(finishedChunks);
+			this.duplicateChunkDataChecker.removeAll(finishedChunks);
+			
+			new AsyncTask <List <Chunk>> ()
+			{
+				/** Offloads delayed chunk loading to an async thread, since chunk loading is
+				 *  done asynchronously in 1.17 */
+				@Override
+				protected List<Chunk> getAsyncData() throws SQLException 
+				{
+					List <Chunk> loadedChunks = new ArrayList <Chunk> ();
+					
+					for (ChunkData finishedChunk : finishedChunks)
+					{
+						loadedChunks.add(finishedChunk.getChunk());
+					}
+					return loadedChunks;
+				}
+				
+				/** Handles the fully loaded chunk after the delay has been served
+				 *  with the provided method
+				 *  @param processedChunk Chunk that is fully loaded from the current instance
+				 *         of the world */
+				@Override
+				protected void handlePromise(List<Chunk> data) 
+				{
+					for (Chunk chunk : data)
+					{
+						Entity[] chunkEntities = chunk.getEntities();
+						for (Entity entity : chunkEntities)
+						{
+							processEntity (entity);
+						}
+					}
+				}
+				
+			}.runAsyncTask();
+		}
 	}
 	
 	/** Enqueues all loaded chunks from a list of active worlds

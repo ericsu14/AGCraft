@@ -30,6 +30,7 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.interpreter.DamageDisplayModeInterpreter;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.util.worker.ChunkWorkerQueue;
 
 public class DamageDisplayListener extends AGListener 
 {
@@ -45,6 +46,8 @@ public class DamageDisplayListener extends AGListener
 	protected DamageDisplayModeInterpreter damageDisplayModeInterpreter;
 	/** Damage display mode */
 	protected DamageDisplayMode damageDisplayMode;
+	/** Chunk worker queue used to remove damage display entities upon chunk loads */
+	protected ChunkWorkerQueue damageDisplayRemover;
 	
 	public DamageDisplayListener (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
@@ -54,12 +57,32 @@ public class DamageDisplayListener extends AGListener
 		this.allowedRegainReasons = EnumSet.of(RegainReason.CUSTOM, RegainReason.MAGIC, RegainReason.MAGIC_REGEN, 
 				RegainReason.WITHER, RegainReason.ENDER_CRYSTAL);
 		this.damageDisplayModeInterpreter = new DamageDisplayModeInterpreter ();
+		this.damageDisplayRemover = new ChunkWorkerQueue ()
+		{
+			/** Deattaches a damage display armor stand from runtime and removes it from existance */
+			@Override
+			public void processEntity(Entity entity) 
+			{
+				if (entity != null && entity.getType() == EntityType.ARMOR_STAND)
+				{
+					MobEquipment equipment = monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) entity);
+					if (equipment != null && equipment.getMonsterType() == MonsterType.DAMAGE_DISPLAY_ENTITY)
+					{
+						damageDisplayManager.removeDamageDisplayEntity(entity.getUniqueId());
+						if (!entity.isDead())
+						{
+							entity.remove();
+						}
+					}
+				}
+			}
+		};
 	}
 	
 	@Override
 	public void onEnable ()
 	{
-
+		this.damageDisplayRemover.runTaskTimer(AGCraftPlugin.plugin, 20, 10);
 	}
 	
 	@Override
@@ -187,18 +210,7 @@ public class DamageDisplayListener extends AGListener
 	{
 		for (Entity entity : entityList)
 		{
-			if (entity != null && entity.getType() == EntityType.ARMOR_STAND)
-			{
-				MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) entity);
-				if (equipment != null && equipment.getMonsterType() == MonsterType.DAMAGE_DISPLAY_ENTITY)
-				{
-					this.damageDisplayManager.removeDamageDisplayEntity(entity.getUniqueId());
-					if (!entity.isDead())
-					{
-						entity.remove();
-					}
-				}
-			}
+			this.damageDisplayRemover.processEntity(entity);
 		}
 	}
 	
@@ -206,7 +218,7 @@ public class DamageDisplayListener extends AGListener
 	@EventHandler (priority = EventPriority.LOWEST)
 	public void onChunkLoad (ChunkLoadEvent chunkLoadEvent)
 	{
-		this.removeDamageDisplayEntities(chunkLoadEvent.getChunk().getEntities());
+		this.damageDisplayRemover.enqueue(chunkLoadEvent.getChunk());
 	}
 	
 	/** Attempt to remove all damage display entities upon chunk unloading */

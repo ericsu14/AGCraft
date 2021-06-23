@@ -1,17 +1,14 @@
 package com.joojet.plugins.mobs;
 
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityResurrectEvent;
-import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
@@ -19,7 +16,6 @@ import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
-import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
@@ -88,27 +84,6 @@ public class BossBarEventListener extends AGListener
 		if (event.getEntity() instanceof LivingEntity && !event.isCancelled())
 		{
 			this.bossBarController.createBossBar((LivingEntity) event.getEntity());
-		}
-	}
-	
-	/** Recreates custom boss bars upon chunk load events */
-	@EventHandler(priority = EventPriority.NORMAL)
-	public void createBossBarsOnChunkLoad (ChunkLoadEvent event)
-	{
-		Entity[] chunkEntities = event.getChunk().getEntities();
-		LivingEntity livingEntity;
-		
-		for (Entity ent : chunkEntities)
-		{
-			if (ent instanceof LivingEntity && ent.getType() != EntityType.PLAYER)
-			{
-				livingEntity = (LivingEntity) ent;
-				MobEquipment equipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity(livingEntity);
-				if (equipment != null && equipment.containsFlag(MobFlag.BOSS_BAR))
-				{
-					this.bossBarController.createBossBar(livingEntity);
-				}
-			}
 		}
 	}
 	

@@ -77,7 +77,7 @@ public class CustomSkillsListener extends AGListener
 		this.damageDisplayListener = damageDisplayListener;
 		this.bossBarController = bossBarController;
 		this.mobSkillRunner = mobSkillRunner;
-		this.asyncLoadChunkDelay = 20;
+		this.asyncLoadChunkDelay = 10;
 		this.rand = new Random ();
 		this.customSkillWorker = new ChunkWorkerQueue () 
 		{

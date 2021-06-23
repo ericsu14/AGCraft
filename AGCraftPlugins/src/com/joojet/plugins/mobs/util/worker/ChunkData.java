@@ -41,11 +41,8 @@ public class ChunkData
 	 *  if it is not already yet. */
 	public boolean canReadChunk ()
 	{
-		boolean result = this.isDelayed;
-		if (this.world.isChunkLoaded(this.coordinates.getKey(), this.coordinates.getEntry()))
-		{
-			this.isDelayed = true;
-		}
+		boolean result = this.isDelayed && this.world.isChunkLoaded(this.coordinates.getKey(), this.coordinates.getEntry());
+		this.isDelayed = true;
 		return result;
 	}
 	
