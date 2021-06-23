@@ -17,6 +17,7 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.SelfHealSkill;
 import com.joojet.plugins.mobs.skills.passive.IcySnowballSkill;
+import com.joojet.plugins.mobs.skills.passive.MonsterWeaknessSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 
 public class Scruffy extends AlliedMob implements CustomSkillUser
@@ -29,7 +30,7 @@ public class Scruffy extends AlliedMob implements CustomSkillUser
 		this.setStat(MonsterStat.HEALTH, 40.0);
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.DISABLE_DROWNING, 
 				MobFlag.DISABLE_MELTING);
-		this.addEntitiesToIgnoreList(EntityType.CREEPER);
+		this.addTargetsToHitList(EntityType.CREEPER);
 		
 		this.addPotionEffect(CustomPotionEffect.RESISTANCE, CustomPotionEffect.WATER_BREATHING,
 				CustomPotionEffect.FIRE_RESISTANCE, CustomPotionEffect.REGEN, CustomPotionEffect.SPEED);
@@ -47,6 +48,7 @@ public class Scruffy extends AlliedMob implements CustomSkillUser
 		skills.add(new SelfHealSkill (2, 30, 8, 0.50));
 		skills.add(new TeleportSkill (64, 60, Integer.MAX_VALUE, 1));
 		skills.add(new IcySnowballSkill (1.00, 12.0));
+		skills.add(new MonsterWeaknessSkill (1.50, EntityType.CREEPER));
 	}
 		
 }

@@ -16,6 +16,7 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.buff.SelfHealSkill;
 import com.joojet.plugins.mobs.skills.passive.IcySnowballSkill;
+import com.joojet.plugins.mobs.skills.passive.MonsterWeaknessSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 
 public class Frosty extends AlliedMob implements CustomSkillUser
@@ -28,7 +29,7 @@ public class Frosty extends AlliedMob implements CustomSkillUser
 		this.setStat(MonsterStat.HEALTH, 30.0);
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.DISABLE_DROWNING, 
 				MobFlag.DISABLE_MELTING);
-		this.addEntitiesToIgnoreList(EntityType.CREEPER);
+		this.addTargetsToHitList(EntityType.CREEPER);
 		
 		this.addPotionEffect(CustomPotionEffect.RESISTANCE, 
 				CustomPotionEffect.WATER_BREATHING, 
@@ -45,5 +46,6 @@ public class Frosty extends AlliedMob implements CustomSkillUser
 		skills.add(new SelfHealSkill (1, 30, 1, 0.40));
 		skills.add(new TeleportSkill (64, 60, Integer.MAX_VALUE, 1));
 		skills.add(new IcySnowballSkill (1.00, 8.0));
+		skills.add(new MonsterWeaknessSkill (2.50, EntityType.CREEPER));
 	}
 }

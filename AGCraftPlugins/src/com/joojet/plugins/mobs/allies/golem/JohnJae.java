@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.allies.golem;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.mobs.allies.factions.AlliedMob;
 import com.joojet.plugins.mobs.enums.CustomPotionEffect;
@@ -15,6 +16,7 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.anvil.AnvilDropSkill;
 import com.joojet.plugins.mobs.skills.attack.anvil.AnvilThrowSkill;
 import com.joojet.plugins.mobs.skills.buff.SelfHealSkill;
+import com.joojet.plugins.mobs.skills.passive.MonsterWeaknessSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 
 public class JohnJae extends AlliedMob implements CustomSkillUser
@@ -26,6 +28,7 @@ public class JohnJae extends AlliedMob implements CustomSkillUser
 		this.color = ChatColor.GOLD;
 		this.addMobFlags(MobFlag.SHOW_NAME);
 		this.setStat(MonsterStat.HEALTH, 250.0);
+		this.addTargetsToHitList(EntityType.CREEPER);
 		
 		this.addPotionEffect(CustomPotionEffect.RESISTANCE_II, 
 				CustomPotionEffect.REGEN, 
@@ -45,5 +48,6 @@ public class JohnJae extends AlliedMob implements CustomSkillUser
 		skills.add(new AnvilThrowSkill (30, 25, 8, 2.0f, 3));
 		skills.add(new SelfHealSkill (4, 60, 4, 0.45));
 		skills.add(new TeleportSkill (64, 60, Integer.MAX_VALUE, 2));
+		skills.add(new MonsterWeaknessSkill (0.80, EntityType.CREEPER, EntityType.PHANTOM));
 	}
 }
