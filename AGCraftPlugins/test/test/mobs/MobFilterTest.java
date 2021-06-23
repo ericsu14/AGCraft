@@ -1,7 +1,5 @@
 package test.mobs;
 
-import static org.mockito.Mockito.mockitoSession;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +42,6 @@ public class MobFilterTest
 	@Test
 	public void testMockEntityCreation ()
 	{
-		
 		SimpleUSCTestMob uscEquipment = new SimpleUSCTestMob ();
 		LivingEntity entity = this.createMockLivingEntity(EntityType.ZOMBIE, uscEquipment, new ArrayList <Entity> ());
 		
