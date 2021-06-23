@@ -87,7 +87,9 @@ public class PathfindTargetingEventListener extends AGListener
 	public void onTargetChangeEvent (EntityTargetEvent targetEvent)
 	{
 		Entity entity = targetEvent.getEntity();
-		if (!entity.hasMetadata(pathfindingGoalKey))
+		if (entity instanceof LivingEntity && 
+				!entity.hasMetadata(pathfindingGoalKey)
+				&& this.monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) entity) != null)
 		{
 			Bukkit.getPluginManager().callEvent(new InjectCustomGoalsToEntityEvent (entity));
 		}
