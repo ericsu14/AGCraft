@@ -1,4 +1,4 @@
-package tests;
+package test.formatter;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
@@ -13,7 +13,7 @@ import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.biblefetcher.string.ContentParser;
 
-class TestFunctions {
+class TestBookFormatFunctions {
 
 	
 	/** Tests the format content function, which should split up long passages into multiple 253 character chunks should

@@ -1,4 +1,4 @@
-package mobs.test_mobs;
+package test.mobs.test_mobs;
 
 import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MobFlag;

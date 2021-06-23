@@ -61,12 +61,12 @@ public class TrieNode <T>
 	public T getValue (String searchTerm)
 	{
 		T result = null;
-		int currentCount = -1;
+		int currentCount = Integer.MIN_VALUE;
 		
 		for (Entry<T, Integer> entry : this.linkedValues.entrySet())
 		{	
 			/* Check if length of searchTerm matches length of formatted title */
-			if (entry.getKey().toString().equalsIgnoreCase(searchTerm))
+			if (this.linkedValues.entrySet().size() == 1 || entry.getKey().toString().equalsIgnoreCase(searchTerm))
 			{
 				return entry.getKey();
 			}

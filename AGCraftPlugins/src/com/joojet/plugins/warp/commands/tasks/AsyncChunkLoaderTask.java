@@ -66,7 +66,6 @@ public class AsyncChunkLoaderTask extends AsyncTask<DatabaseStatus>
 				neighboringChunks.add(new ChunkData (currentCoordinates.getKey(), currentCoordinates.getEntry() - 1, world, currentChunkLevel + 1));
 			}
 		}
-		
 		return chunkData;
 	}
 	

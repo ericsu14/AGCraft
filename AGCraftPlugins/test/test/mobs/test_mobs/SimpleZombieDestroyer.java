@@ -1,4 +1,4 @@
-package mobs.test_mobs;
+package test.mobs.test_mobs;
 
 import org.bukkit.entity.EntityType;
 

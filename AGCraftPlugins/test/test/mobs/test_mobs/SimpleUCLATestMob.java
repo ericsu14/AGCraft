@@ -1,4 +1,4 @@
-package mobs.test_mobs;
+package test.mobs.test_mobs;
 
 import org.bukkit.entity.EntityType;
 
@@ -7,15 +7,13 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
 /** A simple USC mob who is part of the USC faction and rivals with the UCLA faction */
-public class SimpleUSCTestMob extends MobEquipment
+public class SimpleUCLATestMob extends MobEquipment 
 {
-
-	public SimpleUSCTestMob() 
+	public SimpleUCLATestMob() 
 	{
-		super(MonsterType.HG_USC_WARRIOR);
-		this.addFactions(Faction.USC);
-		this.addRivalFactions(Faction.UCLA);
-		this.addEntitiesToIgnoreList(EntityType.PLAYER, EntityType.IRON_GOLEM);
+		super(MonsterType.HG_UCLA_JOCK);
+		this.addFactions(Faction.UCLA);
+		this.addRivalFactions(Faction.USC);
 		
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.SKELETON);
 	}

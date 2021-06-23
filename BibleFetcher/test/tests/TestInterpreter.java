@@ -84,6 +84,11 @@ class TestInterpreter
 		testBookInput ("revalations", BookID.REV);
 		testBookInput ("revelation", BookID.REV);
 		testBookInput ("revaleations", BookID.REV);
+		testBookInput ("mar", BookID.MRK);
+		testBookInput ("re", BookID.REV);
+		testBookInput ("o", BookID.OBA);
+		testBookInput ("john1ey", BookID.JN1);
+		testBookInput ("jobe", BookID.JOB);
 		// TODO: The rest
 	}
 	

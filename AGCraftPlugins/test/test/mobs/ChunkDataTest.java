@@ -1,4 +1,4 @@
-package mobs;
+package test.mobs;
 
 import java.util.HashSet;
 

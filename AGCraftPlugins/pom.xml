@@ -25,6 +25,9 @@
 	    <url>https://papermc.io/repo/repository/maven-public/</url>
 	</repository>
   </repositories>
+  <properties>
+    <powermock.version>2.0.2</powermock.version>
+  </properties>
   <dependencies>
 	<dependency>
 	    <groupId>org.yaml</groupId>
@@ -53,5 +56,24 @@
     	<artifactId>mockito-core</artifactId>
     	<version>2.21.0</version>
 	</dependency>
+		<!-- PowerMock TestNG Module -->
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-testng</artifactId>
+			<version>${powermock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- PowerMock JUnit 4.4+ Module -->
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<version>${powermock.version}</version>
+		</dependency>
+		<!-- PowerMock Mockito2 API -->
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito2</artifactId>
+			<version>${powermock.version}</version>
+		</dependency>
   </dependencies>
 </project>

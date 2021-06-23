@@ -1,13 +1,13 @@
-package mobs;
+package test.mobs;
 
 import org.bukkit.entity.EntityType;
 import org.junit.Test;
 
-import mobs.test_mobs.IgnoreNonFactionedTestMob;
-import mobs.test_mobs.SimpleNeutralTestMob;
-import mobs.test_mobs.SimpleUCLATestMob;
-import mobs.test_mobs.SimpleUSCTestMob;
-import mobs.test_mobs.SimpleZombieDestroyer;
+import test.mobs.test_mobs.IgnoreNonFactionedTestMob;
+import test.mobs.test_mobs.SimpleNeutralTestMob;
+import test.mobs.test_mobs.SimpleUCLATestMob;
+import test.mobs.test_mobs.SimpleUSCTestMob;
+import test.mobs.test_mobs.SimpleZombieDestroyer;
 
 public class IsAlliesTest 
 {
@@ -176,6 +176,8 @@ public class IsAlliesTest
 		// Test vanilla mobs with the same procedures
 		assert (stanfordMob.isAlliesOf(EntityType.ZOMBIE, EntityType.SKELETON, null));
 		assert (stanfordMob.isAlliesOf(EntityType.SKELETON, EntityType.CAVE_SPIDER, null));
+		
+		assert (stanfordMob.isAlliesOf(EntityType.ZOMBIE, EntityType.ARMOR_STAND, neutralMob));
 	}
 	
 	/** Tests to see if factioned mobs with the IGNORE_NON_FACTIONED_ENTITIES flag enabled will still target players, since they cannot
