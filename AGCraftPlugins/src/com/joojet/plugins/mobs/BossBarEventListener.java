@@ -10,15 +10,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityResurrectEvent;
-import org.bukkit.event.world.ChunkUnloadEvent;
 
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
+import com.joojet.plugins.mobs.chunk.interfaces.ChunkUnloadHandler;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
-public class BossBarEventListener implements Listener
+public class BossBarEventListener implements Listener, ChunkUnloadHandler
 {
 	/** A reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
@@ -80,24 +80,6 @@ public class BossBarEventListener implements Listener
 		}
 	}
 	
-	/** Removes active custom boss bars on captured chunk unload events */
-	@EventHandler 
-	public void removeBossBarsOnChunkUnload (ChunkUnloadEvent event)
-	{
-		Entity[] chunkEntities = event.getChunk().getEntities();
-		
-		LivingEntity livingEntity;
-		
-		for (Entity ent : chunkEntities)
-		{
-			if (ent instanceof LivingEntity)
-			{
-				livingEntity = (LivingEntity) ent;
-				this.bossBarController.removeBossBar(livingEntity);
-			}
-		}
-	}
-	
 	/** Removes an entity's boss bar upon entity death */
 	@EventHandler
 	public void onEntityDeath (EntityDeathEvent event)
@@ -106,6 +88,18 @@ public class BossBarEventListener implements Listener
 		{
 			LivingEntity entity = (LivingEntity) event.getEntity();
 			this.bossBarController.removeBossBar(entity);
+		}
+	}
+	
+	/** Removes active custom boss bars on captured chunk unload events
+	 * 	@param entity Entity being checked for boss bars */
+	@Override
+	public void processEntityOnChunkUnload(Entity entity) 
+	{
+		if (entity instanceof LivingEntity)
+		{
+			LivingEntity livingEntity = (LivingEntity) entity;
+			this.bossBarController.removeBossBar(livingEntity);
 		}
 	}
 }

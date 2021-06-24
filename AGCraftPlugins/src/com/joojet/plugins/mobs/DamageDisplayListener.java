@@ -16,7 +16,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
-import org.bukkit.event.world.ChunkUnloadEvent;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
@@ -25,6 +24,7 @@ import com.joojet.plugins.agcraft.interfaces.ServerConfigLoader;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.chunk.interfaces.ChunkEntityHandler;
+import com.joojet.plugins.mobs.chunk.interfaces.ChunkUnloadHandler;
 import com.joojet.plugins.mobs.damage.DamageDisplayManager;
 import com.joojet.plugins.mobs.damage.enums.DamageType;
 import com.joojet.plugins.mobs.enums.DamageDisplayMode;
@@ -33,7 +33,7 @@ import com.joojet.plugins.mobs.interpreter.DamageDisplayModeInterpreter;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
-public class DamageDisplayListener implements AGListener, Listener, ServerConfigLoader, ChunkEntityHandler
+public class DamageDisplayListener implements AGListener, Listener, ServerConfigLoader, ChunkEntityHandler, ChunkUnloadHandler
 {
 	/** Stores a reference to the damage display manager used to spawn in armorstand entities */
 	protected DamageDisplayManager damageDisplayManager;
@@ -183,23 +183,6 @@ public class DamageDisplayListener implements AGListener, Listener, ServerConfig
 		this.damageDisplayManager.createDamageDisplayonEntity(event.getEntity(), DamageType.HEALING, event.getAmount());
 	}
 	
-	/** Removes all unremoved damage display entities from the passed list of entities
-	 * 	@param entityList - List of entities captured by chunk data. */
-	public void removeDamageDisplayEntities (Entity[] entityList)
-	{
-		for (Entity entity : entityList)
-		{
-			this.processEntityOnChunkLoad(entity);
-		}
-	}
-	
-	/** Attempt to remove all damage display entities upon chunk unloading */
-	@EventHandler (priority = EventPriority.LOWEST)
-	public void onChunkUnload (ChunkUnloadEvent chunkUnloadEvent)
-	{
-		this.removeDamageDisplayEntities(chunkUnloadEvent.getChunk().getEntities());
-	}
-	
 	/** Returns true if the damage display module is enabled */
 	public boolean checkDamageDisplayModuleIsEnabled ()
 	{
@@ -310,5 +293,11 @@ public class DamageDisplayListener implements AGListener, Listener, ServerConfig
 				}
 			}
 		}
+	}
+
+	@Override
+	public void processEntityOnChunkUnload(Entity entity) 
+	{
+		this.processEntityOnChunkLoad(entity);
 	}
 }

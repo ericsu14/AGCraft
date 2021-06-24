@@ -12,11 +12,13 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.ChunkLoadEvent;
+import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.mobs.chunk.interfaces.ChunkEntityHandler;
+import com.joojet.plugins.mobs.chunk.interfaces.ChunkUnloadHandler;
 
 /** An abstract worker pool module used to queue chunks loaded into and out of the game, 
  *  so that all entities stored on those chunks can be processed at a later time.
@@ -33,6 +35,9 @@ public class ChunkWorkerQueue extends BukkitRunnable implements Listener, AGList
 	/** A list of classes that implemented the ChunkEntityHandler interface, allowing those
 	 *  classes to process recent chunk-loaded entities */
 	protected List <ChunkEntityHandler> chunkEntityHandlers;
+	/** A list of classes that implemented the ChunkUnloadHandler interface, allowing those
+	 *  classes to process recent chunk-unloaded entities */
+	protected List <ChunkUnloadHandler> chunkUnloadHandlers;
 	
 	/** Creates a new instance of a chunk worker queue, allowing chunks to be safely loaded into the queue
 	 *  and have all entities within that chunk to be processed on a timer.
@@ -43,6 +48,7 @@ public class ChunkWorkerQueue extends BukkitRunnable implements Listener, AGList
 		this.chunkQueue = new ArrayList <ChunkData> ();
 		this.duplicateChunkDataChecker = new HashSet <ChunkData> ();
 		this.chunkEntityHandlers = new ArrayList <ChunkEntityHandler> ();
+		this.chunkUnloadHandlers = new ArrayList <ChunkUnloadHandler> ();
 	}
 	
 	@Override
@@ -110,6 +116,21 @@ public class ChunkWorkerQueue extends BukkitRunnable implements Listener, AGList
 		this.enqueue(chunkLoadEvent.getChunk());
 	}
 	
+	/** Listens to chunk unload events and processes the entities found within those events */
+	@EventHandler 
+	public void onChunkUnload (ChunkUnloadEvent chunkUnloadEvent)
+	{
+		Entity [] chunkEntities = chunkUnloadEvent.getChunk().getEntities();
+		
+		for (Entity entity : chunkEntities)
+		{
+			for (ChunkUnloadHandler handler : this.chunkUnloadHandlers)
+			{
+				handler.processEntityOnChunkUnload(entity);
+			}
+		}
+	}
+	
 	/** Enqueues all loaded chunks from a list of active worlds
 	 *  @param worlds A collection of worlds */
 	public void loadSpawnChunks (List <World> worlds)
@@ -129,6 +150,12 @@ public class ChunkWorkerQueue extends BukkitRunnable implements Listener, AGList
 	public void addChunkEntityHandler (ChunkEntityHandler handler)
 	{
 		this.chunkEntityHandlers.add(handler);
+	}
+	
+	/** Adds a new chunk unload handler instance into the worker queue for processing unloaded entities */
+	public void addChunkUnloadHandler (ChunkUnloadHandler handler)
+	{
+		this.chunkUnloadHandlers.add(handler);
 	}
 	
 	/** Enqueues a chunk into the worker queue by storing its world and <X,Z> coordinate pair

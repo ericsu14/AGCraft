@@ -6,7 +6,7 @@ import org.bukkit.entity.Entity;
  *  into a chunk load event. */
 public interface ChunkEntityHandler 
 {
-	/** Processes an entity when a chunk loads into a world.
+	/** Processes an entity from a chunk when that chunk loads into the world.
 	 *  @param entity Entity being processed */
 	public void processEntityOnChunkLoad (Entity entity);
 }

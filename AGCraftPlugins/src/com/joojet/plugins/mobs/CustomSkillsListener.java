@@ -25,13 +25,13 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.chunk.interfaces.ChunkEntityHandler;
+import com.joojet.plugins.mobs.chunk.interfaces.ChunkUnloadHandler;
 import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
 import com.joojet.plugins.mobs.event.InjectCustomGoalsToEntityEvent;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
@@ -43,10 +43,9 @@ import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveEnvironmental;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveRegeneration;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillTask;
-// import com.joojet.plugins.mobs.util.worker.ChunkWorkerQueue;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 
-public class CustomSkillsListener implements AGListener, Listener, ChunkEntityHandler
+public class CustomSkillsListener implements AGListener, Listener, ChunkEntityHandler, ChunkUnloadHandler
 {
 	/** Metadata key used to identify entities who are already attached to the CustomSkillListener */
 	public final String customSkillTag = "ag-custom-skill";
@@ -106,20 +105,6 @@ public class CustomSkillsListener implements AGListener, Listener, ChunkEntityHa
 		if (deathEntity != null && deathEntity instanceof LivingEntity)
 		{
 			this.mobSkillRunner.removeSkillFromEntity((LivingEntity) deathEntity);
-		}
-	}
-	
-	@EventHandler (priority = EventPriority.LOW)
-	public void onChunkUnload (ChunkUnloadEvent chunkUnloadEvent)
-	{
-		Entity[] entities = chunkUnloadEvent.getChunk().getEntities();
-		
-		for (Entity entity : entities)
-		{
-			if (entity != null && entity instanceof LivingEntity)
-			{
-				this.mobSkillRunner.removeSkillFromEntity((LivingEntity) entity);
-			}
 		}
 	}
 	
@@ -483,12 +468,23 @@ public class CustomSkillsListener implements AGListener, Listener, ChunkEntityHa
 		}
 	}
 
-	/** Attaches a recently chunk-loaded entity to our custom skill system, if possible
-	 *  @param entity Entity recieving custom skills */
+	/** Attaches a recent chunk-loaded entity to our custom skill system, if possible
+	 *  @param entity Entity receiving custom skills */
 	@Override
 	public void processEntityOnChunkLoad(Entity entity) 
 	{
 		loadCustomSkillsOntoEntity(entity);
+	}
+	
+	/** Deattaches a recent chunk-unloaded entity from our custom skill system if possible
+	 *  @param entity Entity being deattached from custom skill system */
+	@Override
+	public void processEntityOnChunkUnload(Entity entity) 
+	{
+		if (entity != null && entity instanceof LivingEntity)
+		{
+			this.mobSkillRunner.removeSkillFromEntity((LivingEntity) entity);
+		}
 	}
 
 }

@@ -37,6 +37,7 @@ import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.chunk.ChunkWorkerQueue;
 import com.joojet.plugins.mobs.chunk.interfaces.ChunkEntityHandler;
+import com.joojet.plugins.mobs.chunk.interfaces.ChunkUnloadHandler;
 import com.joojet.plugins.mobs.commands.SummonEntity;
 import com.joojet.plugins.mobs.commands.tabcompleter.SummonEntityTabCompleter;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
@@ -179,12 +180,17 @@ public class AGCraftPlugin extends JavaPlugin
 		// Loads in the server config file and initializes its values
 		this.loadServerConfigFile();
 		
-		// Adds in all chunk entity handlersinto the chunk worker queue
+		// Adds in all chunk entity and unload handlers into the chunk worker queue
 		for (Listener listener : this.activeEventListeners)
 		{
 			if (listener instanceof ChunkEntityHandler)
 			{
 				this.chunkWorkerQueue.addChunkEntityHandler((ChunkEntityHandler) listener);
+			}
+			
+			if (listener instanceof ChunkUnloadHandler)
+			{
+				this.chunkWorkerQueue.addChunkUnloadHandler((ChunkUnloadHandler) listener);
 			}
 		}
 		
