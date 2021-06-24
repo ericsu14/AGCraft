@@ -1,6 +1,7 @@
 package com.joojet.plugins.agcraft.main;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
@@ -34,6 +35,8 @@ import com.joojet.plugins.mobs.PathfindTargetingEventListener;
 import com.joojet.plugins.mobs.SoulBoundListener;
 import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
+import com.joojet.plugins.mobs.chunk.ChunkWorkerQueue;
+import com.joojet.plugins.mobs.chunk.interfaces.ChunkEntityHandler;
 import com.joojet.plugins.mobs.commands.SummonEntity;
 import com.joojet.plugins.mobs.commands.tabcompleter.SummonEntityTabCompleter;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
@@ -88,11 +91,13 @@ public class AGCraftPlugin extends JavaPlugin
 	protected SummoningScrollInterpreter summonTypeInterpreter;
 	
 	/** Stores a set of active listener instances */
-	protected ArrayList <Listener> activeEventListeners;
+	protected List <Listener> activeEventListeners;
 	/** Music listener */
 	protected MusicListener musicListener;
-	// Stores a reference to the damage display listener
+	/** Stores a reference to the damage display listener */
 	protected DamageDisplayListener damageDisplayListener;
+	/** Stores a chunk worker queue adding a delay for chunks to load */
+	protected ChunkWorkerQueue chunkWorkerQueue;
 	
 	public AGCraftPlugin ()
 	{
@@ -107,6 +112,7 @@ public class AGCraftPlugin extends JavaPlugin
 		this.musicListener = new MusicListener();
 		this.damageDisplayListener = null;
 		this.bossBarController = new BossBarController(this.monsterTypeInterpreter, this.musicListener);
+		this.chunkWorkerQueue = new ChunkWorkerQueue ();
 		logger = new PluginLogger (this);
 		logger.setLevel(Level.ALL);
 	}
@@ -165,10 +171,22 @@ public class AGCraftPlugin extends JavaPlugin
 		// Music controller event listener
 		this.registerEventListener(this.musicListener);
 		
+		// Chunk worker queue event listener
+		this.registerEventListener(this.chunkWorkerQueue);
+		
 		this.registerEventListener(new TabCompleteListener (this.playerCommands));
 		
 		// Loads in the server config file and initializes its values
 		this.loadServerConfigFile();
+		
+		// Adds in all chunk entity handlersinto the chunk worker queue
+		for (Listener listener : this.activeEventListeners)
+		{
+			if (listener instanceof ChunkEntityHandler)
+			{
+				this.chunkWorkerQueue.addChunkEntityHandler((ChunkEntityHandler) listener);
+			}
+		}
 	}
 	
 	@Override
@@ -322,6 +340,7 @@ public class AGCraftPlugin extends JavaPlugin
 	{
 		this.activeEventListeners.add(listener);
 		Bukkit.getPluginManager().registerEvents(listener, this);
+		
 		if (listener instanceof AGListener)
 		{
 			((AGListener) listener).onEnable();

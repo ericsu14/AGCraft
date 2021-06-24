@@ -24,14 +24,16 @@ import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.interfaces.ServerConfigLoader;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
+import com.joojet.plugins.mobs.chunk.interfaces.ChunkEntityHandler;
 import com.joojet.plugins.mobs.damage.DamageDisplayManager;
 import com.joojet.plugins.mobs.damage.enums.DamageType;
 import com.joojet.plugins.mobs.enums.DamageDisplayMode;
+import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.interpreter.DamageDisplayModeInterpreter;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
-public class DamageDisplayListener implements AGListener, Listener, ServerConfigLoader
+public class DamageDisplayListener implements AGListener, Listener, ServerConfigLoader, ChunkEntityHandler
 {
 	/** Stores a reference to the damage display manager used to spawn in armorstand entities */
 	protected DamageDisplayManager damageDisplayManager;
@@ -45,8 +47,6 @@ public class DamageDisplayListener implements AGListener, Listener, ServerConfig
 	protected DamageDisplayModeInterpreter damageDisplayModeInterpreter;
 	/** Damage display mode */
 	protected DamageDisplayMode damageDisplayMode;
-	/** Chunk worker queue used to remove damage display entities upon chunk loads */
-	// protected ChunkWorkerQueue damageDisplayRemover;
 	
 	public DamageDisplayListener (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
@@ -56,31 +56,12 @@ public class DamageDisplayListener implements AGListener, Listener, ServerConfig
 		this.allowedRegainReasons = EnumSet.of(RegainReason.CUSTOM, RegainReason.MAGIC, RegainReason.MAGIC_REGEN, 
 				RegainReason.WITHER, RegainReason.ENDER_CRYSTAL);
 		this.damageDisplayModeInterpreter = new DamageDisplayModeInterpreter ();
-		/* this.damageDisplayRemover = new ChunkWorkerQueue ()
-		{
-			@Override
-			public void processEntity(Entity entity) 
-			{
-				if (entity != null && entity.getType() == EntityType.ARMOR_STAND)
-				{
-					MobEquipment equipment = monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) entity);
-					if (equipment != null && equipment.getMonsterType() == MonsterType.DAMAGE_DISPLAY_ENTITY)
-					{
-						damageDisplayManager.removeDamageDisplayEntity(entity.getUniqueId());
-						if (!entity.isDead())
-						{
-							entity.remove();
-						}
-					}
-				}
-			}
-		}; */
 	}
 	
 	@Override
 	public void onEnable ()
 	{
-		// this.damageDisplayRemover.runTaskTimer(AGCraftPlugin.plugin, 20, 10);
+		
 	}
 	
 	@Override
@@ -208,7 +189,7 @@ public class DamageDisplayListener implements AGListener, Listener, ServerConfig
 	{
 		for (Entity entity : entityList)
 		{
-			// this.damageDisplayRemover.processEntity(entity);
+			this.processEntityOnChunkLoad(entity);
 		}
 	}
 	
@@ -310,5 +291,24 @@ public class DamageDisplayListener implements AGListener, Listener, ServerConfig
 	{
 		this.damageDisplayMode = config.searchElementFromInterpreter(this.damageDisplayModeInterpreter, DamageDisplayModeInterpreter.DAMAGE_DISPLAY_MODE_KEY, 
 				DamageDisplayMode.AUTO);
+	}
+
+	/** Removes damage display entities upon chunk loads and unloads
+	 *  @param entity Entity to be checked and removed if conditions are satisfied */
+	@Override
+	public void processEntityOnChunkLoad(Entity entity) 
+	{
+		if (entity != null && entity.getType() == EntityType.ARMOR_STAND)
+		{
+			MobEquipment equipment = monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) entity);
+			if (equipment != null && equipment.getMonsterType() == MonsterType.DAMAGE_DISPLAY_ENTITY)
+			{
+				damageDisplayManager.removeDamageDisplayEntity(entity.getUniqueId());
+				if (!entity.isDead())
+				{
+					entity.remove();
+				}
+			}
+		}
 	}
 }

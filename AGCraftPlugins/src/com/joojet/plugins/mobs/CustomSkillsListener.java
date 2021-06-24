@@ -31,6 +31,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
+import com.joojet.plugins.mobs.chunk.interfaces.ChunkEntityHandler;
 import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
 import com.joojet.plugins.mobs.event.InjectCustomGoalsToEntityEvent;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
@@ -45,7 +46,7 @@ import com.joojet.plugins.mobs.skills.runnable.MobSkillTask;
 // import com.joojet.plugins.mobs.util.worker.ChunkWorkerQueue;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 
-public class CustomSkillsListener implements AGListener, Listener
+public class CustomSkillsListener implements AGListener, Listener, ChunkEntityHandler
 {
 	/** Metadata key used to identify entities who are already attached to the CustomSkillListener */
 	public final String customSkillTag = "ag-custom-skill";
@@ -62,11 +63,6 @@ public class CustomSkillsListener implements AGListener, Listener
 	/** Stores a registry for all active mob skill instances in the server
 	 *  and runs them each tick */
 	protected MobSkillRunner mobSkillRunner;
-	/** A worker queue used to process loaded chunks and initializes skill systems for any custom monsters
-	 *  that needs it */
-	// protected ChunkWorkerQueue customSkillWorker;
-	/** Stores time between async entity processing */
-	protected int asyncLoadChunkDelay;
 	
 	public CustomSkillsListener (MonsterTypeInterpreter monsterInterpreter, DamageDisplayListener damageDisplayListener,
 			BossBarController bossBarController, MobSkillRunner mobSkillRunner)
@@ -75,32 +71,19 @@ public class CustomSkillsListener implements AGListener, Listener
 		this.damageDisplayListener = damageDisplayListener;
 		this.bossBarController = bossBarController;
 		this.mobSkillRunner = mobSkillRunner;
-		this.asyncLoadChunkDelay = 10;
 		this.rand = new Random ();
-		/* this.customSkillWorker = new ChunkWorkerQueue () 
-		{
-			// Initializes custom skill system for the entity if it is set to have one
-			@Override
-			public void processEntity(Entity entity) 
-			{
-				loadCustomSkillsOntoEntity(entity);
-			}
-		}; */
 	}
 
 	@Override
 	public void onEnable() 
 	{
 		this.mobSkillRunner.runTaskTimer(AGCraftPlugin.plugin, 20, 20);
-		// this.customSkillWorker.loadSpawnChunks(Bukkit.getWorlds());
-		// this.customSkillWorker.runTaskTimer(AGCraftPlugin.plugin, 20, this.asyncLoadChunkDelay);
 	}
 
 	@Override
 	public void onDisable() 
 	{
 		this.mobSkillRunner.cancel();
-		// this.customSkillWorker.cancel();
 	}
 	
 	@EventHandler(priority = EventPriority.LOW)
@@ -498,6 +481,14 @@ public class CustomSkillsListener implements AGListener, Listener
 				livingEntity.setMetadata(this.customSkillTag, new FixedMetadataValue (AGCraftPlugin.plugin, this.customSkillTag));
 			}
 		}
+	}
+
+	/** Attaches a recently chunk-loaded entity to our custom skill system, if possible
+	 *  @param entity Entity recieving custom skills */
+	@Override
+	public void processEntityOnChunkLoad(Entity entity) 
+	{
+		loadCustomSkillsOntoEntity(entity);
 	}
 
 }

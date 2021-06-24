@@ -8,9 +8,13 @@ import java.util.List;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
+import com.joojet.plugins.mobs.chunk.interfaces.ChunkEntityHandler;
 
 /** An abstract worker pool module used to queue chunks loaded into and out of the game, 
  *  so that all entities stored on those chunks can be processed at a later time.
@@ -18,12 +22,15 @@ import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
  *  This is because chunk-loading is done asynchronously in the 1.17 releases of Spigot,
  *  therefore making the chunk.getEntities() call unreliable. A delay is necessary
  *  to ensure that all entities are loaded before processing its entities. */
-public abstract class ChunkWorkerQueue extends BukkitRunnable
+public class ChunkWorkerQueue extends BukkitRunnable implements Listener
 {
 	/** A queue used to store incoming chunks to be processed */
 	protected List <ChunkData> chunkQueue;
 	/** Ensures that no duplicate data is inserted */
 	protected HashSet <ChunkData> duplicateChunkDataChecker;
+	/** A list of classes that implemented the ChunkEntityHandler interface, allowing those
+	 *  classes to process recent chunk-loaded entities */
+	protected List <ChunkEntityHandler> chunkEntityHandlers;
 	
 	/** Creates a new instance of a chunk worker queue, allowing chunks to be safely loaded into the queue
 	 *  and have all entities within that chunk to be processed on a timer.
@@ -33,6 +40,7 @@ public abstract class ChunkWorkerQueue extends BukkitRunnable
 	{
 		this.chunkQueue = new ArrayList <ChunkData> ();
 		this.duplicateChunkDataChecker = new HashSet <ChunkData> ();
+		this.chunkEntityHandlers = new ArrayList <ChunkEntityHandler> ();
 	}
 	
 	@Override
@@ -81,13 +89,23 @@ public abstract class ChunkWorkerQueue extends BukkitRunnable
 						Entity[] chunkEntities = chunk.getEntities();
 						for (Entity entity : chunkEntities)
 						{
-							processEntity (entity);
+							for (ChunkEntityHandler handler : chunkEntityHandlers)
+							{
+								handler.processEntityOnChunkLoad(entity);
+							}
 						}
 					}
 				}
 				
 			}.runAsyncTask();
 		}
+	}
+	
+	/** Listens to chunk load events and enqueues the loaded chunks into the queue */
+	@EventHandler
+	public void onChunkLoad (ChunkLoadEvent chunkLoadEvent)
+	{
+		this.enqueue(chunkLoadEvent.getChunk());
 	}
 	
 	/** Enqueues all loaded chunks from a list of active worlds
@@ -105,6 +123,12 @@ public abstract class ChunkWorkerQueue extends BukkitRunnable
 		}
 	}
 	
+	/** Adds a new chunk entity handler instance into the worker queue for processing entities */
+	public void addChunkEntityHandler (ChunkEntityHandler handler)
+	{
+		this.chunkEntityHandlers.add(handler);
+	}
+	
 	/** Enqueues a chunk into the worker queue by storing its world and <X,Z> coordinate pair
 	 *  @param Chunk being enqueued */
 	public void enqueue (Chunk chunk)
@@ -116,8 +140,4 @@ public abstract class ChunkWorkerQueue extends BukkitRunnable
 			this.chunkQueue.add(newChunkData);
 		}
 	}
-	
-	/** A custom function used to process an entity stored within a chunk
-	 *  @param entity Entity being processed in the chunk */
-	public abstract void processEntity (Entity entity);
 }

@@ -24,6 +24,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
+import com.joojet.plugins.mobs.chunk.interfaces.ChunkEntityHandler;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.event.CreatedCustomMonsterEvent;
@@ -35,7 +36,7 @@ import com.joojet.plugins.mobs.util.EquipmentTools;
 import com.joojet.plugins.mobs.util.stream.ClosestProximity;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
-public class PathfindTargetingEventListener implements Listener
+public class PathfindTargetingEventListener implements Listener, ChunkEntityHandler
 {
 	/** Key used to distinguish entities who have already been injected with pathfinding goals */
 	public final String pathfindingGoalKey = "ag-pathfinding-goals";
@@ -43,26 +44,11 @@ public class PathfindTargetingEventListener implements Listener
 	protected MonsterTypeInterpreter monsterTypeInterpreter;
 	/** Stores a reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
-	/** A chunk pool used to initialize pathfinding targets upon chunk loads */
-	// protected ChunkWorkerQueue pathfinderWorker;
-	/** Stores time between async entity processing */
-	protected int asyncLoadChunkDelay;
 	
 	public PathfindTargetingEventListener (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
-		this.asyncLoadChunkDelay = 10;
-		
-		// Allows entities loaded into the world to have their defined custom pathfinding behavior
-		/* this.pathfinderWorker = new ChunkWorkerQueue () 
-		{
-			@Override
-			public void processEntity(Entity entity) 
-			{
-				injectPathfindingGoals (entity);
-			}
-		}; */
 	}
 	
 	/** Listens to any AI target event and propagates the entity in question to our custom mob goals handler
@@ -354,5 +340,13 @@ public class PathfindTargetingEventListener implements Listener
 	{
 		return (player instanceof Player) && (((Player)player).getAllowFlight() ||
 				((Player)player).getGameMode() == GameMode.SPECTATOR);
+	}
+	
+	/** Injects pathfinding goals to entities upon chunk load events
+	 *  @param entity Entity receiving custom pathfinding goals if possible */
+	@Override
+	public void processEntityOnChunkLoad(Entity entity) 
+	{
+		this.injectPathfindingGoals (entity);
 	}
 }
