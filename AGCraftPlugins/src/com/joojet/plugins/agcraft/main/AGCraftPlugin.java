@@ -187,6 +187,8 @@ public class AGCraftPlugin extends JavaPlugin
 				this.chunkWorkerQueue.addChunkEntityHandler((ChunkEntityHandler) listener);
 			}
 		}
+		
+		this.chunkWorkerQueue.runTaskTimer(this, 20, 10);
 	}
 	
 	@Override
