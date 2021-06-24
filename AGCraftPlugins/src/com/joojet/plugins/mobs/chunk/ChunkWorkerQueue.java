@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -14,6 +15,7 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
+import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.mobs.chunk.interfaces.ChunkEntityHandler;
 
 /** An abstract worker pool module used to queue chunks loaded into and out of the game, 
@@ -22,7 +24,7 @@ import com.joojet.plugins.mobs.chunk.interfaces.ChunkEntityHandler;
  *  This is because chunk-loading is done asynchronously in the 1.17 releases of Spigot,
  *  therefore making the chunk.getEntities() call unreliable. A delay is necessary
  *  to ensure that all entities are loaded before processing its entities. */
-public class ChunkWorkerQueue extends BukkitRunnable implements Listener
+public class ChunkWorkerQueue extends BukkitRunnable implements Listener, AGListener
 {
 	/** A queue used to store incoming chunks to be processed */
 	protected List <ChunkData> chunkQueue;
@@ -139,5 +141,17 @@ public class ChunkWorkerQueue extends BukkitRunnable implements Listener
 			this.duplicateChunkDataChecker.add(newChunkData);
 			this.chunkQueue.add(newChunkData);
 		}
+	}
+
+	@Override
+	public void onEnable() 
+	{
+		this.loadSpawnChunks(Bukkit.getWorlds());
+	}
+
+	@Override
+	public void onDisable() 
+	{
+		
 	}
 }
