@@ -31,7 +31,7 @@ public class AsyncWarpPlayerTask extends AsyncTask<DatabaseResponse <Location>>
 	
 	public AsyncWarpPlayerTask (Player player, String locationName)
 	{
-		if (player.getBedLocation() != null)
+		if (player.getBedSpawnLocation() != null)
 		{
 			this.playerBedSpawnLocation = player.getBedSpawnLocation().clone();
 		}
