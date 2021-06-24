@@ -234,9 +234,10 @@ public class AGCraftPlugin extends JavaPlugin
 		// Invokes config file loader function for all player commands
 		for (PlayerCommand command : this.playerCommands.values())
 		{
-			if (command instanceof ServerConfigLoader)
+			AGCommandExecutor executor = command.getExecutor();
+			if (executor instanceof ServerConfigLoader)
 			{
-				((ServerConfigLoader) command.getExecutor()).loadConfigVariables(this.serverConfigFile);
+				((ServerConfigLoader) executor).loadConfigVariables(this.serverConfigFile);
 			}
 		}
 	}
