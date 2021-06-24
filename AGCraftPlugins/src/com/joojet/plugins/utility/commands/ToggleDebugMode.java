@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
@@ -32,9 +31,4 @@ public class ToggleDebugMode extends AGCommandExecutor
 		return false;
 	}
 
-	@Override
-	public void loadConfigVariables(ServerConfigFile config) 
-	{
-		
-	}
 }

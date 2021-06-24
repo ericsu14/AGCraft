@@ -6,20 +6,19 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 
-import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
-import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
-public class BossBarEventListener extends AGListener 
+public class BossBarEventListener implements Listener
 {
 	/** A reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
@@ -30,12 +29,6 @@ public class BossBarEventListener extends AGListener
 	{
 		this.monsterTypeInterpreter = monsterTypeInterpreter;
 		this.bossBarController = bossBarController;
-	}
-	
-	@Override
-	public void onEnable ()
-	{
-		
 	}
 	
 	/** Captures entity damage events and adds the Player to the enemy's boss bar if it has one */
@@ -114,17 +107,5 @@ public class BossBarEventListener extends AGListener
 			LivingEntity entity = (LivingEntity) event.getEntity();
 			this.bossBarController.removeBossBar(entity);
 		}
-	}
-
-	@Override
-	public void loadConfigVariables(ServerConfigFile config) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDisable() {
-		// TODO Auto-generated method stub
-		
 	}
 }

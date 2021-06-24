@@ -8,12 +8,13 @@ import org.bukkit.entity.Player;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
+import com.joojet.plugins.agcraft.interfaces.ServerConfigLoader;
 import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 
-public class SummonEntity extends AGCommandExecutor 
+public class SummonEntity extends AGCommandExecutor implements ServerConfigLoader
 {
 	/** Tag used to identify the max entites that could be summoned in bulk using this summon command */
 	public static final String MAX_SUMMONED_ENTITIES_TAG = "max-summoned-entities";

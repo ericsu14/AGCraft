@@ -21,7 +21,7 @@ import com.joojet.plugins.agcraft.asynctasks.response.DatabaseStatus;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.agcraft.util.Pair;
 import com.joojet.plugins.coordinates.commands.GetCoordinates;
-import com.joojet.plugins.mobs.util.worker.ChunkData;
+import com.joojet.plugins.mobs.chunk.ChunkData;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
 public class AsyncChunkLoaderTask extends AsyncTask<DatabaseStatus> 

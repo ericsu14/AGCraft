@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
+import com.joojet.plugins.agcraft.interfaces.ServerConfigLoader;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.consequences.enums.CalendarField;
 import com.joojet.plugins.mobs.fireworks.tasks.SpawnFireworksOnLocationTask;
@@ -23,7 +24,7 @@ import com.joojet.plugins.music.enums.SoundPlayerState;
 import com.joojet.plugins.music.interpreter.MusicTypeInterpreter;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
-public class FireworksCommand extends AGCommandExecutor 
+public class FireworksCommand extends AGCommandExecutor implements ServerConfigLoader
 {
 	/** A list of tags used to reference various variables from the config file */
 	public static final String COOLDOWN_TIMER_TAG = "firework-cooldown-timer";

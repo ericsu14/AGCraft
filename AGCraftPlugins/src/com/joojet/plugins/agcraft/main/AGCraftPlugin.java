@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.joojet.biblefetcher.database.CreateDatabase;
@@ -17,6 +18,7 @@ import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.interfaces.AGTabCompleter;
+import com.joojet.plugins.agcraft.interfaces.ServerConfigLoader;
 import com.joojet.plugins.biblefetcher.commands.*;
 import com.joojet.plugins.biblefetcher.commands.tabcompleter.BibleTabCompleter;
 import com.joojet.plugins.consequences.ConsequenceManager;
@@ -86,7 +88,7 @@ public class AGCraftPlugin extends JavaPlugin
 	protected SummoningScrollInterpreter summonTypeInterpreter;
 	
 	/** Stores a set of active listener instances */
-	protected ArrayList <AGListener> activeEventListeners;
+	protected ArrayList <Listener> activeEventListeners;
 	/** Music listener */
 	protected MusicListener musicListener;
 	// Stores a reference to the damage display listener
@@ -96,7 +98,7 @@ public class AGCraftPlugin extends JavaPlugin
 	{
 		super ();
 		this.playerCommands = new ConcurrentHashMap <CommandType, PlayerCommand> ();
-		this.activeEventListeners = new ArrayList <AGListener> ();
+		this.activeEventListeners = new ArrayList <Listener> ();
 		this.serverConfigFile = null;
 		this.bibleInterpreter = new BibleCommandInterpreter();
 		this.serverModeInterpreter = new ServerModeInterpreter ();
@@ -173,9 +175,12 @@ public class AGCraftPlugin extends JavaPlugin
 	public void onDisable ()
 	{		
 		// Invokes the onDisable routine for all event listeners
-		for (AGListener listener: this.activeEventListeners)
+		for (Listener listener: this.activeEventListeners)
 		{
-			listener.onDisable();
+			if (listener instanceof AGListener)
+			{
+				((AGListener) listener).onDisable();
+			}
 		}
 	}
 	
@@ -192,15 +197,21 @@ public class AGCraftPlugin extends JavaPlugin
 				ServerMode.getKey(), ServerMode.NORMAL));
 		
 		// Invokes config file loader function for all event listeners
-		for (AGListener listener : this.activeEventListeners)
+		for (Listener listener : this.activeEventListeners)
 		{
-			listener.loadConfigVariables(this.serverConfigFile);
+			if (listener instanceof ServerConfigLoader)
+			{
+				((ServerConfigLoader) listener).loadConfigVariables(this.serverConfigFile);
+			}
 		}
 		
 		// Invokes config file loader function for all player commands
 		for (PlayerCommand command : this.playerCommands.values())
 		{
-			command.getExecutor().loadConfigVariables(this.serverConfigFile);
+			if (command instanceof ServerConfigLoader)
+			{
+				((ServerConfigLoader) command.getExecutor()).loadConfigVariables(this.serverConfigFile);
+			}
 		}
 	}
 
@@ -307,11 +318,14 @@ public class AGCraftPlugin extends JavaPlugin
 	
 	/** Registers an event listener into Bukkit
 	 *  @param listener - A reference to the listener itself */
-	private void registerEventListener (AGListener listener)
+	private void registerEventListener (Listener listener)
 	{
 		this.activeEventListeners.add(listener);
 		Bukkit.getPluginManager().registerEvents(listener, this);
-		listener.onEnable();
+		if (listener instanceof AGListener)
+		{
+			((AGListener) listener).onEnable();
+		}
 	}
 	
 }

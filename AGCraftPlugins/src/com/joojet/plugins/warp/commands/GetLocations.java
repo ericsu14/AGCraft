@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
 
-import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 import com.joojet.plugins.agcraft.util.Pair;
@@ -96,11 +95,5 @@ public class GetLocations extends AGCommandExecutor
 		{
 			p.sendMessage(ChatColor.AQUA + locationList.substring(0, ln - 3).toString());
 		}
-	}
-
-	@Override
-	public void loadConfigVariables(ServerConfigFile config) 
-	{
-		
 	}
 }

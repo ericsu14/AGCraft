@@ -10,13 +10,12 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.joojet.plugins.agcraft.config.ServerConfigFile;
-import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
@@ -26,7 +25,7 @@ import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 
 
-public class SummoningScrollListener extends AGListener
+public class SummoningScrollListener implements Listener
 {
 	// Interpreter to search for used summoning scrolls
 	private SummoningScrollInterpreter summonInterpreter;
@@ -39,12 +38,6 @@ public class SummoningScrollListener extends AGListener
 	{
 		this.bossBarController = bossBarController;
 		this.summonInterpreter = summonTypeInterpreter;
-	}
-	
-	@Override
-	public void onEnable ()
-	{
-		
 	}
 	
 	/** Checks for use of a summoning scroll */
@@ -158,15 +151,4 @@ public class SummoningScrollListener extends AGListener
 		return true;
 	}
 
-	@Override
-	public void loadConfigVariables(ServerConfigFile config) 
-	{
-
-	}
-
-	@Override
-	public void onDisable() {
-		// TODO Auto-generated method stub
-		
-	}
 }

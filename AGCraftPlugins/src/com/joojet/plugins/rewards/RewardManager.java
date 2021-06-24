@@ -5,12 +5,13 @@ import java.util.UUID;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
-import com.joojet.plugins.agcraft.interfaces.AGListener;
+import com.joojet.plugins.agcraft.interfaces.ServerConfigLoader;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.metadata.IgnorePlayerMetadata;
@@ -21,7 +22,7 @@ import com.joojet.plugins.rewards.interpreter.MinigameRewardTypeInterpreter;
 
 import org.bukkit.ChatColor;
 
-public class RewardManager extends AGListener
+public class RewardManager implements Listener, ServerConfigLoader
 {	
 	
 	public static final String MOB_IGNORES_PLAYERS_KEY = "ignore-player-when-login-time";
@@ -214,17 +215,5 @@ public class RewardManager extends AGListener
 				MinigameRewardType.getKey(), MinigameRewardType.GIFT);
 		// Ignore player time
 		this.setPlayerIgnoreTime(config.getValueAsInteger(MOB_IGNORES_PLAYERS_KEY));
-	}
-
-	@Override
-	public void onEnable() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDisable() {
-		// TODO Auto-generated method stub
-		
 	}
 }

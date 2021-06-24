@@ -10,13 +10,14 @@ import org.bukkit.entity.Player;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
+import com.joojet.plugins.agcraft.interfaces.ServerConfigLoader;
 import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.spawning.FairSpawnController;
 
 /** A player command that tells the player his/her current threat score,
  *  along with the classifications of custom monsters that can spawn around
  *  the player. */
-public class WhoCanSpawn extends AGCommandExecutor 
+public class WhoCanSpawn extends AGCommandExecutor implements ServerConfigLoader
 {
 	/** Used to simulate the player's threat score calculation */
 	protected FairSpawnController fairSpawnController;

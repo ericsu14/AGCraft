@@ -14,6 +14,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -24,6 +25,7 @@ import org.spigotmc.event.entity.EntityMountEvent;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
+import com.joojet.plugins.agcraft.interfaces.ServerConfigLoader;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.damage.entities.DamageDisplayEntity;
@@ -43,7 +45,7 @@ import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillRunner;
 import com.joojet.plugins.mobs.spawnhandlers.SpawnController;
 
-public class AmplifiedMobSpawner extends AGListener 
+public class AmplifiedMobSpawner implements AGListener, Listener, ServerConfigLoader
 {			
 	// Stores the server-wide event mode, which may add custom themed mobs or events into the normal game world
 	protected ThemedServerEvent serverEventMode = ThemedServerEvent.DEFAULT;

@@ -12,18 +12,16 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.EntityTransformEvent;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 import org.bukkit.event.entity.EntityTransformEvent.TransformReason;
-import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
-import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
-import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.enums.MobFlag;
@@ -35,10 +33,9 @@ import com.joojet.plugins.mobs.metadata.IgnorePlayerMetadata;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.util.EquipmentTools;
 import com.joojet.plugins.mobs.util.stream.ClosestProximity;
-import com.joojet.plugins.mobs.util.worker.ChunkWorkerQueue;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
-public class PathfindTargetingEventListener extends AGListener
+public class PathfindTargetingEventListener implements Listener
 {
 	/** Key used to distinguish entities who have already been injected with pathfinding goals */
 	public final String pathfindingGoalKey = "ag-pathfinding-goals";
@@ -47,7 +44,7 @@ public class PathfindTargetingEventListener extends AGListener
 	/** Stores a reference to the boss bar controller defined in main */
 	protected BossBarController bossBarController;
 	/** A chunk pool used to initialize pathfinding targets upon chunk loads */
-	protected ChunkWorkerQueue pathfinderWorker;
+	// protected ChunkWorkerQueue pathfinderWorker;
 	/** Stores time between async entity processing */
 	protected int asyncLoadChunkDelay;
 	
@@ -58,27 +55,14 @@ public class PathfindTargetingEventListener extends AGListener
 		this.asyncLoadChunkDelay = 10;
 		
 		// Allows entities loaded into the world to have their defined custom pathfinding behavior
-		this.pathfinderWorker = new ChunkWorkerQueue () 
+		/* this.pathfinderWorker = new ChunkWorkerQueue () 
 		{
 			@Override
 			public void processEntity(Entity entity) 
 			{
 				injectPathfindingGoals (entity);
 			}
-		};
-	}
-	
-	@Override
-	public void onEnable ()
-	{
-		this.pathfinderWorker.loadSpawnChunks(Bukkit.getWorlds());
-		this.pathfinderWorker.runTaskTimer(AGCraftPlugin.plugin, 20, this.asyncLoadChunkDelay);
-	}
-	
-	@Override
-	public void onDisable() 
-	{
-		this.pathfinderWorker.cancel();
+		}; */
 	}
 	
 	/** Listens to any AI target event and propagates the entity in question to our custom mob goals handler
@@ -178,13 +162,6 @@ public class PathfindTargetingEventListener extends AGListener
 			Monster mob = (Monster) entity;
 			mob.setTarget(damager);
 		}
-	}
-	
-	/** Resets custom mob targets upon chunk load events */
-	@EventHandler(priority = EventPriority.HIGH)
-	public void resetTargetsOnChunkLoad (ChunkLoadEvent event)
-	{
-		this.pathfinderWorker.enqueue(event.getChunk());
 	}
 	
 	/** Captures zombie to drowned conversion events and transfers custom metadata to
@@ -377,11 +354,5 @@ public class PathfindTargetingEventListener extends AGListener
 	{
 		return (player instanceof Player) && (((Player)player).getAllowFlight() ||
 				((Player)player).getGameMode() == GameMode.SPECTATOR);
-	}
-
-	@Override
-	public void loadConfigVariables(ServerConfigFile config) 
-	{
-		// TODO
 	}
 }

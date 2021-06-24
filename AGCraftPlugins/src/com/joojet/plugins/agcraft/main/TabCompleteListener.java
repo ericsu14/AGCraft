@@ -6,16 +6,15 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 
 import com.destroystokyo.paper.event.server.AsyncTabCompleteEvent;
 import com.joojet.plugins.agcraft.commands.PlayerCommand;
-import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
-import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.interfaces.AGTabCompleter;
 import com.joojet.plugins.agcraft.interfaces.AsyncTabCompleteOperation;
 
-public class TabCompleteListener extends AGListener 
+public class TabCompleteListener implements Listener 
 {
 	protected ConcurrentHashMap <CommandType, PlayerCommand> playerCommands;
 	
@@ -105,24 +104,6 @@ public class TabCompleteListener extends AGListener
 			return result;
 		}
 		return new ArrayList <String> ();
-	}
-	
-	@Override
-	public void loadConfigVariables(ServerConfigFile config) 
-	{
-		
-	}
-
-	@Override
-	public void onEnable() 
-	{
-		
-	}
-
-	@Override
-	public void onDisable() 
-	{
-		
 	}
 	
 }

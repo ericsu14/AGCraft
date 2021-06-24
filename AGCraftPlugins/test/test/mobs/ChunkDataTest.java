@@ -7,7 +7,7 @@ import org.bukkit.World.Environment;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.joojet.plugins.mobs.util.worker.ChunkData;
+import com.joojet.plugins.mobs.chunk.ChunkData;
 import com.joojet.plugins.warp.commands.tasks.AsyncChunkLoaderTask;
 
 public class ChunkDataTest 

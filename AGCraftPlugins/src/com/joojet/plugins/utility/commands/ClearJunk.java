@@ -16,13 +16,14 @@ import org.bukkit.ChatColor;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
+import com.joojet.plugins.agcraft.interfaces.ServerConfigLoader;
 import com.joojet.plugins.mobs.scrolls.SummoningScroll;
 import com.joojet.plugins.utility.config.JunkItemConfig;
 import com.joojet.plugins.utility.enums.JunkClassifier;
 import com.joojet.plugins.utility.interpreter.JunkCommandInterpreter;
 
 
-public class ClearJunk extends AGCommandExecutor
+public class ClearJunk extends AGCommandExecutor implements ServerConfigLoader
 {
 	/** Used to interpret junk classifier commands */
 	private JunkCommandInterpreter commandInterpreter;

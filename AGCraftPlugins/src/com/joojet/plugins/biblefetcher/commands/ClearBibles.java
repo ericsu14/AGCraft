@@ -11,7 +11,6 @@ import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.ItemStack;
 
 import com.joojet.biblefetcher.interpreter.BibleCommandInterpreter;
-import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
 
@@ -63,13 +62,6 @@ public class ClearBibles extends AGCommandExecutor
 	private boolean checkAuthor (String author)
 	{
 		return this.bibleCommandInterpreter.searchBibleTrie(author) != null;
-	}
-
-	@Override
-	public void loadConfigVariables(ServerConfigFile config) 
-	{
-		// TODO Auto-generated method stub
-		
 	}
 
 }

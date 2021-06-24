@@ -9,12 +9,13 @@ import org.bukkit.ChatColor;
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.CommandType;
 import com.joojet.plugins.agcraft.interfaces.AGCommandExecutor;
+import com.joojet.plugins.agcraft.interfaces.ServerConfigLoader;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.warp.commands.tasks.AsyncEWarpCheckerTask;
 import com.joojet.plugins.warp.commands.tasks.AsyncWarpPlayerTask;
 import com.joojet.plugins.warp.scantools.ScanEntities;
 
-public class Warp extends AGCommandExecutor
+public class Warp extends AGCommandExecutor implements ServerConfigLoader
 {
 	/** A hardcoded warp location used to define a warp back to the player's bed spawn */
 	public final static String home = "home";

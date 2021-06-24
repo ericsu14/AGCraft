@@ -8,20 +8,19 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
-import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
-import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.consequences.database.ConsequenceDatabaseManager;
 import com.joojet.plugins.mobs.equipment.head.ClownHead;
 
-public class ConsequenceManager extends AGListener 
+public class ConsequenceManager implements Listener
 {
 	@EventHandler
 	public void handleConsequenceLoginEvent (PlayerJoinEvent event)
@@ -144,20 +143,5 @@ public class ConsequenceManager extends AGListener
 				p.sendMessage(ChatColor.GREEN +"Your consequences have been lifted!");
 			}
 		}
-	}
-
-	@Override
-	public void loadConfigVariables(ServerConfigFile config) {
-		// No variables to load
-	}
-
-	@Override
-	public void onEnable() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void onDisable() {
-		// TODO Auto-generated method stub
 	}
 }

@@ -1,4 +1,4 @@
-package com.joojet.plugins.mobs.util.worker;
+package com.joojet.plugins.mobs.chunk;
 
 import java.util.Objects;
 

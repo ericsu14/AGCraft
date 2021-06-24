@@ -10,29 +10,28 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
-import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 
 import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.enums.ServerMode;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
+import com.joojet.plugins.agcraft.interfaces.ServerConfigLoader;
 import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.damage.DamageDisplayManager;
 import com.joojet.plugins.mobs.damage.enums.DamageType;
 import com.joojet.plugins.mobs.enums.DamageDisplayMode;
-import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.interpreter.DamageDisplayModeInterpreter;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
-import com.joojet.plugins.mobs.util.worker.ChunkWorkerQueue;
 
-public class DamageDisplayListener extends AGListener 
+public class DamageDisplayListener implements AGListener, Listener, ServerConfigLoader
 {
 	/** Stores a reference to the damage display manager used to spawn in armorstand entities */
 	protected DamageDisplayManager damageDisplayManager;
@@ -47,7 +46,7 @@ public class DamageDisplayListener extends AGListener
 	/** Damage display mode */
 	protected DamageDisplayMode damageDisplayMode;
 	/** Chunk worker queue used to remove damage display entities upon chunk loads */
-	protected ChunkWorkerQueue damageDisplayRemover;
+	// protected ChunkWorkerQueue damageDisplayRemover;
 	
 	public DamageDisplayListener (MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
 	{
@@ -57,9 +56,8 @@ public class DamageDisplayListener extends AGListener
 		this.allowedRegainReasons = EnumSet.of(RegainReason.CUSTOM, RegainReason.MAGIC, RegainReason.MAGIC_REGEN, 
 				RegainReason.WITHER, RegainReason.ENDER_CRYSTAL);
 		this.damageDisplayModeInterpreter = new DamageDisplayModeInterpreter ();
-		this.damageDisplayRemover = new ChunkWorkerQueue ()
+		/* this.damageDisplayRemover = new ChunkWorkerQueue ()
 		{
-			/** Deattaches a damage display armor stand from runtime and removes it from existance */
 			@Override
 			public void processEntity(Entity entity) 
 			{
@@ -76,13 +74,13 @@ public class DamageDisplayListener extends AGListener
 					}
 				}
 			}
-		};
+		}; */
 	}
 	
 	@Override
 	public void onEnable ()
 	{
-		this.damageDisplayRemover.runTaskTimer(AGCraftPlugin.plugin, 20, 10);
+		// this.damageDisplayRemover.runTaskTimer(AGCraftPlugin.plugin, 20, 10);
 	}
 	
 	@Override
@@ -210,15 +208,8 @@ public class DamageDisplayListener extends AGListener
 	{
 		for (Entity entity : entityList)
 		{
-			this.damageDisplayRemover.processEntity(entity);
+			// this.damageDisplayRemover.processEntity(entity);
 		}
-	}
-	
-	/** Attempt to remove all damage display entities upon chunk loading */
-	@EventHandler (priority = EventPriority.LOWEST)
-	public void onChunkLoad (ChunkLoadEvent chunkLoadEvent)
-	{
-		this.damageDisplayRemover.enqueue(chunkLoadEvent.getChunk());
 	}
 	
 	/** Attempt to remove all damage display entities upon chunk unloading */

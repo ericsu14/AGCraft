@@ -6,17 +6,17 @@ import java.util.UUID;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import com.joojet.plugins.agcraft.config.ServerConfigFile;
 import com.joojet.plugins.agcraft.interfaces.AGListener;
 import com.joojet.plugins.mobs.metadata.SoulBoundMetadata;
 import com.joojet.plugins.mobs.util.serializer.SoulboundItemSerializer;
 
-public class SoulBoundListener extends AGListener 
+public class SoulBoundListener implements AGListener, Listener
 {
 	/** Used to serialize / deserialized the dropped items hashmap into a file
 	 *  in the case of any server shutdowns */
@@ -93,11 +93,4 @@ public class SoulBoundListener extends AGListener
 			}
 		}
 	}
-
-	@Override
-	public void loadConfigVariables(ServerConfigFile config) 
-	{
-		
-	}
-	
 }
