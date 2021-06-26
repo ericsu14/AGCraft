@@ -35,7 +35,8 @@ import com.joojet.plugins.mobs.PathfindTargetingEventListener;
 import com.joojet.plugins.mobs.SoulBoundListener;
 import com.joojet.plugins.mobs.SummoningScrollListener;
 import com.joojet.plugins.mobs.bossbar.BossBarController;
-import com.joojet.plugins.mobs.chunk.ChunkWorkerQueue;
+import com.joojet.plugins.mobs.chunk.ChunkLoaderQueue;
+import com.joojet.plugins.mobs.chunk.ChunkUnloaderQueue;
 import com.joojet.plugins.mobs.chunk.interfaces.ChunkEntityHandler;
 import com.joojet.plugins.mobs.chunk.interfaces.ChunkUnloadHandler;
 import com.joojet.plugins.mobs.commands.SummonEntity;
@@ -98,7 +99,9 @@ public class AGCraftPlugin extends JavaPlugin
 	/** Stores a reference to the damage display listener */
 	protected DamageDisplayListener damageDisplayListener;
 	/** Stores a chunk worker queue adding a delay for chunks to load */
-	protected ChunkWorkerQueue chunkWorkerQueue;
+	protected ChunkLoaderQueue chunkWorkerQueue;
+	/** Chunk worker for handling chunk unload events */
+	protected ChunkUnloaderQueue chunkUnloaderQueue;
 	
 	public AGCraftPlugin ()
 	{
@@ -113,7 +116,8 @@ public class AGCraftPlugin extends JavaPlugin
 		this.musicListener = new MusicListener();
 		this.damageDisplayListener = null;
 		this.bossBarController = new BossBarController(this.monsterTypeInterpreter, this.musicListener);
-		this.chunkWorkerQueue = new ChunkWorkerQueue ();
+		this.chunkWorkerQueue = new ChunkLoaderQueue ();
+		this.chunkUnloaderQueue = new ChunkUnloaderQueue ();
 		logger = new PluginLogger (this);
 		logger.setLevel(Level.ALL);
 	}
@@ -174,6 +178,7 @@ public class AGCraftPlugin extends JavaPlugin
 		
 		// Chunk worker queue event listener
 		this.registerEventListener(this.chunkWorkerQueue);
+		this.registerEventListener(this.chunkUnloaderQueue);
 		
 		this.registerEventListener(new TabCompleteListener (this.playerCommands));
 		
@@ -190,11 +195,12 @@ public class AGCraftPlugin extends JavaPlugin
 			
 			if (listener instanceof ChunkUnloadHandler)
 			{
-				this.chunkWorkerQueue.addChunkUnloadHandler((ChunkUnloadHandler) listener);
+				this.chunkUnloaderQueue.addChunkUnloadHandler((ChunkUnloadHandler) listener);
 			}
 		}
 		
 		this.chunkWorkerQueue.runTaskTimer(this, 20, 20);
+		this.chunkUnloaderQueue.runTaskTimer(this, 20, 19);
 	}
 	
 	@Override
