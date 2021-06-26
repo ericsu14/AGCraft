@@ -194,7 +194,7 @@ public class AGCraftPlugin extends JavaPlugin
 			}
 		}
 		
-		this.chunkWorkerQueue.runTaskTimer(this, 20, 10);
+		this.chunkWorkerQueue.runTaskTimer(this, 20, 20);
 	}
 	
 	@Override
