@@ -1,6 +1,5 @@
 package com.joojet.plugins.mobs.chunk;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -13,7 +12,6 @@ import org.bukkit.World.Environment;
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.mobs.chunk.data.ChunkData;
 
 public abstract class AbstractChunkWorkerQueue extends BukkitRunnable
@@ -33,14 +31,23 @@ public abstract class AbstractChunkWorkerQueue extends BukkitRunnable
 	public void run ()
 	{
 		List <ChunkData> finishedChunks = new ArrayList <ChunkData> ();
+		List <World> worlds = new ArrayList <World> ();
+		EnumSet <Environment> loadedEnvironments = EnumSet.noneOf(Environment.class);
 		HashSet <ChunkData> chunkCoordinateMap = new HashSet <ChunkData> ();
+		
 		for (int i = 0; i < chunkQueue.size(); ++i)
 		{
 			ChunkData chunkData = chunkQueue.get(i);
 			if (chunkData.canReadChunk())
 			{	
+				Environment environment = chunkData.getWorld().getEnvironment();
 				finishedChunks.add(chunkData);
 				chunkCoordinateMap.add(chunkData);
+				if (!loadedEnvironments.contains(environment))
+				{
+					loadedEnvironments.add(environment);
+					worlds.add(chunkData.getWorld());
+				}
 			}
 		}
 		
@@ -49,56 +56,27 @@ public abstract class AbstractChunkWorkerQueue extends BukkitRunnable
 			this.chunkQueue.removeAll(finishedChunks);
 			this.duplicateChunkDataChecker.removeAll(finishedChunks);
 			
-			new AsyncTask <List <World>> ()
+			/** For each world, get all entities in the world, filter them based on if they exist in the list of
+			 *  chunks and process them */
+			for (World world : worlds)
 			{
-				
-				/** Gets a list of worlds all of the finished chunks reside in */
-				@Override
-				protected List<World> getAsyncData() throws SQLException 
+				List <Entity> worldEntities = world.getEntities();
+				for (Entity entity : worldEntities)
 				{
-					List <World> worlds = new ArrayList <World> ();
-					EnumSet <Environment> loadedEnvironments = EnumSet.noneOf(Environment.class);
-					
-					World world;
-					for (ChunkData finishedChunk : finishedChunks)
+					// Construct a new ChunkData with the entity's current location and check it against
+					// the hashmap of loaded chunk coordinates
+					Location entityLocation = entity.getLocation();
+					ChunkData entityChunk = new ChunkData (toChunkCoord (entityLocation.getX()), 
+							toChunkCoord (entityLocation.getZ()), 
+							world, 
+							0);
+					// If the entity lies on a chunk being loaded, process it
+					if (chunkCoordinateMap.contains(entityChunk))
 					{
-						world = finishedChunk.getWorld();
-						if (!loadedEnvironments.contains(world.getEnvironment()))
-						{
-							worlds.add(world);
-							loadedEnvironments.add(world.getEnvironment());
-						}
-					}
-					return worlds;
-				}
-				
-				/** For each world, get all entities in the world, filter them based on if they exist in the list of
-				 *  chunks and process them */
-				@Override
-				protected void handlePromise(List<World> data) 
-				{
-					for (World world : data)
-					{
-						List <Entity> worldEntities = world.getEntities();
-						for (Entity entity : worldEntities)
-						{
-							// Construct a new ChunkData with the entity's current location and check it against
-							// the hashmap of loaded chunk coordinates
-							Location entityLocation = entity.getLocation();
-							ChunkData entityChunk = new ChunkData (toChunkCoord (entityLocation.getX()), 
-									toChunkCoord (entityLocation.getZ()), 
-									world, 
-									0);
-							// If the entity lies on a chunk being loaded, process it
-							if (chunkCoordinateMap.contains(entityChunk))
-							{
-								processEntity (entity);
-							}
-						}
+						processEntity (entity);
 					}
 				}
-				
-			}.runAsyncTask();
+			}
 		}
 	}
 	

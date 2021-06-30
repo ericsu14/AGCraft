@@ -9,7 +9,6 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import com.joojet.plugins.agcraft.asynctasks.AsyncTask;
 import com.joojet.plugins.agcraft.asynctasks.response.DatabaseResponse;
@@ -31,10 +30,7 @@ public class AsyncWarpPlayerTask extends AsyncTask<DatabaseResponse <Location>>
 	
 	public AsyncWarpPlayerTask (Player player, String locationName)
 	{
-		if (player.getBedSpawnLocation() != null)
-		{
-			this.playerBedSpawnLocation = player.getBedSpawnLocation().clone();
-		}
+		this.playerBedSpawnLocation = player.getBedSpawnLocation();
 		this.player = player;
 		this.playerUUID = player.getUniqueId();
 		this.locationName = locationName;
@@ -98,49 +94,44 @@ public class AsyncWarpPlayerTask extends AsyncTask<DatabaseResponse <Location>>
 			return;
 		}
 		
-		this.player.teleportAsync(location).thenRun(new BukkitRunnable () {
-
-			@Override
-			public void run() 
+		this.player.teleportAsync(location).thenRun( () -> 
+		{
+			List <Entity> ownedEntities = ScanEntities.ScanNearbyPlayerOwnedEntities(player, 40);
+				
+			player.playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, 0.4f, 1f);
+				
+			// Teleports any player-owned entities to the player's current location as well
+			StringBuilder teleportedEntities = new StringBuilder ();
+			int index = 0;
+			for (Entity entity : ownedEntities)
 			{
-				List <Entity> ownedEntities = ScanEntities.ScanNearbyPlayerOwnedEntities(player, 40);
-				
-				player.playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, 0.4f, 1f);
-				
-				// Teleports any player-owned entities to the player's current location as well
-				StringBuilder teleportedEntities = new StringBuilder ();
-				int index = 0;
-				for (Entity entity : ownedEntities)
+				entity.teleport(player.getLocation());
+					
+				// Appends an "and" to the last element of the string if there is more than one owned entity to teleport
+				if (index == ownedEntities.size() - 1 && ownedEntities.size() > 1)
 				{
-					entity.teleport(player.getLocation());
-					
-					// Appends an "and" to the last element of the string if there is more than one owned entity to teleport
-					if (index == ownedEntities.size() - 1 && ownedEntities.size() > 1)
-					{
-						teleportedEntities = new StringBuilder (teleportedEntities.substring(0, teleportedEntities.length() - 2));
-						teleportedEntities.append(ChatColor.GOLD);
-						teleportedEntities.append(" and ");
-					}
-					
-					teleportedEntities.append(ChatColor.AQUA);
-					teleportedEntities.append(entity.getName());
-					
-					// Appends a comma on the end of the string if there is more than one entity to teleport
-					if (index < ownedEntities.size() - 1)
-					{
-						teleportedEntities.append(", ");
-					}
-					
-					++index;
+					teleportedEntities = new StringBuilder (teleportedEntities.substring(0, teleportedEntities.length() - 2));
+					teleportedEntities.append(ChatColor.GOLD);
+					teleportedEntities.append(" and ");
 				}
-				// Notifies the player that their owned entities are teleported with them.
-				if (!ownedEntities.isEmpty())
+					
+				teleportedEntities.append(ChatColor.AQUA);
+				teleportedEntities.append(entity.getName());
+					
+				// Appends a comma on the end of the string if there is more than one entity to teleport
+				if (index < ownedEntities.size() - 1)
 				{
-					player.sendMessage(ChatColor.GOLD + "Teleported " + teleportedEntities.toString() + ChatColor.GOLD + " to your location. Please rejoin the server if they are invisible.");
+					teleportedEntities.append(", ");
 				}
-				player.sendMessage(ChatColor.GOLD + "Teleported you to location " + ChatColor.AQUA + locationName + ChatColor.GOLD + " at " + GetCoordinates.getCoordinates(player));
+					
+				++index;
 			}
-			
+			// Notifies the player that their owned entities are teleported with them.
+			if (!ownedEntities.isEmpty())
+			{
+				player.sendMessage(ChatColor.GOLD + "Teleported " + teleportedEntities.toString() + ChatColor.GOLD + " to your location. Please rejoin the server if they are invisible.");
+			}
+			player.sendMessage(ChatColor.GOLD + "Teleported you to location " + ChatColor.AQUA + locationName + ChatColor.GOLD + " at " + GetCoordinates.getCoordinates(player));
 		});
 	}
 
