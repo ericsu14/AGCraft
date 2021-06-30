@@ -12,8 +12,8 @@ public class ShrekHat extends Equipment
 	public ShrekHat (ChatColor color)
 	{
 		super (EquipmentType.SHREK_HAT, PlayerHead.SHREK, color);
-		this.setDisplayName("Shrek's Face");
-		this.addLoreToItemMeta("Somebody once told me the world is gonna roll me. I ain't the sharpest tool in the shed.");
+		this.setDisplayName("Shrek is Love, Shrek is Life");
+		this.addLoreToItemMeta("Shhhhh, it's all ogre now...");
 		this.addDefenseAttributes(2.0, 2.0, 0.10);
 		this.addUnsafeEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
 	}

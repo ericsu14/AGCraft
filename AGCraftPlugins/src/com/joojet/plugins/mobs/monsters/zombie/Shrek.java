@@ -39,14 +39,16 @@ public class Shrek extends LegendaryMob
 		this.weapon = new OgreAxe (this.color);
 		
 		this.setStat(MonsterStat.EXPERIENCE, 60.0);
+		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
+		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 300);
 		this.bossTheme = MusicType.SHREK;
 	}
 	
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
-		skills.add(new AttackBuffSkill     (2, 45, 20, 60, 8));
-		skills.add(new ResistanceBuffSkill (1, 45, 20, 60, 8));
+		skills.add(new AttackBuffSkill     (1, 45, 20, 60, 8));
+		skills.add(new ResistanceBuffSkill (0, 45, 20, 60, 8));
 		skills.add(new SpeedBuffSkill      (0, 45, 20, 60, 8));
 	}
 }
