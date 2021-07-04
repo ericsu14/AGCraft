@@ -3,6 +3,7 @@ package com.joojet.plugins.mobs.monsters.creeper.julyfourth;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
@@ -20,6 +21,7 @@ public class PatrioticCreeper extends MobEquipment implements CustomSkillUser
 	public PatrioticCreeper() 
 	{
 		super(MonsterType.PATRIOTIC_CREEPER);
+		this.addBiomes(Biome.THE_VOID);
 		this.setStat(MonsterStat.HEALTH, 8);
 		this.name = StringUtil.alternateTextColors("Patriotic Creeper", TextPattern.WORD, 
 				ChatColor.RED, ChatColor.WHITE, ChatColor.BLUE);

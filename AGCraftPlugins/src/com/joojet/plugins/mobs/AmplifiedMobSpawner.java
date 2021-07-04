@@ -174,7 +174,7 @@ public class AmplifiedMobSpawner implements AGListener, Listener, ServerConfigLo
 		if (entity instanceof LivingEntity)
 		{
 			MobEquipment entityEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) entity);
-			if (entityEquipment.containsFlag(MobFlag.DISABLE_EXPLOSION_GRIEFING))
+			if (entityEquipment != null && entityEquipment.containsFlag(MobFlag.DISABLE_EXPLOSION_GRIEFING))
 			{
 				event.blockList().clear();
 			}

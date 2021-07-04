@@ -8,7 +8,6 @@ import com.joojet.plugins.mobs.monsters.MonsterTypes;
 
 public class JulyFourthCreeperTypes extends MonsterTypes 
 {
-
 	public JulyFourthCreeperTypes(MonsterTypeInterpreter monsterTypeInterpreter,
 			SummoningScrollInterpreter summonTypeInterpreter) 
 	{

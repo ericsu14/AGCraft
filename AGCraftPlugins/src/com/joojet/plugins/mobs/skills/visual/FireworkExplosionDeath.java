@@ -26,7 +26,7 @@ public class FireworkExplosionDeath extends AbstractVisualSkill implements Passi
 		ItemStack fwItem = fwTypes.getRandomFirework(1, 0);
 		firework.setFireworkMeta((FireworkMeta)fwItem.getItemMeta());
 		firework.detonate();
-		return false;
+		return true;
 	}
 
 	@Override

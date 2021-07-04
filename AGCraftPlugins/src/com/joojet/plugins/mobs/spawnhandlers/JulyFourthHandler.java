@@ -29,6 +29,7 @@ public class JulyFourthHandler extends AbstractSpawnHandler
 				new PatrioticPillagerTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
 				new JulyFourthPhantomTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),
 				new JulyFourthCreeperTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter));
+		
 		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.SPAWNER_EGG, SpawnReason.REINFORCEMENTS,
 				SpawnReason.DEFAULT, SpawnReason.DISPENSE_EGG, SpawnReason.LIGHTNING, SpawnReason.PATROL,
 				SpawnReason.TRAP);
@@ -37,7 +38,6 @@ public class JulyFourthHandler extends AbstractSpawnHandler
 	/** Handles 4th of july mob spawns */
 	protected void handleSpawnEvent (LivingEntity entity, EntityType type, SpawnReason reason, Biome biome)
 	{
-		
 		// Summon a new fourth of july mob when roll is between a certain range
 		// or entity is a phantom
 		if (this.canSpawn(reason) || type == EntityType.PHANTOM || type == EntityType.CREEPER)

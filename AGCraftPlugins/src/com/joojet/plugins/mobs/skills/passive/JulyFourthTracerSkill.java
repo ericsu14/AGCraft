@@ -15,9 +15,9 @@ public class JulyFourthTracerSkill extends AbstractPassiveSkill implements Passi
 	public double modifyOutgoingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
 			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
-		ParticleUtil.spawnColoredParticlesOnEntity(target, 4, 128, 0, 0, Particle.REDSTONE);
+		ParticleUtil.spawnColoredParticlesOnEntity(target, 4, 255, 0, 0, Particle.REDSTONE);
 		ParticleUtil.spawnColoredParticlesOnEntity(target, 4, 255, 255, 255, Particle.REDSTONE);
-		ParticleUtil.spawnColoredParticlesOnEntity(target, 4, 0, 0, 128, Particle.REDSTONE);
+		ParticleUtil.spawnColoredParticlesOnEntity(target, 4, 0, 0, 255, Particle.REDSTONE);
 		ParticleUtil.spawnColoredParticlesOnEntity(target, 6, 0, 0, 0, Particle.FIREWORKS_SPARK);
 		return 0;
 	}
@@ -26,7 +26,10 @@ public class JulyFourthTracerSkill extends AbstractPassiveSkill implements Passi
 	public double modifyIncomingDamageEvent(double damage, Entity source, LivingEntity damager, LivingEntity target,
 			MobEquipment damagerEquipment, MobEquipment targetEquipment) 
 	{
-		// TODO Auto-generated method stub
+		ParticleUtil.spawnColoredParticlesOnEntity(target, 4, 255, 0, 0, Particle.REDSTONE);
+		ParticleUtil.spawnColoredParticlesOnEntity(target, 4, 255, 255, 255, Particle.REDSTONE);
+		ParticleUtil.spawnColoredParticlesOnEntity(target, 4, 0, 0, 255, Particle.REDSTONE);
+		ParticleUtil.spawnColoredParticlesOnEntity(target, 6, 0, 0, 0, Particle.FIREWORKS_SPARK);
 		return 0;
 	}
 	
