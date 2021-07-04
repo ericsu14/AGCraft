@@ -40,6 +40,7 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.anvil.AnvilDropSkill;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveEnvironmental;
+import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveOnDeath;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveRegeneration;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillTask;
@@ -102,6 +103,29 @@ public class CustomSkillsListener implements AGListener, Listener, ChunkEntityHa
 	public void onEntityDeath (EntityDeathEvent entityDeathEvent)
 	{
 		Entity deathEntity = entityDeathEvent.getEntity();
+		if (deathEntity instanceof LivingEntity)
+		{
+			LivingEntity livingDeathEntity = (LivingEntity) deathEntity;
+			MobEquipment deathEntityEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(livingDeathEntity);
+			
+			boolean isDead = true;
+			if (deathEntityEquipment != null && this.mobSkillRunner.containsSkill(livingDeathEntity))
+			{
+				for (AbstractSkill skill : this.mobSkillRunner.getSkillTask(livingDeathEntity.getUniqueId()).getSkillList())
+				{
+					if (skill instanceof PassiveOnDeath)
+					{
+						isDead &= ((PassiveOnDeath)skill).handleDeathEvent(livingDeathEntity, deathEntityEquipment);
+					}
+				}
+			}
+			
+			if (!isDead)
+			{
+				entityDeathEvent.setCancelled(true);
+				return;
+			}
+		}
 		if (deathEntity != null && deathEntity instanceof LivingEntity)
 		{
 			this.mobSkillRunner.removeSkillFromEntity((LivingEntity) deathEntity);

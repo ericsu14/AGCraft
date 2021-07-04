@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.pillager.julyfourth;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
@@ -9,9 +11,12 @@ import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.weapons.FireworkLauncher;
-import com.joojet.plugins.mobs.monsters.factions.classifications.UncommonMob;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.passive.JulyFourthTracerSkill;
 
-public class PatrioticPillager extends UncommonMob
+public class PatrioticPillager extends MobEquipment implements CustomSkillUser
 {
 	public PatrioticPillager ()
 	{
@@ -25,5 +30,11 @@ public class PatrioticPillager extends UncommonMob
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.weapon = new FireworkLauncher (ChatColor.GOLD);
 		this.setDropRates(0.0f, 0.0f, 0.0f, 0.0f, 0.25f, 0.85f);
+	}
+
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
+		skills.add(new JulyFourthTracerSkill ());
 	}
 }

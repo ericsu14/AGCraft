@@ -1,5 +1,7 @@
 package com.joojet.plugins.mobs.monsters.zombie.julyfourth;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
@@ -14,9 +16,12 @@ import com.joojet.plugins.mobs.equipment.chest.PatrioticRedJacket;
 import com.joojet.plugins.mobs.equipment.head.USAHat;
 import com.joojet.plugins.mobs.equipment.leggings.PatrioticWhiteLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.PropFirework;
-import com.joojet.plugins.mobs.monsters.factions.classifications.UncommonMob;
+import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
+import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.passive.JulyFourthTracerSkill;
 
-public class PatrioticZombie extends UncommonMob
+public class PatrioticZombie extends MobEquipment implements CustomSkillUser
 {	
 	public PatrioticZombie ()
 	{
@@ -41,6 +46,12 @@ public class PatrioticZombie extends UncommonMob
 		this.offhand = new PropFirework();
 		
 		this.addMonsterDrops(new FireworkDrop (0.75, 16, 16));
+	}
+
+	@Override
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
+		skills.add(new JulyFourthTracerSkill ());
 	}
 
 }

@@ -155,9 +155,9 @@ public class AmplifiedMobSpawner implements AGListener, Listener, ServerConfigLo
 		}
 	}
 	
-	/** Prevents Giant-caused fireball explosions from griefing the world */
+	/** Prevents explosions from griefing the world if certain conditions are satisfied*/
 	@EventHandler
-	public void cancelGiantGriefing (EntityExplodeEvent event)
+	public void cancelMobGriefing (EntityExplodeEvent event)
 	{
 		Entity entity = event.getEntity();
 		
@@ -166,6 +166,15 @@ public class AmplifiedMobSpawner implements AGListener, Listener, ServerConfigLo
 			LargeFireball fireball = (LargeFireball) entity;
 			if (fireball.getShooter() != null
 					&& fireball.getYield() > 1.5F)
+			{
+				event.blockList().clear();
+			}
+		}
+		
+		if (entity instanceof LivingEntity)
+		{
+			MobEquipment entityEquipment = this.monsterTypeInterpreter.getMobEquipmentFromEntity((LivingEntity) entity);
+			if (entityEquipment.containsFlag(MobFlag.DISABLE_EXPLOSION_GRIEFING))
 			{
 				event.blockList().clear();
 			}

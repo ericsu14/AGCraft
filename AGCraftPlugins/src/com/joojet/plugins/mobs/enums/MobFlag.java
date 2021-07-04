@@ -203,7 +203,10 @@ public enum MobFlag implements CustomAttribute, CustomSkillUser
 		{
 			skills.add(new DisableDrowningSkill());
 		}
-	};
+	},
+	/** When enabled, entities with this flag on will not grief any blocks when set to explode */
+	DISABLE_EXPLOSION_GRIEFING
+	;
 	
 	/** Does nothing when the mobflag does not have a custom definition specific for that attribute */
 	@Override
