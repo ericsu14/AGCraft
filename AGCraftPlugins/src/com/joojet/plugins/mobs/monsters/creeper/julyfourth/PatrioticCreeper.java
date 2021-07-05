@@ -14,7 +14,7 @@ import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.passive.JulyFourthTracerSkill;
-import com.joojet.plugins.mobs.skills.visual.FireworkExplosionDeath;
+import com.joojet.plugins.mobs.skills.visual.FireworkCreeperExplosionDeath;
 
 public class PatrioticCreeper extends MobEquipment implements CustomSkillUser
 {
@@ -31,7 +31,7 @@ public class PatrioticCreeper extends MobEquipment implements CustomSkillUser
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
-		skills.add(new FireworkExplosionDeath ());
+		skills.add(new FireworkCreeperExplosionDeath());
 		skills.add(new JulyFourthTracerSkill ());
 	}
 

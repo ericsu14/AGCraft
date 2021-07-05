@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
@@ -32,7 +33,7 @@ public class PatrioticSkeleton extends MobEquipment implements CustomSkillUser
 		this.setStat(MonsterStat.HEALTH, 4.0);
 		
 		this.addBiomes(Biome.THE_VOID);
-		
+		this.addTargetsToHitList(EntityType.PHANTOM);
 		this.addPotionEffect(CustomPotionEffect.STRENGTH,
 				CustomPotionEffect.SPEED);
 		

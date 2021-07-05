@@ -22,6 +22,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
@@ -41,6 +42,7 @@ import com.joojet.plugins.mobs.skills.attack.anvil.AnvilDropSkill;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveEnvironmental;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveOnDeath;
+import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveOnExplode;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveRegeneration;
 import com.joojet.plugins.mobs.skills.runnable.MobSkillTask;
@@ -99,6 +101,40 @@ public class CustomSkillsListener implements AGListener, Listener, ChunkEntityHa
 		this.loadCustomSkillsOntoEntity(customMobEvent.getEntity());
 	}
 	
+	/** Handles custom entity explosion event handlers before deallocating the entity from the MobSkillRunner */
+	@EventHandler
+	public void onEntityExplosion (EntityExplodeEvent entityExplosionEvent)
+	{
+		LivingEntity entity = this.getLivingEntity(entityExplosionEvent.getEntity());
+		MobEquipment entityEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(entity);
+		
+		if (entity == null || entityEquipment == null)
+		{
+			return;
+		}
+		
+		if (this.mobSkillRunner.containsSkill(entity))
+		{
+			boolean isDead = true;
+			for (AbstractSkill skill : this.mobSkillRunner.getSkillTask(entity.getUniqueId()).getSkillList())
+			{
+				if (skill instanceof PassiveOnExplode)
+				{
+					isDead &= ((PassiveOnExplode) skill).handleExplosionEvent(entity, entityEquipment);
+				}
+			}
+			
+			if (!isDead)
+			{
+				entityExplosionEvent.setCancelled(true);
+				return;
+			}
+		}
+		
+		this.mobSkillRunner.removeSkillFromEntity(entity);
+	}
+	
+	/** Handles custom onEntityDeath event handlers before deallocating the enttiy from the MobSkillRunner */
 	@EventHandler (priority = EventPriority.LOW)
 	public void onEntityDeath (EntityDeathEvent entityDeathEvent)
 	{

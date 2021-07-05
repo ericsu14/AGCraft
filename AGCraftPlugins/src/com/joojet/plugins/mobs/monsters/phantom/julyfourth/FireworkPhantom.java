@@ -8,7 +8,6 @@ import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
-import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
@@ -23,9 +22,8 @@ public class FireworkPhantom extends MobEquipment implements CustomSkillUser
 	{
 		super (MonsterType.FIREWORK_PHANTOM);
 		this.addBiomes(Biome.THE_VOID);
-		this.setStat(MonsterStat.HEALTH, 6.0);
-		this.addMobFlags(MobFlag.ON_FIRE);
-		this.name = StringUtil.alternateTextColors("Shoot Me", TextPattern.WORD, ChatColor.RED, ChatColor.WHITE, ChatColor.BLUE);
+		this.setStat(MonsterStat.HEALTH, 4.0);
+		this.name = StringUtil.alternateTextColors("Shoot Me!", TextPattern.CHARACTER, ChatColor.RED, ChatColor.WHITE, ChatColor.BLUE);
 		
 		this.addTargetsToHitList(EntityType.SKELETON, EntityType.ZOMBIE, EntityType.SPIDER, EntityType.CAVE_SPIDER,
 				EntityType.WITCH, EntityType.CREEPER, EntityType.CAVE_SPIDER, EntityType.ZOMBIFIED_PIGLIN,

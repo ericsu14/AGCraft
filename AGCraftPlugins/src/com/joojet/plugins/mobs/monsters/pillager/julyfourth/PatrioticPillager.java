@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
@@ -24,6 +25,7 @@ public class PatrioticPillager extends MobEquipment implements CustomSkillUser
 		this.addBiomes(Biome.THE_VOID);
 		
 		this.addMobFlags(MobFlag.RANDOM_FIREWORK_ON_OFFHAND);
+		this.addTargetsToHitList(EntityType.PHANTOM);
 		
 		this.name = StringUtil.alternateTextColors("Patriotic Pillager", 
 				TextPattern.WORD, ChatColor.RED, ChatColor.WHITE, ChatColor.BLUE);
