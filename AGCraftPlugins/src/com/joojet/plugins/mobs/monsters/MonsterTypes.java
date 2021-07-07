@@ -65,7 +65,6 @@ public abstract class MonsterTypes implements Cloneable
 	public MobEquipment getRandomEquipment (Biome biome, MobSkillRunner mobSkillRunner)
 	{
 		EnumSet <Biome> spawnBiomes;
-		// ArrayList <WeightedMob> mobList = new ArrayList <WeightedMob> ();
 		WeightedList <WeightedMob, MobEquipment> mobList = new WeightedList <WeightedMob, MobEquipment> ();
 		
 		for (WeightedMob mob : equipmentList)
