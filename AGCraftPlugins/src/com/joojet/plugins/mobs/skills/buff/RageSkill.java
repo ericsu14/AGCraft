@@ -9,15 +9,17 @@ import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveAttack;
+import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveEnvironmental;
 import com.joojet.plugins.mobs.skills.passive.interfaces.PassiveProjectile;
 import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 
-public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, PassiveAttack
+public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, PassiveAttack, PassiveEnvironmental
 {
 	/** Used to determine if a mob is enraged */
 	protected boolean enraged;
@@ -25,6 +27,8 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, P
 	protected double threshold;
 	/** Base damage amplifier used to increase incoming and outgoing damage when enraged */
 	protected final double baseDamageAmplifier = 0.10;
+	/** Added damage bonus multiplier towards all incoming attacks */
+	protected final double incomingDamageBonus = 1.5;
 	
 	/** Allows a monster to temporarily increase its strength and health once its
 	 *  base health drops below a certain percentage.
@@ -122,7 +126,7 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, P
 		double bonusDamage = 0.0;
 		if (this.enraged)
 		{
-			bonusDamage = (damage * ((this.potionStrength + 1) * this.baseDamageAmplifier));
+			bonusDamage = (damage * this.getDamageAmplifier());
 			ParticleUtil.spawnColoredParticlesOnEntity(target, 10, 0, 0, 0, Particle.CRIT);
 			damager.getWorld().playSound(damager.getLocation(), Sound.ENTITY_PLAYER_ATTACK_CRIT, 1.0f, 1.0f);
 		}
@@ -138,11 +142,32 @@ public class RageSkill extends AbstractBuffSkill implements PassiveProjectile, P
 		
 		if (this.enraged)
 		{
-			bonusDamage = (damage * ((this.potionStrength + 1) * this.baseDamageAmplifier));
+			bonusDamage = (damage * (this.getDamageAmplifier() * this.incomingDamageBonus));
 			ParticleUtil.spawnColoredParticlesOnEntity(target, 20, 128, 0, 0, Particle.REDSTONE);
 			target.getWorld().playSound(target.getLocation(), Sound.BLOCK_STONE_BREAK, 1.0f, 1.0f);
 		}
 		return bonusDamage;
+	}
+	
+	/** Custom monsters who are enraged take bonus environmental damage */
+	@Override
+	public double modifyIncomingEnvironmentalDamageEvent(double damage, DamageCause damageReason, LivingEntity target,
+			MobEquipment targetEquipment) 
+	{
+		double bonusDamage = 0.0;
+		
+		if (this.enraged)
+		{
+			bonusDamage = (damage * (this.getDamageAmplifier() * this.incomingDamageBonus));
+		}
+		
+		return bonusDamage;
+	}
+	
+	/** Gets the bonus damage amplifier */
+	private double getDamageAmplifier ()
+	{
+		return (this.potionStrength + 1) * this.baseDamageAmplifier;
 	}
 
 }
