@@ -23,6 +23,7 @@ import com.joojet.plugins.mobs.monsters.piglin.PiglinTypes;
 import com.joojet.plugins.mobs.monsters.skeleton.SkeletonTypes;
 import com.joojet.plugins.mobs.monsters.spider.SpiderTypes;
 import com.joojet.plugins.mobs.monsters.squid.SquidTypes;
+import com.joojet.plugins.mobs.monsters.stray.StrayTypes;
 import com.joojet.plugins.mobs.monsters.wither_skeleton.WitherSkeletonTypes;
 import com.joojet.plugins.mobs.monsters.zombie.ZombieTypes;
 import com.joojet.plugins.mobs.monsters.zombie_pigmen.ZombiePigmenTypes;
@@ -56,7 +57,8 @@ public class AmplifiedMobHandler extends AbstractSpawnHandler
 				new PiglinTypes(this.monsterTypeInterpreter, this.summonTypeInterpreter),
 				new HoglinTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),
 				new ChickenTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),
-				new SquidTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter));
+				new SquidTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new StrayTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter));
 		
 		this.addSpawnReasons(SpawnReason.NATURAL, SpawnReason.BUILD_IRONGOLEM,
 				SpawnReason.BUILD_SNOWMAN, SpawnReason.VILLAGE_DEFENSE, SpawnReason.BREEDING,
