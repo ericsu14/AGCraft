@@ -32,13 +32,13 @@ public class FearlessSkill extends AbstractPassiveSkill
 		// Cast this into a NMS entity monster
 		EntityInsentient nmsMob = ((CraftMob) caster).getHandle();
 		// Attempts to remove the PANIC pathfinder goal from the chicken
-		Object[] rawGoals = nmsMob.bO.d().toArray();
+		Object[] rawGoals = nmsMob.bQ.d().toArray();
 		PathfinderGoalWrapped[] goals = Arrays.copyOf(rawGoals, rawGoals.length, PathfinderGoalWrapped[].class);
 		for (PathfinderGoalWrapped goal : goals)
 		{
 			if (goal.j() instanceof PathfinderGoalPanic)
 			{
-				nmsMob.bO.a(goal.j());
+				nmsMob.bQ.a(goal.j());
 				removed = true;
 			}
 		}

@@ -16,6 +16,8 @@ public interface NMSSkillUser
 	 *  Usage Example:
 	 *  nmsMob.bO.a (weight, goal); // Goal selector changed to bO in 1.17 versions
 	 *  
+	 *  nmsMob.bQ.a (weight, goal); // In 1.17.1, Goal selector is now named bQ.
+	 *  
 	 *  @param nmsMob CraftBukkit instance of the entity that is spawned
 	 *  @param entity Bukkit instance of the entity that is spawned*/
 	public void loadNMSSkills (EntityInsentient nmsMob, LivingEntity entity);
