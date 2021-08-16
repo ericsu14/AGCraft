@@ -49,7 +49,7 @@ public class TheBruinBear extends UCLAFaction
 				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 0.15, 1, 1));
 		this.setStat(MonsterStat.EXPERIENCE, 200.0);
 		this.ignoreList.clear();
-		this.bossTheme = MusicType.HAIKYUU;
+		this.bossTheme = MusicType.BLINDED_BY_LIGHT;
 	}
 
 	@Override

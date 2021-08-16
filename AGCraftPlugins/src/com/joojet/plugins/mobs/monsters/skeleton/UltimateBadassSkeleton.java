@@ -58,7 +58,7 @@ public class UltimateBadassSkeleton extends LegendaryMob
 				new MonsterDrop (Material.GOLDEN_CARROT, 0.075, 3, 16));
 		
 		this.setStat(MonsterStat.EXPERIENCE, 50.0);
-		this.bossTheme = MusicType.HAIKYUU;
+		this.bossTheme = MusicType.BLINDED_BY_LIGHT;
 	}
 	
 	@Override

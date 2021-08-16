@@ -9,7 +9,8 @@ public enum MusicEndingType {
 	HAIKYUU_END ("boss_ending.haikyuu_end", "0:17"),
 	BARNEY_END ("boss_ending.barney_end", "0:08"),
 	SHREK_END ("boss_ending.shrek_end", "0:14"),
-	OUTLAW_END ("boss_ending.outlaw_end", "0:08");
+	OUTLAW_END ("boss_ending.outlaw_end", "0:08"),
+	BLINDED_BY_LIGHT_END ("boss_ending.blinded_by_light_end", "0:11");
 	
 	protected String namespace;
 	

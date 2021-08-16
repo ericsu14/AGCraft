@@ -3,13 +3,14 @@ package com.joojet.plugins.music.enums;
 import com.joojet.plugins.music.duration.MusicDuration;
 
 public enum MusicType {
-	GORO_THEME ("boss.goro_theme", "2:40", MusicEndingType.GORO_THEME_END),
+	GORO_THEME ("boss.goro_theme", "2:31", MusicEndingType.GORO_THEME_END),
 	KUZE_THEME ("boss.kuze_theme", "3:56", MusicEndingType.KUZE_THEME_END),
-	DOOM_GUY ("boss.doom_guy", "1:41", MusicEndingType.DOOM_GUY_END),
+	DOOM_GUY ("boss.doom_guy", "1:35", MusicEndingType.DOOM_GUY_END),
 	HAIKYUU ("boss.haikyuu", "4:01", MusicEndingType.HAIKYUU_END),
 	BARNEY ("boss.barney", "2:30", MusicEndingType.BARNEY_END),
 	SHREK ("boss.shrek", "3:20", MusicEndingType.SHREK_END),
 	OUTLAW ("boss.outlaw", "3:22", MusicEndingType.OUTLAW_END),
+	BLINDED_BY_LIGHT ("boss.blinded_by_light", "3:19", MusicEndingType.BLINDED_BY_LIGHT_END),
 	BAKA_MITAI ("fireworks.baka_mitai", "4:48"),
 	FALLING_IN_LOVE ("fireworks.falling_in_love", "3:01"),
 	FLY_ME_TO_THE_MOON ("fireworks.fly_me_to_the_moon", "2:28"),

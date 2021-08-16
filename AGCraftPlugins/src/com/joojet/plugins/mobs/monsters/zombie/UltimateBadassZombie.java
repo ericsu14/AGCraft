@@ -51,7 +51,7 @@ public class UltimateBadassZombie extends LegendaryMob
 				new MonsterDrop (Material.GOLDEN_CARROT, 0.10, 3, 16));
 		
 		this.setStat (MonsterStat.EXPERIENCE, 50.0);
-		this.bossTheme = MusicType.GORO_THEME;
+		this.bossTheme = MusicType.BLINDED_BY_LIGHT;
 	}
 	
 	@Override
