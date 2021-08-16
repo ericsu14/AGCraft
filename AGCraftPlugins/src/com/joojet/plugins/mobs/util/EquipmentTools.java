@@ -50,6 +50,11 @@ public class EquipmentTools
 	/** Total number of AIR blocks that must be above the entity's position
 	 *  upon spawning any entity that has a Y_LIMIT stat. */
 	public static double openAirRequirement = 36.0;
+	/**
+	 * Natural mob target mappings for each known entity in the game for preventing duplicate pathfinding goals
+	 * from conflicting with each other
+	 */
+	public static NaturalHostileMobMappings naturalHostileMobMappings = new NaturalHostileMobMappings();
 	
 	/** Equips a living entity with the items stored in a MobEquipment object
 	 * 	@param entity - Entity we are equipping custom armor to
@@ -293,7 +298,7 @@ public class EquipmentTools
 				for (EntityType victim : hitlist)
 				{
 					Class <?> mobClass = ConvertEntity.getNMSEntity(victim);
-					if (mobClass != null)
+					if (mobClass != null && !naturalHostileMobMappings.isNaturallyHostile(entity.getType(), victim))
 					{
 						nmsMob.bP.a (5, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
 					}

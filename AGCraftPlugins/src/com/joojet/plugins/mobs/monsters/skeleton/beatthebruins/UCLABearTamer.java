@@ -58,7 +58,7 @@ public class UCLABearTamer extends UCLAFaction
 		this.setStat(MonsterStat.MONSTER_CLASSIFIER, MonsterClassifier.LEGENDARY);
 		
 		this.addMonsterDrops(new MonsterDrop (new TheTrojanDestroyer(), 0.05));
-		this.bossTheme = MusicType.HAIKYUU;
+		this.bossTheme = MusicType.BLINDED_BY_LIGHT;
 	}
 	
 	@Override

@@ -30,6 +30,6 @@ public abstract class AlliedMob extends MobEquipment
 				EntityType.SLIME, EntityType.MAGMA_CUBE, EntityType.ENDERMITE, EntityType.PHANTOM,
 				EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER, EntityType.GIANT, EntityType.HOGLIN,
 				EntityType.VEX, EntityType.PIGLIN_BRUTE, EntityType.ZOGLIN, EntityType.ENDER_DRAGON,
-				EntityType.ZOMBIE_VILLAGER, EntityType.SHULKER, EntityType.SHULKER_BULLET);
+				EntityType.ZOMBIE_VILLAGER, EntityType.SHULKER);
 	}
 }
