@@ -23,7 +23,7 @@ public class USCArcher extends USCFaction
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 8.0);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.20);
-		this.setStat(MonsterStat.BASE_SPEED, 0.17);
+		this.setStat(MonsterStat.BASE_SPEED, 0.20);
 		this.helmet = new USCTrojan (this.color);
 		this.chestplate = new USCFootballTunic (this.color);
 		this.leggings = new USCFootballTrousers (this.color);
