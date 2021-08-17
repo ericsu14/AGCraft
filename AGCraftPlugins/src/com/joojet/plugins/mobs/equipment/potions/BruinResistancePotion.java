@@ -20,7 +20,7 @@ public class BruinResistancePotion extends SplashPotionEquipment
 	{
 		this.setDisplayName(UCLAFaction.generateUCLADisplayName("Resistance Potion"));
 		this.addPotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 2400, 0);
-		this.setColor(Color.AQUA);
+		this.setColor(Color.GRAY);
 	}
 	
 	
