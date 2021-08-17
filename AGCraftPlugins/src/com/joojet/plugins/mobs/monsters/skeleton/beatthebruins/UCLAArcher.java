@@ -3,7 +3,6 @@ package com.joojet.plugins.mobs.monsters.skeleton.beatthebruins;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
-import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.BruinFootballBoots;
@@ -20,11 +19,11 @@ public class UCLAArcher extends UCLAFaction
 		super (MonsterType.UCLA_ARCHER);
 		this.name = "The " + generateUCLADisplayName("Archer");
 		this.addBiomes(Biome.THE_VOID);
-		this.addPotionEffect(CustomPotionEffect.SPEED);
 		this.setStat(MonsterStat.HEALTH, 16.0);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 0.50);
 		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 8.0);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
+		this.setStat(MonsterStat.BASE_SPEED, 0.17);
 		this.color = ChatColor.AQUA;
 		this.helmet = new BruinHead ();
 		this.chestplate = new BruinTunic (this.color);

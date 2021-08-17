@@ -36,7 +36,8 @@ public class UCLABearTamer extends UCLAFaction
 		this.setStat(MonsterStat.EXPERIENCE, 50.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 100.0);
 		this.setStat(MonsterStat.Y_LIMIT, 55);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 10.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 6.0);
+		this.setStat(MonsterStat.BASE_SPEED, 0.17);
 		this.setStat(MonsterStat.ARROW_CRITICAL_CHANCE, 1.00);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
 		this.setStat(MonsterStat.HEALTH, 40.0);

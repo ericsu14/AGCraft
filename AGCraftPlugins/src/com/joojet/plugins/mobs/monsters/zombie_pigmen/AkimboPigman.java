@@ -4,7 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 
-import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -25,8 +24,6 @@ public class AkimboPigman extends LegendaryMob
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		// Do not naturally target players
 		this.hitlist.remove(EntityType.PLAYER);
-		
-		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);

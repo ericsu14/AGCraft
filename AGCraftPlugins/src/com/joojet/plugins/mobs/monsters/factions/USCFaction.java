@@ -15,9 +15,7 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
-import com.joojet.plugins.mobs.skills.buff.AlliedAttackBuffSkill;
-import com.joojet.plugins.mobs.skills.buff.AlliedResistanceBuffSkill;
-import com.joojet.plugins.mobs.skills.buff.AlliedSpeedBuffSkill;
+import com.joojet.plugins.mobs.skills.attack.potionthrow.TrojanPotionThrow;
 import com.joojet.plugins.mobs.skills.passive.USCTracerSkill;
 
 public abstract class USCFaction extends MobEquipment implements CustomSkillUser
@@ -62,10 +60,9 @@ public abstract class USCFaction extends MobEquipment implements CustomSkillUser
 	}
 	
 	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
-		skills.add(new AlliedAttackBuffSkill(0, 60, 16, 60, 8));
-		skills.add(new AlliedResistanceBuffSkill (0, 60, 16, 60, 8));
-		skills.add(new AlliedSpeedBuffSkill (0, 60, 16, 60, 8));
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
+		skills.add(new TrojanPotionThrow(16, 30, 3, 1));
 		skills.add(new USCTracerSkill ());
 	}
 }

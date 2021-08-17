@@ -33,7 +33,7 @@ public class TheTerminator extends MythicMob
 		this.addTargetsToHitList(EntityType.PLAYER);
 		this.addBiomes(Biome.NETHER_WASTES, Biome.SOUL_SAND_VALLEY, Biome.CRIMSON_FOREST, Biome.WARPED_FOREST,
 				Biome.BASALT_DELTAS);
-		this.addPotionEffect(CustomPotionEffect.SPEED, CustomPotionEffect.UNDEAD_HEAL);
+		this.addPotionEffect(CustomPotionEffect.UNDEAD_HEAL);
 		
 		this.helmet = new CyborgPigmanHead (this.color);
 		this.chestplate = new DarkNetheriteChestplate (this.color);

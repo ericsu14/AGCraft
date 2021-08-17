@@ -7,7 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.drops.MonsterDrop;
-import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -38,7 +37,6 @@ public class UltimateBadassSkeleton extends LegendaryMob
 		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 180);
 		
 		this.addBiomes(Biome.THE_VOID);
-		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
 		// Weapon
 		this.weapon = new SpiritualFantasy (this.color);

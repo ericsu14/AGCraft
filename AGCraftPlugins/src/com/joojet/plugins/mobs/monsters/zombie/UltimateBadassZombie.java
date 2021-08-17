@@ -8,7 +8,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Biome;
 
 import com.joojet.plugins.mobs.drops.MonsterDrop;
-import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
@@ -33,11 +32,9 @@ public class UltimateBadassZombie extends LegendaryMob
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		this.setStat(MonsterStat.SPAWN_LIMIT, 3);
 		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 180);
+		this.setStat(MonsterStat.BASE_SPEED, 0.17);
 		
 		this.addBiomes(Biome.THE_VOID);
-		
-		// Custom potion effects
-		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
 		// Equipment
 		this.weapon = new SpiritualTravesty (this.color);

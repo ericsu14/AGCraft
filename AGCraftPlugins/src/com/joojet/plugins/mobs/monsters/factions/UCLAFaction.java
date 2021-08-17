@@ -15,8 +15,7 @@ import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
-import com.joojet.plugins.mobs.skills.buff.AttackBuffSkill;
-import com.joojet.plugins.mobs.skills.buff.ResistanceBuffSkill;
+import com.joojet.plugins.mobs.skills.attack.potionthrow.BruinPotionThrow;
 import com.joojet.plugins.mobs.skills.passive.UCLATracerSkill;
 
 public abstract class UCLAFaction extends MobEquipment implements CustomSkillUser
@@ -55,8 +54,7 @@ public abstract class UCLAFaction extends MobEquipment implements CustomSkillUse
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
-		skills.add(new AttackBuffSkill(0, 60, 16, 60, 8));
-		skills.add(new ResistanceBuffSkill (1, 60, 16, 60, 8));
+		skills.add(new BruinPotionThrow (16, 30, 2, 1));
 		skills.add(new UCLATracerSkill ());
 	}
 }

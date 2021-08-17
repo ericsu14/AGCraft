@@ -23,6 +23,7 @@ public class USCWarrior extends USCFaction
 	{
 		super (MonsterType.USC_WARRIOR);
 		this.setStat(MonsterStat.HEALTH, 14.0);
+		this.setStat(MonsterStat.BASE_SPEED, 0.17);
 		
 		this.name = generateUSCDisplayName("Trojan");
 		

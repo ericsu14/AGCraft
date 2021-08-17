@@ -22,6 +22,7 @@ import com.joojet.plugins.mobs.equipment.weapons.EternalSpiritOfTroy;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.monsters.factions.USCFaction;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
+import com.joojet.plugins.mobs.skills.attack.potionthrow.TrojanPotionThrow;
 import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.mobs.skills.buff.UndeadSelfHealSkill;
 import com.joojet.plugins.mobs.skills.summon.SummonTrojansSkill;
@@ -67,7 +68,8 @@ public class EternalTrojanArcher extends USCFaction
 		super.loadCustomSkills(skills);
 		skills.add(new TeleportSkill (64, 20, Integer.MAX_VALUE, 1));
 		skills.add(new UndeadSelfHealSkill (1, 30, 16, 0.35));
-		skills.add(new SummonTrojansSkill (16, 300, Integer.MAX_VALUE, 4, 4));
+		skills.add(new SummonTrojansSkill (16, 300, Integer.MAX_VALUE, 4, 3));
 		skills.add(new RageSkill (0, 60, 0.25));
+		skills.add(new TrojanPotionThrow(24, 30, 4, 5));
 	}
 }
