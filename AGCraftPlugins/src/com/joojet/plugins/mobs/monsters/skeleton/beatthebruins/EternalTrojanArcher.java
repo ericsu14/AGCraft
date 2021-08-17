@@ -70,6 +70,6 @@ public class EternalTrojanArcher extends USCFaction
 		skills.add(new UndeadSelfHealSkill (1, 30, 16, 0.35));
 		skills.add(new SummonTrojansSkill (16, 300, Integer.MAX_VALUE, 4, 3));
 		skills.add(new RageSkill (0, 60, 0.25));
-		skills.add(new TrojanPotionThrow(24, 30, 4, 5));
+		skills.add(new TrojanPotionThrow(24, 30, Integer.MAX_VALUE, 5));
 	}
 }

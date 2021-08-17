@@ -53,7 +53,7 @@ public class BruinPotionThrow extends AbstractThrowPotionSkill {
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return !allies.isEmpty();
+		return !allies.isEmpty() && !enemies.isEmpty();
 	}
 
 	@Override
