@@ -41,6 +41,7 @@ public class TrojanPotionThrow extends AbstractThrowPotionSkill {
 	public List<LivingEntity> getTargets(LivingEntity caster, List<LivingEntity> entities) 
 	{
 		return entities.stream().filter(new FilterLineOfSight (caster)).
+				filter(ent -> !ent.equals(caster)).
 				sorted(new ClosestProximity(caster.getLocation().clone())).toList();
 	}
 

@@ -31,7 +31,7 @@ public class TheBruinBear extends UCLAFaction
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 20.0);
 		this.setStat(MonsterStat.BASE_ARMOR, 14.0);
 		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 8.0);
-		this.setStat(MonsterStat.BASE_SPEED, 0.20);
+		this.setStat(MonsterStat.BASE_SPEED, 0.23);
 		this.addTargetsToHitList(EntityType.CREEPER, EntityType.IRON_GOLEM);
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.SHOW_NAME, MobFlag.PERSISTENT_ATTACKER, MobFlag.DISABLE_PERSISTENCE);
 		this.addBiomes(Biome.THE_VOID);
