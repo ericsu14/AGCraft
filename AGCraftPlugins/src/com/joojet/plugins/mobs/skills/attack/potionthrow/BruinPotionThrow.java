@@ -10,6 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import com.joojet.plugins.agcraft.enums.TextPattern;
 import com.joojet.plugins.agcraft.util.StringUtil;
 import com.joojet.plugins.mobs.DamageDisplayListener;
+import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.ThrowablePotionType;
 import com.joojet.plugins.mobs.equipment.potions.BruinResistancePotion;
 import com.joojet.plugins.mobs.equipment.potions.BruinStrengthPotion;
@@ -59,7 +60,8 @@ public class BruinPotionThrow extends AbstractThrowPotionSkill {
 	@Override
 	protected boolean checkConditions(LivingEntity caster) 
 	{
-		return this.checkHealthIsBelowThreshold(caster, 0.75);
+		return this.spawnWeight.getAverageThreatScore(caster) >= MonsterClassifier.MYTHIC.getThreshold() 
+				&& this.checkHealthIsBelowThreshold(caster, 0.50);
 	}
 
 }
