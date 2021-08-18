@@ -6,7 +6,6 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 
-import com.joojet.plugins.mobs.enums.CustomPotionEffect;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
 import com.joojet.plugins.mobs.equipment.boots.BruinFootballBoots;
@@ -32,7 +31,6 @@ public class UCLAJock extends UCLAFaction
 		this.color = ChatColor.AQUA;
 		
 		this.addBiomes(Biome.THE_VOID);
-		this.addPotionEffect(CustomPotionEffect.SPEED);
 		
 		this.weapon = new BruinSword (this.color);
 		this.helmet = new BruinHead ();
