@@ -42,7 +42,7 @@ public class PlayCustomSoundTask
 	 *  the passed musicplayer's active songs table. */
 	public void update () 
 	{
-		if (this.timer > 0)
+		if (this.timer >= 0)
 		{
 			--this.timer;
 		}

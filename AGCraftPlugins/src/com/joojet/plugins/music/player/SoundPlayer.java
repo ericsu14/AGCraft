@@ -47,12 +47,14 @@ public class SoundPlayer extends BukkitRunnable
 		{
 			PlayCustomSoundTask soundTask = finishedTasks.pop();
 			
-			if (soundTask.getPlayer() != null && 
-					soundTask.getSoundPlayerState() == SoundPlayerState.RUNNING)
+			if (soundTask.getSoundPlayerState() == SoundPlayerState.RUNNING)
 			{
 				soundTask.resetTimer();
 				Player player = soundTask.getPlayer();
-				player.playSound(player.getLocation(), soundTask.getMusicType().getNamespace(), musicListener.musicVolume, 1.0F);
+				if (player != null)
+				{
+					player.playSound(player.getLocation(), soundTask.getMusicType().getNamespace(), musicListener.musicVolume, 1.0F);
+				}
 			}
 			else
 			{
@@ -175,8 +177,6 @@ public class SoundPlayer extends BukkitRunnable
 	 *  @param - player - The player whose songs are being stopped */
 	public void stopAllSoundsNearPlayer (Player player)
 	{
-		UUID playerUUID = player.getUniqueId();
-		
 		for (MusicType type : MusicType.values())
 		{
 			player.stopSound(type.getNamespace());
@@ -186,10 +186,7 @@ public class SoundPlayer extends BukkitRunnable
 			player.stopSound(type.getNamespace());
 		}
 		
-		if (this.activePlayerSoundTable.containsKey(playerUUID))
-		{
-			this.removeSoundTaskFromTable(player);
-		}
+		this.removeSoundTaskFromTable(player);
 	}
 	
 	/** Removes the sound task entry from the sound player table
@@ -198,7 +195,7 @@ public class SoundPlayer extends BukkitRunnable
 	public void removeSoundTaskFromTable (Player player)
 	{
 		UUID uuid = player.getUniqueId();
-		if (this.activePlayerSoundTable != null && this.activePlayerSoundTable.containsKey(uuid))
+		if (this.activePlayerSoundTable.containsKey(uuid))
 		{
 			this.activePlayerSoundTable.remove(uuid);
 		}

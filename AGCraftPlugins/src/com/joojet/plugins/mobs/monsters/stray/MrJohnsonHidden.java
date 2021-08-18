@@ -58,14 +58,16 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 		this.tippedArrow = new SnakeArrow (this.color);
 		
 		this.addFactions(Faction.MR_JOHNSON);
-		this.addRivalFactions(Faction.ALLIES, Faction.USC, Faction.UCLA, Faction.CHICKEN_GANG, Faction.NETHER);
+		this.addRivalFactions(Faction.ALLIES, Faction.USC, Faction.UCLA, 
+				Faction.CHICKEN_GANG, Faction.NETHER, Faction.DOOM_GUY);
 		
-		this.setStat(MonsterStat.HEALTH, 100.0);
+		this.setStat(MonsterStat.HEALTH, 120.0);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
 		this.setStat(MonsterStat.SPAWN_LIMIT, 1);
 		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 1800);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 250);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 16.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 17.0);
+		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 8.0);
 		
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.PLAYER, EntityType.SKELETON, EntityType.SPIDER, EntityType.STRAY, 
 				EntityType.SLIME, EntityType.HUSK,EntityType.IRON_GOLEM, EntityType.SNOWMAN, EntityType.PILLAGER, EntityType.CAVE_SPIDER,
@@ -74,7 +76,7 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 		this.addEntitiesToIgnoreList(EntityType.CREEPER);
 		
 		this.addMobFlags(MobFlag.BOSS_BAR, MobFlag.SHOW_NAME, MobFlag.SPAWN_LIGHTNING,
-				MobFlag.DISABLE_PICK_UP_ITEMS);
+				MobFlag.DISABLE_PICK_UP_ITEMS, MobFlag.PERSISTENT_ATTACKER);
 		
 		// Allow Mr. Johnson to drop a random piece of diamond armor / equipment upon death
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.50, 1, 1),
@@ -87,20 +89,20 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 						new WeightedDrop (new MrJohnsonHead (this.color), 10))
 				);
 		
-		this.bossTheme = MusicType.OUTLAW;
+		this.bossTheme = MusicType.BLINDED_BY_LIGHT;
 	}
 
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
 		skills.add(new ThundagaSkill (16, 16, Integer.MAX_VALUE, 8, 3.0F, 4, 60, 0.60));
-		skills.add(new EvokerFangSkill (16, 8, Integer.MAX_VALUE, 4, 8));
+		skills.add(new EvokerFangSkill (12, 7, Integer.MAX_VALUE, 4, 8));
 		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 2, 4, 0.80));
 		skills.add(new RageSkill (0, 15, 0.35));
 		skills.add(new BlindingArrow (7, 6));
 		skills.add(new ThrowEnderPearlSkill(64, 20, Integer.MAX_VALUE, 2, 8.0));
 		skills.add(new MrJohnsonPotionSkill (32, 7, Integer.MAX_VALUE, 4));
-		skills.add(new AnvilThrowSkill (24, 20, 2, 2.0f, 2));
+		skills.add(new AnvilThrowSkill (24, 20, 2, 2.5f, 2));
 		skills.add(new MrJohnsonAuraSkill ());
 	}
 }
