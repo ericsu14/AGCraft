@@ -48,9 +48,9 @@ public class EvilSquid extends RareMob implements NMSSkillUser, CustomSkillUser
 	@Override
 	public void loadNMSSkills(EntityInsentient nmsMob, LivingEntity entity) 
 	{
-		nmsMob.bQ.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
-		nmsMob.bQ.a(20, new PathfinderGoalCustomMeleeAttack ((EntityCreature) nmsMob, this));
-		nmsMob.bQ.a(6, new PathfinderGoalRandomStroll ((EntityCreature) nmsMob, 1.0D, 80));
+		nmsMob.bP.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
+		nmsMob.bP.a(20, new PathfinderGoalCustomMeleeAttack ((EntityCreature) nmsMob, this));
+		nmsMob.bP.a(6, new PathfinderGoalRandomStroll ((EntityCreature) nmsMob, 1.0D, 80));
 	}
 	
 }

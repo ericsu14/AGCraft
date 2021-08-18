@@ -35,7 +35,6 @@ import com.joojet.plugins.mobs.skills.attack.potionthrow.MrJohnsonPotionSkill;
 import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.mobs.skills.passive.BlindingArrow;
 import com.joojet.plugins.mobs.skills.passive.MrJohnsonAuraSkill;
-import com.joojet.plugins.mobs.skills.utility.SituationalTeleportSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
 public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
@@ -60,11 +59,14 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 		this.addFactions(Faction.MR_JOHNSON);
 		this.addRivalFactions(Faction.ALLIES, Faction.USC, Faction.UCLA, Faction.CHICKEN_GANG);
 		
-		this.setStat(MonsterStat.HEALTH, 24.0);
+		this.setStat(MonsterStat.HEALTH, 75.0);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
 		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
 		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 90);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 250);
+		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 6.0);
+		this.setStat(MonsterStat.BASE_ARMOR, 8.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 20.0);
 		
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.PLAYER, EntityType.SKELETON, EntityType.SPIDER, EntityType.STRAY, 
 				EntityType.SLIME, EntityType.HUSK,EntityType.IRON_GOLEM, EntityType.SNOWMAN, EntityType.PILLAGER, EntityType.CAVE_SPIDER,
@@ -76,7 +78,7 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 		
 		// Allow Mr. Johnson to drop a random piece of diamond armor / equipment upon death
 		this.addMonsterDrops(new MonsterDrop (Material.DIAMOND, 0.50, 1, 1),
-				new MonsterDrop (Material.GOLDEN_APPLE, 1.00, 1, 1),
+				new MonsterDrop (Material.ENCHANTED_GOLDEN_APPLE, 1.00, 1, 1),
 				new WeightedLootCrateDrop (
 						1.00, 1, 1,
 						new WeightedDrop (Material.ENDER_PEARL, 60),
@@ -90,14 +92,13 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
-		skills.add(new ThundagaSkill (16, 16, Integer.MAX_VALUE, 8, 2.0F, 4, 60, 0.60));
-		skills.add(new EvokerFangSkill (12, 8, Integer.MAX_VALUE, 4, 0));
-		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 2, 3, 0.60));
+		skills.add(new ThundagaSkill (16, 16, Integer.MAX_VALUE, 8, 3.0F, 4, 60, 0.60));
+		skills.add(new EvokerFangSkill (16, 8, Integer.MAX_VALUE, 4, 12));
+		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 2, 4, 0.80));
 		skills.add(new RageSkill (0, 15, 0.35));
 		skills.add(new BlindingArrow (7, 6));
-		skills.add(new ThrowEnderPearlSkill(64, 25, 3, 2, 8.0));
-		skills.add(new MrJohnsonPotionSkill (32, 20, 3, 4));
-		skills.add(new SituationalTeleportSkill (32, 120, 1, 1));
+		skills.add(new ThrowEnderPearlSkill(64, 25, Integer.MAX_VALUE, 2, 8.0));
+		skills.add(new MrJohnsonPotionSkill (32, 7, Integer.MAX_VALUE, 4));
 		skills.add(new MrJohnsonAuraSkill ());
 	}
 

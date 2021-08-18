@@ -115,10 +115,10 @@ public class GiantBruin extends UCLAFaction implements NMSSkillUser
 	@Override
 	public void loadNMSSkills(EntityInsentient nmsMob, LivingEntity entity) 
 	{
-		nmsMob.bQ.a(1, new PathfinderGoalFloat((EntityCreature) nmsMob));
-		nmsMob.bQ.a(1, new PathfinderGoalGiantFireball((EntityGiantZombie) nmsMob, entity));
-		nmsMob.bQ.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
-		nmsMob.bQ.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
-		nmsMob.bQ.a(4, new PathfinderGoalMeleeAttack ((EntityCreature) nmsMob, 1.0D, true));
+		nmsMob.bP.a(1, new PathfinderGoalFloat((EntityCreature) nmsMob));
+		nmsMob.bP.a(1, new PathfinderGoalGiantFireball((EntityGiantZombie) nmsMob, entity));
+		nmsMob.bP.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
+		nmsMob.bP.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
+		nmsMob.bP.a(4, new PathfinderGoalMeleeAttack ((EntityCreature) nmsMob, 1.0D, true));
 	}
 }
