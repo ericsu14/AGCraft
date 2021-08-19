@@ -96,13 +96,13 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
 		skills.add(new ThundagaSkill (16, 16, Integer.MAX_VALUE, 8, 3.0F, 4, 60, 0.60));
-		skills.add(new EvokerFangSkill (12, 7, Integer.MAX_VALUE, 4, 8));
+		skills.add(new EvokerFangSkill (16, 7, Integer.MAX_VALUE, 4, 8));
 		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 2, 4, 0.80));
 		skills.add(new RageSkill (0, 15, 0.35));
 		skills.add(new BlindingArrow (7, 6));
-		skills.add(new ThrowEnderPearlSkill(64, 20, Integer.MAX_VALUE, 2, 8.0));
+		skills.add(new ThrowEnderPearlSkill(72, 16, Integer.MAX_VALUE, 2, 8.0));
 		skills.add(new MrJohnsonPotionSkill (32, 7, Integer.MAX_VALUE, 4));
-		skills.add(new AnvilThrowSkill (24, 20, 2, 2.5f, 2));
+		skills.add(new AnvilThrowSkill (24, 20, 2, 3.0f, 2));
 		skills.add(new MrJohnsonAuraSkill ());
 	}
 }
