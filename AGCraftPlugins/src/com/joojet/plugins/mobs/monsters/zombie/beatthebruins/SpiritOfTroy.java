@@ -29,7 +29,6 @@ public class SpiritOfTroy extends USCFaction
 				ChatColor.RED, ChatColor.GOLD);
 		this.color = ChatColor.RED;
 		this.setStat(MonsterStat.HEALTH, 16.0);
-		this.setStat(MonsterStat.BASE_SPEED, 0.20);
 		this.helmet = new USCBandHead (this.color);
 		this.chestplate = new USCBandUniformTop (this.color);
 		this.leggings = new USCBandUniformBottom (this.color);

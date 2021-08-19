@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
@@ -24,7 +25,6 @@ public class BruinPotionThrow extends AbstractThrowPotionSkill {
 	public BruinPotionThrow(int range, int cooldown, int maxUses, int weight) 
 	{
 		super(range, cooldown, maxUses, weight, TargetSelector.ALLIES);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class BruinPotionThrow extends AbstractThrowPotionSkill {
 	public List<LivingEntity> getTargets(LivingEntity caster, List<LivingEntity> entities) 
 	{
 		return entities.stream().filter(new FilterLineOfSight(caster)).
-				filter(ent -> !ent.equals(caster)).
+				filter(ent -> !ent.equals(caster) && ent.getType() != EntityType.CREEPER).
 				sorted(new ClosestProximity(caster.getLocation().clone())).toList();
 	}
 
@@ -54,7 +54,7 @@ public class BruinPotionThrow extends AbstractThrowPotionSkill {
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return !allies.isEmpty() && !enemies.isEmpty();
+		return !this.getTargets(caster, allies).isEmpty() && !enemies.isEmpty();
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
@@ -32,16 +33,16 @@ public class TrojanPotionThrow extends AbstractThrowPotionSkill {
 		this.addPotion(new TrojanStrengthPotion (), 30, ThrowablePotionType.SPLASH);
 		this.addPotion(new TrojanSwiftnessPotion (), 40, ThrowablePotionType.SPLASH);
 		this.addPotion(new TrojanResistancePotion (), 20, ThrowablePotionType.SPLASH);
-		this.addPotion(new TrojanStrengthPotion (), 1, ThrowablePotionType.LINGERING);
-		this.addPotion(new TrojanSwiftnessPotion (), 2, ThrowablePotionType.LINGERING);
-		this.addPotion(new TrojanResistancePotion (), 7, ThrowablePotionType.LINGERING);
+		this.addPotion(new TrojanStrengthPotion (), 3, ThrowablePotionType.LINGERING);
+		this.addPotion(new TrojanSwiftnessPotion (), 3, ThrowablePotionType.LINGERING);
+		this.addPotion(new TrojanResistancePotion (), 4, ThrowablePotionType.LINGERING);
 	}
 
 	@Override
 	public List<LivingEntity> getTargets(LivingEntity caster, List<LivingEntity> entities) 
 	{
 		return entities.stream().filter(new FilterLineOfSight (caster)).
-				filter(ent -> !ent.equals(caster)).
+				filter(ent -> !ent.equals(caster) && ent.getType() != EntityType.CREEPER).
 				sorted(new ClosestProximity(caster.getLocation().clone())).toList();
 	}
 
@@ -57,7 +58,7 @@ public class TrojanPotionThrow extends AbstractThrowPotionSkill {
 	@Override
 	protected boolean checkConditons(LivingEntity caster, List<LivingEntity> allies, List<LivingEntity> enemies) 
 	{
-		return !allies.isEmpty()  && !enemies.isEmpty();
+		return !this.getTargets(caster, allies).isEmpty() && !enemies.isEmpty();
 	}
 
 	@Override
