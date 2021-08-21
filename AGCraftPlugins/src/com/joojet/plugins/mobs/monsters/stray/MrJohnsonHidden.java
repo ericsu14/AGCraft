@@ -89,8 +89,8 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 						new WeightedDrop (Material.ENDER_PEARL, 60),
 						new WeightedDrop (new SnakeVenomPotion (), 15),
 						new WeightedDrop (new PainfulMocktail (), 15),
-						new WeightedDrop (new MrJohnsonSpecialPotion(), 15),
-						new WeightedDrop (new MrJohnsonHead (this.color), 10))
+						new WeightedDrop (new MrJohnsonSpecialPotion(), 25),
+						new WeightedDrop (new MrJohnsonHead (this.color), 15))
 				);
 		
 		this.bossTheme = MusicType.BLINDED_BY_LIGHT;
@@ -110,9 +110,9 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 		skills.add(new RageSkill (1, 30, 0.35));
 		skills.add(new BlindingArrow (7, 6));
 		skills.add(new ThrowEnderPearlSkill(72, 16, Integer.MAX_VALUE, 2, 8.0));
-		skills.add(potionThrowSkill);
+		skills.add(    potionThrowSkill);
 		skills.add(new AnvilThrowSkill (24, 20, 2, 3.0f, 2));
 		skills.add(new MrJohnsonAuraSkill ());
-		skills.add(new FireResistancePotionSkill(120, Integer.MAX_VALUE, 10));
+		skills.add(new FireResistancePotionSkill(90, Integer.MAX_VALUE, 10));
 	}
 }

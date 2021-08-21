@@ -21,7 +21,7 @@ public class MrJohnsonSpecialPotion extends SplashPotionEquipment {
 		this.setDisplayName(StringUtil.alternateTextColors("Mr. Johnson's Special Suprise", TextPattern.WORD, 
 				ChatColor.BLUE, ChatColor.GOLD));
 		this.loreColor = ChatColor.GOLD;
-		this.setColor(Color.PURPLE);
+		this.setColor(Color.fromRGB(18, 35, 104));
 		this.addLoreToItemMeta("Mr. Johnson wants you to experience perfection. 25 cents is all it takes.");
 		this.addPotionEffect(PotionEffectType.WITHER, 140, 0);
 		this.addPotionEffect(PotionEffectType.WEAKNESS, 140, 0);
