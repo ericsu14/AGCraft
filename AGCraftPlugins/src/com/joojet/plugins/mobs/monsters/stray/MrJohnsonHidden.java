@@ -16,11 +16,13 @@ import com.joojet.plugins.mobs.enums.Faction;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.enums.MonsterType;
+import com.joojet.plugins.mobs.enums.ThrowablePotionType;
 import com.joojet.plugins.mobs.equipment.boots.MrJohnsonFeet;
 import com.joojet.plugins.mobs.equipment.chest.MrJohnsonTunic;
 import com.joojet.plugins.mobs.equipment.head.MrJohnsonHead;
 import com.joojet.plugins.mobs.equipment.leggings.MrJohnsonLeggings;
 import com.joojet.plugins.mobs.equipment.offhand.SnakeArrow;
+import com.joojet.plugins.mobs.equipment.potions.MrJohnsonSpecialPotion;
 import com.joojet.plugins.mobs.equipment.potions.PainfulMocktail;
 import com.joojet.plugins.mobs.equipment.potions.SnakeVenomPotion;
 import com.joojet.plugins.mobs.equipment.weapons.PledgeDestroyer;
@@ -32,6 +34,7 @@ import com.joojet.plugins.mobs.skills.attack.HurricaneSkill;
 import com.joojet.plugins.mobs.skills.attack.ThrowEnderPearlSkill;
 import com.joojet.plugins.mobs.skills.attack.ThundagaSkill;
 import com.joojet.plugins.mobs.skills.attack.anvil.AnvilThrowSkill;
+import com.joojet.plugins.mobs.skills.attack.potionthrow.FireResistancePotionSkill;
 import com.joojet.plugins.mobs.skills.attack.potionthrow.MrJohnsonPotionSkill;
 import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.mobs.skills.passive.BlindingArrow;
@@ -61,12 +64,12 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 		this.addRivalFactions(Faction.ALLIES, Faction.USC, Faction.UCLA, 
 				Faction.CHICKEN_GANG, Faction.NETHER, Faction.DOOM_GUY);
 		
-		this.setStat(MonsterStat.HEALTH, 120.0);
+		this.setStat(MonsterStat.HEALTH, 150.0);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
 		this.setStat(MonsterStat.SPAWN_LIMIT, 1);
 		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 1800);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 250);
-		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 17.0);
+		this.setStat(MonsterStat.BASE_ARROW_DAMAGE, 18.0);
 		this.setStat(MonsterStat.BASE_ARMOR_TOUGHNESS, 8.0);
 		
 		this.addTargetsToHitList(EntityType.ZOMBIE, EntityType.PLAYER, EntityType.SKELETON, EntityType.SPIDER, EntityType.STRAY, 
@@ -86,6 +89,7 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 						new WeightedDrop (Material.ENDER_PEARL, 60),
 						new WeightedDrop (new SnakeVenomPotion (), 15),
 						new WeightedDrop (new PainfulMocktail (), 15),
+						new WeightedDrop (new MrJohnsonSpecialPotion(), 15),
 						new WeightedDrop (new MrJohnsonHead (this.color), 10))
 				);
 		
@@ -95,14 +99,20 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 	@Override
 	public void loadCustomSkills(List<AbstractSkill> skills) 
 	{
+		// Special Mr. Johnson is able to throw a new potion
+		MrJohnsonPotionSkill potionThrowSkill = new MrJohnsonPotionSkill (32, 7, Integer.MAX_VALUE, 4);
+		potionThrowSkill.addPotion(new MrJohnsonSpecialPotion(), 15, ThrowablePotionType.SPLASH);
+		potionThrowSkill.addPotion(new MrJohnsonSpecialPotion(), 5, ThrowablePotionType.LINGERING);
+		
 		skills.add(new ThundagaSkill (16, 16, Integer.MAX_VALUE, 8, 3.0F, 4, 60, 0.60));
 		skills.add(new EvokerFangSkill (16, 7, Integer.MAX_VALUE, 4, 8));
 		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 2, 4, 0.80));
-		skills.add(new RageSkill (0, 15, 0.35));
+		skills.add(new RageSkill (1, 30, 0.35));
 		skills.add(new BlindingArrow (7, 6));
 		skills.add(new ThrowEnderPearlSkill(72, 16, Integer.MAX_VALUE, 2, 8.0));
-		skills.add(new MrJohnsonPotionSkill (32, 7, Integer.MAX_VALUE, 4));
+		skills.add(potionThrowSkill);
 		skills.add(new AnvilThrowSkill (24, 20, 2, 3.0f, 2));
 		skills.add(new MrJohnsonAuraSkill ());
+		skills.add(new FireResistancePotionSkill(120, Integer.MAX_VALUE, 10));
 	}
 }
