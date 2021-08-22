@@ -64,7 +64,7 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 		this.addRivalFactions(Faction.ALLIES, Faction.USC, Faction.UCLA, 
 				Faction.CHICKEN_GANG, Faction.NETHER, Faction.DOOM_GUY);
 		
-		this.setStat(MonsterStat.HEALTH, 150.0);
+		this.setStat(MonsterStat.HEALTH, 180.0);
 		this.setStat(MonsterStat.ARROW_PIERCING_CHANCE, 0.15);
 		this.setStat(MonsterStat.SPAWN_LIMIT, 1);
 		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 1800);
@@ -101,15 +101,15 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 	{
 		// Special Mr. Johnson is able to throw a new potion
 		MrJohnsonPotionSkill potionThrowSkill = new MrJohnsonPotionSkill (32, 7, Integer.MAX_VALUE, 4);
-		potionThrowSkill.addPotion(new MrJohnsonSpecialPotion(), 15, ThrowablePotionType.SPLASH);
-		potionThrowSkill.addPotion(new MrJohnsonSpecialPotion(), 5, ThrowablePotionType.LINGERING);
+		potionThrowSkill.addPotion(new MrJohnsonSpecialPotion(), 25, ThrowablePotionType.SPLASH);
+		potionThrowSkill.addPotion(new MrJohnsonSpecialPotion(), 10, ThrowablePotionType.LINGERING);
 		
 		skills.add(new ThundagaSkill (16, 16, Integer.MAX_VALUE, 8, 3.0F, 4, 60, 0.60));
 		skills.add(new EvokerFangSkill (16, 7, Integer.MAX_VALUE, 4, 8));
-		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 2, 4, 0.80));
+		skills.add(new HurricaneSkill (8, 16, Integer.MAX_VALUE, 2, 4, 0.85));
 		skills.add(new RageSkill (1, 30, 0.35));
 		skills.add(new BlindingArrow (7, 6));
-		skills.add(new ThrowEnderPearlSkill(72, 16, Integer.MAX_VALUE, 2, 8.0));
+		skills.add(new ThrowEnderPearlSkill(72, 12, Integer.MAX_VALUE, 2, 8.0));
 		skills.add(    potionThrowSkill);
 		skills.add(new AnvilThrowSkill (24, 20, 2, 3.0f, 2));
 		skills.add(new MrJohnsonAuraSkill ());
