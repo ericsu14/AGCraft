@@ -25,6 +25,7 @@ public class UCLAJock extends UCLAFaction
 		super (MonsterType.UCLA_JOCK);
 		this.setStat(MonsterStat.HEALTH, 14.0);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 2.0);
+		this.setStat(MonsterStat.BASE_SPEED, 0.25);
 		
 		this.name = "The " + generateUCLADisplayName("Jock");
 		this.color = ChatColor.AQUA;
@@ -39,6 +40,7 @@ public class UCLAJock extends UCLAFaction
 		this.offhand = new BruinShield ();
 		
 		this.setStat(MonsterStat.EXPERIENCE, 24.0);
+		this.setStat(MonsterStat.BASE_SPEED, 0.20);
 	}
 	
 	@Override
