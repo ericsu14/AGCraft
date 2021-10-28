@@ -47,7 +47,7 @@ public class UCLAJock extends UCLAFaction
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
 		super.loadCustomSkills(skills);
-		// Nerfs damage output by 30% to prevent him from becoming too overwhelming
+		// Nerfs damage output by 40% to prevent him from becoming too overwhelming
 		skills.add(new NerfDamageOutputSkill (0.40));
 	}
 

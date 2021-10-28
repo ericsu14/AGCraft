@@ -36,6 +36,9 @@ public abstract class AbstractSkill
 	protected Random random;
 	/** Used to calculate fair spawn weights */
 	protected FairSpawnController spawnWeight;
+	/** A reference to the monster type interpreter defined in the main plugin class */
+	protected MonsterTypeInterpreter monsterInterpreter;
+	
 	
 	public AbstractSkill (SkillPropetry type, int range, int cooldown, int maxUses, int weight)
 	{
@@ -47,6 +50,7 @@ public abstract class AbstractSkill
 		this.cooldownTick = 0;
 		this.weight = weight;
 		this.random = new Random ();
+		this.monsterInterpreter = null;
 		this.spawnWeight = new FairSpawnController (this.getRange() / 2);
 	}
 	
@@ -73,6 +77,15 @@ public abstract class AbstractSkill
 	public void update (LivingEntity caster)
 	{
 		this.cooldownTick = (this.cooldownTick - 1) >= 0 ? this.cooldownTick - 1 : 0;
+	}
+	
+	/**
+	 * Sets the monster type interpreter for this skill
+	 * @param monsterInterpreter A reference to the monster type interpreter defined in main
+	 */
+	public void setMonsterTypeInterpreterInstance (MonsterTypeInterpreter monsterInterpreter)
+	{
+		this.monsterInterpreter = monsterInterpreter;
 	}
 	
 	/** Allows the skillcaster to use a custom skill.

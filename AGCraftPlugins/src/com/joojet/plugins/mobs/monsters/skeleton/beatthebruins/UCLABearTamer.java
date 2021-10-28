@@ -63,7 +63,8 @@ public class UCLABearTamer extends UCLAFaction
 	}
 	
 	@Override
-	public void loadCustomSkills(List<AbstractSkill> skills) {
+	public void loadCustomSkills(List<AbstractSkill> skills) 
+	{
 		super.loadCustomSkills(skills);
 		skills.add(new ThundagaSkill (24, 20, Integer.MAX_VALUE, 3, 3.0F, 6, 80, 0.70));
 		skills.add(new HurricaneSkill (24, 20, Integer.MAX_VALUE, 16, 3, 0.5));

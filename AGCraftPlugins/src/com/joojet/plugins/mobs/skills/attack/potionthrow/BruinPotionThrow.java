@@ -5,7 +5,6 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
 import com.joojet.plugins.agcraft.enums.TextPattern;
@@ -15,6 +14,7 @@ import com.joojet.plugins.mobs.enums.MonsterClassifier;
 import com.joojet.plugins.mobs.enums.ThrowablePotionType;
 import com.joojet.plugins.mobs.equipment.potions.BruinResistancePotion;
 import com.joojet.plugins.mobs.equipment.potions.BruinStrengthPotion;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.enums.TargetSelector;
 import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 import com.joojet.plugins.mobs.util.stream.ClosestProximity;
@@ -37,8 +37,22 @@ public class BruinPotionThrow extends AbstractThrowPotionSkill {
 	@Override
 	public List<LivingEntity> getTargets(LivingEntity caster, List<LivingEntity> entities) 
 	{
+		MobEquipment casterEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(caster);
 		return entities.stream().filter(new FilterLineOfSight(caster)).
-				filter(ent -> !ent.equals(caster) && ent.getType() != EntityType.CREEPER).
+				filter((entity) -> 
+				{
+					if (entity.equals(caster))
+					{
+						return false;
+					}
+					
+					MobEquipment entityEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(entity);
+					if (entityEquipment != null && !entityEquipment.getFactions().isEmpty())
+					{
+						return entityEquipment.isAlliesOf(entity, caster, casterEquipment);
+					}
+					return false;
+				}).
 				sorted(new ClosestProximity(caster.getLocation().clone())).toList();
 	}
 

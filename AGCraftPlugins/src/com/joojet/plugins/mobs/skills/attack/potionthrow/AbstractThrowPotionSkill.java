@@ -6,6 +6,8 @@ import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.ThrownPotion;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -93,7 +95,27 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 				break;
 		}
 		
-		if (targets.isEmpty() || this.potionList.isEmpty())
+		if (this.potionList.isEmpty())
+		{
+			return;
+		}
+		
+		// Filters out entities who has at least one active potion effect of the randomly thrown potion
+		AbstractPotionEquipment potion = potionList.getRandomEntry();
+		PotionMeta potionMeta = (PotionMeta) potion.getItemMeta();
+		targets = targets.stream().filter((entity) -> 
+		{
+			for (PotionEffect potionEffect : potionMeta.getCustomEffects())
+			{
+				if (entity.hasPotionEffect(potionEffect.getType()))
+				{
+					return false;
+				}
+			}
+			return true;
+		}).toList();
+		
+		if (targets.isEmpty())
 		{
 			return;
 		}
@@ -131,7 +153,7 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 					{
 						entity.setVelocity(velocity);
 					}
-					entity.setItem(potionList.getRandomEntry());
+					entity.setItem(potion);
 					entity.setShooter(caster);
 				});
 			}

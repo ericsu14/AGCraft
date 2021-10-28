@@ -10,6 +10,7 @@ import com.joojet.plugins.mobs.CustomSkillsListener;
 import com.joojet.plugins.mobs.enums.MobFlag;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.interfaces.CustomSkillUser;
+import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.passive.TippedArrowSkill;
@@ -26,12 +27,14 @@ public class MobSkillTask
 	protected ArrayList <AbstractSkill> mobSkills;
 	/** A reference to the custom skills listener used to handle the custom skills system */
 	protected CustomSkillsListener customSkillsListener;
+	/** A reference to the monster type interpreter defined in the main plugin class */
+	protected MonsterTypeInterpreter monsterInterpreter;
 	/** A random number generator used to select random mob skills */
 	protected Random rand;
 	/** UUID of the entity this skill task is attached to */
 	protected UUID casterUUID;
 	
-	public MobSkillTask (LivingEntity caster, MobEquipment equipment, CustomSkillsListener customSkillsListener)
+	public MobSkillTask (LivingEntity caster, MobEquipment equipment, CustomSkillsListener customSkillsListener, MonsterTypeInterpreter monsterTypeInterpreter)
 	{
 		this.caster = caster;
 		this.equipment = equipment;
@@ -39,6 +42,7 @@ public class MobSkillTask
 		this.rand = new Random ();
 		this.customSkillsListener = customSkillsListener;
 		this.casterUUID = caster.getUniqueId();
+		this.monsterInterpreter = monsterTypeInterpreter;
 		this.loadSkills();
 	}
 	
@@ -130,6 +134,12 @@ public class MobSkillTask
 			if (this.equipment instanceof CustomSkillUser)
 			{
 				((CustomSkillUser) this.equipment).loadCustomSkills(this.mobSkills);
+			}
+			
+			// Sets monster type interpreter instance for every skill in the skill list
+			for (AbstractSkill skill : this.mobSkills)
+			{
+				skill.setMonsterTypeInterpreterInstance(this.monsterInterpreter);
 			}
 		}
 	}

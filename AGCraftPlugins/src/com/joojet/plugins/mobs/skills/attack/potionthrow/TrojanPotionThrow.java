@@ -15,6 +15,7 @@ import com.joojet.plugins.mobs.enums.ThrowablePotionType;
 import com.joojet.plugins.mobs.equipment.potions.TrojanResistancePotion;
 import com.joojet.plugins.mobs.equipment.potions.TrojanStrengthPotion;
 import com.joojet.plugins.mobs.equipment.potions.TrojanSwiftnessPotion;
+import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.skills.enums.TargetSelector;
 import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 import com.joojet.plugins.mobs.util.stream.ClosestProximity;
@@ -41,8 +42,21 @@ public class TrojanPotionThrow extends AbstractThrowPotionSkill {
 	@Override
 	public List<LivingEntity> getTargets(LivingEntity caster, List<LivingEntity> entities) 
 	{
-		return entities.stream().filter(new FilterLineOfSight (caster)).
-				filter(ent -> !ent.equals(caster) && ent.getType() != EntityType.CREEPER).
+		MobEquipment casterEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(caster);
+		return entities.stream().filter(new FilterLineOfSight (caster)).filter((entity) -> 
+				{
+					if (entity.equals(caster))
+					{
+						return false;
+					}
+					
+					MobEquipment entityEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(entity);
+					if (entityEquipment != null && !entityEquipment.getFactions().isEmpty())
+					{
+						return entityEquipment.isAlliesOf(entity, caster, casterEquipment);
+					}
+					return entity.getType() == EntityType.PLAYER;
+				}).
 				sorted(new ClosestProximity(caster.getLocation().clone())).toList();
 	}
 

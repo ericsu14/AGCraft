@@ -518,7 +518,7 @@ public class CustomSkillsListener implements AGListener, Listener, ChunkEntityHa
 			
 			if (equipment != null && !this.mobSkillRunner.containsSkill(livingEntity))
 			{
-				MobSkillTask task = new MobSkillTask (livingEntity, equipment, this);
+				MobSkillTask task = new MobSkillTask (livingEntity, equipment, this, monsterInterpreter);
 				if (task.getSkillSize() > 0)
 				{
 					this.mobSkillRunner.attachSkillToEntity(livingEntity, task);
