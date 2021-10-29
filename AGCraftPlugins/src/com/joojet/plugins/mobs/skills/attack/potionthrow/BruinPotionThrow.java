@@ -20,8 +20,8 @@ import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 import com.joojet.plugins.mobs.util.stream.ClosestProximity;
 import com.joojet.plugins.mobs.util.stream.FilterLineOfSight;
 
-public class BruinPotionThrow extends AbstractThrowPotionSkill {
-
+public class BruinPotionThrow extends AbstractThrowPotionSkill 
+{
 	public BruinPotionThrow(int range, int cooldown, int maxUses, int weight) 
 	{
 		super(range, cooldown, maxUses, weight, TargetSelector.ALLIES);
@@ -49,7 +49,7 @@ public class BruinPotionThrow extends AbstractThrowPotionSkill {
 					MobEquipment entityEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(entity);
 					if (entityEquipment != null && !entityEquipment.getFactions().isEmpty())
 					{
-						return entityEquipment.isAlliesOf(entity, caster, casterEquipment);
+						return casterEquipment.isAlliesOf(caster, entity, entityEquipment);
 					}
 					return false;
 				}).

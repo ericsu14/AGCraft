@@ -56,6 +56,7 @@ public class GiantBruin extends UCLAFaction implements NMSSkillUser
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 150.0);
 		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 4.0);
 		this.setStat(MonsterStat.KNOCKBACK_RESISTANCE, 4.50);
+		this.setStat(MonsterStat.BASE_SPEED, 0.27);
 		
 		// Equipment
 		this.weapon = new BruinSword (this.color);

@@ -23,7 +23,7 @@ import com.joojet.plugins.mobs.util.stream.FilterNonPlayerEntities;
 
 public class ThrowEnderPearlSkill extends AbstractAttackSkill 
 {
-	/** Min. distance the player needs to be for the peral to be thrown */
+	/** Min. distance the player needs to be for the pearl to be thrown */
 	protected double minDistance;
 	
 	/** Allows the skillcaster to throw an ender-pearl to a player's location. */

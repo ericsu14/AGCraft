@@ -21,7 +21,8 @@ import com.joojet.plugins.mobs.util.particle.ParticleUtil;
 import com.joojet.plugins.mobs.util.stream.ClosestProximity;
 import com.joojet.plugins.mobs.util.stream.FilterLineOfSight;
 
-public class TrojanPotionThrow extends AbstractThrowPotionSkill {
+public class TrojanPotionThrow extends AbstractThrowPotionSkill 
+{
 
 	public TrojanPotionThrow(int range, int cooldown, int maxUses, int weight) 
 	{
@@ -53,7 +54,7 @@ public class TrojanPotionThrow extends AbstractThrowPotionSkill {
 					MobEquipment entityEquipment = this.monsterInterpreter.getMobEquipmentFromEntity(entity);
 					if (entityEquipment != null && !entityEquipment.getFactions().isEmpty())
 					{
-						return entityEquipment.isAlliesOf(entity, caster, casterEquipment);
+						return casterEquipment.isAlliesOf(caster, entity, entityEquipment);
 					}
 					return entity.getType() == EntityType.PLAYER;
 				}).
