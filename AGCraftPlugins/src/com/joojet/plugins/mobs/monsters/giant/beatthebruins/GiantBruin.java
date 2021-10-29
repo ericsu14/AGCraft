@@ -52,11 +52,10 @@ public class GiantBruin extends UCLAFaction implements NMSSkillUser
 		this.color = ChatColor.AQUA;
 		this.name = "Giant" + ChatColor.GOLD + " Bruin";
 		this.setStat(MonsterStat.HEALTH, 200.0);
-		this.setStat(MonsterStat.EXPERIENCE, 1200.0);
+		this.setStat(MonsterStat.EXPERIENCE, 800.0);
 		this.setStat(MonsterStat.HUNT_ON_SPAWN_RADIUS, 150.0);
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 4.0);
-		this.setStat(MonsterStat.KNOCKBACK_RESISTANCE, 4.50);
-		this.setStat(MonsterStat.BASE_SPEED, 0.27);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 2.0);
+		this.setStat(MonsterStat.BASE_SPEED, 0.30);
 		
 		// Equipment
 		this.weapon = new BruinSword (this.color);

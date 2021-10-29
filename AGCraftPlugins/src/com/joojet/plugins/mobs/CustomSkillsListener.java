@@ -131,7 +131,10 @@ public class CustomSkillsListener implements AGListener, Listener, ChunkEntityHa
 			}
 		}
 		
-		this.mobSkillRunner.removeSkillFromEntity(entity);
+		if (entityExplosionEvent.getEntityType() != EntityType.FIREBALL)
+		{
+			this.mobSkillRunner.removeSkillFromEntity(entity);
+		}
 	}
 	
 	/** Handles custom onEntityDeath event handlers before deallocating the enttiy from the MobSkillRunner */
