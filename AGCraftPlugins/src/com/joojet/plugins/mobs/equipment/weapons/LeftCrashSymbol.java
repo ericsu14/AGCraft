@@ -19,9 +19,9 @@ public class LeftCrashSymbol extends ShieldEquipment
 		super (EquipmentType.LEFT_CRASH_SYMBOL, DyeColor.YELLOW, EquipmentSlot.HAND, color);
 		this.loreColor = ChatColor.GOLD;
 		this.wordsPerLine = 5;
-		this.setDisplayName(StringUtil.alternateTextColors("Left Crash Symbol", TextPattern.WORD, 
+		this.setDisplayName(StringUtil.alternateTextColors("Left Crash Cymbal", TextPattern.WORD, 
 				ChatColor.RED, ChatColor.GOLD));
-		this.addLoreToItemMeta("Bash your enemies with this crash symbol! Not intended to be used as a shield, but more as a weapon!");
+		this.addLoreToItemMeta("Bash your enemies with this crash cymbal! Not intended to be used as a shield, but more as a weapon!");
 		
 		this.addPatterns(new Pattern (DyeColor.BLACK, PatternType.FLOWER),
 				new Pattern (DyeColor.YELLOW, PatternType.STRIPE_BOTTOM),

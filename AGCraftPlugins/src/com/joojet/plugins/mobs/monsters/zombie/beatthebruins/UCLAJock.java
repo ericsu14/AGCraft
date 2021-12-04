@@ -24,7 +24,7 @@ public class UCLAJock extends UCLAFaction
 	{
 		super (MonsterType.UCLA_JOCK);
 		this.setStat(MonsterStat.HEALTH, 14.0);
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 2.0);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 2.0);;
 		
 		this.name = "The " + generateUCLADisplayName("Jock");
 		this.color = ChatColor.AQUA;
@@ -39,13 +39,14 @@ public class UCLAJock extends UCLAFaction
 		this.offhand = new BruinShield ();
 		
 		this.setStat(MonsterStat.EXPERIENCE, 24.0);
+		this.setStat(MonsterStat.BASE_SPEED, 0.23);
 	}
 	
 	@Override
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
 		super.loadCustomSkills(skills);
-		// Nerfs damage output by 30% to prevent him from becoming too overwhelming
+		// Nerfs damage output by 40% to prevent him from becoming too overwhelming
 		skills.add(new NerfDamageOutputSkill (0.40));
 	}
 

@@ -2,10 +2,13 @@ package com.joojet.plugins.mobs.skills.attack.potionthrow;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.ThrownPotion;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -29,6 +32,10 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 	/** Contains a weighted list of PotionEquipment the skill caster can throw */
 	protected WeightedList <WeightedPotion, AbstractPotionEquipment> potionList;
 	
+	/** Bypasses cooldown timer reset when enabled. Used to check if the throw potion skill fails to find a target
+	 *  after all filters are applied */
+	protected boolean bypassCooldownTimerReset;
+	
 	/** Creates a new abstract potion throw skill, allowing entities to throw potions at a nearby target (or self)
 	 *  @param range Max. radius in which the skillcaster is able to use this skill
 	 *  @param cooldown Cooldown time (in seconds) before the skill can be used again
@@ -42,6 +49,7 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 		this.potionList = new WeightedList <WeightedPotion, AbstractPotionEquipment> ();
 		this.initializePotionsList();
 		this.targetSelection = targetSelection;
+		this.bypassCooldownTimerReset = false;
 	}
 	
 	/** Loads in the types of potions that can be randomly thrown upon using this skill */
@@ -64,6 +72,33 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 			potion.setType(potionType.getMaterial());
 		}
 		this.potionList.addEntry(new WeightedPotion (potion, weight));
+	}
+	
+	@Override
+	/** Allows the caster to use a skill once the internal cooldown tick reaches zero and its specified conditions are met. 
+	 * 		@param caster - The LivingEntity using this skill
+	 * 		@param allies - A list of allies this skill may positively affect
+	 * 		@param enemies - A list of enemies this skill may negatively affect
+	 * 		@param damageDisplayListener - A reference to the plugin's damage display listener, which is used to display floating name-tags */
+	public void useSkill (LivingEntity caster, List <LivingEntity> allies, List <LivingEntity> enemies, DamageDisplayListener damageDisplayListener,
+			MonsterTypeInterpreter monsterTypeInterpreter, BossBarController bossBarController)
+	{
+		if (this.canUseSkill(caster) && this.checkConditons(caster, allies, enemies))
+		{
+			this.handleSkill(caster, allies, enemies, damageDisplayListener, monsterTypeInterpreter, bossBarController);
+			if (!this.bypassCooldownTimerReset)
+			{
+				this.cooldownTick = this.cooldown;
+				if (this.maxUses != Integer.MAX_VALUE)
+				{
+					--this.currentUsage;
+				}
+			}
+			else
+			{
+				this.bypassCooldownTimerReset = false;
+			}
+		}
 	}
 	
 	@Override
@@ -93,8 +128,29 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 				break;
 		}
 		
-		if (targets.isEmpty() || this.potionList.isEmpty())
+		if (this.potionList.isEmpty())
 		{
+			return;
+		}
+		
+		// Filters out entities who has at least one active potion effect of the randomly thrown potion
+		AbstractPotionEquipment potion = potionList.getRandomEntry();
+		PotionMeta potionMeta = (PotionMeta) potion.getItemMeta();
+		targets = targets.stream().filter((entity) -> 
+		{
+			for (PotionEffect potionEffect : potionMeta.getCustomEffects())
+			{
+				if (entity.hasPotionEffect(potionEffect.getType()))
+				{
+					return false;
+				}
+			}
+			return true;
+		}).collect(Collectors.toList());
+		
+		if (targets.isEmpty())
+		{
+			this.bypassCooldownTimerReset = true;
 			return;
 		}
 		
@@ -121,6 +177,7 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 					}
 					catch (IllegalArgumentException iae)
 					{
+						bypassCooldownTimerReset = true;
 						return;
 					}
 				}
@@ -131,7 +188,7 @@ public abstract class AbstractThrowPotionSkill extends AbstractAttackSkill
 					{
 						entity.setVelocity(velocity);
 					}
-					entity.setItem(potionList.getRandomEntry());
+					entity.setItem(potion);
 					entity.setShooter(caster);
 				});
 			}

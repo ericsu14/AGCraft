@@ -93,7 +93,7 @@ public class MrJohnsonHidden extends EpicMob implements CustomSkillUser
 						new WeightedDrop (new MrJohnsonHead (this.color), 15))
 				);
 		
-		this.bossTheme = MusicType.BLINDED_BY_LIGHT;
+		this.bossTheme = MusicType.OUTLAW;
 	}
 
 	@Override

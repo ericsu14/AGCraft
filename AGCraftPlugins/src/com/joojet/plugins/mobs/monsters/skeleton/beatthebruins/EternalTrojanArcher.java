@@ -25,6 +25,7 @@ import com.joojet.plugins.mobs.skills.AbstractSkill;
 import com.joojet.plugins.mobs.skills.attack.potionthrow.TrojanPotionThrow;
 import com.joojet.plugins.mobs.skills.buff.RageSkill;
 import com.joojet.plugins.mobs.skills.buff.UndeadSelfHealSkill;
+import com.joojet.plugins.mobs.skills.passive.DisableFriendlyFireSkill;
 import com.joojet.plugins.mobs.skills.summon.SummonTrojansSkill;
 import com.joojet.plugins.mobs.skills.utility.TeleportSkill;
 
@@ -71,5 +72,6 @@ public class EternalTrojanArcher extends USCFaction
 		skills.add(new SummonTrojansSkill (16, 300, Integer.MAX_VALUE, 4, 3));
 		skills.add(new RageSkill (0, 60, 0.25));
 		skills.add(new TrojanPotionThrow(24, 30, Integer.MAX_VALUE, 5));
+		skills.add(new DisableFriendlyFireSkill());
 	}
 }

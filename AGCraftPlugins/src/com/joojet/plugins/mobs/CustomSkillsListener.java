@@ -131,7 +131,10 @@ public class CustomSkillsListener implements AGListener, Listener, ChunkEntityHa
 			}
 		}
 		
-		this.mobSkillRunner.removeSkillFromEntity(entity);
+		if (entityExplosionEvent.getEntityType() != EntityType.FIREBALL)
+		{
+			this.mobSkillRunner.removeSkillFromEntity(entity);
+		}
 	}
 	
 	/** Handles custom onEntityDeath event handlers before deallocating the enttiy from the MobSkillRunner */
@@ -518,7 +521,7 @@ public class CustomSkillsListener implements AGListener, Listener, ChunkEntityHa
 			
 			if (equipment != null && !this.mobSkillRunner.containsSkill(livingEntity))
 			{
-				MobSkillTask task = new MobSkillTask (livingEntity, equipment, this);
+				MobSkillTask task = new MobSkillTask (livingEntity, equipment, this, monsterInterpreter);
 				if (task.getSkillSize() > 0)
 				{
 					this.mobSkillRunner.attachSkillToEntity(livingEntity, task);

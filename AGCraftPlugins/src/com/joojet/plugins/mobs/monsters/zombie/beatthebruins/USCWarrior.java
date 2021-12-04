@@ -23,6 +23,7 @@ public class USCWarrior extends USCFaction
 	{
 		super (MonsterType.USC_WARRIOR);
 		this.setStat(MonsterStat.HEALTH, 14.0);
+		this.setStat(MonsterStat.BASE_SPEED, 0.25);
 		
 		this.name = generateUSCDisplayName("Trojan");
 		
@@ -41,7 +42,7 @@ public class USCWarrior extends USCFaction
 	public void loadCustomSkills (List <AbstractSkill> skills)
 	{
 		super.loadCustomSkills(skills);
-		// Nerfs damage output by 30% to balance his damage output against the UCLA jock
+		// Nerfs damage output by 40% to balance his damage output against the UCLA jock
 		skills.add(new NerfDamageOutputSkill (0.40));
 	}
 }
