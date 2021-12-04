@@ -35,9 +35,8 @@ public class BarneyTheDinosaur extends MythicMob
 		this.setStat(MonsterStat.SPAWN_LIMIT, 2);
 		this.setStat(MonsterStat.SPAWN_LIMIT_COOLDOWN, 300);
 		
-		this.addBiomes(Biome.FLOWER_FOREST, Biome.DARK_FOREST, Biome.DARK_FOREST_HILLS,
-				Biome.SWAMP, Biome.SWAMP_HILLS, Biome.JUNGLE, Biome.JUNGLE_HILLS, Biome.JUNGLE_EDGE,
-				Biome.GRAVELLY_MOUNTAINS, Biome.SUNFLOWER_PLAINS);
+		this.addBiomes(Biome.FLOWER_FOREST, Biome.DARK_FOREST,
+				Biome.SWAMP, Biome.SUNFLOWER_PLAINS);
 		this.addPotionEffect(CustomPotionEffect.FIRE_RESISTANCE, CustomPotionEffect.UNDEAD_HEAL);
 		this.addMobFlags(MobFlag.HUNT_ON_SPAWN, MobFlag.SPAWN_LIGHTNING, MobFlag.SHOW_NAME,
 				MobFlag.BOSS_BAR, MobFlag.PERSISTENT_ATTACKER);

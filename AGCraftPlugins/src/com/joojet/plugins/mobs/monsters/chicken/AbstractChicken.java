@@ -64,10 +64,10 @@ public abstract class AbstractChicken extends MobEquipment implements NMSSkillUs
 	@Override
 	public void loadNMSSkills(EntityInsentient nmsMob, LivingEntity entity) 
 	{
-		nmsMob.bP.a(1, new PathfinderGoalFloat((EntityCreature) nmsMob));
-		nmsMob.bP.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
-		nmsMob.bP.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
-		nmsMob.bP.a(4, new PathfinderGoalCustomMeleeAttack ((EntityCreature) nmsMob, this));
+		nmsMob.bR.a(1, new PathfinderGoalFloat((EntityCreature) nmsMob));
+		nmsMob.bR.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
+		nmsMob.bR.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
+		nmsMob.bR.a(4, new PathfinderGoalCustomMeleeAttack ((EntityCreature) nmsMob, this));
 	}
 
 }

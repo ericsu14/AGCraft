@@ -20,7 +20,7 @@ import net.minecraft.world.entity.ai.goal.PathfinderGoalMeleeAttack;
 import net.minecraft.world.entity.animal.EntityChicken;
 import net.minecraft.world.item.enchantment.EnchantmentManager;
 
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_18_R1.entity.CraftLivingEntity;
 
 public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack 
 {
@@ -42,7 +42,7 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 		if (var1 <= attackRadius && this.h())
 		{
 			this.g();
-			this.a.swingHand(EnumHand.a);
+			this.a.a(EnumHand.a);
 			attackEntity(this.a, this.mobEquipment, target);
 		}
 	}
@@ -56,7 +56,7 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 		{
 			multiplier += 1.5F;
 		}
-		return (this.a.getWidth() * multiplier * this.a.getWidth() * multiplier + var0.getWidth());
+		return (this.a.cT() * multiplier * this.a.cT() * multiplier + var0.cT());
 	}
 	
 	/** Uses the modified attackEntity implementation for bukkit-based living entities.
@@ -98,12 +98,12 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 		
 		if (target instanceof EntityLiving)
 		{
-			baseDamage += EnchantmentManager.a(attacker.getItemInMainHand(), ((EntityLiving)target).getMonsterType());
+			baseDamage += EnchantmentManager.a(attacker.er(), ((EntityLiving)target).eq());
 			knockBack += EnchantmentManager.b(attacker);
 		}
 		
 		// Handles fire aspect enchants
-		int fireAspectLevel = EnchantmentManager.getFireAspectEnchantmentLevel(attacker);
+		int fireAspectLevel = EnchantmentManager.c(attacker);
 		if (fireAspectLevel > 0) 
 		{
 			EntityCombustByEntityEvent combustEvent = new EntityCombustByEntityEvent((org.bukkit.entity.Entity)attacker.getBukkitEntity(), 
@@ -111,18 +111,18 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 			Bukkit.getPluginManager().callEvent((Event)combustEvent);
 			if (!combustEvent.isCancelled())
 			{
-		        target.setOnFire(combustEvent.getDuration(), false);
+		        target.setSecondsOnFire(combustEvent.getDuration(), false);
 			}
 		}
 		
-		boolean flag = target.damageEntity(DamageSource.mobAttack(attacker), baseDamage);
+		boolean flag = target.a(DamageSource.c(attacker), baseDamage);
 		if (flag)
 		{
 			if (knockBack > 0.0F && target instanceof EntityLiving)
 			{
-				((EntityLiving) target).p(knockBack * 0.5f, MathHelper.sin(attacker.getBukkitYaw() * 0.017453292F), 
-						-MathHelper.cos(attacker.getBukkitYaw() * 0.017453292F));
-				attacker.setMot(attacker.getMot().d(0.6D, 1.0F, 0.6D));
+				((EntityLiving) target).p(knockBack * 0.5f, MathHelper.a(attacker.getBukkitYaw() * 0.017453292F), 
+						-MathHelper.b(attacker.getBukkitYaw() * 0.017453292F));
+				attacker.g(attacker.da().d(0.6D, 1.0F, 0.6D));
 			}
 			attacker.a(attacker, target);
 			attacker.x(target);

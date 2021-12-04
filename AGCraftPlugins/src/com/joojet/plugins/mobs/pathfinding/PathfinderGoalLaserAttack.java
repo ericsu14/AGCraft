@@ -19,7 +19,7 @@ public class PathfinderGoalLaserAttack extends PathfinderGoal
 	protected LivingEntity entity;
 	/** Tick cooldown timer for this attack */
 	protected int tickCooldown;
-	/** Tick needed to be reached before the entity can peform the laser attack */
+	/** Tick needed to be reached before the entity can perform the laser attack */
 	protected int attackTick;
 	/** Laser beam used to follow the target */
 	protected LaserBeam laser;
@@ -35,15 +35,15 @@ public class PathfinderGoalLaserAttack extends PathfinderGoal
 	@Override
 	public boolean a() 
 	{
-		EntityLiving target = this.nmsEntity.getGoalTarget();
-		return (target != null && target.isAlive());
+		EntityLiving target = this.nmsEntity.G();
+		return (target != null && target.bl());
 	}
 	
 	public boolean b()
 	{
 		// Entity must be alive
 		// and target must be 9 blocks away from this entity?
-		return (super.b() && this.nmsEntity.f(this.nmsEntity.getGoalTarget()) > 9.0D);
+		return (super.b() && this.nmsEntity.f(this.nmsEntity.G()) > 9.0D);
 	}
 	
 	/** Resets tick cooldown and navigation and tells the mob to
@@ -57,13 +57,13 @@ public class PathfinderGoalLaserAttack extends PathfinderGoal
 	@Override
 	public void e()
 	{
-		EntityLiving target = this.nmsEntity.getGoalTarget();
-		this.nmsEntity.getNavigation().o();
-		this.nmsEntity.getControllerLook().a (target, 90.0F, 90.0F);
+		EntityLiving target = this.nmsEntity.G();
+		this.nmsEntity.D().o();
+		this.nmsEntity.z().a (target, 90.0F, 90.0F);
 		
-		if (!this.nmsEntity.hasLineOfSight(target))
+		if (!this.nmsEntity.B(target))
 		{
-			this.nmsEntity.setGoalTarget((EntityLiving) null);
+			this.nmsEntity.h((EntityLiving) null);
 			return;
 		}
 		
@@ -86,8 +86,8 @@ public class PathfinderGoalLaserAttack extends PathfinderGoal
 		else if (this.tickCooldown >= this.attackTick)
 		{
 			float damage = 5.0F;
-			target.damageEntity(DamageSource.mobAttack(this.nmsEntity), damage);
-			this.nmsEntity.setGoalTarget((EntityLiving)null);
+			target.a(DamageSource.c(this.nmsEntity), damage);
+			this.nmsEntity.h((EntityLiving)null);
 			this.tickCooldown = -80;
 		}
 		else if (this.laser != null)
@@ -107,7 +107,7 @@ public class PathfinderGoalLaserAttack extends PathfinderGoal
 	
 	private Location getTargetLocation (EntityLiving target)
 	{
-		return new Location (entity.getWorld(), target.locX(), target.locY(), target.locZ());
+		return new Location (entity.getWorld(), target.dc(), target.de(), target.di());
 	}
 
 }

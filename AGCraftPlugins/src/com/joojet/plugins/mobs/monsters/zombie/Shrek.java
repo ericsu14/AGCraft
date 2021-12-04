@@ -30,7 +30,7 @@ public class Shrek extends LegendaryMob
 		this.name = "Shrek";
 		this.addMobFlags(MobFlag.SHOW_NAME, MobFlag.BOSS_BAR);
 		this.setStat(MonsterStat.HEALTH, 60.0);
-		this.addBiomes(Biome.SWAMP, Biome.SWAMP_HILLS);
+		this.addBiomes(Biome.SWAMP);
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		this.helmet = new ShrekHat (this.color);
 		this.chestplate = new OgreTunic (this.color);

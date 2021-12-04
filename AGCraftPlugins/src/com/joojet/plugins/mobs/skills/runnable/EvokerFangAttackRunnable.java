@@ -2,7 +2,7 @@ package com.joojet.plugins.mobs.skills.runnable;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftMob;
+import org.bukkit.craftbukkit.v1_18_R1.entity.CraftMonster;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -34,7 +34,7 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 	{
 		this.caster = caster;
 		this.target = target;
-		this.casterNMS = ((CraftMob) caster).getHandle();
+		this.casterNMS = ((CraftMonster) caster).getHandle();
 		this.range = (int) Math.ceil((range / 2.0) * 1.5);
 	}
 	
@@ -63,12 +63,12 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 			for (var6 = 0; var6 < 6; var6++)
 			{
 				float var7 = var5 + var6 * FLOAT_PI * 0.4F;
-				this.summonFangs(casterLocation.getX() + MathHelper.cos(var7) * 1.5D, casterLocation.getZ() + MathHelper.sin(var7) * 1.5D, var1, var3, var7, 0, casterLocation.getWorld());
+				this.summonFangs(casterLocation.getX() + MathHelper.b(var7) * 1.5D, casterLocation.getZ() + MathHelper.a(var7) * 1.5D, var1, var3, var7, 0, casterLocation.getWorld());
 			}
 			for (var6 = 0; var6 < 10; var6++)
 			{
 				float var7 = var5 + var6 + FLOAT_PI * 2.0F / 8.0F + 1.2566371F;
-				this.summonFangs(casterLocation.getX() + MathHelper.cos(var7) * 2.5D, casterLocation.getZ() + MathHelper.sin(var7) * 2.5D, var1, var3, var7, 3, casterLocation.getWorld());
+				this.summonFangs(casterLocation.getX() + MathHelper.b(var7) * 2.5D, casterLocation.getZ() + MathHelper.a(var7) * 2.5D, var1, var3, var7, 3, casterLocation.getWorld());
 			}
 		}
 		
@@ -78,7 +78,7 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 			{
 				double var7 = 1.25D * (var6 + 1);
 				int var9 = 1 * var6;
-				summonFangs (casterLocation.getX() + MathHelper.cos(var5) * var7, casterLocation.getZ() + MathHelper.sin(var5) * var7, var1, var3, var5, var9, casterLocation.getWorld());
+				summonFangs (casterLocation.getX() + MathHelper.b(var5) * var7, casterLocation.getZ() + MathHelper.a(var5) * var7, var1, var3, var5, var9, casterLocation.getWorld());
 			}
 		}
 	}
@@ -91,16 +91,16 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 		double var12 = 0.0D;
 		do
 		{
-			BlockPosition var14 = var10.down();
-			net.minecraft.world.level.World casterWorld = this.casterNMS.getWorld();
-			IBlockData var15 = casterWorld.getType(var14);
+			BlockPosition var14 = var10.c();
+			net.minecraft.world.level.World casterWorld = this.casterNMS.t;
+			IBlockData var15 = casterWorld.a_(var14);
 			if (var15.d (casterWorld, var14, EnumDirection.a))
 			{
-				if (!this.casterNMS.getWorld().isEmpty (var10))
+				if (!this.casterNMS.t.w(var10))
 				{
-					IBlockData var16 = casterWorld.getType(var10);
-					VoxelShape var17 = var16.getCollisionShape(this.casterNMS.getWorld(), var10);
-					if (!var17.isEmpty())
+					IBlockData var16 = casterWorld.a_(var10);
+					VoxelShape var17 = var16.k(this.casterNMS.t, var10);
+					if (!var17.b())
 					{
 						var12 = var17.c(EnumDirection.EnumAxis.a);
 					}
@@ -108,12 +108,12 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 				var11 = true;
 				break;
 			}
-			var10 = var10.down();
-		} while (var10.getY() >= MathHelper.floor(var4) - 1);
+			var10 = var10.c();
+		} while (var10.v() >= MathHelper.b(var4) - 1);
 		
 		if (var11)
 		{
-			this.casterNMS.getWorld().addEntity(new EntityEvokerFangs (this.casterNMS.getWorld(), var0, var10.getY() + var12, var2, var8, var9, this.casterNMS));
+			this.casterNMS.t.b(new EntityEvokerFangs (this.casterNMS.t, var0, var10.v() + var12, var2, var8, var9, this.casterNMS));
 		}
 	}
 }

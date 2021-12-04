@@ -31,7 +31,7 @@ public class PathfinderGoalGiantFireball extends PathfinderGoal
 	
 	public boolean a() 
 	{
-		return (this.giant.getGoalTarget() != null);
+		return (this.giant.G() != null);
 	}
 		    
 	public void c() 
@@ -46,15 +46,15 @@ public class PathfinderGoalGiantFireball extends PathfinderGoal
 	@Override
 	public void e() 
 	{
-		EntityLiving entityliving = this.giant.getGoalTarget();
+		EntityLiving entityliving = this.giant.G();
 		if (entityliving != null &&
 				entityliving.f(this.giant) < 1524.0D &&
-				this.giant.hasLineOfSight(entityliving)) 
+				this.giant.B(entityliving)) 
 		{
 			// World world = this.giant.world;
 			this.a++;
 			// Plays the ghast sound on the 10th tick
-			if (this.a == 10 && !this.giant.isSilent())
+			if (this.a == 10 && !this.giant.aL())
 			{
 				giantBukkit.getWorld().playSound(giantBukkit.getLocation(), Sound.ENTITY_WITHER_SHOOT, 1.0f, 1.0f);
 			}
@@ -62,8 +62,8 @@ public class PathfinderGoalGiantFireball extends PathfinderGoal
 			{
 				Vec3D vec3d = this.giant.e(1.0F);
 				
-				Vector fireballLocation = new Vector (this.giant.locX() + vec3d.getX() * 4.0D, this.giant.e(0.5D) + 0.5D, this.giant.locZ() + vec3d.getZ() * 4.0D);
-				Vector targetLocation = new Vector (entityliving.locX(), entityliving.locY(), entityliving.locZ());
+				Vector fireballLocation = new Vector (this.giant.dc() + vec3d.a() * 4.0D, this.giant.e(0.5D) + 0.5D, this.giant.di() + vec3d.c() * 4.0D);
+				Vector targetLocation = new Vector (entityliving.dc(), entityliving.de(), entityliving.di());
 				Vector fireballDirection = targetLocation.subtract(fireballLocation).normalize();
 				
 				LargeFireball fireball = (LargeFireball) this.giantBukkit.getWorld().spawnEntity(new Location (this.giantBukkit.getWorld(), fireballLocation.getX(),
