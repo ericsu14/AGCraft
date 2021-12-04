@@ -1,7 +1,7 @@
 package com.joojet.plugins.mobs.skills.passive;
 
 import java.util.Arrays;
-import org.bukkit.craftbukkit.v1_18_R1.entity.CraftMonster;
+import org.bukkit.craftbukkit.v1_18_R1.entity.CraftMob;
 import org.bukkit.entity.LivingEntity;
 
 import net.minecraft.world.entity.EntityInsentient;
@@ -30,7 +30,7 @@ public class FearlessSkill extends AbstractPassiveSkill
 		}
 		
 		// Cast this into a NMS entity monster
-		EntityInsentient nmsMob = ((CraftMonster) caster).getHandle();
+		EntityInsentient nmsMob = ((CraftMob) caster).getHandle();
 		// Attempts to remove the PANIC pathfinder goal from the chicken
 		Object[] rawGoals = nmsMob.bR.d().toArray();
 		PathfinderGoalWrapped[] goals = Arrays.copyOf(rawGoals, rawGoals.length, PathfinderGoalWrapped[].class);
