@@ -2,7 +2,7 @@ package com.joojet.plugins.mobs.skills.runnable;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_18_R1.entity.CraftMonster;
+import org.bukkit.craftbukkit.v1_18_R1.entity.CraftMob;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -34,7 +34,7 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 	{
 		this.caster = caster;
 		this.target = target;
-		this.casterNMS = ((CraftMonster) caster).getHandle();
+		this.casterNMS = ((CraftMob) caster).getHandle();
 		this.range = (int) Math.ceil((range / 2.0) * 1.5);
 	}
 	
