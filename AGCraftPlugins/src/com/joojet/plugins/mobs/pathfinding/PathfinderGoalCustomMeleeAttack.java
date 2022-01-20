@@ -9,26 +9,24 @@ import org.bukkit.potion.PotionEffectType;
 import com.joojet.plugins.mobs.enums.MonsterStat;
 import com.joojet.plugins.mobs.monsters.MobEquipment;
 
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.EnumHand;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityCreature;
-import net.minecraft.world.entity.EntityInsentient;
-import net.minecraft.world.entity.EntityLiving;
-import net.minecraft.world.entity.ai.goal.PathfinderGoalMeleeAttack;
-import net.minecraft.world.entity.animal.EntityChicken;
-import net.minecraft.world.item.enchantment.EnchantmentManager;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.animal.Chicken;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.util.Mth;
 
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_18_R1.entity.CraftLivingEntity;
 
-public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack 
+public class PathfinderGoalCustomMeleeAttack extends MeleeAttackGoal 
 {
 	/** Mob equipment instance tied to the creature (used to extract attack damage attributes) */
 	protected MobEquipment mobEquipment;
 	
 	/** Creates a custom melee attack allowing passive monsters to peform basic attacks */
-	public PathfinderGoalCustomMeleeAttack(EntityCreature creature, MobEquipment mobEquipment) 
+	public PathfinderGoalCustomMeleeAttack(PathfinderMob creature, MobEquipment mobEquipment) 
 	{
 		super(creature, 1.0D, true);
 		this.mobEquipment = mobEquipment;
@@ -36,27 +34,27 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 	
 	/** Overrides the attacking behavior to use our custom attackEntity code */
 	@Override
-	protected void a (EntityLiving target, double var1)
+	protected void checkAndPerformAttack (net.minecraft.world.entity.LivingEntity target, double var1)
 	{
-		double attackRadius = this.a(target);
-		if (var1 <= attackRadius && this.h())
+		double attackRadius = this.getAttackReachSqr(target);
+		if (var1 <= attackRadius && this.getTicksUntilNextAttack() <= 0)
 		{
-			this.g();
-			this.a.swingHand(EnumHand.a);
-			attackEntity(this.a, this.mobEquipment, target);
+			this.resetAttackCooldown();
+			this.mob.swing(InteractionHand.MAIN_HAND);
+			attackEntity(this.mob, this.mobEquipment, target);
 		}
 	}
 	
 	/** Extends the mob's attack radius if that mob is a chicken, due to its smaller hitbox. */
 	@Override
-	protected double a(EntityLiving var0) 
+	protected double getAttackReachSqr(net.minecraft.world.entity.LivingEntity var0) 
 	{
 		float multiplier = 2.0F;
-		if (this.a instanceof EntityChicken)
+		if (this.mob instanceof Chicken)
 		{
 			multiplier += 1.5F;
 		}
-		return (this.a.getWidth() * multiplier * this.a.getWidth() * multiplier + var0.getWidth());
+		return (this.mob.getBbWidth() * multiplier * this.mob.getBbWidth() * multiplier + var0.getBbWidth());
 	}
 	
 	/** Uses the modified attackEntity implementation for bukkit-based living entities.
@@ -65,7 +63,7 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 	 *  @param target Target being attacked by the entity */
 	public static boolean attackEntity (LivingEntity attacker, MobEquipment attackerEquipment, LivingEntity target)
 	{
-		return attackEntity ((EntityInsentient) ((CraftLivingEntity) attacker).getHandle(), attackerEquipment, ((CraftLivingEntity) target).getHandle());			
+		return attackEntity ((PathfinderMob) ((CraftLivingEntity) attacker).getHandle(), attackerEquipment, ((CraftLivingEntity) target).getHandle());			
 	}
 	
 	/** A modified implementation of the NMS attack entity code that supports custom base damage
@@ -74,7 +72,7 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 	 *  @param attacker Entity attacking the target
 	 *  @param attackerEquipment Attacker's mobEquipment instance
 	 *  @param target Target being attacked by the entity */
-	public static boolean attackEntity (EntityInsentient attacker, MobEquipment attackerEquipment, Entity target)
+	public static boolean attackEntity (PathfinderMob attacker, MobEquipment attackerEquipment, Entity target)
 	{
 		float baseDamage = attackerEquipment.containsStat(MonsterStat.BASE_ATTACK_DAMAGE) ? 
 				attackerEquipment.getStat(MonsterStat.BASE_ATTACK_DAMAGE).floatValue() : 4.0f;
@@ -82,7 +80,7 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 				attackerEquipment.getStat(MonsterStat.BASE_KNOCKBACK_STRENGTH).floatValue() : 0.1f;;
 				
 		// Amplifies attack damage with strength / weakness buffs
-		if (attacker instanceof EntityLiving)
+		if (attacker instanceof net.minecraft.world.entity.LivingEntity)
 		{
 			LivingEntity bukkitAttacker = (LivingEntity) (org.bukkit.entity.Entity) attacker.getBukkitEntity();
 			if (bukkitAttacker.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE))
@@ -96,14 +94,14 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 		}
 		
 		
-		if (target instanceof EntityLiving)
+		if (target instanceof net.minecraft.world.entity.LivingEntity)
 		{
-			baseDamage += EnchantmentManager.a(attacker.getItemInMainHand(), ((EntityLiving)target).getMonsterType());
-			knockBack += EnchantmentManager.b(attacker);
+			baseDamage += EnchantmentHelper.getDamageBonus(attacker.getMainHandItem(), ((net.minecraft.world.entity.LivingEntity)target).getMobType());
+			knockBack += EnchantmentHelper.getKnockbackBonus(attacker);
 		}
 		
 		// Handles fire aspect enchants
-		int fireAspectLevel = EnchantmentManager.getFireAspectEnchantmentLevel(attacker);
+		int fireAspectLevel = EnchantmentHelper.getFireAspect(attacker);
 		if (fireAspectLevel > 0) 
 		{
 			EntityCombustByEntityEvent combustEvent = new EntityCombustByEntityEvent((org.bukkit.entity.Entity)attacker.getBukkitEntity(), 
@@ -111,21 +109,21 @@ public class PathfinderGoalCustomMeleeAttack extends PathfinderGoalMeleeAttack
 			Bukkit.getPluginManager().callEvent((Event)combustEvent);
 			if (!combustEvent.isCancelled())
 			{
-		        target.setOnFire(combustEvent.getDuration(), false);
+		        target.setSecondsOnFire(combustEvent.getDuration(), false);
 			}
 		}
 		
-		boolean flag = target.damageEntity(DamageSource.mobAttack(attacker), baseDamage);
+		boolean flag = target.hurt(DamageSource.mobAttack(attacker), baseDamage);
 		if (flag)
 		{
-			if (knockBack > 0.0F && target instanceof EntityLiving)
+			if (knockBack > 0.0F && target instanceof net.minecraft.world.entity.LivingEntity)
 			{
-				((EntityLiving) target).p(knockBack * 0.5f, MathHelper.sin(attacker.getBukkitYaw() * 0.017453292F), 
-						-MathHelper.cos(attacker.getBukkitYaw() * 0.017453292F));
-				attacker.setMot(attacker.getMot().d(0.6D, 1.0F, 0.6D));
+				((net.minecraft.world.entity.LivingEntity) target).knockback(knockBack * 0.5f, Mth.sin(attacker.getBukkitYaw() * 0.017453292F), 
+						-Mth.cos(attacker.getBukkitYaw() * 0.017453292F));
+				attacker.setDeltaMovement(attacker.getDeltaMovement().multiply(0.6D, 1.0F, 0.6D));
 			}
-			attacker.a(attacker, target);
-			attacker.x(target);
+			attacker.doEnchantDamageEffects(attacker, target);
+			attacker.setLastHurtMob(target);
 		}
 		
 		return flag;

@@ -10,7 +10,7 @@ import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftMob;
+import org.bukkit.craftbukkit.v1_18_R1.entity.CraftMonster;
 import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
@@ -41,8 +41,8 @@ import com.joojet.plugins.mobs.monsters.MobEquipment;
 import com.joojet.plugins.mobs.monsters.MountedMob;
 import com.joojet.plugins.mobs.villager.VillagerEquipment;
 
-import net.minecraft.world.entity.EntityInsentient;
-import net.minecraft.world.entity.ai.goal.target.PathfinderGoalNearestAttackableTarget;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 
 public class EquipmentTools 
 {	
@@ -278,7 +278,7 @@ public class EquipmentTools
 			public void run ()
 			{
 				// Cast this into a NMS entity monster
-				EntityInsentient nmsMob = ((CraftMob) entity).getHandle();
+				PathfinderMob nmsMob = ((CraftMonster) entity).getHandle();
 				
 				// Retrieves the monster's hitlist
 				EnumSet <EntityType> hitlist = mobEquipment.getHitList();
@@ -295,7 +295,7 @@ public class EquipmentTools
 					Class <?> mobClass = ConvertEntity.getNMSEntity(victim);
 					if (mobClass != null)
 					{
-						nmsMob.bQ.a (5, new PathfinderGoalNearestAttackableTarget (nmsMob, mobClass, true));
+						nmsMob.targetSelector.addGoal (5, new NearestAttackableTargetGoal (nmsMob, mobClass, true));
 					}
 				}
 			}

@@ -2,7 +2,7 @@ package com.joojet.plugins.mobs.interfaces;
 
 import org.bukkit.entity.LivingEntity;
 
-import net.minecraft.world.entity.EntityInsentient;
+import net.minecraft.world.entity.PathfinderMob;
 
 /** If the custom mob equipment instance is an NMS SKill User,
  *  override the loadNMSSkills function to load a custom set of
@@ -20,5 +20,5 @@ public interface NMSSkillUser
 	 *  
 	 *  @param nmsMob CraftBukkit instance of the entity that is spawned
 	 *  @param entity Bukkit instance of the entity that is spawned*/
-	public void loadNMSSkills (EntityInsentient nmsMob, LivingEntity entity);
+	public void loadNMSSkills (PathfinderMob nmsMob, LivingEntity entity);
 }

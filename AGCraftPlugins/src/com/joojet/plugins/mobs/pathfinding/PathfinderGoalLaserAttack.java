@@ -7,14 +7,13 @@ import com.joojet.plugins.agcraft.main.AGCraftPlugin;
 import com.joojet.plugins.mobs.pathfinding.util.LaserBeam;
 
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityInsentient;
-import net.minecraft.world.entity.EntityLiving;
-import net.minecraft.world.entity.ai.goal.PathfinderGoal;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.goal.Goal;
 
-public class PathfinderGoalLaserAttack extends PathfinderGoal
+public class PathfinderGoalLaserAttack extends Goal
 {
 	/** The NMS entity attached to this pathfinding goal */
-	protected EntityInsentient nmsEntity;
+	protected Mob nmsEntity;
 	/** The living entity attached to this pathfinding goal */
 	protected LivingEntity entity;
 	/** Tick cooldown timer for this attack */
@@ -24,7 +23,7 @@ public class PathfinderGoalLaserAttack extends PathfinderGoal
 	/** Laser beam used to follow the target */
 	protected LaserBeam laser;
 	
-	public PathfinderGoalLaserAttack (EntityInsentient nmsEntity, LivingEntity entity)
+	public PathfinderGoalLaserAttack (Mob nmsEntity, LivingEntity entity)
 	{
 		this.nmsEntity = nmsEntity;
 		this.entity = entity;
@@ -32,38 +31,37 @@ public class PathfinderGoalLaserAttack extends PathfinderGoal
 	}
 	
 	/** Returns true if there exists a living target for this mob */
-	@Override
-	public boolean a() 
+	public boolean canUse() 
 	{
-		EntityLiving target = this.nmsEntity.getGoalTarget();
+		net.minecraft.world.entity.LivingEntity target = this.nmsEntity.getTarget();
 		return (target != null && target.isAlive());
 	}
 	
-	public boolean b()
+	public boolean canContinueToUse()
 	{
 		// Entity must be alive
 		// and target must be 9 blocks away from this entity?
-		return (super.b() && this.nmsEntity.f(this.nmsEntity.getGoalTarget()) > 9.0D);
+		return (super.canContinueToUse() && this.nmsEntity.distanceToSqr(this.nmsEntity.getTarget()) > 9.0D);
 	}
 	
 	/** Resets tick cooldown and navigation and tells the mob to
 	 *  look at the target. */
-	public void c()
+	public void start()
 	{
 		this.tickCooldown = -10;
 	}
 	
 	/** Fires a lazer at the entity's current target */
 	@Override
-	public void e()
+	public void tick()
 	{
-		EntityLiving target = this.nmsEntity.getGoalTarget();
-		this.nmsEntity.getNavigation().o();
-		this.nmsEntity.getControllerLook().a (target, 90.0F, 90.0F);
+		net.minecraft.world.entity.LivingEntity target = this.nmsEntity.getTarget();
+		this.nmsEntity.getNavigation().stop();
+		this.nmsEntity.getLookControl().setLookAt (target, 90.0F, 90.0F);
 		
 		if (!this.nmsEntity.hasLineOfSight(target))
 		{
-			this.nmsEntity.setGoalTarget((EntityLiving) null);
+			this.nmsEntity.setTarget((net.minecraft.world.entity.LivingEntity) null);
 			return;
 		}
 		
@@ -71,7 +69,6 @@ public class PathfinderGoalLaserAttack extends PathfinderGoal
 		
 		if (this.tickCooldown == 0)
 		{
-
 			try {
 				this.laser = new LaserBeam (this.entity.getEyeLocation().clone(), this.getTargetLocation(target),
 						4, 256);
@@ -86,8 +83,8 @@ public class PathfinderGoalLaserAttack extends PathfinderGoal
 		else if (this.tickCooldown >= this.attackTick)
 		{
 			float damage = 5.0F;
-			target.damageEntity(DamageSource.mobAttack(this.nmsEntity), damage);
-			this.nmsEntity.setGoalTarget((EntityLiving)null);
+			target.hurt(DamageSource.mobAttack(this.nmsEntity), damage);
+			this.nmsEntity.setTarget((net.minecraft.world.entity.LivingEntity)null);
 			this.tickCooldown = -80;
 		}
 		else if (this.laser != null)
@@ -102,12 +99,12 @@ public class PathfinderGoalLaserAttack extends PathfinderGoal
 				e1.printStackTrace();
 			}
 		}
-		super.e();
+		super.tick();
 	}
 	
-	private Location getTargetLocation (EntityLiving target)
+	private Location getTargetLocation (net.minecraft.world.entity.LivingEntity target)
 	{
-		return new Location (entity.getWorld(), target.locX(), target.locY(), target.locZ());
+		return new Location (entity.getWorld(), target.getX(), target.getY(), target.getZ());
 	}
 
 }

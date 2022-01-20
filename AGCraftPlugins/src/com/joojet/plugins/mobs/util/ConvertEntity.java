@@ -2,7 +2,6 @@ package com.joojet.plugins.mobs.util;
 
 import org.bukkit.entity.EntityType;
 
-import net.minecraft.server.level.EntityPlayer;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ambient.*;
 import net.minecraft.world.entity.animal.*;
@@ -16,6 +15,7 @@ import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.monster.hoglin.*;
 import net.minecraft.world.entity.monster.piglin.*;
 import net.minecraft.world.entity.npc.*;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.*;
 
 
@@ -27,139 +27,139 @@ public class ConvertEntity
 		switch (type)
 		{
 			case ZOMBIE:
-				return EntityZombie.class;
+				return Zombie.class;
 			case SKELETON:
-				return EntitySkeleton.class;
+				return Skeleton.class;
 			case WITHER_SKELETON:
-				return EntitySkeletonWither.class;
+				return WitherSkeleton.class;
 			case STRAY:
-				return EntitySkeletonStray.class;
+				return Stray.class;
 			case HUSK:
-				return EntityZombieHusk.class;
+				return Husk.class;
 			case ENDERMAN:
-				return EntityEnderman.class;
+				return EnderMan.class;
 			case POLAR_BEAR:
-				return EntityPolarBear.class;
+				return PolarBear.class;
 			case PIGLIN:
-				return EntityPiglin.class;
+				return Piglin.class;
 			case ZOMBIFIED_PIGLIN:
-				return EntityPigZombie.class;
+				return ZombifiedPiglin.class;
 			case SILVERFISH:
-				return EntitySilverfish.class;
+				return Silverfish.class;
 			case CHICKEN:
-				return EntityChicken.class;
+				return Chicken.class;
 			case CREEPER:
-				return EntityCreeper.class;
+				return Creeper.class;
 			case BLAZE:
-				return EntityBlaze.class;
+				return Blaze.class;
 			case BEE:
-				return EntityBee.class;
+				return Bee.class;
 			case EVOKER:
-				return EntityEvoker.class;
+				return Evoker.class;
 			case FOX:
-				return EntityFox.class;
+				return Fox.class;
 			case HOGLIN:
-				return EntityHoglin.class;
+				return Hoglin.class;
 			case GHAST:
-				return EntityGhast.class;
+				return Ghast.class;
 			case SLIME:
-				return EntitySlime.class;
+				return Slime.class;
 			case ILLUSIONER:
-				return EntityIllagerIllusioner.class;
+				return Illusioner.class;
 			case WITCH:
-				return EntityWitch.class;
+				return Witch.class;
 			case GIANT:
-				return EntityGiantZombie.class;
+				return Giant.class;
 			case GUARDIAN:
-				return EntityGuardian.class;
+				return Guardian.class;
 			case ELDER_GUARDIAN:
-				return EntityGuardianElder.class;
+				return ElderGuardian.class;
 			case PILLAGER:
-				return EntityPillager.class;
+				return Pillager.class;
 			case RAVAGER:
-				return EntityRavager.class;
+				return Ravager.class;
 			case IRON_GOLEM:
-				return EntityIronGolem.class;
+				return IronGolem.class;
 			case SNOWMAN:
-				return EntitySnowman.class;
+				return SnowGolem.class;
 			case WOLF:
-				return EntityWolf.class;
+				return Wolf.class;
 			case CAT:
-				return EntityCat.class;
+				return Cat.class;
 			case OCELOT:
-				return EntityOcelot.class;
+				return Ocelot.class;
 			case VILLAGER:
-				return EntityVillager.class;
+				return Villager.class;
 			case WANDERING_TRADER:
-				return EntityVillagerTrader.class;
+				return WanderingTrader.class;
 			case RABBIT:
-				return EntityRabbit.class;
+				return Rabbit.class;
 			case PIG:
-				return EntityPig.class;
+				return Pig.class;
 			case COW:
-				return EntityCow.class;
+				return Cow.class;
 			case SPIDER:
-				return EntitySpider.class;
+				return Spider.class;
 			case CAVE_SPIDER:
-				return EntityCaveSpider.class;
+				return CaveSpider.class;
 			case PLAYER:
-				return EntityPlayer.class;
+				return Player.class;
 			case MAGMA_CUBE:
-				return EntityMagmaCube.class;
+				return MagmaCube.class;
 			case DROWNED:
-				return EntityDrowned.class;
+				return Drowned.class;
 			case VEX:
-				return EntityVex.class;
+				return Vex.class;
 			case VINDICATOR:
-				return EntityVindicator.class;
+				return Vindicator.class;
 			case ENDERMITE:
-				return EntityEndermite.class;
+				return Endermite.class;
 			case ZOMBIE_VILLAGER:
-				return EntityZombieVillager.class;
+				return ZombieVillager.class;
 			case PHANTOM:
-				return EntityPhantom.class;
+				return Phantom.class;
 			case PIGLIN_BRUTE:
-				return EntityPiglinBrute.class;
+				return PiglinBrute.class;
 			case ARMOR_STAND:
-				return EntityArmorStand.class;
+				return ArmorStand.class;
 			case WITHER:
-				return EntityWither.class;
+				return WitherBoss.class;
 			case SQUID:
-				return EntitySquid.class;
+				return Squid.class;
 			case COD:
-				return EntityCod.class;
+				return Cod.class;
 			case TROPICAL_FISH:
-				return EntityTropicalFish.class;
+				return TropicalFish.class;
 			case PUFFERFISH:
-				return EntityPufferFish.class;
+				return Pufferfish.class;
 			case SALMON:
-				return EntitySalmon.class;
+				return Salmon.class;
 			case BAT:
-				return EntityBat.class;
+				return Bat.class;
 			case PANDA:
-				return EntityPanda.class;
+				return Panda.class;
 			case SHEEP:
-				return EntitySheep.class;
+				return Sheep.class;
 			case SHULKER:
-				return EntityShulker.class;
+				return Shulker.class;
 			case SHULKER_BULLET:
-				return EntityShulkerBullet.class;
+				return ShulkerBullet.class;
 			case ITEM_FRAME:
-				return EntityItemFrame.class;
+				return ItemFrame.class;
 			case DONKEY:
-				return EntityHorseDonkey.class;
+				return Donkey.class;
 			case LLAMA:
-				return EntityLlama.class;
+				return Llama.class;
 			case MULE:
-				return EntityHorseMule.class;
+				return Mule.class;
 			case TURTLE:
-				return EntityTurtle.class;
+				return Turtle.class;
 			case PARROT:
-				return EntityParrot.class;
+				return Parrot.class;
 			case ZOGLIN:
-				return EntityZoglin.class;
+				return Zoglin.class;
 			case ENDER_DRAGON:
-				return EntityEnderDragon.class;
+				return EnderDragon.class;
 			case GLOW_SQUID:
 				return GlowSquid.class;
 			case AXOLOTL:

@@ -36,13 +36,12 @@ import com.joojet.plugins.mobs.skills.passive.UCLATracerSkill;
 import com.joojet.plugins.mobs.skills.summon.SummonBruinSkill;
 import com.joojet.plugins.music.enums.MusicType;
 
-import net.minecraft.world.entity.EntityCreature;
-import net.minecraft.world.entity.monster.EntityGiantZombie;
-import net.minecraft.world.entity.EntityInsentient;
-import net.minecraft.world.entity.ai.goal.PathfinderGoalFloat;
-import net.minecraft.world.entity.ai.goal.PathfinderGoalLeapAtTarget;
-import net.minecraft.world.entity.ai.goal.PathfinderGoalMeleeAttack;
-import net.minecraft.world.entity.ai.goal.PathfinderGoalRandomStrollLand;
+import net.minecraft.world.entity.monster.Giant;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 
 public class GiantBruin extends UCLAFaction implements NMSSkillUser
 {
@@ -113,12 +112,12 @@ public class GiantBruin extends UCLAFaction implements NMSSkillUser
 	
 	/** Allows the giant to naturally attack other mobs and gives him the ability to summon fireballs at people. */
 	@Override
-	public void loadNMSSkills(EntityInsentient nmsMob, LivingEntity entity) 
+	public void loadNMSSkills(PathfinderMob nmsMob, LivingEntity entity) 
 	{
-		nmsMob.bP.a(1, new PathfinderGoalFloat((EntityCreature) nmsMob));
-		nmsMob.bP.a(1, new PathfinderGoalGiantFireball((EntityGiantZombie) nmsMob, entity));
-		nmsMob.bP.a(4, new PathfinderGoalRandomStrollLand ((EntityCreature) nmsMob, 1.0D));
-		nmsMob.bP.a(4, new PathfinderGoalLeapAtTarget ((EntityCreature) nmsMob, 0.5F));
-		nmsMob.bP.a(4, new PathfinderGoalMeleeAttack ((EntityCreature) nmsMob, 1.0D, true));
+		nmsMob.goalSelector.addGoal(1, new FloatGoal(nmsMob));
+		nmsMob.goalSelector.addGoal(1, new PathfinderGoalGiantFireball((Giant) nmsMob, entity));
+		nmsMob.goalSelector.addGoal(4, new RandomStrollGoal (nmsMob, 1.0D));
+		nmsMob.goalSelector.addGoal(4, new LeapAtTargetGoal (nmsMob, 0.5F));
+		nmsMob.goalSelector.addGoal(4, new MeleeAttackGoal (nmsMob, 1.0D, true));
 	}
 }

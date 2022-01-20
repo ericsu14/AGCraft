@@ -20,12 +20,9 @@ public class BadlandsBandit extends EpicMob
 		this.addPotionEffect(CustomPotionEffect.SPEED);
 		this.setStat(MonsterStat.HEALTH, 30.0);
 		
-		this.addBiomes(Biome.BADLANDS, 
-				Biome.BADLANDS_PLATEAU, 
+		this.addBiomes(Biome.BADLANDS,
 				Biome.SAVANNA, 
-				Biome.SAVANNA_PLATEAU, 
-				Biome.SHATTERED_SAVANNA, 
-				Biome.SHATTERED_SAVANNA_PLATEAU);
+				Biome.SAVANNA_PLATEAU);
 		
 		this.boots = new DesertSandals (this.color);
 		this.weapon = new SpiritualFantasy (this.color);

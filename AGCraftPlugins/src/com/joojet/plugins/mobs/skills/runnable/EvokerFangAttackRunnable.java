@@ -2,16 +2,17 @@ package com.joojet.plugins.mobs.skills.runnable;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftMob;
+import org.bukkit.craftbukkit.v1_18_R1.entity.CraftMob;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import net.minecraft.core.BlockPosition;
-import net.minecraft.core.EnumDirection;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.entity.EntityInsentient;
-import net.minecraft.world.entity.projectile.EntityEvokerFangs;
-import net.minecraft.world.level.block.state.IBlockData;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.projectile.EvokerFangs;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class EvokerFangAttackRunnable extends BukkitRunnable
@@ -21,7 +22,7 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 	/** The target being attacked by the skill */
 	protected LivingEntity target;
 	/** NMS instance of the caster */
-	protected EntityInsentient casterNMS;
+	protected Mob casterNMS;
 	/** Range of the longer attack */
 	protected int range;
 	/** PI constant in the form of a float used in vector calculations */
@@ -54,7 +55,8 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 		
 		double var1 = Math.min(targetLocation.getY(), casterLocation.getY());
 		double var3 = Math.max(targetLocation.getY(), casterLocation.getY()) + 1.0D;
-		float var5 = (float) MathHelper.d(targetLocation.getZ() - casterLocation.getZ(), targetLocation.getX() - casterLocation.getX());
+		// Used to be MathHelper.d
+		float var5 = (float) Mth.atan2(targetLocation.getZ() - casterLocation.getZ(), targetLocation.getX() - casterLocation.getX());
 		
 		if (caster.getBoundingBox().clone().expand(3.0D).contains(targetLocation.toVector()))
 		{
@@ -63,12 +65,12 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 			for (var6 = 0; var6 < 6; var6++)
 			{
 				float var7 = var5 + var6 * FLOAT_PI * 0.4F;
-				this.summonFangs(casterLocation.getX() + MathHelper.cos(var7) * 1.5D, casterLocation.getZ() + MathHelper.sin(var7) * 1.5D, var1, var3, var7, 0, casterLocation.getWorld());
+				this.summonFangs(casterLocation.getX() + Mth.cos(var7) * 1.5D, casterLocation.getZ() + Mth.sin(var7) * 1.5D, var1, var3, var7, 0, casterLocation.getWorld());
 			}
 			for (var6 = 0; var6 < 10; var6++)
 			{
 				float var7 = var5 + var6 + FLOAT_PI * 2.0F / 8.0F + 1.2566371F;
-				this.summonFangs(casterLocation.getX() + MathHelper.cos(var7) * 2.5D, casterLocation.getZ() + MathHelper.sin(var7) * 2.5D, var1, var3, var7, 3, casterLocation.getWorld());
+				this.summonFangs(casterLocation.getX() + Mth.cos(var7) * 2.5D, casterLocation.getZ() + Mth.sin(var7) * 2.5D, var1, var3, var7, 3, casterLocation.getWorld());
 			}
 		}
 		
@@ -78,7 +80,7 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 			{
 				double var7 = 1.25D * (var6 + 1);
 				int var9 = 1 * var6;
-				summonFangs (casterLocation.getX() + MathHelper.cos(var5) * var7, casterLocation.getZ() + MathHelper.sin(var5) * var7, var1, var3, var5, var9, casterLocation.getWorld());
+				summonFangs (casterLocation.getX() + Mth.cos(var5) * var7, casterLocation.getZ() + Mth.sin(var5) * var7, var1, var3, var5, var9, casterLocation.getWorld());
 			}
 		}
 	}
@@ -86,34 +88,34 @@ public class EvokerFangAttackRunnable extends BukkitRunnable
 	/** Summons fangs on a location. Code is recreated line-by-line from the NMS codebase. */
 	public void summonFangs (double var0, double var2, double var4, double var6, float var8, int var9, World world)
 	{
-		BlockPosition var10 = new BlockPosition (var0, var6, var2);
+		BlockPos var10 = new BlockPos (var0, var6, var2);
 		boolean var11 = false;
 		double var12 = 0.0D;
 		do
 		{
-			BlockPosition var14 = var10.down();
-			net.minecraft.world.level.World casterWorld = this.casterNMS.getWorld();
-			IBlockData var15 = casterWorld.getType(var14);
-			if (var15.d (casterWorld, var14, EnumDirection.a))
+			BlockPos var14 = var10.below();
+			Level casterWorld = this.casterNMS.getLevel();
+			BlockState var15 = casterWorld.getBlockState(var14);
+			if (var15.isFaceSturdy ( casterWorld, var14, Direction.UP))
 			{
-				if (!this.casterNMS.getWorld().isEmpty (var10))
+				if (!this.casterNMS.getLevel().isEmptyBlock (var10))
 				{
-					IBlockData var16 = casterWorld.getType(var10);
-					VoxelShape var17 = var16.getCollisionShape(this.casterNMS.getWorld(), var10);
+					BlockState var16 = casterWorld.getBlockState(var10);
+					VoxelShape var17 = var16.getCollisionShape(casterWorld, var10);
 					if (!var17.isEmpty())
 					{
-						var12 = var17.c(EnumDirection.EnumAxis.a);
+						var12 = var17.max(Direction.Axis.Y);
 					}
 				}
 				var11 = true;
 				break;
 			}
-			var10 = var10.down();
-		} while (var10.getY() >= MathHelper.floor(var4) - 1);
+			var10 = var10.below();
+		} while (var10.getY() >= Mth.floor(var4) - 1);
 		
 		if (var11)
 		{
-			this.casterNMS.getWorld().addEntity(new EntityEvokerFangs (this.casterNMS.getWorld(), var0, var10.getY() + var12, var2, var8, var9, this.casterNMS));
+			this.casterNMS.getLevel().addFreshEntity(new EvokerFangs (this.casterNMS.getLevel(), var0, var10.getY() + var12, var2, var8, var9, this.casterNMS));
 		}
 	}
 }

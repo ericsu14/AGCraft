@@ -26,13 +26,10 @@ public class GiantBruinTamer extends UCLAFaction
 		super(MonsterType.GIANT_BRUIN_TAMER);
 		this.name = StringUtil.alternateTextColors("Giant Bruin Tamer", TextPattern.WORD, 
 				ChatColor.AQUA, ChatColor.GOLD);
-		this.addBiomes(Biome.PLAINS, Biome.DESERT, Biome.DESERT_HILLS, Biome.DESERT_LAKES,
-				Biome.BADLANDS, Biome.BADLANDS_PLATEAU, Biome.ERODED_BADLANDS, Biome.SAVANNA_PLATEAU,
-				Biome.SNOWY_TUNDRA, Biome.FROZEN_RIVER, Biome.SNOWY_BEACH,
-				Biome.GRAVELLY_MOUNTAINS, Biome.MOUNTAINS, Biome.STONE_SHORE,
-				Biome.SUNFLOWER_PLAINS, Biome.SWAMP, Biome.JUNGLE_EDGE, Biome.MODIFIED_JUNGLE_EDGE,
-				Biome.BEACH, Biome.ERODED_BADLANDS, Biome.SHATTERED_SAVANNA_PLATEAU,
-				Biome.SHATTERED_SAVANNA, Biome.MODIFIED_GRAVELLY_MOUNTAINS);
+		this.addBiomes(Biome.PLAINS, Biome.DESERT,
+				Biome.BADLANDS, Biome.ERODED_BADLANDS, Biome.SAVANNA_PLATEAU, Biome.FROZEN_RIVER, Biome.SNOWY_BEACH,
+				Biome.SUNFLOWER_PLAINS, Biome.SWAMP,
+				Biome.BEACH, Biome.ERODED_BADLANDS);
 		
 		this.mount = new MountedMob (EntityType.GIANT, new GiantBruin());
 		this.weapon = new BruinSword (this.color);
