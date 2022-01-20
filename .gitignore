@@ -41,3 +41,9 @@ AGCraftPlugins/.gradle/**
 BibleFetcher/.gradle/**
 AGCraftPlugins/build/**
 BibleFetcher/build/**
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build

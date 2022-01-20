@@ -10,7 +10,7 @@ import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.craftbukkit.v1_18_R1.entity.CraftMonster;
+import org.bukkit.craftbukkit.v1_18_R1.entity.CraftMob;
 import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
@@ -278,7 +278,7 @@ public class EquipmentTools
 			public void run ()
 			{
 				// Cast this into a NMS entity monster
-				PathfinderMob nmsMob = ((CraftMonster) entity).getHandle();
+				PathfinderMob nmsMob = (PathfinderMob) ((CraftMob) entity).getHandle();
 				
 				// Retrieves the monster's hitlist
 				EnumSet <EntityType> hitlist = mobEquipment.getHitList();

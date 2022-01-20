@@ -20,7 +20,7 @@ public class PathfinderGoalGiantFireball extends Goal
 	private LivingEntity giantBukkit;
 	private final Giant giant;
 		    
-	public int a;
+	public int a = 0;
 		    
 	public PathfinderGoalGiantFireball(Giant entitygiant, LivingEntity entity) 
 	{
@@ -33,12 +33,14 @@ public class PathfinderGoalGiantFireball extends Goal
 	{
 		return (this.giant.getTarget() != null);
 	}
-		    
+		
+	@Override
 	public void start() 
 	{
 		this.a = 0;
 	}
-		    
+	
+	@Override
 	public void stop() 
 	{
 	}

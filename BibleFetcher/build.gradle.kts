@@ -27,11 +27,6 @@ sourceSets {
 			setSrcDirs(listOf("src"))
 		}
 	}
-	test{
-		java {
-			setSrcDirs(listOf("test"))
-		}
-	}
 }
 
 tasks.test {
@@ -43,4 +38,4 @@ tasks.test {
 group = "com.joojet.biblefetcher"
 version = "0.0.1-SNAPSHOT"
 description = "Bible Fetcher"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+

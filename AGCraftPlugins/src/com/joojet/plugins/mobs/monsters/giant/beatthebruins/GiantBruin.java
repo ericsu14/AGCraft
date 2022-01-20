@@ -115,7 +115,7 @@ public class GiantBruin extends UCLAFaction implements NMSSkillUser
 	public void loadNMSSkills(PathfinderMob nmsMob, LivingEntity entity) 
 	{
 		nmsMob.goalSelector.addGoal(1, new FloatGoal(nmsMob));
-		nmsMob.goalSelector.addGoal(1, new PathfinderGoalGiantFireball((Giant) nmsMob, entity));
+		nmsMob.goalSelector.addGoal(7, new PathfinderGoalGiantFireball((Giant) nmsMob, entity));
 		nmsMob.goalSelector.addGoal(4, new RandomStrollGoal (nmsMob, 1.0D));
 		nmsMob.goalSelector.addGoal(4, new LeapAtTargetGoal (nmsMob, 0.5F));
 		nmsMob.goalSelector.addGoal(4, new MeleeAttackGoal (nmsMob, 1.0D, true));

@@ -26,6 +26,7 @@ repositories {
 }
 
 dependencies {
+	implementation(project(":BibleFetcher"))
 	paperDevBundle("1.18.1-R0.1-SNAPSHOT")
     implementation("org.yaml:snakeyaml:1.26")
     implementation("org.xerial:sqlite-jdbc:3.34.0")
@@ -63,11 +64,6 @@ sourceSets {
 			setSrcDirs(listOf("src"))
 		}
 	}
-	test{
-		java {
-			setSrcDirs(listOf("test"))
-		}
-	}
 }
 
 tasks.test {
@@ -77,9 +73,8 @@ tasks.test {
 }
 
 group = "AGCraftPlugins"
-version = "1.8.0"
+version = "2.0.0"
 description = "AGCraftPlugins"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 publishing {
     publications.create<MavenPublication>("maven") {
