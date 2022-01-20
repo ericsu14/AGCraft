@@ -64,7 +64,7 @@ public class PathfinderGoalGiantFireball extends Goal
 			{
 				Vec3 vec3d = this.giant.getViewVector(1.0F);
 				
-				Vector fireballLocation = new Vector (this.giant.getX() + vec3d.x() * 4.0D, this.giant.getX(0.5D) + 0.5D, this.giant.getZ() + vec3d.z() * 4.0D);
+				Vector fireballLocation = new Vector (this.giant.getX() + vec3d.x() * 4.0D, this.giant.getY(0.5D) + 0.5D, this.giant.getZ() + vec3d.z() * 4.0D);
 				Vector targetLocation = new Vector (entityliving.getX(), entityliving.getY(), entityliving.getZ());
 				Vector fireballDirection = targetLocation.subtract(fireballLocation).normalize();
 				
