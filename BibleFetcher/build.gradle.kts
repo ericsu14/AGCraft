@@ -4,6 +4,7 @@
 
 plugins {
     java
+    eclipse
     `maven-publish`
 }
 
@@ -17,15 +18,29 @@ repositories {
 dependencies {
     implementation("org.xerial:sqlite-jdbc:3.34.0")
     implementation("com.google.code.gson:gson:2.7")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
 }
 
-group = "BibleFetcher"
+sourceSets {
+	main {
+		java {
+			setSrcDirs(listOf("src"))
+		}
+	}
+	test{
+		java {
+			setSrcDirs(listOf("test"))
+		}
+	}
+}
+
+tasks.test {
+    useJUnit()
+
+    maxHeapSize = "1G"
+}
+
+group = "com.joojet.biblefetcher"
 version = "0.0.1-SNAPSHOT"
 description = "Bible Fetcher"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
-
-publishing {
-    publications.create<MavenPublication>("maven") {
-        from(components["java"])
-    }
-}

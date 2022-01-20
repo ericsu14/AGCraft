@@ -17,6 +17,7 @@ public class DeathCounter
 	private Scoreboard scoreboard;
 	private Objective deathCounterObj;
 	
+	@SuppressWarnings("deprecation")
 	public DeathCounter ()
 	{		
 		this.scoreboard = AGCraftPlugin.plugin.getServer().getScoreboardManager().getMainScoreboard();
@@ -34,7 +35,6 @@ public class DeathCounter
 	}
 	
 	/** Synchronizes the death counter scoreboard to reflect values found in each player's statistics */
-	@SuppressWarnings("deprecation")
 	public void syncDeathCounts ()
 	{
 		OfflinePlayer players [] = AGCraftPlugin.plugin.getServer().getOfflinePlayers();

@@ -39,3 +39,5 @@ BibleFetcher/doc/**
 *.DS_Store
 AGCraftPlugins/.gradle/**
 BibleFetcher/.gradle/**
+AGCraftPlugins/build/**
+BibleFetcher/build/**

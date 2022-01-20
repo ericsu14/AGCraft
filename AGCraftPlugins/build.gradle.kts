@@ -4,8 +4,14 @@
 
 plugins {
     java
+    eclipse
     id("io.papermc.paperweight.userdev") version "1.3.3"
     `maven-publish`
+}
+
+java {
+  // Configure the java toolchain. This allows gradle to auto-provision JDK 17 on systems that only have JDK 8 installed for example.
+  toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
 repositories {
@@ -27,6 +33,7 @@ dependencies {
     implementation("org.powermock:powermock-module-junit4:2.0.2")
     implementation("org.powermock:powermock-api-mockito2:2.0.2")
     testImplementation("org.powermock:powermock-module-testng:2.0.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
 }
 
 tasks {
@@ -48,6 +55,25 @@ tasks {
   processResources {
     filteringCharset = Charsets.UTF_8.name() // We want UTF-8 for everything
   }
+}
+
+sourceSets {
+	main {
+		java {
+			setSrcDirs(listOf("src"))
+		}
+	}
+	test{
+		java {
+			setSrcDirs(listOf("test"))
+		}
+	}
+}
+
+tasks.test {
+    useJUnit()
+
+    maxHeapSize = "1G"
 }
 
 group = "AGCraftPlugins"
