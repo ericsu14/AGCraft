@@ -9,6 +9,7 @@ import com.joojet.plugins.mobs.bossbar.BossBarController;
 import com.joojet.plugins.mobs.interpreter.MonsterTypeInterpreter;
 import com.joojet.plugins.mobs.interpreter.SummoningScrollInterpreter;
 import com.joojet.plugins.mobs.metadata.MonsterTypeMetadata;
+import com.joojet.plugins.mobs.monsters.chicken.hungergames.HGChickenTypes;
 import com.joojet.plugins.mobs.monsters.skeleton.hungergames.HGSkeletonTypes;
 import com.joojet.plugins.mobs.monsters.stray.hungergames.HGStrayTypes;
 import com.joojet.plugins.mobs.monsters.zombie.hungergames.HGZombieTypes;
@@ -27,7 +28,8 @@ public class HungerGamesHandler extends AbstractSpawnHandler
 		
 		this.addMonsterTypes(new HGZombieTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),
 				new HGSkeletonTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),
-				new HGStrayTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter));
+				new HGStrayTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter),
+				new HGChickenTypes (this.monsterTypeInterpreter, this.summonTypeInterpreter));
 		this.addSpawnReasons(SpawnReason.CUSTOM, SpawnReason.NATURAL, SpawnReason.REINFORCEMENTS);
 	}
 

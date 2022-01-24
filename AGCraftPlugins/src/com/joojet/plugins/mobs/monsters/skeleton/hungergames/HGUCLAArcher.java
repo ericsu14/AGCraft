@@ -41,11 +41,12 @@ public class HGUCLAArcher extends UCLAFaction
 		this.boots = new BruinFootballBoots (this.color);
 		this.weapon = new PotentBow (this.color);
 		
-		this.addMonsterDrops(new WeightedLootCrateDrop (0.075, 1, 1, 
+		this.addMonsterDrops(new WeightedLootCrateDrop (0.20, 1, 1, 
 				new WeightedDrop (Material.BOW, 40),
-				new WeightedDrop (Material.STONE_SWORD, 50),
+				new WeightedDrop (Material.STONE_SWORD, 30),
 				new WeightedDrop (Material.GOLDEN_APPLE, 5),
-				new WeightedDrop (Material.IRON_AXE, 5)
+				new WeightedDrop (Material.IRON_AXE, 5),
+				new WeightedDrop (Material.BAKED_POTATO, 20)
 		));
 	}
 	
