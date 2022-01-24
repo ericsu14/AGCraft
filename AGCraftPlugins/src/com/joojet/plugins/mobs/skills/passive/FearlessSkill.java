@@ -39,7 +39,7 @@ public class FearlessSkill extends AbstractPassiveSkill
 		{
 			if (goal.getGoal() instanceof PanicGoal)
 			{
-				nmsMob.goalSelector.removeGoal(goal);
+				nmsMob.goalSelector.removeGoal(goal.getGoal());
 				removed = true;
 			}
 		}

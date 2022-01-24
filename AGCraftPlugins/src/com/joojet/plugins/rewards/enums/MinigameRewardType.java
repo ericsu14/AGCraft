@@ -19,7 +19,8 @@ public enum MinigameRewardType
 			+ " Hope you have an amazing day today and best of wishes in your job and small group leading! ~ jooj"),
 	JOOJ_BIRTHDAY ("Birthday Gift - Eric", "11-20-2020", "Happy birthday to myself, hehe! ~ jooj"),
 	CHRISTMAS ("Belated Christmas", "12-26-2020", "Merry (belated) Christmas everyone! ~jooj"),
-	HUNGER_GAMES_ENTERTAINMENT ("Hunger Games (by Alpha Omicron)", "4-17-2021");
+	HUNGER_GAMES_ENTERTAINMENT ("Hunger Games (by Alpha Omicron)", "4-17-2021"),
+	RUSH_SPRING_2022("Spring 2022 Rush", "1-23-2022");
 	
 	/** Full name of the event */
 	private String fullName;

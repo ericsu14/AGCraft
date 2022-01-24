@@ -145,6 +145,13 @@ public class RewardManager implements Listener, ServerConfigLoader
 								RewardType.STRAWBERRY_MOCKTAIL);
 						break;
 					default:
+						grantRewards(player, RewardType.DIAMONDS, 
+								RewardType.FROLF, 
+								RewardType.GOLDEN_CARROTS, 
+								RewardType.ENCHANTED_GOLDEN_APPLE,
+								RewardType.ETERNAL_MOCKTAIL,
+								RewardType.USC_CREEPER_SHIELD,
+								RewardType.SNOWBALL);
 						break;
 				}
 				player.sendMessage(ChatColor.GREEN + "Be sure to run " + ChatColor.GOLD + "/rewards" + ChatColor.GREEN +
