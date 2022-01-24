@@ -36,7 +36,7 @@ public class LootChicken extends MobEquipment implements NMSSkillUser, CustomSki
 		this.name = "Loot Chicken";
 		this.color = ChatColor.GOLD;
 		this.setStat(MonsterStat.HEALTH, 8);
-		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 3);
+		this.setStat(MonsterStat.BASE_ATTACK_DAMAGE, 2);
 		this.addMobFlags(MobFlag.SHOW_NAME);
 		
 		this.addBiomes(Biome.THE_VOID);
@@ -75,7 +75,7 @@ public class LootChicken extends MobEquipment implements NMSSkillUser, CustomSki
 	{
 		skills.add(new ChickenAura());
 		skills.add(new FearlessSkill ());
-		skills.add(new EvokerFangSkill (12, 10, Integer.MAX_VALUE, 4, 4));
+		skills.add(new EvokerFangSkill (8, 14, Integer.MAX_VALUE, 4, -2));
 	}
 
 	@Override
